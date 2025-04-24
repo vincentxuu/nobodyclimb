@@ -69,3 +69,24 @@ export const UPLOAD_ENDPOINTS = {
   UPLOAD_IMAGE: '/upload/image',
   UPLOAD_AVATAR: '/upload/avatar',
 }
+
+// 人物誌相關
+export const BIOGRAPHY_ENDPOINTS = {
+  BIOGRAPHIES: '/biographies',
+  BIOGRAPHY_BY_ID: (id: string) => `/biographies/${id}`,
+  BIOGRAPHY_BY_SLUG: (slug: string) => `/biographies/slug/${slug}`,
+  FEATURED_BIOGRAPHIES: '/biographies/featured',
+  MY_BIOGRAPHY: '/biographies/me',
+}
+
+// 岩場相關
+export const CRAG_ENDPOINTS = {
+  CRAGS: '/crags',
+  CRAG_BY_ID: (id: string) => `/crags/${id}`,
+  CRAG_BY_SLUG: (slug: string) => `/crags/slug/${slug}`,
+  FEATURED_CRAGS: '/crags/featured',
+  NEARBY_CRAGS: '/crags/nearby',
+  ROUTES: (id: string) => `/crags/${id}/routes`,
+  REVIEWS: (id: string) => `/crags/${id}/reviews`,
+  WEATHER: (id: string) => `/crags/${id}/weather`,
+}

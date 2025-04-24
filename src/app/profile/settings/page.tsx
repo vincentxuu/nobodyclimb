@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import ProfileSidebar from '@/components/ProfileSidebar';
+import ProfilePageLayout from '@/components/profile/layout/ProfilePageLayout';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -302,20 +302,8 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className={`container mx-auto ${isMobile ? 'pt-16 pb-6' : 'py-12'} ${isMobile ? 'block px-4' : 'flex'}`}>
-      {/* 側邊選單 - 在桌面版才顯示 */}
-      <div className="hidden md:block">
-        <ProfileSidebar />
-      </div>
-
-      {/* 主要內容區域 */}
-      <motion.div 
-        className={`flex-1 ${isMobile ? 'mx-0' : 'ml-8'}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className={`bg-white ${isMobile ? 'p-4 md:p-6' : 'p-12'} rounded-sm`}>
+    <ProfilePageLayout>
+      <div className={`bg-white ${isMobile ? 'p-4 md:p-6' : 'p-8 md:p-12'} rounded-sm`}>
           <h1 className={`${isMobile ? 'text-2xl mb-4' : 'text-4xl mb-8'} font-medium text-[#1B1A1A]`}>帳號設定</h1>
 
           {/* 標籤切換區域 */}
@@ -351,7 +339,6 @@ export default function SettingsPage() {
           {/* 內容區域 */}
           {renderContent()}
         </div>
-      </motion.div>
-    </div>
+    </ProfilePageLayout>
   );
 }

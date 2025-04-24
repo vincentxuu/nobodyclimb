@@ -1,9 +1,9 @@
 'use client';
 
 import { UserCircle, FileText, Bookmark, Settings } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { useCallback } from 'react';
 
 interface MenuItem {
   name: string;
@@ -35,18 +35,26 @@ const menuItems: MenuItem[] = [
 ];
 
 const ProfileSidebar = () => {
+  const router = useRouter();
   const pathname = usePathname();
+  
+  // 優化點擊處理函數
+  const handleNavigate = useCallback((href: string) => {
+    if (pathname !== href) {
+      router.push(href, { scroll: false });
+    }
+  }, [pathname, router]);
 
   // 桌面版返回完整側邊欄
   return (
     <motion.div 
-      className="w-[425px] bg-white flex flex-col"
+      className="w-64 bg-white flex flex-col"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
       {/* User Card */}
-      <div className="flex flex-col items-center p-10">
+      <div className="flex flex-col items-center p-6">
         <div className="w-24 h-24 bg-[#F5F5F5] rounded-full flex items-center justify-center mb-4">
           <UserCircle className="w-20 h-20 text-[#3F3D3D]" />
         </div>
@@ -61,11 +69,10 @@ const ProfileSidebar = () => {
         {menuItems.map((item) => {
           const isActive = pathname === item.href;
           return (
-            <Link
+            <div
               key={item.href}
-              href={item.href}
-              prefetch={true}
-              className={`flex items-center gap-3 px-5 py-3 rounded-[4px] transition-colors ${
+              onClick={() => handleNavigate(item.href)}
+              className={`flex items-center gap-3 px-5 py-3 rounded-[4px] transition-colors cursor-pointer ${
                 isActive
                   ? 'bg-[#F5F5F5] text-[#3F3D3D]'
                   : 'text-[#6D6C6C] hover:bg-gray-50'
@@ -75,7 +82,7 @@ const ProfileSidebar = () => {
               <span className="text-[16px] font-medium tracking-[0.02em]">
                 {item.name}
               </span>
-            </Link>
+            </div>
           );
         })}
       </div>

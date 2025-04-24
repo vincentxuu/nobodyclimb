@@ -12,8 +12,8 @@ interface ProfilePageHeaderProps {
 
 export default function ProfilePageHeader({ title, isEditing, onEdit, isMobile }: ProfilePageHeaderProps) {
   return (
-    <div className="flex justify-between items-center mb-8">
-      <h1 className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-medium text-[#1B1A1A]`}>
+    <div className="flex justify-between items-center mb-6 md:mb-8">
+      <h1 className={`${isMobile ? 'text-xl' : 'text-2xl lg:text-3xl'} font-medium text-[#1B1A1A]`}>
         {title}
       </h1>
       {!isEditing && (

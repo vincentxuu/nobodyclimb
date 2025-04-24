@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { ProfileProvider } from '@/components/profile/ProfileContext';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -36,6 +36,24 @@ export default function ProfileLayout({
   const router = useRouter();
   const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(false);
+  const [isPageChanging, setIsPageChanging] = useState(false);
+
+  // 設置頁面轉換狀態的函數
+  const handleRouteChange = useCallback(() => {
+    setIsPageChanging(true);
+    
+    // 短暫延遲後重設狀態，讓頁面可以重新顯示動畫效果
+    setTimeout(() => {
+      setIsPageChanging(false);
+    }, 50);
+  }, []);
+  
+  // 監聽路由變化
+  useEffect(() => {
+    // 此處不能再添加事件監聽器，因為 Next.js 的 App Router 沒有 routeChangeStart 事件
+    // 但當 pathname 變化時，此 effect 會觸發
+    handleRouteChange();
+  }, [pathname, handleRouteChange]);
 
   // 檢測視窗寬度
   useEffect(() => {
@@ -83,15 +101,15 @@ export default function ProfileLayout({
   // 已登入時顯示內容，並使用 ProfileProvider
   return (
     <ProfileProvider>
-      <div className="bg-[#F5F5F5] min-h-screen">
+      <div className="bg-[#F5F5F5] min-h-screen pb-16 md:pb-0">
         {/* 手機版導航列 */}
         <div className="block md:hidden sticky top-0 z-50">
           <MobileNav />
         </div>
         
         {/* 頁面內容區域 - 增加手機版 padding */}
-        <div className="md:py-6">
-          {children}
+        <div className="pt-2 md:py-6">
+          {!isPageChanging && children}
         </div>
       </div>
     </ProfileProvider>

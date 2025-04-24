@@ -1,5 +1,18 @@
 import apiClient from './client'
-import { Post, Gym, Gallery, User, Comment, PaginatedResponse, ApiResponse, SearchParams } from '@/lib/types'
+import { 
+  Post, 
+  Gym, 
+  Gallery, 
+  User, 
+  Comment, 
+  PaginatedResponse, 
+  ApiResponse, 
+  SearchParams,
+  Biography,
+  Crag,
+  Route,
+  Weather
+} from '@/lib/types'
 
 /**
  * 認證相關 API 服務
@@ -366,6 +379,196 @@ export const galleryService = {
       formData.append(`images[${index}]`, file)
     })
     const response = await apiClient.post<ApiResponse<{ urls: string[] }>>('/galleries/upload-images', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    return response.data
+  },
+}
+
+/**
+ * 人物誌相關 API 服務
+ */
+export const biographyService = {
+  /**
+   * 獲取人物誌列表
+   */
+  getBiographies: async (page = 1, limit = 10) => {
+    const response = await apiClient.get<ApiResponse<PaginatedResponse<Biography>>>('/biographies', {
+      params: { page, limit },
+    })
+    return response.data
+  },
+
+  /**
+   * 獲取個人人物誌
+   */
+  getMyBiography: async () => {
+    const response = await apiClient.get<ApiResponse<Biography>>('/biographies/me')
+    return response.data
+  },
+
+  /**
+   * 獲取人物誌詳情（通過ID）
+   */
+  getBiographyById: async (id: string) => {
+    const response = await apiClient.get<ApiResponse<Biography>>(`/biographies/${id}`)
+    return response.data
+  },
+
+  /**
+   * 獲取人物誌詳情（通過 Slug）
+   */
+  getBiographyBySlug: async (slug: string) => {
+    const response = await apiClient.get<ApiResponse<Biography>>(`/biographies/slug/${slug}`)
+    return response.data
+  },
+
+  /**
+   * 獲取精選人物誌
+   */
+  getFeaturedBiographies: async () => {
+    const response = await apiClient.get<ApiResponse<Biography[]>>('/biographies/featured')
+    return response.data
+  },
+
+  /**
+   * 更新個人人物誌
+   */
+  updateMyBiography: async (biographyData: Partial<Biography>) => {
+    const response = await apiClient.put<ApiResponse<Biography>>('/biographies/me', biographyData)
+    return response.data
+  },
+
+  /**
+   * 上傳人物誌圖片
+   */
+  uploadImage: async (file: File) => {
+    const formData = new FormData()
+    formData.append('image', file)
+    const response = await apiClient.post<ApiResponse<{ url: string }>>('/biographies/upload-image', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    return response.data
+  },
+}
+
+/**
+ * 岩場相關 API 服務
+ */
+export const cragService = {
+  /**
+   * 獲取岩場列表
+   */
+  getCrags: async (page = 1, limit = 10, filters?: { difficulty?: string; type?: string }) => {
+    const response = await apiClient.get<ApiResponse<PaginatedResponse<Crag>>>('/crags', {
+      params: { page, limit, ...filters },
+    })
+    return response.data
+  },
+
+  /**
+   * 獲取岩場詳情（通過ID）
+   */
+  getCragById: async (id: string) => {
+    const response = await apiClient.get<ApiResponse<Crag>>(`/crags/${id}`)
+    return response.data
+  },
+
+  /**
+   * 獲取岩場詳情（通過 Slug）
+   */
+  getCragBySlug: async (slug: string) => {
+    const response = await apiClient.get<ApiResponse<Crag>>(`/crags/slug/${slug}`)
+    return response.data
+  },
+
+  /**
+   * 獲取精選岩場
+   */
+  getFeaturedCrags: async () => {
+    const response = await apiClient.get<ApiResponse<Crag[]>>('/crags/featured')
+    return response.data
+  },
+
+  /**
+   * 獲取附近岩場
+   */
+  getNearbyCrags: async (latitude: number, longitude: number, radius: number = 50) => {
+    const response = await apiClient.get<ApiResponse<Crag[]>>('/crags/nearby', {
+      params: { latitude, longitude, radius },
+    })
+    return response.data
+  },
+
+  /**
+   * 獲取岩場路線
+   */
+  getCragRoutes: async (cragId: string) => {
+    const response = await apiClient.get<ApiResponse<Route[]>>(`/crags/${cragId}/routes`)
+    return response.data
+  },
+
+  /**
+   * 獲取岩場評論
+   */
+  getReviews: async (cragId: string) => {
+    const response = await apiClient.get<ApiResponse<Comment[]>>(`/crags/${cragId}/reviews`)
+    return response.data
+  },
+
+  /**
+   * 添加岩場評論
+   */
+  addReview: async (cragId: string, content: string, rating: number) => {
+    const response = await apiClient.post<ApiResponse<Comment>>(`/crags/${cragId}/reviews`, { content, rating })
+    return response.data
+  },
+
+  /**
+   * 獲取岩場天氣資訊
+   */
+  getWeather: async (cragId: string) => {
+    const response = await apiClient.get<ApiResponse<Weather>>(`/crags/${cragId}/weather`)
+    return response.data
+  },
+
+  /**
+   * 創建岩場
+   */
+  createCrag: async (cragData: Omit<Crag, 'id' | 'createdAt' | 'reviews' | 'rating'>) => {
+    const response = await apiClient.post<ApiResponse<Crag>>('/crags', cragData)
+    return response.data
+  },
+
+  /**
+   * 更新岩場資訊
+   */
+  updateCrag: async (id: string, cragData: Partial<Crag>) => {
+    const response = await apiClient.put<ApiResponse<Crag>>(`/crags/${id}`, cragData)
+    return response.data
+  },
+
+  /**
+   * 刪除岩場
+   */
+  deleteCrag: async (id: string) => {
+    const response = await apiClient.delete<ApiResponse<{}>>(`/crags/${id}`)
+    return response.data
+  },
+
+  /**
+   * 上傳岩場圖片
+   */
+  uploadImages: async (files: File[]) => {
+    const formData = new FormData()
+    files.forEach((file, index) => {
+      formData.append(`images[${index}]`, file)
+    })
+    const response = await apiClient.post<ApiResponse<{ urls: string[] }>>('/crags/upload-images', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

@@ -73,6 +73,53 @@ export const GYM_FACILITIES = [
   '停車場',
 ]
 
+// 岩場難度等級
+export const CRAG_DIFFICULTIES = {
+  boulder: ['V0', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9', 'V10+'],
+  sport: ['5.6', '5.7', '5.8', '5.9', '5.10a', '5.10b', '5.10c', '5.10d', '5.11a', '5.11b', '5.11c', '5.11d', '5.12a+'],
+  trad: ['5.5', '5.6', '5.7', '5.8', '5.9', '5.10', '5.11', '5.12+'],
+}
+
+// 岩場類型
+export const CRAG_TYPES = [
+  { value: 'boulder', label: '抱石' },
+  { value: 'sport', label: '運動攀登' },
+  { value: 'trad', label: '傳統攀登' },
+  { value: 'mixed', label: '混合攀登' },
+]
+
+// 岩場季節
+export const CRAG_SEASONS = [
+  { value: 'spring', label: '春季' },
+  { value: 'summer', label: '夏季' },
+  { value: 'autumn', label: '秋季' },
+  { value: 'winter', label: '冬季' },
+]
+
+// 岩場設施
+export const CRAG_AMENITIES = [
+  '停車場',
+  '洗手間',
+  '野餐區',
+  '遮蔽處',
+  '垃圾桶',
+  '飲用水',
+  '營地',
+]
+
+// 人物誌興趣標籤
+export const BIOGRAPHY_INTERESTS = [
+  '抱石',
+  '運動攀登',
+  '傳統攀登',
+  '速度攀登',
+  '冰攀',
+  '高山攀登',
+  '攀岩教練',
+  '攀岩攝影',
+  '路線開發',
+]
+
 // 頁尾連結
 export const FOOTER_LINKS = {
   關於: [

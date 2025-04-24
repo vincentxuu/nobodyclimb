@@ -88,7 +88,7 @@ export interface Comment {
   id: string
   content: string
   createdAt: Date
-  updatedAt?: Date
+  updatedAt: Date
   authorId: string
   author?: User
   postId?: string
@@ -159,4 +159,101 @@ export interface ApiResponse<T = any> {
   data: T;
   message?: string;
   error?: string;
+}
+
+/**
+ * 人物誌介面
+ */
+export interface Biography {
+  id: string
+  userId: string
+  slug: string
+  name: string
+  content: string
+  interests: string[]
+  achievements: string[]
+  socialLinks: {
+    instagram?: string
+    facebook?: string
+    twitter?: string
+    website?: string
+  }
+  photoUrl: string
+  featured: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+/**
+ * 岩場介面
+ */
+export interface Crag {
+  id: string
+  slug: string
+  name: string
+  description: string
+  location: {
+    latitude: number
+    longitude: number
+    address: string
+    region: string
+  }
+  type: 'boulder' | 'sport' | 'trad' | 'mixed'
+  difficulty: {
+    min: string
+    max: string
+  }
+  seasons: string[]
+  access: {
+    description: string
+    parking: string
+    approach: string
+  }
+  amenities: string[]
+  photos: string[]
+  featured: boolean
+  rating: number
+  reviews: Comment[]
+  createdAt: string
+  updatedAt: string
+}
+
+/**
+ * 路線介面
+ */
+export interface Route {
+  id: string
+  cragId: string
+  name: string
+  grade: string
+  type: 'boulder' | 'sport' | 'trad' | 'mixed'
+  length: number
+  description: string
+  firstAscent: string
+  photos: string[]
+  rating: number
+  reviews: Comment[]
+  createdAt: string
+  updatedAt: string
+}
+
+/**
+ * 天氣資訊介面
+ */
+export interface Weather {
+  current: {
+    temperature: number
+    humidity: number
+    windSpeed: number
+    condition: string
+    icon: string
+  }
+  forecast: Array<{
+    date: string
+    minTemp: number
+    maxTemp: number
+    condition: string
+    icon: string
+    precipitation: number
+  }>
 }

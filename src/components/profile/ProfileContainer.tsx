@@ -50,14 +50,14 @@ export default function ProfileContainer() {
 
   return (
     <motion.div
-      className="flex-1"
+      className="flex-1 w-full"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="bg-white rounded-sm p-4 md:p-8">
+      <div className="bg-white rounded-sm p-4 md:p-6 lg:p-8">
         <ProfilePageHeader
-          title="Profile Page"
+          title="我的人物誌"
           isEditing={isEditing}
           onEdit={() => setIsEditing(true)}
           isMobile={isMobile}

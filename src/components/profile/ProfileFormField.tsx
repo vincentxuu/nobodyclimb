@@ -11,8 +11,8 @@ interface ProfileFormFieldProps {
 
 export default function ProfileFormField({ label, children, isMobile }: ProfileFormFieldProps) {
   return (
-    <div className="space-y-2">
-      <Label className={`text-[#3F3D3D] font-medium ${isMobile ? 'text-sm' : ''}`}>
+    <div className="space-y-2 w-full">
+      <Label className={`text-[#3F3D3D] font-medium ${isMobile ? 'text-sm' : 'text-base'}`}>
         {label}
       </Label>
       {children}
