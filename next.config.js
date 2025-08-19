@@ -1,18 +1,22 @@
 /** @type {import('next').NextConfig} */
-// 移除 next-intl 插件配置
-// const withNextIntl = require('next-intl/plugin')();
-
 const nextConfig = {
   reactStrictMode: true,
+  
   images: {
     domains: [
       'cloudflare-ipfs.com',
-      'r2.cloudflarestorage.com', // 根據 README 中的描述，使用 Cloudflare R2 存儲圖片
-      'i.imgur.com' // 允許 imgur 域名
+      'r2.cloudflarestorage.com',
+      'i.imgur.com',
+      'nobodyclimb.cc',
     ],
+    formats: ['image/avif', 'image/webp'],
+    unoptimized: true, // 在 Cloudflare Workers 中禁用圖片優化
   },
-  // Server Actions 已默認啟用，不需要此配置
+  
+  // 環境變量
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://api.nobodyclimb.com',
+  },
 }
 
-// 移除 next-intl 包裝
-module.exports = nextConfig;
+module.exports = nextConfig

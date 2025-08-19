@@ -1,31 +1,22 @@
 # dependencies
-/node_modules
-/.pnp
+node_modules
+.pnp
 .pnp.js
 
 # testing
-/coverage
+coverage
 
 # next.js
-/.next/
-/out/
-.open-next/
-
-# production
-/build
+.next
+out
+build
 
 # misc
 .DS_Store
 *.pem
 
 # debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# pnpm
-pnpm-lock.yaml
+*.log*
 
 # local env files
 .env*.local
@@ -37,3 +28,10 @@ pnpm-lock.yaml
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# pnpm
+pnpm-lock.yaml
+
+# generated files
+public/sw.js
+public/workbox-*.js
