@@ -6,22 +6,22 @@ import Cookies from 'js-cookie'
 import { API_BASE_URL, AUTH_TOKEN_KEY } from '@/lib/constants'
 
 interface UpdateUserData {
-  id?: string;
-  username?: string;
-  email?: string;
-  avatar?: File | string;
-  avatarStyle?: string;
-  bio?: string;
-  displayName?: string;
-  climbingStartYear?: string;
-  frequentGym?: string;
-  favoriteRouteType?: string;
+  id?: string
+  username?: string
+  email?: string
+  avatar?: File | string
+  avatarStyle?: string
+  bio?: string
+  displayName?: string
+  climbingStartYear?: string
+  frequentGym?: string
+  favoriteRouteType?: string
   socialLinks?: {
-    instagram?: string;
-    facebook?: string;
-    twitter?: string;
-    website?: string;
-  };
+    instagram?: string
+    facebook?: string
+    twitter?: string
+    website?: string
+  }
 }
 
 interface AuthState {
@@ -30,9 +30,9 @@ interface AuthState {
   isAuthenticated: boolean
   isLoading: boolean
   error: string | null
-  
+
   // 動作
-  login: (email: string, password: string) => Promise<void>
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
   loginWithGoogle: (token: string) => Promise<void>
   register: (username: string, email: string, password: string) => Promise<void>
   logout: () => Promise<void>
@@ -53,38 +53,86 @@ export const useAuthStore = create<AuthState>()(
 
       login: async (email, password) => {
         set({ isLoading: true, error: null })
-        try {
-          // 連接實際後端 API
-          const response = await axios.post(`${API_BASE_URL}/auth/login`, {
-            email,
-            password
+        
+        // 測試帳號驗證
+        const TEST_CREDENTIALS = {
+          email: 'test@nobodyclimb.com',
+          password: 'test1234'
+        }
+        
+        // 檢查是否為測試帳號
+        if (email === TEST_CREDENTIALS.email && password === TEST_CREDENTIALS.password) {
+          // 模擬測試用戶登入
+          const mockUser: User = {
+            id: 'test-user-001',
+            username: 'testuser',
+            email: TEST_CREDENTIALS.email,
+            displayName: '測試用戶',
+            bio: '這是一個測試帳號，用於展示系統功能。',
+            avatar: '/images/person-poto.jpeg',
+            climbingStartYear: '2020',
+            frequentGym: '台北攀岩館',
+            favoriteRouteType: '抱石',
+            socialLinks: {
+              instagram: 'https://instagram.com/nobodyclimb',
+              facebook: 'https://facebook.com/nobodyclimb'
+            },
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          }
+          
+          const mockToken = 'test-token-' + Date.now()
+          
+          // 設置 Cookie
+          Cookies.set(AUTH_TOKEN_KEY, mockToken, { expires: 7 })
+          
+          // 更新狀態
+          set({
+            user: mockUser,
+            token: mockToken,
+            isAuthenticated: true,
+            isLoading: false,
+            error: null,
           })
           
+          return { success: true }
+        }
+        
+        try {
+          // 連接實際後端 API（保留原有邏輯）
+          const response = await axios.post(`${API_BASE_URL}/auth/login`, {
+            email,
+            password,
+          })
+
           // 從回應中獲取用戶信息和 Token
           const { user, token } = response.data
-          
+
           // 設置 Cookie (如果後端沒有自動設置)
           Cookies.set(AUTH_TOKEN_KEY, token, { expires: 7 })
-          
+
           // 更新狀態
           set({
             user,
             token,
             isAuthenticated: true,
             isLoading: false,
+            error: null,
           })
+          
+          return { success: true }
         } catch (error) {
           // 處理錯誤
-          const errorMessage = axios.isAxiosError(error) 
+          const errorMessage = axios.isAxiosError(error)
             ? error.response?.data?.message || '登入失敗，請檢查您的帳號密碼'
             : '登入過程中發生錯誤'
-            
+
           set({
             error: errorMessage,
             isLoading: false,
           })
-          
-          throw new Error(errorMessage)
+
+          return { success: false, error: errorMessage }
         }
       },
 
@@ -93,13 +141,13 @@ export const useAuthStore = create<AuthState>()(
         try {
           // 向後端 API 發送 Google 令牌
           const response = await axios.post(`${API_BASE_URL}/auth/google`, { token })
-          
+
           // 從回應中獲取用戶信息和 Token
           const { user, token: authToken } = response.data
-          
+
           // 設置 Cookie (如果後端沒有自動設置)
           Cookies.set(AUTH_TOKEN_KEY, authToken, { expires: 7 })
-          
+
           // 更新狀態
           set({
             user,
@@ -109,15 +157,15 @@ export const useAuthStore = create<AuthState>()(
           })
         } catch (error) {
           // 處理錯誤
-          const errorMessage = axios.isAxiosError(error) 
+          const errorMessage = axios.isAxiosError(error)
             ? error.response?.data?.message || 'Google 登入失敗'
             : 'Google 登入過程中發生錯誤'
-            
+
           set({
             error: errorMessage,
             isLoading: false,
           })
-          
+
           throw new Error(errorMessage)
         }
       },
@@ -129,15 +177,15 @@ export const useAuthStore = create<AuthState>()(
           const response = await axios.post(`${API_BASE_URL}/auth/register`, {
             username,
             email,
-            password
+            password,
           })
-          
+
           // 從回應中獲取用戶信息和 Token
           const { user, token } = response.data
-          
+
           // 設置 Cookie (如果後端沒有自動設置)
           Cookies.set(AUTH_TOKEN_KEY, token, { expires: 7 })
-          
+
           // 更新狀態
           set({
             user,
@@ -147,15 +195,15 @@ export const useAuthStore = create<AuthState>()(
           })
         } catch (error) {
           // 處理錯誤
-          const errorMessage = axios.isAxiosError(error) 
+          const errorMessage = axios.isAxiosError(error)
             ? error.response?.data?.message || '註冊失敗，該 Email 可能已被使用'
             : '註冊過程中發生錯誤'
-            
+
           set({
             error: errorMessage,
             isLoading: false,
           })
-          
+
           throw new Error(errorMessage)
         }
       },
@@ -163,17 +211,21 @@ export const useAuthStore = create<AuthState>()(
       logout: async () => {
         try {
           // 通知後端登出 (可選)
-          await axios.post(`${API_BASE_URL}/auth/logout`, {}, {
-            headers: {
-              Authorization: `Bearer ${get().token}`
+          await axios.post(
+            `${API_BASE_URL}/auth/logout`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${get().token}`,
+              },
             }
-          })
+          )
         } catch (error) {
           console.error('登出通知後端失敗:', error)
         } finally {
           // 無論後端請求成功與否，都清除本地狀態
           Cookies.remove(AUTH_TOKEN_KEY)
-          
+
           set({
             user: null,
             token: null,
@@ -186,29 +238,25 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true, error: null })
         try {
           // 處理檔案上傳情況
-          let formData: FormData | null = null;
-          let config: { headers: { 'Content-Type': string } } | undefined;
-          
+          let formData: FormData | null = null
+          let config: { headers: { 'Content-Type': string } } | undefined
+
           if (userData.avatar && userData.avatar instanceof File) {
-            formData = new FormData();
-            formData.append('avatar', userData.avatar);
+            formData = new FormData()
+            formData.append('avatar', userData.avatar)
             config = {
               headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            };
+                'Content-Type': 'multipart/form-data',
+              },
+            }
           }
-          
+
           // 連接實際後端 API
-          const response = await axios.put(
-            `${API_BASE_URL}/auth/profile`, 
-            formData,
-            config
-          );
-          
+          const response = await axios.put(`${API_BASE_URL}/auth/profile`, formData, config)
+
           // 從回應中獲取更新後的用戶信息
           const { user } = response.data
-          
+
           // 更新狀態
           set({
             user,
@@ -216,56 +264,56 @@ export const useAuthStore = create<AuthState>()(
           })
         } catch (error) {
           // 處理錯誤
-          const errorMessage = axios.isAxiosError(error) 
+          const errorMessage = axios.isAxiosError(error)
             ? error.response?.data?.message || '更新資料失敗'
             : '更新資料過程中發生錯誤'
-            
+
           set({
             error: errorMessage,
             isLoading: false,
           })
-          
+
           throw new Error(errorMessage)
         }
       },
-      
+
       refreshToken: async () => {
         try {
           // 向後端 API 請求刷新 Token
           const response = await axios.post(`${API_BASE_URL}/auth/refresh-token`)
-          
+
           // 從回應中獲取新的 Token
           const { token, user } = response.data
-          
+
           // 設置新的 Cookie
           Cookies.set(AUTH_TOKEN_KEY, token, { expires: 7 })
-          
+
           // 更新狀態
           set({
             token,
             user,
             isAuthenticated: true,
           })
-          
+
           return true
         } catch (error) {
           // Token 刷新失敗，用戶需要重新登入
           Cookies.remove(AUTH_TOKEN_KEY)
-          
+
           set({
             user: null,
             token: null,
             isAuthenticated: false,
           })
-          
+
           return false
         }
       },
-      
+
       setUser: (user) => {
-        set({ 
+        set({
           user,
-          isAuthenticated: !!user
+          isAuthenticated: !!user,
         })
       },
 
@@ -273,10 +321,10 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'auth-storage',
-      partialize: (state) => ({ 
+      partialize: (state) => ({
         user: state.user,
         token: state.token,
-        isAuthenticated: state.isAuthenticated 
+        isAuthenticated: state.isAuthenticated,
       }),
     }
   )

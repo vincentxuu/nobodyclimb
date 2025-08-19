@@ -23,26 +23,21 @@ interface MobileNavProps {
 export default function MobileNav({ isDesktop }: MobileNavProps) {
   const router = useRouter()
   const pathname = usePathname()
-  const { 
-    isNavbarOpen, 
-    closeNavbar, 
-    searchQuery, 
-    setSearchQuery,
-    closeSearch
-  } = useUIStore()
-  let { isAuthenticated, logout, user } = useAuthStore()
-  isAuthenticated = true; // 臨時設置，實際應該使用後端驗證
-  
+  const { isNavbarOpen, closeNavbar, searchQuery, setSearchQuery, closeSearch } = useUIStore()
+  const { isAuthenticated, logout, user } = useAuthStore()
+
   // 假設用戶數據中有 avatarStyle 屬性，否則使用默認頭像
-  const avatarStyle = user?.avatarStyle ? DEFAULT_AVATARS.find(a => a.id === user.avatarStyle) || DEFAULT_AVATARS[0] : DEFAULT_AVATARS[0];
-  
+  const avatarStyle = user?.avatarStyle
+    ? DEFAULT_AVATARS.find((a) => a.id === user.avatarStyle) || DEFAULT_AVATARS[0]
+    : DEFAULT_AVATARS[0]
+
   const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({})
 
   // 處理子選單展開/收起
   const toggleSubmenu = (href: string) => {
-    setExpandedMenus(prev => ({
+    setExpandedMenus((prev) => ({
       ...prev,
-      [href]: !prev[href]
+      [href]: !prev[href],
     }))
   }
 
@@ -56,7 +51,7 @@ export default function MobileNav({ isDesktop }: MobileNavProps) {
     }
   }
 
-  if (isDesktop || !isNavbarOpen) return null;
+  if (isDesktop || !isNavbarOpen) return null
 
   return (
     <AnimatePresence>
@@ -65,42 +60,42 @@ export default function MobileNav({ isDesktop }: MobileNavProps) {
         animate={{ opacity: 1, height: 'auto' }}
         exit={{ opacity: 0, height: 0 }}
         transition={{ duration: 0.3 }}
-        className="lg:hidden bg-white border-t border-gray-200 shadow-lg"
+        className="border-t border-gray-200 bg-white shadow-lg lg:hidden"
       >
         <nav className="py-4">
           {/* 搜尋框 - 始終顯示在導航選單中 */}
-          <div className="px-4 pb-4 mb-4 border-b border-gray-200">
+          <div className="mb-4 border-b border-gray-200 px-4 pb-4">
             <form onSubmit={handleSearch} className="relative">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="請輸入關鍵字"
-                className="w-full h-[40px] px-4 py-3 bg-[#F5F5F5] rounded-[4px] text-base font-normal font-['Noto_Sans_CJK_TC'] leading-6 tracking-[0.01em] placeholder:text-[#B6B3B3] focus:outline-none"
+                className="h-[40px] w-full rounded-[4px] bg-[#F5F5F5] px-4 py-3 font-['Noto_Sans_CJK_TC'] text-base font-normal leading-6 tracking-[0.01em] placeholder:text-[#B6B3B3] focus:outline-none"
                 autoFocus
               />
-              <button type="submit" className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <Search className="h-5 w-5 text-[#1B1A1A] stroke-[1.5px]"/>
+              <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 transform">
+                <Search className="h-5 w-5 stroke-[1.5px] text-[#1B1A1A]" />
               </button>
             </form>
           </div>
-          
+
           {/* 導航選單 */}
           <ul className="space-y-6 px-4">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 {link.hasSubmenu ? (
                   <div className="space-y-2">
-                    <button 
+                    <button
                       onClick={() => toggleSubmenu(link.href)}
-                      className="flex items-center justify-between w-full"
+                      className="flex w-full items-center justify-between"
                     >
-                      <span className="font-['Noto_Sans_TC'] text-base leading-6 tracking-[0.02em] font-medium text-[#1B1A1A]">
+                      <span className="font-['Noto_Sans_TC'] text-base font-medium leading-6 tracking-[0.02em] text-[#1B1A1A]">
                         {link.label}
                       </span>
-                      <ChevronDown 
+                      <ChevronDown
                         className={`h-4 w-4 transition-transform duration-200 ${
-                          expandedMenus[link.href] ? 'transform rotate-180' : ''
+                          expandedMenus[link.href] ? 'rotate-180 transform' : ''
                         }`}
                       />
                     </button>
@@ -111,10 +106,10 @@ export default function MobileNav({ isDesktop }: MobileNavProps) {
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="pl-4 space-y-2 overflow-hidden"
+                          className="space-y-2 overflow-hidden pl-4"
                         >
                           {COLUMN_SUBMENU.map((subItem) => (
-                            <motion.li 
+                            <motion.li
                               key={subItem.href}
                               initial={{ x: -10, opacity: 0 }}
                               animate={{ x: 0, opacity: 1 }}
@@ -136,9 +131,7 @@ export default function MobileNav({ isDesktop }: MobileNavProps) {
                 ) : (
                   <Link
                     href={link.href}
-                    className={`block py-1 font-['Noto_Sans_TC'] text-base leading-6 tracking-[0.02em] font-medium hover:text-[#8E8C8C]
-                      ${pathname === link.href ? 'text-[#8E8C8C]' : 'text-[#1B1A1A]'}
-                    `}
+                    className={`block py-1 font-['Noto_Sans_TC'] text-base font-medium leading-6 tracking-[0.02em] hover:text-[#8E8C8C] ${pathname === link.href ? 'text-[#8E8C8C]' : 'text-[#1B1A1A]'} `}
                     onClick={closeNavbar}
                   >
                     {link.label}
@@ -154,58 +147,84 @@ export default function MobileNav({ isDesktop }: MobileNavProps) {
                   <Link href="/profile" className="block">
                     <div className="flex items-center px-4 py-3 hover:bg-gray-50">
                       {user?.avatar ? (
-                        <img 
-                          src={user.avatar} 
-                          alt="用戶頭像" 
-                          className="w-10 h-10 rounded-full object-cover"
+                        <img
+                          src={user.avatar}
+                          alt="用戶頭像"
+                          className="h-10 w-10 rounded-full object-cover"
                         />
                       ) : (
                         generateAvatarElement(avatarStyle, 'w-10 h-10')
                       )}
                       <div className="ml-3">
-                        <div className="font-['Noto_Sans_CJK_TC'] text-base font-medium text-[#1B1A1A]">{user?.displayName || user?.username || '使用者名稱'}</div>
-                        <div className="font-['Noto_Sans_CJK_TC'] text-sm text-[#8E8C8C]">查看個人檔案</div>
+                        <div className="font-['Noto_Sans_CJK_TC'] text-base font-medium text-[#1B1A1A]">
+                          {user?.displayName || user?.username || '使用者名稱'}
+                        </div>
+                        <div className="font-['Noto_Sans_CJK_TC'] text-sm text-[#8E8C8C]">
+                          查看個人檔案
+                        </div>
                       </div>
                     </div>
                   </Link>
 
                   {/* 主要功能區 */}
                   <div className="border-t border-[#EBEAEA] py-2">
-                    <Link href="/blog/create" className="flex items-center px-4 py-3 hover:bg-gray-50">
-                      <FileText className="w-5 h-5 text-[#3F3D3D]" />
-                      <span className="ml-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium text-[#3F3D3D]">發表文章</span>
+                    <Link
+                      href="/blog/create"
+                      className="flex items-center px-4 py-3 hover:bg-gray-50"
+                    >
+                      <FileText className="h-5 w-5 text-[#3F3D3D]" />
+                      <span className="ml-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium text-[#3F3D3D]">
+                        發表文章
+                      </span>
                     </Link>
-                    <Link href="/profile/articles" className="flex items-center px-4 py-3 hover:bg-gray-50">
-                      <FileText className="w-5 h-5 text-[#3F3D3D]" />
-                      <span className="ml-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium text-[#3F3D3D]">我的文章</span>
+                    <Link
+                      href="/profile/articles"
+                      className="flex items-center px-4 py-3 hover:bg-gray-50"
+                    >
+                      <FileText className="h-5 w-5 text-[#3F3D3D]" />
+                      <span className="ml-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium text-[#3F3D3D]">
+                        我的文章
+                      </span>
                     </Link>
-                    <Link href="/profile/bookmarks" className="flex items-center px-4 py-3 hover:bg-gray-50">
-                      <Bookmark className="w-5 h-5 text-[#3F3D3D]" />
-                      <span className="ml-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium text-[#3F3D3D]">我的收藏</span>
+                    <Link
+                      href="/profile/bookmarks"
+                      className="flex items-center px-4 py-3 hover:bg-gray-50"
+                    >
+                      <Bookmark className="h-5 w-5 text-[#3F3D3D]" />
+                      <span className="ml-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium text-[#3F3D3D]">
+                        我的收藏
+                      </span>
                     </Link>
                   </div>
 
                   {/* 設定與登出區 */}
                   <div className="border-t border-[#EBEAEA]">
-                    <Link href="/profile/settings" className="flex items-center px-4 py-3 hover:bg-gray-50">
-                      <Settings className="w-5 h-5 text-[#3F3D3D]" />
-                      <span className="ml-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium text-[#3F3D3D]">帳號設定</span>
-                    </Link>
-                    <button 
-                      onClick={() => logout()}
-                      className="w-full flex items-center px-4 py-3 hover:bg-gray-50 text-[#D94A4A]"
+                    <Link
+                      href="/profile/settings"
+                      className="flex items-center px-4 py-3 hover:bg-gray-50"
                     >
-                      <LogOut className="w-5 h-5" />
-                      <span className="ml-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium">登出</span>
+                      <Settings className="h-5 w-5 text-[#3F3D3D]" />
+                      <span className="ml-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium text-[#3F3D3D]">
+                        帳號設定
+                      </span>
+                    </Link>
+                    <button
+                      onClick={() => logout()}
+                      className="flex w-full items-center px-4 py-3 text-[#D94A4A] hover:bg-gray-50"
+                    >
+                      <LogOut className="h-5 w-5" />
+                      <span className="ml-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium">
+                        登出
+                      </span>
                     </button>
                   </div>
                 </div>
               ) : (
                 <Link href="/auth/login" className="block w-full px-4">
-                  <Button 
+                  <Button
                     variant="outline"
                     size="lg"
-                    className="border border-gray-300 text-[#1B1A1A] hover:bg-gray-100/80 w-full text-left rounded-md font-medium py-1"
+                    className="w-full rounded-md border border-gray-300 py-1 text-left font-medium text-[#1B1A1A] hover:bg-gray-100/80"
                   >
                     登入
                   </Button>

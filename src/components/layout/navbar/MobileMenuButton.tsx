@@ -14,7 +14,7 @@ interface MobileMenuButtonProps {
 export default function MobileMenuButton({ isDesktop }: MobileMenuButtonProps) {
   const { isNavbarOpen, toggleNavbar } = useUIStore()
 
-  if (isDesktop) return null;
+  if (isDesktop) return null
 
   return (
     <button

@@ -11,12 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion'
  */
 export default function DesktopSearchBar() {
   const router = useRouter()
-  const { 
-    isSearchOpen, 
-    closeSearch,
-    searchQuery,
-    setSearchQuery 
-  } = useUIStore()
+  const { isSearchOpen, closeSearch, searchQuery, setSearchQuery } = useUIStore()
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -26,7 +21,7 @@ export default function DesktopSearchBar() {
     }
   }
 
-  if (!isSearchOpen) return null;
+  if (!isSearchOpen) return null
 
   return (
     <AnimatePresence>
@@ -35,32 +30,23 @@ export default function DesktopSearchBar() {
         animate={{ opacity: 1, width: 'auto' }}
         exit={{ opacity: 0, width: 0 }}
         transition={{ duration: 0.2 }}
-        className="absolute right-16 top-1/2 -translate-y-1/2 z-10 hidden lg:block"
+        className="absolute right-12 top-1/2 z-10 hidden -translate-y-1/2 lg:block"
       >
-        <form 
-          onSubmit={handleSearch}
-          className="relative flex items-center"
-        >
+        <form onSubmit={handleSearch} className="relative flex items-center">
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="請輸入關鍵字"
-            className="w-[240px] h-[40px] px-4 py-3 bg-[#F5F5F5] rounded-[4px] text-base font-normal font-['Noto_Sans_CJK_TC'] leading-6 tracking-[0.01em] placeholder:text-[#B6B3B3] focus:outline-none"
+            className="h-[40px] w-[240px] rounded-[4px] bg-[#F5F5F5] px-4 py-3 font-['Noto_Sans_CJK_TC'] text-base font-normal leading-6 tracking-[0.01em] placeholder:text-[#B6B3B3] focus:outline-none"
             autoFocus
           />
-          <button 
-            type="button" 
-            onClick={closeSearch} 
-            className="absolute right-10 top-1/2 transform -translate-y-1/2 text-[#8E8C8C] hover:text-[#3F3D3D]"
+          <button
+            type="button"
+            onClick={closeSearch}
+            className="absolute right-2 top-1/2 -translate-y-1/2 transform text-[#8E8C8C] hover:text-[#3F3D3D]"
           >
             <X className="h-4 w-4" />
-          </button>
-          <button 
-            type="submit" 
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#1B1A1A]"
-          >
-            <Search className="h-5 w-5 stroke-[1.5px]"/>
           </button>
         </form>
       </motion.div>

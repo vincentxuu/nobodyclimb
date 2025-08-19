@@ -31,35 +31,30 @@ export default function BiographyPage() {
       <div className="container mx-auto px-4 py-10">
         {/* Breadcrumb */}
         <div className="mb-8">
-          <Breadcrumb
-            items={[
-              { label: '首頁', href: '/' },
-              { label: '人物誌' }
-            ]}
-          />
+          <Breadcrumb items={[{ label: '首頁', href: '/' }, { label: '人物誌' }]} />
         </div>
 
         <div className="mb-16">
-          <div className="relative max-w-[240px] mx-auto">
+          <div className="relative mx-auto max-w-[240px]">
             <input
               type="text"
               placeholder="搜尋人物關鍵字..."
               value={searchTerm}
               onChange={handleSearch}
-              className="w-full h-[40px] px-4 py-3 border border-[#1B1A1A] bg-white rounded-[4px] text-sm font-light placeholder:text-[#6D6C6C] focus:outline-none focus:ring-2 focus:ring-[#1B1A1A] focus:border-transparent"
+              className="h-[40px] w-full rounded-[4px] border border-[#1B1A1A] bg-white px-4 py-3 text-sm font-light placeholder:text-[#6D6C6C] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1B1A1A]"
             />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-              <Search className="h-5 w-5 text-[#1B1A1A] stroke-[1.5px]" />
+            <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+              <Search className="h-5 w-5 stroke-[1.5px] text-[#1B1A1A]" />
             </div>
           </div>
         </div>
 
         <BiographyList searchTerm={searchTerm} />
 
-        <div className="flex justify-center mt-10 mb-16">
+        <div className="mb-16 mt-10 flex justify-center">
           <Button
             variant="outline"
-            className="h-11 border border-[#1B1A1A] text-[#1B1A1A] px-8 hover:bg-[#dbd8d8] hover:text-[#1B1A1A]"
+            className="h-11 border border-[#1B1A1A] px-8 text-[#1B1A1A] hover:bg-[#dbd8d8] hover:text-[#1B1A1A]"
           >
             看更多
           </Button>

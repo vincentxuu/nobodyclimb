@@ -24,7 +24,7 @@ function GymCard({ gym }: { gym: Gym }) {
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-        
+
         {/* 評分 */}
         <div className="absolute bottom-2 right-2 flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 text-xs font-medium text-black">
           <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
@@ -32,23 +32,21 @@ function GymCard({ gym }: { gym: Gym }) {
           <span className="text-muted-foreground">({gym.reviews})</span>
         </div>
       </div>
-      
+
       <div className="p-4">
         <h3 className="mb-1 text-lg font-semibold">
           <Link href={`/gym/${gym.slug}`} className="hover:text-primary">
             {gym.name}
           </Link>
         </h3>
-        
+
         <div className="mb-2 flex items-center gap-1 text-xs text-muted-foreground">
           <MapPin className="h-3 w-3" />
           <span className="truncate">{gym.address}</span>
         </div>
-        
-        <p className="mb-3 text-sm text-muted-foreground line-clamp-2">
-          {gym.description}
-        </p>
-        
+
+        <p className="mb-3 line-clamp-2 text-sm text-muted-foreground">{gym.description}</p>
+
         {/* 設施標籤 */}
         <div className="mb-3 flex flex-wrap gap-2">
           {gym.facilities?.slice(0, 3).map((facility) => (
@@ -65,7 +63,7 @@ function GymCard({ gym }: { gym: Gym }) {
             </span>
           )}
         </div>
-        
+
         <Link href={`/gym/${gym.slug}`}>
           <Button size="sm" variant="outline" className="w-full">
             查看詳情
@@ -82,11 +80,11 @@ function GymCard({ gym }: { gym: Gym }) {
  */
 export function GymHighlights() {
   const { featuredGyms, gymsLoading, fetchFeaturedGyms } = useContentStore()
-  
+
   useEffect(() => {
     fetchFeaturedGyms()
   }, [fetchFeaturedGyms])
-  
+
   return (
     <section className="bg-muted/40 py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
@@ -114,12 +112,12 @@ export function GymHighlights() {
             </Button>
           </motion.div>
         </div>
-        
+
         {gymsLoading ? (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3].map((i) => (
-              <motion.div 
-                key={i} 
+              <motion.div
+                key={i}
                 className="h-72 animate-pulse rounded-lg bg-muted"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -131,7 +129,7 @@ export function GymHighlights() {
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featuredGyms.map((gym, index) => (
-              <motion.div 
+              <motion.div
                 key={gym.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -143,9 +141,9 @@ export function GymHighlights() {
             ))}
           </div>
         )}
-        
+
         {/* 加入新攀岩館提示 */}
-        <motion.div 
+        <motion.div
           className="mt-12 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20 p-6 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

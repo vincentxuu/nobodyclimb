@@ -29,31 +29,33 @@ export const useUIStore = create<UIState>((set) => ({
   isSearchOpen: false,
   scrollProgress: 0,
   searchQuery: '',
-  
+
   setTheme: (theme) => set({ theme }),
-  
+
   toggleNavbar: () => set((state) => ({ isNavbarOpen: !state.isNavbarOpen })),
-  
+
   openNavbar: () => set({ isNavbarOpen: true }),
-  
+
   closeNavbar: () => set({ isNavbarOpen: false }),
-  
+
   toggleSearch: () => set((state) => ({ isSearchOpen: !state.isSearchOpen })),
-  
+
   openSearch: () => set({ isSearchOpen: true }),
-  
-  closeSearch: () => set({ 
-    isSearchOpen: false,
-    searchQuery: '' // 關閉搜尋時清空查詢
-  }),
-  
+
+  closeSearch: () =>
+    set({
+      isSearchOpen: false,
+      searchQuery: '', // 關閉搜尋時清空查詢
+    }),
+
   // 同時打開導航欄和搜尋框
-  openNavbarWithSearch: () => set({ 
-    isNavbarOpen: true,
-    isSearchOpen: true
-  }),
-  
+  openNavbarWithSearch: () =>
+    set({
+      isNavbarOpen: true,
+      isSearchOpen: true,
+    }),
+
   setSearchQuery: (query) => set({ searchQuery: query }),
-  
+
   setScrollProgress: (progress) => set({ scrollProgress: progress }),
 }))

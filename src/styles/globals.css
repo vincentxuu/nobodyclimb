@@ -4,38 +4,51 @@
 
 @layer base {
   :root {
-    --font-noto-sans-tc: "Noto Sans TC", sans-serif;
-    --font-allerta-stencil: "Allerta Stencil", monospace;
-    
-    --background: 0 0% 100%;
-    --foreground: 0 0% 11%; /* #1B1A1A */
+    --font-noto-sans-tc: 'Noto Sans TC', sans-serif;
+    --font-allerta-stencil: 'Allerta Stencil', monospace;
 
-    --card: 0 0% 100%; /* 白色 */
-    --card-foreground: 0 0% 11%; /* #1B1A1A */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 11%;
+    /* #1B1A1A */
+
+    --card: 0 0% 100%;
+    /* 白色 */
+    --card-foreground: 0 0% 11%;
+    /* #1B1A1A */
 
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 11%;
 
-    --primary: 0 0% 11%; /* #1B1A1A */
-    --primary-foreground: 0 0% 100%; /* 白色 */
+    --primary: 0 0% 11%;
+    /* #1B1A1A */
+    --primary-foreground: 0 0% 100%;
+    /* 白色 */
 
-    --secondary: 0 0% 94%; /* #F0F0F0 */
-    --secondary-foreground: 0 0% 11%; /* #1B1A1A */
+    --secondary: 0 0% 94%;
+    /* #F0F0F0 */
+    --secondary-foreground: 0 0% 11%;
+    /* #1B1A1A */
 
     --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 33%; /* #535353 */
+    --muted-foreground: 0 0% 33%;
+    /* #535353 */
 
-    --accent: 60 100% 52%; /* #ffe70c 黃色 */
-    --accent-foreground: 0 0% 11%; /* #1B1A1A */
+    --accent: 54 100% 52%;
+    /* #FFE70C 黃色 */
+    --accent-foreground: 0 0% 11%;
+    /* #1B1A1A */
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 83%; /* #D3D3D3 */
+    --border: 0 0% 83%;
+    /* #D3D3D3 */
     --input: 0 0% 89%;
-    --ring: 60 100% 52%; /* #ffe70c 黃色 */
+    --ring: 60 100% 52%;
+    /* #ffe70c 黃色 */
 
-    --radius: 0.25rem; /* 4px */
+    --radius: 0.25rem;
+    /* 4px */
   }
 
   .dark {
@@ -73,6 +86,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -102,7 +116,9 @@
 .page-transition-enter-active {
   opacity: 1;
   transform: translate(0, 0);
-  transition: opacity 300ms, transform 300ms;
+  transition:
+    opacity 300ms,
+    transform 300ms;
 }
 
 .page-transition-exit {
@@ -113,7 +129,9 @@
 .page-transition-exit-active {
   opacity: 0;
   transform: translate(0, -15px);
-  transition: opacity 300ms, transform 300ms;
+  transition:
+    opacity 300ms,
+    transform 300ms;
 }
 
 /* 瀏覽進度條 */

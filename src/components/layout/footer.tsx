@@ -16,21 +16,15 @@ export function Footer() {
     facebook: <Facebook className="h-5 w-5" />,
     mail: <Mail className="h-5 w-5" />,
   }
-  
+
   return (
-    <footer className="bg-[#1B1A1A] h-[160px] flex justify-between items-center px-4 md:px-20 lg:px-40 xl:px-[160px]">
+    <footer className="flex h-[160px] items-center justify-between bg-[#1B1A1A] px-4 md:px-20 lg:px-40 xl:px-[160px]">
       {/* Logo與版權資訊 */}
       <div className="flex items-center space-x-4">
-        <img
-          src="/logo/Nobodylimb-white.svg"
-          alt="NobodyClimb Logo"
-          className="h-8 w-auto"
-        />
-        <p className="text-[#8E8C8C] text-[14px] font-light">
-          NobodyClimb © 2022.
-        </p>
+        <img src="/logo/Nobodylimb-white.svg" alt="NobodyClimb Logo" className="h-8 w-auto" />
+        <p className="text-[14px] font-light text-[#8E8C8C]">NobodyClimb © 2022.</p>
       </div>
-      
+
       {/* 社交媒體圖標 */}
       <div className="flex items-center space-x-3">
         {SOCIAL_LINKS.map((link) => (
@@ -40,7 +34,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={link.label}
-            className="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-[#DBD8D8] p-[5px] text-[#1B1A1A] hover:bg-white transition-colors"
+            className="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-[#DBD8D8] p-[5px] text-[#1B1A1A] transition-colors hover:bg-white"
           >
             {socialIcons[link.icon]}
           </a>

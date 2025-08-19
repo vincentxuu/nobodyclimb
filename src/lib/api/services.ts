@@ -1,17 +1,17 @@
 import apiClient from './client'
-import { 
-  Post, 
-  Gym, 
-  Gallery, 
-  User, 
-  Comment, 
-  PaginatedResponse, 
-  ApiResponse, 
+import {
+  Post,
+  Gym,
+  Gallery,
+  User,
+  Comment,
+  PaginatedResponse,
+  ApiResponse,
   SearchParams,
   Biography,
   Crag,
   Route,
-  Weather
+  Weather,
 } from '@/lib/types'
 
 /**
@@ -22,10 +22,13 @@ export const authService = {
    * 用戶登入
    */
   login: async (email: string, password: string) => {
-    const response = await apiClient.post<ApiResponse<{ user: User; token: string }>>('/auth/login', {
-      email,
-      password,
-    })
+    const response = await apiClient.post<ApiResponse<{ user: User; token: string }>>(
+      '/auth/login',
+      {
+        email,
+        password,
+      }
+    )
     return response.data
   },
 
@@ -33,9 +36,12 @@ export const authService = {
    * 用 Google OAuth 登入
    */
   loginWithGoogle: async (token: string) => {
-    const response = await apiClient.post<ApiResponse<{ user: User; token: string }>>('/auth/google', {
-      token,
-    })
+    const response = await apiClient.post<ApiResponse<{ user: User; token: string }>>(
+      '/auth/google',
+      {
+        token,
+      }
+    )
     return response.data
   },
 
@@ -43,11 +49,14 @@ export const authService = {
    * 用戶註冊
    */
   register: async (username: string, email: string, password: string) => {
-    const response = await apiClient.post<ApiResponse<{ user: User; token: string }>>('/auth/register', {
-      username,
-      email,
-      password,
-    })
+    const response = await apiClient.post<ApiResponse<{ user: User; token: string }>>(
+      '/auth/register',
+      {
+        username,
+        email,
+        password,
+      }
+    )
     return response.data
   },
 
@@ -147,7 +156,9 @@ export const postService = {
   /**
    * 創建文章
    */
-  createPost: async (postData: Omit<Post, 'id' | 'authorId' | 'createdAt' | 'likes' | 'comments' | 'views'>) => {
+  createPost: async (
+    postData: Omit<Post, 'id' | 'authorId' | 'createdAt' | 'likes' | 'comments' | 'views'>
+  ) => {
     const response = await apiClient.post<ApiResponse<Post>>('/posts', postData)
     return response.data
   },
@@ -172,7 +183,9 @@ export const postService = {
    * 喜歡/取消喜歡文章
    */
   toggleLike: async (id: string) => {
-    const response = await apiClient.post<ApiResponse<{ liked: boolean; likes: number }>>(`/posts/${id}/like`)
+    const response = await apiClient.post<ApiResponse<{ liked: boolean; likes: number }>>(
+      `/posts/${id}/like`
+    )
     return response.data
   },
 
@@ -188,7 +201,9 @@ export const postService = {
    * 添加文章評論
    */
   addComment: async (postId: string, content: string) => {
-    const response = await apiClient.post<ApiResponse<Comment>>(`/posts/${postId}/comments`, { content })
+    const response = await apiClient.post<ApiResponse<Comment>>(`/posts/${postId}/comments`, {
+      content,
+    })
     return response.data
   },
 
@@ -198,11 +213,15 @@ export const postService = {
   uploadImage: async (file: File) => {
     const formData = new FormData()
     formData.append('image', file)
-    const response = await apiClient.post<ApiResponse<{ url: string }>>('/posts/upload-image', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    const response = await apiClient.post<ApiResponse<{ url: string }>>(
+      '/posts/upload-image',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
     return response.data
   },
 }
@@ -273,7 +292,9 @@ export const gymService = {
    * 喜歡/取消喜歡攀岩館
    */
   toggleLike: async (id: string) => {
-    const response = await apiClient.post<ApiResponse<{ liked: boolean; likes: number }>>(`/gyms/${id}/like`)
+    const response = await apiClient.post<ApiResponse<{ liked: boolean; likes: number }>>(
+      `/gyms/${id}/like`
+    )
     return response.data
   },
 
@@ -289,7 +310,10 @@ export const gymService = {
    * 添加攀岩館評論與評分
    */
   addReview: async (gymId: string, content: string, rating: number) => {
-    const response = await apiClient.post<ApiResponse<Comment>>(`/gyms/${gymId}/reviews`, { content, rating })
+    const response = await apiClient.post<ApiResponse<Comment>>(`/gyms/${gymId}/reviews`, {
+      content,
+      rating,
+    })
     return response.data
   },
 
@@ -299,11 +323,15 @@ export const gymService = {
   uploadImage: async (file: File) => {
     const formData = new FormData()
     formData.append('image', file)
-    const response = await apiClient.post<ApiResponse<{ url: string }>>('/gyms/upload-image', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    const response = await apiClient.post<ApiResponse<{ url: string }>>(
+      '/gyms/upload-image',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
     return response.data
   },
 }
@@ -341,7 +369,9 @@ export const galleryService = {
   /**
    * 創建相簿
    */
-  createGallery: async (galleryData: Omit<Gallery, 'id' | 'authorId' | 'createdAt' | 'likes' | 'views'>) => {
+  createGallery: async (
+    galleryData: Omit<Gallery, 'id' | 'authorId' | 'createdAt' | 'likes' | 'views'>
+  ) => {
     const response = await apiClient.post<ApiResponse<Gallery>>('/galleries', galleryData)
     return response.data
   },
@@ -366,7 +396,9 @@ export const galleryService = {
    * 喜歡/取消喜歡相簿
    */
   toggleLike: async (id: string) => {
-    const response = await apiClient.post<ApiResponse<{ liked: boolean; likes: number }>>(`/galleries/${id}/like`)
+    const response = await apiClient.post<ApiResponse<{ liked: boolean; likes: number }>>(
+      `/galleries/${id}/like`
+    )
     return response.data
   },
 
@@ -378,11 +410,15 @@ export const galleryService = {
     files.forEach((file, index) => {
       formData.append(`images[${index}]`, file)
     })
-    const response = await apiClient.post<ApiResponse<{ urls: string[] }>>('/galleries/upload-images', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    const response = await apiClient.post<ApiResponse<{ urls: string[] }>>(
+      '/galleries/upload-images',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
     return response.data
   },
 }
@@ -395,9 +431,12 @@ export const biographyService = {
    * 獲取人物誌列表
    */
   getBiographies: async (page = 1, limit = 10) => {
-    const response = await apiClient.get<ApiResponse<PaginatedResponse<Biography>>>('/biographies', {
-      params: { page, limit },
-    })
+    const response = await apiClient.get<ApiResponse<PaginatedResponse<Biography>>>(
+      '/biographies',
+      {
+        params: { page, limit },
+      }
+    )
     return response.data
   },
 
@@ -447,11 +486,15 @@ export const biographyService = {
   uploadImage: async (file: File) => {
     const formData = new FormData()
     formData.append('image', file)
-    const response = await apiClient.post<ApiResponse<{ url: string }>>('/biographies/upload-image', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    const response = await apiClient.post<ApiResponse<{ url: string }>>(
+      '/biographies/upload-image',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
     return response.data
   },
 }
@@ -524,7 +567,10 @@ export const cragService = {
    * 添加岩場評論
    */
   addReview: async (cragId: string, content: string, rating: number) => {
-    const response = await apiClient.post<ApiResponse<Comment>>(`/crags/${cragId}/reviews`, { content, rating })
+    const response = await apiClient.post<ApiResponse<Comment>>(`/crags/${cragId}/reviews`, {
+      content,
+      rating,
+    })
     return response.data
   },
 
@@ -568,11 +614,15 @@ export const cragService = {
     files.forEach((file, index) => {
       formData.append(`images[${index}]`, file)
     })
-    const response = await apiClient.post<ApiResponse<{ urls: string[] }>>('/crags/upload-images', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    const response = await apiClient.post<ApiResponse<{ urls: string[] }>>(
+      '/crags/upload-images',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
     return response.data
   },
 }
@@ -585,11 +635,13 @@ export const searchService = {
    * 全站搜尋
    */
   search: async (params: SearchParams) => {
-    const response = await apiClient.get<ApiResponse<{
-      posts: Post[]
-      gyms: Gym[]
-      galleries: Gallery[]
-    }>>('/search', { params })
+    const response = await apiClient.get<
+      ApiResponse<{
+        posts: Post[]
+        gyms: Gym[]
+        galleries: Gallery[]
+      }>
+    >('/search', { params })
     return response.data
   },
 }
@@ -610,9 +662,12 @@ export const userService = {
    * 獲取用戶發布的文章
    */
   getUserPosts: async (userId: string, page = 1, limit = 10) => {
-    const response = await apiClient.get<ApiResponse<PaginatedResponse<Post>>>(`/users/${userId}/posts`, {
-      params: { page, limit },
-    })
+    const response = await apiClient.get<ApiResponse<PaginatedResponse<Post>>>(
+      `/users/${userId}/posts`,
+      {
+        params: { page, limit },
+      }
+    )
     return response.data
   },
 
@@ -620,9 +675,12 @@ export const userService = {
    * 獲取用戶發布的相簿
    */
   getUserGalleries: async (userId: string, page = 1, limit = 10) => {
-    const response = await apiClient.get<ApiResponse<PaginatedResponse<Gallery>>>(`/users/${userId}/galleries`, {
-      params: { page, limit },
-    })
+    const response = await apiClient.get<ApiResponse<PaginatedResponse<Gallery>>>(
+      `/users/${userId}/galleries`,
+      {
+        params: { page, limit },
+      }
+    )
     return response.data
   },
 
@@ -630,9 +688,12 @@ export const userService = {
    * 獲取用戶收藏的文章
    */
   getUserLikedPosts: async (page = 1, limit = 10) => {
-    const response = await apiClient.get<ApiResponse<PaginatedResponse<Post>>>('/users/me/liked-posts', {
-      params: { page, limit },
-    })
+    const response = await apiClient.get<ApiResponse<PaginatedResponse<Post>>>(
+      '/users/me/liked-posts',
+      {
+        params: { page, limit },
+      }
+    )
     return response.data
   },
 
@@ -640,9 +701,12 @@ export const userService = {
    * 獲取用戶收藏的攀岩館
    */
   getUserLikedGyms: async (page = 1, limit = 10) => {
-    const response = await apiClient.get<ApiResponse<PaginatedResponse<Gym>>>('/users/me/liked-gyms', {
-      params: { page, limit },
-    })
+    const response = await apiClient.get<ApiResponse<PaginatedResponse<Gym>>>(
+      '/users/me/liked-gyms',
+      {
+        params: { page, limit },
+      }
+    )
     return response.data
   },
 
@@ -650,9 +714,12 @@ export const userService = {
    * 獲取用戶收藏的相簿
    */
   getUserLikedGalleries: async (page = 1, limit = 10) => {
-    const response = await apiClient.get<ApiResponse<PaginatedResponse<Gallery>>>('/users/me/liked-galleries', {
-      params: { page, limit },
-    })
+    const response = await apiClient.get<ApiResponse<PaginatedResponse<Gallery>>>(
+      '/users/me/liked-galleries',
+      {
+        params: { page, limit },
+      }
+    )
     return response.data
   },
 
@@ -662,11 +729,15 @@ export const userService = {
   uploadAvatar: async (file: File) => {
     const formData = new FormData()
     formData.append('avatar', file)
-    const response = await apiClient.post<ApiResponse<{ url: string }>>('/users/upload-avatar', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    const response = await apiClient.post<ApiResponse<{ url: string }>>(
+      '/users/upload-avatar',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
     return response.data
   },
 }

@@ -10,7 +10,7 @@ import { useUIStore } from '@/store/uiStore'
  */
 export function ProgressBar() {
   const { scrollProgress, setScrollProgress } = useUIStore()
-  
+
   useEffect(() => {
     // 計算滾動進度
     const handleScroll = () => {
@@ -19,14 +19,14 @@ export function ProgressBar() {
       const scrolled = (winScroll / height) * 100
       setScrollProgress(scrolled)
     }
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true })
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [setScrollProgress])
-  
+
   return (
     <motion.div
       className="progress-bar"

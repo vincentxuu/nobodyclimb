@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react'
 /**
  * 媒體查詢 Hook
  * 用於響應式設計，檢測當前視窗寬度是否符合特定媒體查詢
- * 
+ *
  * @param query 媒體查詢字串
  * @returns 是否符合媒體查詢
- * 
+ *
  * @example
  * const isDesktop = useMediaQuery('(min-width: 1024px)')
  */

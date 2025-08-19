@@ -16,10 +16,10 @@ export default function SearchBar({ isDesktop }: SearchBarProps) {
 
   return (
     <div className="relative px-4">
-      <button 
-        onClick={toggleSearch} 
-        aria-label="搜尋" 
-        className="text-[#1B1A1A] hover:text-[#8E8C8C] transition-colors duration-200"
+      <button
+        onClick={toggleSearch}
+        aria-label="搜尋"
+        className="text-[#1B1A1A] transition-colors duration-200 hover:text-[#8E8C8C]"
       >
         <Search className="h-5 w-5 stroke-[1.5px]" />
       </button>

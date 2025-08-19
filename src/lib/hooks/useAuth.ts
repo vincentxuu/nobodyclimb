@@ -23,9 +23,9 @@ export function useAuth() {
     loginWithGoogle: storeLoginWithGoogle,
     clearError: storeClearError,
   } = useAuthStore()
-  
+
   const router = useRouter()
-  
+
   /**
    * 登入
    * @param {string} email - 用戶電子郵件
@@ -35,8 +35,8 @@ export function useAuth() {
   const login = useCallback(
     async (email: string, password: string) => {
       try {
-        await storeLogin(email, password)
-        return { success: true }
+        const result = await storeLogin(email, password)
+        return result
       } catch (error) {
         return {
           success: false,
@@ -46,7 +46,7 @@ export function useAuth() {
     },
     [storeLogin]
   )
-  
+
   /**
    * 使用 Google 登入
    * @returns {Promise<{ success: boolean, error?: string }>} 登入結果
@@ -56,10 +56,10 @@ export function useAuth() {
       // 這裡需要處理 Google 登入流程
       // 在實際應用中，這可能包括打開一個 Google OAuth 窗口
       // 然後處理回調並將令牌發送到後端
-      
+
       // 模擬 Google 登入成功後獲取的令牌
       const mockGoogleToken = 'google-auth-token-' + Date.now()
-      
+
       await storeLoginWithGoogle(mockGoogleToken)
       return { success: true }
     } catch (error) {
@@ -69,7 +69,7 @@ export function useAuth() {
       }
     }
   }, [storeLoginWithGoogle])
-  
+
   /**
    * 註冊
    * @param {string} username - 用戶名
@@ -91,7 +91,7 @@ export function useAuth() {
     },
     [storeRegister]
   )
-  
+
   /**
    * 登出
    * @param {boolean} redirect - 是否重定向到登入頁面
@@ -105,7 +105,7 @@ export function useAuth() {
     },
     [storeLogout, router]
   )
-  
+
   /**
    * 更新用戶資料
    * @param {Partial<User>} userData - 要更新的用戶資料
@@ -125,14 +125,14 @@ export function useAuth() {
     },
     [storeUpdateUser]
   )
-  
+
   /**
    * 清除錯誤
    */
   const clearError = useCallback(() => {
     storeClearError()
   }, [storeClearError])
-  
+
   return {
     user,
     token,

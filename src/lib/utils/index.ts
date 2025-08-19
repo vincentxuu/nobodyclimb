@@ -1,6 +1,6 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
- 
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
 /**
  * 合併 Tailwind CSS 的類名
  * @param {ClassValue[]} inputs - 傳入的類名

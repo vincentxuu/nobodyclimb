@@ -1,37 +1,37 @@
-"use client";
+'use client'
 
-import React from "react";
-import { Cloud, Umbrella } from "lucide-react";
+import React from 'react'
+import { Cloud, Umbrella } from 'lucide-react'
 
 interface WeatherType {
   current: {
-    temp: number;
-    condition: string;
-    precipitation: string;
-    wind: string;
-  };
+    temp: number
+    condition: string
+    precipitation: string
+    wind: string
+  }
   forecast: Array<{
-    day: string;
-    high: number;
-    low: number;
-    condition: string;
-    precipitation: string;
-  }>;
+    day: string
+    high: number
+    low: number
+    condition: string
+    precipitation: string
+  }>
 }
 
 interface CragWeatherCardProps {
-  weather: WeatherType;
+  weather: WeatherType
 }
 
 export const CragWeatherCard: React.FC<CragWeatherCardProps> = ({ weather }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-      <h3 className="text-xl font-bold flex items-center mb-4">
+    <div className="mb-6 rounded-lg bg-white p-6 shadow-md">
+      <h3 className="mb-4 flex items-center text-xl font-bold">
         <Cloud size={20} className="mr-2 text-[#1B1A1A]" />
         即時天氣
       </h3>
-      
-      <div className="flex justify-between items-center mb-6">
+
+      <div className="mb-6 flex items-center justify-between">
         <div>
           <p className="text-3xl font-bold">{weather.current.temp}°C</p>
           <p className="text-gray-600">{weather.current.condition}</p>
@@ -44,19 +44,24 @@ export const CragWeatherCard: React.FC<CragWeatherCardProps> = ({ weather }) => 
           <p className="text-gray-700">{weather.current.wind}</p>
         </div>
       </div>
-      
-      <h4 className="font-medium mb-3">未來天氣預報</h4>
+
+      <h4 className="mb-3 font-medium">未來天氣預報</h4>
       <div className="space-y-3">
         {weather.forecast.map((day, index) => (
-          <div key={index} className="flex justify-between items-center p-2 hover:bg-gray-50 rounded">
+          <div
+            key={index}
+            className="flex items-center justify-between rounded p-2 hover:bg-gray-50"
+          >
             <span>{day.day}</span>
             <div className="flex items-center">
-              <span className="text-gray-700 mr-3">{day.condition}</span>
-              <span>{day.low}° / {day.high}°</span>
+              <span className="mr-3 text-gray-700">{day.condition}</span>
+              <span>
+                {day.low}° / {day.high}°
+              </span>
             </div>
           </div>
         ))}
       </div>
     </div>
-  );
-};
+  )
+}

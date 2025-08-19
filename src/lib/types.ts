@@ -155,10 +155,10 @@ export interface UpdateProfileFormData {
 
 // API 回應介面
 export interface ApiResponse<T = any> {
-  success: boolean;
-  data: T;
-  message?: string;
-  error?: string;
+  success: boolean
+  data: T
+  message?: string
+  error?: string
 }
 
 /**

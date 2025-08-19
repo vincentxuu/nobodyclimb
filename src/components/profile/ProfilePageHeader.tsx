@@ -1,30 +1,35 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { Button } from '@/components/ui/button';
+import React from 'react'
+import { Button } from '@/components/ui/button'
 
 interface ProfilePageHeaderProps {
-  title: string;
-  isEditing: boolean;
-  onEdit: () => void;
-  isMobile: boolean;
+  title: string
+  isEditing: boolean
+  onEdit: () => void
+  isMobile: boolean
 }
 
-export default function ProfilePageHeader({ title, isEditing, onEdit, isMobile }: ProfilePageHeaderProps) {
+export default function ProfilePageHeader({
+  title,
+  isEditing,
+  onEdit,
+  isMobile,
+}: ProfilePageHeaderProps) {
   return (
-    <div className="flex justify-between items-center mb-6 md:mb-8">
+    <div className="mb-6 flex items-center justify-between md:mb-8">
       <h1 className={`${isMobile ? 'text-xl' : 'text-2xl lg:text-3xl'} font-medium text-[#1B1A1A]`}>
         {title}
       </h1>
       {!isEditing && (
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           onClick={onEdit}
-          className="border-[#1B1A1A] text-[#1B1A1A] hover:bg-[#F5F5F5] text-sm md:text-base"
+          className="border-[#1B1A1A] text-sm text-[#1B1A1A] hover:bg-[#F5F5F5] md:text-base"
         >
           編輯資料
         </Button>
       )}
     </div>
-  );
+  )
 }

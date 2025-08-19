@@ -11,32 +11,32 @@ import { Card, CardContent } from '@/components/ui/card'
 const relatedArticles = [
   {
     id: 1,
-    title: "冰攀初體驗",
-    author: "謝璿",
-    date: "2023.02.15",
-    description: "第一次體驗冰攀，在冰凍的瀑布上攀登，是一種全新的感受...",
-    imageSrc: "/photo/blog-left.jpeg"
+    title: '冰攀初體驗',
+    author: '謝璿',
+    date: '2023.02.15',
+    description: '第一次體驗冰攀，在冰凍的瀑布上攀登，是一種全新的感受...',
+    imageSrc: '/photo/blog-left.jpeg',
   },
   {
     id: 2,
-    title: "長程攀登：心得與準備",
-    author: "小若",
-    date: "2023.01.20",
-    description: "準備一次長程攀登需要什麼？分享我的準備清單和心得...",
-    imageSrc: "/photo/blog-mid-left.jpeg"
+    title: '長程攀登：心得與準備',
+    author: '小若',
+    date: '2023.01.20',
+    description: '準備一次長程攀登需要什麼？分享我的準備清單和心得...',
+    imageSrc: '/photo/blog-mid-left.jpeg',
   },
   {
     id: 3,
-    title: "攀岩訓練與身體調適",
-    author: "一路",
-    date: "2023.03.05",
-    description: "如何安排訓練計畫，讓身體達到最佳攀岩狀態...",
-    imageSrc: "/photo/blog-mid-right.jpeg"
-  }
-];
+    title: '攀岩訓練與身體調適',
+    author: '一路',
+    date: '2023.03.05',
+    description: '如何安排訓練計畫，讓身體達到最佳攀岩狀態...',
+    imageSrc: '/photo/blog-mid-right.jpeg',
+  },
+]
 
 interface RelatedArticleCardProps {
-  article: typeof relatedArticles[0];
+  article: (typeof relatedArticles)[0]
 }
 
 function RelatedArticleCard({ article }: RelatedArticleCardProps) {
@@ -48,7 +48,7 @@ function RelatedArticleCard({ article }: RelatedArticleCardProps) {
       className="h-full"
     >
       <Link href={`/blog/${article.id}`} className="block h-full">
-        <Card className="h-full overflow-hidden hover:shadow-md transition-shadow duration-300">
+        <Card className="h-full overflow-hidden transition-shadow duration-300 hover:shadow-md">
           <div className="relative h-[200px] overflow-hidden">
             <Image
               src={article.imageSrc}
@@ -57,17 +57,19 @@ function RelatedArticleCard({ article }: RelatedArticleCardProps) {
               className="object-cover transition-transform duration-500 hover:scale-105"
             />
           </div>
-          
+
           <CardContent className="p-5">
             <div className="mb-3 flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-medium text-[#1B1A1A]">{article.title}</h3>
-                <p className="text-sm text-[#8E8C8C]">{article.author} | {article.date}</p>
+                <p className="text-sm text-[#8E8C8C]">
+                  {article.author} | {article.date}
+                </p>
               </div>
               <ArrowRightCircle size={20} className="text-gray-400" />
             </div>
-            
-            <p className="text-sm text-[#1B1A1A] line-clamp-2">{article.description}</p>
+
+            <p className="line-clamp-2 text-sm text-[#1B1A1A]">{article.description}</p>
           </CardContent>
         </Card>
       </Link>

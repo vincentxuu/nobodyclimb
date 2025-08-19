@@ -63,9 +63,9 @@ export default function CompletePage() {
               <Check size={36} />
             </div>
           </div>
-          
+
           <h1 className="text-3xl font-bold">註冊完成！</h1>
-          
+
           <p className="max-w-md text-gray-600">
             感謝您完成資料填寫，現在您可以開始探索 NobodyClimb 平台，
             與其他攀岩愛好者互動交流，查看最新攀岩資訊。
@@ -78,14 +78,14 @@ export default function CompletePage() {
             type="button"
             variant="outline"
             onClick={handleGoToProfile}
-            className="border-gray-700 px-6 py-3 rounded-lg"
+            className="rounded-lg border-gray-700 px-6 py-3"
           >
             查看個人檔案
           </Button>
           <Button
             type="button"
             onClick={handleGoToHome}
-            className="px-6 py-3 text-white rounded-lg"
+            className="rounded-lg px-6 py-3 text-white"
           >
             回到首頁
           </Button>

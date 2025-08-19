@@ -14,8 +14,8 @@ const photos = [
     location: {
       country: '台灣',
       city: '新北市',
-      spot: '龍洞'
-    }
+      spot: '龍洞',
+    },
   },
   {
     id: 2,
@@ -23,8 +23,8 @@ const photos = [
     location: {
       country: '台灣',
       city: '新北市',
-      spot: '龍洞'
-    }
+      spot: '龍洞',
+    },
   },
   {
     id: 3,
@@ -32,8 +32,8 @@ const photos = [
     location: {
       country: '台灣',
       city: '新北市',
-      spot: '龍洞'
-    }
+      spot: '龍洞',
+    },
   },
   {
     id: 4,
@@ -41,8 +41,8 @@ const photos = [
     location: {
       country: '台灣',
       city: '新北市',
-      spot: '龍洞'
-    }
+      spot: '龍洞',
+    },
   },
   {
     id: 5,
@@ -50,8 +50,8 @@ const photos = [
     location: {
       country: '台灣',
       city: '新北市',
-      spot: '龍洞'
-    }
+      spot: '龍洞',
+    },
   },
   {
     id: 6,
@@ -59,14 +59,14 @@ const photos = [
     location: {
       country: '台灣',
       city: '新北市',
-      spot: '龍洞'
-    }
-  }
+      spot: '龍洞',
+    },
+  },
 ]
 
-function PhotoCard({ photo, index }: { photo: typeof photos[0], index: number }) {
+function PhotoCard({ photo, index }: { photo: (typeof photos)[0]; index: number }) {
   return (
-    <motion.div 
+    <motion.div
       className="group relative aspect-square overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -79,18 +79,24 @@ function PhotoCard({ photo, index }: { photo: typeof photos[0], index: number })
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="object-cover transition-transform duration-500 group-hover:scale-105"
       />
-      
+
       {/* 漸層遮罩 */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      
+
       {/* 位置資訊 */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
+      <div className="absolute bottom-0 left-0 right-0 translate-y-full p-4 transition-transform duration-300 group-hover:translate-y-0">
         <div className="flex items-center gap-2 text-white">
           <MapPin size={16} className="text-white" />
-          <span className="text-sm font-medium tracking-[0.02em] font-['Noto_Sans_TC']">{photo.location.country}</span>
-          <span className="text-sm font-medium tracking-[0.02em] font-['Noto_Sans_TC']">{photo.location.city}</span>
+          <span className="font-['Noto_Sans_TC'] text-sm font-medium tracking-[0.02em]">
+            {photo.location.country}
+          </span>
+          <span className="font-['Noto_Sans_TC'] text-sm font-medium tracking-[0.02em]">
+            {photo.location.city}
+          </span>
           <span className="h-1.5 w-1.5 rounded-full bg-white"></span>
-          <span className="text-sm font-medium tracking-[0.02em] font-['Noto_Sans_TC']">{photo.location.spot}</span>
+          <span className="font-['Noto_Sans_TC'] text-sm font-medium tracking-[0.02em]">
+            {photo.location.spot}
+          </span>
         </div>
       </div>
     </motion.div>
@@ -99,28 +105,26 @@ function PhotoCard({ photo, index }: { photo: typeof photos[0], index: number })
 
 export function GallerySection() {
   return (
-    <section className="py-16 md:py-20 border-t border-[#D2D2D2]">
+    <section className="border-t border-[#D2D2D2] py-16 md:py-20">
       <div className="container mx-auto px-4">
         <div className="mb-8 text-center">
-          <h2 className="text-[40px] font-bold text-[#1B1A1A] font-['Noto_Sans_TC']">
-            精選影像
-          </h2>
-          <p className="text-base font-normal text-[#6D6C6C] mt-4 tracking-[0.01em] font-['Noto_Sans_CJK_TC']">
+          <h2 className="font-['Noto_Sans_TC'] text-[40px] font-bold text-[#1B1A1A]">精選影像</h2>
+          <p className="mt-4 font-['Noto_Sans_CJK_TC'] text-base font-normal tracking-[0.01em] text-[#6D6C6C]">
             看看小人物們攀岩的英姿吧
           </p>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
           {photos.map((photo, index) => (
             <PhotoCard key={photo.id} photo={photo} index={index} />
           ))}
         </div>
-        
+
         <div className="mt-10 flex justify-center">
           <Link href="/photoalbum">
-            <Button 
-              variant="outline" 
-              className="h-11 border border-[#1B1A1A] px-8 text-base text-[#1B1A1A] hover:bg-[#DBD8D8] font-['Noto_Sans_TC'] tracking-[0.02em]"
+            <Button
+              variant="outline"
+              className="h-11 border border-[#1B1A1A] px-8 font-['Noto_Sans_TC'] text-base tracking-[0.02em] text-[#1B1A1A] hover:bg-[#DBD8D8]"
             >
               看更多影像
             </Button>

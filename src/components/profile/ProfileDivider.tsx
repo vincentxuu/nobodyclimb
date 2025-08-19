@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import React from 'react';
+import React from 'react'
 
 export default function ProfileDivider() {
-  return <hr className="border-[#DBD8D8]" />;
+  return <hr className="border-[#DBD8D8]" />
 }

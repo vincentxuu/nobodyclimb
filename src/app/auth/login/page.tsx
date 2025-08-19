@@ -13,22 +13,25 @@ import { PageTransition } from '@/components/shared/page-transition'
  */
 export default function LoginPage() {
   const router = useRouter()
-  const { login, loginWithGoogle, loading, isAuthenticated } = useAuth()
-  
+  const { login, loginWithGoogle, loading } = useAuth()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
-  
+
   // 處理表單提交
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
-    
+
     try {
       const result = await login(email, password)
       if (result.success) {
-        router.push('/')
+        // 等待一小段時間確保狀態更新完成
+        setTimeout(() => {
+          router.push('/')
+        }, 100)
       } else {
         setError(result.error || '登入失敗，請檢查您的帳號密碼')
       }
@@ -37,7 +40,7 @@ export default function LoginPage() {
       setError('登入過程中發生錯誤')
     }
   }
-  
+
   // 處理Google登入
   const handleGoogleLogin = async () => {
     try {
@@ -48,7 +51,7 @@ export default function LoginPage() {
       setError('Google登入過程中發生錯誤')
     }
   }
-  
+
   return (
     <PageTransition>
       <div className="container flex min-h-[calc(100vh-14rem)] flex-col items-center justify-center px-4 py-12">
@@ -56,8 +59,13 @@ export default function LoginPage() {
           <div className="space-y-2 text-center">
             <h1 className="text-3xl font-bold">歡迎回來</h1>
             <p className="text-muted-foreground">登入您的帳號以繼續</p>
+            <div className="rounded-md bg-blue-50 p-3 text-sm text-blue-700">
+              <p className="font-medium">測試帳號</p>
+              <p>帳號：test@nobodyclimb.com</p>
+              <p>密碼：test1234</p>
+            </div>
           </div>
-          
+
           {error && (
             <div className="rounded-md bg-destructive/10 p-3 text-center text-sm text-destructive">
               {error}
@@ -70,7 +78,7 @@ export default function LoginPage() {
               </button>
             </div>
           )}
-          
+
           <div className="space-y-4">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
@@ -82,11 +90,11 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full rounded-md border border-input bg-background pl-10 pr-4 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-4 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   />
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -96,7 +104,7 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full rounded-md border border-input bg-background pl-10 pr-10 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-10 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   />
                   <button
                     type="button"
@@ -104,11 +112,7 @@ export default function LoginPage() {
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                     aria-label={showPassword ? '隱藏密碼' : '顯示密碼'}
                   >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
-                    ) : (
-                      <Eye className="h-4 w-4" />
-                    )}
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
                 <div className="flex justify-end">
@@ -120,23 +124,19 @@ export default function LoginPage() {
                   </Link>
                 </div>
               </div>
-              
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={loading}
-              >
+
+              <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? '登入中...' : '登入'}
                 <LogIn className="ml-2 h-4 w-4" />
               </Button>
             </form>
-            
+
             <div className="relative flex items-center">
               <div className="flex-grow border-t border-border"></div>
               <div className="mx-4 text-xs text-muted-foreground">或</div>
               <div className="flex-grow border-t border-border"></div>
             </div>
-            
+
             <Button
               type="button"
               variant="outline"
@@ -154,7 +154,7 @@ export default function LoginPage() {
               </svg>
               使用 Google 登入
             </Button>
-            
+
             <div className="text-center text-sm">
               <span className="text-muted-foreground">還沒有帳號？</span>{' '}
               <Link href="/auth/register" className="font-medium text-primary hover:underline">

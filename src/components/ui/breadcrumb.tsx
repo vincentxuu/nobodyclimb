@@ -20,13 +20,11 @@ export function Breadcrumb({ items, className }: BreadcrumbProps) {
     <nav className={cn('flex items-center space-x-2', className)}>
       {items.map((item, index) => (
         <React.Fragment key={item.label}>
-          {index > 0 && (
-            <ChevronRight className="h-4 w-4 text-[#8E8C8C]" />
-          )}
+          {index > 0 && <ChevronRight className="h-4 w-4 text-[#8E8C8C]" />}
           {item.href ? (
             <Link
               href={item.href}
-              className="text-sm text-[#8E8C8C] hover:text-[#1B1A1A] transition-colors"
+              className="text-sm text-[#8E8C8C] transition-colors hover:text-[#1B1A1A]"
             >
               {item.label}
             </Link>

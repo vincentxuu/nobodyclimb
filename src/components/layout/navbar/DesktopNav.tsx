@@ -31,17 +31,20 @@ const COLUMN_SUBMENU = [
 export default function DesktopNav() {
   const pathname = usePathname()
   const [expandedColumn, setExpandedColumn] = useState(false)
-  
+
   // 處理專欄展開狀態
   const handleColumnToggle = (isOpen: boolean) => {
     setExpandedColumn(isOpen)
   }
-  
+
   // 確定目前頁面是否在專欄分類中
-  const isInColumnSection = pathname.startsWith('/blog') && pathname !== '/blog/create' && !pathname.startsWith('/blog/edit/')
+  const isInColumnSection =
+    pathname.startsWith('/blog') &&
+    pathname !== '/blog/create' &&
+    !pathname.startsWith('/blog/edit/')
 
   return (
-    <nav className="hidden lg:flex flex-1 items-center justify-center">
+    <nav className="hidden flex-1 items-center justify-center lg:flex">
       <ul className="flex gap-12">
         {NAV_LINKS.map((link) => (
           <li key={link.href}>
@@ -49,31 +52,38 @@ export default function DesktopNav() {
               <Popover closeOnClick={true} onOpenChange={handleColumnToggle}>
                 <PopoverTrigger>
                   <button
-                    className="flex items-center font-['Noto_Sans_TC'] text-base leading-6 tracking-[0.02em] font-medium text-[#1B1A1A] hover:text-[#1B1A1A] relative group"
+                    className="group relative flex items-center font-['Noto_Sans_TC'] text-base font-medium leading-6 tracking-[0.02em] text-[#1B1A1A] hover:text-[#1B1A1A]"
                     id="column-article-button"
                   >
                     <span className="relative">
-                      {(pathname.startsWith(link.href) && pathname !== '/blog/create' && !pathname.startsWith('/blog/edit/')) && (
-                        <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-[#1B1A1A]"></span>
-                      )}
-                      <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-[#1B1A1A] transition-all duration-300 group-hover:w-full"></span>
+                      {pathname.startsWith(link.href) &&
+                        pathname !== '/blog/create' &&
+                        !pathname.startsWith('/blog/edit/') && (
+                          <span className="absolute -bottom-2 left-0 h-0.5 w-full bg-[#1B1A1A]"></span>
+                        )}
+                      <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-[#1B1A1A] transition-all duration-300 group-hover:w-full"></span>
                       {link.text}
                     </span>
-                    <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200" style={{ transform: expandedColumn || isInColumnSection ? 'rotate(180deg)' : 'none' }} />
+                    <ChevronDown
+                      className="ml-1 h-4 w-4 transition-transform duration-200"
+                      style={{
+                        transform: expandedColumn || isInColumnSection ? 'rotate(180deg)' : 'none',
+                      }}
+                    />
                   </button>
                 </PopoverTrigger>
-                <PopoverContent className="w-[160px] p-0 mt-3 bg-white shadow-lg border border-[#EBEAEA] rounded-lg overflow-hidden">
+                <PopoverContent className="mt-3 w-[160px] overflow-hidden rounded-lg border border-[#EBEAEA] bg-white p-0 shadow-lg">
                   <ul className="py-2">
                     <AnimatePresence>
                       {COLUMN_SUBMENU.map((subItem, index) => (
-                        <motion.li 
+                        <motion.li
                           key={subItem.href}
                           initial={{ x: -10, opacity: 0 }}
                           animate={{ x: 0, opacity: 1 }}
-                          transition={{ 
-                            duration: 0.3, 
+                          transition={{
+                            duration: 0.3,
                             delay: index * 0.05,
-                            ease: [0.16, 1, 0.3, 1]
+                            ease: [0.16, 1, 0.3, 1],
                           }}
                         >
                           <Link
@@ -91,17 +101,14 @@ export default function DesktopNav() {
             ) : (
               <Link
                 href={link.href}
-                className={`font-['Noto_Sans_TC'] text-base leading-6 tracking-[0.02em] font-medium text-[#1B1A1A] hover:text-[#1B1A1A] relative
-                  ${pathname === link.href ? 'text-[#1B1A1A]' : ''}
-                  group
-                `}
+                className={`relative font-['Noto_Sans_TC'] text-base font-medium leading-6 tracking-[0.02em] text-[#1B1A1A] hover:text-[#1B1A1A] ${pathname === link.href ? 'text-[#1B1A1A]' : ''} group`}
               >
                 <span className="relative">
                   {pathname === link.href && (
-                    <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-[#1B1A1A]"></span>
+                    <span className="absolute -bottom-2 left-0 h-0.5 w-full bg-[#1B1A1A]"></span>
                   )}
-                  <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-[#1B1A1A] transition-all duration-300 group-hover:w-full"></span>
-                
+                  <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-[#1B1A1A] transition-all duration-300 group-hover:w-full"></span>
+
                   {link.text}
                 </span>
               </Link>

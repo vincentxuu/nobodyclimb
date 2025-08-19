@@ -27,7 +27,7 @@ export default function SelfIntroPage() {
     climbingMeaning: '',
     climbingBucketList: '',
     messageToBeginners: '',
-    isPublic: false
+    isPublic: false,
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -36,20 +36,20 @@ export default function SelfIntroPage() {
     if (!loading && !isAuthenticated) {
       router.push('/auth/login')
     }
-    
+
     // 如果使用者已有自我介紹資料，則預填寫表單
     if (user && user.bio) {
       try {
         // 假設 bio 是 JSON 格式儲存的
         const bioData = JSON.parse(user.bio)
         if (bioData) {
-          setFormData(prev => ({
+          setFormData((prev) => ({
             ...prev,
             climbingReason: bioData.climbingReason || '',
             climbingMeaning: bioData.climbingMeaning || '',
             climbingBucketList: bioData.climbingBucketList || '',
             messageToBeginners: bioData.messageToBeginners || '',
-            isPublic: bioData.isPublic || false
+            isPublic: bioData.isPublic || false,
           }))
         }
       } catch (error) {
@@ -61,12 +61,12 @@ export default function SelfIntroPage() {
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target
-    setFormData(prev => ({ ...prev, [name]: checked }))
+    setFormData((prev) => ({ ...prev, [name]: checked }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -80,42 +80,42 @@ export default function SelfIntroPage() {
         climbingMeaning: formData.climbingMeaning,
         climbingBucketList: formData.climbingBucketList,
         messageToBeginners: formData.messageToBeginners,
-        isPublic: formData.isPublic
+        isPublic: formData.isPublic,
       })
 
       const userData = {
-        bio: bioData
+        bio: bioData,
       }
 
       const result = await updateUser(userData)
-      
+
       if (result.success) {
         toast({
-          title: "自我介紹已更新",
-          description: "您的自我介紹已成功更新",
-          variant: "default",
+          title: '自我介紹已更新',
+          description: '您的自我介紹已成功更新',
+          variant: 'default',
         })
         // 導航到完成頁面
         router.push('/auth/profile-setup/complete')
       } else {
         toast({
-          title: "更新失敗",
-          description: result.error || "更新資料時發生錯誤",
-          variant: "destructive",
+          title: '更新失敗',
+          description: result.error || '更新資料時發生錯誤',
+          variant: 'destructive',
         })
       }
     } catch (error) {
       console.error('更新資料失敗', error)
       toast({
-        title: "更新失敗",
-        description: "更新資料時發生錯誤，請稍後再試",
-        variant: "destructive",
+        title: '更新失敗',
+        description: '更新資料時發生錯誤，請稍後再試',
+        variant: 'destructive',
       })
     } finally {
       setIsSubmitting(false)
     }
   }
-  
+
   const handleSkip = () => {
     router.push('/auth/profile-setup/complete')
   }
@@ -225,14 +225,14 @@ export default function SelfIntroPage() {
               type="button"
               variant="outline"
               onClick={handleSkip}
-              className="flex-1 border-gray-700 py-3 rounded-lg"
+              className="flex-1 rounded-lg border-gray-700 py-3"
               disabled={isSubmitting}
             >
               略過
             </Button>
             <Button
               type="submit"
-              className="flex-1 py-3 text-white rounded-lg"
+              className="flex-1 rounded-lg py-3 text-white"
               disabled={isSubmitting}
             >
               {isSubmitting ? '處理中...' : '完成'}

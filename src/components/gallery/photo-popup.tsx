@@ -1,36 +1,36 @@
-import React from 'react';
-import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
+import React from 'react'
+import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
+import { X, ChevronLeft, ChevronRight, MapPin } from 'lucide-react'
 
 // Placeholder type, sync with page.tsx
 interface GalleryPhoto {
-  id: string;
-  src: string;
-  alt: string;
+  id: string
+  src: string
+  alt: string
   location?: {
-    country: string;
-    city: string;
-    spot: string;
-  };
-  uploadDate?: string; // Format like 'YYYY. MM. DD' based on Figma
+    country: string
+    city: string
+    spot: string
+  }
+  uploadDate?: string // Format like 'YYYY. MM. DD' based on Figma
 }
 
 interface PhotoPopupProps {
-  photo: GalleryPhoto;
-  onClose: () => void;
-  onNext: () => void;
-  onPrev: () => void;
+  photo: GalleryPhoto
+  onClose: () => void
+  onNext: () => void
+  onPrev: () => void
 }
 
 const PhotoPopup: React.FC<PhotoPopupProps> = ({ photo, onClose, onNext, onPrev }) => {
   // Prevent background scroll when popup is open
   React.useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'
     return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
+      document.body.style.overflow = 'unset'
+    }
+  }, [])
 
   return (
     <AnimatePresence>
@@ -38,7 +38,7 @@ const PhotoPopup: React.FC<PhotoPopupProps> = ({ photo, onClose, onNext, onPrev 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-4"
         onClick={onClose} // Close on backdrop click
       >
         {/* Content */}
@@ -46,29 +46,35 @@ const PhotoPopup: React.FC<PhotoPopupProps> = ({ photo, onClose, onNext, onPrev 
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
-          className="relative bg-white max-w-4xl w-full max-h-[90vh] flex flex-col md:flex-row overflow-hidden rounded-lg"
+          className="relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-lg bg-white md:flex-row"
           onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside content
         >
           {/* Image Container - Simplified: Relative position and width constraints */}
           {/* Image Container - Relative position and width constraints */}
-          <div className="relative w-full md:w-2/3 flex items-center justify-center overflow-hidden">
+          <div className="relative flex w-full items-center justify-center overflow-hidden md:w-2/3">
             {/* Use explicit width/height and object-contain style */}
             <Image
               src={photo.src}
               alt={photo.alt}
               width={1000} // Provide large intrinsic width
               height={1500} // Provide large intrinsic height (adjust ratio if needed)
-              style={{ objectFit: 'contain', width: 'auto', height: 'auto', maxHeight: '100%', maxWidth: '100%' }}
+              style={{
+                objectFit: 'contain',
+                width: 'auto',
+                height: 'auto',
+                maxHeight: '100%',
+                maxWidth: '100%',
+              }}
               sizes="(max-width: 768px) 90vw, 60vw"
               priority // Prioritize loading the main popup image
             />
           </div>
 
           {/* Info Panel - Allow vertical scrolling on desktop if content overflows */}
-          <div className="w-full md:w-1/3 p-4 flex flex-col justify-between bg-neutral-800 text-white md:overflow-y-auto">
+          <div className="flex w-full flex-col justify-between bg-neutral-800 p-4 text-white md:w-1/3 md:overflow-y-auto">
             <div>
               {photo.location && (
-                <div className="flex items-center gap-2 mb-3 text-sm">
+                <div className="mb-3 flex items-center gap-2 text-sm">
                   <MapPin size={16} className="text-neutral-400" />
                   <span>{photo.location.country}</span>
                   <span>{photo.location.city}</span>
@@ -82,7 +88,7 @@ const PhotoPopup: React.FC<PhotoPopupProps> = ({ photo, onClose, onNext, onPrev 
               )}
             </div>
             {/* Add other details if needed */}
-            <div className="text-sm text-neutral-300 mt-4">
+            <div className="mt-4 text-sm text-neutral-300">
               {/* Placeholder for description or other info */}
               {photo.alt}
             </div>
@@ -91,7 +97,7 @@ const PhotoPopup: React.FC<PhotoPopupProps> = ({ photo, onClose, onNext, onPrev 
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 md:top-4 md:right-4 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full p-2 transition-colors z-10"
+            className="absolute right-3 top-3 z-10 rounded-full bg-black bg-opacity-50 p-2 text-white transition-colors hover:bg-opacity-75 md:right-4 md:top-4"
             aria-label="Close photo"
           >
             <X size={20} />
@@ -100,7 +106,7 @@ const PhotoPopup: React.FC<PhotoPopupProps> = ({ photo, onClose, onNext, onPrev 
           {/* Prev Button */}
           <button
             onClick={onPrev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full p-2 transition-colors z-10"
+            className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black bg-opacity-50 p-2 text-white transition-colors hover:bg-opacity-75"
             aria-label="Previous photo"
           >
             <ChevronLeft size={24} />
@@ -109,7 +115,7 @@ const PhotoPopup: React.FC<PhotoPopupProps> = ({ photo, onClose, onNext, onPrev 
           {/* Next Button */}
           <button
             onClick={onNext}
-            className="absolute right-3 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white rounded-full p-2 transition-colors z-10"
+            className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black bg-opacity-50 p-2 text-white transition-colors hover:bg-opacity-75"
             aria-label="Next photo"
           >
             <ChevronRight size={24} />
@@ -117,7 +123,7 @@ const PhotoPopup: React.FC<PhotoPopupProps> = ({ photo, onClose, onNext, onPrev 
         </motion.div>
       </motion.div>
     </AnimatePresence>
-  );
-};
+  )
+}
 
-export default PhotoPopup;
+export default PhotoPopup

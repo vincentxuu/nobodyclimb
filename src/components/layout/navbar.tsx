@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 // 使用 Next.js 原生的路由函數
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useUIStore } from '@/store/uiStore'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
@@ -56,12 +56,14 @@ export function Navbar() {
   }, [pathname, closeNavbar])
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-[999] transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-white backdrop-blur-sm'
-    }`}>
+    <header
+      className={`fixed left-0 right-0 top-0 z-[999] transition-all duration-300 ${
+        isScrolled ? 'bg-white/95 shadow-sm backdrop-blur-sm' : 'bg-white backdrop-blur-sm'
+      }`}
+    >
       {/* 進度條 */}
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-[3px] bg-[#FFE70C] origin-left z-[9999]"
+      <motion.div
+        className="fixed left-0 right-0 top-0 z-[9999] h-[3px] origin-left bg-[#FFE70C]"
         style={{ scaleX }}
       />
 
@@ -73,10 +75,13 @@ export function Navbar() {
         <DesktopNav />
 
         {/* 右側功能區 */}
-        <div className="flex items-center relative">
-          {/* 只在桌面版顯示搜尋按鈕 */}
-          {isDesktop && <SearchBar isDesktop={isDesktop} />}
-          <DesktopSearchBar />
+        <div className="flex items-center">
+          {/* 搜尋功能區 - 提供相對定位容器 */}
+          <div className="relative mr-4">
+            {/* 只在桌面版顯示搜尋按鈕 */}
+            {isDesktop && <SearchBar isDesktop={isDesktop} />}
+            <DesktopSearchBar />
+          </div>
           {/* 移除語言切換器
           <div className="mr-4">
             <LanguageSwitcher />

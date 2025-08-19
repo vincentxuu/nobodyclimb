@@ -14,7 +14,7 @@ interface ContentState {
     totalPages: number
     hasMore: boolean
   }
-  
+
   // 攀岩館相關
   gyms: Gym[]
   featuredGyms: Gym[]
@@ -26,7 +26,7 @@ interface ContentState {
     totalPages: number
     hasMore: boolean
   }
-  
+
   // 相簿相關
   galleries: Gallery[]
   currentGallery: Gallery | null
@@ -37,7 +37,7 @@ interface ContentState {
     totalPages: number
     hasMore: boolean
   }
-  
+
   // 搜尋相關
   searchResults: {
     posts: Post[]
@@ -46,24 +46,24 @@ interface ContentState {
   }
   searchLoading: boolean
   searchError: string | null
-  
+
   // 動作 - 文章
   fetchPosts: (page?: number, limit?: number, tags?: string[]) => Promise<void>
   fetchPostById: (id: string) => Promise<void>
   fetchPostBySlug: (slug: string) => Promise<void>
   fetchFeaturedPosts: () => Promise<void>
-  
+
   // 動作 - 攀岩館
   fetchGyms: (page?: number, limit?: number, facilities?: string[]) => Promise<void>
   fetchGymById: (id: string) => Promise<void>
   fetchGymBySlug: (slug: string) => Promise<void>
   fetchFeaturedGyms: () => Promise<void>
-  
+
   // 動作 - 相簿
   fetchGalleries: (page?: number, limit?: number) => Promise<void>
   fetchGalleryById: (id: string) => Promise<void>
   fetchGalleryBySlug: (slug: string) => Promise<void>
-  
+
   // 動作 - 搜尋
   search: (params: SearchParams) => Promise<void>
   clearSearch: () => void
@@ -81,7 +81,7 @@ export const useContentStore = create<ContentState>((set, get) => ({
     totalPages: 1,
     hasMore: false,
   },
-  
+
   // 攀岩館初始狀態
   gyms: [],
   featuredGyms: [],
@@ -93,7 +93,7 @@ export const useContentStore = create<ContentState>((set, get) => ({
     totalPages: 1,
     hasMore: false,
   },
-  
+
   // 相簿初始狀態
   galleries: [],
   currentGallery: null,
@@ -104,7 +104,7 @@ export const useContentStore = create<ContentState>((set, get) => ({
     totalPages: 1,
     hasMore: false,
   },
-  
+
   // 搜尋初始狀態
   searchResults: {
     posts: [],
@@ -113,7 +113,7 @@ export const useContentStore = create<ContentState>((set, get) => ({
   },
   searchLoading: false,
   searchError: null,
-  
+
   // 文章相關動作
   fetchPosts: async (page = DEFAULT_PAGE, limit = DEFAULT_PAGE_SIZE, tags = []) => {
     set({ postsLoading: true, postsError: null })
@@ -121,24 +121,26 @@ export const useContentStore = create<ContentState>((set, get) => ({
       // 實際專案需串接API
       // const response = await apiClient.get('/posts', { params: { page, limit, tags } })
       // const { data, meta } = response.data as PaginatedResponse<Post>
-      
+
       // 模擬API回應
       setTimeout(() => {
-        const mockPosts: Post[] = Array(limit).fill(0).map((_, i) => ({
-          id: `post-${(page - 1) * limit + i + 1}`,
-          title: `攀岩技巧分享 #${(page - 1) * limit + i + 1}`,
-          slug: `climbing-tips-${(page - 1) * limit + i + 1}`,
-          content: `這是第 ${(page - 1) * limit + i + 1} 篇文章的內容...`,
-          summary: `學習進階攀岩技巧，提升你的攀岩能力...`,
-          coverImage: `/images/post-${(i % 5) + 1}.jpg`,
-          createdAt: new Date(Date.now() - i * 86400000),
-          authorId: 'user-1',
-          tags: ['技巧分享', '初學入門'],
-          likes: Math.floor(Math.random() * 100),
-          comments: Math.floor(Math.random() * 20),
-          views: Math.floor(Math.random() * 1000),
-        }))
-        
+        const mockPosts: Post[] = Array(limit)
+          .fill(0)
+          .map((_, i) => ({
+            id: `post-${(page - 1) * limit + i + 1}`,
+            title: `攀岩技巧分享 #${(page - 1) * limit + i + 1}`,
+            slug: `climbing-tips-${(page - 1) * limit + i + 1}`,
+            content: `這是第 ${(page - 1) * limit + i + 1} 篇文章的內容...`,
+            summary: `學習進階攀岩技巧，提升你的攀岩能力...`,
+            coverImage: `/images/post-${(i % 5) + 1}.jpg`,
+            createdAt: new Date(Date.now() - i * 86400000),
+            authorId: 'user-1',
+            tags: ['技巧分享', '初學入門'],
+            likes: Math.floor(Math.random() * 100),
+            comments: Math.floor(Math.random() * 20),
+            views: Math.floor(Math.random() * 1000),
+          }))
+
         set((state) => ({
           posts: page === 1 ? mockPosts : [...state.posts, ...mockPosts],
           postsLoading: false,
@@ -156,14 +158,14 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   fetchPostById: async (id) => {
     set({ postsLoading: true, postsError: null })
     try {
       // 實際專案需串接API
       // const response = await apiClient.get(`/posts/${id}`)
       // const post = response.data as Post
-      
+
       // 模擬API回應
       setTimeout(() => {
         const mockPost: Post = {
@@ -192,7 +194,7 @@ export const useContentStore = create<ContentState>((set, get) => ({
           comments: Math.floor(Math.random() * 20),
           views: Math.floor(Math.random() * 1000),
         }
-        
+
         set({
           currentPost: mockPost,
           postsLoading: false,
@@ -205,14 +207,14 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   fetchPostBySlug: async (slug) => {
     set({ postsLoading: true, postsError: null })
     try {
       // 實際專案中需串接API
       // const response = await apiClient.get(`/posts/slug/${slug}`)
       // const post = response.data as Post
-      
+
       // 模擬API回應
       const id = slug.split('-').pop() || '1'
       get().fetchPostById(`post-${id}`)
@@ -223,31 +225,33 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   fetchFeaturedPosts: async () => {
     set({ postsLoading: true, postsError: null })
     try {
       // 實際專案中需串接API
       // const response = await apiClient.get('/posts/featured')
       // const posts = response.data as Post[]
-      
+
       // 模擬API回應
       setTimeout(() => {
-        const mockFeaturedPosts: Post[] = Array(3).fill(0).map((_, i) => ({
-          id: `featured-post-${i + 1}`,
-          title: `精選攀岩文章 #${i + 1}`,
-          slug: `featured-climbing-article-${i + 1}`,
-          content: `這是第 ${i + 1} 篇精選文章的內容...`,
-          summary: `精選攀岩技巧與故事分享...`,
-          coverImage: `/images/featured-${i + 1}.jpg`,
-          createdAt: new Date(Date.now() - i * 86400000),
-          authorId: 'user-1',
-          tags: ['技巧分享', '精選'],
-          likes: 100 + Math.floor(Math.random() * 200),
-          comments: 20 + Math.floor(Math.random() * 30),
-          views: 1000 + Math.floor(Math.random() * 2000),
-        }))
-        
+        const mockFeaturedPosts: Post[] = Array(3)
+          .fill(0)
+          .map((_, i) => ({
+            id: `featured-post-${i + 1}`,
+            title: `精選攀岩文章 #${i + 1}`,
+            slug: `featured-climbing-article-${i + 1}`,
+            content: `這是第 ${i + 1} 篇精選文章的內容...`,
+            summary: `精選攀岩技巧與故事分享...`,
+            coverImage: `/images/featured-${i + 1}.jpg`,
+            createdAt: new Date(Date.now() - i * 86400000),
+            authorId: 'user-1',
+            tags: ['技巧分享', '精選'],
+            likes: 100 + Math.floor(Math.random() * 200),
+            comments: 20 + Math.floor(Math.random() * 30),
+            views: 1000 + Math.floor(Math.random() * 2000),
+          }))
+
         set({
           featuredPosts: mockFeaturedPosts,
           postsLoading: false,
@@ -260,7 +264,7 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   // 攀岩館相關動作
   fetchGyms: async (page = DEFAULT_PAGE, limit = DEFAULT_PAGE_SIZE, facilities = []) => {
     set({ gymsLoading: true, gymsError: null })
@@ -268,23 +272,25 @@ export const useContentStore = create<ContentState>((set, get) => ({
       // 實際專案中需串接API
       // const response = await apiClient.get('/gyms', { params: { page, limit, facilities } })
       // const { data, meta } = response.data as PaginatedResponse<Gym>
-      
+
       // 模擬API回應
       setTimeout(() => {
-        const mockGyms: Gym[] = Array(limit).fill(0).map((_, i) => ({
-          id: `gym-${(page - 1) * limit + i + 1}`,
-          name: `攀岩館 #${(page - 1) * limit + i + 1}`,
-          slug: `climbing-gym-${(page - 1) * limit + i + 1}`,
-          description: `位於市中心的專業攀岩館，提供多樣化的攀岩路線...`,
-          address: `台北市信義區松高路 ${100 + i} 號`,
-          coverImage: `/images/gym-${(i % 5) + 1}.jpg`,
-          createdAt: new Date(Date.now() - i * 86400000),
-          facilities: ['抱石區', '先鋒攀登', '體能訓練區'],
-          likes: Math.floor(Math.random() * 100),
-          reviews: Math.floor(Math.random() * 50),
-          rating: 4 + Math.random(),
-        }))
-        
+        const mockGyms: Gym[] = Array(limit)
+          .fill(0)
+          .map((_, i) => ({
+            id: `gym-${(page - 1) * limit + i + 1}`,
+            name: `攀岩館 #${(page - 1) * limit + i + 1}`,
+            slug: `climbing-gym-${(page - 1) * limit + i + 1}`,
+            description: `位於市中心的專業攀岩館，提供多樣化的攀岩路線...`,
+            address: `台北市信義區松高路 ${100 + i} 號`,
+            coverImage: `/images/gym-${(i % 5) + 1}.jpg`,
+            createdAt: new Date(Date.now() - i * 86400000),
+            facilities: ['抱石區', '先鋒攀登', '體能訓練區'],
+            likes: Math.floor(Math.random() * 100),
+            reviews: Math.floor(Math.random() * 50),
+            rating: 4 + Math.random(),
+          }))
+
         set((state) => ({
           gyms: page === 1 ? mockGyms : [...state.gyms, ...mockGyms],
           gymsLoading: false,
@@ -302,14 +308,14 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   fetchGymById: async (id) => {
     set({ gymsLoading: true, gymsError: null })
     try {
       // 實際專案中需串接API
       // const response = await apiClient.get(`/gyms/${id}`)
       // const gym = response.data as Gym
-      
+
       // 模擬API回應
       setTimeout(() => {
         const mockGym: Gym = {
@@ -341,7 +347,7 @@ export const useContentStore = create<ContentState>((set, get) => ({
           reviews: Math.floor(Math.random() * 50),
           rating: 4 + Math.random(),
         }
-        
+
         set({
           currentGym: mockGym,
           gymsLoading: false,
@@ -354,14 +360,14 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   fetchGymBySlug: async (slug) => {
     set({ gymsLoading: true, gymsError: null })
     try {
       // 實際專案中需串接API
       // const response = await apiClient.get(`/gyms/slug/${slug}`)
       // const gym = response.data as Gym
-      
+
       // 模擬API回應
       const id = slug.split('-').pop() || '1'
       get().fetchGymById(`gym-${id}`)
@@ -372,30 +378,32 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   fetchFeaturedGyms: async () => {
     set({ gymsLoading: true, gymsError: null })
     try {
       // 實際專案中需串接API
       // const response = await apiClient.get('/gyms/featured')
       // const gyms = response.data as Gym[]
-      
+
       // 模擬API回應
       setTimeout(() => {
-        const mockFeaturedGyms: Gym[] = Array(3).fill(0).map((_, i) => ({
-          id: `featured-gym-${i + 1}`,
-          name: `精選攀岩館 #${i + 1}`,
-          slug: `featured-climbing-gym-${i + 1}`,
-          description: `最受歡迎的攀岩館之一，提供頂級設施...`,
-          address: `台北市中山區中山北路 ${200 + i} 號`,
-          coverImage: `/images/featured-gym-${i + 1}.jpg`,
-          createdAt: new Date(Date.now() - i * 86400000),
-          facilities: ['抱石區', '先鋒攀登', '體能訓練區', '咖啡廳'],
-          likes: 150 + Math.floor(Math.random() * 100),
-          reviews: 70 + Math.floor(Math.random() * 30),
-          rating: 4.5 + Math.random() * 0.5,
-        }))
-        
+        const mockFeaturedGyms: Gym[] = Array(3)
+          .fill(0)
+          .map((_, i) => ({
+            id: `featured-gym-${i + 1}`,
+            name: `精選攀岩館 #${i + 1}`,
+            slug: `featured-climbing-gym-${i + 1}`,
+            description: `最受歡迎的攀岩館之一，提供頂級設施...`,
+            address: `台北市中山區中山北路 ${200 + i} 號`,
+            coverImage: `/images/featured-gym-${i + 1}.jpg`,
+            createdAt: new Date(Date.now() - i * 86400000),
+            facilities: ['抱石區', '先鋒攀登', '體能訓練區', '咖啡廳'],
+            likes: 150 + Math.floor(Math.random() * 100),
+            reviews: 70 + Math.floor(Math.random() * 30),
+            rating: 4.5 + Math.random() * 0.5,
+          }))
+
         set({
           featuredGyms: mockFeaturedGyms,
           gymsLoading: false,
@@ -408,7 +416,7 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   // 相簿相關動作
   fetchGalleries: async (page = DEFAULT_PAGE, limit = DEFAULT_PAGE_SIZE) => {
     set({ galleriesLoading: true, galleriesError: null })
@@ -416,22 +424,26 @@ export const useContentStore = create<ContentState>((set, get) => ({
       // 實際專案中需串接API
       // const response = await apiClient.get('/galleries', { params: { page, limit } })
       // const { data, meta } = response.data as PaginatedResponse<Gallery>
-      
+
       // 模擬API回應
       setTimeout(() => {
-        const mockGalleries: Gallery[] = Array(limit).fill(0).map((_, i) => ({
-          id: `gallery-${(page - 1) * limit + i + 1}`,
-          title: `攀岩相簿 #${(page - 1) * limit + i + 1}`,
-          slug: `climbing-gallery-${(page - 1) * limit + i + 1}`,
-          description: `攀岩活動的精彩照片集錦...`,
-          coverImage: `/images/gallery-cover-${(i % 5) + 1}.jpg`,
-          images: Array(6).fill(0).map((_, j) => `/images/gallery-${(i % 5) + 1}-${j + 1}.jpg`),
-          createdAt: new Date(Date.now() - i * 86400000),
-          authorId: 'user-1',
-          likes: Math.floor(Math.random() * 100),
-          views: Math.floor(Math.random() * 500),
-        }))
-        
+        const mockGalleries: Gallery[] = Array(limit)
+          .fill(0)
+          .map((_, i) => ({
+            id: `gallery-${(page - 1) * limit + i + 1}`,
+            title: `攀岩相簿 #${(page - 1) * limit + i + 1}`,
+            slug: `climbing-gallery-${(page - 1) * limit + i + 1}`,
+            description: `攀岩活動的精彩照片集錦...`,
+            coverImage: `/images/gallery-cover-${(i % 5) + 1}.jpg`,
+            images: Array(6)
+              .fill(0)
+              .map((_, j) => `/images/gallery-${(i % 5) + 1}-${j + 1}.jpg`),
+            createdAt: new Date(Date.now() - i * 86400000),
+            authorId: 'user-1',
+            likes: Math.floor(Math.random() * 100),
+            views: Math.floor(Math.random() * 500),
+          }))
+
         set((state) => ({
           galleries: page === 1 ? mockGalleries : [...state.galleries, ...mockGalleries],
           galleriesLoading: false,
@@ -449,14 +461,14 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   fetchGalleryById: async (id) => {
     set({ galleriesLoading: true, galleriesError: null })
     try {
       // 實際專案中需串接API
       // const response = await apiClient.get(`/galleries/${id}`)
       // const gallery = response.data as Gallery
-      
+
       // 模擬API回應
       setTimeout(() => {
         const mockGallery: Gallery = {
@@ -465,9 +477,9 @@ export const useContentStore = create<ContentState>((set, get) => ({
           slug: `climbing-gallery-${id}`,
           description: `精彩的攀岩照片集錦，記錄了攀岩過程中的美好時刻...`,
           coverImage: `/images/gallery-cover-${(parseInt(id.split('-')[1]) % 5) + 1}.jpg`,
-          images: Array(9).fill(0).map((_, j) => 
-            `/images/gallery-${(parseInt(id.split('-')[1]) % 5) + 1}-${j + 1}.jpg`
-          ),
+          images: Array(9)
+            .fill(0)
+            .map((_, j) => `/images/gallery-${(parseInt(id.split('-')[1]) % 5) + 1}-${j + 1}.jpg`),
           createdAt: new Date(Date.now() - parseInt(id.split('-')[1]) * 86400000),
           authorId: 'user-1',
           author: {
@@ -480,7 +492,7 @@ export const useContentStore = create<ContentState>((set, get) => ({
           likes: Math.floor(Math.random() * 100),
           views: Math.floor(Math.random() * 500),
         }
-        
+
         set({
           currentGallery: mockGallery,
           galleriesLoading: false,
@@ -493,14 +505,14 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   fetchGalleryBySlug: async (slug) => {
     set({ galleriesLoading: true, galleriesError: null })
     try {
       // 實際專案中需串接API
       // const response = await apiClient.get(`/galleries/slug/${slug}`)
       // const gallery = response.data as Gallery
-      
+
       // 模擬API回應
       const id = slug.split('-').pop() || '1'
       get().fetchGalleryById(`gallery-${id}`)
@@ -511,7 +523,7 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   // 搜尋相關動作
   search: async (params: SearchParams) => {
     set({ searchLoading: true, searchError: null })
@@ -519,59 +531,68 @@ export const useContentStore = create<ContentState>((set, get) => ({
       // 實際專案中需串接API
       // const response = await apiClient.get('/search', { params })
       // const { posts, gyms, galleries } = response.data
-      
+
       // 模擬API回應
       setTimeout(() => {
         // 模擬搜尋文章結果
-        const mockPostResults: Post[] = Array(3).fill(0).map((_, i) => ({
-          id: `search-post-${i + 1}`,
-          title: `搜尋結果: ${params.query} - 文章 #${i + 1}`,
-          slug: `search-result-${params.query}-post-${i + 1}`,
-          content: `包含關鍵字 "${params.query}" 的文章內容...`,
-          summary: `這是一篇關於 "${params.query}" 的文章摘要...`,
-          coverImage: `/images/post-${(i % 5) + 1}.jpg`,
-          createdAt: new Date(Date.now() - i * 86400000),
-          authorId: 'user-1',
-          tags: ['搜尋結果', params.query],
-          likes: Math.floor(Math.random() * 100),
-          comments: Math.floor(Math.random() * 20),
-          views: Math.floor(Math.random() * 1000),
-        }))
-        
+        const mockPostResults: Post[] = Array(3)
+          .fill(0)
+          .map((_, i) => ({
+            id: `search-post-${i + 1}`,
+            title: `搜尋結果: ${params.query} - 文章 #${i + 1}`,
+            slug: `search-result-${params.query}-post-${i + 1}`,
+            content: `包含關鍵字 "${params.query}" 的文章內容...`,
+            summary: `這是一篇關於 "${params.query}" 的文章摘要...`,
+            coverImage: `/images/post-${(i % 5) + 1}.jpg`,
+            createdAt: new Date(Date.now() - i * 86400000),
+            authorId: 'user-1',
+            tags: ['搜尋結果', params.query],
+            likes: Math.floor(Math.random() * 100),
+            comments: Math.floor(Math.random() * 20),
+            views: Math.floor(Math.random() * 1000),
+          }))
+
         // 模擬搜尋攀岩館結果
-        const mockGymResults: Gym[] = Array(2).fill(0).map((_, i) => ({
-          id: `search-gym-${i + 1}`,
-          name: `搜尋結果: ${params.query} - 攀岩館 #${i + 1}`,
-          slug: `search-result-${params.query}-gym-${i + 1}`,
-          description: `包含關鍵字 "${params.query}" 的攀岩館描述...`,
-          address: `台北市信義區松高路 ${100 + i} 號`,
-          coverImage: `/images/gym-${(i % 5) + 1}.jpg`,
-          createdAt: new Date(Date.now() - i * 86400000),
-          facilities: ['抱石區', '先鋒攀登', params.query],
-          likes: Math.floor(Math.random() * 100),
-          reviews: Math.floor(Math.random() * 50),
-          rating: 4 + Math.random(),
-        }))
-        
+        const mockGymResults: Gym[] = Array(2)
+          .fill(0)
+          .map((_, i) => ({
+            id: `search-gym-${i + 1}`,
+            name: `搜尋結果: ${params.query} - 攀岩館 #${i + 1}`,
+            slug: `search-result-${params.query}-gym-${i + 1}`,
+            description: `包含關鍵字 "${params.query}" 的攀岩館描述...`,
+            address: `台北市信義區松高路 ${100 + i} 號`,
+            coverImage: `/images/gym-${(i % 5) + 1}.jpg`,
+            createdAt: new Date(Date.now() - i * 86400000),
+            facilities: ['抱石區', '先鋒攀登', params.query],
+            likes: Math.floor(Math.random() * 100),
+            reviews: Math.floor(Math.random() * 50),
+            rating: 4 + Math.random(),
+          }))
+
         // 模擬搜尋相簿結果
-        const mockGalleryResults: Gallery[] = Array(2).fill(0).map((_, i) => ({
-          id: `search-gallery-${i + 1}`,
-          title: `搜尋結果: ${params.query} - 相簿 #${i + 1}`,
-          slug: `search-result-${params.query}-gallery-${i + 1}`,
-          description: `包含關鍵字 "${params.query}" 的相簿描述...`,
-          coverImage: `/images/gallery-cover-${(i % 5) + 1}.jpg`,
-          images: Array(6).fill(0).map((_, j) => `/images/gallery-${(i % 5) + 1}-${j + 1}.jpg`),
-          createdAt: new Date(Date.now() - i * 86400000),
-          authorId: 'user-1',
-          likes: Math.floor(Math.random() * 100),
-          views: Math.floor(Math.random() * 500),
-        }))
-        
+        const mockGalleryResults: Gallery[] = Array(2)
+          .fill(0)
+          .map((_, i) => ({
+            id: `search-gallery-${i + 1}`,
+            title: `搜尋結果: ${params.query} - 相簿 #${i + 1}`,
+            slug: `search-result-${params.query}-gallery-${i + 1}`,
+            description: `包含關鍵字 "${params.query}" 的相簿描述...`,
+            coverImage: `/images/gallery-cover-${(i % 5) + 1}.jpg`,
+            images: Array(6)
+              .fill(0)
+              .map((_, j) => `/images/gallery-${(i % 5) + 1}-${j + 1}.jpg`),
+            createdAt: new Date(Date.now() - i * 86400000),
+            authorId: 'user-1',
+            likes: Math.floor(Math.random() * 100),
+            views: Math.floor(Math.random() * 500),
+          }))
+
         // 根據搜尋類型過濾結果
         const filteredPosts = params.type === 'all' || params.type === 'post' ? mockPostResults : []
         const filteredGyms = params.type === 'all' || params.type === 'gym' ? mockGymResults : []
-        const filteredGalleries = params.type === 'all' || params.type === 'gallery' ? mockGalleryResults : []
-        
+        const filteredGalleries =
+          params.type === 'all' || params.type === 'gallery' ? mockGalleryResults : []
+
         set({
           searchResults: {
             posts: filteredPosts,
@@ -588,7 +609,7 @@ export const useContentStore = create<ContentState>((set, get) => ({
       })
     }
   },
-  
+
   clearSearch: () => {
     set({
       searchResults: {

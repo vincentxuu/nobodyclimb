@@ -19,26 +19,26 @@ const explorePosts: Post[] = [
     id: 1,
     title: '裝備介紹',
     slug: 'equipment-intro',
-    coverImage: '/photo/blog-left.png'
+    coverImage: '/photo/blog-left.png',
   },
   {
     id: 2,
     title: '技巧介紹',
     slug: 'technique-intro',
-    coverImage: '/photo/blog-mid-left.jpg'
+    coverImage: '/photo/blog-mid-left.jpg',
   },
   {
     id: 3,
     title: '技術研究',
     slug: 'technical-research',
-    coverImage: '/photo/blog-mid-right.jpg'
+    coverImage: '/photo/blog-mid-right.jpg',
   },
   {
     id: 4,
     title: '比賽介紹',
     slug: 'competition-intro',
-    coverImage: '/photo/blog-right.jpg'
-  }
+    coverImage: '/photo/blog-right.jpg',
+  },
 ]
 
 /**
@@ -55,14 +55,14 @@ function ExploreCard({ post }: { post: Post }) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           className="object-cover"
         />
-        
+
         {/* 黃色漸層遮罩 */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#FFE70C] via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="absolute inset-0 bg-black/40" />
-        
+
         {/* 標題 */}
         <div className="absolute bottom-0 left-0 right-0 p-6">
-          <h3 className="text-center text-[26px] font-medium text-white font-['Noto_Sans_CJK_TC']">
+          <h3 className="text-center font-['Noto_Sans_CJK_TC'] text-[26px] font-medium text-white">
             {post.title}
           </h3>
         </div>
@@ -76,13 +76,11 @@ function ExploreCard({ post }: { post: Post }) {
  */
 export function FeaturedPosts() {
   return (
-    <section className="py-16 md:py-20 border-t border-[#D2D2D2]">
+    <section className="border-t border-[#D2D2D2] py-16 md:py-20">
       <div className="container mx-auto px-4">
         <div className="mb-8 text-center">
-          <h2 className="text-[40px] font-medium text-[#1B1A1A] font-['Noto_Sans_TC']">
-            探索攀岩
-          </h2>
-          <p className="text-base font-normal text-[#6D6C6C] mt-4 tracking-[0.01em] font-['Noto_Sans_CJK_TC']">
+          <h2 className="font-['Noto_Sans_TC'] text-[40px] font-medium text-[#1B1A1A]">探索攀岩</h2>
+          <p className="mt-4 font-['Noto_Sans_CJK_TC'] text-base font-normal tracking-[0.01em] text-[#6D6C6C]">
             關於攀岩的各種知識和故事
           </p>
         </div>

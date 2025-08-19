@@ -36,7 +36,7 @@ export default function BasicInfoPage() {
     startYear: '',
     frequentGym: '',
     favoriteRouteType: '',
-    avatar: null
+    avatar: null,
   })
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -46,10 +46,10 @@ export default function BasicInfoPage() {
     // if (!loading && !isAuthenticated) {
     //   router.push('/auth/login')
     // }
-    
+
     // 如果使用者已有名稱，則預填寫表單
     if (user) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         displayName: user.displayName || user.username || '',
       }))
@@ -58,18 +58,18 @@ export default function BasicInfoPage() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0]
-      setFormData(prev => ({ ...prev, avatar: file }))
-      
+      setFormData((prev) => ({ ...prev, avatar: file }))
+
       // 建立預覽
       const reader = new FileReader()
       reader.onload = (event) => {
-        setAvatarPreview(event.target?.result as string || null)
+        setAvatarPreview((event.target?.result as string) || null)
       }
       reader.readAsDataURL(file)
     }
@@ -92,34 +92,34 @@ export default function BasicInfoPage() {
       }
 
       const result = await updateUser(userData)
-      
+
       if (result.success) {
         toast({
-          title: "基本資料已更新",
-          description: "您的個人資料已成功更新",
-          variant: "default",
+          title: '基本資料已更新',
+          description: '您的個人資料已成功更新',
+          variant: 'default',
         })
         // 導航到下一步
         router.push('/auth/profile-setup/self-intro')
       } else {
         toast({
-          title: "更新失敗",
-          description: result.error || "更新資料時發生錯誤",
-          variant: "destructive",
+          title: '更新失敗',
+          description: result.error || '更新資料時發生錯誤',
+          variant: 'destructive',
         })
       }
     } catch (error) {
       console.error('更新資料失敗', error)
       toast({
-        title: "更新失敗",
-        description: "更新資料時發生錯誤，請稍後再試",
-        variant: "destructive",
+        title: '更新失敗',
+        description: '更新資料時發生錯誤，請稍後再試',
+        variant: 'destructive',
       })
     } finally {
       setIsSubmitting(false)
     }
   }
-  
+
   const handleSkip = () => {
     router.push('/auth/profile-setup/self-intro')
   }
@@ -164,14 +164,21 @@ export default function BasicInfoPage() {
           <div className="flex flex-col items-center space-y-4">
             <div className="relative h-24 w-24 overflow-hidden rounded-full bg-gray-100">
               {avatarPreview ? (
-                <img
-                  src={avatarPreview}
-                  alt="頭像預覽"
-                  className="h-full w-full object-cover"
-                />
+                <img src={avatarPreview} alt="頭像預覽" className="h-full w-full object-cover" />
               ) : (
                 <div className="flex h-full w-full items-center justify-center text-gray-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-user"
+                  >
                     <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                   </svg>
@@ -212,11 +219,15 @@ export default function BasicInfoPage() {
               name="startYear"
               value={formData.startYear}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:border-primary bg-white"
+              className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 focus:border-primary focus:outline-none"
             >
-              <option value="" className="bg-white">請選擇年份</option>
-              {yearOptions().map(year => (
-                <option key={year} value={year} className="bg-white">{year}</option>
+              <option value="" className="bg-white">
+                請選擇年份
+              </option>
+              {yearOptions().map((year) => (
+                <option key={year} value={year} className="bg-white">
+                  {year}
+                </option>
               ))}
             </select>
           </div>
@@ -251,14 +262,14 @@ export default function BasicInfoPage() {
               type="button"
               variant="outline"
               onClick={handleSkip}
-              className="flex-1 border-gray-700 py-3 rounded-lg"
+              className="flex-1 rounded-lg border-gray-700 py-3"
               disabled={isSubmitting}
             >
               略過
             </Button>
             <Button
               type="submit"
-              className="flex-1 py-3 text-white rounded-lg"
+              className="flex-1 rounded-lg py-3 text-white"
               disabled={isSubmitting}
             >
               {isSubmitting ? '處理中...' : '下一步'}

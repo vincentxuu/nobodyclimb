@@ -3,7 +3,8 @@
  */
 export const SITE_NAME = 'NobodyClimb'
 export const SITE_URL = 'https://nobodyclimb.com'
-export const SITE_DESCRIPTION = '專注於攀岩社群的網站，提供攀岩愛好者分享經驗、尋找攀岩地點及交流的平台'
+export const SITE_DESCRIPTION =
+  '專注於攀岩社群的網站，提供攀岩愛好者分享經驗、尋找攀岩地點及交流的平台'
 
 /**
  * API 相關常數
@@ -98,27 +99,147 @@ export const GYM_FACILITIES = [
 export const galleryPhotos = [
   // Add 18+ placeholder images based on Figma structure
   // Row 1
-  { id: 'gal1', src: '/photo/cont-photo-top-left.jpeg', alt: 'Climber on outdoor route', location: { country: '台灣', city: '新北市', spot: '龍洞' }, uploadDate: '2024. 01. 15' },
-  { id: 'gal2', src: '/photo/cont-photo-top-right.jpeg', alt: 'Climber bouldering indoors', location: { country: '台灣', city: '台北市', spot: '市民岩館' }, uploadDate: '2024. 01. 14' },
-  { id: 'gal3', src: '/photo/cont-photo-mid-left.jpeg', alt: 'Climber celebrating at the top', location: { country: '台灣', city: '高雄市', spot: '壽山' }, uploadDate: '2024. 01. 13' },
-  { id: 'gal4', src: '/photo/cont-photo-mid-right.jpeg', alt: 'Climbing gear details', location: { country: '台灣', city: '台中市', spot: 'Dapro' }, uploadDate: '2024. 01. 12' },
-  { id: 'gal5', src: '/photo/cont-photo-bottom-left.jpeg', alt: 'Scenic view from climbing spot', location: { country: '台灣', city: '花蓮縣', spot: '太魯閣' }, uploadDate: '2024. 01. 11' },
-  { id: 'gal6', src: '/photo/cont-photo-bottom-right.jpeg', alt: 'Group of climbers', location: { country: '台灣', city: '新北市', spot: '龍洞' }, uploadDate: '2024. 01. 10' },
+  {
+    id: 'gal1',
+    src: '/photo/cont-photo-top-left.jpeg',
+    alt: 'Climber on outdoor route',
+    location: { country: '台灣', city: '新北市', spot: '龍洞' },
+    uploadDate: '2024. 01. 15',
+  },
+  {
+    id: 'gal2',
+    src: '/photo/cont-photo-top-right.jpeg',
+    alt: 'Climber bouldering indoors',
+    location: { country: '台灣', city: '台北市', spot: '市民岩館' },
+    uploadDate: '2024. 01. 14',
+  },
+  {
+    id: 'gal3',
+    src: '/photo/cont-photo-mid-left.jpeg',
+    alt: 'Climber celebrating at the top',
+    location: { country: '台灣', city: '高雄市', spot: '壽山' },
+    uploadDate: '2024. 01. 13',
+  },
+  {
+    id: 'gal4',
+    src: '/photo/cont-photo-mid-right.jpeg',
+    alt: 'Climbing gear details',
+    location: { country: '台灣', city: '台中市', spot: 'Dapro' },
+    uploadDate: '2024. 01. 12',
+  },
+  {
+    id: 'gal5',
+    src: '/photo/cont-photo-bottom-left.jpeg',
+    alt: 'Scenic view from climbing spot',
+    location: { country: '台灣', city: '花蓮縣', spot: '太魯閣' },
+    uploadDate: '2024. 01. 11',
+  },
+  {
+    id: 'gal6',
+    src: '/photo/cont-photo-bottom-right.jpeg',
+    alt: 'Group of climbers',
+    location: { country: '台灣', city: '新北市', spot: '龍洞' },
+    uploadDate: '2024. 01. 10',
+  },
   // Row 2
-  { id: 'gal7', src: '/photo/blog-left.png', alt: 'Climber on steep overhang', location: { country: '台灣', city: '台北市', spot: 'B-plus' }, uploadDate: '2024. 01. 09' },
-  { id: 'gal8', src: '/photo/blog-mid-left.jpg', alt: 'Indoor climbing competition', location: { country: '台灣', city: '台中市', spot: '攀吶' }, uploadDate: '2024. 01. 08' },
-  { id: 'gal9', src: '/photo/blog-mid-right.jpg', alt: 'Climber resting', location: { country: '台灣', city: '新北市', spot: '龍洞' }, uploadDate: '2024. 01. 07' },
-  { id: 'gal10', src: '/photo/blog-right.jpg', alt: 'Close up of climbing hold', location: { country: '台灣', city: '台北市', spot: '原岩' }, uploadDate: '2024. 01. 06' },
-  { id: 'gal11', src: '/photo/climbspot-photo.jpg', alt: 'Outdoor bouldering problem', location: { country: '台灣', city: '高雄市', spot: '關子嶺' }, uploadDate: '2024. 01. 05' },
-  { id: 'gal12', src: '/photo/cont-about.jpg', alt: 'Climber looking at view', location: { country: '台灣', city: '新北市', spot: '龍洞' }, uploadDate: '2024. 01. 04' },
+  {
+    id: 'gal7',
+    src: '/photo/blog-left.png',
+    alt: 'Climber on steep overhang',
+    location: { country: '台灣', city: '台北市', spot: 'B-plus' },
+    uploadDate: '2024. 01. 09',
+  },
+  {
+    id: 'gal8',
+    src: '/photo/blog-mid-left.jpg',
+    alt: 'Indoor climbing competition',
+    location: { country: '台灣', city: '台中市', spot: '攀吶' },
+    uploadDate: '2024. 01. 08',
+  },
+  {
+    id: 'gal9',
+    src: '/photo/blog-mid-right.jpg',
+    alt: 'Climber resting',
+    location: { country: '台灣', city: '新北市', spot: '龍洞' },
+    uploadDate: '2024. 01. 07',
+  },
+  {
+    id: 'gal10',
+    src: '/photo/blog-right.jpg',
+    alt: 'Close up of climbing hold',
+    location: { country: '台灣', city: '台北市', spot: '原岩' },
+    uploadDate: '2024. 01. 06',
+  },
+  {
+    id: 'gal11',
+    src: '/photo/climbspot-photo.jpg',
+    alt: 'Outdoor bouldering problem',
+    location: { country: '台灣', city: '高雄市', spot: '關子嶺' },
+    uploadDate: '2024. 01. 05',
+  },
+  {
+    id: 'gal12',
+    src: '/photo/cont-about.jpg',
+    alt: 'Climber looking at view',
+    location: { country: '台灣', city: '新北市', spot: '龍洞' },
+    uploadDate: '2024. 01. 04',
+  },
   // Row 3
-  { id: 'gal13', src: '/photo/cont-intro.png', alt: 'Climber silhouette', location: { country: '台灣', city: '台東縣', spot: '東河' }, uploadDate: '2024. 01. 03' },
-  { id: 'gal14', src: '/photo/cover-photo.jpg', alt: 'Wide shot of climbing crag', location: { country: '台灣', city: '新北市', spot: '龍洞' }, uploadDate: '2024. 01. 02' },
-  { id: 'gal15', src: '/photo/person-poto.jpg', alt: 'Portrait of a climber', location: { country: '台灣', city: '台北市', spot: '市民岩館' }, uploadDate: '2024. 01. 01' },
-  { id: 'gal16', src: '/photo/personleft.jpg', alt: 'Climber chalking up', location: { country: '台灣', city: '新北市', spot: '龍洞' }, uploadDate: '2023. 12. 31' },
-  { id: 'gal17', src: '/photo/personmid.jpg', alt: 'Climber mid-move', location: { country: '台灣', city: '台中市', spot: 'Dapro' }, uploadDate: '2023. 12. 30' },
-  { id: 'gal18', src: '/photo/personright.jpg', alt: 'Climber reaching for hold', location: { country: '台灣', city: '高雄市', spot: '攀吶' }, uploadDate: '2023. 12. 29' },
-   // Add more if needed for "Load More" functionality testing
-  { id: 'gal19', src: '/photo/cont-photo-top-left.jpg', alt: 'Climber on outdoor route repeat', location: { country: '台灣', city: '新北市', spot: '龍洞' }, uploadDate: '2023. 12. 28' },
-  { id: 'gal20', src: '/photo/cont-photo-top-right.jpg', alt: 'Climber bouldering indoors repeat', location: { country: '台灣', city: '台北市', spot: '市民岩館' }, uploadDate: '2023. 12. 27' },
-];
+  {
+    id: 'gal13',
+    src: '/photo/cont-intro.png',
+    alt: 'Climber silhouette',
+    location: { country: '台灣', city: '台東縣', spot: '東河' },
+    uploadDate: '2024. 01. 03',
+  },
+  {
+    id: 'gal14',
+    src: '/photo/cover-photo.jpg',
+    alt: 'Wide shot of climbing crag',
+    location: { country: '台灣', city: '新北市', spot: '龍洞' },
+    uploadDate: '2024. 01. 02',
+  },
+  {
+    id: 'gal15',
+    src: '/photo/person-poto.jpg',
+    alt: 'Portrait of a climber',
+    location: { country: '台灣', city: '台北市', spot: '市民岩館' },
+    uploadDate: '2024. 01. 01',
+  },
+  {
+    id: 'gal16',
+    src: '/photo/personleft.jpg',
+    alt: 'Climber chalking up',
+    location: { country: '台灣', city: '新北市', spot: '龍洞' },
+    uploadDate: '2023. 12. 31',
+  },
+  {
+    id: 'gal17',
+    src: '/photo/personmid.jpg',
+    alt: 'Climber mid-move',
+    location: { country: '台灣', city: '台中市', spot: 'Dapro' },
+    uploadDate: '2023. 12. 30',
+  },
+  {
+    id: 'gal18',
+    src: '/photo/personright.jpg',
+    alt: 'Climber reaching for hold',
+    location: { country: '台灣', city: '高雄市', spot: '攀吶' },
+    uploadDate: '2023. 12. 29',
+  },
+  // Add more if needed for "Load More" functionality testing
+  {
+    id: 'gal19',
+    src: '/photo/cont-photo-top-left.jpg',
+    alt: 'Climber on outdoor route repeat',
+    location: { country: '台灣', city: '新北市', spot: '龍洞' },
+    uploadDate: '2023. 12. 28',
+  },
+  {
+    id: 'gal20',
+    src: '/photo/cont-photo-top-right.jpg',
+    alt: 'Climber bouldering indoors repeat',
+    location: { country: '台灣', city: '台北市', spot: '市民岩館' },
+    uploadDate: '2023. 12. 27',
+  },
+]

@@ -18,17 +18,17 @@ export function cn(...inputs: ClassValue[]) {
  */
 export function formatDate(date: Date | string | number, showTime = false): string {
   if (!date) return ''
-  
+
   const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date
-  
+
   if (isToday(dateObj)) {
     return `今天 ${format(dateObj, 'HH:mm')}`
   }
-  
+
   if (isYesterday(dateObj)) {
     return `昨天 ${format(dateObj, 'HH:mm')}`
   }
-  
+
   return format(dateObj, showTime ? DATE_TIME_FORMAT : DATE_FORMAT, { locale: zhTW })
 }
 
@@ -40,7 +40,7 @@ export function formatDate(date: Date | string | number, showTime = false): stri
 export function truncateText(text: string, maxLength: number): string {
   if (!text) return ''
   if (text.length <= maxLength) return text
-  
+
   return text.slice(0, maxLength) + '...'
 }
 
@@ -52,11 +52,11 @@ export function formatNumber(num: number): string {
   if (num >= 1000000) {
     return (num / 1000000).toFixed(1) + 'M'
   }
-  
+
   if (num >= 1000) {
     return (num / 1000).toFixed(1) + 'K'
   }
-  
+
   return num.toString()
 }
 
@@ -67,11 +67,11 @@ export function formatNumber(num: number): string {
 export function generateId(length = 8): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let result = ''
-  
+
   for (let i = 0; i < length; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length))
   }
-  
+
   return result
 }
 
@@ -90,11 +90,11 @@ export function delay(ms: number): Promise<void> {
 export function parseQueryString(query: string): Record<string, string> {
   const params = new URLSearchParams(query)
   const result: Record<string, string> = {}
-  
+
   params.forEach((value, key) => {
     result[key] = value
   })
-  
+
   return result
 }
 
@@ -104,12 +104,12 @@ export function parseQueryString(query: string): Record<string, string> {
  */
 export function objectToQueryString(params: Record<string, any>): string {
   const urlParams = new URLSearchParams()
-  
+
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== '') {
       urlParams.append(key, String(value))
     }
   })
-  
+
   return urlParams.toString()
 }

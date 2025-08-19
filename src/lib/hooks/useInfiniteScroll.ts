@@ -34,12 +34,12 @@ export function useInfiniteScroll({
 }: UseInfiniteScrollProps): { page: number; resetPage: () => void } {
   // 當前頁碼
   const [page, setPage] = useState<number>(initialPage)
-  
+
   // 重置頁碼的函數
   const resetPage = useCallback(() => {
     setPage(initialPage)
   }, [initialPage])
-  
+
   // 加載更多數據的回調
   const loadMore = useCallback(() => {
     if (!isLoading && hasMore) {
@@ -48,13 +48,13 @@ export function useInfiniteScroll({
       onLoadMore(nextPage)
     }
   }, [page, isLoading, hasMore, onLoadMore])
-  
+
   useEffect(() => {
     // 檢查目標元素和IntersectionObserver API的可用性
     if (!targetRef?.current || typeof IntersectionObserver !== 'function') {
       return
     }
-    
+
     // 創建交叉觀察器
     const observer = new IntersectionObserver((entries) => {
       // 當目標元素進入視口時
@@ -62,10 +62,10 @@ export function useInfiniteScroll({
         loadMore()
       }
     }, options)
-    
+
     // 開始觀察目標元素
     observer.observe(targetRef.current)
-    
+
     // 清理函數
     return () => {
       if (targetRef.current) {
@@ -74,6 +74,6 @@ export function useInfiniteScroll({
       observer.disconnect()
     }
   }, [targetRef, options, loadMore])
-  
+
   return { page, resetPage }
 }

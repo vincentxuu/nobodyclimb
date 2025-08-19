@@ -1,12 +1,12 @@
 'use client'
 
-import { 
-  Hero, 
-  FeaturedPosts, 
-  GymHighlights, 
-  BiographySection, 
-  GallerySection, 
-  AboutSection 
+import {
+  Hero,
+  FeaturedPosts,
+  GymHighlights,
+  BiographySection,
+  GallerySection,
+  AboutSection,
 } from '@/components/home'
 import { PageTransition } from '@/components/shared/page-transition'
 

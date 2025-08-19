@@ -8,11 +8,11 @@ import { useRouter } from 'next/navigation'
  */
 export default function Logo() {
   const router = useRouter()
-  
+
   return (
-    <div className="bg-[#FFE70C] h-[70px] flex items-center px-6">
-      <div 
-        className="flex items-center cursor-pointer" 
+    <div className="flex h-[70px] items-center bg-[#FFE70C] px-6">
+      <div
+        className="flex cursor-pointer items-center"
         onClick={() => router.push('/')}
         role="button"
         aria-label="前往首頁"

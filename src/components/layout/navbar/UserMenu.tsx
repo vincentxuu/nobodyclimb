@@ -10,8 +10,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSeparator
-} from "@/components/ui/dropdown-menu"
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu'
 
 interface UserMenuProps {
   isDesktop: boolean
@@ -24,56 +24,67 @@ interface UserMenuProps {
  */
 export default function UserMenu({ isDesktop }: UserMenuProps) {
   const router = useRouter()
-  let { isAuthenticated, logout, user } = useAuthStore()
-  isAuthenticated = true; // 臨時設置，實際應該使用後端驗證
-  
-  // 假設用戶數據中有 avatarStyle 屬性，否則使用默認頭像
-  const avatarStyle = user?.avatarStyle ? DEFAULT_AVATARS.find(a => a.id === user.avatarStyle) || DEFAULT_AVATARS[0] : DEFAULT_AVATARS[0];
+  const { isAuthenticated, logout, user } = useAuthStore()
 
-  if (!isDesktop) return null;
+  // 假設用戶數據中有 avatarStyle 屬性，否則使用默認頭像
+  const avatarStyle = user?.avatarStyle
+    ? DEFAULT_AVATARS.find((a) => a.id === user.avatarStyle) || DEFAULT_AVATARS[0]
+    : DEFAULT_AVATARS[0]
+
+  if (!isDesktop) return null
 
   return (
-    <div className="px-6 hidden lg:block">
+    <div className="hidden px-6 lg:block">
       {isAuthenticated ? (
         <div className="flex items-center space-x-4">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="lg"
             onClick={() => router.push('/blog/create')}
-            className="border border-[#1B1A1A] text-[#1B1A1A] hover:bg-gray-100/80 rounded-md font-medium w-[120px] h-9"
+            className="h-9 w-[120px] rounded-md border border-[#1B1A1A] font-medium text-[#1B1A1A] hover:bg-gray-100/80"
           >
-            <span className="font-['Noto_Sans_CJK_TC'] text-sm leading-5 tracking-[0.01em] font-medium">發表文章</span>
+            <span className="font-['Noto_Sans_CJK_TC'] text-sm font-medium leading-5 tracking-[0.01em]">
+              發表文章
+            </span>
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center hover:opacity-80 transition-opacity duration-200">
+              <button className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full transition-opacity duration-200 hover:opacity-80">
                 {user?.avatar ? (
-                  <img 
-                    src={user.avatar} 
-                    alt="用戶頭像" 
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={user.avatar} alt="用戶頭像" className="h-full w-full object-cover" />
                 ) : (
                   generateAvatarElement(avatarStyle, 'w-10 h-10')
                 )}
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-[200px] p-2 bg-white border border-[#EBEAEA] rounded-lg shadow-md">
-              <DropdownMenuItem className="px-8 py-3 text-sm font-medium text-[#3F3D3D] hover:bg-gray-100 cursor-pointer font-['Noto_Sans_CJK_TC'] leading-5 tracking-[0.01em]" onClick={() => router.push('/profile')}>
+            <DropdownMenuContent className="w-[200px] rounded-lg border border-[#EBEAEA] bg-white p-2 shadow-md">
+              <DropdownMenuItem
+                className="cursor-pointer px-8 py-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium leading-5 tracking-[0.01em] text-[#3F3D3D] hover:bg-gray-100"
+                onClick={() => router.push('/profile')}
+              >
                 我的人物誌
               </DropdownMenuItem>
-              <DropdownMenuItem className="px-8 py-3 text-sm font-medium text-[#3F3D3D] hover:bg-gray-100 cursor-pointer font-['Noto_Sans_CJK_TC'] leading-5 tracking-[0.01em]" onClick={() => router.push('/profile/articles')}>
+              <DropdownMenuItem
+                className="cursor-pointer px-8 py-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium leading-5 tracking-[0.01em] text-[#3F3D3D] hover:bg-gray-100"
+                onClick={() => router.push('/profile/articles')}
+              >
                 我的文章
               </DropdownMenuItem>
-              <DropdownMenuItem className="px-8 py-3 text-sm font-medium text-[#3F3D3D] hover:bg-gray-100 cursor-pointer font-['Noto_Sans_CJK_TC'] leading-5 tracking-[0.01em]" onClick={() => router.push('/profile/bookmarks')}>
+              <DropdownMenuItem
+                className="cursor-pointer px-8 py-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium leading-5 tracking-[0.01em] text-[#3F3D3D] hover:bg-gray-100"
+                onClick={() => router.push('/profile/bookmarks')}
+              >
                 我的收藏
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-[#EBEAEA] my-1" />
-              <DropdownMenuItem className="px-8 py-3 text-sm font-medium text-[#3F3D3D] hover:bg-gray-100 cursor-pointer font-['Noto_Sans_CJK_TC'] leading-5 tracking-[0.01em]" onClick={() => router.push('/profile/settings')}>
+              <DropdownMenuSeparator className="my-1 bg-[#EBEAEA]" />
+              <DropdownMenuItem
+                className="cursor-pointer px-8 py-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium leading-5 tracking-[0.01em] text-[#3F3D3D] hover:bg-gray-100"
+                onClick={() => router.push('/profile/settings')}
+              >
                 帳號設定
               </DropdownMenuItem>
-              <DropdownMenuItem 
-                className="px-8 py-3 text-sm font-medium text-[#D94A4A] hover:bg-gray-100 cursor-pointer font-['Noto_Sans_CJK_TC'] leading-5 tracking-[0.01em]"
+              <DropdownMenuItem
+                className="cursor-pointer px-8 py-3 font-['Noto_Sans_CJK_TC'] text-sm font-medium leading-5 tracking-[0.01em] text-[#D94A4A] hover:bg-gray-100"
                 onClick={() => logout()}
               >
                 登出
@@ -83,12 +94,14 @@ export default function UserMenu({ isDesktop }: UserMenuProps) {
         </div>
       ) : (
         <Link href="/auth/login">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="lg"
-            className="border border-[#1B1A1A] text-[#1B1A1A] hover:bg-gray-100/80 rounded-md font-medium w-[104px] h-9"
+            className="h-9 w-[104px] rounded-md border border-[#1B1A1A] font-medium text-[#1B1A1A] hover:bg-gray-100/80"
           >
-            <span className="font-['Noto_Sans_CJK_TC'] text-sm leading-5 tracking-[0.01em] font-medium">登入</span>
+            <span className="font-['Noto_Sans_CJK_TC'] text-sm font-medium leading-5 tracking-[0.01em]">
+              登入
+            </span>
           </Button>
         </Link>
       )}
