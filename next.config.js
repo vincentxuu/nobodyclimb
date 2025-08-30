@@ -3,14 +3,37 @@ const nextConfig = {
   reactStrictMode: true,
   
   images: {
-    domains: [
-      'cloudflare-ipfs.com',
-      'r2.cloudflarestorage.com',
-      'i.imgur.com',
-      'nobodyclimb.cc',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cloudflare-ipfs.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'r2.cloudflarestorage.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'nobodyclimb.cc',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
-    unoptimized: true, // 在 Cloudflare Workers 中禁用圖片優化
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 86400,
+    unoptimized: false, // 啟用圖片優化
   },
   
   // 環境變量
