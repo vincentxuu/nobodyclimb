@@ -75,12 +75,14 @@ src/
 ## 安裝與執行
 
 1. 複製專案
+
    ```bash
    git clone [專案repository URL]
    cd nobodyclimb-fe
    ```
 
 2. 安裝依賴
+
    ```bash
    npm install
    ```
@@ -89,6 +91,7 @@ src/
    在專案根目錄創建 `.env.local` 檔案，並設定必要的環境變數
 
 4. 啟動開發伺服器
+
    ```bash
    npm run dev
    ```
