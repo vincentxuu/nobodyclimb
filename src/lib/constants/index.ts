@@ -22,11 +22,12 @@ export const DEFAULT_PAGE = 1
  * 導航連結
  */
 export const NAV_LINKS = [
-  { href: '/', label: '首頁' },
-  { href: '/blog', label: '文章' },
-  { href: '/gym', label: '攀岩館' },
-  { href: '/gallery', label: '相簿' },
-  { href: '/biography', label: '個人' },
+  { href: '/biography', label: '人物誌', hasSubmenu: false },
+  { href: '/crag', label: '岩場', hasSubmenu: false },
+  { href: '/gym', label: '岩館', hasSubmenu: false },
+  { href: '/gallery', label: '攝影集', hasSubmenu: false },
+  { href: '/videos', label: '影片', hasSubmenu: false },
+  { href: '/blog', label: '部落格', hasSubmenu: true },
 ]
 
 /**
@@ -242,4 +243,14 @@ export const galleryPhotos = [
     location: { country: '台灣', city: '台北市', spot: '市民岩館' },
     uploadDate: '2023. 12. 27',
   },
+]
+
+/**
+ * 專欄子選單
+ */
+export const COLUMN_SUBMENU = [
+  { href: '/blog?category=equipment', label: '裝備介紹' },
+  { href: '/blog?category=technique', label: '技巧介紹' },
+  { href: '/blog?category=research', label: '技術研究' },
+  { href: '/blog?category=competition', label: '比賽介紹' },
 ]

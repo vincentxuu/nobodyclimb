@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { key: 'crags', text: '岩場', href: '/crag', hasSubmenu: false },
   { key: 'gyms', text: '岩館', href: '/gym', hasSubmenu: false },
   { key: 'gallery', text: '攝影集', href: '/gallery', hasSubmenu: false },
+  { key: 'videos', text: '影片', href: '/videos', hasSubmenu: false },
   { key: 'blog', text: '部落格', href: '/blog', hasSubmenu: true },
 ]
 
