@@ -1,6 +1,6 @@
 # NobodyClimb - 攀岩社群前端專案
 
-這是 NobodyClimb 攀岩社群的前端專案，使用 Next.js 14 框架建構，並支援 Cloudflare 部署。
+這是 NobodyClimb 攀岩社群的前端專案，使用 Next.js 15 框架建構，並支援 Cloudflare 部署。
 
 ## 專案概述
 
@@ -106,6 +106,7 @@ nobodyclimb-fe/
 ## 主要功能
 
 ### 核心功能
+
 - **用戶認證**: 註冊、登入、多步驟個人資料設定
 - **個人檔案**: 用戶資料、攀岩經驗、個人設定、文章管理、書籤收藏
 - **部落格系統**: 文章創建、編輯、瀏覽功能
@@ -117,6 +118,7 @@ nobodyclimb-fe/
 - **影片瀏覽**: YouTube 攀岩影片整合、篩選、播放功能
 
 ### 技術特色
+
 - **響應式設計**: 支援桌面和行動裝置
 - **主題切換**: 明暗模式支援
 - **國際化**: 多語言切換功能
@@ -129,6 +131,7 @@ nobodyclimb-fe/
 - **現代化架構**: 使用 React 19 和 Next.js 15 最新特性
 
 ### YouTube 影片功能
+
 - 支援多個攀岩 YouTube 頻道的影片收集
 - 自動化影片資料更新腳本
 - 影片篩選和搜尋功能
@@ -137,16 +140,19 @@ nobodyclimb-fe/
 ## 安裝與執行
 
 ### 前置需求
+
 - Node.js 18+ (支援 React 19)
 - pnpm (推薦) 或 npm
 
 ### 1. 複製專案
+
 ```bash
 git clone [專案repository URL]
 cd nobodyclimb-fe
 ```
 
 ### 2. 安裝依賴
+
 ```bash
 pnpm install
 # 或
@@ -154,13 +160,16 @@ npm install
 ```
 
 ### 3. 設定環境變數
+
 在專案根目錄創建 `.env.local` 檔案（如需要）：
+
 ```env
 # 環境變數配置（目前暫無外部 API 需求）
 # NEXT_PUBLIC_CUSTOM_VAR=your_value
 ```
 
 ### 4. 啟動開發伺服器
+
 ```bash
 pnpm dev
 # 或
@@ -168,11 +177,13 @@ npm run dev
 ```
 
 ### 5. 訪問應用
+
 開啟瀏覽器訪問 [http://localhost:3000](http://localhost:3000)
 
 ## 指令說明
 
 ### 開發相關
+
 - `pnpm dev` - 啟動開發伺服器 (支援 React 19)
 - `pnpm build` - 建構生產版本
 - `pnpm start` - 啟動生產伺服器
@@ -182,12 +193,14 @@ npm run dev
 - `pnpm format:check` - 檢查程式碼格式
 
 ### Cloudflare 部署相關
+
 - `pnpm build:cf` - 建構 Cloudflare 版本
 - `pnpm preview` - 預覽 Cloudflare 建構
 - `pnpm deploy` - 部署到 Cloudflare (預設環境)
 - `pnpm cf-typegen` - 生成 Cloudflare 環境型別
 
 ### 環境特定部署
+
 - `wrangler deploy` - 部署到預設環境
 - `wrangler deploy --env production` - 部署到生產環境 (nobodyclimb.cc)
 - `wrangler deploy --env preview` - 部署到預覽環境
@@ -196,6 +209,7 @@ npm run dev
 - `wrangler tail --env preview` - 查看預覽環境日誌
 
 ### YouTube 資料處理
+
 - `./scripts/collect-youtube-data.sh` - 收集 YouTube 影片資料
 - `node scripts/convert-youtube-videos.js` - 轉換影片資料格式
 - `./scripts/update-videos.sh` - 更新影片資料
@@ -209,21 +223,25 @@ npm run dev
 專案配置了以下環境：
 
 #### 生產環境 (Production)
-- **域名**: nobodyclimb.cc, www.nobodyclimb.cc
+
+- **域名**: nobodyclimb.cc, <www.nobodyclimb.cc>
 - **Worker 名稱**: nobodyclimb-fe-production
 - **部署指令**: `wrangler deploy --env production`
 
 #### 預覽環境 (Preview)
+
 - **Worker 名稱**: nobodyclimb-fe-preview
 - **部署指令**: `wrangler deploy --env preview`
 
 #### 開發環境 (Development)
+
 - **本地開發**: `pnpm dev`
 - **本地預覽**: `wrangler preview`
 
 ### 快速部署步驟
 
 1. **前置準備**
+
    ```bash
    # 安裝依賴
    pnpm install
@@ -233,12 +251,14 @@ npm run dev
    ```
 
 2. **建構專案**
+
    ```bash
    # 建構 Cloudflare 版本
    pnpm build:cf
    ```
 
 3. **部署到指定環境**
+
    ```bash
    # 部署到生產環境
    wrangler deploy --env production
@@ -248,6 +268,7 @@ npm run dev
    ```
 
 4. **監控部署**
+
    ```bash
    # 查看生產環境日誌
    wrangler tail --env production
@@ -261,6 +282,7 @@ npm run dev
 專案配置了 Cloudflare KV 存儲，用於將來存儲動態數據：
 
 #### 當前狀態
+
 - **綁定名稱**: VIDEOS
 - **KV 命名空間 ID**: 6562f1cc9373496da57aeb48987346f8
 - **目前使用**: 暫時使用靜態 JSON 檔案 (`public/data/videos.json`)
@@ -268,6 +290,7 @@ npm run dev
 #### KV 使用說明
 
 **1. 在 Cloudflare Workers 環境中訪問 KV**
+
 ```typescript
 // 在 API routes 中使用
 export async function GET(request: Request) {
@@ -284,6 +307,7 @@ export async function GET(request: Request) {
 ```
 
 **2. 型別支援**
+
 ```typescript
 // cloudflare-env.d.ts 中已定義
 interface CloudflareEnv {
@@ -292,6 +316,7 @@ interface CloudflareEnv {
 ```
 
 **3. Wrangler CLI 操作**
+
 ```bash
 # 上傳數據到 KV
 wrangler kv:key put --binding=VIDEOS "videos" --path="./public/data/videos.json"
@@ -306,6 +331,7 @@ wrangler kv:key list --binding=VIDEOS
 ### 詳細部署文件
 
 更詳細的部署文件請參考 `docs/cloudflare-deployment/` 目錄：
+
 - `deployment-steps.md` - 完整部署步驟
 - `deployment-checklist.md` - 部署檢查清單
 - `environment-setup.md` - 環境設定說明
@@ -313,6 +339,7 @@ wrangler kv:key list --binding=VIDEOS
 ## 開發指南
 
 ### 程式碼風格
+
 - 使用 TypeScript 5.9 進行嚴格型別檢查
 - 遵循 ESLint 8.57 和 Prettier 3.6 配置
 - 使用 Tailwind CSS 3.4 進行樣式設計
@@ -320,11 +347,13 @@ wrangler kv:key list --binding=VIDEOS
 - 使用現代化的 Next.js 15 App Router 結構
 
 ### 狀態管理
+
 - 使用 Zustand 4.5 進行全域狀態管理
 - 使用 TanStack Query 5.85 處理伺服器狀態和快取
 - 使用 React Hook Form 7.62 + Zod 3.25 處理表單狀態和驗證
 
 ### 檔案組織
+
 - 按功能模組組織元件
 - 共用元件放在 `components/shared/` 和 `components/ui/`
 - 型別定義集中在 `lib/types/`
@@ -332,6 +361,7 @@ wrangler kv:key list --binding=VIDEOS
 - API 相關邏輯統一在 `lib/api/`
 
 ### 圖片處理
+
 - 使用 Next.js 15 優化圖片載入和快取
 - 支援 YouTube 縮圖和多種圖片來源
 - 啟用 AVIF 和 WebP 格式支援
@@ -345,6 +375,14 @@ wrangler kv:key list --binding=VIDEOS
 4. 推送到分支 (`git push origin feature/amazing-feature`)
 5. 建立 Pull Request
 
-## 授權
+---
 
-此專案採用私有授權。
+### 聯絡資訊
+
+- **網站**: [nobodyclimb.cc](https://nobodyclimb.cc)
+- **官方網站**: [www.nobodyclimb.cc](https://www.nobodyclimb.cc)
+- **開發團隊**: NobodyClimb Team
+
+---
+
+*本專案為 NobodyClimb 攀岩社群平台，致力於為攀岩愛好者提供最佳的線上體驗。*
