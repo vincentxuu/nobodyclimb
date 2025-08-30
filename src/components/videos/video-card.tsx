@@ -1,7 +1,8 @@
 import React from 'react'
+import Image from 'next/image'
 import { Card } from '@/components/ui/card'
 import type { Video } from '@/lib/types/video'
-import { Play, Eye, Clock } from 'lucide-react'
+import { Play, Eye } from 'lucide-react'
 
 interface VideoCardProps {
   video: Video
@@ -25,10 +26,12 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onClick }) => {
     >
       {/* 縮圖容器 */}
       <div className="relative aspect-video overflow-hidden bg-neutral-100">
-        <img
+        <Image
           src={video.thumbnailUrl}
           alt={video.title}
-          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
         />
         

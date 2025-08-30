@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 /**
  * Logo 組件
@@ -17,7 +18,14 @@ export default function Logo() {
         role="button"
         aria-label="前往首頁"
       >
-        <img src="/logo/Nobodylimb-black.svg" alt="NobodyClimb Logo" className="h-8 w-auto" />
+        <Image 
+          src="/logo/Nobodylimb-black.svg" 
+          alt="NobodyClimb Logo" 
+          width={120} 
+          height={32}
+          priority
+          className="h-8 w-auto" 
+        />
       </div>
     </div>
   )

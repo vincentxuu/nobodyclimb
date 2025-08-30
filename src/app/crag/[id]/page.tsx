@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, use } from 'react'
 import Image from 'next/image'
 import PlaceholderImage from '@/components/ui/placeholder-image'
 import Link from 'next/link'
@@ -230,10 +230,11 @@ const cragData = [
   },
 ]
 
-export default function CragDetailPage({ params }: { params: { id: string } }) {
+export default function CragDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const [isVisible, setIsVisible] = useState(false)
   const router = useRouter()
-  const cragId = parseInt(params.id)
+  const cragId = parseInt(id)
   // 監聽滾動事件
   useEffect(() => {
     const toggleVisibility = () => {

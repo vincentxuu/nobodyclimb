@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, use } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -12,14 +12,15 @@ import { biographyData } from '@/data/biographyData'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 
 interface ProfilePageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default function ProfilePage({ params }: ProfilePageProps) {
   const router = useRouter()
-  const personId = parseInt(params.id)
+  const { id } = use(params)
+  const personId = parseInt(id)
   const [showBackToTop, setShowBackToTop] = useState(false)
 
   // 監聽滾動事件，決定是否顯示回到頂部按鈕

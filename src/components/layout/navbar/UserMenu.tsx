@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { useAuthStore } from '@/store/authStore'
 import { generateAvatarElement, DEFAULT_AVATARS } from '@/components/shared/avatar-options'
@@ -51,7 +52,14 @@ export default function UserMenu({ isDesktop }: UserMenuProps) {
             <DropdownMenuTrigger asChild>
               <button className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full transition-opacity duration-200 hover:opacity-80">
                 {user?.avatar ? (
-                  <img src={user.avatar} alt="用戶頭像" className="h-full w-full object-cover" />
+                  <Image 
+                    src={user.avatar} 
+                    alt="用戶頭像" 
+                    width={40} 
+                    height={40}
+                    className="object-cover rounded-full"
+                    unoptimized={user.avatar.startsWith('http')}
+                  />
                 ) : (
                   generateAvatarElement(avatarStyle, 'w-10 h-10')
                 )}

@@ -11,7 +11,7 @@ import { SOCIAL_LINKS } from '@/lib/constants'
  */
 export function Footer() {
   // 社群媒體圖標映射
-  const socialIcons: Record<string, JSX.Element> = {
+  const socialIcons: Record<string, React.JSX.Element> = {
     instagram: <Instagram className="h-5 w-5" />,
     facebook: <Facebook className="h-5 w-5" />,
     mail: <Mail className="h-5 w-5" />,
@@ -21,7 +21,13 @@ export function Footer() {
     <footer className="flex h-[160px] items-center justify-between bg-[#1B1A1A] px-4 md:px-20 lg:px-40 xl:px-[160px]">
       {/* Logo與版權資訊 */}
       <div className="flex items-center space-x-4">
-        <img src="/logo/Nobodylimb-white.svg" alt="NobodyClimb Logo" className="h-8 w-auto" />
+        <Image 
+          src="/logo/Nobodylimb-white.svg" 
+          alt="NobodyClimb Logo" 
+          width={120} 
+          height={32}
+          className="h-8 w-auto" 
+        />
         <p className="text-[14px] font-light text-[#8E8C8C]">NobodyClimb © 2022.</p>
       </div>
 

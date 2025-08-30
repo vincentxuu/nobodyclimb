@@ -19,7 +19,7 @@ const explorePosts: Post[] = [
     id: 1,
     title: '裝備介紹',
     slug: 'equipment-intro',
-    coverImage: '/photo/blog-left.png',
+    coverImage: '/photo/blog-left.jpeg',
   },
   {
     id: 2,
@@ -54,6 +54,8 @@ function ExploreCard({ post }: { post: Post }) {
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           className="object-cover"
+          priority={post.id === 1}
+          loading={post.id === 1 ? 'eager' : 'lazy'}
         />
 
         {/* 黃色漸層遮罩 */}

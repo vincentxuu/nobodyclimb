@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, use } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -95,10 +95,11 @@ Facebook：MegaSTONE Climbing Gym`,
   },
 ]
 
-export default function GymDetailPage({ params }: { params: { id: string } }) {
+export default function GymDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const [showBackToTop, setShowBackToTop] = useState(false)
   const router = useRouter()
-  const gymId = parseInt(params.id)
+  const gymId = parseInt(id)
 
   // 監聽滾動事件
   useEffect(() => {

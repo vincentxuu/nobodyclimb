@@ -28,7 +28,7 @@ interface PopoverContentProps extends React.HTMLAttributes<HTMLDivElement> {
 interface PopoverContextType {
   open: boolean
   setOpen: (value: boolean | ((prev: boolean) => boolean)) => void
-  triggerRef: React.RefObject<HTMLElement>
+  triggerRef: React.RefObject<HTMLElement | null>
   closeOnClick?: boolean
 }
 
@@ -219,14 +219,16 @@ const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
           return React.cloneElement(child as CloneElementType, {
             onClick: (e: React.MouseEvent) => {
               if (closeOnClick) setOpen(false)
-              if (child.props.onClick) child.props.onClick(e)
+              if (React.isValidElement(child) && child.props && typeof child.props === 'object' && 'onClick' in child.props && child.props.onClick) {
+                (child.props.onClick as (e: React.MouseEvent) => void)(e)
+              }
             },
           })
         }
         // 遞迴處理子元素中的連結
-        else if (child.props.children) {
+        else if (React.isValidElement(child) && child.props && typeof child.props === 'object' && 'children' in child.props) {
           return React.cloneElement(child as CloneElementType, {
-            children: wrapChildrenWithClickHandler(child.props.children),
+            children: wrapChildrenWithClickHandler((child.props as any).children),
           })
         }
 

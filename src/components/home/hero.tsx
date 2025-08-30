@@ -12,17 +12,18 @@ export function Hero() {
   return (
     <div className="relative h-[100vh] w-full overflow-hidden pt-[80px]">
       {/* 背景圖片 */}
-      <div
-        className="absolute inset-0 bg-[#242424]/40"
-        style={{
-          background:
-            'linear-gradient(0deg, rgba(36, 36, 36, 0.4), rgba(36, 36, 36, 0.4)), url(/photo/cont-intro.jpeg)',
-          backgroundAttachment: 'fixed',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
+      <div className="absolute inset-0">
+        <Image
+          src="/photo/cont-intro.jpeg"
+          alt="Climbing Background"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+          quality={85}
+        />
+        <div className="absolute inset-0 bg-[#242424]/40" />
+      </div>
 
       {/* 內容 */}
       <div className="container relative z-10 mx-auto flex h-full flex-col items-center justify-center px-4 text-center text-white">
