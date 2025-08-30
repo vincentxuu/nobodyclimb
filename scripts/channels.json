@@ -1,0 +1,44 @@
+{
+  "channels": [
+    {
+      "url": "https://www.youtube.com/@mellowclimbing",
+      "name": "mellow",
+      "displayName": "Mellow Climbing",
+      "channelId": "@mellowclimbing",
+      "type": "climbing",
+      "featuredThreshold": 50000
+    },
+    {
+      "url": "https://www.youtube.com/@PetzlSportVideos",
+      "name": "petzl",
+      "displayName": "Petzl Sport Videos",
+      "channelId": "@PetzlSportVideos",
+      "type": "climbing",
+      "featuredThreshold": 10000
+    },
+    {
+      "url": "https://www.youtube.com/@TheNorthFace",
+      "name": "TheNorthFace",
+      "displayName": "The North Face",
+      "channelId": "@TheNorthFace",
+      "type": "climbing",
+      "featuredThreshold": 30000
+    },
+    {
+      "url": "https://www.youtube.com/@arcteryx",
+      "name": "arcteryx",
+      "displayName": "Arc'teryx",
+      "channelId": "@arcteryx",
+      "type": "climbing",
+      "featuredThreshold": 25000
+    },
+    {
+      "url": "https://www.youtube.com/@mammut",
+      "name": "mammut",
+      "displayName": "Mammut",
+      "channelId": "@mammut",
+      "type": "climbing",
+      "featuredThreshold": 15000
+    }
+  ]
+}
