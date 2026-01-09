@@ -1,0 +1,9 @@
+route_id,crag_id,area,area_en,name,english_name,grade,length,type,type_en,first_ascent,first_ascent_date,description,description_en,protection,protection_en,tips,tips_en,safety_rating,popularity,views,status,created_by,created_date,updated_date
+LD329,longdong,音樂廳,Music Hall,肥牛,Fat Cow,5.6,10m,傳統攀登,Traditional Climbing,,,可步行下撤,,,,,,●●●,,,已發佈,,,
+LD330,longdong,音樂廳,Music Hall,瘦馬,Skinny Horse,5.9,9m,傳統攀登,Traditional Climbing,吳招坤,,可步行下撤,,,,,,●●●,,,已發佈,,,
+LD338,longdong,音樂廳,Music Hall,直接嘗試,Direct Attempt,5.11d,16m,運動攀登,Sport Climbing,,,原為上方架繩路線，2012更新為運動攀登路線,,固定保護點，共8個316-TW Bolt,,,,●●●,,,已發佈,,,
+LD367,longdong,音樂廳,Music Hall,Fucking Fall,Fucking Fall,5.11a,15m,運動攀登,Sport Climbing,匿名攀岩者,1988-07-01,1988年7月首攀，又名78決賽或全員墜落,,固定保護點，共9個Ti-TW Bolt,,,,●●●,,,已發佈,,,
+LD523,longdong,校門口,School Gate,V槽,V-Groove,5.10b,15m,運動攀登,Sport Climbing,,,建議佩戴岩盔，確保者提高警覺,,固定保護點，共10個316-TW Bolt,,,,●●●,,,已發佈,,,
+LD525,longdong,校門口,School Gate,無名小卒,Nowhere Man,5.12a,20m,運動攀登,Sport Climbing,朴來慶,,,,,固定保護點，共12個316-TW Bolt,,,,●●●,,,已發佈,,,
+LD526,longdong,校門口,School Gate,水虎魚,Piranha,5.11c,18m,運動攀登,Sport Climbing,傅抱仁,,,,,固定保護點，共12個316-TW Bolt,,,,●●●,,,已發佈,,,
+LD305,longdong,大禮堂,Grand Auditorium,龍脊中路,Dragon Ridge Center,5.5,33m,傳統攀登,Traditional Climbing,,,少數區塊岩質不穩,,,,,,●●●,,,已發佈,,,
