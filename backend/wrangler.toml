@@ -28,6 +28,9 @@ CORS_ORIGIN = "http://localhost:3000"
 
 JWT_ISSUER = "nobodyclimb-api"
 
+# Google OAuth - Set via wrangler secret or environment variable
+# GOOGLE_CLIENT_ID = "your-google-client-id.apps.googleusercontent.com"
+
  
 
 [[env.preview.d1_databases]]
@@ -79,6 +82,9 @@ routes = [
 CORS_ORIGIN = "https://nobodyclimb.cc"
 
 JWT_ISSUER = "nobodyclimb-api"
+
+# Google OAuth - Set via wrangler secret or environment variable
+# GOOGLE_CLIENT_ID = "your-google-client-id.apps.googleusercontent.com"
 
  
 

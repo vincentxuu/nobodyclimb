@@ -6,6 +6,7 @@ export interface Env {
   CORS_ORIGIN: string;
   JWT_ISSUER: string;
   JWT_SECRET: string;
+  GOOGLE_CLIENT_ID: string;
 }
 
 // Database Models
@@ -13,15 +14,37 @@ export interface User {
   id: string;
   email: string;
   username: string;
-  password_hash: string;
+  password_hash: string | null;
   display_name: string | null;
   avatar_url: string | null;
   bio: string | null;
   role: 'user' | 'admin' | 'moderator';
   is_active: number;
   email_verified: number;
+  google_id: string | null;
+  auth_provider: 'local' | 'google';
   created_at: string;
   updated_at: string;
+}
+
+// Google OAuth Types
+export interface GoogleAuthRequest {
+  credential: string;
+}
+
+export interface GoogleTokenPayload {
+  iss: string;
+  azp: string;
+  aud: string;
+  sub: string;
+  email: string;
+  email_verified: boolean;
+  name?: string;
+  picture?: string;
+  given_name?: string;
+  family_name?: string;
+  iat: number;
+  exp: number;
 }
 
 export interface Post {
