@@ -8,6 +8,7 @@ import { RouteListItem } from './route-list-item'
 import { RouteListFilter } from './route-list-filter'
 import type { RouteSidebarItem } from '@/lib/crag-data'
 import { getSectorsForArea } from '@/lib/crag-data'
+import { useRouteFilterParams } from '@/lib/hooks/useRouteFilterParams'
 
 interface RouteMobileDrawerProps {
   cragId: string
@@ -25,11 +26,21 @@ export function RouteMobileDrawer({
   currentRouteId,
 }: RouteMobileDrawerProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedArea, setSelectedArea] = useState('all')
-  const [selectedSector, setSelectedSector] = useState('all')
-  const [selectedGrade, setSelectedGrade] = useState('all')
-  const [selectedType, setSelectedType] = useState('all')
+
+  // 使用 URL 參數管理篩選狀態，確保路由變更時狀態不會丟失
+  const {
+    searchQuery,
+    selectedArea,
+    selectedSector,
+    selectedGrade,
+    selectedType,
+    setSearchQuery,
+    setSelectedArea,
+    setSelectedSector,
+    setSelectedGrade,
+    setSelectedType,
+    buildUrlWithFilters,
+  } = useRouteFilterParams()
 
   // 根據選擇的區域獲取 sectors
   const sectors = useMemo(() => {
@@ -195,6 +206,7 @@ export function RouteMobileDrawer({
                         cragId={cragId}
                         isActive={route.id === currentRouteId}
                         onClick={() => setIsOpen(false)}
+                        buildUrlWithFilters={buildUrlWithFilters}
                       />
                     ))}
                   </div>

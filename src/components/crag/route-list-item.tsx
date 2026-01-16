@@ -11,9 +11,16 @@ interface RouteListItemProps {
   cragId: string
   isActive: boolean
   onClick?: () => void
+  buildUrlWithFilters?: (basePath: string) => string
 }
 
-export function RouteListItem({ route, cragId, isActive, onClick }: RouteListItemProps) {
+export function RouteListItem({
+  route,
+  cragId,
+  isActive,
+  onClick,
+  buildUrlWithFilters,
+}: RouteListItemProps) {
   const router = useRouter()
 
   const handleClick = (e: React.MouseEvent) => {
@@ -31,13 +38,19 @@ export function RouteListItem({ route, cragId, isActive, onClick }: RouteListIte
     // 執行點擊回調
     onClick?.()
 
-    // 導航到路線頁面
-    router.push(`/crag/${cragId}/route/${route.id}`)
+    // 導航到路線頁面，保留篩選參數
+    const basePath = `/crag/${cragId}/route/${route.id}`
+    const targetUrl = buildUrlWithFilters ? buildUrlWithFilters(basePath) : basePath
+    router.push(targetUrl)
   }
+
+  // 計算帶有篩選參數的 href
+  const basePath = `/crag/${cragId}/route/${route.id}`
+  const href = buildUrlWithFilters ? buildUrlWithFilters(basePath) : basePath
 
   return (
     <Link
-      href={`/crag/${cragId}/route/${route.id}`}
+      href={href}
       prefetch={false}
       onClick={handleClick}
       className={cn(
