@@ -437,6 +437,63 @@ export interface BiographyBackend {
 // ═══════════════════════════════════════════
 
 /**
+ * 舊欄位名稱到系統故事問題 ID 的映射
+ * 用於將後端舊格式的欄位名稱轉換為新的系統問題 ID
+ */
+const LEGACY_STORY_FIELD_TO_SYSTEM_ID: Record<string, string> = {
+  // 成長與突破
+  memorable_moment: 'sys_story_growth_memorable_moment',
+  biggest_challenge: 'sys_story_growth_biggest_challenge',
+  breakthrough_story: 'sys_story_growth_breakthrough',
+  first_outdoor: 'sys_story_growth_first_outdoor',
+  first_grade: 'sys_story_growth_first_grade',
+  frustrating_climb: 'sys_story_growth_frustrating',
+  // 心理與哲學
+  fear_management: 'sys_story_psychology_fear',
+  climbing_lesson: 'sys_story_psychology_lesson',
+  failure_perspective: 'sys_story_psychology_failure',
+  flow_moment: 'sys_story_psychology_flow',
+  life_balance: 'sys_story_psychology_balance',
+  unexpected_gain: 'sys_story_psychology_gain',
+  // 社群與連結
+  climbing_mentor: 'sys_story_community_mentor',
+  climbing_partner: 'sys_story_community_partner',
+  funny_moment: 'sys_story_community_funny',
+  favorite_spot: 'sys_story_community_spot',
+  advice_to_group: 'sys_story_community_advice',
+  climbing_space: 'sys_story_community_space',
+  // 實用分享
+  injury_recovery: 'sys_story_practical_injury',
+  memorable_route: 'sys_story_practical_route',
+  training_method: 'sys_story_practical_training',
+  effective_practice: 'sys_story_practical_practice',
+  technique_tip: 'sys_story_practical_technique',
+  gear_choice: 'sys_story_practical_gear',
+  // 夢想與探索
+  dream_climb: 'sys_story_dreams_dream_climb',
+  climbing_trip: 'sys_story_dreams_trip',
+  bucket_list_story: 'sys_story_dreams_bucket_list',
+  climbing_goal: 'sys_story_dreams_goal',
+  climbing_style: 'sys_story_dreams_style',
+  climbing_inspiration: 'sys_story_dreams_inspiration',
+  // 生活整合
+  life_outside_climbing: 'sys_story_life_outside',
+  // 核心故事（映射到適合的故事問題）
+  climbing_origin: 'sys_story_growth_memorable_moment', // 攀岩起源 -> 難忘經歷
+  advice_to_self: 'sys_story_community_advice', // 給自己的建議 -> 給新手/某族群的話
+}
+
+/**
+ * 舊欄位名稱到系統一句話問題 ID 的映射
+ */
+const LEGACY_ONELINER_FIELD_TO_SYSTEM_ID: Record<string, string> = {
+  climbing_reason: 'sys_ol_why_started', // 為什麼開始攀岩
+  climbing_meaning: 'sys_ol_climbing_lesson', // 攀岩的意義 -> 攀岩教會我的一件事
+  advice: 'sys_ol_advice_for_beginners', // 建議 -> 給新手一句話
+  bucket_list: 'sys_ol_current_goal', // 人生清單 -> 目前的攀岩小目標
+}
+
+/**
  * 安全解析 JSON 字串
  */
 function safeJsonParse<T>(json: string | null, defaultValue: T | null): T | null {
@@ -462,8 +519,9 @@ export function transformBackendToBiographyV2(backend: BiographyBackend): Biogra
   ) || {}
   const one_liners: OneLinerItem[] = Object.entries(oneLinersRaw)
     .filter(([, data]) => data?.answer)
-    .map(([question_id, data]) => ({
-      question_id,
+    .map(([fieldName, data]) => ({
+      // 將舊欄位名稱映射到系統問題 ID
+      question_id: LEGACY_ONELINER_FIELD_TO_SYSTEM_ID[fieldName] || fieldName,
       answer: data.answer,
       source: 'system' as ContentSource,
     }))
@@ -477,8 +535,9 @@ export function transformBackendToBiographyV2(backend: BiographyBackend): Biogra
     .flatMap((category) =>
       Object.entries(category || {})
         .filter(([, data]) => data?.answer)
-        .map(([question_id, data]) => ({
-          question_id,
+        .map(([fieldName, data]) => ({
+          // 將舊欄位名稱映射到系統問題 ID
+          question_id: LEGACY_STORY_FIELD_TO_SYSTEM_ID[fieldName] || fieldName,
           content: data!.answer,
           source: 'system' as ContentSource,
         }))
