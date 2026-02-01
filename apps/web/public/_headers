@@ -1,0 +1,43 @@
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/_next/image
+  Cache-Control: public, max-age=3600, s-maxage=31536000
+  CF-Cache-Tag: images
+
+/photo/*
+  Cache-Control: public, max-age=86400, s-maxage=2592000
+  CF-Cache-Tag: photos
+
+/images/*
+  Cache-Control: public, max-age=86400, s-maxage=2592000
+  CF-Cache-Tag: images
+
+/logo/*
+  Cache-Control: public, max-age=31536000, immutable
+  CF-Cache-Tag: logos
+
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=86400, s-maxage=2592000
+  CF-Cache-Tag: images
+
+/*.jpeg
+  Cache-Control: public, max-age=86400, s-maxage=2592000
+  CF-Cache-Tag: images
+
+/*.png
+  Cache-Control: public, max-age=86400, s-maxage=2592000
+  CF-Cache-Tag: images
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+  CF-Cache-Tag: vectors

@@ -1,4 +1,0 @@
-# Video data files - ignore individual channel files only
-*_videos.json
-!videos.json
-!.gitignore
