@@ -121,7 +121,7 @@ const lang = c.get('language'); // 'zh-TW' | 'en'
 ## Implementation Example
 
 ```typescript
-// backend/src/i18n/zh-tw.json
+// backend/src/i18n/zh-TW.json
 {
   "errors": {
     "INVALID_CREDENTIALS": "帳號或密碼錯誤",
@@ -156,7 +156,7 @@ const lang = c.get('language'); // 'zh-TW' | 'en'
 
 ```typescript
 // backend/src/utils/i18n.ts
-import zhTW from '../i18n/zh-tw.json';
+import zhTW from '../i18n/zh-TW.json';
 import en from '../i18n/en.json';
 
 const messages = { 'zh-TW': zhTW, 'en': en };
@@ -170,7 +170,7 @@ export function t(lang: string, key: string, params?: Record<string, string>): s
   }
   if (typeof value !== 'string') return key;
   if (params) {
-    return value.replace(/\{(\w+)\}/g, (_, k) => params[k] || `{${k}}`);
+    return value.replace(/\{(\w+)\}/g, (_, k) => params[k] ?? `{${k}}`);
   }
   return value;
 }

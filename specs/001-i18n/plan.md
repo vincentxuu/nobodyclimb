@@ -56,7 +56,7 @@ packages/i18n/                      # 新增：共享翻譯套件 (@nobodyclimb/
 ├── types.ts                        # IntlMessages 型別定義
 ├── constants.ts                    # SUPPORTED_LOCALES, DEFAULT_LOCALE
 └── locales/
-    ├── zh-tw/
+    ├── zh-TW/
     │   ├── common.json             # 通用：按鈕、標籤、格式
     │   ├── nav.json                # 導航列項目
     │   ├── auth.json               # 登入、註冊、密碼重設
@@ -90,7 +90,7 @@ apps/web/
 │           ├── admin/
 │           └── auth/
 ├── messages/                       # 新增：Web 專屬翻譯
-│   ├── zh-tw/
+│   ├── zh-TW/
 │   │   ├── metadata.json
 │   │   ├── biography.json
 │   │   ├── about.json
@@ -111,7 +111,7 @@ apps/mobile/
 │   └── i18n/                       # 新增：i18next 設定
 │       └── config.ts
 ├── locales/                        # 新增：Mobile 專屬翻譯
-│   ├── zh-tw/mobile.json
+│   ├── zh-TW/mobile.json
 │   └── en/mobile.json
 └── app/
     └── _layout.tsx                 # 修改：加入 I18nProvider
@@ -121,7 +121,7 @@ backend/
     ├── middleware/
     │   └── language.ts             # 新增：Hono language detector 設定
     ├── i18n/                       # 新增：後端翻譯
-    │   ├── zh-tw.json
+    │   ├── zh-TW.json              # 後端繁中翻譯
     │   └── en.json
     └── index.ts                    # 修改：掛載 language middleware
 ```
@@ -232,7 +232,7 @@ backend/
 |------|--------|------------|------------|
 | next-intl middleware 在 Cloudflare Workers 不相容 | High | Low | next-intl 支援 middleware-free 模式（cookie-based），Phase 1 即驗證 |
 | 路由結構改造導致大量檔案異動 | Medium | High | Git 的 `mv` 操作可追蹤；分 PR 進行 |
-| 翻譯 key 遺漏或不一致 | Medium | Medium | CI 腳本檢查 zh-tw/en JSON key 一致性 |
+| 翻譯 key 遺漏或不一致 | Medium | Medium | CI 腳本檢查 zh-TW/en JSON key 一致性 |
 | 英文翻譯品質 | Low | Medium | 第一版可接受機器翻譯品質，後續人工修正 |
 | Bundle size 增加 | Low | Low | next-intl 僅載入當前語系；RSC 翻譯不計入 client bundle |
 

@@ -157,7 +157,7 @@ export interface BiographyMessages {
   featured: string;
   readMore: string;
   questionPrompt: string;
-  sharYourStory: string;
+  shareYourStory: string;
   // Biography interaction
   likeButton: string;
   commentButton: string;
@@ -212,13 +212,20 @@ export default getRequestConfig(async ({ requestLocale }) => {
     locale = routing.defaultLocale;
   }
 
-  // Merge shared + web-specific messages
-  const sharedMessages = (await import(`@nobodyclimb/i18n/locales/${locale}`)).default;
-  const webMessages = (await import(`../../../messages/${locale}`)).default;
-
   return {
     locale,
-    messages: { ...sharedMessages, ...webMessages },
+    messages: {
+      // Shared namespaces
+      common: (await import(`@nobodyclimb/i18n/locales/${locale}/common.json`)).default,
+      nav: (await import(`@nobodyclimb/i18n/locales/${locale}/nav.json`)).default,
+      auth: (await import(`@nobodyclimb/i18n/locales/${locale}/auth.json`)).default,
+      crag: (await import(`@nobodyclimb/i18n/locales/${locale}/crag.json`)).default,
+      errors: (await import(`@nobodyclimb/i18n/locales/${locale}/errors.json`)).default,
+      // Web-specific namespaces
+      metadata: (await import(`../../../messages/${locale}/metadata.json`)).default,
+      biography: (await import(`../../../messages/${locale}/biography.json`)).default,
+      about: (await import(`../../../messages/${locale}/about.json`)).default,
+    },
   };
 });
 ```
@@ -231,38 +238,38 @@ export default getRequestConfig(async ({ requestLocale }) => {
 export interface BackendMessages {
   errors: {
     // Auth errors
-    invalidCredentials: string;
-    tokenExpired: string;
-    insufficientPermissions: string;
-    accountDisabled: string;
-    emailAlreadyExists: string;
+    INVALID_CREDENTIALS: string;
+    TOKEN_EXPIRED: string;
+    INSUFFICIENT_PERMISSIONS: string;
+    ACCOUNT_DISABLED: string;
+    EMAIL_ALREADY_EXISTS: string;
 
     // Validation errors
-    requiredField: string;     // "{field} is required" → "{field} 為必填欄位"
-    invalidFormat: string;     // "{field} format is invalid"
-    tooLong: string;           // "{field} exceeds {max} characters"
-    tooShort: string;          // "{field} must be at least {min} characters"
+    REQUIRED_FIELD: string;     // "{field} is required" → "{field} 為必填欄位"
+    INVALID_FORMAT: string;     // "{field} format is invalid"
+    TOO_LONG: string;           // "{field} exceeds {max} characters"
+    TOO_SHORT: string;          // "{field} must be at least {min} characters"
 
     // Resource errors
-    resourceNotFound: string;  // "{resource} not found"
-    resourceAlreadyExists: string;
-    operationFailed: string;
+    RESOURCE_NOT_FOUND: string;  // "{resource} not found"
+    RESOURCE_ALREADY_EXISTS: string;
+    OPERATION_FAILED: string;
 
     // Rate limiting
-    rateLimited: string;
-    tooManyRequests: string;
+    RATE_LIMITED: string;
+    TOO_MANY_REQUESTS: string;
   };
   success: {
-    created: string;
-    updated: string;
-    deleted: string;
+    CREATED: string;
+    UPDATED: string;
+    DELETED: string;
   };
 }
 ```
 
 ## Translation JSON Examples
 
-### Shared: `packages/i18n/locales/zh-tw/common.json`
+### Shared: `packages/i18n/locales/zh-TW/common.json`
 
 ```json
 {
@@ -304,7 +311,7 @@ export interface BackendMessages {
 }
 ```
 
-### Shared: `packages/i18n/locales/zh-tw/nav.json`
+### Shared: `packages/i18n/locales/zh-TW/nav.json`
 
 ```json
 {
@@ -359,7 +366,7 @@ N/A — i18n 不涉及狀態機。語系選擇為純靜態設定（cookie + URL 
 
 | Rule | Scope | Description |
 |------|-------|-------------|
-| All locale JSONs must have identical keys | CI check | `zh-tw/*.json` 和 `en/*.json` 的 key 結構必須一致 |
+| All locale JSONs must have identical keys | CI check | `zh-TW/*.json` 和 `en/*.json` 的 key 結構必須一致 |
 | No empty translation values | CI check | 翻譯值不可為空字串 |
 | ICU variable names must match across locales | CI check | `{name}` 在所有語系版本中必須出現 |
 | Locale URL prefix must be valid | Runtime | Middleware 只接受 `SUPPORTED_LOCALES` 中定義的語系 |

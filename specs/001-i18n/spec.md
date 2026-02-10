@@ -80,7 +80,7 @@ packages/i18n/
 ├── package.json
 ├── index.ts
 ├── locales/
-│   ├── zh-tw/
+│   ├── zh-TW/
 │   │   ├── common.json      # 通用：按鈕、標籤、日期
 │   │   ├── nav.json          # 導航列
 │   │   ├── auth.json         # 登入、註冊
@@ -95,7 +95,7 @@ packages/i18n/
 └── tsconfig.json
 
 apps/web/messages/
-├── zh-tw/
+├── zh-TW/
 │   ├── metadata.json         # SEO 標題、描述
 │   ├── biography.json        # 人物誌功能
 │   ├── about.json            # 關於頁面
@@ -107,7 +107,7 @@ apps/web/messages/
     └── admin.json
 
 apps/mobile/locales/
-├── zh-tw/mobile.json
+├── zh-TW/mobile.json
 └── en/mobile.json
 ```
 

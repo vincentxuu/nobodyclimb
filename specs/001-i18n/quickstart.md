@@ -32,12 +32,12 @@ pnpm init
 
 ### 新增翻譯字串
 
-1. 在 `packages/i18n/locales/zh-tw/<namespace>.json` 新增 key
+1. 在 `packages/i18n/locales/zh-TW/<namespace>.json` 新增 key
 2. 在 `packages/i18n/locales/en/<namespace>.json` 新增對應 key
 3. 兩邊 key 必須一致，否則 CI 會報錯
 
 ```json
-// packages/i18n/locales/zh-tw/common.json
+// packages/i18n/locales/zh-TW/common.json
 {
   "save": "儲存",
   "newKey": "新翻譯"     // ← 新增
@@ -116,14 +116,16 @@ export default getRequestConfig(async ({ requestLocale }) => {
   return {
     locale,
     messages: {
-      ...(await import(`@nobodyclimb/i18n/locales/${locale}/common.json`)).default,
-      ...(await import(`@nobodyclimb/i18n/locales/${locale}/nav.json`)).default,
-      ...(await import(`@nobodyclimb/i18n/locales/${locale}/auth.json`)).default,
-      ...(await import(`@nobodyclimb/i18n/locales/${locale}/crag.json`)).default,
-      ...(await import(`@nobodyclimb/i18n/locales/${locale}/errors.json`)).default,
-      ...(await import(`../../messages/${locale}/metadata.json`)).default,
-      ...(await import(`../../messages/${locale}/biography.json`)).default,
-      ...(await import(`../../messages/${locale}/about.json`)).default,
+      // Shared namespaces (from @nobodyclimb/i18n)
+      common: (await import(`@nobodyclimb/i18n/locales/${locale}/common.json`)).default,
+      nav: (await import(`@nobodyclimb/i18n/locales/${locale}/nav.json`)).default,
+      auth: (await import(`@nobodyclimb/i18n/locales/${locale}/auth.json`)).default,
+      crag: (await import(`@nobodyclimb/i18n/locales/${locale}/crag.json`)).default,
+      errors: (await import(`@nobodyclimb/i18n/locales/${locale}/errors.json`)).default,
+      // Web-specific namespaces
+      metadata: (await import(`../../messages/${locale}/metadata.json`)).default,
+      biography: (await import(`../../messages/${locale}/biography.json`)).default,
+      about: (await import(`../../messages/${locale}/about.json`)).default,
     },
   };
 });
@@ -266,13 +268,13 @@ import { initReactI18next } from 'react-i18next';
 import { getLocales } from 'expo-localization';
 
 // Import shared translations
-import zhTWCommon from '@nobodyclimb/i18n/locales/zh-tw/common.json';
-import zhTWNav from '@nobodyclimb/i18n/locales/zh-tw/nav.json';
+import zhTWCommon from '@nobodyclimb/i18n/locales/zh-TW/common.json';
+import zhTWNav from '@nobodyclimb/i18n/locales/zh-TW/nav.json';
 import enCommon from '@nobodyclimb/i18n/locales/en/common.json';
 import enNav from '@nobodyclimb/i18n/locales/en/nav.json';
 
 // Import mobile-specific translations
-import zhTWMobile from '../../locales/zh-tw/mobile.json';
+import zhTWMobile from '../../locales/zh-TW/mobile.json';
 import enMobile from '../../locales/en/mobile.json';
 
 const deviceLocale = getLocales()[0]?.languageTag ?? 'zh-TW';
@@ -430,7 +432,7 @@ const t = useTranslations('about');
 
 開發時確認：
 
-- [ ] 新增翻譯 key 時，zh-tw 和 en 都有對應值
+- [ ] 新增翻譯 key 時，zh-TW 和 en 都有對應值
 - [ ] 使用 `Link` from `@/i18n/navigation` 而非 `next/link`
 - [ ] Server Component 使用 `useTranslations()` / `getTranslations()`
 - [ ] Client Component 使用 `useTranslations()`
