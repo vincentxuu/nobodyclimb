@@ -38,7 +38,7 @@ export default function DesktopSearchBar() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="請輸入關鍵字"
-            className="h-[40px] w-[240px] rounded-[4px] bg-[#F5F5F5] px-4 py-3 font-['Noto_Sans_CJK_TC'] text-base font-normal leading-6 tracking-[0.01em] placeholder:text-[#B6B3B3] focus:outline-none"
+            className="h-[40px] w-[240px] rounded-[4px] bg-[#F5F5F5] px-4 py-3 font-['Noto_Sans_TC'] text-base font-normal leading-6 tracking-[0.01em] placeholder:text-[#B6B3B3] focus:outline-none"
             autoFocus
           />
           <button

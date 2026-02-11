@@ -2,9 +2,9 @@
 
 import React, { useCallback } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { UserCircle, FileText, Bookmark, Settings, Target, ImageIcon, BarChart3 } from 'lucide-react'
+import { UserCircle, FileText, Bookmark, Settings, Target, ImageIcon, BarChart3, MountainSnow } from 'lucide-react'
 
-// 所有導航項目（水平滾動）
+// 所有導航項目（水平滾動，與 ProfileSidebar 一致）
 const menuItems = [
   {
     name: '人物誌',
@@ -16,7 +16,16 @@ const menuItems = [
     href: '/profile/bucket-list',
     icon: Target,
   },
-
+  {
+    name: '成就',
+    href: '/profile/stats',
+    icon: BarChart3,
+  },
+  {
+    name: '攀爬紀錄',
+    href: '/profile/ascents',
+    icon: MountainSnow,
+  },
   {
     name: '文章',
     href: '/profile/articles',
@@ -26,11 +35,6 @@ const menuItems = [
     name: '照片',
     href: '/profile/photos',
     icon: ImageIcon,
-  },
-  {
-    name: '成就',
-    href: '/profile/stats',
-    icon: BarChart3,
   },
   {
     name: '收藏',

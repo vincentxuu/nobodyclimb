@@ -17,7 +17,7 @@ import {
 
 // 共用的選單項目樣式
 const menuItemBaseClass =
-  "cursor-pointer font-['Noto_Sans_CJK_TC'] text-sm font-medium leading-5 tracking-[0.01em] hover:bg-gray-100"
+  "cursor-pointer font-['Noto_Sans_TC'] text-sm font-medium leading-5 tracking-[0.01em] hover:bg-gray-100"
 const createMenuItemClass = `${menuItemBaseClass} px-4 py-3 text-[#3F3D3D]`
 const userMenuItemClass = `${menuItemBaseClass} px-8 py-3 text-[#3F3D3D]`
 const logoutMenuItemClass = `${menuItemBaseClass} px-8 py-3 text-[#D94A4A]`
@@ -47,7 +47,7 @@ export default function UserMenu() {
                 size="sm"
                 className="h-7 rounded-md border border-[#1B1A1A] px-2 font-medium text-[#1B1A1A] hover:bg-gray-100/80 md:h-8 md:px-3 lg:h-9 lg:px-4"
               >
-                <span className="font-['Noto_Sans_CJK_TC'] text-xs font-medium leading-5 tracking-[0.01em] md:text-sm">
+                <span className="font-['Noto_Sans_TC'] text-xs font-medium leading-5 tracking-[0.01em] md:text-sm">
                   創作
                 </span>
               </Button>
@@ -98,15 +98,27 @@ export default function UserMenu() {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className={userMenuItemClass}
-                onClick={() => router.push('/profile/photos')}
+                onClick={() => router.push('/profile/stats')}
               >
-                我的照片
+                我的成就
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className={userMenuItemClass}
+                onClick={() => router.push('/profile/ascents')}
+              >
+                攀爬紀錄
               </DropdownMenuItem>
               <DropdownMenuItem
                 className={userMenuItemClass}
                 onClick={() => router.push('/profile/articles')}
               >
                 我的文章
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className={userMenuItemClass}
+                onClick={() => router.push('/profile/photos')}
+              >
+                我的照片
               </DropdownMenuItem>
               <DropdownMenuItem
                 className={userMenuItemClass}
@@ -137,7 +149,7 @@ export default function UserMenu() {
             size="sm"
             className="h-7 rounded-md border border-[#1B1A1A] px-2 font-medium text-[#1B1A1A] hover:bg-gray-100/80 md:h-8 md:px-3 lg:h-9 lg:px-4"
           >
-            <span className="font-['Noto_Sans_CJK_TC'] text-xs font-medium leading-5 tracking-[0.01em] md:text-sm">
+            <span className="font-['Noto_Sans_TC'] text-xs font-medium leading-5 tracking-[0.01em] md:text-sm">
               登入
             </span>
           </Button>

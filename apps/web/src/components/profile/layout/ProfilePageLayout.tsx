@@ -14,7 +14,7 @@ export default function ProfilePageLayout({ children }: ProfilePageLayoutProps) 
     <div className="container mx-auto max-w-screen-xl px-4 md:px-6">
       <div className="flex flex-col md:flex-row md:space-x-6">
         {/* 側邊選單 - 在桌面版才顯示 */}
-        <div className="sticky top-6 hidden w-64 flex-shrink-0 self-start md:block">
+        <div className="sticky top-[86px] hidden w-64 flex-shrink-0 self-start md:block">
           <ProfileSidebar />
         </div>
 

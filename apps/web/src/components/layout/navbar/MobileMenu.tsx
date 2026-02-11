@@ -11,13 +11,16 @@ import { generateAvatarElement, DEFAULT_AVATARS } from '@/components/shared/avat
 import { AvatarWithFallback } from '@/components/ui/avatar-with-fallback'
 import { Button } from '@/components/ui/button'
 
-// 用戶選單項目
+// 用戶選單項目（與 ProfileSidebar 一致）
 const userMenuItems = [
   { label: '人物誌', href: '/profile' },
   { label: '清單', href: '/profile/bucket-list' },
+  { label: '成就', href: '/profile/stats' },
+  { label: '攀爬紀錄', href: '/profile/ascents' },
   { label: '文章', href: '/profile/articles' },
   { label: '照片', href: '/profile/photos' },
-  { label: '收藏', href: '/profile/bookmarks' }
+  { label: '收藏', href: '/profile/bookmarks' },
+  { label: '設定', href: '/profile/settings' },
 ]
 
 /**
@@ -81,7 +84,7 @@ export default function MobileMenu() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed right-0 top-0 z-[10001] h-full w-[280px] bg-white shadow-xl md:hidden"
+            className="fixed right-0 top-0 z-[10001] h-full w-[280px] max-w-[80vw] bg-white shadow-xl md:hidden"
           >
             {/* 選單標題和關閉按鈕 */}
             <div className="flex flex-shrink-0 items-center justify-between bg-white px-3 py-2 xs:p-3">
