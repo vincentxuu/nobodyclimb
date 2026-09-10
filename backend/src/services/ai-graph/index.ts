@@ -2,8 +2,14 @@ import type { AIAskResponse } from '../../types'
 import { createLangfuseClient, createTrace, flushLangfuse } from '../../utils/langfuse'
 import { PipelineContext } from '../pipeline/types'
 import { agenticGraph } from './graphs/agentic'
+import { autoGraph } from './graphs/auto'
 import { baselineGraph } from './graphs/baseline'
+import { correctiveGraph } from './graphs/corrective'
+import { customGraph } from './graphs/custom'
+import { deepGraph } from './graphs/deep'
+import { fastGraph } from './graphs/fast'
 import { planExecuteGraph } from './graphs/plan-execute'
+import { thoroughGraph } from './graphs/thorough'
 import { createProviders, type ProviderName } from './providers'
 import { GraphState } from './state'
 
@@ -231,18 +237,23 @@ export async function runAIGraph(ctx: PipelineContext): Promise<PipelineContext>
     videoCountMap: ctx.videoCountMap ? Object.fromEntries(ctx.videoCountMap) : undefined,
     latestVideoMap: ctx.latestVideoMap ? Object.fromEntries(ctx.latestVideoMap) : undefined,
     climbed_route_ids: ctx.climbed_route_ids ?? null,
+    ragTools: ctx.request.rag_tools,
   } as unknown as GraphState
 
   // 根據策略選擇 graph
   const strategy = ctx.pipelineConfig.rag_strategy ?? 'baseline'
-  let graph: AnyGraph
-  if (strategy === 'agentic') {
-    graph = agenticGraph as unknown as AnyGraph
-  } else if (strategy === 'plan-execute') {
-    graph = planExecuteGraph as unknown as AnyGraph
-  } else {
-    graph = baselineGraph as unknown as AnyGraph
+  const graphMap: Record<string, AnyGraph> = {
+    auto: autoGraph as unknown as AnyGraph,
+    fast: fastGraph as unknown as AnyGraph,
+    thorough: thoroughGraph as unknown as AnyGraph,
+    corrective: correctiveGraph as unknown as AnyGraph,
+    deep: deepGraph as unknown as AnyGraph,
+    custom: customGraph as unknown as AnyGraph,
+    baseline: baselineGraph as unknown as AnyGraph,
+    agentic: agenticGraph as unknown as AnyGraph,
+    'plan-execute': planExecuteGraph as unknown as AnyGraph,
   }
+  const graph = graphMap[strategy] ?? (baselineGraph as unknown as AnyGraph)
 
   const finalState = await graph.invoke(initialState, {
     recursionLimit: 20, // 防止無限迴圈

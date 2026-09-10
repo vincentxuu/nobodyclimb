@@ -145,6 +145,8 @@ export const GraphStateAnnotation = Annotation.Root({
   llmProvider: Annotation<AIProvider | undefined>(),
   /** 注入的 embedding provider，embedding node 透過此介面呼叫 embed */
   embeddingProvider: Annotation<AIProvider | undefined>(),
+  /** custom 模式的工具開關 */
+  ragTools: Annotation<import('../../types').RagToolToggles | undefined>(),
 })
 
 export type GraphState = typeof GraphStateAnnotation.State

@@ -3,18 +3,11 @@ import { crossEncoderNode } from '../nodes/cross-encoder'
 import { embeddingNode } from '../nodes/embedding'
 import { filterBuildNode } from '../nodes/filter-build'
 import { hybridSearchNode } from '../nodes/hybrid-search'
-import { hydeNode } from '../nodes/hyde'
-import { judgeNode } from '../nodes/judge'
 import { lexicalFallbackNode } from '../nodes/lexical-fallback'
 import { llmGenerationNode } from '../nodes/llm-generation'
 import { memoryExtractorNode } from '../nodes/memory-extractor'
-import { mmrNode } from '../nodes/mmr'
-import { multiQueryNode } from '../nodes/multi-query'
 import { multiSourceRetrievalNode } from '../nodes/multi-source-retrieval'
-import { queryRewriteNode } from '../nodes/query-rewrite'
-import { popularityRerankNode } from '../nodes/popularity-rerank'
 import { retrievalFallbackNode } from '../nodes/retrieval-fallback'
-import { selfReflectionNode } from '../nodes/self-reflection'
 import { semanticCacheNode } from '../nodes/semantic-cache'
 import { textNormalizeNode } from '../nodes/text-normalize'
 import { textToSqlNode } from '../nodes/text-to-sql'
@@ -22,17 +15,22 @@ import { toolSelectionNode } from '../nodes/tool-selection'
 import {
   routeAfterEmbedding,
   routeAfterHybridSearch,
-  routeAfterJudge,
   routeAfterMultiSourceRetrieval,
   routeAfterRetrievalFallback,
-  routeAfterSelfReflection,
   routeAfterSemanticCache,
   routeAfterTextToSql,
   routeAfterToolSelection,
 } from '../routing'
 import { GraphStateAnnotation } from '../state'
 
-export function buildBaselineGraph() {
+/**
+ * Fast graph — 低延遲、低成本模式（1-2s，1 次 LLM 呼叫）
+ *
+ * 跳過：HyDE, queryExpansion, MMR, domainRerank, judge, selfReflection, queryRewrite
+ * 保留：semanticCache, textNormalize, intentClassifier, metadataFilter,
+ *       queryEmbedding, hybridRetrieval, semanticRerank, responseGeneration, conversationMemory
+ */
+export function buildFastGraph() {
   const graph = new StateGraph(GraphStateAnnotation)
     .addNode('semanticCache', semanticCacheNode)
     .addNode('textNormalize', textNormalizeNode)
@@ -42,17 +40,10 @@ export function buildBaselineGraph() {
     .addNode('filterBuild', filterBuildNode)
     .addNode('embedding', embeddingNode)
     .addNode('lexicalFallback', lexicalFallbackNode)
-    .addNode('hyde', hydeNode)
-    .addNode('multiQuery', multiQueryNode)
     .addNode('hybridSearch', hybridSearchNode)
     .addNode('retrievalFallback', retrievalFallbackNode)
-    .addNode('queryRewrite', queryRewriteNode)
     .addNode('crossEncoder', crossEncoderNode)
-    .addNode('mmr', mmrNode)
-    .addNode('popularityRerank', popularityRerankNode)
     .addNode('llmGeneration', llmGenerationNode)
-    .addNode('judge', judgeNode)
-    .addNode('selfReflection', selfReflectionNode)
     .addNode('memoryExtractor', memoryExtractorNode)
 
   graph.addEdge(START, 'semanticCache')
@@ -79,13 +70,11 @@ export function buildBaselineGraph() {
   })
   graph.addEdge('filterBuild', 'embedding')
   graph.addConditionalEdges('embedding', routeAfterEmbedding, {
-    hyde: 'hyde',
+    hyde: 'hybridSearch', // Fast: 跳過 HyDE，直接搜尋
     lexicalFallback: 'lexicalFallback',
     hybridSearch: 'hybridSearch',
   })
   graph.addEdge('lexicalFallback', 'crossEncoder')
-  graph.addEdge('hyde', 'multiQuery')
-  graph.addEdge('multiQuery', 'hybridSearch')
   graph.addConditionalEdges('hybridSearch', routeAfterHybridSearch, {
     retrievalFallback: 'retrievalFallback',
     crossEncoder: 'crossEncoder',
@@ -94,22 +83,13 @@ export function buildBaselineGraph() {
     filterBuild: 'filterBuild',
     crossEncoder: 'crossEncoder',
   })
-  graph.addEdge('crossEncoder', 'mmr')
-  graph.addEdge('mmr', 'popularityRerank')
-  graph.addEdge('popularityRerank', 'llmGeneration')
-  graph.addEdge('llmGeneration', 'judge')
-  graph.addConditionalEdges('judge', routeAfterJudge, {
-    selfReflection: 'selfReflection',
-    memoryExtractor: 'memoryExtractor',
-  })
-  graph.addConditionalEdges('selfReflection', routeAfterSelfReflection, {
-    queryRewrite: 'queryRewrite',
-    llmGeneration: 'llmGeneration',
-  })
-  graph.addEdge('queryRewrite', 'embedding')
+  // Fast: crossEncoder 直接到 llmGeneration（跳過 MMR + domainRerank）
+  graph.addEdge('crossEncoder', 'llmGeneration')
+  // Fast: llmGeneration 直接到 memoryExtractor（跳過 judge + selfReflection）
+  graph.addEdge('llmGeneration', 'memoryExtractor')
   graph.addEdge('memoryExtractor', END)
 
   return graph.compile()
 }
 
-export const baselineGraph = buildBaselineGraph()
+export const fastGraph = buildFastGraph()
