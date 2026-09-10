@@ -81,20 +81,34 @@ pnpm format       # Biome formatting
 
 ## AI climbing assistant
 
-The platform ships with a built-in AI assistant for climbing Q&A and recommendations:
+The platform ships with a built-in AI assistant with a modular RAG toolbox (42 pluggable components) and multiple switchable strategies:
 
-- **LangGraph engine** — state-graph-driven AI pipeline supporting Baseline / Adaptive / Agentic / Plan-and-Execute strategies
+### RAG strategies
+
+| Strategy | Latency | Description |
+| --- | --- | --- |
+| **Fast** | 1-2s | Minimal pipeline — skips HyDE, query expansion, judge, and self-reflection |
+| **Thorough** | 3-6s | Full pipeline with HyDE, multi-query, three-layer reranking, and quality loop |
+| **Corrective** | 4-8s | Retrieval quality judge after reranking; rewrites query and retries on low recall |
+| **Deep** | 6-12s | Decomposes complex questions into sub-queries, executes in parallel, synthesizes |
+| **Custom** | varies | Toggle each of 12 RAG tools on/off for precise A/B testing |
+| **Auto** | varies | LLM dynamically routes to the best strategy per query |
+
+### Key capabilities
+
+- **LangGraph engine** — state-graph-driven AI pipeline with modular node architecture
 - **Multi-provider** — abstraction layer to switch between Cloudflare Workers AI, OpenAI, Anthropic, and Google models
 - **Langfuse observability** — end-to-end trace / span / generation tracking with cost and latency visualization
-- **RAG Q&A** — combines vector and full-text search for natural-language answers about crags, routes, and climbing knowledge
-- **Adaptive RAG** — classifies query types automatically and falls back to full-text search when relevance is low
-- **Agentic multi-step RAG** — complex questions trigger multi-round search (ReAct pattern) driven by LLM decisions
+- **Hybrid retrieval** — combines vector search (BGE-M3) + BM25 full-text + RRF fusion with CRAG fallback
+- **Three-layer reranking** — cross-encoder (semantic) → MMR (diversity) → popularity (domain-specific)
+- **Query rewrite** — quality-feedback-driven query rewriting on retry instead of repeating the same search
 - **SSE streaming** — token-by-token responses for a better experience
 - **Personalization** — answers adapt to your ascent history and preferences, with cross-session memory
 - **Route recommendations** — personalized route suggestions triggered after each completed ascent
 - **Safety guardrails** — input/output guardrails and token budget management
 - **Quota system** — per-level daily limits (both request count and tokens)
-- **Admin dashboard** — AI log queries, prompt settings, knowledge base management, cost tracking and usage stats, LangGraph engine switching
+- **RAG evaluation** — 60 golden test cases, multi-strategy A/B comparison, LLM-as-Judge scoring, sub-group analysis
+- **Admin dashboard** — AI settings, RAG tool toggles, log queries, prompt settings, knowledge base management, cost tracking
 
 ## How it works
 
