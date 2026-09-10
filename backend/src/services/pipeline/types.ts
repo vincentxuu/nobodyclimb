@@ -131,6 +131,8 @@ export interface PipelineTokenBreakdown {
   self_reflection_regen?: StageTokenUsage
   judge?: StageTokenUsage
   judge_2nd?: StageTokenUsage
+  query_rewrite?: StageTokenUsage
+  retrieval_quality_judge?: StageTokenUsage
 }
 
 // Pipeline 設定（從 ai_config 讀取）

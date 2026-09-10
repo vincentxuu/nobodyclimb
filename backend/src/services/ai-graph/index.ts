@@ -2,6 +2,7 @@ import type { AIAskResponse } from '../../types'
 import { createLangfuseClient, createTrace, flushLangfuse } from '../../utils/langfuse'
 import { PipelineContext } from '../pipeline/types'
 import { agenticGraph } from './graphs/agentic'
+import { autoGraph } from './graphs/auto'
 import { baselineGraph } from './graphs/baseline'
 import { planExecuteGraph } from './graphs/plan-execute'
 import { createProviders, type ProviderName } from './providers'
@@ -236,7 +237,9 @@ export async function runAIGraph(ctx: PipelineContext): Promise<PipelineContext>
   // 根據策略選擇 graph
   const strategy = ctx.pipelineConfig.rag_strategy ?? 'baseline'
   let graph: AnyGraph
-  if (strategy === 'agentic') {
+  if (strategy === 'auto') {
+    graph = autoGraph as unknown as AnyGraph
+  } else if (strategy === 'agentic') {
     graph = agenticGraph as unknown as AnyGraph
   } else if (strategy === 'plan-execute') {
     graph = planExecuteGraph as unknown as AnyGraph

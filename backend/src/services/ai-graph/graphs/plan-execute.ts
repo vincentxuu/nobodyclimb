@@ -6,6 +6,7 @@ import { memoryExtractorNode } from '../nodes/memory-extractor'
 import { planningNode } from '../nodes/planning'
 import { selfReflectionNode } from '../nodes/self-reflection'
 import { semanticCacheNode } from '../nodes/semantic-cache'
+import { textNormalizeNode } from '../nodes/text-normalize'
 import { synthesisNode } from '../nodes/synthesis'
 import { routeAfterJudge, routeAfterSelfReflection, routeAfterSemanticCache } from '../routing'
 import { GraphState, GraphStateAnnotation } from '../state'
@@ -27,6 +28,7 @@ function dispatchPlanSteps(state: GraphState): Send[] | string {
 export function buildPlanExecuteGraph() {
   const graph = new StateGraph(GraphStateAnnotation)
     .addNode('semanticCache', semanticCacheNode)
+    .addNode('textNormalize', textNormalizeNode)
     .addNode('planning', planningNode)
     .addNode('executePlanStep', executePlanStepNode)
     .addNode('synthesis', synthesisNode)
@@ -38,8 +40,9 @@ export function buildPlanExecuteGraph() {
   graph.addEdge(START, 'semanticCache')
   graph.addConditionalEdges('semanticCache', routeAfterSemanticCache, {
     END,
-    toolSelection: 'planning',
+    toolSelection: 'textNormalize',
   })
+  graph.addEdge('textNormalize', 'planning')
   graph.addConditionalEdges('planning', dispatchPlanSteps, ['executePlanStep', 'synthesis'])
   graph.addEdge('executePlanStep', 'synthesis')
   graph.addEdge('synthesis', 'llmGeneration')
@@ -49,7 +52,7 @@ export function buildPlanExecuteGraph() {
     memoryExtractor: 'memoryExtractor',
   })
   graph.addConditionalEdges('selfReflection', routeAfterSelfReflection, {
-    hybridSearch: 'synthesis', // re-synthesize on self-reflection
+    queryRewrite: 'synthesis', // plan-execute: re-synthesize instead of queryRewrite
     llmGeneration: 'llmGeneration',
   })
   graph.addEdge('memoryExtractor', END)
