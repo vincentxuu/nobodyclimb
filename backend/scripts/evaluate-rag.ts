@@ -107,6 +107,7 @@ function parseArgs(): {
   category?: string
   strategy?: string
   ci: boolean
+  llmJudge: boolean
   delay: number
   output: string
   baseline?: string
@@ -123,6 +124,8 @@ function parseArgs(): {
       parsed.ci = true
     } else if (arg === '--red-team') {
       parsed.redTeam = true
+    } else if (arg === '--llm-judge') {
+      parsed.llmJudge = true
     } else if (arg.startsWith('--') && i + 1 < args.length) {
       parsed[arg.slice(2)] = args[++i]
     }
@@ -141,6 +144,7 @@ function parseArgs(): {
     category: parsed.category as string | undefined,
     strategy: parsed.strategy as string | undefined,
     ci: parsed.ci === true,
+    llmJudge: parsed.llmJudge === true,
     delay: parseInt(parsed.delay as string, 10) || 1000,
     output: (parsed.output as string) || path.resolve(__dirname, '../tests/evaluation-report.json'),
     baseline: parsed.baseline as string | undefined,
@@ -721,6 +725,70 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
     if (i < cases.length - 1) await sleep(args.delay)
   }
 
+  // ---- LLM-as-Judge pass (optional) ----
+  interface LlmJudgeScores {
+    faithfulness: { avg: number | null; scores: Array<{ id: string; score: number; reason: string }> }
+    relevance: { avg: number | null; scores: Array<{ id: string; score: number; reason: string }> }
+    correctness: { avg: number | null; scores: Array<{ id: string; score: number; reason: string }> }
+  }
+  let llmJudgeScores: LlmJudgeScores | undefined
+
+  if (args.llmJudge) {
+    console.log('\n  Running LLM-as-Judge evaluation...')
+    const caseMap = new Map(cases.map((c) => [c.id, c]))
+    const successResults = results.filter((r) => r.status !== 'error' && r.details.answer)
+
+    const faithScores: Array<{ id: string; score: number; reason: string }> = []
+    const relScores: Array<{ id: string; score: number; reason: string }> = []
+    const corrScores: Array<{ id: string; score: number; reason: string }> = []
+
+    for (let j = 0; j < successResults.length; j++) {
+      const r = successResults[j]
+      const tc = caseMap.get(r.id)
+      if (!tc) continue
+      const answer = (r.details.answer as string) ?? ''
+      process.stdout.write(`  [${j + 1}/${successResults.length}] Judging ${r.id}...`)
+
+      const fPrompt = FAITHFULNESS_JUDGE_PROMPT
+        .replace('{query}', tc.query)
+        .replace('{context}', '[context from pipeline]')
+        .replace('{answer}', answer)
+      const fResult = await llmJudge(args.apiUrl, args.token, fPrompt, args.cfAccessClientId, args.cfAccessClientSecret)
+      if (fResult) faithScores.push({ id: r.id, ...fResult })
+
+      const rPrompt = RELEVANCE_JUDGE_PROMPT
+        .replace('{query}', tc.query)
+        .replace('{answer}', answer)
+      const rResult = await llmJudge(args.apiUrl, args.token, rPrompt, args.cfAccessClientId, args.cfAccessClientSecret)
+      if (rResult) relScores.push({ id: r.id, ...rResult })
+
+      if (tc.ground_truth_answer) {
+        const cPrompt = CORRECTNESS_JUDGE_PROMPT
+          .replace('{query}', tc.query)
+          .replace('{answer}', answer)
+          .replace('{ground_truth}', tc.ground_truth_answer)
+        const cResult = await llmJudge(args.apiUrl, args.token, cPrompt, args.cfAccessClientId, args.cfAccessClientSecret)
+        if (cResult) corrScores.push({ id: r.id, ...cResult })
+      }
+
+      console.log(' done')
+      await sleep(args.delay)
+    }
+
+    const avg = (arr: Array<{ score: number }>) =>
+      arr.length > 0 ? arr.reduce((a, b) => a + b.score, 0) / arr.length : null
+
+    llmJudgeScores = {
+      faithfulness: { avg: avg(faithScores), scores: faithScores },
+      relevance: { avg: avg(relScores), scores: relScores },
+      correctness: { avg: avg(corrScores), scores: corrScores },
+    }
+
+    console.log(`  Faithfulness: ${llmJudgeScores.faithfulness.avg?.toFixed(3) ?? 'N/A'}`)
+    console.log(`  Relevance: ${llmJudgeScores.relevance.avg?.toFixed(3) ?? 'N/A'}`)
+    console.log(`  Correctness: ${llmJudgeScores.correctness.avg?.toFixed(3) ?? 'N/A'}`)
+  }
+
   // Calculate metrics
   const metrics: MetricsResult = {
     tool_accuracy: calcToolAccuracy(results),
@@ -777,6 +845,7 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
     sub_groups: calcSubGroupMetrics(results, cases),
     retrieval: calcRetrievalMetrics(results),
     error_distribution: calcErrorDistribution(results),
+    ...(llmJudgeScores ? { llm_judge: llmJudgeScores } : {}),
   }
 
   // Write JSON report

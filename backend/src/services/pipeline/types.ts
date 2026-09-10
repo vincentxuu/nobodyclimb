@@ -205,6 +205,7 @@ export interface PipelineConfig {
   llm_provider?: 'cloudflare' | 'openai' | 'anthropic' | 'google'
   embedding_provider?: 'cloudflare' | 'openai' | 'google'
   use_langgraph_engine?: boolean
+  rag_tools_default?: import('../../types').RagToolToggles
 }
 
 // 檢索方法

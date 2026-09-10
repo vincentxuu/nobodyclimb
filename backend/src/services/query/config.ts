@@ -121,6 +121,21 @@ export async function loadPipelineConfig(db: D1Database): Promise<PipelineConfig
     tool_confidence_threshold: num(cfg['tool_confidence_threshold'], 0.7, 0, 1),
     // LangGraph 引擎
     use_langgraph_engine: cfg['use_langgraph_engine'] === '1',
+    // RAG 工具預設開關（custom 模式用）
+    rag_tools_default: {
+      textNormalize: cfg['rag_tool_textNormalize'] !== '0',
+      hyde: cfg['rag_tool_hyde'] !== '0',
+      queryExpansion: cfg['rag_tool_queryExpansion'] !== '0',
+      semanticRerank: cfg['rag_tool_semanticRerank'] !== '0',
+      diversityFilter: cfg['rag_tool_diversityFilter'] !== '0',
+      domainRerank: cfg['rag_tool_domainRerank'] !== '0',
+      responseQualityJudge: cfg['rag_tool_responseQualityJudge'] !== '0',
+      retrievalQualityJudge: cfg['rag_tool_retrievalQualityJudge'] === '1',
+      generationRetry: cfg['rag_tool_generationRetry'] !== '0',
+      queryRewrite: cfg['rag_tool_queryRewrite'] !== '0',
+      contextCompression: cfg['rag_tool_contextCompression'] === '1',
+      conversationMemory: cfg['rag_tool_conversationMemory'] !== '0',
+    },
   }
 }
 

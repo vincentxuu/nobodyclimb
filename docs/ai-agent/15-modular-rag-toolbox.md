@@ -311,6 +311,73 @@ auto 不是第七套策略，而是在 graph 選擇層（`strategyRouter`）路�
 
 ---
 
+## Custom 模式
+
+`rag_strategy: "custom"` 搭配 `rag_tools` 物件，可逐個開關 12 個工具：
+
+```json
+{
+  "query": "...",
+  "rag_strategy": "custom",
+  "rag_tools": {
+    "textNormalize": true,
+    "hyde": false,
+    "queryExpansion": false,
+    "semanticRerank": true,
+    "diversityFilter": true,
+    "domainRerank": true,
+    "responseQualityJudge": true,
+    "retrievalQualityJudge": false,
+    "generationRetry": false,
+    "queryRewrite": false,
+    "contextCompression": false,
+    "conversationMemory": true
+  }
+}
+```
+
+未設定的工具預設開啟。只有明確 `false` 才跳過。實作機制是 `withToggle()` 包裝器（`shared/tool-toggle.ts`），graph 拓撲不變，關掉的節點返回空 state。
+
+---
+
+## Eval 體系
+
+### 指令用法
+
+```bash
+# 基本 eval
+tsx evaluate-rag.ts --api-url <url> --token <jwt>
+
+# 指定策略
+tsx evaluate-rag.ts --api-url <url> --token <jwt> --strategy fast --output report-fast.json
+
+# 加 LLM-as-Judge（較慢，每題多 3 次 LLM 呼叫）
+tsx evaluate-rag.ts --api-url <url> --token <jwt> --strategy thorough --llm-judge --output report-thorough.json
+
+# 多策略比較
+tsx compare-strategies.ts report-fast.json report-thorough.json report-corrective.json
+```
+
+### Report 結構
+
+| 區塊 | 內容 |
+|------|------|
+| `metrics` | tool_accuracy, faithfulness, answer_relevancy, recall@5, filter_accuracy, success_rate |
+| `performance` | latency avg/p50/p95, token avg/total |
+| `sub_groups` | 按 category（simple/complex/GK/edge-case）分別報每個指標 |
+| `retrieval` | avg candidates, paths, bm25_only/crag_fallback/reranker_used 計數 |
+| `error_distribution` | retrieval_miss / ranking_miss / generation_miss / tool_miss 分類 |
+| `llm_judge`（--llm-judge） | faithfulness/relevance/correctness 的獨立 LLM 評分 |
+
+### Golden Test Set（v1.1.0）
+
+- 60 題，4 categories（simple 22 / complex 21 / GK 11 / edge-case 6）
+- CI 標記 20 題（每 category ≥ 5）
+- 17 題有 ground_truth_answer（支援 Correctness eval）
+- 待補：剩餘 43 題 ground_truth_answer、全部 expected_source_ids
+
+---
+
 ## 參考文章
 
 本設計基於以下 quidproquo 文章的研究結論：
