@@ -4,7 +4,9 @@ import { PipelineContext } from '../pipeline/types'
 import { agenticGraph } from './graphs/agentic'
 import { autoGraph } from './graphs/auto'
 import { baselineGraph } from './graphs/baseline'
+import { fastGraph } from './graphs/fast'
 import { planExecuteGraph } from './graphs/plan-execute'
+import { thoroughGraph } from './graphs/thorough'
 import { createProviders, type ProviderName } from './providers'
 import { GraphState } from './state'
 
@@ -236,16 +238,15 @@ export async function runAIGraph(ctx: PipelineContext): Promise<PipelineContext>
 
   // 根據策略選擇 graph
   const strategy = ctx.pipelineConfig.rag_strategy ?? 'baseline'
-  let graph: AnyGraph
-  if (strategy === 'auto') {
-    graph = autoGraph as unknown as AnyGraph
-  } else if (strategy === 'agentic') {
-    graph = agenticGraph as unknown as AnyGraph
-  } else if (strategy === 'plan-execute') {
-    graph = planExecuteGraph as unknown as AnyGraph
-  } else {
-    graph = baselineGraph as unknown as AnyGraph
+  const graphMap: Record<string, AnyGraph> = {
+    auto: autoGraph as unknown as AnyGraph,
+    fast: fastGraph as unknown as AnyGraph,
+    thorough: thoroughGraph as unknown as AnyGraph,
+    baseline: baselineGraph as unknown as AnyGraph,
+    agentic: agenticGraph as unknown as AnyGraph,
+    'plan-execute': planExecuteGraph as unknown as AnyGraph,
   }
+  const graph = graphMap[strategy] ?? (baselineGraph as unknown as AnyGraph)
 
   const finalState = await graph.invoke(initialState, {
     recursionLimit: 20, // 防止無限迴圈
