@@ -133,6 +133,7 @@ export interface PipelineTokenBreakdown {
   judge_2nd?: StageTokenUsage
   query_rewrite?: StageTokenUsage
   retrieval_quality_judge?: StageTokenUsage
+  context_compression?: StageTokenUsage
 }
 
 // Pipeline 設定（從 ai_config 讀取）

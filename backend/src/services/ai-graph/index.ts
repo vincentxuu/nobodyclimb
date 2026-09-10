@@ -4,6 +4,8 @@ import { PipelineContext } from '../pipeline/types'
 import { agenticGraph } from './graphs/agentic'
 import { autoGraph } from './graphs/auto'
 import { baselineGraph } from './graphs/baseline'
+import { correctiveGraph } from './graphs/corrective'
+import { deepGraph } from './graphs/deep'
 import { fastGraph } from './graphs/fast'
 import { planExecuteGraph } from './graphs/plan-execute'
 import { thoroughGraph } from './graphs/thorough'
@@ -242,6 +244,8 @@ export async function runAIGraph(ctx: PipelineContext): Promise<PipelineContext>
     auto: autoGraph as unknown as AnyGraph,
     fast: fastGraph as unknown as AnyGraph,
     thorough: thoroughGraph as unknown as AnyGraph,
+    corrective: correctiveGraph as unknown as AnyGraph,
+    deep: deepGraph as unknown as AnyGraph,
     baseline: baselineGraph as unknown as AnyGraph,
     agentic: agenticGraph as unknown as AnyGraph,
     'plan-execute': planExecuteGraph as unknown as AnyGraph,

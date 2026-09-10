@@ -89,6 +89,26 @@ export function routeAfterSelfReflection(state: GraphState): 'queryRewrite' | 'l
   return 'llmGeneration'
 }
 
+// ---- Corrective Strategy ----
+
+/** retrievalQualityJudge 後：recall 不足且未超過 retry 上限則走 queryRewrite 重搜 */
+export function routeAfterRetrievalQualityJudge(
+  state: GraphState
+): 'queryRewrite' | 'llmGeneration' {
+  const trace = state.trace?.retrieval_quality as {
+    recall_sufficient?: boolean
+    skipped?: boolean
+  } | undefined
+  const retryCount = state.loopCount ?? 0
+  const maxRetries = 2
+
+  if (trace?.skipped) return 'llmGeneration'
+  if (trace?.recall_sufficient !== false) return 'llmGeneration'
+  if (retryCount >= maxRetries) return 'llmGeneration'
+
+  return 'queryRewrite'
+}
+
 // ---- Auto Strategy Routing ----
 
 /** toolSelection 後依 strategyHint 分流到不同策略路徑 */
