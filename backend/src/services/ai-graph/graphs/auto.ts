@@ -72,10 +72,6 @@ export function buildAutoGraph() {
     .addNode('embeddingAgentic', embeddingNode)
     .addNode('agenticDecision', agenticDecisionNode)
     .addNode('agenticRetrieve', agenticRetrieveNode)
-    .addNode('hybridSearchAgentic', hybridSearchNode)
-    .addNode('crossEncoderAgentic', crossEncoderNode)
-    .addNode('mmrAgentic', mmrNode)
-    .addNode('popularityRerankAgentic', popularityRerankNode)
     // Plan-execute path
     .addNode('planning', planningNode)
     .addNode('executePlanStep', executePlanStepNode)
@@ -152,12 +148,6 @@ export function buildAutoGraph() {
     agenticDecision: 'agenticDecision',
     llmGeneration: 'llmGeneration',
   })
-  // Agentic self-reflection loopback goes through rerank
-  graph.addEdge('hybridSearchAgentic', 'crossEncoderAgentic')
-  graph.addEdge('crossEncoderAgentic', 'mmrAgentic')
-  graph.addEdge('mmrAgentic', 'popularityRerankAgentic')
-  graph.addEdge('popularityRerankAgentic', 'agenticDecision')
-
   // ---- Plan-execute path ----
   graph.addConditionalEdges('planning', dispatchPlanSteps, ['executePlanStep', 'synthesis'])
   graph.addEdge('executePlanStep', 'synthesis')
