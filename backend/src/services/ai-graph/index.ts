@@ -237,7 +237,7 @@ export async function runAIGraph(ctx: PipelineContext): Promise<PipelineContext>
     videoCountMap: ctx.videoCountMap ? Object.fromEntries(ctx.videoCountMap) : undefined,
     latestVideoMap: ctx.latestVideoMap ? Object.fromEntries(ctx.latestVideoMap) : undefined,
     climbed_route_ids: ctx.climbed_route_ids ?? null,
-    ragTools: ctx.request.rag_tools,
+    ragTools: ctx.request.rag_tools ?? ctx.pipelineConfig.rag_tools_default,
   } as unknown as GraphState
 
   // 根據策略選擇 graph

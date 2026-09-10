@@ -359,6 +359,132 @@ const TABS: TabConfig[] = [
         ],
       },
       {
+        title: 'RAG 工具開關（Custom 模式）',
+        desc: 'rag_strategy = custom 時的預設工具開關。未設定的工具預設開啟，明確設 0 才跳過。也可透過 API request body 的 rag_tools 逐次覆寫',
+        fields: [
+          {
+            key: 'rag_tool_textNormalize',
+            label: '繁簡正規化',
+            placeholder: '1',
+            hint: '統一繁簡異體字，解決 embedding 偏差（textNormalize）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+          {
+            key: 'rag_tool_hyde',
+            label: 'HyDE',
+            placeholder: '1',
+            hint: '假設性文件生成，擴展搜尋範圍（hyde）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+          {
+            key: 'rag_tool_queryExpansion',
+            label: '查詢擴展',
+            placeholder: '1',
+            hint: '多角度改寫查詢（queryExpansion / multiQuery）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+          {
+            key: 'rag_tool_semanticRerank',
+            label: '語意重排序',
+            placeholder: '1',
+            hint: 'Cross-encoder 精排（semanticRerank）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+          {
+            key: 'rag_tool_diversityFilter',
+            label: '多樣性過濾',
+            placeholder: '1',
+            hint: 'MMR 去重（diversityFilter）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+          {
+            key: 'rag_tool_domainRerank',
+            label: '領域重排序',
+            placeholder: '1',
+            hint: '影片數加權 + 已完攀排除（domainRerank）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+          {
+            key: 'rag_tool_responseQualityJudge',
+            label: '回應品質評估',
+            placeholder: '1',
+            hint: 'Groundedness + Quality 評分（responseQualityJudge）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+          {
+            key: 'rag_tool_retrievalQualityJudge',
+            label: '檢索品質評估',
+            placeholder: '0',
+            hint: '檢索後評估 recall 是否足夠（retrievalQualityJudge，Corrective 模式專用）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+          {
+            key: 'rag_tool_generationRetry',
+            label: '生成重試',
+            placeholder: '1',
+            hint: '品質不足時改寫 query 或重新生成（generationRetry / selfReflection）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+          {
+            key: 'rag_tool_queryRewrite',
+            label: '查詢改寫',
+            placeholder: '1',
+            hint: '品質回饋驅動的查詢改寫（queryRewrite）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+          {
+            key: 'rag_tool_contextCompression',
+            label: '上下文壓縮',
+            placeholder: '0',
+            hint: '多源結果合併後壓縮 context（contextCompression，Deep 模式專用）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+          {
+            key: 'rag_tool_conversationMemory',
+            label: '對話記憶',
+            placeholder: '1',
+            hint: '跨 session 對話記憶萃取（conversationMemory）',
+            options: [
+              { value: '1', label: '啟用' },
+              { value: '0', label: '停用' },
+            ],
+          },
+        ],
+      },
+      {
         title: 'Agentic 模式',
         desc: '多輪動態搜尋模式，讓 LLM 自主決定是否需要補充搜尋；僅對 complex 查詢生效，成本顯著較高',
         fields: [
@@ -366,11 +492,16 @@ const TABS: TabConfig[] = [
             key: 'rag_strategy',
             label: 'RAG 策略',
             placeholder: 'baseline',
-            hint: 'baseline = 單輪搜尋；agentic = 多輪動態搜尋；plan-execute = 子任務規劃 + 執行 + 合成；auto = 依查詢複雜度自動選擇（plan-execute 優先，子任務太少降級 agentic）',
+            hint: 'fast = 低延遲（1-2s）；thorough = 完整精排（3-6s）；corrective = 檢索品質修正（4-8s）；deep = 子問題分解（6-12s）；custom = 自訂工具開關；agentic = 多輪動態搜尋；auto = 依複雜度自動選擇',
             options: [
-              { value: 'baseline', label: 'baseline — 單輪搜尋' },
+              { value: 'fast', label: 'fast — 低延遲（跳過 HyDE/Judge）' },
+              { value: 'thorough', label: 'thorough — 完整精排' },
+              { value: 'corrective', label: 'corrective — 檢索品質修正' },
+              { value: 'deep', label: 'deep — 子問題分解 + 並行 + 合成' },
+              { value: 'custom', label: 'custom — 自訂工具開關' },
+              { value: 'baseline', label: 'baseline — 同 thorough（向後相容）' },
               { value: 'agentic', label: 'agentic — 多輪動態搜尋' },
-              { value: 'plan-execute', label: 'plan-execute — 子任務規劃 + 執行 + 合成' },
+              { value: 'plan-execute', label: 'plan-execute — 子任務規劃（舊版 deep）' },
               { value: 'react', label: 'react — ReAct Agent 動態工具選擇' },
               { value: 'auto', label: 'auto — 依複雜度自動選擇' },
             ],

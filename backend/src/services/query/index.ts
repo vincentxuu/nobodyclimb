@@ -257,6 +257,14 @@ export class QueryService {
       pipelineCfg.rag_strategy = request.rag_strategy
     }
 
+    // ragTools: request 層覆寫 DB 預設值（custom 模式）
+    if (request.rag_tools) {
+      pipelineCfg.rag_tools_default = {
+        ...pipelineCfg.rag_tools_default,
+        ...request.rag_tools,
+      }
+    }
+
     const pipelineCtx = createPipelineContext({
       env: this.env,
       queryService: this,
