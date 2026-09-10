@@ -1,16 +1,12 @@
 import { END, START, StateGraph } from '@langchain/langgraph'
 import { agenticDecisionNode } from '../nodes/agentic-decision'
 import { agenticRetrieveNode } from '../nodes/agentic-retrieve'
-import { crossEncoderNode } from '../nodes/cross-encoder'
 import { embeddingNode } from '../nodes/embedding'
 import { filterBuildNode } from '../nodes/filter-build'
-import { hybridSearchNode } from '../nodes/hybrid-search'
 import { queryRewriteNode } from '../nodes/query-rewrite'
 import { judgeNode } from '../nodes/judge'
 import { llmGenerationNode } from '../nodes/llm-generation'
 import { memoryExtractorNode } from '../nodes/memory-extractor'
-import { mmrNode } from '../nodes/mmr'
-import { popularityRerankNode } from '../nodes/popularity-rerank'
 import { selfReflectionNode } from '../nodes/self-reflection'
 import { semanticCacheNode } from '../nodes/semantic-cache'
 import { textNormalizeNode } from '../nodes/text-normalize'
@@ -37,10 +33,6 @@ export function buildAgenticGraph() {
     .addNode('embedding', embeddingNode)
     .addNode('agenticDecision', agenticDecisionNode)
     .addNode('agenticRetrieve', agenticRetrieveNode)
-    .addNode('hybridSearch', hybridSearchNode)
-    .addNode('crossEncoder', crossEncoderNode)
-    .addNode('mmr', mmrNode)
-    .addNode('popularityRerank', popularityRerankNode)
     .addNode('llmGeneration', llmGenerationNode)
     .addNode('judge', judgeNode)
     .addNode('selfReflection', selfReflectionNode)
@@ -86,10 +78,6 @@ export function buildAgenticGraph() {
     llmGeneration: 'llmGeneration',
   })
   graph.addEdge('queryRewrite', 'filterBuild')
-  graph.addEdge('hybridSearch', 'crossEncoder')
-  graph.addEdge('crossEncoder', 'mmr')
-  graph.addEdge('mmr', 'popularityRerank')
-  graph.addEdge('popularityRerank', 'agenticDecision')
   graph.addEdge('memoryExtractor', END)
 
   return graph.compile()
