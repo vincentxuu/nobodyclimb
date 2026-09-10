@@ -81,20 +81,34 @@ pnpm format       # Biome 格式化
 
 ## AI 攀岩助手
 
-平台內建 AI 助手，提供攀岩相關的智慧問答與推薦：
+平台內建模組化 RAG 工具箱（42 個可插拔元件），支援多種可切換的檢索策略：
 
-- **LangGraph 引擎** — 以狀態圖驅動 AI pipeline，支援 Baseline / Adaptive / Agentic / Plan-and-Execute 多策略
+### RAG 策略
+
+| 策略 | 延遲 | 說明 |
+| --- | --- | --- |
+| **Fast** | 1-2s | 精簡管線 — 跳過 HyDE、查詢擴展、品質評估、重生成 |
+| **Thorough** | 3-6s | 完整管線，含 HyDE、多角度查詢、三層重排序、品質迴圈 |
+| **Corrective** | 4-8s | 重排序後評估檢索品質，recall 不足時改寫查詢重搜 |
+| **Deep** | 6-12s | 將複雜問題拆解為子問題，並行搜尋後合成 |
+| **Custom** | 不定 | 逐個開關 12 個 RAG 工具，用於精確的 A/B 測試 |
+| **Auto** | 不定 | LLM 依查詢複雜度動態路由到最佳策略 |
+
+### 核心能力
+
+- **LangGraph 引擎** — 以狀態圖驅動 AI pipeline，模組化節點架構
 - **Multi-Provider** — 抽象層支援 Cloudflare Workers AI、OpenAI、Anthropic、Google 模型切換
 - **Langfuse 觀測** — 全鏈路 trace / span / generation 追蹤，成本與延遲可視化
-- **RAG 問答** — 結合向量搜尋與全文搜尋，針對岩場、路線、攀岩知識進行自然語言問答
-- **Adaptive RAG** — 自動分類查詢類型，相關性不足時回退至全文搜尋補強
-- **Agentic Multi-Step RAG** — 複雜問題觸發多輪搜尋（ReAct 模式），由 LLM 驅動搜尋決策
+- **混合檢索** — 向量搜尋（BGE-M3）+ BM25 全文搜尋 + RRF 融合 + CRAG 降級
+- **三層重排序** — Cross-encoder（語意）→ MMR（多樣性）→ Popularity（領域特化）
+- **查詢改寫** — 品質回饋驅動的查詢改寫，而非用相同查詢重搜
 - **SSE 串流** — 逐字輸出回應，提升使用體驗
 - **個人化** — 依攀登紀錄與用戶偏好調整回答內容，跨會話記憶
 - **路線推薦** — 完攀後自動觸發個人化路線推薦
 - **安全防護** — 輸入 / 輸出 Guardrails、Token Budget 管理
 - **配額系統** — 依等級設定每日使用上限（次數 + Token 雙重限制）
-- **管理儀表板** — AI 日誌查詢、Prompt 設定、知識庫管理、成本追蹤與用量統計、LangGraph 引擎切換
+- **RAG 評估** — 60 題 golden test set、多策略 A/B 比較、LLM-as-Judge 評分、子群體分析
+- **管理後台** — AI 設定、RAG 工具開關、日誌查詢、Prompt 設定、知識庫管理、成本追蹤
 
 ## 架構如何運作
 
