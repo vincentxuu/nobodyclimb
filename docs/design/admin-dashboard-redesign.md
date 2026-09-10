@@ -209,7 +209,9 @@ Token       生成 [800]           通識 [600]         高消耗 [1000]
 - **`app/admin/` 改成 re-export**：`app/admin/layout.tsx` 與 `app/admin/ai/settings/page.tsx` 只剩
   `export { default } from '../[locale]/admin/...'`，不再維護兩份。兩棵樹在重構前已經漂移
   （RAG 工具開關只進了 `app/admin/`，react-agent tab 只進了 `[locale]/admin/`），本次已合併。
-  註：`localePrefix: 'as-needed'` 下 `/admin` 會被 middleware rewrite 成 `/zh/admin`，`app/admin/` 實際上不可達，可考慮整棵移除。
+  註：`localePrefix: 'as-needed'` 下 `/admin` 會被 middleware rewrite 成 `/zh/admin`，`app/admin/` 實際上不可達。
+  **後續（2026-09-11）**：merge 後 deploy build 在 prerender `/admin/ai/costs` 時失敗——那棵樹不在 `[locale]/layout.tsx` 底下，
+  沒有 NextIntlClientProvider 也沒有 QueryClientProvider，新 layout 的 next-intl `useRouter` 直接炸。已整棵移除 `app/admin/`。
 - **AI sub-nav layout 直接刪除**（兩棵樹皆刪），sidebar 的 AI 助理 group 接管。
 - **Settings 頁改成單一 draft + 只送 dirty keys**：不再每個 tab 各自 state / 各自儲存；底部 sticky 儲存列顯示未儲存數量，
   section 標題顯示「N 項已修改」。Pipeline Flow 與費用面板維持獨立儲存。
