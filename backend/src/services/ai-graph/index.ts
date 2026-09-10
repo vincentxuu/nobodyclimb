@@ -5,6 +5,7 @@ import { agenticGraph } from './graphs/agentic'
 import { autoGraph } from './graphs/auto'
 import { baselineGraph } from './graphs/baseline'
 import { correctiveGraph } from './graphs/corrective'
+import { customGraph } from './graphs/custom'
 import { deepGraph } from './graphs/deep'
 import { fastGraph } from './graphs/fast'
 import { planExecuteGraph } from './graphs/plan-execute'
@@ -236,6 +237,7 @@ export async function runAIGraph(ctx: PipelineContext): Promise<PipelineContext>
     videoCountMap: ctx.videoCountMap ? Object.fromEntries(ctx.videoCountMap) : undefined,
     latestVideoMap: ctx.latestVideoMap ? Object.fromEntries(ctx.latestVideoMap) : undefined,
     climbed_route_ids: ctx.climbed_route_ids ?? null,
+    ragTools: ctx.request.rag_tools,
   } as unknown as GraphState
 
   // 根據策略選擇 graph
@@ -246,6 +248,7 @@ export async function runAIGraph(ctx: PipelineContext): Promise<PipelineContext>
     thorough: thoroughGraph as unknown as AnyGraph,
     corrective: correctiveGraph as unknown as AnyGraph,
     deep: deepGraph as unknown as AnyGraph,
+    custom: customGraph as unknown as AnyGraph,
     baseline: baselineGraph as unknown as AnyGraph,
     agentic: agenticGraph as unknown as AnyGraph,
     'plan-execute': planExecuteGraph as unknown as AnyGraph,
