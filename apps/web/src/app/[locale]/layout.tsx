@@ -6,6 +6,7 @@ import { ChatWidget } from '@/components/ai'
 import { Footer } from '@/components/layout/footer'
 import { Navbar } from '@/components/layout/navbar'
 import { Providers } from '@/components/layout/providers'
+import { SiteChrome } from '@/components/layout/site-chrome'
 import { Analytics } from '@/components/shared/analytics'
 import { AuthInitializer } from '@/components/shared/auth-initializer'
 import { ClaimContentProvider } from '@/components/shared/claim-content-modal'
@@ -105,11 +106,18 @@ export default async function LocaleLayout({ children, params }: Props) {
                 <AuthInitializer />
                 <StoryPromptWrapper />
                 <ProgressBar />
-                <Navbar />
-                <main className="min-h-[calc(100vh-14rem)] pt-14 md:pt-[70px]">{children}</main>
-                <ShareInvitation />
-                <Footer />
-                {process.env.NEXT_PUBLIC_ENABLE_AI_CHAT === 'true' && <ChatWidget />}
+                <SiteChrome
+                  navbar={<Navbar />}
+                  footer={<Footer />}
+                  extras={
+                    <>
+                      <ShareInvitation />
+                      {process.env.NEXT_PUBLIC_ENABLE_AI_CHAT === 'true' && <ChatWidget />}
+                    </>
+                  }
+                >
+                  {children}
+                </SiteChrome>
               </ClaimContentProvider>
             </ErrorBoundary>
           </Providers>
