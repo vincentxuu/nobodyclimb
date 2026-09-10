@@ -4,8 +4,10 @@
 
 **The community platform for climbing enthusiasts.**
 
-[![Deploy App](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-app.yml/badge.svg)](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-app.yml)
+[![Deploy Web](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy.yml/badge.svg)](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy.yml)
 [![Deploy API](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-api.yml/badge.svg)](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-api.yml)
+[![Deploy Mobile](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-app.yml/badge.svg)](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-app.yml)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Status](https://img.shields.io/badge/status-live-brightgreen.svg)
 
 [Website](https://nobodyclimb.cc) · [API Docs](https://api.nobodyclimb.cc/api/v1/docs) · [Quick start](#quick-start) · [Deploy](#deployment) · [Architecture](#how-it-works)
@@ -135,10 +137,20 @@ nobodyclimb/
 
 ## Deployment
 
-Both frontend and backend deploy automatically via GitHub Actions:
+Web frontend, backend API, and mobile app deploy automatically via GitHub Actions:
 
 - `main` branch → production (`nobodyclimb.cc` / `api.nobodyclimb.cc`)
-- Other branches → preview environments
+- `develop` / other branches → preview environments
+
+| Workflow | Trigger path | Description |
+| --- | --- | --- |
+| `deploy.yml` | `apps/web/**` | Deploy web frontend to Cloudflare Workers |
+| `deploy-api.yml` | `backend/**` | Deploy backend API with D1 migrations |
+| `deploy-app.yml` | `apps/mobile/**` | Build and deploy mobile app |
+| `code-review.yml` | Pull requests | AI code review on PR open/sync |
+| `auto-pr-description.yml` | Pull requests | Auto-generate PR description |
+| `evaluate-rag.yml` | Manual dispatch | RAG evaluation benchmark |
+| `keep-alive.yml` | Cron (every 5 min) | Ping Workers to reduce cold starts |
 
 Manual deployment:
 
@@ -152,9 +164,36 @@ cd backend && pnpm db:migrate:remote && pnpm deploy:production
 
 See the [deployment guide](docs/DEPLOYMENT-GUIDE.md) for details.
 
+## Why NobodyClimb?
+
+- **All-in-one climbing platform:** ascent tracking, route videos, crag info, social features, and AI assistant in one place.
+- **AI-powered personalization:** LangGraph-driven RAG pipeline that learns from your climbing history and adapts recommendations over time.
+- **Edge-first architecture:** both frontend and backend run on Cloudflare Workers for low-latency access worldwide.
+- **Cross-platform:** web and mobile (React Native) share types, schemas, and hooks through monorepo packages.
+
 ## Development conventions
 
 - Strict TypeScript; the frontend uses the `@/` path alias
+- Linting and formatting via [Biome](https://biomejs.dev/)
 - Components grouped by domain: `components/<domain>/`
 - Multilingual UI (zh-TW / en / ja); code comments written in **Traditional Chinese**
 - AI pipeline built on LangGraph state graphs with full Langfuse observability
+
+## Documentation
+
+- [Deployment guide](docs/DEPLOYMENT-GUIDE.md)
+- [Database migration guide](docs/database-migration-guide.md)
+- [AI agent architecture](docs/ai-agent/)
+- [Backend API](docs/backend/)
+- [UI/UX design](docs/design/)
+- [Product requirements](docs/prd/)
+- [Roadmap](docs/roadmap/)
+- [Research](docs/research/)
+
+## Contributing
+
+Use [GitHub Issues](https://github.com/vincentxuu/nobodyclimb/issues) for bugs and feature requests.
+
+## License
+
+NobodyClimb is licensed under the [Apache License 2.0](LICENSE).

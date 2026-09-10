@@ -4,8 +4,10 @@
 
 **為攀岩愛好者打造的社群平台。**
 
-[![Deploy App](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-app.yml/badge.svg)](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-app.yml)
+[![Deploy Web](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy.yml/badge.svg)](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy.yml)
 [![Deploy API](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-api.yml/badge.svg)](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-api.yml)
+[![Deploy Mobile](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-app.yml/badge.svg)](https://github.com/vincentxuu/nobodyclimb/actions/workflows/deploy-app.yml)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Status](https://img.shields.io/badge/status-live-brightgreen.svg)
 
 [網站](https://nobodyclimb.cc) · [API 文檔](https://api.nobodyclimb.cc/api/v1/docs) · [快速開始](#快速開始) · [部署](#部署) · [架構](#架構如何運作)
@@ -135,10 +137,20 @@ nobodyclimb/
 
 ## 部署
 
-前後端皆透過 GitHub Actions 自動部署：
+Web 前端、後端 API 與行動應用皆透過 GitHub Actions 自動部署：
 
 - `main` 分支 → 生產環境（`nobodyclimb.cc` / `api.nobodyclimb.cc`）
-- 其他分支 → 預覽環境
+- `develop` / 其他分支 → 預覽環境
+
+| Workflow | 觸發路徑 | 說明 |
+| --- | --- | --- |
+| `deploy.yml` | `apps/web/**` | 部署 Web 前端至 Cloudflare Workers |
+| `deploy-api.yml` | `backend/**` | 部署後端 API（含 D1 migration） |
+| `deploy-app.yml` | `apps/mobile/**` | 建構並部署行動應用 |
+| `code-review.yml` | Pull requests | PR 開啟/更新時自動 AI Code Review |
+| `auto-pr-description.yml` | Pull requests | 自動產生 PR 描述 |
+| `evaluate-rag.yml` | 手動觸發 | RAG 評估基準測試 |
+| `keep-alive.yml` | Cron（每 5 分鐘） | Ping Workers 減少冷啟動 |
 
 手動部署：
 
@@ -152,9 +164,36 @@ cd backend && pnpm db:migrate:remote && pnpm deploy:production
 
 詳細步驟請參考 [部署指南](docs/DEPLOYMENT-GUIDE.md)。
 
+## 為什麼選 NobodyClimb？
+
+- **一站式攀岩平台：** 完攀紀錄、路線影片、岩場資訊、社群互動、AI 助手一次到位。
+- **AI 個人化推薦：** LangGraph 驅動的 RAG pipeline，從你的攀登歷史學習，持續優化推薦。
+- **邊緣優先架構：** 前後端皆運行於 Cloudflare Workers，全球低延遲存取。
+- **跨平台：** Web 與行動端（React Native）透過 monorepo 共用型別、schema 與 hooks。
+
 ## 開發慣例
 
 - TypeScript 嚴格型別，前端使用 `@/` 路徑別名
+- Lint 與格式化使用 [Biome](https://biomejs.dev/)
 - 元件按領域分組：`components/<domain>/`
 - 多語系 UI（繁中 / 英文 / 日文），程式碼註解使用**繁體中文**
 - AI pipeline 採用 LangGraph 狀態圖架構，搭配 Langfuse 全鏈路觀測
+
+## 文件
+
+- [部署指南](docs/DEPLOYMENT-GUIDE.md)
+- [資料庫遷移指南](docs/database-migration-guide.md)
+- [AI Agent 架構](docs/ai-agent/)
+- [後端 API](docs/backend/)
+- [UI/UX 設計](docs/design/)
+- [產品需求](docs/prd/)
+- [Roadmap](docs/roadmap/)
+- [研究](docs/research/)
+
+## 貢獻
+
+歡迎透過 [GitHub Issues](https://github.com/vincentxuu/nobodyclimb/issues) 回報問題或提出功能建議。
+
+## 授權
+
+NobodyClimb 採用 [Apache License 2.0](LICENSE) 授權。
