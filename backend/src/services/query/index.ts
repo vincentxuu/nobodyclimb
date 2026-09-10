@@ -252,6 +252,11 @@ export class QueryService {
 
     const controller = new AbortController()
 
+    // request.rag_strategy 覆寫 DB 設定（eval/A/B 測試用）
+    if (request.rag_strategy) {
+      pipelineCfg.rag_strategy = request.rag_strategy
+    }
+
     const pipelineCtx = createPipelineContext({
       env: this.env,
       queryService: this,

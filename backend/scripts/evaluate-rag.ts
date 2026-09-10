@@ -104,6 +104,7 @@ function parseArgs(): {
   apiUrl: string
   token: string
   category?: string
+  strategy?: string
   ci: boolean
   delay: number
   output: string
@@ -128,7 +129,7 @@ function parseArgs(): {
 
   if (!parsed['api-url'] || !parsed.token) {
     console.error(
-      'Usage: tsx evaluate-rag.ts --api-url <url> --token <jwt> [--category <cat>] [--ci] [--delay <ms>] [--output <path>] [--baseline <path>] [--red-team] [--cf-access-client-id <id>] [--cf-access-client-secret <secret>]'
+      'Usage: tsx evaluate-rag.ts --api-url <url> --token <jwt> [--strategy <name>] [--category <cat>] [--ci] [--delay <ms>] [--output <path>] [--baseline <path>] [--red-team] [--cf-access-client-id <id>] [--cf-access-client-secret <secret>]'
     )
     process.exit(1)
   }
@@ -137,6 +138,7 @@ function parseArgs(): {
     apiUrl: (parsed['api-url'] as string).replace(/\/$/, ''),
     token: parsed.token as string,
     category: parsed.category as string | undefined,
+    strategy: parsed.strategy as string | undefined,
     ci: parsed.ci === true,
     delay: parseInt(parsed.delay as string, 10) || 1000,
     output: (parsed.output as string) || path.resolve(__dirname, '../tests/evaluation-report.json'),
@@ -184,9 +186,19 @@ async function callAskApi(
   token: string,
   query: string,
   cfAccessClientId?: string,
-  cfAccessClientSecret?: string
-): Promise<{ status: number; data: Record<string, unknown> | null; error?: string }> {
+  cfAccessClientSecret?: string,
+  ragStrategy?: string
+): Promise<{
+  status: number
+  data: Record<string, unknown> | null
+  error?: string
+  latencyMs: number
+}> {
+  const startTime = Date.now()
   try {
+    const body: Record<string, unknown> = { query, include_sources: true, no_cache: true }
+    if (ragStrategy) body.rag_strategy = ragStrategy
+
     const res = await fetch(`${apiUrl}/api/v1/ai/ask`, {
       method: 'POST',
       headers: {
@@ -198,18 +210,18 @@ async function callAskApi(
             'CF-Access-Client-Secret': cfAccessClientSecret,
           }),
       },
-      body: JSON.stringify({ query, include_sources: true, no_cache: true }),
+      body: JSON.stringify(body),
     })
 
     if (!res.ok) {
       const text = await res.text().catch((err) => `Response parse error: ${String(err)}`)
-      return { status: res.status, data: null, error: text }
+      return { status: res.status, data: null, error: text, latencyMs: Date.now() - startTime }
     }
 
     const data = (await res.json()) as Record<string, unknown>
-    return { status: res.status, data }
+    return { status: res.status, data, latencyMs: Date.now() - startTime }
   } catch (err) {
-    return { status: 0, data: null, error: String(err) }
+    return { status: 0, data: null, error: String(err), latencyMs: Date.now() - startTime }
   }
 }
 
@@ -393,12 +405,13 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
     const tc = cases[i]
     process.stdout.write(`  [${i + 1}/${cases.length}] ${tc.id} ${tc.query.slice(0, 40)}...`)
 
-    const { status, data, error } = await callAskApi(
+    const { status, data, error, latencyMs } = await callAskApi(
       args.apiUrl,
       args.token,
       tc.query,
       args.cfAccessClientId,
-      args.cfAccessClientSecret
+      args.cfAccessClientSecret,
+      args.strategy
     )
 
     if (status !== 200 || !data) {
@@ -407,7 +420,7 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
         id: tc.id,
         query: tc.query,
         status: 'error',
-        details: { error: error ?? `HTTP ${status}`, expected_tool: tc.expected_tool },
+        details: { error: error ?? `HTTP ${status}`, expected_tool: tc.expected_tool, latency_ms: latencyMs },
       })
 
       const totalErrors = results.filter((r) => r.status === 'error').length
@@ -455,6 +468,8 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
 
     const passed = toolMatch && keywordCoverage >= 0.5
 
+    const tokenCount = (traceData?.token_count as number | null) ?? null
+
     results.push({
       id: tc.id,
       query: tc.query,
@@ -470,6 +485,8 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
         expected_source_ids: tc.expected_source_ids,
         actual_source_ids: sources.map((s) => s.id),
         groundedness_score: groundednessScore,
+        latency_ms: latencyMs,
+        token_count: tokenCount,
       },
     })
 
@@ -492,9 +509,30 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
   const baselinePath = path.resolve(__dirname, '../tests/baseline-metrics.json')
   const thresholds = loadBaseline(baselinePath)
 
+  // Latency & token stats
+  const latencies = results
+    .map((r) => r.details.latency_ms as number | undefined)
+    .filter((v): v is number => v != null && v > 0)
+  const tokens = results
+    .map((r) => r.details.token_count as number | undefined)
+    .filter((v): v is number => v != null && v > 0)
+  const perfStats = {
+    latency_ms: latencies.length > 0 ? {
+      avg: Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length),
+      p50: latencies.sort((a, b) => a - b)[Math.floor(latencies.length * 0.5)],
+      p95: latencies.sort((a, b) => a - b)[Math.floor(latencies.length * 0.95)],
+      min: Math.min(...latencies),
+      max: Math.max(...latencies),
+    } : null,
+    token_count: tokens.length > 0 ? {
+      avg: Math.round(tokens.reduce((a, b) => a + b, 0) / tokens.length),
+      total: tokens.reduce((a, b) => a + b, 0),
+    } : null,
+  }
+
   // Build report
   const context = getGitContext()
-  const report: EvaluationReport = {
+  const report: EvaluationReport & { strategy?: string; performance?: typeof perfStats } = {
     metrics,
     results,
     summary: {
@@ -508,6 +546,8 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
     api_url: args.apiUrl,
     test_set_count: results.length,
     context,
+    ...(args.strategy ? { strategy: args.strategy } : {}),
+    performance: perfStats,
   }
 
   // Write JSON report
@@ -648,12 +688,13 @@ async function runRedTeamEvaluation(args: ReturnType<typeof parseArgs>): Promise
       `  [${i + 1}/${cases.length}] ${tc.id} [${tc.attack_type}] ${tc.query.slice(0, 35)}...`
     )
 
-    const { status, data, error } = await callAskApi(
+    const { status, data, error: _error } = await callAskApi(
       args.apiUrl,
       args.token,
       tc.query,
       args.cfAccessClientId,
-      args.cfAccessClientSecret
+      args.cfAccessClientSecret,
+      args.strategy
     )
 
     let actualResult: string
