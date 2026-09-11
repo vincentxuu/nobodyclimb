@@ -102,10 +102,10 @@ export default function AdminAISettingsPage() {
   }
 
   return (
-    <div className="max-w-4xl space-y-4 pb-24">
+    <div className="mx-auto max-w-4xl space-y-4 pb-24">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-xl font-bold text-wb-100">AI Pipeline 設定</h1>
+          <h1 className="text-xl font-bold text-wb-100">AI 設定</h1>
           <p className="mt-1 text-sm text-wb-60">
             所有參數儲存後立即生效（無需重啟）；只會送出有修改的欄位
           </p>
