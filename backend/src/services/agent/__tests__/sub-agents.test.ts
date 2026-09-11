@@ -1,0 +1,303 @@
+import { describe, expect, it, vi } from 'vitest'
+import type { Env } from '../../../types'
+import type { AgentCache } from '../cache'
+import { recommendAgentTool, coachingAgentTool } from '../sub-agents'
+import { recommendSubAgent } from '../sub-agents/recommend-agent'
+import { coachingSubAgent } from '../sub-agents/coaching-agent'
+import { formatSubAgentResult } from '../sub-agents/types'
+import { analyzeWeaknesses } from '../sub-agents/weakness-analysis'
+import { DefaultTokenTracker } from '../tracker'
+import type { ToolContext } from '../types'
+
+// ---------------------------------------------------------------------------
+// Mock provider (for synthesize)
+// ---------------------------------------------------------------------------
+
+vi.mock('../../orchestrators/ai-graph/providers', () => ({
+  createProvider: () => ({
+    chat: vi.fn().mockResolvedValue({
+      content: 'mock LLM response',
+      usage: { prompt_tokens: 100, completion_tokens: 50 },
+    }),
+  }),
+}))
+
+// mock the inner tools so gatherContext doesn't hit real DB
+vi.mock('../tools/recommend', () => ({
+  recommendTool: {
+    execute: vi.fn().mockResolvedValue({ recommendations: [], count: 0 }),
+    formatResult: vi.fn().mockReturnValue({ content: '目前沒有推薦路線。' }),
+  },
+}))
+
+vi.mock('../tools/user-profile', () => ({
+  userProfileTool: {
+    execute: vi.fn().mockResolvedValue({ user: { name: 'TestUser' }, stats: { total_ascents: 5 } }),
+    formatResult: vi.fn().mockReturnValue({ content: '用戶：TestUser\n總完攀：5 條' }),
+  },
+}))
+
+vi.mock('../tools/coaching', () => ({
+  suggestTrainingTool: {
+    execute: vi.fn().mockResolvedValue({
+      level: '進階入門（5.10）',
+      typeDistribution: [{ type: 'sport', count: 8 }, { type: 'trad', count: 2 }],
+      styleDistribution: { redpoint: 6, onsight: 2 },
+      recentAscents: [
+        { route: 'A', grade: '5.10a', type: 'sport', style: 'redpoint' },
+        { route: 'B', grade: '5.10b', type: 'sport', style: 'redpoint' },
+      ],
+    }),
+    formatResult: vi.fn().mockReturnValue({ content: '攀登程度：進階入門（5.10）\n總完攀：10 條' }),
+  },
+}))
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+const MODELS = {
+  orchestrator: { provider: 'workers-ai' as const, model: 'test-model' },
+  hyde: { provider: 'workers-ai' as const, model: 'test-model' },
+  multiQuery: { provider: 'workers-ai' as const, model: 'test-model' },
+  textToSql: { provider: 'workers-ai' as const, model: 'test-model' },
+  rerank: { provider: 'workers-ai' as const, model: 'test-model' },
+  judge: { provider: 'workers-ai' as const, model: 'test-model' },
+  embedding: { provider: 'workers-ai' as const, model: 'test-model' },
+}
+
+const mockCache: AgentCache = {
+  get: vi.fn().mockResolvedValue(null),
+  set: vi.fn().mockResolvedValue(undefined),
+}
+
+function stubEnv(dbOverride?: Partial<D1Database>): Env {
+  const db = {
+    prepare: () => ({
+      bind: () => ({
+        all: async () => ({ results: [] }),
+        first: async () => null,
+      }),
+    }),
+    ...dbOverride,
+  } as unknown as D1Database
+  return { DB: db } as unknown as Env
+}
+
+function makeCtx(overrides: Partial<ToolContext> = {}): ToolContext {
+  return {
+    env: stubEnv(),
+    userId: null,
+    locale: 'zh-TW',
+    models: MODELS,
+    langfuseTrace: null,
+    tracker: new DefaultTokenTracker(),
+    cache: mockCache,
+    availableTools: [],
+    ...overrides,
+  }
+}
+
+// ---------------------------------------------------------------------------
+// formatSubAgentResult
+// ---------------------------------------------------------------------------
+
+describe('formatSubAgentResult', () => {
+  it('formats a successful sub-agent result', () => {
+    const result = formatSubAgentResult({
+      answer: '推薦你爬飛簷',
+      tokensUsed: 150,
+      subAgent: 'recommend_agent',
+    })
+    expect(result.content).toBe('推薦你爬飛簷')
+    expect(result.metadata).toEqual({ subAgent: 'recommend_agent', tokensUsed: 150 })
+  })
+
+  it('formats an error result', () => {
+    const result = formatSubAgentResult({ error: '用戶未登入' })
+    expect(result.content).toBe('用戶未登入')
+    expect(result.metadata).toBeUndefined()
+  })
+})
+
+// ---------------------------------------------------------------------------
+// wrapAsTools: recommendAgentTool
+// ---------------------------------------------------------------------------
+
+describe('recommendAgentTool (wrapped)', () => {
+  it('has correct name, tags, and parameters', () => {
+    expect(recommendAgentTool.name).toBe('recommend_agent')
+    expect(recommendAgentTool.tags).toContain('sub-agent')
+    expect(recommendAgentTool.tags).toContain('personal')
+    expect(recommendAgentTool.parameters).toHaveProperty('properties')
+  })
+
+  it('prompt: 未登入顯示無法使用', () => {
+    const ctx = makeCtx({ userId: null })
+    expect(recommendAgentTool.prompt(ctx)).toContain('未登入')
+  })
+
+  it('prompt: 已登入顯示功能描述', () => {
+    const ctx = makeCtx({ userId: 'user-1' })
+    const desc = recommendAgentTool.prompt(ctx)
+    expect(desc).not.toContain('未登入')
+    expect(desc).toContain('推薦')
+  })
+
+  it('execute: 未登入回傳 error', async () => {
+    const ctx = makeCtx({ userId: null })
+    const result = await recommendAgentTool.execute({ query: '推薦路線' }, ctx)
+    expect(result).toEqual({ error: '用戶未登入，無法使用此工具' })
+  })
+
+  it('execute: 已登入回傳 SubAgentToolOutput', async () => {
+    const ctx = makeCtx({ userId: 'user-1' })
+    const result = (await recommendAgentTool.execute({ query: '推薦路線' }, ctx)) as {
+      answer: string
+      subAgent: string
+      tokensUsed: number
+    }
+    expect(result.subAgent).toBe('recommend_agent')
+    expect(result.answer).toBe('mock LLM response')
+    expect(result.tokensUsed).toBe(150)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// wrapAsTools: coachingAgentTool
+// ---------------------------------------------------------------------------
+
+describe('coachingAgentTool (wrapped)', () => {
+  it('has correct name and tags', () => {
+    expect(coachingAgentTool.name).toBe('coaching_agent')
+    expect(coachingAgentTool.tags).toContain('sub-agent')
+    expect(coachingAgentTool.tags).toContain('coaching')
+  })
+
+  it('execute: 未登入回傳 error', async () => {
+    const ctx = makeCtx({ userId: null })
+    const result = await coachingAgentTool.execute({ query: '怎麼進步' }, ctx)
+    expect(result).toEqual({ error: '用戶未登入，無法使用此工具' })
+  })
+
+  it('execute: 已登入回傳含 coaching_agent 標記', async () => {
+    const ctx = makeCtx({ userId: 'user-1' })
+    const result = (await coachingAgentTool.execute({ query: '怎麼進步' }, ctx)) as {
+      subAgent: string
+    }
+    expect(result.subAgent).toBe('coaching_agent')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// recommendSubAgent.gatherContext
+// ---------------------------------------------------------------------------
+
+describe('recommendSubAgent.gatherContext', () => {
+  it('calls recommend + user_profile and returns combined context', async () => {
+    const ctx = makeCtx({ userId: 'user-1' })
+    const context = await recommendSubAgent.gatherContext({}, ctx)
+    expect(context).toContain('使用者資料')
+    expect(context).toContain('推薦路線')
+    expect(context).toContain('TestUser')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// coachingSubAgent.gatherContext
+// ---------------------------------------------------------------------------
+
+describe('coachingSubAgent.gatherContext', () => {
+  it('calls suggest_training + user_profile and includes weakness analysis', async () => {
+    const ctx = makeCtx({ userId: 'user-1' })
+    const context = await coachingSubAgent.gatherContext({}, ctx)
+    expect(context).toContain('使用者資料')
+    expect(context).toContain('訓練分析')
+    expect(context).toContain('弱點分析')
+  })
+
+  it('gracefully handles missing user_goals table', async () => {
+    const errDb = {
+      prepare: () => ({
+        bind: () => ({
+          all: async () => {
+            throw new Error('no such table: user_goals')
+          },
+          first: async () => null,
+        }),
+      }),
+    } as unknown as D1Database
+    const ctx = makeCtx({ userId: 'user-1', env: { DB: errDb } as unknown as Env })
+    const context = await coachingSubAgent.gatherContext({}, ctx)
+    expect(context).toContain('弱點分析')
+    expect(context).not.toContain('使用者目標')
+  })
+
+  it('includes goals section when user_goals exist', async () => {
+    const goalsDb = {
+      prepare: () => ({
+        bind: () => ({
+          all: async () => ({
+            results: [{ title: '挑戰 5.12', target: '5.12a', current_progress: '5.11c', status: 'active' }],
+          }),
+          first: async () => null,
+        }),
+      }),
+    } as unknown as D1Database
+    const ctx = makeCtx({ userId: 'user-1', env: { DB: goalsDb } as unknown as Env })
+    const context = await coachingSubAgent.gatherContext({}, ctx)
+    expect(context).toContain('使用者目標')
+    expect(context).toContain('挑戰 5.12')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// analyzeWeaknesses
+// ---------------------------------------------------------------------------
+
+describe('analyzeWeaknesses', () => {
+  it('detects type imbalance (>80% one type)', () => {
+    const result = analyzeWeaknesses({
+      typeDistribution: [{ type: 'sport', count: 9 }, { type: 'trad', count: 1 }],
+    })
+    expect(result).toContain('類型偏科')
+    expect(result).toContain('90%')
+  })
+
+  it('no type imbalance when balanced', () => {
+    const result = analyzeWeaknesses({
+      typeDistribution: [{ type: 'sport', count: 5 }, { type: 'trad', count: 5 }],
+    })
+    expect(result).not.toContain('類型偏科')
+  })
+
+  it('detects missing onsight when redpoint exists', () => {
+    const result = analyzeWeaknesses({
+      styleDistribution: { redpoint: 10 },
+    })
+    expect(result).toContain('onsight')
+  })
+
+  it('detects high toprope ratio', () => {
+    const result = analyzeWeaknesses({
+      styleDistribution: { toprope: 8, lead: 2 },
+    })
+    expect(result).toContain('top-rope')
+  })
+
+  it('detects grade plateau', () => {
+    const ascents = Array.from({ length: 5 }, (_, i) => ({
+      route: `R${i}`,
+      grade: '5.10a',
+      type: 'sport',
+      style: 'redpoint',
+    }))
+    const result = analyzeWeaknesses({ recentAscents: ascents })
+    expect(result).toContain('停滯')
+  })
+
+  it('returns default message when data insufficient', () => {
+    const result = analyzeWeaknesses({})
+    expect(result).toContain('數據不足')
+  })
+})
