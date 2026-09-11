@@ -1,4 +1,7 @@
 import { ANTI_STYLE_KEYWORDS } from '@nobodyclimb/constants'
+import { getDocuments } from '../../query/documents'
+import { mergeResults, searchBM25 } from '../../query/retrieval'
+import { hybridSearch } from '../../tools/hybrid-search'
 import {
   AgenticStepTrace,
   PipelineContext,
@@ -350,233 +353,81 @@ export const hybridSearchStep: PipelineStep = {
         initial_search: initialSearch,
       }
     } else {
-      // Baseline：Vector + BM25 + RRF
-      const hydeFilter: Record<string, unknown> =
-        vectorFilter['crag_id'] || vectorFilter['area_id']
-          ? { ...vectorFilter }
-          : vectorFilter['type']
-            ? { type: vectorFilter['type'] }
-            : {}
+      // Baseline：委派給共用工具
+      const baselineResult = await hybridSearch(env, {
+        query,
+        queryVector,
+        hydeVector,
+        expandedVectors,
+        vectorFilter,
+        retrievalMethod: ctx.retrievalMethod ?? 'hybrid',
+        isSimRouteSearch: ctx.isSimRouteSearch,
+        excludeRouteIds: ctx.excludeRouteId ? [ctx.excludeRouteId] : [],
+        config: {
+          bm25_top_k: pipelineConfig.bm25_top_k,
+          merge_top_k: pipelineConfig.merge_top_k,
+          min_rrf_score: pipelineConfig.min_rrf_score,
+          min_rrf_score_filtered: pipelineConfig.min_rrf_score_filtered,
+        },
+      })
 
-      const expandedFilter = vectorFilter['type'] ? { type: vectorFilter['type'] } : undefined
+      candidateMatches = baselineResult.candidateMatches
+      retrievalScore = baselineResult.retrievalScore
+      const baselineTrace = { ...baselineResult.trace }
 
-      const retrievalMethod = ctx.retrievalMethod ?? 'hybrid'
-
-      // 根據 retrievalMethod 選擇性執行搜尋路徑
-      const skipVector = retrievalMethod === 'bm25'
-      const skipBM25 = retrievalMethod === 'vector'
-
-      const allSearchPromises: Promise<{ matches: SearchResult[] } | SearchResult[]>[] = [
-        !skipVector
-          ? env.VECTOR_INDEX.query(queryVector, {
-              topK: MERGE_TOP_K,
-              returnMetadata: 'all',
-              filter: Object.keys(vectorFilter).length > 0 ? vectorFilter : undefined,
-            })
-          : Promise.resolve({ matches: [] as SearchResult[] }),
-        !skipVector && hydeVector
-          ? env.VECTOR_INDEX.query(hydeVector, {
-              topK: MERGE_TOP_K,
-              returnMetadata: 'all',
-              filter: Object.keys(hydeFilter).length > 0 ? hydeFilter : undefined,
-            })
-          : Promise.resolve({ matches: [] as SearchResult[] }),
-        !skipBM25
-          ? qs.searchBM25(query, pipelineConfig.bm25_top_k)
-          : Promise.resolve([] as SearchResult[]),
-        ...(!skipVector
-          ? expandedVectors.map((vec) =>
-              env.VECTOR_INDEX.query(vec, {
-                topK: MERGE_TOP_K,
-                returnMetadata: 'all',
-                filter: expandedFilter,
-              })
-            )
-          : []),
-      ]
-
-      const allResults = await Promise.all(allSearchPromises)
-      const queryVecResult = allResults[0] as { matches: SearchResult[] }
-      const hydeVecResult = allResults[1] as { matches: SearchResult[] }
-      const bm25Matches = allResults[2] as SearchResult[]
-      const expandedVecResults = !skipVector
-        ? (allResults.slice(3) as { matches: SearchResult[] }[]).map((r) =>
-            r.matches.map((m) => ({ id: m.id, score: m.score, metadata: m.metadata }))
-          )
-        : []
-
-      let queryMatches: SearchResult[] = queryVecResult.matches.map((m) => ({
-        id: m.id,
-        score: m.score,
-        metadata: m.metadata,
-      }))
-      let rawHydeMatches: SearchResult[] =
-        hydeVector && !skipVector
-          ? hydeVecResult.matches.map((m) => ({ id: m.id, score: m.score, metadata: m.metadata }))
-          : []
-
-      // 相似路線 fallback
-      if (ctx.isSimRouteSearch && queryMatches.length === 0 && vectorFilter['crag_id']) {
-        const relaxedFilter: Record<string, unknown> = { type: { $eq: 'route' } }
-        if (vectorFilter['grade_numeric'])
-          relaxedFilter['grade_numeric'] = vectorFilter['grade_numeric']
-
-        const [fbQueryResult, fbHydeResult] = await Promise.all([
-          env.VECTOR_INDEX.query(queryVector, {
-            topK: MERGE_TOP_K,
-            returnMetadata: 'all',
-            filter: relaxedFilter,
-          }),
-          hydeVector
-            ? env.VECTOR_INDEX.query(hydeVector, {
-                topK: MERGE_TOP_K,
-                returnMetadata: 'all',
-                filter: relaxedFilter,
-              })
-            : Promise.resolve({ matches: [] as SearchResult[] }),
-        ])
-        queryMatches = fbQueryResult.matches.map((m) => ({
-          id: m.id,
-          score: m.score,
-          metadata: m.metadata,
-        }))
-        rawHydeMatches = fbHydeResult.matches.map((m) => ({
-          id: m.id,
-          score: m.score,
-          metadata: m.metadata,
-        }))
-      }
-
-      const hasLocationFilter = !!(
-        vectorFilter['crag_id'] ||
-        vectorFilter['area_id'] ||
-        vectorFilter['region']
-      )
-      const hydeMatches = hasLocationFilter && queryMatches.length === 0 ? [] : rawHydeMatches
-
-      const mergedMatches = qs.mergeResults(
-        [queryMatches, hydeMatches, bm25Matches, ...expandedVecResults],
-        MERGE_TOP_K
-      )
-
-      // 反風格補充檢索
+      // Pipeline 獨有：反風格補充檢索
       const bodyAxis = ctx.personalityType?.[0]
-      let allMerged = mergedMatches
-      let antiStyleResults = 0
       if (bodyAxis === 'P' || bodyAxis === 'T') {
         const antiKeywords = ANTI_STYLE_KEYWORDS[bodyAxis]
         const antiQuery = antiKeywords.join(' ')
         const antiTopK = pipelineConfig.personality_anti_retrieve_count
-        const antiBm25 = await qs.searchBM25(antiQuery, antiTopK)
-        antiStyleResults = antiBm25.length
+        const antiBm25 = await searchBM25(env.DB, antiQuery, antiTopK)
         if (antiBm25.length > 0) {
-          allMerged = qs.mergeResults([mergedMatches, antiBm25], MERGE_TOP_K + antiTopK)
+          const allMerged = mergeResults(
+            [candidateMatches, antiBm25],
+            pipelineConfig.merge_top_k + antiTopK
+          )
+          const hasFilter = Object.keys(vectorFilter).some((k) =>
+            ['grade_numeric', 'crag_id', 'area_id', 'region', 'route_type'].includes(k)
+          )
+          const minScore = hasFilter
+            ? pipelineConfig.min_rrf_score_filtered
+            : pipelineConfig.min_rrf_score
+          candidateMatches = allMerged.filter((m) => m.score >= minScore)
+          retrievalScore = allMerged.length > 0 ? Math.max(...allMerged.map((m) => m.score)) : 0
+        }
+        ;(baselineTrace as Record<string, unknown>).anti_style = {
+          body_axis: bodyAxis,
+          results: antiBm25.length,
         }
       }
 
-      candidateMatches = allMerged.filter((m) => m.score >= minScore)
-      retrievalScore = allMerged.length > 0 ? Math.max(...allMerged.map((m) => m.score)) : 0
-
-      // Retrieval trace
-      const tracePaths = ['query_vec']
-      if (hydeVector) tracePaths.push('hyde_vec')
-      tracePaths.push('bm25')
-      expandedVectors.forEach((_, i) => tracePaths.push(`expanded_${i}`))
-
-      type PathDoc = { id: string; score: number; name?: string }
-      const toPathDocs = (results: SearchResult[], limit = 20): PathDoc[] =>
-        results.slice(0, limit).map((m) => ({
-          id: m.id,
-          score: Math.round(m.score * 1000) / 1000,
-          name:
-            (m.metadata?.name as string | undefined) ??
-            (m.metadata?.crag_name as string | undefined),
-        }))
-      const pathCounts: Record<string, number> = { query_vec: queryMatches.length }
-      const pathResults: Record<string, PathDoc[]> = { query_vec: toPathDocs(queryMatches) }
-      if (hydeVector) {
-        pathCounts['hyde_vec'] = hydeMatches.length
-        pathResults['hyde_vec'] = toPathDocs(hydeMatches)
-      }
-      pathCounts['bm25'] = bm25Matches.length
-      pathResults['bm25'] = toPathDocs(bm25Matches)
-      expandedVectors.forEach((_, i) => {
-        const results = expandedVecResults[i] ?? []
-        pathCounts[`expanded_${i}`] = results.length
-        pathResults[`expanded_${i}`] = toPathDocs(results)
-      })
-
-      const bm25FtsQuery = query.replace(/["\x00-\x1f()*^[\]]/g, ' ').trim() || null
-      trace.retrieval = {
-        retrieval_method: retrievalMethod,
-        paths: tracePaths,
-        path_counts: pathCounts,
-        path_results: pathResults,
-        bm25_fts_query: bm25FtsQuery,
-        candidates_before_filter: mergedMatches.length,
-        candidates_after_filter: candidateMatches.length,
-        crag_fallback: false,
-        crag_fallback_stage: null as 'grade' | null,
-        reranker_used: false,
-        rrf: {
-          paths_count: tracePaths.length,
-          merged_count: mergedMatches.length,
-          min_score_threshold: minScore,
-          after_threshold_count: candidateMatches.length,
-        },
-        crag_fallback_detail: null as null | {
-          trigger_reason: string
-          retries: { removed_filter: string; candidates_after: number }[]
-        },
-        ...(antiStyleResults > 0
-          ? { anti_style: { body_axis: bodyAxis, results: antiStyleResults } }
-          : {}),
-      }
-
-      // CRAG fallback
-      if (candidateMatches.length === 0 && vectorFilter['grade_numeric']) {
-        const relaxedFilter = { ...vectorFilter }
-        delete relaxedFilter['grade_numeric']
-        const retryResult = await env.VECTOR_INDEX.query(queryVector, {
-          topK: MERGE_TOP_K,
-          returnMetadata: 'all',
-          filter: Object.keys(relaxedFilter).length > 0 ? relaxedFilter : undefined,
-        })
-        const retryMatches = retryResult.matches.map((m) => ({
-          id: m.id,
-          score: m.score,
-          metadata: m.metadata,
-        }))
-        const retryMerged = qs.mergeResults([retryMatches, bm25Matches], MERGE_TOP_K)
-        candidateMatches = retryMerged.filter((m) => m.score >= minScore)
-        if (candidateMatches.length > 0) {
-          ;(trace.retrieval as Record<string, unknown>).crag_fallback = true
-          ;(trace.retrieval as Record<string, unknown>).crag_fallback_stage = 'grade'
-          ;(trace.retrieval as Record<string, unknown>).crag_fallback_detail = {
-            trigger_reason: 'no_results_with_grade_filter',
-            retries: [
-              { removed_filter: 'grade_numeric', candidates_after: candidateMatches.length },
-            ],
-          }
-        }
-      }
+      trace.retrieval = baselineTrace
+      ctx.candidateMatches = candidateMatches
+      ctx.documents = baselineResult.documents
+      ctx.retrievalScore = retrievalScore
     }
 
-    // 取得完整文件
-    const documents = await qs.getDocuments(candidateMatches.map((m) => m.id))
+    // Pipeline 獨有 baseline 路徑：取得文件已在共用工具中完成
+    // agentic 路徑：仍需取得文件
+    if (!ctx.documents || ctx.documents.size === 0) {
+      ctx.documents = await getDocuments(
+        env.DB,
+        candidateMatches.map((m) => m.id)
+      )
+    }
 
-    // 排除來源路線
-    if (ctx.excludeRouteId) {
-      for (const [embeddingId, doc] of documents) {
+    // 排除來源路線（agentic 路徑用）
+    if (ctx.excludeRouteId && ctx.documents) {
+      for (const [embeddingId, doc] of ctx.documents) {
         if (doc.source_id === ctx.excludeRouteId) {
-          documents.delete(embeddingId)
+          ctx.documents.delete(embeddingId)
         }
       }
     }
 
-    ctx.candidateMatches = candidateMatches
-    ctx.documents = documents
-    ctx.retrievalScore = retrievalScore
+    if (!ctx.candidateMatches) ctx.candidateMatches = candidateMatches
+    if (!ctx.retrievalScore) ctx.retrievalScore = retrievalScore
 
     // Tool Fallback：中等信心 + 空結果 → 切換到備選工具並重新執行
     if (ctx.fallbackEnabled && candidateMatches.length === 0 && ctx.alternativeTool) {
