@@ -11,7 +11,6 @@ import {
   estimateAbilityLevel,
   getRecentAscents,
 } from '../domain/personalization'
-import type { QueryService } from '../entry'
 import { runAgentLoop } from './agent-loop'
 import { KVAgentCache } from './cache'
 import { classifyQuery, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
@@ -141,7 +140,6 @@ export interface RunAgentParams {
   chatHistory?: Array<{ role: 'user' | 'assistant'; content: string }>
   userId: string | null
   env: Env
-  queryService: QueryService
   langfuseTrace?: LangfuseParent | null
   waitUntilCtx?: { waitUntil(promise: Promise<unknown>): void }
   stream?: boolean
@@ -154,7 +152,7 @@ export interface RunAgentParams {
 }
 
 export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
-  const { query, chatHistory, userId, env, queryService, langfuseTrace, waitUntilCtx } = params
+  const { query, chatHistory, userId, env, langfuseTrace, waitUntilCtx } = params
 
   // 0. 查詢分類快速路徑（0 LLM call）
   const category = classifyQuery(query)
@@ -235,7 +233,6 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     userId,
     locale: 'zh-TW',
     models,
-    queryService,
     langfuseTrace,
     tracker,
     cache,
