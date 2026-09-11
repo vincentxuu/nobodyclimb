@@ -1,4 +1,5 @@
 import { endSpan, startSpan } from '../../../utils/langfuse'
+import { crossEncoderRerank } from '../../tools/cross-encoder'
 import { GraphState } from '../state'
 
 export async function crossEncoderNode(state: GraphState): Promise<Partial<GraphState>> {
@@ -8,7 +9,6 @@ export async function crossEncoderNode(state: GraphState): Promise<Partial<Graph
   try {
     const existingRetrievalTrace = (state.trace?.retrieval ?? {}) as Record<string, unknown>
 
-    // Plan-and-Execute 已完成 synthesis，跳過 post-retrieval
     if (state.skipPostRetrieval) {
       endSpan(span, { output: { skipped: true } })
       return {
@@ -22,81 +22,20 @@ export async function crossEncoderNode(state: GraphState): Promise<Partial<Graph
       }
     }
 
-    const { env, request } = state
-    const candidateMatches = state.candidateMatches ?? []
-    const documents = state.documents ?? new Map()
+    const result = await crossEncoderRerank(state.env, {
+      query: state.request.query,
+      candidateMatches: state.candidateMatches ?? [],
+      documents: state.documents ?? new Map(),
+      config: {
+        reranker_relevance_threshold: state.pipelineConfig.reranker_relevance_threshold,
+        reranker_min_keep: state.pipelineConfig.reranker_min_keep,
+      },
+    })
 
-    // 業務邏輯跳過：候選數 ≤ 1
-    const rerankCandidates = candidateMatches.filter((m) => documents.has(m.id))
-    if (rerankCandidates.length <= 1) {
-      endSpan(span, { output: { skipped: true, reason: 'too_few_candidates' } })
-      return {
-        scoredCandidates: candidateMatches,
-        trace: {
-          retrieval: {
-            ...existingRetrievalTrace,
-            reranker: { skipped_reason: 'too_few_candidates' },
-          },
-        },
-      }
-    }
-
-    try {
-      const contexts = rerankCandidates.map((m) => ({ text: documents.get(m.id)!.text }))
-      const rerankerResult = (await (env.AI.run as Function)('@cf/baai/bge-reranker-base', {
-        query: request.query,
-        contexts,
-      })) as { response: { id: number; score: number }[] }
-
-      if (rerankerResult?.response?.length > 0) {
-        const scoreByIdx = new Map(rerankerResult.response.map((r) => [r.id, r.score]))
-        const scored = rerankCandidates.map((m, idx) => ({
-          ...m,
-          score: scoreByIdx.get(idx) ?? m.score,
-        }))
-
-        // 閾值過濾：移除低相關性文件，保留 min_keep 安全網
-        const threshold = state.pipelineConfig.reranker_relevance_threshold
-        const minKeep = state.pipelineConfig.reranker_min_keep
-        const sorted = [...scored].sort((a, b) => b.score - a.score)
-        const filtered = sorted.filter((m) => m.score >= threshold)
-        const beforeCount = sorted.length
-        const scoredCandidates = filtered.length >= minKeep ? filtered : sorted.slice(0, minKeep)
-        const filteredCount = beforeCount - scoredCandidates.length
-
-        const rerankerTrace = {
-          reranker_used: true,
-          reranker: {
-            input_count: rerankCandidates.length,
-            filtered_count: filteredCount,
-            threshold_used: threshold,
-            top_scores: scoredCandidates.map((m) => {
-              const doc = documents.get(m.id)
-              return {
-                title: doc ? state.queryService.extractTitle(doc) : m.id,
-                score: Math.round(m.score * 1000) / 1000,
-              }
-            }),
-          },
-        }
-
-        endSpan(span, { output: { scoredCount: scoredCandidates.length } })
-        return {
-          scoredCandidates,
-          trace: {
-            retrieval: {
-              ...existingRetrievalTrace,
-              ...rerankerTrace,
-            },
-          },
-        }
-      } else {
-        endSpan(span, { output: { scoredCount: candidateMatches.length } })
-        return { scoredCandidates: candidateMatches }
-      }
-    } catch {
-      endSpan(span, { output: { scoredCount: candidateMatches.length } })
-      return { scoredCandidates: candidateMatches }
+    endSpan(span, { output: { scoredCount: result.scoredCandidates.length } })
+    return {
+      scoredCandidates: result.scoredCandidates,
+      trace: { retrieval: { ...existingRetrievalTrace, ...result.trace } },
     }
   } catch (err) {
     endSpan(span, { level: 'ERROR', metadata: { error: String(err) } })

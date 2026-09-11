@@ -1,4 +1,5 @@
 import { endSpan, startSpan } from '../../../utils/langfuse'
+import { mmrSelect } from '../../tools/mmr'
 import { GraphState } from '../state'
 
 export async function mmrNode(state: GraphState): Promise<Partial<GraphState>> {
@@ -6,7 +7,6 @@ export async function mmrNode(state: GraphState): Promise<Partial<GraphState>> {
     candidateCount: (state.scoredCandidates ?? []).length,
   })
   try {
-    // Plan-and-Execute 已完成 synthesis，跳過 post-retrieval
     if (state.skipPostRetrieval) {
       endSpan(span, { output: { skipped: true } })
       return {
@@ -15,27 +15,22 @@ export async function mmrNode(state: GraphState): Promise<Partial<GraphState>> {
       }
     }
 
-    const { pipelineConfig } = state
-    const scoredCandidates = state.scoredCandidates ?? []
-    const documents = state.documents ?? new Map()
-    const effectiveLimit = pipelineConfig.max_results
+    const result = mmrSelect({
+      scoredCandidates: state.scoredCandidates ?? [],
+      documents: state.documents ?? new Map(),
+      config: {
+        mmr_lambda: state.pipelineConfig.mmr_lambda,
+        max_results: state.pipelineConfig.max_results,
+      },
+    })
 
-    const mmrSelected = state.queryService.applyMMR(
-      scoredCandidates,
-      documents,
-      pipelineConfig.mmr_lambda,
-      effectiveLimit
-    )
-
-    endSpan(span, { output: { selectedCount: mmrSelected.length } })
+    endSpan(span, { output: { selectedCount: result.rerankedMatches.length } })
     return {
-      rerankedMatches: mmrSelected.map((m) => ({ ...m, finalScore: m.score })),
+      rerankedMatches: result.rerankedMatches,
       trace: {
         mmr_selection: {
-          lambda: pipelineConfig.mmr_lambda,
-          input_count: scoredCandidates.length,
-          selected_count: mmrSelected.length,
-          popularity_weight: pipelineConfig.popularity_weight,
+          ...result.trace,
+          popularity_weight: state.pipelineConfig.popularity_weight,
         },
       },
     }
