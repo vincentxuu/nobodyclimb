@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { describeRoute } from 'hono-openapi'
 import { authMiddleware, optionalAuthMiddleware } from '../middleware/auth'
-import { RecommendationService } from '../services/recommendation'
+import { RecommendationService } from '../services/domain/recommendation'
 import { Env, UserRouteAscent } from '../types'
 import {
   generateId,

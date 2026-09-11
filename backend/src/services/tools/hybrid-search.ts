@@ -12,9 +12,9 @@
  */
 
 import type { AIDocument, Env } from '../../types'
-import type { SearchResult } from '../pipeline/types'
-import { getDocuments } from '../query/documents'
-import { mergeResults, searchBM25 } from '../query/retrieval'
+import { getDocuments } from '../core/documents'
+import { mergeResults, searchBM25 } from '../core/retrieval'
+import type { SearchResult } from '../orchestrators/pipeline/types'
 
 // ---------------------------------------------------------------------------
 // Input / Output

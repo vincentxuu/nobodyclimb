@@ -1,6 +1,6 @@
 import type { Env } from '../../types'
 import type { LangfuseParent } from '../../utils/langfuse'
-import type { QueryService } from '../query'
+import type { QueryService } from '../entry'
 import type { AgentCache } from './cache'
 
 // ---------------------------------------------------------------------------

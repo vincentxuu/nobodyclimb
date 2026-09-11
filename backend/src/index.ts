@@ -227,7 +227,7 @@ app.onError((err, c) => {
 // Cron Trigger Handler - 每日等級重置與積分重算
 // =============================================
 
-import { processEvolutionBatch } from './services/evolution'
+import { processEvolutionBatch } from './services/domain/evolution'
 import { recalculateAllRanks, resetDailyUsage } from './services/rank'
 
 export default {

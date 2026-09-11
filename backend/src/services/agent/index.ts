@@ -2,16 +2,16 @@ import { getMemoriesSummary } from '../../repositories/memory'
 import type { Env } from '../../types'
 import { buildAgentBasePrompt } from '../../utils/ai-prompts'
 import type { LangfuseParent } from '../../utils/langfuse'
-import { createProvider } from '../ai-graph/providers'
-import type { ProviderName as LegacyProviderName } from '../ai-graph/providers/types'
-import { extractMemoriesFromQuery } from '../memory-extractor'
+import { createProvider } from '../orchestrators/ai-graph/providers'
+import type { ProviderName as LegacyProviderName } from '../orchestrators/ai-graph/providers/types'
+import { extractMemoriesFromQuery } from '../domain/memory'
 import {
   buildAscentContext,
   buildPersonalizedSystemPrompt,
   estimateAbilityLevel,
   getRecentAscents,
-} from '../personalization'
-import type { QueryService } from '../query'
+} from '../domain/personalization'
+import type { QueryService } from '../entry'
 import { runAgentLoop } from './agent-loop'
 import { KVAgentCache } from './cache'
 import { classifyQuery, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'

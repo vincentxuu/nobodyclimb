@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { describeRoute, validator } from 'hono-openapi'
 import { z } from 'zod'
-import { getWeatherByCoordinates, getWeatherByLocation } from '../services/weather'
+import { getWeatherByCoordinates, getWeatherByLocation } from '../services/domain/weather'
 import { Env } from '../types'
 
 // Query parameter schemas

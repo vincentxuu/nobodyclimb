@@ -1,6 +1,6 @@
 import type { LangfuseParent } from '../../utils/langfuse'
 import { endSpan, logGeneration, startSpan } from '../../utils/langfuse'
-import type { AIProvider, ChatMessage } from '../ai-graph/providers/types'
+import type { AIProvider, ChatMessage } from '../orchestrators/ai-graph/providers/types'
 import { hashForCache } from './cache'
 import type { ToolRegistry } from './registry'
 import { getCircuitBreaker, withRetry } from './resilience'

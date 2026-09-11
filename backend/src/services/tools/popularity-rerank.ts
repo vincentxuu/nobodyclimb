@@ -8,8 +8,8 @@
  */
 
 import type { AIDocument, AIDocumentMetadata, AISource, Env } from '../../types'
-import type { SearchResult } from '../pipeline/types'
-import { buildExcerpt, buildUrl, extractTitle } from '../query/documents'
+import { buildExcerpt, buildUrl, extractTitle } from '../core/documents'
+import type { SearchResult } from '../orchestrators/pipeline/types'
 
 // ---------------------------------------------------------------------------
 // Input / Output

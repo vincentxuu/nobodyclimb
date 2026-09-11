@@ -2,7 +2,7 @@ import type { Env } from '../../types'
 import { checkInput, checkOutput } from '../../utils/guardrails'
 import type { LangfuseParent } from '../../utils/langfuse'
 import { endSpan, startSpan } from '../../utils/langfuse'
-import { runJudge } from '../query/llm'
+import { runJudge } from '../core/llm'
 import type { ModelMap } from './types'
 
 // ---------------------------------------------------------------------------

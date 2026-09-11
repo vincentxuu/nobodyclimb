@@ -1,6 +1,6 @@
-import { EmbeddingService } from '../../embedding'
-import { loadPipelineConfig } from '../../query/config'
-import { buildExcerpt, extractTitle } from '../../query/documents'
+import { EmbeddingService } from '../../core/embedding'
+import { loadPipelineConfig } from '../../core/config'
+import { buildExcerpt, extractTitle } from '../../core/documents'
 import { hybridSearch } from '../../tools/hybrid-search'
 import type { Tool, ToolContext, ToolResult } from '../types'
 

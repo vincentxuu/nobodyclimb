@@ -1,4 +1,4 @@
-import { TextToSqlService } from '../../text-to-sql'
+import { TextToSqlService } from '../../domain/text-to-sql'
 import type { Tool, ToolContext, ToolResult } from '../types'
 import { isSmallModel } from '../types'
 
