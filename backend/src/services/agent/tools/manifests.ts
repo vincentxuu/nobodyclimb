@@ -14,9 +14,9 @@ export const TOOL_MANIFESTS: ToolManifest[] = [
     name: 'recommend',
     description: '個人化路線推薦',
     triggers: ['推薦', '建議', '適合我', '下一條', '推薦我'],
-    tools: ['recommend'],
+    tools: ['recommend_agent'],
     promptFragment:
-      '你可以根據使用者的攀登歷史和能力，推薦個人化的下一條攀岩路線，會自動排除已完攀路線。',
+      '你可以根據使用者的攀登歷史和能力，推薦個人化的下一條攀岩路線，會自動排除已完攀路線。（sub-agent 模式：自帶推薦專屬 prompt）',
     requiresAuth: true,
   },
   {
@@ -58,9 +58,9 @@ export const TOOL_MANIFESTS: ToolManifest[] = [
     name: 'coaching',
     description: '訓練計畫建議',
     triggers: ['訓練', '練習', '怎麼進步', '弱點', '加強', '指力', '耐力'],
-    tools: ['suggest_training'],
+    tools: ['coaching_agent'],
     promptFragment:
-      '你可以根據使用者的攀登歷史分析弱點，建議針對性的訓練計畫。',
+      '你可以根據使用者的攀登歷史分析弱點，建議針對性的訓練計畫。（sub-agent 模式：自帶教練專屬 prompt）',
     requiresAuth: true,
   },
 ]
