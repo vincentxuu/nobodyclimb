@@ -1,7 +1,8 @@
 # Agent-First 架構重構規劃
 
 > 2026-09-11 規劃
-> Phase 0 + 1 已合併（PR #393），Phase 2 + 3 進行中（PR #394）
+> Phase 0 + 1 已合併（PR #393），Phase 2 + 3 已合併（PR #394 #395 #396）
+> Phase A+B（目錄重組 + ToolManifest）已完成（PR #397），詳見 `17-service-architecture-redesign.md`
 
 ## 目標
 
