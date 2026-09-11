@@ -1,14 +1,7 @@
 import { getPersonalityType } from '@nobodyclimb/constants'
 import type { PersonalityTypeCode } from '@nobodyclimb/types'
+import { gradeToNumeric } from '../../core/climbing-schema'
 import type { Tool, ToolContext, ToolResult } from '../types'
-
-/** YDS grade → sortable numeric（5.10a=100, 5.12d=123） */
-function gradeToNumeric(grade: string | null): number {
-  if (!grade) return 0
-  const match = grade.match(/5\.(\d+)([a-d])?/)
-  if (!match) return 0
-  return parseInt(match[1], 10) * 10 + (match[2] ? 'abcd'.indexOf(match[2]) : 0)
-}
 
 export const userProfileTool: Tool = {
   name: 'user_profile',
