@@ -4,7 +4,7 @@ import { describeRoute } from 'hono-openapi'
 import { z } from 'zod'
 import { authMiddleware } from '../middleware/auth'
 import { FeedbackRequestSchema, GenerateRequestSchema } from '../schemas/ai-training'
-import { AITrainingService, RateLimitError } from '../services/ai-training'
+import { AITrainingService, RateLimitError } from '../services/domain/training'
 import { Env } from '../types'
 import { generateId } from '../utils/id'
 

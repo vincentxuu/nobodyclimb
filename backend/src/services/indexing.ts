@@ -1,7 +1,7 @@
 import { AIDocumentMetadata, Crag, Env, Route } from '../types'
 import { CONTEXTUAL_CHUNK_PROMPT } from '../utils/ai-prompts'
-import { EmbeddingService } from './embedding'
-import { extractResponseText } from './query/types'
+import { EmbeddingService } from './core/embedding'
+import { extractResponseText } from './core/types'
 
 const CONTEXT_GENERATION_BATCH_SIZE = 5 // 並行 LLM 呼叫上限，避免超出 Workers AI 速率限制
 

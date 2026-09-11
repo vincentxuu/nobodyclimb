@@ -83,10 +83,14 @@ const AGENT_SYSTEM_PROMPT_TEMPLATE = `你是 NobodyClimb 的攀岩助理，使�
 /**
  * 組裝 React Agent 的基底 system prompt。
  * toolsSection 由 ToolRegistry.toSystemPromptSection(ctx) 動態生成，
- * 確保工具描述與當前啟用工具及 context 保持同步。
+ * capabilitySection 由 ToolManifest 的 promptFragment 動態組裝（Phase B）。
  */
-export function buildAgentBasePrompt(toolsSection: string): string {
-  return AGENT_SYSTEM_PROMPT_TEMPLATE.replace('{tools_section}', toolsSection)
+export function buildAgentBasePrompt(toolsSection: string, capabilitySection?: string): string {
+  let prompt = AGENT_SYSTEM_PROMPT_TEMPLATE.replace('{tools_section}', toolsSection)
+  if (capabilitySection) {
+    prompt += `\n\n你具備以下能力：\n${capabilitySection}`
+  }
+  return prompt
 }
 
 // Tool Calling：讓 LLM 解析查詢意圖並選擇搜尋工具

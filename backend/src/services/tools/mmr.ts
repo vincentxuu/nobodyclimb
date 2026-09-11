@@ -6,8 +6,8 @@
  */
 
 import type { AIDocument } from '../../types'
-import type { SearchResult } from '../pipeline/types'
-import { applyMMR } from '../query/retrieval'
+import { applyMMR } from '../core/retrieval'
+import type { SearchResult } from '../orchestrators/pipeline/types'
 
 // ---------------------------------------------------------------------------
 // Input / Output

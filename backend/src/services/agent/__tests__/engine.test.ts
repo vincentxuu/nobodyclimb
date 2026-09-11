@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import type { AIProvider, ToolUseResponse } from '../../ai-graph/providers/types'
+import type { AIProvider, ToolUseResponse } from '../../orchestrators/ai-graph/providers/types'
 import { runAgentLoop } from '../agent-loop'
 import type { AgentCache } from '../cache'
 import { ToolRegistry } from '../registry'

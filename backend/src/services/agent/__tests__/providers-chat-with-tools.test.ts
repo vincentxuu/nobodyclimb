@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
-import { AnthropicProvider } from '../../ai-graph/providers/anthropic'
-import { CloudflareProvider } from '../../ai-graph/providers/cloudflare'
-import { GitHubModelsProvider } from '../../ai-graph/providers/github'
-import { GoogleProvider } from '../../ai-graph/providers/google'
-import { OpenAIProvider } from '../../ai-graph/providers/openai'
-import type { ToolSchema } from '../../ai-graph/providers/types'
+import { AnthropicProvider } from '../../orchestrators/ai-graph/providers/anthropic'
+import { CloudflareProvider } from '../../orchestrators/ai-graph/providers/cloudflare'
+import { GitHubModelsProvider } from '../../orchestrators/ai-graph/providers/github'
+import { GoogleProvider } from '../../orchestrators/ai-graph/providers/google'
+import { OpenAIProvider } from '../../orchestrators/ai-graph/providers/openai'
+import type { ToolSchema } from '../../orchestrators/ai-graph/providers/types'
 
 const SAMPLE_TOOLS: ToolSchema[] = [
   {

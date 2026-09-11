@@ -2,15 +2,15 @@ import { getMemoriesSummary } from '../../repositories/memory'
 import type { Env } from '../../types'
 import { buildAgentBasePrompt } from '../../utils/ai-prompts'
 import type { LangfuseParent } from '../../utils/langfuse'
-import { createProvider } from '../ai-graph/providers'
-import type { ProviderName as LegacyProviderName } from '../ai-graph/providers/types'
-import { extractMemoriesFromQuery } from '../memory-extractor'
+import { createProvider } from '../orchestrators/ai-graph/providers'
+import type { ProviderName as LegacyProviderName } from '../orchestrators/ai-graph/providers/types'
+import { extractMemoriesFromQuery } from '../domain/memory'
 import {
   buildAscentContext,
   buildPersonalizedSystemPrompt,
   estimateAbilityLevel,
   getRecentAscents,
-} from '../personalization'
+} from '../domain/personalization'
 import { runAgentLoop } from './agent-loop'
 import { KVAgentCache } from './cache'
 import { classifyQuery, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
@@ -226,7 +226,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   // 2. Create provider + tracker + registry + context
   const orchestratorProvider = createProviderForConfig(models.orchestrator.provider, env)
   const tracker = new DefaultTokenTracker(agentCfg.usdToTwd)
-  const registry = createToolRegistry()
+  const { registry, manifests } = createToolRegistry({ isAuthenticated: !!userId })
   const cache = new KVAgentCache(env.CACHE)
   const toolCtx: ToolContext = {
     env,
@@ -239,15 +239,16 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     availableTools: registry.getToolNames(),
   }
 
-  // 3. Build personalized system prompt（工具說明動態生成，基於 registry + ctx）
+  // 3. Build personalized system prompt（工具說明動態生成，基於 manifest + ctx）
   const ascentContext = buildAscentContext(ascents)
   const abilityLevel = estimateAbilityLevel(ascents)
   const toolsSection = registry.toSystemPromptSection(toolCtx)
+  const capabilitySection = manifests.map((m) => `- **${m.name}**：${m.promptFragment}`).join('\n')
   const systemPrompt = buildPersonalizedSystemPrompt(
     memorySummary,
     ascentContext,
     abilityLevel,
-    buildAgentBasePrompt(toolsSection)
+    buildAgentBasePrompt(toolsSection, capabilitySection)
   )
 
   // 5. Run agent loop

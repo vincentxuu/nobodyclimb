@@ -1,4 +1,4 @@
-import type { ToolSchema } from '../ai-graph/providers/types'
+import type { ToolSchema } from '../orchestrators/ai-graph/providers/types'
 import type { Tool, ToolContext } from './types'
 
 export class ToolRegistry {

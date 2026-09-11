@@ -5,9 +5,9 @@ import { z } from 'zod'
 import { adminMiddleware, authMiddleware } from '../middleware/auth'
 import { checkAiRateLimit } from '../middleware/rateLimit'
 import { deleteMemory, getUserMemories } from '../repositories/memory'
-import { EmbeddingService } from '../services/embedding'
+import { EmbeddingService } from '../services/core/embedding'
 import { IndexingService } from '../services/indexing'
-import { QueryService } from '../services/query'
+import { QueryService } from '../services/entry'
 import {
   addTokenUsage,
   deductQuotaAndToken,
@@ -16,7 +16,7 @@ import {
   initUserRank,
   resetDailyUsage,
 } from '../services/rank'
-import { RecommendationService } from '../services/recommendation'
+import { RecommendationService } from '../services/domain/recommendation'
 import { Env } from '../types'
 import { SYSTEM_PROMPT } from '../utils/ai-prompts'
 import {

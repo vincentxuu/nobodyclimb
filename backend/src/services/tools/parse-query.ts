@@ -7,7 +7,7 @@
  * 不包含 sim-route intent 處理（pipeline 用單條、graph 用多條，邏輯不同，留在 wrapper）。
  */
 
-import toolRegistry from '../tool-registry'
+import toolRegistry from '../orchestrators/tool-registry'
 
 // ---------------------------------------------------------------------------
 // 共用 regex + helper（原本在兩個檔案各複製一份）

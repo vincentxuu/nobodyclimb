@@ -119,6 +119,24 @@ export interface Tool {
 }
 
 // ---------------------------------------------------------------------------
+// Capability Manifest（Phase B）
+// ---------------------------------------------------------------------------
+
+/** 描述一組相關 capability 的 metadata，用於條件式註冊和動態 prompt 組裝 */
+export interface ToolManifest {
+  name: string
+  description: string
+  /** 觸發這組 capability 的中文/英文關鍵詞 */
+  triggers: string[]
+  /** 屬於這組 capability 的 tool 名稱 */
+  tools: string[]
+  /** 注入 system prompt 的片段，描述此 capability 能做什麼 */
+  promptFragment: string
+  /** 是否需要登入才啟用 */
+  requiresAuth: boolean
+}
+
+// ---------------------------------------------------------------------------
 // Provider Tool-Use Response (unified format)
 // ---------------------------------------------------------------------------
 

@@ -1,17 +1,9 @@
-import { EmbeddingService } from '../../embedding'
-import { loadPipelineConfig } from '../../query/config'
-import { buildExcerpt, extractTitle } from '../../query/documents'
+import { gradeToNumeric } from '../../core/climbing-schema'
+import { loadPipelineConfig } from '../../core/config'
+import { buildExcerpt, extractTitle } from '../../core/documents'
+import { EmbeddingService } from '../../core/embedding'
 import { hybridSearch } from '../../tools/hybrid-search'
 import type { Tool, ToolContext, ToolResult } from '../types'
-
-function gradeToNumeric(grade: string | null | undefined): number {
-  if (!grade) return 0
-  const match = grade.match(/5\.(\d+)([a-d])?/)
-  if (!match) return 0
-  const base = parseInt(match[1], 10) * 10
-  const suffix = match[2] ? 'abcd'.indexOf(match[2]) : 0
-  return base + suffix
-}
 
 export const recommendTool: Tool = {
   name: 'recommend',

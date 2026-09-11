@@ -6,8 +6,8 @@
  */
 
 import type { AIDocument, Env } from '../../types'
-import type { SearchResult } from '../pipeline/types'
-import { extractTitle } from '../query/documents'
+import { extractTitle } from '../core/documents'
+import type { SearchResult } from '../orchestrators/pipeline/types'
 
 // ---------------------------------------------------------------------------
 // Input / Output
