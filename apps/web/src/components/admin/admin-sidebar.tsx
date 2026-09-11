@@ -68,6 +68,7 @@ const AI_GROUP: NavGroup = {
     { href: '/admin/ai/prompts', label: '模板設定' },
     { href: '/admin/ai/knowledge', label: '知識庫' },
     { href: '/admin/ai/metrics', label: '趨勢分析' },
+    { href: '/admin/ai/quality', label: '品質監控' },
     { href: '/admin/ai/costs', label: '費用估算' },
   ],
 }
