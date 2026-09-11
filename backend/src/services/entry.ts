@@ -251,6 +251,11 @@ export class QueryService {
 
     const controller = new AbortController()
 
+    // eval_mode_override 覆寫 ai_mode（eval A/B 測試用，需 X-Eval-Mode header）
+    if (extraTrace?.eval_mode_override === 'agent' || extraTrace?.eval_mode_override === 'pipeline') {
+      pipelineCfg.ai_mode = extraTrace.eval_mode_override
+    }
+
     // request.rag_strategy 覆寫 DB 設定（eval/A/B 測試用）
     if (request.rag_strategy) {
       pipelineCfg.rag_strategy = request.rag_strategy
