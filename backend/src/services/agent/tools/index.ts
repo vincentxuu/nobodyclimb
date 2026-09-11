@@ -1,5 +1,6 @@
 import { selectManifests } from '../classifier'
 import { ToolRegistry } from '../registry'
+import { coachingAgentTool, recommendAgentTool } from '../sub-agents'
 import type { ToolManifest } from '../types'
 import { suggestTrainingTool } from './coaching'
 import { cragInfoTool } from './crag-info'
@@ -22,6 +23,8 @@ const TOOL_MAP: Record<string, import('../types').Tool> = {
   crag_info: cragInfoTool,
   recall_memory: recallMemoryTool,
   suggest_training: suggestTrainingTool,
+  recommend_agent: recommendAgentTool,
+  coaching_agent: coachingAgentTool,
 }
 
 /** manifest-driven 條件式工具註冊。query 有值時啟用動態載入。 */
