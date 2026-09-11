@@ -306,7 +306,6 @@ export class QueryService {
               })),
               userId: userId ?? null,
               env: this.env,
-              queryService: this,
               langfuseTrace,
               waitUntilCtx: ctx,
               stream: streamingMode,
