@@ -148,11 +148,11 @@ interface Tool {
 | 1-2 | `rerank` | `applyMMR`, cross-encoder, popularity, personality | 4 | 配合 hybrid_search，兩個一起做 Agent 就有完整檢索能力。帶 `methods` 參數 |
 | 1-3 | `parse_query` | `parseQueryWithLLM`（現 tool-selection） | 2 | 把 pipeline 的分類智慧給 Agent 用（general_knowledge earlyReturn、sql 偵測、低信心降級）。Agent 可在第一輪呼叫做分流 |
 | 1-4 | `build_filters` | `extractLocationFilter`, `extractGradeFilter`, `extractTypeFilter`, `buildFiltersFromParsed` | 6 | 純 NLP，無 LLM，配合 hybrid_search 做精確篩選 |
-| 1-5 | `expand_query` | `generateHyDE`, `generateMultipleQueries` | 4 | Agent 可自己決定要不要用，優先序較低 |
-| 1-6 | `judge_retrieval` | retrieval quality judge | 2 | Agent 搜完自己判斷要不要再搜 |
-| 1-7 | `judge_answer` | `runJudge` | 4 | |
-| 1-8 | `generate_answer` | `streamLLMGeneration` | 2 | 最後做，牽涉串流 onToken 傳遞 |
-| 1-9 | `plan_execute` | `planQuery`, `executePlan`, `synthesize` | 1 | 可整包保留 |
+| 1-5 | `expand_query` | `generateHyDE`, `generateMultipleQueries` | 4 | **跳過**：核心就一行 queryService 呼叫，wrapper 邏輯比共用邏輯多，抽了加碼 |
+| 1-6 | `judge_retrieval` | retrieval quality judge | 2 | graph 獨有（無 pipeline 對應），暫不抽 |
+| 1-7 | `judge_answer` | `runJudge` | 4 | ✅ 已完成 → `tools/judge-answer.ts` |
+| 1-8 | `generate_answer` | `streamLLMGeneration` | 2 | **跳過**：pipeline 用 `env.AI.run`（含 Qwen3 特殊處理），graph 用 provider 抽象層，LLM 呼叫機制不同，硬抽會變成一堆分支 |
+| 1-9 | `plan_execute` | `planQuery`, `executePlan`, `synthesize` | 1 | pipeline 獨有，暫不抽 |
 
 Agent 原有七個工具（search_routes、search_crags、sql_query、weather、user_profile、recommend、crag_info）搬到同一個 `services/tools/` 目錄，但內容不動。
 
