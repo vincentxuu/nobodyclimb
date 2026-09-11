@@ -15,6 +15,7 @@ import { runAgentLoop } from './agent-loop'
 import { KVAgentCache } from './cache'
 import { classifyQuery, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
 import { runAsyncJudge, runOutputGuards } from './guards'
+import { buildProactivePromptSection, gatherProactiveContext } from './proactive'
 import { createToolRegistry } from './tools'
 import { DefaultTokenTracker } from './tracker'
 import type { AgentResult, ModelConfig, ModelMap, ProviderName, ToolContext } from './types'
@@ -212,15 +213,16 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     }
   }
 
-  // 1. Load config + personalization（並行）
+  // 1. Load config + personalization + proactive context（並行）
   const personalizationPromise = userId
     ? Promise.all([getMemoriesSummary(userId, env.DB), getRecentAscents(userId, env.DB)])
     : Promise.resolve([null, []] as [string | null, Awaited<ReturnType<typeof getRecentAscents>>])
 
-  const [models, agentCfg, [memorySummary, ascents]] = await Promise.all([
+  const [models, agentCfg, [memorySummary, ascents], proactiveCtx] = await Promise.all([
     loadModelMap(env.DB),
     loadAgentConfig(env.DB),
     personalizationPromise,
+    gatherProactiveContext(env.DB, userId),
   ])
 
   // 2. Create provider + tracker + registry + context
@@ -244,12 +246,16 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   const abilityLevel = estimateAbilityLevel(ascents)
   const toolsSection = registry.toSystemPromptSection(toolCtx)
   const capabilitySection = manifests.map((m) => `- **${m.name}**：${m.promptFragment}`).join('\n')
-  const systemPrompt = buildPersonalizedSystemPrompt(
+  const baseSystemPrompt = buildPersonalizedSystemPrompt(
     memorySummary,
     ascentContext,
     abilityLevel,
     buildAgentBasePrompt(toolsSection, capabilitySection)
   )
+  const proactiveSection = buildProactivePromptSection(proactiveCtx)
+  const systemPrompt = proactiveSection
+    ? `${baseSystemPrompt}\n\n${proactiveSection}`
+    : baseSystemPrompt
 
   // 5. Run agent loop
   const result = await runAgentLoop(
