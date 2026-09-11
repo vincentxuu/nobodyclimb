@@ -1,6 +1,5 @@
 import type { Env } from '../../types'
 import type { LangfuseParent } from '../../utils/langfuse'
-import type { QueryService } from '../query'
 import type { AgentCache } from './cache'
 
 // ---------------------------------------------------------------------------
@@ -86,7 +85,6 @@ export interface ToolContext {
   userId: string | null
   locale: string
   models: ModelMap
-  queryService: QueryService
   langfuseTrace?: LangfuseParent | null
   tracker: TokenTracker
   cache: AgentCache
