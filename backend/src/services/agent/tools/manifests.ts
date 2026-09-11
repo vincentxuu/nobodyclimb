@@ -63,6 +63,15 @@ export const TOOL_MANIFESTS: ToolManifest[] = [
       '你可以根據使用者的攀登歷史分析弱點，建議針對性的訓練計畫。（sub-agent 模式：自帶教練專屬 prompt）',
     requiresAuth: true,
   },
+  {
+    name: 'goals',
+    description: '攀岩目標設定與追蹤',
+    triggers: ['目標', '挑戰', '想要達到', '進度', '計畫', '我想爬到', '我想挑戰'],
+    tools: ['manage_goals'],
+    promptFragment:
+      '你可以幫使用者設定攀岩目標（如挑戰某個難度、完攀特定路線），追蹤進度並在接近達成時提醒。',
+    requiresAuth: true,
+  },
 ]
 
 /** 根據使用者是否登入，回傳啟用的 manifest 清單 */

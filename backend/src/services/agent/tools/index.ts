@@ -4,6 +4,7 @@ import { coachingAgentTool, recommendAgentTool } from '../sub-agents'
 import type { ToolManifest } from '../types'
 import { suggestTrainingTool } from './coaching'
 import { cragInfoTool } from './crag-info'
+import { goalsTool } from './goals'
 import { getActiveManifests } from './manifests'
 import { recallMemoryTool } from './memory'
 import { recommendTool } from './recommend'
@@ -25,6 +26,7 @@ const TOOL_MAP: Record<string, import('../types').Tool> = {
   suggest_training: suggestTrainingTool,
   recommend_agent: recommendAgentTool,
   coaching_agent: coachingAgentTool,
+  manage_goals: goalsTool,
 }
 
 /** manifest-driven 條件式工具註冊。query 有值時啟用動態載入。 */
