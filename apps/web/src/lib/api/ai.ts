@@ -133,7 +133,8 @@ export async function askAIStream(
   onToken: (_token: string) => void,
   onDone: (_event: AIStreamDoneEvent) => void,
   onError: (_message: string) => void,
-  signal?: AbortSignal
+  signal?: AbortSignal,
+  onProgress?: (_event: { tool: string; status: 'executing' | 'done' }) => void
 ): Promise<void> {
   const { API_BASE_URL } = await import('../constants')
   const { getAccessToken } = await import('@nobodyclimb/api-client/web')
@@ -182,11 +183,18 @@ export async function askAIStream(
           const event = JSON.parse(jsonStr) as {
             type: string
             token?: string
+            tool?: string
+            status?: string
           } & Partial<AIStreamDoneEvent> & { message?: string }
           if (event.type === 'token' && event.token !== undefined) {
             onToken(event.token)
           } else if (event.type === 'done') {
             onDone(event as AIStreamDoneEvent)
+          } else if (event.type === 'progress' && onProgress) {
+            onProgress({
+              tool: event.tool as string,
+              status: event.status as 'executing' | 'done',
+            })
           } else if (event.type === 'error') {
             onError(event.message ?? '抱歉，AI 服務暫時無法使用，請稍後再試。')
           }
