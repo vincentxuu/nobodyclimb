@@ -32,21 +32,21 @@ describe('KVAgentCache', () => {
     const kv = mockKV()
     const cache = new KVAgentCache(kv)
     await cache.set('test', 'value', 300)
-    expect(kv.put).toHaveBeenCalledWith('react-agent:test', '"value"', { expirationTtl: 300 })
+    expect(kv.put).toHaveBeenCalledWith('agent:test', '"value"', { expirationTtl: 300 })
   })
 
   it('passes TTL to KV put', async () => {
     const kv = mockKV()
     const cache = new KVAgentCache(kv)
     await cache.set('key', 'val', 1800)
-    const stored = kv._store.get('react-agent:key')
+    const stored = kv._store.get('agent:key')
     expect(stored?.expiration).toBe(1800)
   })
 
   it('handles malformed JSON in KV gracefully', async () => {
     const kv = mockKV()
     // Manually put invalid JSON
-    kv._store.set('react-agent:bad', { value: 'not-json{' })
+    kv._store.set('agent:bad', { value: 'not-json{' })
     const cache = new KVAgentCache(kv)
     const result = await cache.get('bad')
     expect(result).toBeNull()

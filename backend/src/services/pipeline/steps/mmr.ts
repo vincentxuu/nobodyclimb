@@ -1,3 +1,4 @@
+import { mmrSelect } from '../../tools/mmr'
 import { PipelineContext, PipelineStep } from '../types'
 
 export const mmrStep: PipelineStep = {
@@ -18,34 +19,26 @@ export const mmrStep: PipelineStep = {
   ],
 
   async execute(ctx: PipelineContext): Promise<PipelineContext> {
-    // Plan-and-Execute 已完成 synthesis，跳過 post-retrieval
     if (ctx.skipPostRetrieval) {
       ctx.rerankedMatches = (ctx.scoredCandidates ?? []).map((m) => ({ ...m, finalScore: m.score }))
       ctx.trace.mmr_selection = { skipped_reason: 'skipPostRetrieval' }
       return ctx
     }
 
-    const { pipelineConfig, trace } = ctx
-    const scoredCandidates = ctx.scoredCandidates ?? ctx.candidateMatches ?? []
-    const documents = ctx.documents ?? new Map()
-    const effectiveLimit = pipelineConfig.max_results
+    const result = mmrSelect({
+      scoredCandidates: ctx.scoredCandidates ?? ctx.candidateMatches ?? [],
+      documents: ctx.documents ?? new Map(),
+      config: {
+        mmr_lambda: ctx.pipelineConfig.mmr_lambda,
+        max_results: ctx.pipelineConfig.max_results,
+      },
+    })
 
-    const mmrSelected = ctx.queryService.applyMMR(
-      scoredCandidates,
-      documents,
-      pipelineConfig.mmr_lambda,
-      effectiveLimit
-    )
-
-    trace.mmr_selection = {
-      lambda: pipelineConfig.mmr_lambda,
-      input_count: scoredCandidates.length,
-      selected_count: mmrSelected.length,
-      popularity_weight: pipelineConfig.popularity_weight,
+    ctx.rerankedMatches = result.rerankedMatches
+    ctx.trace.mmr_selection = {
+      ...result.trace,
+      popularity_weight: ctx.pipelineConfig.popularity_weight,
     }
-
-    // rerankedMatches 暫存為 MMR 選出的候選（popularity-rerank 會加權排序）
-    ctx.rerankedMatches = mmrSelected.map((m) => ({ ...m, finalScore: m.score }))
 
     return ctx
   },

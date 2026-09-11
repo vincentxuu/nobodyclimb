@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import type { AIProvider, ToolUseResponse } from '../../ai-graph/providers/types'
+import { runAgentLoop } from '../agent-loop'
 import type { AgentCache } from '../cache'
-import { runReactLoop } from '../engine'
 import { ToolRegistry } from '../registry'
 import { DefaultTokenTracker } from '../tracker'
 import type { ModelMap, Tool, ToolContext } from '../types'
@@ -92,7 +92,7 @@ const DEFAULT_OPTS = {
 // Tests
 // ---------------------------------------------------------------------------
 
-describe('runReactLoop', () => {
+describe('runAgentLoop', () => {
   it('0 tool calls — direct answer in 1 turn', async () => {
     const provider = mockProvider([
       {
@@ -105,7 +105,7 @@ describe('runReactLoop', () => {
     const registry = new ToolRegistry()
     const ctx = makeCtx()
 
-    const result = await runReactLoop({ provider, registry, ctx }, DEFAULT_OPTS)
+    const result = await runAgentLoop({ provider, registry, ctx }, DEFAULT_OPTS)
 
     expect(result.answer).toBe('龍洞有很多經典運動攀路線。')
     expect(result.turnCount).toBe(1)
@@ -134,7 +134,7 @@ describe('runReactLoop', () => {
     registry.registerTool(makeTool())
     const ctx = makeCtx()
 
-    const result = await runReactLoop({ provider, registry, ctx }, DEFAULT_OPTS)
+    const result = await runAgentLoop({ provider, registry, ctx }, DEFAULT_OPTS)
 
     expect(result.answer).toBe('根據搜尋結果，龍洞有以下路線...')
     expect(result.turnCount).toBe(2)
@@ -183,7 +183,7 @@ describe('runReactLoop', () => {
     registry.registerTool(tool2)
     const ctx = makeCtx()
 
-    const result = await runReactLoop({ provider, registry, ctx }, DEFAULT_OPTS)
+    const result = await runAgentLoop({ provider, registry, ctx }, DEFAULT_OPTS)
 
     expect(result.toolCallCount).toBe(2)
     // Both tools should have been called
@@ -215,7 +215,7 @@ describe('runReactLoop', () => {
     registry.registerTool(failingTool)
     const ctx = makeCtx()
 
-    const result = await runReactLoop({ provider, registry, ctx }, DEFAULT_OPTS)
+    const result = await runAgentLoop({ provider, registry, ctx }, DEFAULT_OPTS)
 
     // Should not throw — error wrapped and sent to LLM
     expect(result.answer).toBe('天氣查詢失敗，但根據其他資料...')
@@ -255,7 +255,7 @@ describe('runReactLoop', () => {
     registry.registerTool(failingTool)
     const ctx = makeCtx()
 
-    const result = await runReactLoop({ provider, registry, ctx }, DEFAULT_OPTS)
+    const result = await runAgentLoop({ provider, registry, ctx }, DEFAULT_OPTS)
 
     // After 2 consecutive failures, tool should be removed
     expect(registry.getTool('weather')).toBeUndefined()
@@ -283,7 +283,7 @@ describe('runReactLoop', () => {
     registry.registerTool(makeTool())
     const ctx = makeCtx()
 
-    const result = await runReactLoop({ provider, registry, ctx }, { ...DEFAULT_OPTS, maxTurns: 2 })
+    const result = await runAgentLoop({ provider, registry, ctx }, { ...DEFAULT_OPTS, maxTurns: 2 })
 
     // Should reach maxTurns then do a final forced answer
     expect(result.turnCount).toBe(3) // 2 loop turns + 1 final
@@ -309,7 +309,7 @@ describe('runReactLoop', () => {
     registry.registerTool(makeTool())
     const ctx = makeCtx()
 
-    const result = await runReactLoop(
+    const result = await runAgentLoop(
       { provider, registry, ctx },
       { ...DEFAULT_OPTS, tokenBudget: 7000 }
     )
@@ -340,7 +340,7 @@ describe('runReactLoop', () => {
     registry.registerTool(makeTool())
     const ctx = makeCtx()
 
-    const result = await runReactLoop(
+    const result = await runAgentLoop(
       { provider, registry, ctx },
       { ...DEFAULT_OPTS, tokenBudget: 400 }
     )
@@ -375,7 +375,7 @@ describe('runReactLoop', () => {
     registry.registerTool(tool)
     const ctx = makeCtx()
 
-    await runReactLoop({ provider, registry, ctx }, DEFAULT_OPTS)
+    await runAgentLoop({ provider, registry, ctx }, DEFAULT_OPTS)
 
     // The tool result message sent to LLM should contain truncation note
     const chatWithToolsCalls = (provider.chatWithTools as any).mock.calls
@@ -406,7 +406,7 @@ describe('runReactLoop', () => {
     // No tools registered
     const ctx = makeCtx()
 
-    const result = await runReactLoop({ provider, registry, ctx }, DEFAULT_OPTS)
+    const result = await runAgentLoop({ provider, registry, ctx }, DEFAULT_OPTS)
 
     expect(result.answer).toBe('工具不可用，直接回答。')
   })
