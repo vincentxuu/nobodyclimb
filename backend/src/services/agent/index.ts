@@ -226,7 +226,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   // 2. Create provider + tracker + registry + context
   const orchestratorProvider = createProviderForConfig(models.orchestrator.provider, env)
   const tracker = new DefaultTokenTracker(agentCfg.usdToTwd)
-  const { registry, manifests } = createToolRegistry({ isAuthenticated: !!userId })
+  const { registry, manifests } = createToolRegistry({ isAuthenticated: !!userId, query })
   const cache = new KVAgentCache(env.CACHE)
   const toolCtx: ToolContext = {
     env,

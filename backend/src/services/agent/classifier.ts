@@ -1,7 +1,10 @@
 /**
  * 規則式查詢分類器
  * 在 ReAct loop 前分類查詢，閒聊和通用知識問題跳過 orchestrator LLM call
+ * selectManifests 根據 manifest triggers 動態篩選工具（Phase C）
  */
+
+import type { ToolManifest } from './types'
 
 export type QueryCategory = 'greeting' | 'system' | 'general_knowledge' | 'needs_tool'
 
@@ -91,6 +94,39 @@ export function classifyQuery(query: string): QueryCategory {
 
   // 5. 預設進 ReAct loop（寧可多花一次 orchestrator call，不可漏回答）
   return 'needs_tool'
+}
+
+// ---------------------------------------------------------------------------
+// Manifest 篩選（Phase C: Dynamic Tool Loading）
+// ---------------------------------------------------------------------------
+
+const ALWAYS_LOAD_MANIFESTS = new Set(['search', 'data'])
+
+/**
+ * 根據查詢文字比對 manifest triggers，回傳應載入的 manifests。
+ * 保底規則：
+ * 1. search + data 永遠載入（核心能力）
+ * 2. 無 trigger 命中時全部載入（不猜錯）
+ */
+export function selectManifests(
+  query: string,
+  manifests: ToolManifest[]
+): ToolManifest[] {
+  const trimmed = query.trim()
+  if (!trimmed) return manifests
+
+  const matched = new Set<string>(ALWAYS_LOAD_MANIFESTS)
+  let anyTriggerHit = false
+  for (const m of manifests) {
+    if (m.triggers.some((t) => trimmed.includes(t))) {
+      matched.add(m.name)
+      anyTriggerHit = true
+    }
+  }
+
+  if (!anyTriggerHit) return manifests
+
+  return manifests.filter((m) => matched.has(m.name))
 }
 
 // ---------------------------------------------------------------------------
