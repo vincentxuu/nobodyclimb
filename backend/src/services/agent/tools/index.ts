@@ -7,7 +7,7 @@ import { sqlQueryTool } from './sql-query'
 import { userProfileTool } from './user-profile'
 import { weatherTool } from './weather'
 
-/** 建立並註冊所有 react-agent tools */
+/** 建立並註冊所有 agent tools */
 export function createToolRegistry(): ToolRegistry {
   const registry = new ToolRegistry()
   registry.registerTool(searchRoutesTool)

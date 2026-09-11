@@ -41,7 +41,7 @@ export const SYSTEM_PROMPT = `你是 NobodyClimb 的攀岩助理，專門協助�
 // 與 SYSTEM_PROMPT 的差異：React Agent 沒有預載 context，資料全靠工具呼叫
 // 工具說明區塊（{tools_section}）由 ToolRegistry.toSystemPromptSection(ctx) 動態生成，
 // 確保描述與當前已啟用的工具及 context（如是否登入）保持同步。
-const REACT_AGENT_SYSTEM_PROMPT_TEMPLATE = `你是 NobodyClimb 的攀岩助理，使用工具（Tool Calling）從資料庫查詢資料後才能回答。
+const AGENT_SYSTEM_PROMPT_TEMPLATE = `你是 NobodyClimb 的攀岩助理，使用工具（Tool Calling）從資料庫查詢資料後才能回答。
 
 **【語言規定（最高優先）】你必須使用繁體中文回答一切問題。絕對不可以用英文或任何其他語言回答。**
 
@@ -85,8 +85,8 @@ const REACT_AGENT_SYSTEM_PROMPT_TEMPLATE = `你是 NobodyClimb 的攀岩助理�
  * toolsSection 由 ToolRegistry.toSystemPromptSection(ctx) 動態生成，
  * 確保工具描述與當前啟用工具及 context 保持同步。
  */
-export function buildReactAgentBasePrompt(toolsSection: string): string {
-  return REACT_AGENT_SYSTEM_PROMPT_TEMPLATE.replace('{tools_section}', toolsSection)
+export function buildAgentBasePrompt(toolsSection: string): string {
+  return AGENT_SYSTEM_PROMPT_TEMPLATE.replace('{tools_section}', toolsSection)
 }
 
 // Tool Calling：讓 LLM 解析查詢意圖並選擇搜尋工具

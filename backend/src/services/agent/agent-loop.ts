@@ -5,17 +5,17 @@ import { hashForCache } from './cache'
 import type { ToolRegistry } from './registry'
 import { getCircuitBreaker, withRetry } from './resilience'
 import type {
+  AgentOptions,
   ModelConfig,
   ProgressEvent,
   ProviderName,
-  ReactAgentOptions,
   Tool,
   ToolContext,
   ToolUseResponse,
 } from './types'
 
 // ---------------------------------------------------------------------------
-// ReAct Engine — 核心 loop
+// Agent Loop — 核心 loop
 // ---------------------------------------------------------------------------
 
 interface EngineConfig {
@@ -34,12 +34,12 @@ interface EngineResult {
 }
 
 /**
- * ReAct loop 主邏輯
+ * Agent loop 主邏輯
  * while (turns < max && tokens < budget) → chatWithTools → execute tools → observe
  */
-export async function runReactLoop(
+export async function runAgentLoop(
   config: EngineConfig,
-  opts: ReactAgentOptions
+  opts: AgentOptions
 ): Promise<EngineResult> {
   const { provider, registry, ctx, langfuseParent } = config
   const { maxTurns, tokenBudget, systemPrompt } = opts
@@ -132,7 +132,7 @@ export async function runReactLoop(
     if (response.stopReason === 'end_turn' || response.toolCalls.length === 0) {
       // 第一輪就沒呼叫工具，且還有剩餘輪次 → 注入警告強制重試，避免模型直接幻覺作答
       if (turn === 1 && turn < maxTurns && registry.getToolNames().length > 0) {
-        console.warn('[react-engine] Turn 1 returned no tool calls — injecting retry prompt')
+        console.warn('[agent-loop] Turn 1 returned no tool calls — injecting retry prompt')
         endSpan(turnSpan, { output: { warning: 'no_tool_calls_turn1', injecting_retry: true } })
         if (response.content) {
           messages.push({ role: 'assistant', content: response.content })
@@ -476,7 +476,7 @@ async function executeSingleTool(
     // 同一 tool 連續失敗 2 次 → 移除
     if (failures >= 2) {
       registry.removeTool(tc.name)
-      console.warn(`[react-engine] Tool ${tc.name} removed after ${failures} consecutive failures`)
+      console.warn(`[agent-loop] Tool ${tc.name} removed after ${failures} consecutive failures`)
     }
 
     // 送出 progress: done（即使失敗也要通知前端結束）

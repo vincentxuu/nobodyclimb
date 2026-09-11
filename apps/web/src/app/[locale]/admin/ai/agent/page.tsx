@@ -67,7 +67,7 @@ function StatusPanel() {
         <div className="flex items-center gap-3">
           <Bot className="h-5 w-5 text-wb-60" />
           <div>
-            <h2 className="text-sm font-semibold text-wb-100">React Agent 狀態</h2>
+            <h2 className="text-sm font-semibold text-wb-100">Agent 狀態</h2>
             <p className="mt-0.5 text-xs text-wb-50">當前 RAG 策略設定</p>
           </div>
         </div>
@@ -92,7 +92,7 @@ function StatusPanel() {
             ) : (
               <Power className="h-4 w-4" />
             )}
-            {isReact ? '停用 React Agent' : '啟用 React Agent'}
+            {isReact ? '停用 Agent' : '啟用 Agent'}
           </button>
         </div>
       </div>
@@ -445,14 +445,12 @@ function TestQueryPanel() {
 // Main Page
 // =============================================
 
-export default function ReactAgentPage() {
+export default function AgentPage() {
   return (
     <div className="max-w-2xl space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-wb-100">React Agent</h1>
-        <p className="mt-1 text-sm text-wb-60">
-          啟用 / 停用 React Agent 策略，並在此直接測試查詢效果
-        </p>
+        <h1 className="text-xl font-bold text-wb-100">Agent</h1>
+        <p className="mt-1 text-sm text-wb-60">啟用 / 停用 Agent 策略，並在此直接測試查詢效果</p>
       </div>
 
       <StatusPanel />

@@ -154,7 +154,7 @@ export interface ProgressEvent {
   status: 'executing' | 'done'
 }
 
-export interface ReactAgentOptions {
+export interface AgentOptions {
   query: string
   chatHistory?: Array<{ role: 'user' | 'assistant'; content: string }>
   systemPrompt: string
@@ -165,7 +165,7 @@ export interface ReactAgentOptions {
   onProgress?: (event: ProgressEvent) => Promise<void>
 }
 
-export interface ReactAgentResult {
+export interface AgentResult {
   answer: string
   sources: Array<{ title: string; url: string; excerpt?: string }>
   totalTokens: number

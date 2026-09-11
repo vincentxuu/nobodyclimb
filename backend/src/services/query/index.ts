@@ -293,12 +293,12 @@ export class QueryService {
     this.setPipelineCtx(pipelineCtx)
 
     try {
-      // React Agent 策略
+      // Agent 策略
       if (pipelineCfg.rag_strategy === 'react') {
         try {
-          const { runReactAgent } = await import('../react-agent')
+          const { runAgent } = await import('../agent')
           const reactResult = await withTimeout(
-            runReactAgent({
+            runAgent({
               query: request.query,
               chatHistory: recentHistory.map((h) => ({
                 role: h.role as 'user' | 'assistant',
@@ -332,7 +332,7 @@ export class QueryService {
             sources: reactSources,
             latencyMs: Date.now() - startTime,
             tokenCount: reactResult.totalTokens,
-            modelUsed: 'react-agent',
+            modelUsed: 'agent',
             pipelineTrace: JSON.stringify({
               strategy: 'react',
               turn_count: reactResult.turnCount,
@@ -367,7 +367,7 @@ export class QueryService {
           ) {
             throw reactErr
           }
-          console.error('[query] React Agent failed, falling back to baseline:', reactErr)
+          console.error('[query] Agent failed, falling back to baseline:', reactErr)
           pipelineCtx.pipelineConfig.rag_strategy = 'baseline'
           pipelineCtx.trace.react_fallback = {
             triggered: true,

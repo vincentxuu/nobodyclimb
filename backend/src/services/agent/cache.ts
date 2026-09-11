@@ -1,7 +1,7 @@
 /**
  * AgentCache — 底層 Cloudflare KV，支援 namespace + TTL
  *
- * 用於 react-agent 的 tool result cache 和 embedding cache，
+ * 用於 agent 的 tool result cache 和 embedding cache，
  * 避免重複的工具呼叫和 embedding 計算。
  */
 
@@ -10,7 +10,7 @@ export interface AgentCache {
   set(key: string, value: unknown, ttlSeconds: number): Promise<void>
 }
 
-const NAMESPACE = 'react-agent'
+const NAMESPACE = 'agent'
 
 export class KVAgentCache implements AgentCache {
   constructor(private readonly kv: KVNamespace) {}
@@ -68,7 +68,7 @@ export async function cachedEmbed(
 
   const result = await embedFn(text)
   cache.set(key, result, EMBEDDING_CACHE_TTL).catch((err) => {
-    console.warn('[react-agent] embed cache write failed:', err)
+    console.warn('[agent] embed cache write failed:', err)
   })
   return result
 }

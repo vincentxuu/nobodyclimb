@@ -1,6 +1,6 @@
 import { getMemoriesSummary } from '../../repositories/memory'
 import type { Env } from '../../types'
-import { buildReactAgentBasePrompt } from '../../utils/ai-prompts'
+import { buildAgentBasePrompt } from '../../utils/ai-prompts'
 import type { LangfuseParent } from '../../utils/langfuse'
 import { createProvider } from '../ai-graph/providers'
 import type { ProviderName as LegacyProviderName } from '../ai-graph/providers/types'
@@ -12,13 +12,13 @@ import {
   getRecentAscents,
 } from '../personalization'
 import type { QueryService } from '../query'
+import { runAgentLoop } from './agent-loop'
 import { KVAgentCache } from './cache'
 import { classifyQuery, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
-import { runReactLoop } from './engine'
 import { runAsyncJudge, runOutputGuards } from './guards'
 import { createToolRegistry } from './tools'
 import { DefaultTokenTracker } from './tracker'
-import type { ModelConfig, ModelMap, ProviderName, ReactAgentResult, ToolContext } from './types'
+import type { AgentResult, ModelConfig, ModelMap, ProviderName, ToolContext } from './types'
 
 // ---------------------------------------------------------------------------
 // Default Model Map
@@ -92,16 +92,17 @@ export async function loadModelMap(db: D1Database): Promise<ModelMap> {
 }
 
 // ---------------------------------------------------------------------------
-// Load React Agent Config
+// Load Agent Config
 // ---------------------------------------------------------------------------
 
-interface ReactConfig {
+interface AgentConfig {
   maxTurns: number
   tokenBudget: number
   usdToTwd: number
 }
 
-async function loadReactConfig(db: D1Database): Promise<ReactConfig> {
+// TODO: Phase 2 rename DB keys to agent_max_turns, agent_token_budget, agent_usd_to_twd
+async function loadAgentConfig(db: D1Database): Promise<AgentConfig> {
   const rows = await db
     .prepare(
       "SELECT key, value FROM ai_config WHERE key IN ('react_max_turns', 'react_token_budget', 'react_usd_to_twd')"
@@ -122,16 +123,16 @@ async function loadReactConfig(db: D1Database): Promise<ReactConfig> {
 // ---------------------------------------------------------------------------
 
 function createProviderForConfig(provider: ProviderName, env: Env) {
-  // 將 react-agent 的 ProviderName 對應到 factory 接受的名稱
+  // 將 agent 的 ProviderName 對應到 factory 接受的名稱
   const factoryName = provider === 'workers-ai' ? 'cloudflare' : provider
   return createProvider(factoryName as LegacyProviderName, env)
 }
 
 // ---------------------------------------------------------------------------
-// runReactAgent — 主入口
+// runAgent — 主入口
 // ---------------------------------------------------------------------------
 
-export interface RunReactAgentParams {
+export interface RunAgentParams {
   query: string
   chatHistory?: Array<{ role: 'user' | 'assistant'; content: string }>
   userId: string | null
@@ -148,7 +149,7 @@ export interface RunReactAgentParams {
   }) => Promise<void>
 }
 
-export async function runReactAgent(params: RunReactAgentParams): Promise<ReactAgentResult> {
+export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   const { query, chatHistory, userId, env, queryService, langfuseTrace, waitUntilCtx } = params
 
   // 0. 查詢分類快速路徑（0 LLM call）
@@ -205,10 +206,7 @@ export async function runReactAgent(params: RunReactAgentParams): Promise<ReactA
         perModelStats: tracker.getPerModelStats(),
       }
     } catch (err) {
-      console.warn(
-        '[react-agent] general_knowledge hyde failed, falling through to ReAct loop:',
-        err
-      )
+      console.warn('[agent] general_knowledge hyde failed, falling through to agent loop:', err)
     }
   }
 
@@ -217,15 +215,15 @@ export async function runReactAgent(params: RunReactAgentParams): Promise<ReactA
     ? Promise.all([getMemoriesSummary(userId, env.DB), getRecentAscents(userId, env.DB)])
     : Promise.resolve([null, []] as [string | null, Awaited<ReturnType<typeof getRecentAscents>>])
 
-  const [models, reactCfg, [memorySummary, ascents]] = await Promise.all([
+  const [models, agentCfg, [memorySummary, ascents]] = await Promise.all([
     loadModelMap(env.DB),
-    loadReactConfig(env.DB),
+    loadAgentConfig(env.DB),
     personalizationPromise,
   ])
 
   // 2. Create provider + tracker + registry + context
   const orchestratorProvider = createProviderForConfig(models.orchestrator.provider, env)
-  const tracker = new DefaultTokenTracker(reactCfg.usdToTwd)
+  const tracker = new DefaultTokenTracker(agentCfg.usdToTwd)
   const registry = createToolRegistry()
   const cache = new KVAgentCache(env.CACHE)
   const toolCtx: ToolContext = {
@@ -248,11 +246,11 @@ export async function runReactAgent(params: RunReactAgentParams): Promise<ReactA
     memorySummary,
     ascentContext,
     abilityLevel,
-    buildReactAgentBasePrompt(toolsSection)
+    buildAgentBasePrompt(toolsSection)
   )
 
-  // 5. Run ReAct loop
-  const result = await runReactLoop(
+  // 5. Run agent loop
+  const result = await runAgentLoop(
     {
       provider: orchestratorProvider,
       registry,
@@ -265,8 +263,8 @@ export async function runReactAgent(params: RunReactAgentParams): Promise<ReactA
       query,
       chatHistory,
       systemPrompt,
-      maxTurns: reactCfg.maxTurns,
-      tokenBudget: reactCfg.tokenBudget,
+      maxTurns: agentCfg.maxTurns,
+      tokenBudget: agentCfg.tokenBudget,
       onProgress: params.onProgress,
     }
   )
@@ -274,7 +272,7 @@ export async function runReactAgent(params: RunReactAgentParams): Promise<ReactA
   // 6. Output guards（同步）
   const guardResult = runOutputGuards(result.answer)
   if (!guardResult.passed) {
-    console.warn('[react-agent] output guard failed', { qualityFlag: guardResult.qualityFlag })
+    console.warn('[agent] output guard failed', { qualityFlag: guardResult.qualityFlag })
   }
   const finalAnswer =
     guardResult.qualityFlag === 'tool_call_leak'

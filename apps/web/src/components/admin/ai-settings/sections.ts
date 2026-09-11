@@ -138,7 +138,7 @@ export const SECTIONS: SectionDef[] = [
               { value: 'deep', label: 'deep — 子問題分解 + 並行 + 合成' },
               { value: 'custom', label: 'custom — 自訂工具開關' },
               { value: 'agentic', label: 'agentic — 多輪動態搜尋' },
-              { value: 'react', label: 'react — ReAct Agent 動態工具選擇' },
+              { value: 'react', label: 'react — Agent loop 動態工具選擇' },
               { value: 'auto', label: 'auto — 依複雜度自動選擇' },
               { value: 'baseline', label: 'baseline — 同 thorough（向後相容）' },
               { value: 'plan-execute', label: 'plan-execute — 子任務規劃（舊版 deep）' },
@@ -148,7 +148,7 @@ export const SECTIONS: SectionDef[] = [
             key: 'use_langgraph_engine',
             label: '執行引擎',
             placeholder: '0',
-            hint: '決定上方 RAG 策略由哪套引擎執行：Pipeline 為線性 steps，LangGraph 為 state graph（同一策略對應各自實作）。策略選 react 時走獨立的 ReAct Agent，不套用此設定',
+            hint: '決定上方 RAG 策略由哪套引擎執行：Pipeline 為線性 steps，LangGraph 為 state graph（同一策略對應各自實作）。策略選 react 時走獨立的 Agent loop，不套用此設定',
             kind: 'select',
             options: [
               { value: '0', label: 'Pipeline Engine（原始）' },
@@ -568,7 +568,7 @@ export const SECTIONS: SectionDef[] = [
         ],
       },
       {
-        title: 'ReAct Agent',
+        title: 'Agent',
         fields: [
           {
             key: 'react_max_turns',
