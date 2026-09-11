@@ -118,18 +118,41 @@ const RAG_TOOL_FIELDS: ConfigField[] = [
 
 export const SECTIONS: SectionDef[] = [
   {
-    id: 'strategy',
-    title: 'RAG 策略',
-    desc: '查詢走哪套檢索策略、由哪個引擎執行；儲存後立即生效',
+    id: 'mode',
+    title: '執行模式',
+    desc: '選擇 AI 問答由誰編排工具：Agent 每輪即時判斷，Pipeline 依預設分支路徑',
     defaultOpen: true,
     rows: [
       {
         fields: [
           {
+            key: 'ai_mode',
+            label: '執行模式',
+            placeholder: 'agent',
+            hint: 'Agent：LLM 每輪判斷呼叫哪些工具、呼叫幾次，靈活但成本較不可預測。Pipeline：tool-selection 一次性分類後走預設流程，行為確定性高、成本可控',
+            kind: 'select',
+            options: [
+              { value: 'agent', label: 'Agent — LLM 即時編排工具' },
+              { value: 'pipeline', label: 'Pipeline — 預設分支路徑' },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'strategy',
+    title: 'RAG 策略',
+    desc: 'Pipeline 模式下的檢索策略與引擎；Agent 模式下僅「RAG 工具開關」和「檢索/排名/品質」參數有效',
+    defaultOpen: false,
+    rows: [
+      {
+        fields: [
+          {
             key: 'rag_strategy',
-            label: 'RAG 策略',
+            label: 'RAG 策略（Pipeline 模式）',
             placeholder: 'thorough',
-            hint: 'fast = 低延遲（1-2s）；thorough = 完整精排（3-6s）；corrective = 檢索品質修正（4-8s）；deep = 子問題分解（6-12s）；custom = 自訂工具開關；agentic = 多輪動態搜尋；react = ReAct Agent；auto = 依複雜度自動選擇',
+            hint: 'fast = 低延遲；thorough = 完整精排；corrective = 檢索品質修正；deep = 子問題分解；custom = 自訂工具開關；agentic = 多輪動態搜尋；auto = 依複雜度自動選擇',
             kind: 'select',
             options: [
               { value: 'fast', label: 'fast — 低延遲（跳過 HyDE/Judge）' },
@@ -138,7 +161,6 @@ export const SECTIONS: SectionDef[] = [
               { value: 'deep', label: 'deep — 子問題分解 + 並行 + 合成' },
               { value: 'custom', label: 'custom — 自訂工具開關' },
               { value: 'agentic', label: 'agentic — 多輪動態搜尋' },
-              { value: 'react', label: 'react — Agent loop 動態工具選擇' },
               { value: 'auto', label: 'auto — 依複雜度自動選擇' },
               { value: 'baseline', label: 'baseline — 同 thorough（向後相容）' },
               { value: 'plan-execute', label: 'plan-execute — 子任務規劃（舊版 deep）' },
@@ -146,9 +168,9 @@ export const SECTIONS: SectionDef[] = [
           },
           {
             key: 'use_langgraph_engine',
-            label: '執行引擎',
+            label: '執行引擎（Pipeline 模式）',
             placeholder: '0',
-            hint: '決定上方 RAG 策略由哪套引擎執行：Pipeline 為線性 steps，LangGraph 為 state graph（同一策略對應各自實作）。策略選 react 時走獨立的 Agent loop，不套用此設定',
+            hint: 'Pipeline 模式下決定 RAG 策略由哪套引擎執行。Agent 模式不套用',
             kind: 'select',
             options: [
               { value: '0', label: 'Pipeline Engine（原始）' },
@@ -571,19 +593,19 @@ export const SECTIONS: SectionDef[] = [
         title: 'Agent',
         fields: [
           {
-            key: 'react_max_turns',
+            key: 'agent_max_turns',
             label: '最大 Turn 數',
             placeholder: '3',
             hint: '1 turn = 1 次 orchestrator call，每輪 2-3s（1–5）',
           },
           {
-            key: 'react_token_budget',
+            key: 'agent_token_budget',
             label: 'Token 預算',
             placeholder: '8000',
             hint: '累計 token 上限，優先於 maxTurns 觸發停止（2000–20000）',
           },
           {
-            key: 'react_usd_to_twd',
+            key: 'agent_usd_to_twd',
             label: 'USD → TWD 匯率',
             placeholder: '32.0',
             hint: '成本 dashboard 換算用，月結時手動校正即可',
@@ -593,7 +615,7 @@ export const SECTIONS: SectionDef[] = [
       {
         fields: [
           {
-            key: 'react_models',
+            key: 'agent_models',
             label: '模型配置（JSON ModelMap）',
             placeholder:
               '{"orchestrator":{"provider":"workers-ai","model":"@cf/meta/llama-4-scout-17b-16e-instruct"},...}',

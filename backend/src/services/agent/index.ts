@@ -69,8 +69,11 @@ function normalizeModelConfig(
 // ---------------------------------------------------------------------------
 
 export async function loadModelMap(db: D1Database): Promise<ModelMap> {
+  // 新 key 優先，fallback 到舊 key
   const row = await db
-    .prepare("SELECT value FROM ai_config WHERE key = 'react_models'")
+    .prepare(
+      "SELECT value FROM ai_config WHERE key IN ('agent_models', 'react_models') ORDER BY CASE key WHEN 'agent_models' THEN 0 ELSE 1 END LIMIT 1"
+    )
     .first<{ value: string }>()
 
   if (!row?.value) return DEFAULT_MODEL_MAP
@@ -101,20 +104,21 @@ interface AgentConfig {
   usdToTwd: number
 }
 
-// TODO: Phase 2 rename DB keys to agent_max_turns, agent_token_budget, agent_usd_to_twd
 async function loadAgentConfig(db: D1Database): Promise<AgentConfig> {
+  // 新 key（agent_*）優先，fallback 到舊 key（react_*）以相容未跑 migration 的環境
   const rows = await db
     .prepare(
-      "SELECT key, value FROM ai_config WHERE key IN ('react_max_turns', 'react_token_budget', 'react_usd_to_twd')"
+      "SELECT key, value FROM ai_config WHERE key IN ('agent_max_turns', 'agent_token_budget', 'agent_usd_to_twd', 'react_max_turns', 'react_token_budget', 'react_usd_to_twd')"
     )
     .all<{ key: string; value: string }>()
   const cfg: Record<string, string> = Object.fromEntries(
     (rows.results ?? []).map((r) => [r.key, r.value])
   )
   return {
-    maxTurns: parseInt(cfg['react_max_turns'] ?? '3', 10) || 3,
-    tokenBudget: parseInt(cfg['react_token_budget'] ?? '8000', 10) || 8000,
-    usdToTwd: parseFloat(cfg['react_usd_to_twd'] ?? '32.0') || 32.0,
+    maxTurns: parseInt(cfg['agent_max_turns'] ?? cfg['react_max_turns'] ?? '3', 10) || 3,
+    tokenBudget:
+      parseInt(cfg['agent_token_budget'] ?? cfg['react_token_budget'] ?? '8000', 10) || 8000,
+    usdToTwd: parseFloat(cfg['agent_usd_to_twd'] ?? cfg['react_usd_to_twd'] ?? '32.0') || 32.0,
   }
 }
 

@@ -43,7 +43,7 @@ function StatusPanel() {
   // 解析 orchestrator 模型
   let orchestratorModel = '@cf/meta/llama-4-scout-17b-16e-instruct'
   try {
-    const models = JSON.parse(config?.['react_models'] ?? '{}') as Record<
+    const models = JSON.parse(config?.['agent_models'] ?? '{}') as Record<
       string,
       { model?: string }
     >
@@ -103,8 +103,8 @@ function StatusPanel() {
           value={config?.['rag_strategy'] ?? 'baseline'}
           accent={isReact ? 'emerald' : 'gray'}
         />
-        <StatCell label="最大 Turn 數" value={config?.['react_max_turns'] ?? '3'} mono />
-        <StatCell label="Token 預算" value={config?.['react_token_budget'] ?? '8000'} mono />
+        <StatCell label="最大 Turn 數" value={config?.['agent_max_turns'] ?? '3'} mono />
+        <StatCell label="Token 預算" value={config?.['agent_token_budget'] ?? '8000'} mono />
         <StatCell
           label="Orchestrator 模型"
           value={orchestratorModel.split('/').pop() ?? orchestratorModel}
