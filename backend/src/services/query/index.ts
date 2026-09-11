@@ -293,8 +293,8 @@ export class QueryService {
     this.setPipelineCtx(pipelineCtx)
 
     try {
-      // Agent 策略
-      if (pipelineCfg.rag_strategy === 'react') {
+      // Agent 模式（ai_mode = 'agent' 或向後相容 rag_strategy = 'react'）
+      if (pipelineCfg.ai_mode === 'agent') {
         try {
           const { runAgent } = await import('../agent')
           const reactResult = await withTimeout(
@@ -334,7 +334,7 @@ export class QueryService {
             tokenCount: reactResult.totalTokens,
             modelUsed: 'agent',
             pipelineTrace: JSON.stringify({
-              strategy: 'react',
+              strategy: 'agent',
               turn_count: reactResult.turnCount,
               tool_call_count: reactResult.toolCallCount,
               per_model_stats: reactResult.perModelStats,
@@ -369,7 +369,8 @@ export class QueryService {
           }
           console.error('[query] Agent failed, falling back to baseline:', reactErr)
           pipelineCtx.pipelineConfig.rag_strategy = 'baseline'
-          pipelineCtx.trace.react_fallback = {
+          pipelineCtx.pipelineConfig.ai_mode = 'pipeline'
+          pipelineCtx.trace.agent_fallback = {
             triggered: true,
             reason: reactErr instanceof Error ? reactErr.message : String(reactErr),
           }

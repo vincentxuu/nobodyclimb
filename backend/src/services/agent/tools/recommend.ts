@@ -1,3 +1,7 @@
+import { EmbeddingService } from '../../embedding'
+import { loadPipelineConfig } from '../../query/config'
+import { buildExcerpt, extractTitle } from '../../query/documents'
+import { hybridSearch } from '../../tools/hybrid-search'
 import type { Tool, ToolContext, ToolResult } from '../types'
 
 function gradeToNumeric(grade: string | null | undefined): number {
@@ -67,25 +71,36 @@ export const recommendTool: Tool = {
       .all<{ route_id: string }>()
     const climbedRouteIds = new Set((climbedRoutes.results ?? []).map((r) => r.route_id))
 
-    // 用 QueryService 搜尋推薦路線
+    // 建構查詢與篩選
     const query = crag
       ? `推薦適合我的 ${crag}${grade ? ` ${grade}` : ''} 攀岩路線`
       : `推薦適合我的${grade ? ` ${grade}` : ''} 攀岩路線`
 
-    // 查 crag_id
-    let cragId: string | undefined
+    const vectorFilter: Record<string, unknown> = { type: { $eq: 'route' } }
     if (crag) {
-      const cragRow = await ctx.env.DB.prepare('SELECT id FROM crags WHERE name LIKE ? LIMIT 1')
+      const cragRow = await db
+        .prepare('SELECT id FROM crags WHERE name LIKE ? LIMIT 1')
         .bind(`%${crag}%`)
         .first<{ id: string }>()
-      cragId = cragRow?.id
+      if (cragRow) vectorFilter['crag_id'] = { $eq: cragRow.id }
     }
 
-    const result = await ctx.queryService.search({
+    // Embed + hybrid search
+    const embeddingService = new EmbeddingService(ctx.env)
+    const queryVector = await embeddingService.embed(query)
+    const cfg = await loadPipelineConfig(db)
+
+    const searchResult = await hybridSearch(ctx.env, {
       query,
-      type: 'route',
-      limit: 20, // 多撈一些，post-filter 後取 10
-      filters: cragId ? { crag_id: cragId } : undefined,
+      queryVector,
+      vectorFilter,
+      retrievalMethod: 'hybrid',
+      config: {
+        bm25_top_k: cfg.bm25_top_k,
+        merge_top_k: Math.max(cfg.merge_top_k, 20), // 多撈一些，post-filter 後取 10
+        min_rrf_score: cfg.min_rrf_score,
+        min_rrf_score_filtered: cfg.min_rrf_score_filtered,
+      },
     })
 
     // 從近期攀登紀錄推算用戶程度（最高 grade）
@@ -94,40 +109,49 @@ export const recommendTool: Tool = {
       .filter((n) => n > 0)
     const userMaxGrade = gradeNumerics.length > 0 ? Math.max(...gradeNumerics) : null
 
-    // 排除已攀登路線
-    let filtered = (result.results ?? []).filter(
-      (r: { id?: string }) => !r.id || !climbedRouteIds.has(r.id)
-    )
+    // 轉換並排除已攀登路線
+    let filtered = searchResult.candidateMatches
+      .map((match) => {
+        const doc = searchResult.documents.get(match.id)
+        if (!doc) return null
+        if (climbedRouteIds.has(doc.source_id)) return null
+        return {
+          id: doc.source_id,
+          title: extractTitle(doc),
+          excerpt: buildExcerpt(doc),
+          score: match.score,
+          text: doc.text.slice(0, 300),
+        }
+      })
+      .filter(Boolean) as Array<{
+      id: string
+      title: string
+      excerpt: string
+      score: number
+      text: string
+    }>
 
-    // 若用戶明確指定難度，優先用指定難度過濾（精確符合該大級）
+    // 難度過濾
     if (grade) {
       const requestedGrade = gradeToNumeric(grade)
       if (requestedGrade > 0) {
-        // 允許同大級的 a/b/c/d 變體（例如 5.11 → 5.11a~5.11d，數值 110~113）
         const majorBase = Math.floor(requestedGrade / 10) * 10
-        const gradeFiltered = filtered.filter((r: { excerpt?: string }) => {
+        const gradeFiltered = filtered.filter((r) => {
           const gradeNum = gradeToNumeric(r.excerpt?.match(/5\.\d+[a-d]?/)?.[0])
           if (gradeNum === 0) return true
           return Math.floor(gradeNum / 10) * 10 === majorBase
         })
-        if (gradeFiltered.length >= 1) {
-          filtered = gradeFiltered
-        }
+        if (gradeFiltered.length >= 1) filtered = gradeFiltered
       }
     } else if (userMaxGrade !== null) {
-      // 根據用戶程度過濾難度範圍：推薦同級到上一個大級（最多 +10 數值）
-      // 例如用戶最高 5.10c（102）→ 推薦 5.10c～5.11c（102～112），排除 5.12+
       const minGrade = userMaxGrade
       const maxGrade = userMaxGrade + 10
-      const gradeFiltered = filtered.filter((r: { excerpt?: string }) => {
+      const gradeFiltered = filtered.filter((r) => {
         const gradeNum = gradeToNumeric(r.excerpt?.match(/5\.\d+[a-d]?/)?.[0])
-        if (gradeNum === 0) return true // 無法解析 grade 的保留
+        if (gradeNum === 0) return true
         return gradeNum >= minGrade && gradeNum <= maxGrade
       })
-      // 只有過濾後還有結果才套用，避免結果全空
-      if (gradeFiltered.length >= 1) {
-        filtered = gradeFiltered
-      }
+      if (gradeFiltered.length >= 1) filtered = gradeFiltered
     }
 
     filtered = filtered.slice(0, 10)
@@ -143,7 +167,7 @@ export const recommendTool: Tool = {
     const data = raw as {
       error?: string
       recentAscents?: Array<{ route_name: string; grade: string }>
-      recommendations?: Array<{ title: string; excerpt?: string }>
+      recommendations?: Array<{ title: string; excerpt?: string; text?: string }>
       count?: number
     }
 
@@ -155,7 +179,9 @@ export const recommendTool: Tool = {
     if (data.recommendations?.length) {
       lines.push(`推薦路線（${data.count} 條）：`)
       for (const [i, r] of data.recommendations.entries()) {
-        lines.push(`${i + 1}. ${r.title}${r.excerpt ? `\n   ${r.excerpt}` : ''}`)
+        lines.push(
+          `${i + 1}. ${r.title}${r.excerpt ? `\n   ${r.excerpt}` : ''}${r.text ? `\n   ${r.text.slice(0, 200)}` : ''}`
+        )
       }
     } else {
       lines.push('目前沒有推薦路線。')

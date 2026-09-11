@@ -6,9 +6,10 @@ export const MIN_VECTOR_SCORE = 0.5
 export const DEFAULT_LLM_MODEL = '@cf/google/gemma-3-12b-it'
 export const DEFAULT_LIGHTWEIGHT_MODEL = '@cf/meta/llama-3.1-8b-instruct'
 
-// 後台可設定的 RAG 策略白名單。
+// 後台可設定的 RAG 策略白名單（Pipeline 模式用）。
 // 必須與 apps/web/src/components/admin/ai-settings/sections.ts 的 rag_strategy options
 // 及 ai-graph/index.ts 的 graphMap 一致，否則後台存的值會被靜默降回 baseline。
+// 注意：'react' 已被 ai_mode = 'agent' 取代，讀到時由 config loader 向後相容處理。
 export const RAG_STRATEGIES = [
   'baseline',
   'fast',
@@ -18,7 +19,7 @@ export const RAG_STRATEGIES = [
   'custom',
   'agentic',
   'plan-execute',
-  'react',
+  'react', // 向後相容：舊資料可能仍有此值，config loader 會將其映射到 ai_mode = 'agent'
   'auto',
 ] as const
 export type RagStrategy = (typeof RAG_STRATEGIES)[number]
@@ -96,7 +97,14 @@ export async function loadPipelineConfig(db: D1Database): Promise<PipelineConfig
       }
       return DEFAULT_SYSTEM_PROMPT_LEAKAGE_PATTERNS
     })(),
-    // Agentic 模式
+    // 執行模式
+    ai_mode: (() => {
+      const v = cfg['ai_mode']
+      // 向後相容：rag_strategy = react 等同 ai_mode = agent
+      if (!v && cfg['rag_strategy'] === 'react') return 'agent' as const
+      return v === 'agent' ? ('agent' as const) : ('pipeline' as const)
+    })(),
+    // RAG 策略（pipeline 模式用）
     rag_strategy: (() => {
       const v = cfg['rag_strategy'] ?? 'baseline'
       return (RAG_STRATEGIES as readonly string[]).includes(v) ? v : 'baseline'

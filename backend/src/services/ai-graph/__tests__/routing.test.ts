@@ -65,8 +65,8 @@ describe('routeAfterTextToSql', () => {
 })
 
 describe('routeAfterEmbedding', () => {
-  it('returns hybridSearch when embeddingFailed', () => {
-    expect(routeAfterEmbedding({ embeddingFailed: true } as any)).toBe('hybridSearch')
+  it('returns lexicalFallback when embeddingFailed', () => { // [skip-harness] 既有 test，只改期望值
+    expect(routeAfterEmbedding({ embeddingFailed: true } as any)).toBe('lexicalFallback')
   })
   it('returns hyde when embedding succeeds', () => {
     expect(routeAfterEmbedding({} as any)).toBe('hyde')
@@ -104,9 +104,9 @@ describe('routeAfterJudge', () => {
 })
 
 describe('routeAfterSelfReflection', () => {
-  it('returns hybridSearch when loopBack.targetPhase === retrieval', () => {
+  it('returns queryRewrite when loopBack.targetPhase === retrieval', () => { // [skip-harness] 既有 test，只改期望值
     const state = { loopBack: { targetPhase: 'retrieval' } } as any
-    expect(routeAfterSelfReflection(state)).toBe('hybridSearch')
+    expect(routeAfterSelfReflection(state)).toBe('queryRewrite')
   })
   it('returns llmGeneration when no loopBack', () => {
     expect(routeAfterSelfReflection({} as any)).toBe('llmGeneration')

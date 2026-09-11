@@ -169,6 +169,7 @@ export interface PipelineConfig {
   multi_query_count: number
   max_output_length: number
   system_prompt_leakage_patterns: string[]
+  ai_mode: 'agent' | 'pipeline'
   rag_strategy: string
   agentic_max_steps: number
   agentic_min_docs_to_answer: number
