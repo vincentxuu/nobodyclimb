@@ -45,6 +45,24 @@ export const TOOL_MANIFESTS: ToolManifest[] = [
       '你可以查詢使用者的攀岩歷史、能力等級、近期完攀記錄與偏好，用於個人化建議。',
     requiresAuth: true,
   },
+  {
+    name: 'memory',
+    description: '使用者記憶召回',
+    triggers: ['記得', '之前說過', '上次', '我的偏好', '我喜歡'],
+    tools: ['recall_memory'],
+    promptFragment:
+      '你可以回想使用者過去分享的攀岩經歷、偏好和目標，讓對話更個人化。',
+    requiresAuth: true,
+  },
+  {
+    name: 'coaching',
+    description: '訓練計畫建議',
+    triggers: ['訓練', '練習', '怎麼進步', '弱點', '加強', '指力', '耐力'],
+    tools: ['suggest_training'],
+    promptFragment:
+      '你可以根據使用者的攀登歷史分析弱點，建議針對性的訓練計畫。',
+    requiresAuth: true,
+  },
 ]
 
 /** 根據使用者是否登入，回傳啟用的 manifest 清單 */

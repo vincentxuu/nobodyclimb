@@ -1,7 +1,9 @@
 import { ToolRegistry } from '../registry'
 import type { ToolManifest } from '../types'
+import { suggestTrainingTool } from './coaching'
 import { cragInfoTool } from './crag-info'
 import { getActiveManifests } from './manifests'
+import { recallMemoryTool } from './memory'
 import { recommendTool } from './recommend'
 import { searchCragsTool } from './search-crags'
 import { searchRoutesTool } from './search-routes'
@@ -17,6 +19,8 @@ const TOOL_MAP: Record<string, import('../types').Tool> = {
   user_profile: userProfileTool,
   recommend: recommendTool,
   crag_info: cragInfoTool,
+  recall_memory: recallMemoryTool,
+  suggest_training: suggestTrainingTool,
 }
 
 /** manifest-driven 條件式工具註冊 */
