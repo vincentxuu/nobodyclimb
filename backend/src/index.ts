@@ -21,6 +21,7 @@ import { bucketListRoutes } from './routes/bucket-list'
 import { climbingLocationsRoutes } from './routes/climbing-locations'
 import { cragsRoutes } from './routes/crags'
 import { galleriesRoutes } from './routes/galleries'
+import { goalsRoutes } from './routes/goals'
 import { guestRoutes } from './routes/guest'
 import { gymsRoutes } from './routes/gyms'
 import { mediaRoutes } from './routes/media'
@@ -122,6 +123,7 @@ v1.route('/content', biographyContentRoutes)
 v1.route('/access-logs', accessLogsRoutes)
 v1.route('/guest', guestRoutes)
 v1.route('/ascents', ascentsRoutes)
+v1.route('/goals', goalsRoutes)
 v1.route('/route-stories', routeStoriesRoutes)
 v1.route('/admin/import', adminImportRoutes)
 v1.route('/admin/ai', adminAiRoutes)
