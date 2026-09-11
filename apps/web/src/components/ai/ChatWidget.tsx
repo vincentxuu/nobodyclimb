@@ -64,6 +64,18 @@ const SUGGESTION_POOL = [
   '我在龍洞完攀了新法拉利 5.11c，推薦我進階路線',
   '推薦 3 條龍洞 5.11 的經典路線',
   '推薦 3 條關子嶺 5.11 的路線',
+  // 訓練建議型：請 AI 分析弱點、建議訓練
+  '我想突破 5.11，需要加強什麼？',
+  '根據我的攀登記錄，建議我練什麼？',
+  '我要怎麼提升指力和耐力？',
+  '我大部分爬運攀，想嘗試傳攀要練什麼？',
+  '推薦一個針對攀岩的訓練計畫',
+  // 個人化記憶型：利用 AI 記憶功能
+  '你還記得我上次說想去哪攀岩嗎？',
+  '根據我的偏好推薦適合的岩場',
+  '我之前提過的攀岩目標是什麼？',
+  '我通常喜歡什麼類型的路線？',
+  '根據我的攀登風格推薦下一個挑戰',
 ]
 
 function getRandomSuggestions(): string[] {
@@ -76,6 +88,20 @@ function formatRelativeTime(timestamp: number): string {
   if (seconds < 3600) return `${Math.floor(seconds / 60)} 分鐘前`
   if (seconds < 86400) return `${Math.floor(seconds / 3600)} 小時前`
   return `${Math.floor(seconds / 86400)} 天前`
+}
+
+const TOOL_DISPLAY_NAMES: Record<string, string> = {
+  search_routes: '搜尋路線',
+  search_crags: '搜尋岩場',
+  sql_query: '查詢資料',
+  weather: '查詢天氣',
+  user_profile: '讀取個人檔案',
+  recommend: '產生推薦',
+  recommend_agent: '個人化推薦',
+  crag_info: '查詢岩場資訊',
+  recall_memory: '回想記憶',
+  suggest_training: '分析訓練建議',
+  coaching_agent: '教練分析',
 }
 
 export function ChatWidget() {
@@ -95,6 +121,7 @@ export function ChatWidget() {
   const [isRegenerating, setIsRegenerating] = useState(false)
   const [showLoginPrompt, setShowLoginPrompt] = useState(false)
   const [isStreaming, setIsStreaming] = useState(false)
+  const [activeTool, setActiveTool] = useState<string | null>(null)
   // ref 確保多次快速點擊時 guard 是同步的，避免 stale closure
   const isRegeneratingRef = useRef(false)
   const abortControllerRef = useRef<AbortController | null>(null)
@@ -257,6 +284,7 @@ export function ChatWidget() {
 
         const finalizeDone = (doneEvent: import('@/lib/api/ai').AIStreamDoneEvent) => {
           setIsStreaming(false)
+          setActiveTool(null)
           abortControllerRef.current = null
           setMessages((prev) =>
             prev.map((m) =>
@@ -335,6 +363,7 @@ export function ChatWidget() {
               drainTimerRef.current = null
             }
             setIsStreaming(false)
+            setActiveTool(null)
             abortControllerRef.current = null
             setMessages((prev) =>
               prev.map((m) =>
@@ -345,7 +374,10 @@ export function ChatWidget() {
             )
             console.error('Stream error:', errMessage)
           },
-          abortController.signal
+          abortController.signal,
+          (progressEvent) => {
+            setActiveTool(progressEvent.status === 'executing' ? progressEvent.tool : null)
+          }
         )
       } else {
         // 非串流模式（原有邏輯）
@@ -870,7 +902,11 @@ export function ChatWidget() {
                       (isStreaming && messages[messages.length - 1]?.content === '')) && (
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        <span>思考中...</span>
+                        <span>
+                          {activeTool
+                            ? `🔍 ${TOOL_DISPLAY_NAMES[activeTool] ?? activeTool}中...`
+                            : '思考中...'}
+                        </span>
                       </div>
                     )}
                     <div ref={messagesEndRef} />
@@ -903,6 +939,7 @@ export function ChatWidget() {
                           drainTimerRef.current = null
                         }
                         setIsStreaming(false)
+                        setActiveTool(null)
                         setMessages((prev) => {
                           const last = prev[prev.length - 1]
                           if (last?.role === 'assistant') {
