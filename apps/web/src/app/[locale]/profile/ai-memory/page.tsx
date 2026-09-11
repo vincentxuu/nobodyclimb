@@ -5,7 +5,7 @@ import { formatDistanceToNow } from 'date-fns'
 import { zhTW } from 'date-fns/locale'
 import { Brain, Trash2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import ProfilePageLayout from '@/components/profile/layout/ProfilePageLayout'
 import ProfilePageTitle from '@/components/profile/ProfilePageTitle'
 import { Badge } from '@/components/ui/badge'
@@ -49,6 +49,9 @@ export default function AiMemoryPage() {
   const queryClient = useQueryClient()
   const { toast } = useToast()
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [activeFilter, setActiveFilter] = useState<'all' | 'preference' | 'behavior' | 'fact'>(
+    'all'
+  )
 
   const { data, isLoading } = useQuery({
     queryKey: ['ai-memory'],
@@ -73,6 +76,19 @@ export default function AiMemoryPage() {
 
   const memories = data ?? []
 
+  const stats = useMemo(() => {
+    const counts = { preference: 0, behavior: 0, fact: 0 }
+    for (const m of memories) {
+      if (m.memory_type in counts) counts[m.memory_type]++
+    }
+    return counts
+  }, [memories])
+
+  const filteredMemories = useMemo(
+    () => (activeFilter === 'all' ? memories : memories.filter((m) => m.memory_type === activeFilter)),
+    [memories, activeFilter]
+  )
+
   return (
     <ProfilePageLayout>
       <div className="mx-auto max-w-2xl px-4 py-6">
@@ -83,15 +99,46 @@ export default function AiMemoryPage() {
             <LoadingSpinner />
           </div>
         ) : memories.length === 0 ? (
-          // Task 7.5: 空狀態
           <div className="rounded-lg border border-dashed border-gray-200 py-12 text-center">
             <Brain className="mx-auto mb-3 h-8 w-8 text-gray-300" />
             <p className="text-sm text-gray-400">{t('aiMemoryEmpty')}</p>
+            <p className="mx-auto mt-2 max-w-xs text-xs text-gray-300">
+              和 AI 助理聊天時，它會自動記住你的攀岩偏好和習慣。試試告訴它你喜歡的岩場或目標難度！
+            </p>
           </div>
         ) : (
-          // Task 7.3: 渲染記憶列表
-          <ul className="space-y-3">
-            {memories.map((memory) => (
+          <>
+            {/* 統計摘要 + 分類篩選 */}
+            <div className="mb-4 flex flex-wrap items-center gap-2">
+              {(
+                [
+                  { key: 'all', label: `全部 ${memories.length}` },
+                  { key: 'preference', label: `偏好 ${stats.preference}` },
+                  { key: 'behavior', label: `行為 ${stats.behavior}` },
+                  { key: 'fact', label: `事實 ${stats.fact}` },
+                ] as const
+              ).map(({ key, label }) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveFilter(key)}
+                  className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                    activeFilter === key
+                      ? 'bg-gray-800 text-white'
+                      : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {filteredMemories.length === 0 ? (
+              <div className="rounded-lg border border-dashed border-gray-200 py-8 text-center">
+                <p className="text-sm text-gray-400">此分類沒有記憶</p>
+              </div>
+            ) : (
+              <ul className="space-y-3">
+                {filteredMemories.map((memory) => (
               <li
                 key={memory.id}
                 className="flex items-start justify-between gap-3 rounded-lg border border-gray-100 bg-white px-4 py-3 shadow-sm"
@@ -132,7 +179,9 @@ export default function AiMemoryPage() {
                 </Button>
               </li>
             ))}
-          </ul>
+              </ul>
+            )}
+          </>
         )}
       </div>
 
