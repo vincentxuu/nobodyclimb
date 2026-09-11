@@ -6,6 +6,7 @@ import {
   Bookmark,
   Brain,
   FileText,
+  Flag,
   Image as ImageIcon,
   MountainSnow,
   Settings,
@@ -41,6 +42,11 @@ const menuItems: MenuItem[] = [
     name: 'AI 記憶',
     href: '/profile/ai-memory',
     icon: Brain,
+  },
+  {
+    name: '攀岩目標',
+    href: '/profile/goals',
+    icon: Flag,
   },
   {
     name: '人生清單',

@@ -23,6 +23,7 @@ const PERSONAL_ITEMS = [
   { href: '/profile', key: 'profile' },
   { href: '/profile/recommendations', key: 'recommendations' },
   { href: '/profile/ai-memory', key: 'memory' },
+  { href: '/profile/goals', key: 'goals' },
   { href: '/profile/bucket-list', key: 'bucketList' },
   { href: '/profile/ascents', key: 'ascents' },
   { href: '/profile/stats', key: 'stats' },

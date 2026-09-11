@@ -390,3 +390,44 @@ export function useTriggerRecommendation() {
     },
   })
 }
+
+// =============================================
+// Goals API 函式
+// =============================================
+
+export interface UserGoal {
+  id: string
+  goal_type: 'grade' | 'route' | 'volume' | 'custom'
+  title: string
+  target: string
+  current_value: string | null
+  status: 'active' | 'achieved' | 'paused' | 'abandoned'
+  notes: string | null
+  target_date: string | null
+  achieved_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export async function getGoals(): Promise<UserGoal[]> {
+  const res = await apiClient.get<{ success: boolean; data: UserGoal[] }>('/ai/goals')
+  return res.data.data
+}
+
+export async function createGoal(goal: {
+  goal_type: string
+  title: string
+  target: string
+  target_date?: string
+}): Promise<UserGoal> {
+  const res = await apiClient.post<{ success: boolean; data: UserGoal }>('/ai/goals', goal)
+  return res.data.data
+}
+
+export async function achieveGoal(goalId: string): Promise<void> {
+  await apiClient.post(`/ai/goals/${goalId}/achieve`)
+}
+
+export async function deleteGoal(goalId: string): Promise<void> {
+  await apiClient.delete(`/ai/goals/${goalId}`)
+}
