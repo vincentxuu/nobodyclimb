@@ -148,7 +148,7 @@ export const SECTIONS: SectionDef[] = [
             key: 'use_langgraph_engine',
             label: '執行引擎',
             placeholder: '0',
-            hint: '啟用 LangGraph 後所有 AI 查詢改由 ai-graph 接管，RAG 策略由 graph 決定',
+            hint: '決定上方 RAG 策略由哪套引擎執行：Pipeline 為線性 steps，LangGraph 為 state graph（同一策略對應各自實作）。策略選 react 時走獨立的 ReAct Agent，不套用此設定',
             kind: 'select',
             options: [
               { value: '0', label: 'Pipeline Engine（原始）' },

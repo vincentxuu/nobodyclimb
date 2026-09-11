@@ -6,6 +6,23 @@ export const MIN_VECTOR_SCORE = 0.5
 export const DEFAULT_LLM_MODEL = '@cf/google/gemma-3-12b-it'
 export const DEFAULT_LIGHTWEIGHT_MODEL = '@cf/meta/llama-3.1-8b-instruct'
 
+// 後台可設定的 RAG 策略白名單。
+// 必須與 apps/web/src/components/admin/ai-settings/sections.ts 的 rag_strategy options
+// 及 ai-graph/index.ts 的 graphMap 一致，否則後台存的值會被靜默降回 baseline。
+export const RAG_STRATEGIES = [
+  'baseline',
+  'fast',
+  'thorough',
+  'corrective',
+  'deep',
+  'custom',
+  'agentic',
+  'plan-execute',
+  'react',
+  'auto',
+] as const
+export type RagStrategy = (typeof RAG_STRATEGIES)[number]
+
 export function num(v: string | undefined, fallback: number, min?: number, max?: number): number {
   const parsed = v !== undefined && v !== '' ? parseFloat(v) : NaN
   const result = Number.isNaN(parsed) ? fallback : parsed
@@ -82,7 +99,7 @@ export async function loadPipelineConfig(db: D1Database): Promise<PipelineConfig
     // Agentic 模式
     rag_strategy: (() => {
       const v = cfg['rag_strategy'] ?? 'baseline'
-      return ['baseline', 'agentic', 'plan-execute', 'react', 'auto'].includes(v) ? v : 'baseline'
+      return (RAG_STRATEGIES as readonly string[]).includes(v) ? v : 'baseline'
     })(),
     agentic_max_steps: num(cfg['agentic_max_steps'], 3, 1, 5),
     agentic_min_docs_to_answer: num(cfg['agentic_min_docs_to_answer'], 3, 1, 10),
