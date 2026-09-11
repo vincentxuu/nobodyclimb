@@ -183,6 +183,63 @@ export class GoalService {
     return { note: `尚未完攀 ${goal.target}` }
   }
 
+  async checkAndUpdateAfterAscent(
+    userId: string,
+    ascent: {
+      route_name: string
+      grade: string
+      route_type: string
+      crag_name: string | null
+    }
+  ): Promise<{ updatedGoals: UserGoal[]; achievedGoals: UserGoal[] }> {
+    const goals = await this.getActiveGoals(userId)
+    const updatedGoals: UserGoal[] = []
+    const achievedGoals: UserGoal[] = []
+
+    for (const goal of goals) {
+      if (goal.goal_type === 'grade') {
+        const targetNumeric = gradeToNumeric(goal.target)
+        const ascentNumeric = gradeToNumeric(ascent.grade)
+        if (targetNumeric > 0 && ascentNumeric >= targetNumeric) {
+          await this.achieveGoal(goal.id)
+          achievedGoals.push({ ...goal, status: 'achieved' })
+        } else if (ascentNumeric > 0) {
+          const updated = await this.updateProgress(goal.id, ascent.grade)
+          if (updated) updatedGoals.push(updated)
+        }
+      } else if (goal.goal_type === 'route') {
+        if (ascent.route_name.includes(goal.target) || goal.target.includes(ascent.route_name)) {
+          await this.achieveGoal(goal.id)
+          achievedGoals.push({ ...goal, status: 'achieved' })
+        }
+      } else if (goal.goal_type === 'volume') {
+        const targetCount = parseInt(goal.target, 10)
+        if (isNaN(targetCount)) continue
+        const startOfMonth = new Date()
+        startOfMonth.setDate(1)
+        startOfMonth.setHours(0, 0, 0, 0)
+        const result = await this.db
+          .prepare(
+            'SELECT COUNT(*) as cnt FROM user_route_ascents WHERE user_id = ? AND ascent_date >= ?'
+          )
+          .bind(userId, startOfMonth.toISOString())
+          .first<{ cnt: number }>()
+        const current = result?.cnt ?? 0
+        const updated = await this.updateProgress(goal.id, String(current))
+        if (updated) {
+          if (current >= targetCount) {
+            await this.achieveGoal(goal.id)
+            achievedGoals.push({ ...updated, status: 'achieved' })
+          } else {
+            updatedGoals.push(updated)
+          }
+        }
+      }
+    }
+
+    return { updatedGoals, achievedGoals }
+  }
+
   private async checkVolumeProgress(
     userId: string,
     goal: UserGoal
