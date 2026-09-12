@@ -51,6 +51,7 @@ const askSchema = z.object({
   include_sources: z.boolean().optional().default(true),
   no_cache: z.boolean().optional().default(false),
   chat_history: z.array(chatMessageSchema).max(20).optional(),
+  eval_mode: z.enum(['agent', 'pipeline']).optional(),
 })
 
 const searchSchema = z.object({
@@ -238,6 +239,12 @@ aiRoutes.post(
         estimated_tokens: estimatedTokens,
         result: 'admin_bypass',
       }
+    }
+
+    // Eval mode override（需 X-Eval-Mode header，供 eval 腳本 A/B 測試用）
+    const evalHeader = c.req.header('X-Eval-Mode')
+    if (evalHeader === 'true' && body.eval_mode) {
+      extraTrace.eval_mode_override = body.eval_mode
     }
 
     const streamMode = c.req.query('stream') === 'true'
