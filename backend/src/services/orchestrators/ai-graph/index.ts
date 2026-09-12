@@ -1,4 +1,5 @@
 import type { AIAskResponse } from '../../../types'
+import { initGatelane } from '../../../utils/gatelane'
 import { createLangfuseClient, createTrace, flushLangfuse } from '../../../utils/langfuse'
 import { PipelineContext } from '../pipeline/types'
 import { agenticGraph } from './graphs/agentic'
@@ -206,6 +207,7 @@ async function postGraphProcessing(state: GraphState): Promise<AIAskResponse> {
  * 接受與原本 pipeline engine 相同的 PipelineContext，回傳執行後的 state（含 finalResponse）。
  */
 export async function runAIGraph(ctx: PipelineContext): Promise<PipelineContext> {
+  initGatelane(ctx.env)
   const langfuse = createLangfuseClient(ctx.env)
   const trace = createTrace(langfuse, {
     name: 'ai-pipeline',

@@ -29,6 +29,7 @@
     "wrangler": "^4.59.3"
   },
   "dependencies": {
+    "@lanefoundry/gatelane-sdk": "file:../../gatelane/packages/gatelane-sdk",
     "@hono/standard-validator": "^0.2.2",
     "@langchain/langgraph": "^1.2.3",
     "@nobodyclimb/constants": "workspace:^",

@@ -1,3 +1,4 @@
+import { capture } from '../../utils/gatelane'
 import type { Env, ParsedQuery } from '../../types'
 import {
   HYDE_PROMPT,
@@ -33,11 +34,15 @@ export async function parseQueryWithLLM(
 
   let rawResult: LLMResponse | undefined
   try {
-    rawResult = (await env.AI.run(
+    rawResult = await capture({
+      prompt: [{ role: 'user', content: prompt }],
+      model: llmModel,
+      metadata: { stage: 'tool-selection' },
+    }, async () => (await env.AI.run(
       llmModel,
       { messages: [{ role: 'user', content: prompt }] },
       gatewayOptions
-    )) as LLMResponse
+    )) as LLMResponse)
   } catch {
     return { result: null }
   }
@@ -128,11 +133,15 @@ export async function generateHyDE(
 ): Promise<{ doc: string; usage?: TokenUsageInfo }> {
   const prompt = (promptTemplate ?? HYDE_PROMPT).replace('{query}', query)
   try {
-    const result = (await env.AI.run(
+    const result = await capture({
+      prompt: [{ role: 'user', content: prompt }],
+      model: llmModel,
+      metadata: { stage: 'hyde' },
+    }, async () => (await env.AI.run(
       llmModel,
       { messages: [{ role: 'user', content: prompt }] },
       gatewayOptions
-    )) as LLMResponse
+    )) as LLMResponse)
 
     const doc = extractResponseText(result)
     logGeneration(langfuseParent ?? null, {
@@ -171,11 +180,15 @@ export async function generateMultipleQueries(
     .replace(/\{count\}/g, String(count))
     .replace('{query}', query)
   try {
-    const result = (await (env.AI.run as Function)(
+    const result = await capture({
+      prompt: [{ role: 'user', content: prompt }],
+      model,
+      metadata: { stage: 'multi-query', count },
+    }, async () => (await (env.AI.run as Function)(
       model,
       { messages: [{ role: 'user', content: prompt }], max_tokens: 200 },
       gatewayOptions
-    )) as LLMResponse
+    )) as LLMResponse)
     const text = extractResponseText(result)
     logGeneration(langfuseParent ?? null, {
       name: 'multi-query',
@@ -215,11 +228,15 @@ export async function streamLLMGeneration(
   onToken: (token: string) => Promise<void>,
   langfuseParent?: LangfuseParent | null
 ): Promise<string> {
-  const stream = (await (env.AI.run as Function)(
+  const stream = await capture({
+    prompt: messages.map(m => ({ role: m.role, content: m.content })),
+    model,
+    metadata: { stage: 'llm-generation-stream', streaming: true },
+  }, async () => (await (env.AI.run as Function)(
     model,
     { messages, max_tokens: maxTokens, stream: true },
     gatewayOptions
-  )) as ReadableStream<Uint8Array>
+  )) as ReadableStream<Uint8Array>)
 
   const reader = stream.getReader()
   const decoder = new TextDecoder()
@@ -367,17 +384,22 @@ export async function runJudge(
     const timeoutPromise = new Promise<never>((_, reject) =>
       setTimeout(() => reject(new Error('judge timeout')), timeoutMs)
     )
-    const judgePromise = (env.AI.run as Function)(model, {
-      messages: [
-        {
-          role: 'system',
-          content:
-            '只回傳 JSON，不含任何說明文字。格式：{"groundedness": <float 0.0-1.0>, "quality": <int 1-4>, "constraint_ok": <true|false>}',
-        },
-        { role: 'user', content: judgePrompt },
-      ],
+    const judgeMessages = [
+      {
+        role: 'system' as const,
+        content:
+          '只回傳 JSON，不含任何說明文字。格式：{"groundedness": <float 0.0-1.0>, "quality": <int 1-4>, "constraint_ok": <true|false>}',
+      },
+      { role: 'user' as const, content: judgePrompt },
+    ]
+    const judgePromise = capture({
+      prompt: judgeMessages,
+      model,
+      metadata: { stage: 'judge' },
+    }, async () => (await (env.AI.run as Function)(model, {
+      messages: judgeMessages,
       max_tokens: 60,
-    }) as Promise<LLMResponse>
+    })) as LLMResponse)
 
     const judgeResult = await Promise.race([judgePromise, timeoutPromise])
     const rawResponse = extractResponseText(judgeResult)

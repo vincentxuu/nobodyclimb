@@ -23,6 +23,7 @@ import {
 } from '../utils/ai-prompts'
 import { CircuitBreaker } from '../utils/circuit-breaker'
 import type { LangfuseParent } from '../utils/langfuse'
+import { initGatelane } from '../utils/gatelane'
 import { createLangfuseClient, createTrace, flushLangfuse } from '../utils/langfuse'
 import { toTraditionalChinese } from '../utils/opencc'
 import { TimeoutError, withTimeout } from '../utils/timeout'
@@ -236,6 +237,9 @@ export class QueryService {
         failure_count: cbCheck.state.failureCount,
       }
     }
+
+    // Gatelane capture init (no-ops without env vars)
+    initGatelane(this.env)
 
     // Langfuse observability
     const langfuseClient = createLangfuseClient(this.env)

@@ -1,3 +1,4 @@
+import { capture } from '../../utils/gatelane'
 import type { LangfuseParent } from '../../utils/langfuse'
 import { endSpan, logGeneration, startSpan } from '../../utils/langfuse'
 import type { AIProvider, ChatMessage } from '../orchestrators/ai-graph/providers/types'
@@ -82,13 +83,17 @@ export async function runAgentLoop(
     let usedFallback = false
     let cbState: string | undefined
     try {
-      const callResult = await resilientChatWithTools(
+      const callResult = await capture({
+        prompt: messages.map(m => ({ role: m.role, content: m.content })),
+        model: `${ctx.models.orchestrator.provider}/${ctx.models.orchestrator.model}`,
+        metadata: { stage: 'agent-loop', turn, provider: ctx.models.orchestrator.provider },
+      }, () => resilientChatWithTools(
         provider,
         messages,
         toolSchemas,
         ctx.models.orchestrator,
         config.createProvider
-      )
+      ))
       response = callResult.response
       usedProvider = callResult.provider
       usedModel = callResult.model
