@@ -77,6 +77,12 @@ export interface TokenTracker {
 
 export interface ToolResult {
   content: string
+  /**
+   * Structured metadata from tool execution.
+   * Convention: `resultCount` = number of results returned.
+   * `_trace` = pipeline-compatible trace object (embedding, retrieval, filter, text_to_sql keys)
+   * for reuse by admin UI stage detail components.
+   */
   metadata?: Record<string, unknown>
 }
 
@@ -181,6 +187,24 @@ export interface AgentOptions {
   onProgress?: (event: ProgressEvent) => Promise<void>
 }
 
+export interface ToolCallTrace {
+  name: string
+  durationMs: number
+  resultCount?: number
+  cacheHit?: boolean
+  /** Pipeline-compatible trace from tool (embedding, retrieval, filter, text_to_sql keys) */
+  trace?: Record<string, unknown>
+}
+
+export interface AgentTurnTrace {
+  turn: number
+  llmDurationMs: number
+  tools: ToolCallTrace[]
+  provider: string
+  model: string
+  usedFallback: boolean
+}
+
 export interface AgentResult {
   answer: string
   sources: Array<{ title: string; url: string; excerpt?: string }>
@@ -188,6 +212,7 @@ export interface AgentResult {
   turnCount: number
   toolCallCount: number
   perModelStats: ModelTokenUsage[]
+  turnTraces?: AgentTurnTrace[]
   costUSD?: number
   costTWD?: number
 }

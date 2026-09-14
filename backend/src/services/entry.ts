@@ -358,6 +358,9 @@ export class QueryService {
               turn_count: reactResult.turnCount,
               tool_call_count: reactResult.toolCallCount,
               per_model_stats: reactResult.perModelStats,
+              turn_traces: reactResult.turnTraces,
+              cost_usd: reactResult.costUSD,
+              cost_twd: reactResult.costTWD,
             }),
           })
 

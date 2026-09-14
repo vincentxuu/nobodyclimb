@@ -496,16 +496,16 @@ function ReactTrace({ logId }: ReactTraceProps) {
                             <p className="text-[10px] text-wb-40">{s.provider}</p>
                           </div>
                           <span className="text-right font-mono text-wb-70">
-                            {s.prompt_tokens.toLocaleString()}
+                            {(s.inputTokens ?? s.prompt_tokens ?? 0).toLocaleString()}
                           </span>
                           <span className="text-right font-mono text-wb-70">
-                            {s.completion_tokens.toLocaleString()}
+                            {(s.outputTokens ?? s.completion_tokens ?? 0).toLocaleString()}
                           </span>
                           <span className="text-right font-mono text-wb-70">
-                            ${s.cost_usd.toFixed(6)}
+                            ${(s.cost_usd ?? 0).toFixed(6)}
                           </span>
                           <span className="text-right font-mono text-wb-70">
-                            NT${s.cost_twd.toFixed(4)}
+                            NT${(s.cost_twd ?? 0).toFixed(4)}
                           </span>
                         </div>
                       ))}
