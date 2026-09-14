@@ -14,7 +14,7 @@ import { sqlQueryTool } from './sql-query'
 import { userProfileTool } from './user-profile'
 import { weatherTool } from './weather'
 
-const TOOL_MAP: Record<string, import('../types').Tool> = {
+export const TOOL_MAP: Record<string, import('../types').Tool> = {
   search_routes: searchRoutesTool,
   search_crags: searchCragsTool,
   sql_query: sqlQueryTool,
@@ -29,7 +29,7 @@ const TOOL_MAP: Record<string, import('../types').Tool> = {
   manage_goals: goalsTool,
 }
 
-/** manifest-driven 條件式工具註冊。query 有值時啟用動態載入。 */
+/** @deprecated Use createDBToolRegistry from db-registry.ts instead. Will be removed in Phase 3. */
 export function createToolRegistry(opts?: { isAuthenticated?: boolean; query?: string }): {
   registry: ToolRegistry
   manifests: ToolManifest[]

@@ -1061,3 +1061,56 @@ export function useAIMetrics(range: MetricsRange) {
     staleTime: 5 * 60 * 1000,
   })
 }
+
+// =============================================
+// Tool Management
+// =============================================
+
+export interface AdminTool {
+  id: string
+  name: string
+  description: string | null
+  parameters: string | null
+  enabled: number
+  category: string | null
+  tags: string | null
+  description_override: string | null
+  config: string | null
+  source: string
+  requires_auth: number
+  stats_call_count: number
+  stats_error_count: number
+  stats_avg_latency_ms: number | null
+  created_at: string
+  updated_at: string
+}
+
+export async function getAdminTools(): Promise<AdminTool[]> {
+  const res = await apiClient.get<{ success: boolean; data: AdminTool[] }>('/admin/ai/tools')
+  return res.data.data
+}
+
+export async function updateAdminTool(
+  name: string,
+  data: { enabled?: number; description_override?: string | null; config?: string | null }
+): Promise<void> {
+  await apiClient.put(`/admin/ai/tools/${name}`, data)
+}
+
+export function useAdminTools() {
+  return useQuery<AdminTool[]>({
+    queryKey: ['admin-ai-tools'],
+    queryFn: getAdminTools,
+  })
+}
+
+export function useUpdateAdminTool() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ name, data }: { name: string; data: Parameters<typeof updateAdminTool>[1] }) =>
+      updateAdminTool(name, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-tools'] })
+    },
+  })
+}

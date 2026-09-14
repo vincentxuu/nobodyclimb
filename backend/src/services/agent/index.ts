@@ -16,7 +16,7 @@ import { KVAgentCache } from './cache'
 import { classifyQuery, detectDirectRoute, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
 import { runAsyncJudge, runOutputGuards } from './guards'
 import { buildProactivePromptSection, gatherProactiveContext } from './proactive'
-import { createToolRegistry } from './tools'
+import { createDBToolRegistry, updateToolStats } from './tools/db-registry'
 import { DefaultTokenTracker } from './tracker'
 import type { AgentResult, ModelConfig, ModelMap, ProviderName, ToolContext } from './types'
 
@@ -293,7 +293,10 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   // 2. Create provider + tracker + registry + context
   const orchestratorProvider = createProviderForConfig(models.orchestrator.provider, env)
   const tracker = new DefaultTokenTracker(agentCfg.usdToTwd)
-  const { registry, manifests } = createToolRegistry({ isAuthenticated: !!userId, query })
+  const { registry, manifests } = await createDBToolRegistry(env.DB, {
+    isAuthenticated: !!userId,
+    query,
+  })
   const cache = new KVAgentCache(env.CACHE)
   const toolCtx: ToolContext = {
     env,
@@ -354,9 +357,10 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       ? '抱歉，AI 助理暫時無法處理您的問題，請稍後再試。'
       : (guardResult.cleanedAnswer ?? result.answer)
 
-  // 7. Async judge + memory extraction（非同步，不擋回應）
+  // 7. Async judge + memory extraction + tool stats（非同步，不擋回應）
   if (waitUntilCtx) {
     waitUntilCtx.waitUntil(runAsyncJudge(env, query, '', finalAnswer, models, langfuseTrace))
+    waitUntilCtx.waitUntil(updateToolStats(env.DB, tracker.getTurnRecords()))
     if (userId) {
       waitUntilCtx.waitUntil(extractMemoriesFromQuery(query, userId, env.DB, env.AI))
     }
