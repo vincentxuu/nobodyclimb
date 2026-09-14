@@ -85,7 +85,8 @@ export default function AiMemoryPage() {
   }, [memories])
 
   const filteredMemories = useMemo(
-    () => (activeFilter === 'all' ? memories : memories.filter((m) => m.memory_type === activeFilter)),
+    () =>
+      activeFilter === 'all' ? memories : memories.filter((m) => m.memory_type === activeFilter),
     [memories, activeFilter]
   )
 
@@ -139,46 +140,50 @@ export default function AiMemoryPage() {
             ) : (
               <ul className="space-y-3">
                 {filteredMemories.map((memory) => (
-              <li
-                key={memory.id}
-                className="flex items-start justify-between gap-3 rounded-lg border border-gray-100 bg-white px-4 py-3 shadow-sm"
-              >
-                <div className="flex flex-1 flex-col gap-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-medium text-gray-500">
-                      {MEMORY_KEY_LABEL_KEYS[memory.memory_key]
-                        ? t(MEMORY_KEY_LABEL_KEYS[memory.memory_key] as Parameters<typeof t>[0])
-                        : memory.memory_key}
-                    </span>
-                    <Badge
-                      className={`px-1.5 py-0 text-[10px] font-medium ${MEMORY_TYPE_COLOR[memory.memory_type] ?? ''}`}
+                  <li
+                    key={memory.id}
+                    className="flex items-start justify-between gap-3 rounded-lg border border-gray-100 bg-white px-4 py-3 shadow-sm"
+                  >
+                    <div className="flex flex-1 flex-col gap-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-medium text-gray-500">
+                          {MEMORY_KEY_LABEL_KEYS[memory.memory_key]
+                            ? t(MEMORY_KEY_LABEL_KEYS[memory.memory_key] as Parameters<typeof t>[0])
+                            : memory.memory_key}
+                        </span>
+                        <Badge
+                          className={`px-1.5 py-0 text-[10px] font-medium ${MEMORY_TYPE_COLOR[memory.memory_type] ?? ''}`}
+                        >
+                          {MEMORY_TYPE_LABEL_KEYS[memory.memory_type]
+                            ? t(
+                                MEMORY_TYPE_LABEL_KEYS[memory.memory_type] as Parameters<
+                                  typeof t
+                                >[0]
+                              )
+                            : memory.memory_type}
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-gray-800">{memory.content}</p>
+                      <p className="text-[11px] text-gray-400">
+                        {t('memoryUpdated', {
+                          time: formatDistanceToNow(new Date(memory.updated_at), {
+                            addSuffix: true,
+                            locale: zhTW,
+                          }),
+                        })}
+                      </p>
+                    </div>
+                    {/* Task 7.4: 刪除按鈕 */}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="mt-0.5 h-7 w-7 shrink-0 text-gray-400 hover:text-red-500"
+                      onClick={() => setDeletingId(memory.id)}
                     >
-                      {MEMORY_TYPE_LABEL_KEYS[memory.memory_type]
-                        ? t(MEMORY_TYPE_LABEL_KEYS[memory.memory_type] as Parameters<typeof t>[0])
-                        : memory.memory_type}
-                    </Badge>
-                  </div>
-                  <p className="text-sm text-gray-800">{memory.content}</p>
-                  <p className="text-[11px] text-gray-400">
-                    {t('memoryUpdated', {
-                      time: formatDistanceToNow(new Date(memory.updated_at), {
-                        addSuffix: true,
-                        locale: zhTW,
-                      }),
-                    })}
-                  </p>
-                </div>
-                {/* Task 7.4: 刪除按鈕 */}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="mt-0.5 h-7 w-7 shrink-0 text-gray-400 hover:text-red-500"
-                  onClick={() => setDeletingId(memory.id)}
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-              </li>
-            ))}
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </li>
+                ))}
               </ul>
             )}
           </>

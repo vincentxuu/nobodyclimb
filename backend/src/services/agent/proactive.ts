@@ -20,10 +20,7 @@ interface GoalRow {
   status: string
 }
 
-async function getRecentWeekAscents(
-  db: D1Database,
-  userId: string
-): Promise<RecentAscentRow[]> {
+async function getRecentWeekAscents(db: D1Database, userId: string): Promise<RecentAscentRow[]> {
   try {
     const result = await db
       .prepare(
@@ -43,10 +40,7 @@ async function getRecentWeekAscents(
   }
 }
 
-async function getActiveGoals(
-  db: D1Database,
-  userId: string
-): Promise<GoalRow[]> {
+async function getActiveGoals(db: D1Database, userId: string): Promise<GoalRow[]> {
   try {
     const result = await db
       .prepare(

@@ -23,9 +23,7 @@ const RETRIEVAL_JUDGE_PROMPT = `你是攀岩知識搜尋系統的檢索品質評
 
 只回傳 JSON，不要其他文字。`
 
-export async function retrievalQualityJudgeNode(
-  state: GraphState
-): Promise<Partial<GraphState>> {
+export async function retrievalQualityJudgeNode(state: GraphState): Promise<Partial<GraphState>> {
   const candidateMatches = state.candidateMatches ?? []
   const documents = state.documents ?? new Map()
 
@@ -77,9 +75,10 @@ export async function retrievalQualityJudgeNode(
       })
       .join('\n')
 
-    const prompt = RETRIEVAL_JUDGE_PROMPT
-      .replace('{query}', query)
-      .replace('{doc_summaries}', docSummaries)
+    const prompt = RETRIEVAL_JUDGE_PROMPT.replace('{query}', query).replace(
+      '{doc_summaries}',
+      docSummaries
+    )
 
     const llmProvider = state.llmProvider
     if (!llmProvider) {
@@ -87,14 +86,11 @@ export async function retrievalQualityJudgeNode(
       return {}
     }
 
-    const result = await llmProvider.chat(
-      [{ role: 'user', content: prompt }],
-      {
-        model: pipelineConfig.lightweight_model,
-        maxTokens: 200,
-        gatewayOptions: state.gatewayOptions,
-      }
-    )
+    const result = await llmProvider.chat([{ role: 'user', content: prompt }], {
+      model: pipelineConfig.lightweight_model,
+      maxTokens: 200,
+      gatewayOptions: state.gatewayOptions,
+    })
 
     const newTokenBreakdown = { ...state.tokenBreakdown }
     if (result.usage) {

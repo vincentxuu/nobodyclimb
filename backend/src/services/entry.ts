@@ -26,13 +26,6 @@ import type { LangfuseParent } from '../utils/langfuse'
 import { createLangfuseClient, createTrace, flushLangfuse } from '../utils/langfuse'
 import { toTraditionalChinese } from '../utils/opencc'
 import { TimeoutError, withTimeout } from '../utils/timeout'
-import { runAIGraph } from './orchestrators/ai-graph'
-import { EmbeddingService } from './core/embedding'
-import { buildAscentContext, estimateAbilityLevel, getRecentAscents } from './domain/personalization'
-import { createPipelineContext } from './orchestrators/pipeline/context'
-import { PipelineEngine } from './orchestrators/pipeline/engine'
-import type { AgenticStepTrace, PipelineConfig, StageTokenUsage } from './orchestrators/pipeline/types'
-import { parseSuggestedQuestions } from './orchestrators/pipeline/utils'
 import {
   checkSemanticCache,
   flagResponse,
@@ -41,7 +34,14 @@ import {
   storeSemanticCache,
 } from './core/cache-log'
 import { DEFAULT_TOP_K, loadPipelineConfig, loadPrompts, resolvePrompt } from './core/config'
-import { buildExcerpt, buildUrl, extractTitle, getDocuments, injectRouteLinks } from './core/documents'
+import {
+  buildExcerpt,
+  buildUrl,
+  extractTitle,
+  getDocuments,
+  injectRouteLinks,
+} from './core/documents'
+import { EmbeddingService } from './core/embedding'
 import { buildFilter, buildFiltersFromParsed } from './core/filters'
 import {
   generateHyDE,
@@ -63,6 +63,20 @@ import {
 import { executePlan, planQuery, synthesize } from './core/plan-execute'
 import { agenticRetrieve, applyMMR, mergeResults, searchBM25 } from './core/retrieval'
 import type { SearchResult } from './core/types'
+import {
+  buildAscentContext,
+  estimateAbilityLevel,
+  getRecentAscents,
+} from './domain/personalization'
+import { runAIGraph } from './orchestrators/ai-graph'
+import { createPipelineContext } from './orchestrators/pipeline/context'
+import { PipelineEngine } from './orchestrators/pipeline/engine'
+import type {
+  AgenticStepTrace,
+  PipelineConfig,
+  StageTokenUsage,
+} from './orchestrators/pipeline/types'
+import { parseSuggestedQuestions } from './orchestrators/pipeline/utils'
 
 export class QueryService {
   private embeddingService: EmbeddingService
@@ -252,7 +266,10 @@ export class QueryService {
     const controller = new AbortController()
 
     // eval_mode_override 覆寫 ai_mode（eval A/B 測試用，需 X-Eval-Mode header）
-    if (extraTrace?.eval_mode_override === 'agent' || extraTrace?.eval_mode_override === 'pipeline') {
+    if (
+      extraTrace?.eval_mode_override === 'agent' ||
+      extraTrace?.eval_mode_override === 'pipeline'
+    ) {
       pipelineCfg.ai_mode = extraTrace.eval_mode_override
     }
 

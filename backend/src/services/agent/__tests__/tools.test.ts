@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
 import type { Env } from '../../../types'
 import type { AgentCache } from '../cache'
-import { DefaultTokenTracker } from '../tracker'
-import type { ToolContext } from '../types'
 import { suggestTrainingTool } from '../tools/coaching'
 import { recallMemoryTool } from '../tools/memory'
+import { DefaultTokenTracker } from '../tracker'
+import type { ToolContext } from '../types'
 
 // ---------------------------------------------------------------------------
 // Mock repositories/memory
@@ -291,9 +291,7 @@ describe('suggestTrainingTool', () => {
       avgGrade: 105,
       totalAscents: 10,
       uniqueCrags: 3,
-      recentAscents: [
-        { route: '一陽指', grade: '5.10a', type: 'sport', style: 'redpoint' },
-      ],
+      recentAscents: [{ route: '一陽指', grade: '5.10a', type: 'sport', style: 'redpoint' }],
       typeDistribution: [
         { type: 'sport', count: 7 },
         { type: 'trad', count: 3 },

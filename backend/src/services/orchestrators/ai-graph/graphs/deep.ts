@@ -9,10 +9,7 @@ import { semanticCacheNode } from '../nodes/semantic-cache'
 import { synthesisNode } from '../nodes/synthesis'
 import { textNormalizeNode } from '../nodes/text-normalize'
 import { toolSelectionNode } from '../nodes/tool-selection'
-import {
-  routeAfterSemanticCache,
-  routeAfterToolSelection,
-} from '../routing'
+import { routeAfterSemanticCache, routeAfterToolSelection } from '../routing'
 import { GraphState, GraphStateAnnotation } from '../state'
 
 type PlanStep = { id: number; query: string; tool: string; filters: Record<string, unknown> }

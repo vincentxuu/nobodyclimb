@@ -2,8 +2,18 @@ import { describe, expect, it } from 'vitest'
 import { buildProactivePromptSection, gatherProactiveContext } from '../proactive'
 
 function stubDb(
-  ascents: Array<{ route_name: string; grade: string | null; crag_name: string | null; ascent_date: string }> = [],
-  goals: Array<{ goal_type: string; target: string; current_progress: string | null; status: string }> = [],
+  ascents: Array<{
+    route_name: string
+    grade: string | null
+    crag_name: string | null
+    ascent_date: string
+  }> = [],
+  goals: Array<{
+    goal_type: string
+    target: string
+    current_progress: string | null
+    status: string
+  }> = [],
   goalsTableExists = true
 ): D1Database {
   let callIndex = 0
@@ -55,9 +65,10 @@ describe('gatherProactiveContext', () => {
   })
 
   it('有 active 目標 → goalHints 有值', async () => {
-    const db = stubDb([], [
-      { goal_type: 'grade', target: '5.12a', current_progress: '5.11c', status: 'active' },
-    ])
+    const db = stubDb(
+      [],
+      [{ goal_type: 'grade', target: '5.12a', current_progress: '5.11c', status: 'active' }]
+    )
     const ctx = await gatherProactiveContext(db, 'user-1')
     expect(ctx.goalHints).toBeDefined()
     expect(ctx.goalHints).toHaveLength(1)
@@ -76,10 +87,13 @@ describe('gatherProactiveContext', () => {
   })
 
   it('多個目標 → goalHints 多項', async () => {
-    const db = stubDb([], [
-      { goal_type: 'grade', target: '5.12a', current_progress: null, status: 'active' },
-      { goal_type: 'route', target: '飛簷', current_progress: null, status: 'active' },
-    ])
+    const db = stubDb(
+      [],
+      [
+        { goal_type: 'grade', target: '5.12a', current_progress: null, status: 'active' },
+        { goal_type: 'route', target: '飛簷', current_progress: null, status: 'active' },
+      ]
+    )
     const ctx = await gatherProactiveContext(db, 'user-1')
     expect(ctx.goalHints).toHaveLength(2)
   })

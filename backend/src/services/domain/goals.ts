@@ -26,7 +26,9 @@ export class GoalService {
 
   async getActiveGoals(userId: string): Promise<UserGoal[]> {
     const result = await this.db
-      .prepare("SELECT * FROM user_goals WHERE user_id = ? AND status = 'active' ORDER BY created_at DESC")
+      .prepare(
+        "SELECT * FROM user_goals WHERE user_id = ? AND status = 'active' ORDER BY created_at DESC"
+      )
       .bind(userId)
       .all<UserGoal>()
     return result.results ?? []
@@ -48,7 +50,17 @@ export class GoalService {
       .prepare(
         'INSERT INTO user_goals (id, user_id, goal_type, title, target, target_date, notes, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
       )
-      .bind(id, userId, goal.goal_type, goal.title, goal.target, goal.target_date ?? null, goal.notes ?? null, now, now)
+      .bind(
+        id,
+        userId,
+        goal.goal_type,
+        goal.title,
+        goal.target,
+        goal.target_date ?? null,
+        goal.notes ?? null,
+        now,
+        now
+      )
       .run()
 
     return {
@@ -79,7 +91,9 @@ export class GoalService {
   async achieveGoal(goalId: string): Promise<void> {
     const now = new Date().toISOString()
     await this.db
-      .prepare("UPDATE user_goals SET status = 'achieved', achieved_at = ?, updated_at = ? WHERE id = ?")
+      .prepare(
+        "UPDATE user_goals SET status = 'achieved', achieved_at = ?, updated_at = ? WHERE id = ?"
+      )
       .bind(now, now, goalId)
       .run()
   }

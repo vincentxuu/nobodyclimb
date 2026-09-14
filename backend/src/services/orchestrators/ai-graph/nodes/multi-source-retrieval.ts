@@ -49,8 +49,7 @@ export async function multiSourceRetrievalNode(state: GraphState): Promise<Parti
           }
         : state.tokenBreakdown
 
-      const retrievalScore =
-        sources.length > 0 ? Math.max(...sources.map((s) => s.score ?? 0)) : 0
+      const retrievalScore = sources.length > 0 ? Math.max(...sources.map((s) => s.score ?? 0)) : 0
 
       endSpan(span, { output: { docCount: sources.length } })
       return {

@@ -7,7 +7,11 @@ export interface RerankInput {
   documents: Map<string, import('../../../../types').AIDocument>
   env: {
     AI: { run: Function }
-    DB: { prepare: (sql: string) => { bind: (...args: unknown[]) => { all: <T>() => Promise<{ results: T[] }> } } }
+    DB: {
+      prepare: (sql: string) => {
+        bind: (...args: unknown[]) => { all: <T>() => Promise<{ results: T[] }> }
+      }
+    }
   }
   config: {
     reranker_relevance_threshold: number
@@ -18,7 +22,12 @@ export interface RerankInput {
     popularity_weight: number
   }
   queryService: {
-    applyMMR: (candidates: SearchResult[], documents: Map<string, import('../../../../types').AIDocument>, lambda: number, limit: number) => SearchResult[]
+    applyMMR: (
+      candidates: SearchResult[],
+      documents: Map<string, import('../../../../types').AIDocument>,
+      lambda: number,
+      limit: number
+    ) => SearchResult[]
     extractTitle: (doc: import('../../../../types').AIDocument) => string
     buildExcerpt: (doc: import('../../../../types').AIDocument) => string
     buildUrl: (doc: import('../../../../types').AIDocument) => string
@@ -162,9 +171,7 @@ export async function runRerankPipeline(input: RerankInput): Promise<RerankOutpu
       const normalizedPop = videoCount / safeMax
       return {
         ...match,
-        finalScore:
-          match.score * config.reranker_weight +
-          normalizedPop * config.popularity_weight,
+        finalScore: match.score * config.reranker_weight + normalizedPop * config.popularity_weight,
       }
     })
     .sort((a, b) => b.finalScore - a.finalScore)

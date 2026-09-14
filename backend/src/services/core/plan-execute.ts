@@ -2,9 +2,9 @@ import type { AISource, Env } from '../../types'
 import { PLANNING_PROMPT, SYNTHESIS_PROMPT } from '../../utils/ai-prompts'
 import type { LangfuseParent } from '../../utils/langfuse'
 import { logGeneration } from '../../utils/langfuse'
-import { EmbeddingService } from './embedding'
 import type { PipelineConfig, TokenUsageInfo } from '../orchestrators/pipeline/types'
 import { buildExcerpt, buildUrl, extractTitle, getDocuments } from './documents'
+import { EmbeddingService } from './embedding'
 import { mergeResults, searchBM25 } from './retrieval'
 import {
   type ExecutionPlan,

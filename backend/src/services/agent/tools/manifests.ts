@@ -24,7 +24,8 @@ export const TOOL_MANIFESTS: ToolManifest[] = [
     description: '查詢岩場天氣',
     triggers: ['天氣', '下雨', '適合攀岩嗎', '出門', '會不會下雨'],
     tools: ['weather'],
-    promptFragment: '你可以查詢指定岩場的天氣預報（溫度、降雨機率、風速），幫助判斷是否適合出發攀岩。',
+    promptFragment:
+      '你可以查詢指定岩場的天氣預報（溫度、降雨機率、風速），幫助判斷是否適合出發攀岩。',
     requiresAuth: false,
   },
   {
@@ -41,8 +42,7 @@ export const TOOL_MANIFESTS: ToolManifest[] = [
     description: '使用者個人攀登檔案',
     triggers: ['我的', '我爬過', '我的記錄', '我的等級', '個人', '完攀'],
     tools: ['user_profile'],
-    promptFragment:
-      '你可以查詢使用者的攀岩歷史、能力等級、近期完攀記錄與偏好，用於個人化建議。',
+    promptFragment: '你可以查詢使用者的攀岩歷史、能力等級、近期完攀記錄與偏好，用於個人化建議。',
     requiresAuth: true,
   },
   {
@@ -50,8 +50,7 @@ export const TOOL_MANIFESTS: ToolManifest[] = [
     description: '使用者記憶召回',
     triggers: ['記得', '之前說過', '上次', '我的偏好', '我喜歡'],
     tools: ['recall_memory'],
-    promptFragment:
-      '你可以回想使用者過去分享的攀岩經歷、偏好和目標，讓對話更個人化。',
+    promptFragment: '你可以回想使用者過去分享的攀岩經歷、偏好和目標，讓對話更個人化。',
     requiresAuth: true,
   },
   {

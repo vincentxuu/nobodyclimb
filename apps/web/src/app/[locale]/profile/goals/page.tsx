@@ -110,11 +110,7 @@ export default function GoalsPage() {
         <div className="flex items-center justify-between">
           <ProfilePageTitle title="攀岩目標" subtitle="設定目標，追蹤你的攀岩進度" isAI />
           {!showForm && (
-            <Button
-              size="sm"
-              onClick={() => setShowForm(true)}
-              className="flex items-center gap-1"
-            >
+            <Button size="sm" onClick={() => setShowForm(true)} className="flex items-center gap-1">
               <Plus className="h-4 w-4" />
               新增目標
             </Button>
@@ -229,11 +225,7 @@ export default function GoalsPage() {
                 {showAchieved && (
                   <ul className="mt-3 space-y-3">
                     {achievedGoals.map((goal) => (
-                      <GoalCard
-                        key={goal.id}
-                        goal={goal}
-                        onDelete={() => setDeletingId(goal.id)}
-                      />
+                      <GoalCard key={goal.id} goal={goal} onDelete={() => setDeletingId(goal.id)} />
                     ))}
                   </ul>
                 )}

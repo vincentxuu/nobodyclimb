@@ -2,7 +2,6 @@ import type { AIDocument, AIDocumentMetadata, Env } from '../../types'
 import { AGENTIC_DECISION_PROMPT } from '../../utils/ai-prompts'
 import type { LangfuseParent } from '../../utils/langfuse'
 import { logGeneration } from '../../utils/langfuse'
-import { EmbeddingService } from './embedding'
 import type {
   AgenticAction,
   AgenticStepTrace,
@@ -12,6 +11,7 @@ import type {
   TokenUsageInfo,
 } from '../orchestrators/pipeline/types'
 import toolRegistry from '../orchestrators/tool-registry'
+import { EmbeddingService } from './embedding'
 import { estimateTokens, extractResponseText, type LLMResponse, type SearchResult } from './types'
 
 export type RetrievalDeps = {

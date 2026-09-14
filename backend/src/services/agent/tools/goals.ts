@@ -14,12 +14,14 @@ export const goalsTool: Tool = {
       action: {
         type: 'string',
         enum: ['list', 'create', 'progress', 'achieve'],
-        description: '操作類型：list 查看目標、create 建立目標、progress 查看進度、achieve 標記達成',
+        description:
+          '操作類型：list 查看目標、create 建立目標、progress 查看進度、achieve 標記達成',
       },
       goal_type: {
         type: 'string',
         enum: ['grade', 'route', 'volume', 'custom'],
-        description: '目標類型（create 時必填）：grade=挑戰難度、route=完攀特定路線、volume=攀登量、custom=自訂',
+        description:
+          '目標類型（create 時必填）：grade=挑戰難度、route=完攀特定路線、volume=攀登量、custom=自訂',
       },
       title: { type: 'string', description: '目標標題（create 時必填）' },
       target: { type: 'string', description: '目標值（create 時必填），如 5.12a、飛簷、10' },
@@ -115,12 +117,18 @@ export const goalsTool: Tool = {
     }
 
     if (data.goals) {
-      const goals = data.goals as Array<{ title: string; target: string; goal_type: string; current_value: string | null }>
+      const goals = data.goals as Array<{
+        title: string
+        target: string
+        goal_type: string
+        current_value: string | null
+      }>
       if (goals.length === 0) {
         return { content: '目前沒有進行中的目標。', metadata: { count: 0 } }
       }
       const lines = goals.map(
-        (g, i) => `${i + 1}. ${g.title}（${g.goal_type}：${g.target}）${g.current_value ? `— 進度：${g.current_value}` : ''}`
+        (g, i) =>
+          `${i + 1}. ${g.title}（${g.goal_type}：${g.target}）${g.current_value ? `— 進度：${g.current_value}` : ''}`
       )
       return {
         content: `進行中的目標（${goals.length} 個）：\n${lines.join('\n')}`,
@@ -129,7 +137,11 @@ export const goalsTool: Tool = {
     }
 
     if (data.activeGoals) {
-      const active = data.activeGoals as Array<{ title: string; target: string; progressNote?: string }>
+      const active = data.activeGoals as Array<{
+        title: string
+        target: string
+        progressNote?: string
+      }>
       const suggestions = data.suggestions as string[]
       const achieved = data.recentlyAchieved as Array<{ title: string }>
 

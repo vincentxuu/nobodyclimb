@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
 import type { Env } from '../../../types'
 import type { AgentCache } from '../cache'
-import { recommendAgentTool, coachingAgentTool } from '../sub-agents'
-import { recommendSubAgent } from '../sub-agents/recommend-agent'
+import { coachingAgentTool, recommendAgentTool } from '../sub-agents'
 import { coachingSubAgent } from '../sub-agents/coaching-agent'
+import { recommendSubAgent } from '../sub-agents/recommend-agent'
 import { formatSubAgentResult } from '../sub-agents/types'
 import { analyzeWeaknesses, analyzeWeaknessesStructured } from '../sub-agents/weakness-analysis'
 import { DefaultTokenTracker } from '../tracker'
@@ -41,7 +41,10 @@ vi.mock('../tools/coaching', () => ({
   suggestTrainingTool: {
     execute: vi.fn().mockResolvedValue({
       level: '進階入門（5.10）',
-      typeDistribution: [{ type: 'sport', count: 8 }, { type: 'trad', count: 2 }],
+      typeDistribution: [
+        { type: 'sport', count: 8 },
+        { type: 'trad', count: 2 },
+      ],
       styleDistribution: { redpoint: 6, onsight: 2 },
       recentAscents: [
         { route: 'A', grade: '5.10a', type: 'sport', style: 'redpoint' },
@@ -238,7 +241,9 @@ describe('coachingSubAgent.gatherContext', () => {
       prepare: () => ({
         bind: () => ({
           all: async () => ({
-            results: [{ title: '挑戰 5.12', target: '5.12a', current_progress: '5.11c', status: 'active' }],
+            results: [
+              { title: '挑戰 5.12', target: '5.12a', current_progress: '5.11c', status: 'active' },
+            ],
           }),
           first: async () => null,
         }),
@@ -299,7 +304,10 @@ describe('coachingSubAgent.gatherContext', () => {
 describe('analyzeWeaknesses', () => {
   it('detects type imbalance (>80% one type)', () => {
     const result = analyzeWeaknesses({
-      typeDistribution: [{ type: 'sport', count: 9 }, { type: 'trad', count: 1 }],
+      typeDistribution: [
+        { type: 'sport', count: 9 },
+        { type: 'trad', count: 1 },
+      ],
     })
     expect(result).toContain('類型偏科')
     expect(result).toContain('90%')
@@ -307,7 +315,10 @@ describe('analyzeWeaknesses', () => {
 
   it('no type imbalance when balanced', () => {
     const result = analyzeWeaknesses({
-      typeDistribution: [{ type: 'sport', count: 5 }, { type: 'trad', count: 5 }],
+      typeDistribution: [
+        { type: 'sport', count: 5 },
+        { type: 'trad', count: 5 },
+      ],
     })
     expect(result).not.toContain('類型偏科')
   })
@@ -344,22 +355,34 @@ describe('analyzeWeaknesses', () => {
 
   it('includes exercise recommendations for sport-heavy type imbalance', () => {
     const result = analyzeWeaknesses({
-      typeDistribution: [{ type: 'sport', count: 9 }, { type: 'boulder', count: 1 }],
+      typeDistribution: [
+        { type: 'sport', count: 9 },
+        { type: 'boulder', count: 1 },
+      ],
     })
     expect(result).toContain('建議練習')
   })
 
   it('includes anti-style exercises when personality type is provided', () => {
-    const result = analyzeWeaknesses({
-      typeDistribution: [{ type: 'sport', count: 5 }, { type: 'boulder', count: 5 }],
-    }, 'PGB')
+    const result = analyzeWeaknesses(
+      {
+        typeDistribution: [
+          { type: 'sport', count: 5 },
+          { type: 'boulder', count: 5 },
+        ],
+      },
+      'PGB'
+    )
     expect(result).toContain('人格型態弱點')
     expect(result).toContain('建議練習')
   })
 
   it('structured output contains exercise arrays', () => {
     const insights = analyzeWeaknessesStructured({
-      typeDistribution: [{ type: 'boulder', count: 9 }, { type: 'sport', count: 1 }],
+      typeDistribution: [
+        { type: 'boulder', count: 9 },
+        { type: 'sport', count: 1 },
+      ],
       styleDistribution: { redpoint: 10 },
     })
     expect(insights.length).toBeGreaterThanOrEqual(2)

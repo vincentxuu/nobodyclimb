@@ -22,66 +22,59 @@ adminAiQualityRoutes.get('/stats', async (c) => {
   const db = c.env.DB
 
   try {
-    const [
-      todayCount,
-      weekCount,
-      monthCount,
-      avgLatency,
-      qualityStats,
-      toolUsage,
-      modeUsage,
-    ] = await Promise.all([
-      db
-        .prepare(
-          "SELECT COUNT(*) as cnt FROM ai_query_logs WHERE created_at >= datetime('now', '-1 day')"
-        )
-        .first<{ cnt: number }>(),
-      db
-        .prepare(
-          "SELECT COUNT(*) as cnt FROM ai_query_logs WHERE created_at >= datetime('now', '-7 days')"
-        )
-        .first<{ cnt: number }>(),
-      db
-        .prepare(
-          "SELECT COUNT(*) as cnt FROM ai_query_logs WHERE created_at >= datetime('now', '-30 days')"
-        )
-        .first<{ cnt: number }>(),
-      db
-        .prepare(
-          "SELECT AVG(latency_ms) as avg FROM ai_query_logs WHERE created_at >= datetime('now', '-7 days') AND latency_ms IS NOT NULL"
-        )
-        .first<{ avg: number | null }>(),
-      db
-        .prepare(
-          `SELECT
+    const [todayCount, weekCount, monthCount, avgLatency, qualityStats, toolUsage, modeUsage] =
+      await Promise.all([
+        db
+          .prepare(
+            "SELECT COUNT(*) as cnt FROM ai_query_logs WHERE created_at >= datetime('now', '-1 day')"
+          )
+          .first<{ cnt: number }>(),
+        db
+          .prepare(
+            "SELECT COUNT(*) as cnt FROM ai_query_logs WHERE created_at >= datetime('now', '-7 days')"
+          )
+          .first<{ cnt: number }>(),
+        db
+          .prepare(
+            "SELECT COUNT(*) as cnt FROM ai_query_logs WHERE created_at >= datetime('now', '-30 days')"
+          )
+          .first<{ cnt: number }>(),
+        db
+          .prepare(
+            "SELECT AVG(latency_ms) as avg FROM ai_query_logs WHERE created_at >= datetime('now', '-7 days') AND latency_ms IS NOT NULL"
+          )
+          .first<{ avg: number | null }>(),
+        db
+          .prepare(
+            `SELECT
              AVG(groundedness_score) as avg_groundedness,
              AVG(auto_score) as avg_auto_score,
              COUNT(CASE WHEN auto_score IS NOT NULL AND auto_score < 2 THEN 1 END) as low_quality_count,
              COUNT(CASE WHEN auto_score IS NOT NULL THEN 1 END) as total_with_score
            FROM ai_query_logs
            WHERE created_at >= datetime('now', '-7 days')`
-        )
-        .first<QualityRow>(),
-      db
-        .prepare(
-          `SELECT query_route, COUNT(*) as cnt
+          )
+          .first<QualityRow>(),
+        db
+          .prepare(
+            `SELECT query_route, COUNT(*) as cnt
            FROM ai_query_logs
            WHERE created_at >= datetime('now', '-7 days') AND query_route IS NOT NULL
            GROUP BY query_route
            ORDER BY cnt DESC
            LIMIT 15`
-        )
-        .all<ToolUsageRow>(),
-      db
-        .prepare(
-          `SELECT
+          )
+          .all<ToolUsageRow>(),
+        db
+          .prepare(
+            `SELECT
              COUNT(CASE WHEN query_route = 'agent' THEN 1 END) as agent_count,
              COUNT(CASE WHEN query_route != 'agent' OR query_route IS NULL THEN 1 END) as pipeline_count
            FROM ai_query_logs
            WHERE created_at >= datetime('now', '-7 days')`
-        )
-        .first<{ agent_count: number; pipeline_count: number }>(),
-    ])
+          )
+          .first<{ agent_count: number; pipeline_count: number }>(),
+      ])
 
     const silentFailureRate =
       qualityStats && qualityStats.total_with_score > 0

@@ -1,8 +1,8 @@
 import {
+  getExerciseById,
   getPersonalityType,
   getTrainingSchoolMapping,
   TRAINING_BY_LEVEL,
-  getExerciseById,
 } from '@nobodyclimb/constants'
 import type { PersonalityTypeCode } from '@nobodyclimb/types'
 import { createProvider } from '../../orchestrators/ai-graph/providers'
@@ -195,7 +195,9 @@ async function gatherTrainingHistoryContext(
       const completed = rows.filter((r) => r.completed)
       const skipped = rows.filter((r) => !r.completed)
 
-      lines.push(`完成率：${completed.length}/${rows.length}（${Math.round((completed.length / rows.length) * 100)}%）`)
+      lines.push(
+        `完成率：${completed.length}/${rows.length}（${Math.round((completed.length / rows.length) * 100)}%）`
+      )
 
       const daySkipCount: Record<number, number> = {}
       for (const r of skipped) {

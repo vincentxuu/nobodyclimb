@@ -96,9 +96,7 @@ function createRealisticDb(opts: {
       bind: (..._args: unknown[]) => ({
         first: async () => {
           if (sql.includes('personality_type') && sql.includes('users')) {
-            return opts.personalityType
-              ? { personality_type: opts.personalityType }
-              : null
+            return opts.personalityType ? { personality_type: opts.personalityType } : null
           }
           return null
         },

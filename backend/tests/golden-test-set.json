@@ -7,10 +7,7 @@
       "query": "龍洞有哪些 5.10 的路線？",
       "category": "simple",
       "expected_tool": "search_routes",
-      "expected_answer_keywords": [
-        "龍洞",
-        "5.10"
-      ],
+      "expected_answer_keywords": ["龍洞", "5.10"],
       "expected_filters": {
         "location": "龍洞",
         "grade_gte": "5.10a"
@@ -23,10 +20,7 @@
       "query": "關子嶺岩場的特色是什麼？",
       "category": "simple",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "關子嶺",
-        "石灰岩"
-      ],
+      "expected_answer_keywords": ["關子嶺", "石灰岩"],
       "ci": true,
       "ground_truth_answer": "關子嶺岩場位於台南，以石灰岩為主要岩質，路線以 sport climbing 為主。"
     },
@@ -35,11 +29,7 @@
       "query": "比較龍洞和德芙蘭哪個適合新手？",
       "category": "complex",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "龍洞",
-        "德芙蘭",
-        "新手"
-      ],
+      "expected_answer_keywords": ["龍洞", "德芙蘭", "新手"],
       "ci": true,
       "ground_truth_answer": "龍洞路線數量多、難度範圍廣（5.6-5.14），適合各級攀岩者但交通較遠。德芙蘭以砂岩為主，路線相對少但環境清幽。兩者都有適合新手的簡單路線。"
     },
@@ -48,11 +38,7 @@
       "query": "什麼是先鋒攀登？需要什麼裝備？",
       "category": "general-knowledge",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "先鋒",
-        "快扣",
-        "繩子"
-      ],
+      "expected_answer_keywords": ["先鋒", "快扣", "繩子"],
       "ground_truth_answer": "先鋒攀登（lead climbing）是攀岩者邊攀爬邊將繩子掛入快扣的攀登方式。需要的裝備包括：攀岩繩、快扣組、吊帶、確保器、岩鞋、粉袋、頭盔。"
     },
     {
@@ -60,11 +46,7 @@
       "query": "台北101攀岩場有什麼路線？",
       "category": "edge-case",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "沒有找到",
-        "不確定",
-        "無法確認"
-      ],
+      "expected_answer_keywords": ["沒有找到", "不確定", "無法確認"],
       "ci": true,
       "ground_truth_answer": "系統中沒有「台北101攀岩場」的資料。台北101不是攀岩場地。"
     },
@@ -73,10 +55,7 @@
       "query": "墾丁有哪些 sport 路線？",
       "category": "simple",
       "expected_tool": "search_routes",
-      "expected_answer_keywords": [
-        "墾丁",
-        "sport"
-      ],
+      "expected_answer_keywords": ["墾丁", "sport"],
       "expected_filters": {
         "location": "墾丁",
         "type": "sport"
@@ -88,10 +67,7 @@
       "query": "壽山岩場在哪裡？怎麼去？",
       "category": "simple",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "壽山",
-        "高雄"
-      ],
+      "expected_answer_keywords": ["壽山", "高雄"],
       "ci": true,
       "ground_truth_answer": "壽山岩場位於高雄市鼓山區，是台灣南部最大的天然攀岩場地之一。靠近市區，交通便利，是高雄地區攀岩者的首選場地。"
     },
@@ -100,10 +76,7 @@
       "query": "龍洞有多少條路線？",
       "category": "simple",
       "expected_tool": "search_sql",
-      "expected_answer_keywords": [
-        "龍洞",
-        "616"
-      ],
+      "expected_answer_keywords": ["龍洞", "616"],
       "expected_filters": {
         "location": "龍洞"
       },
@@ -115,10 +88,7 @@
       "query": "德芙蘭岩場的岩質是什麼？",
       "category": "simple",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "德芙蘭",
-        "砂岩"
-      ],
+      "expected_answer_keywords": ["德芙蘭", "砂岩"],
       "ground_truth_answer": "德芙蘭岩場的岩質為石英質砂岩，質地粗糙摩擦力佳，位於台中和平區。共有 53 條路線，包含 sport、trad 和 mixed 類型。"
     },
     {
@@ -126,10 +96,7 @@
       "query": "龍洞 5.11 以上的路線有哪些？",
       "category": "simple",
       "expected_tool": "search_routes",
-      "expected_answer_keywords": [
-        "龍洞",
-        "5.11"
-      ],
+      "expected_answer_keywords": ["龍洞", "5.11"],
       "expected_filters": {
         "location": "龍洞",
         "grade_gte": "5.11a"
@@ -141,9 +108,7 @@
       "query": "關子嶺有傳統攀登路線嗎？",
       "category": "simple",
       "expected_tool": "search_routes",
-      "expected_answer_keywords": [
-        "關子嶺"
-      ],
+      "expected_answer_keywords": ["關子嶺"],
       "expected_filters": {
         "location": "關子嶺"
       },
@@ -154,10 +119,7 @@
       "query": "壽山有哪些 5.12 的路線？",
       "category": "simple",
       "expected_tool": "search_routes",
-      "expected_answer_keywords": [
-        "壽山",
-        "5.12"
-      ],
+      "expected_answer_keywords": ["壽山", "5.12"],
       "expected_filters": {
         "location": "壽山",
         "grade_gte": "5.12a"
@@ -169,10 +131,7 @@
       "query": "墾丁岩場有什麼特別的地方？",
       "category": "simple",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "墾丁",
-        "石灰岩"
-      ],
+      "expected_answer_keywords": ["墾丁", "石灰岩"],
       "ground_truth_answer": "墾丁岩場位於船帆石東北側的海岸林中，以珊瑚礁石灰岩為主要岩質。共有 120 條 sport 路線，是台灣南部重要的運動攀登場地。擁有 15 條 5.13 以上的高難度路線。"
     },
     {
@@ -180,10 +139,7 @@
       "query": "龍洞有 trad 路線嗎？",
       "category": "simple",
       "expected_tool": "search_routes",
-      "expected_answer_keywords": [
-        "龍洞",
-        "trad"
-      ],
+      "expected_answer_keywords": ["龍洞", "trad"],
       "expected_filters": {
         "location": "龍洞",
         "type": "trad"
@@ -195,10 +151,7 @@
       "query": "德芙蘭有幾條 5.10 以上的路線？",
       "category": "simple",
       "expected_tool": "search_sql",
-      "expected_answer_keywords": [
-        "德芙蘭",
-        "5.10"
-      ],
+      "expected_answer_keywords": ["德芙蘭", "5.10"],
       "expected_filters": {
         "location": "德芙蘭",
         "grade_gte": "5.10a"
@@ -210,11 +163,7 @@
       "query": "台灣南部有哪些岩場？",
       "category": "simple",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "墾丁",
-        "壽山",
-        "關子嶺"
-      ],
+      "expected_answer_keywords": ["墾丁", "壽山", "關子嶺"],
       "ci": true,
       "ground_truth_answer": "台灣南部的主要岩場包括墾丁（石灰岩）、壽山（石灰岩，位於高雄）、關子嶺（石灰岩，位於台南）。"
     },
@@ -223,10 +172,7 @@
       "query": "龍洞最簡單的路線是什麼難度？",
       "category": "simple",
       "expected_tool": "search_sql",
-      "expected_answer_keywords": [
-        "龍洞",
-        "5.6"
-      ],
+      "expected_answer_keywords": ["龍洞", "5.6"],
       "expected_filters": {
         "location": "龍洞"
       },
@@ -237,11 +183,7 @@
       "query": "壽山的路線難度範圍？",
       "category": "simple",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "壽山",
-        "5.10",
-        "5.13"
-      ],
+      "expected_answer_keywords": ["壽山", "5.10", "5.13"],
       "ground_truth_answer": "壽山的路線難度範圍從 5.6 到 5.13+，共 107 條路線，全部為 sport climbing。5.13 以上僅 1 條。"
     },
     {
@@ -249,10 +191,7 @@
       "query": "墾丁 5.11 到 5.12 的路線有哪些？",
       "category": "simple",
       "expected_tool": "search_routes",
-      "expected_answer_keywords": [
-        "墾丁",
-        "5.11"
-      ],
+      "expected_answer_keywords": ["墾丁", "5.11"],
       "expected_filters": {
         "location": "墾丁",
         "grade_gte": "5.11a",
@@ -265,10 +204,7 @@
       "query": "關子嶺最難的路線是幾級？",
       "category": "simple",
       "expected_tool": "search_sql",
-      "expected_answer_keywords": [
-        "關子嶺",
-        "5.13"
-      ],
+      "expected_answer_keywords": ["關子嶺", "5.13"],
       "expected_filters": {
         "location": "關子嶺"
       },
@@ -279,9 +215,7 @@
       "query": "台灣北部有什麼岩場可以爬？",
       "category": "simple",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "龍洞"
-      ],
+      "expected_answer_keywords": ["龍洞"],
       "ground_truth_answer": "台灣北部最主要的岩場是龍洞，位於新北市貢寮區，是台灣最大的天然岩場，共有 616 條路線，岩質為四稜砂岩。"
     },
     {
@@ -289,9 +223,7 @@
       "query": "德芙蘭岩場怎麼去？交通方式？",
       "category": "simple",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "德芙蘭"
-      ],
+      "expected_answer_keywords": ["德芙蘭"],
       "ground_truth_answer": "德芙蘭岩場位於台中和平區，可從台中市區開車前往。岩場以石英質砂岩為主，共有 53 條路線。"
     },
     {
@@ -299,9 +231,7 @@
       "query": "墾丁有 boulder 路線嗎？",
       "category": "simple",
       "expected_tool": "search_routes",
-      "expected_answer_keywords": [
-        "墾丁"
-      ],
+      "expected_answer_keywords": ["墾丁"],
       "expected_filters": {
         "location": "墾丁"
       },
@@ -312,10 +242,7 @@
       "query": "龍洞校門口有什麼路線？",
       "category": "simple",
       "expected_tool": "search_routes",
-      "expected_answer_keywords": [
-        "龍洞",
-        "校門口"
-      ],
+      "expected_answer_keywords": ["龍洞", "校門口"],
       "ground_truth_answer": "龍洞校門口是龍洞岩場的主要攀登區域之一，有多條各種難度的路線。龍洞共有 616 條路線分布在不同區域。"
     },
     {
@@ -323,11 +250,7 @@
       "query": "各岩場有幾條路線？",
       "category": "simple",
       "expected_tool": "search_sql",
-      "expected_answer_keywords": [
-        "龍洞",
-        "墾丁",
-        "壽山"
-      ],
+      "expected_answer_keywords": ["龍洞", "墾丁", "壽山"],
       "ground_truth_answer": "各岩場路線數量：龍洞 616 條、墾丁 120 條、壽山 107 條、德芙蘭 53 條、關子嶺 50 條。"
     },
     {
@@ -335,11 +258,7 @@
       "query": "推薦適合新手的 5.8 到 5.10 路線",
       "category": "complex",
       "expected_tool": "hybrid",
-      "expected_answer_keywords": [
-        "5.8",
-        "5.10",
-        "新手"
-      ],
+      "expected_answer_keywords": ["5.8", "5.10", "新手"],
       "expected_filters": {
         "grade_gte": "5.8",
         "grade_lte": "5.10d"
@@ -352,11 +271,7 @@
       "query": "龍洞和壽山的路線難度分布比較",
       "category": "complex",
       "expected_tool": "search_sql",
-      "expected_answer_keywords": [
-        "龍洞",
-        "壽山",
-        "難度"
-      ],
+      "expected_answer_keywords": ["龍洞", "壽山", "難度"],
       "ci": true,
       "ground_truth_answer": "龍洞有 616 條路線，難度從 5.3 到 5.14+，範圍極廣。壽山有 107 條路線，難度從 5.6 到 5.13+。龍洞的路線數量和難度跨度都遠大於壽山。"
     },
@@ -365,9 +280,7 @@
       "query": "哪個岩場最適合練習先鋒攀登？",
       "category": "complex",
       "expected_tool": "hybrid",
-      "expected_answer_keywords": [
-        "先鋒"
-      ],
+      "expected_answer_keywords": ["先鋒"],
       "ground_truth_answer": "龍洞最適合練習先鋒攀登，因為路線數量多（616 條）、難度範圍廣（5.3-5.14+），且有大量 sport 路線（246 條）可供練習掛快扣。壽山和墾丁也適合，全為 sport 路線。"
     },
     {
@@ -375,10 +288,7 @@
       "query": "我想找南部的岩場，難度在 5.10 左右，有推薦嗎？",
       "category": "complex",
       "expected_tool": "hybrid",
-      "expected_answer_keywords": [
-        "5.10",
-        "南部"
-      ],
+      "expected_answer_keywords": ["5.10", "南部"],
       "ground_truth_answer": "南部有三個岩場可選：墾丁（120 條 sport，5.10 有 33 條）、壽山（107 條 sport，5.10 有 43 條，交通最便利）、關子嶺（50 條，5.10 有 14 條）。壽山 5.10 路線最多且交通方便，推薦優先考慮。"
     },
     {
@@ -386,11 +296,7 @@
       "query": "比較墾丁和壽山，哪個路線比較多？難度比較高？",
       "category": "complex",
       "expected_tool": "search_sql",
-      "expected_answer_keywords": [
-        "墾丁",
-        "壽山",
-        "路線"
-      ],
+      "expected_answer_keywords": ["墾丁", "壽山", "路線"],
       "ci": true,
       "ground_truth_answer": "墾丁有 120 條路線，壽山有 107 條，墾丁路線較多。難度方面，墾丁有 15 條 5.13 以上路線，壽山僅 1 條，墾丁整體難度較高。兩者都是珊瑚礁石灰岩，全部為 sport climbing。"
     },
@@ -399,10 +305,7 @@
       "query": "台灣有哪些岩場可以爬傳統攀？哪個路線最多？",
       "category": "complex",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "傳統",
-        "龍洞"
-      ],
+      "expected_answer_keywords": ["傳統", "龍洞"],
       "ground_truth_answer": "台灣可以爬傳統攀的岩場主要有龍洞（326 條 trad）和德芙蘭（12 條 trad）。龍洞的傳統攀登路線數量最多，佔全部 616 條路線的一半以上。"
     },
     {
@@ -410,9 +313,7 @@
       "query": "推薦龍洞三條適合中級攀岩者的經典路線",
       "category": "complex",
       "expected_tool": "hybrid",
-      "expected_answer_keywords": [
-        "龍洞"
-      ],
+      "expected_answer_keywords": ["龍洞"],
       "expected_filters": {
         "location": "龍洞"
       },
@@ -423,11 +324,7 @@
       "query": "德芙蘭和龍洞的岩質有什麼不同？對攀爬有什麼影響？",
       "category": "complex",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "德芙蘭",
-        "龍洞",
-        "砂岩"
-      ],
+      "expected_answer_keywords": ["德芙蘭", "龍洞", "砂岩"],
       "ground_truth_answer": "德芙蘭岩質為石英質砂岩，質地粗糙摩擦力佳，適合摩擦力攀登。龍洞岩質為四稜砂岩，岩面較光滑結實。砂岩類型不同會影響手點腳點的抓握方式和攀爬技巧。"
     },
     {
@@ -435,10 +332,7 @@
       "query": "如果我只有週末兩天，推薦哪個岩場？要考慮交通時間",
       "category": "complex",
       "expected_tool": "hybrid",
-      "expected_answer_keywords": [
-        "推薦",
-        "交通"
-      ],
+      "expected_answer_keywords": ["推薦", "交通"],
       "ground_truth_answer": "如果從北部出發，龍洞交通最方便（新北市貢寮區）。從南部出發，壽山位於高雄市區交通最便利。墾丁和關子嶺需要較多交通時間。德芙蘭在台中和平區，從中部出發較方便。"
     },
     {
@@ -446,11 +340,7 @@
       "query": "關子嶺和墾丁都是石灰岩，路線風格有什麼差異？",
       "category": "complex",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "關子嶺",
-        "墾丁",
-        "石灰岩"
-      ],
+      "expected_answer_keywords": ["關子嶺", "墾丁", "石灰岩"],
       "ground_truth_answer": "關子嶺和墾丁都是珊瑚礁石灰岩，但路線風格不同。關子嶺以力量耐力型路線為主，共 50 條路線（49 sport + 1 boulder）。墾丁有 120 條 sport 路線，路線數量較多且難度分布更廣（有 15 條 5.13 以上）。"
     },
     {
@@ -458,10 +348,7 @@
       "query": "各岩場 5.11 以上的路線數量統計",
       "category": "complex",
       "expected_tool": "search_sql",
-      "expected_answer_keywords": [
-        "5.11",
-        "龍洞"
-      ],
+      "expected_answer_keywords": ["5.11", "龍洞"],
       "ci": true,
       "ground_truth_answer": "各岩場 5.11 以上路線數量需要查詢資料庫統計。龍洞因路線最多（616 條），5.11 以上的路線數量也最多。墾丁有 15 條 5.13+，關子嶺有 3 條 5.13+，壽山有 1 條 5.13+。"
     },
@@ -470,10 +357,7 @@
       "query": "推薦壽山幾條 5.10 到 5.11 之間的 sport 路線",
       "category": "complex",
       "expected_tool": "hybrid",
-      "expected_answer_keywords": [
-        "壽山",
-        "5.10"
-      ],
+      "expected_answer_keywords": ["壽山", "5.10"],
       "expected_filters": {
         "location": "壽山",
         "grade_gte": "5.10a",
@@ -487,10 +371,7 @@
       "query": "哪些岩場有適合小朋友的簡單路線？",
       "category": "complex",
       "expected_tool": "hybrid",
-      "expected_answer_keywords": [
-        "簡單",
-        "新手"
-      ],
+      "expected_answer_keywords": ["簡單", "新手"],
       "ground_truth_answer": "龍洞有最簡單的路線（從 5.3 開始），適合小朋友嘗試。壽山、墾丁、關子嶺和德芙蘭的最簡單路線從 5.6 開始。龍洞有 31 條 5.6 等級的路線，選擇最多。"
     },
     {
@@ -498,11 +379,7 @@
       "query": "龍洞的路線類型分布是怎樣的？sport 多還是 trad 多？",
       "category": "complex",
       "expected_tool": "search_sql",
-      "expected_answer_keywords": [
-        "龍洞",
-        "sport",
-        "trad"
-      ],
+      "expected_answer_keywords": ["龍洞", "sport", "trad"],
       "ground_truth_answer": "龍洞的路線類型分布：trad（傳統攀登）326 條、sport（運動攀登）246 條、boulder（抱石）44 條。trad 路線比 sport 多，是台灣傳統攀登路線最豐富的岩場。"
     },
     {
@@ -510,9 +387,7 @@
       "query": "如果我想進階到 5.12，應該去哪個岩場練習？",
       "category": "complex",
       "expected_tool": "hybrid",
-      "expected_answer_keywords": [
-        "5.12"
-      ],
+      "expected_answer_keywords": ["5.12"],
       "ground_truth_answer": "進階到 5.12 可考慮龍洞（路線最多、難度範圍最廣）、墾丁（有 15 條 5.13 以上路線，高難度選擇多）或壽山（交通方便，可頻繁練習）。石灰岩場（墾丁、壽山、關子嶺）適合練習力量耐力。"
     },
     {
@@ -520,13 +395,7 @@
       "query": "比較五個岩場的海拔和岩質差異",
       "category": "complex",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "龍洞",
-        "墾丁",
-        "壽山",
-        "關子嶺",
-        "德芙蘭"
-      ],
+      "expected_answer_keywords": ["龍洞", "墾丁", "壽山", "關子嶺", "德芙蘭"],
       "ground_truth_answer": "五個岩場的岩質：龍洞為四稜砂岩、德芙蘭為石英質砂岩、墾丁為珊瑚礁石灰岩、壽山為珊瑚礁石灰岩、關子嶺為珊瑚礁石灰岩。砂岩類（龍洞、德芙蘭）和石灰岩類（墾丁、壽山、關子嶺）的攀爬風格明顯不同。"
     },
     {
@@ -534,10 +403,7 @@
       "query": "台灣哪些岩場有 5.13 以上的路線？分別有幾條？",
       "category": "complex",
       "expected_tool": "search_sql",
-      "expected_answer_keywords": [
-        "5.13",
-        "墾丁"
-      ],
+      "expected_answer_keywords": ["5.13", "墾丁"],
       "ground_truth_answer": "有 5.13 以上路線的岩場：龍洞 20 條、墾丁 15 條、關子嶺 3 條、壽山 1 條。德芙蘭最高難度僅到 5.12+，沒有 5.13 以上路線。"
     },
     {
@@ -545,11 +411,7 @@
       "query": "推薦幾條有影片的龍洞路線，難度 5.10 左右",
       "category": "complex",
       "expected_tool": "search_sql",
-      "expected_answer_keywords": [
-        "龍洞",
-        "5.10",
-        "影片"
-      ],
+      "expected_answer_keywords": ["龍洞", "5.10", "影片"],
       "expected_filters": {
         "location": "龍洞"
       },
@@ -560,10 +422,7 @@
       "query": "龍洞哪個區域路線最多？各有什麼特色？",
       "category": "complex",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "龍洞",
-        "校門口"
-      ],
+      "expected_answer_keywords": ["龍洞", "校門口"],
       "ground_truth_answer": "龍洞有多個攀登區域，校門口是最知名的區域之一。龍洞共 616 條路線分布在各區域，不同區域有不同的岩壁特色和難度分布。"
     },
     {
@@ -571,10 +430,7 @@
       "query": "我是 5.11 能力的攀岩者，規劃一個南部攀岩行程",
       "category": "complex",
       "expected_tool": "hybrid",
-      "expected_answer_keywords": [
-        "5.11",
-        "南部"
-      ],
+      "expected_answer_keywords": ["5.11", "南部"],
       "expected_filters": {
         "grade_gte": "5.10a",
         "grade_lte": "5.11d"
@@ -586,12 +442,7 @@
       "query": "什麼是 redpoint？和 onsight 有什麼不同？",
       "category": "general-knowledge",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "redpoint",
-        "紅點",
-        "onsight",
-        "視攀"
-      ],
+      "expected_answer_keywords": ["redpoint", "紅點", "onsight", "視攀"],
       "ci": true,
       "ground_truth_answer": "Redpoint（紅點）是指在嘗試過的路線上完成無墜落攀登。Onsight（視攀）是指在從未嘗試過、也未觀看他人攀爬的路線上第一次就完成無墜落攀登。Onsight 難度高於 redpoint。"
     },
@@ -600,11 +451,7 @@
       "query": "攀岩新手需要準備什麼裝備？",
       "category": "general-knowledge",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "岩鞋",
-        "吊帶",
-        "粉袋"
-      ],
+      "expected_answer_keywords": ["岩鞋", "吊帶", "粉袋"],
       "ci": true,
       "ground_truth_answer": "攀岩新手基本裝備：岩鞋、吊帶（harness）、粉袋（chalk bag）、確保器。如果是戶外攀岩還需要頭盔。室內攀岩館通常可以租借裝備。"
     },
@@ -613,10 +460,7 @@
       "query": "什麼是 YDS 難度系統？5.10a 和 5.10d 差多少？",
       "category": "general-knowledge",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "YDS",
-        "5.10"
-      ],
+      "expected_answer_keywords": ["YDS", "5.10"],
       "ci": true,
       "ground_truth_answer": "YDS（Yosemite Decimal System）是北美最常用的攀岩難度系統。5.10 分為 a/b/c/d 四個細分等級，a 最簡單 d 最難。5.10a 到 5.10d 之間差距明顯。"
     },
@@ -625,11 +469,7 @@
       "query": "top rope 和 lead climbing 的差別？",
       "category": "general-knowledge",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "top rope",
-        "上方確保",
-        "先鋒"
-      ],
+      "expected_answer_keywords": ["top rope", "上方確保", "先鋒"],
       "ground_truth_answer": "Top rope（上方確保）是繩子從頂端固定點穿過，攀岩者墜落距離短，較安全適合初學者。Lead climbing（先鋒攀登）需要邊爬邊掛快扣，墜落距離較長，技術和心理要求較高。"
     },
     {
@@ -637,12 +477,7 @@
       "query": "Sport climbing 和 trad climbing 有什麼不同？",
       "category": "general-knowledge",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "sport",
-        "trad",
-        "bolt",
-        "傳統"
-      ],
+      "expected_answer_keywords": ["sport", "trad", "bolt", "傳統"],
       "ci": true,
       "ground_truth_answer": "Sport climbing 使用預先打好的 bolt 作為保護點，攀岩者只需掛快扣。Trad climbing 需要攀岩者自行放置保護裝備（如 cam、nut），難度和風險較高。"
     },
@@ -651,10 +486,7 @@
       "query": "攀岩繩結有哪幾種？怎麼打八字結？",
       "category": "general-knowledge",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "八字結",
-        "繩結"
-      ],
+      "expected_answer_keywords": ["八字結", "繩結"],
       "ground_truth_answer": "常用攀岩繩結包括：八字結（figure-eight knot）用於連接吊帶、雙套結（clove hitch）用於固定點、義大利半扣（Munter hitch）可當緊急確保。八字結的打法是將繩尾折回穿過繩圈形成八字形狀。"
     },
     {
@@ -662,11 +494,7 @@
       "query": "下雨天可以戶外攀岩嗎？有什麼安全注意事項？",
       "category": "general-knowledge",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "下雨",
-        "安全",
-        "濕滑"
-      ],
+      "expected_answer_keywords": ["下雨", "安全", "濕滑"],
       "ground_truth_answer": "下雨天不建議戶外攀岩。岩面濕滑會大幅降低摩擦力，增加墜落風險。砂岩（如龍洞、德芙蘭）濕了之後岩質會變軟，攀爬會損壞岩面。應等岩面完全乾燥後再攀爬。"
     },
     {
@@ -674,11 +502,7 @@
       "query": "什麼是 flash？需要什麼條件？",
       "category": "general-knowledge",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "flash",
-        "閃攀",
-        "第一次"
-      ],
+      "expected_answer_keywords": ["flash", "閃攀", "第一次"],
       "ground_truth_answer": "Flash（閃攀）是指在第一次嘗試路線時就完成無墜落攀登，但之前可以觀看他人攀爬或獲得路線資訊。與 onsight 的差別是 flash 允許事先觀摩，onsight 則完全不能。"
     },
     {
@@ -686,10 +510,7 @@
       "query": "攀岩怎麼暖身比較好？有推薦的暖身動作嗎？",
       "category": "general-knowledge",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "暖身",
-        "伸展"
-      ],
+      "expected_answer_keywords": ["暖身", "伸展"],
       "ground_truth_answer": "攀岩暖身建議：先做 5-10 分鐘的全身活動（跳繩、慢跑），再做手指、手腕、肩膀的動態伸展。接著從比自己能力低 2-3 級的簡單路線開始爬 2-3 條暖身路線，逐步提高難度。"
     },
     {
@@ -697,11 +518,7 @@
       "query": "確保器有哪些種類？GriGri 和 ATC 有什麼差別？",
       "category": "general-knowledge",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "確保器",
-        "GriGri",
-        "ATC"
-      ],
+      "expected_answer_keywords": ["確保器", "GriGri", "ATC"],
       "ci": true,
       "ground_truth_answer": "常見確保器：ATC（管狀，手動制動）和 GriGri（輔助制動）。GriGri 有自動鎖定功能較安全但較重，ATC 輕巧通用但需要更多技術。"
     },
@@ -710,12 +527,7 @@
       "query": "阿里山攀岩場有什麼路線可以爬？",
       "category": "edge-case",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "沒有找到",
-        "不確定",
-        "無法確認",
-        "沒有資料"
-      ],
+      "expected_answer_keywords": ["沒有找到", "不確定", "無法確認", "沒有資料"],
       "ci": true,
       "ground_truth_answer": "系統中沒有阿里山攀岩場的資料。"
     },
@@ -724,13 +536,7 @@
       "query": "太魯閣有 5.15a 的路線嗎？",
       "category": "edge-case",
       "expected_tool": "search_routes",
-      "expected_answer_keywords": [
-        "沒有找到",
-        "不確定",
-        "無法確認",
-        "沒有資料",
-        "5.15"
-      ],
+      "expected_answer_keywords": ["沒有找到", "不確定", "無法確認", "沒有資料", "5.15"],
       "ci": true,
       "ground_truth_answer": "系統中沒有 5.15a 等級的路線資料。5.15a 是極高難度，全世界只有極少數攀岩者能完攀。"
     },
@@ -739,12 +545,7 @@
       "query": "火星攀岩場在哪裡？",
       "category": "edge-case",
       "expected_tool": "search_crags",
-      "expected_answer_keywords": [
-        "沒有找到",
-        "不確定",
-        "無法確認",
-        "沒有資料"
-      ],
+      "expected_answer_keywords": ["沒有找到", "不確定", "無法確認", "沒有資料"],
       "ci": true,
       "ground_truth_answer": "系統中沒有「火星攀岩場」的資料。"
     },
@@ -753,12 +554,7 @@
       "query": "龍洞的「超級無敵霹靂旋風」路線在哪？",
       "category": "edge-case",
       "expected_tool": "search_routes",
-      "expected_answer_keywords": [
-        "沒有找到",
-        "不確定",
-        "無法確認",
-        "沒有資料"
-      ],
+      "expected_answer_keywords": ["沒有找到", "不確定", "無法確認", "沒有資料"],
       "expected_filters": {
         "location": "龍洞"
       },
@@ -769,12 +565,7 @@
       "query": "???",
       "category": "edge-case",
       "expected_tool": "general_knowledge",
-      "expected_answer_keywords": [
-        "請",
-        "問題",
-        "幫助",
-        "攀岩"
-      ],
+      "expected_answer_keywords": ["請", "問題", "幫助", "攀岩"],
       "ci": true,
       "ground_truth_answer": "請提供更具體的攀岩相關問題，例如岩場資訊、路線推薦、攀岩知識等。"
     }

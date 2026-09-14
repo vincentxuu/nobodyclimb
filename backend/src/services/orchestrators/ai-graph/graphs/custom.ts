@@ -82,7 +82,10 @@ export function buildCustomGraph() {
     .addNode('crossEncoder', withToggle('semanticRerank', crossEncoderNode))
     .addNode('mmr', withToggle('diversityFilter', mmrNode))
     .addNode('popularityRerank', withToggle('domainRerank', popularityRerankNode))
-    .addNode('retrievalQualityJudge', withToggle('retrievalQualityJudge', retrievalQualityJudgeNode))
+    .addNode(
+      'retrievalQualityJudge',
+      withToggle('retrievalQualityJudge', retrievalQualityJudgeNode)
+    )
     .addNode('queryRewrite', withToggle('queryRewrite', queryRewriteNode))
     .addNode('contextCompression', withToggle('contextCompression', contextCompressionNode))
     .addNode('llmGeneration', llmGenerationNode)

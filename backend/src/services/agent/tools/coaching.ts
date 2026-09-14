@@ -159,9 +159,7 @@ export const suggestTrainingTool: Tool = {
         boulder: '抱石',
         mixed: '混合',
       }
-      const types = data.typeDistribution.map(
-        (t) => `${typeMap[t.type] ?? t.type} ${t.count} 條`
-      )
+      const types = data.typeDistribution.map((t) => `${typeMap[t.type] ?? t.type} ${t.count} 條`)
       lines.push(`攀登類型分佈：${types.join('、')}`)
     }
 

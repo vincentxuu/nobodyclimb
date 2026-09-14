@@ -38,18 +38,16 @@ export async function contextCompressionNode(state: GraphState): Promise<Partial
       return {}
     }
 
-    const prompt = COMPRESS_PROMPT
-      .replace('{query}', state.request.query)
-      .replace('{context}', context.slice(0, 8000))
-
-    const result = await llmProvider.chat(
-      [{ role: 'user', content: prompt }],
-      {
-        model: pipelineConfig.lightweight_model,
-        maxTokens: 2000,
-        gatewayOptions: state.gatewayOptions,
-      }
+    const prompt = COMPRESS_PROMPT.replace('{query}', state.request.query).replace(
+      '{context}',
+      context.slice(0, 8000)
     )
+
+    const result = await llmProvider.chat([{ role: 'user', content: prompt }], {
+      model: pipelineConfig.lightweight_model,
+      maxTokens: 2000,
+      gatewayOptions: state.gatewayOptions,
+    })
 
     const compressed = result.content?.trim()
     if (!compressed || compressed.length >= context.length) {

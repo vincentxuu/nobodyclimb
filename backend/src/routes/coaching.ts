@@ -1,15 +1,15 @@
-import { Hono } from 'hono'
-import { describeRoute } from 'hono-openapi'
 import {
-  TRAINING_BY_LEVEL,
   getExerciseById,
   getPersonalityType,
   getTrainingSchoolMapping,
+  TRAINING_BY_LEVEL,
 } from '@nobodyclimb/constants'
 import type { PersonalityTypeCode } from '@nobodyclimb/types'
-import { gradeToNumeric } from '../services/core/climbing-schema'
-import { analyzeWeaknessesStructured } from '../services/agent/sub-agents/weakness-analysis'
+import { Hono } from 'hono'
+import { describeRoute } from 'hono-openapi'
 import { authMiddleware } from '../middleware/auth'
+import { analyzeWeaknessesStructured } from '../services/agent/sub-agents/weakness-analysis'
+import { gradeToNumeric } from '../services/core/climbing-schema'
 import type { Env } from '../types'
 
 export const coachingRoutes = new Hono<{ Bindings: Env }>()

@@ -108,10 +108,7 @@ const ALWAYS_LOAD_MANIFESTS = new Set(['search', 'data'])
  * 1. search + data 永遠載入（核心能力）
  * 2. 無 trigger 命中時全部載入（不猜錯）
  */
-export function selectManifests(
-  query: string,
-  manifests: ToolManifest[]
-): ToolManifest[] {
+export function selectManifests(query: string, manifests: ToolManifest[]): ToolManifest[] {
   const trimmed = query.trim()
   if (!trimmed) return manifests
 

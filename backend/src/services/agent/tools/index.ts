@@ -30,10 +30,10 @@ const TOOL_MAP: Record<string, import('../types').Tool> = {
 }
 
 /** manifest-driven 條件式工具註冊。query 有值時啟用動態載入。 */
-export function createToolRegistry(opts?: {
-  isAuthenticated?: boolean
-  query?: string
-}): { registry: ToolRegistry; manifests: ToolManifest[] } {
+export function createToolRegistry(opts?: { isAuthenticated?: boolean; query?: string }): {
+  registry: ToolRegistry
+  manifests: ToolManifest[]
+} {
   const isAuthenticated = opts?.isAuthenticated ?? false
   let manifests = getActiveManifests(isAuthenticated)
 

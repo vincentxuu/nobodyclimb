@@ -53,8 +53,7 @@ export async function queryRewriteNode(state: GraphState): Promise<Partial<Graph
       issueSummary = '回答品質有改善空間'
     }
 
-    const prompt = REWRITE_PROMPT
-      .replace('{query}', originalQuery)
+    const prompt = REWRITE_PROMPT.replace('{query}', originalQuery)
       .replace('{quality}', String(quality ?? 'N/A'))
       .replace('{groundedness}', String(groundedness ?? 'N/A'))
       .replace('{doc_count}', String(docCount))
@@ -66,14 +65,11 @@ export async function queryRewriteNode(state: GraphState): Promise<Partial<Graph
       return {}
     }
 
-    const result = await llmProvider.chat(
-      [{ role: 'user', content: prompt }],
-      {
-        model: pipelineConfig.lightweight_model,
-        maxTokens: 200,
-        gatewayOptions: state.gatewayOptions,
-      }
-    )
+    const result = await llmProvider.chat([{ role: 'user', content: prompt }], {
+      model: pipelineConfig.lightweight_model,
+      maxTokens: 200,
+      gatewayOptions: state.gatewayOptions,
+    })
 
     const newTokenBreakdown = { ...state.tokenBreakdown }
     if (result.usage) {

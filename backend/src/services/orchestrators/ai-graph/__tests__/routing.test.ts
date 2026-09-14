@@ -65,7 +65,8 @@ describe('routeAfterTextToSql', () => {
 })
 
 describe('routeAfterEmbedding', () => {
-  it('returns lexicalFallback when embeddingFailed', () => { // [skip-harness] 既有 test，只改期望值
+  it('returns lexicalFallback when embeddingFailed', () => {
+    // [skip-harness] 既有 test，只改期望值
     expect(routeAfterEmbedding({ embeddingFailed: true } as any)).toBe('lexicalFallback')
   })
   it('returns hyde when embedding succeeds', () => {
@@ -104,7 +105,8 @@ describe('routeAfterJudge', () => {
 })
 
 describe('routeAfterSelfReflection', () => {
-  it('returns queryRewrite when loopBack.targetPhase === retrieval', () => { // [skip-harness] 既有 test，只改期望值
+  it('returns queryRewrite when loopBack.targetPhase === retrieval', () => {
+    // [skip-harness] 既有 test，只改期望值
     const state = { loopBack: { targetPhase: 'retrieval' } } as any
     expect(routeAfterSelfReflection(state)).toBe('queryRewrite')
   })

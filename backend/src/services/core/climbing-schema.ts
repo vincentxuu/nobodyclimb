@@ -9,17 +9,12 @@ export function gradeToNumeric(grade: string | null | undefined): number {
 }
 
 /** 回傳包含中心 grade ± spread 的 grade_numeric 範圍 */
-export function gradeRange(
-  center: number,
-  spread: number
-): { $gte: number; $lte: number } {
+export function gradeRange(center: number, spread: number): { $gte: number; $lte: number } {
   return { $gte: center - spread, $lte: center + spread }
 }
 
 /** 解析使用者輸入的路線類型文字為標準 DB 值 */
-export function parseRouteType(
-  input: string
-): 'sport' | 'trad' | 'boulder' | 'mixed' | null {
+export function parseRouteType(input: string): 'sport' | 'trad' | 'boulder' | 'mixed' | null {
   const lower = input.toLowerCase()
   if (lower.includes('運攀') || lower.includes('sport')) return 'sport'
   if (lower.includes('傳攀') || lower.includes('trad')) return 'trad'

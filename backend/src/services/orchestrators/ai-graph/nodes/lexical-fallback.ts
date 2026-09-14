@@ -19,12 +19,10 @@ export async function lexicalFallbackNode(state: GraphState): Promise<Partial<Gr
       : pipelineConfig.min_rrf_score
     const bm25Matches = await queryService.searchBM25(request.query, pipelineConfig.bm25_top_k)
     const candidateMatches = bm25Matches.filter((m) => m.score >= minScore)
-    const retrievalScore =
-      bm25Matches.length > 0 ? Math.max(...bm25Matches.map((m) => m.score)) : 0
+    const retrievalScore = bm25Matches.length > 0 ? Math.max(...bm25Matches.map((m) => m.score)) : 0
 
     const documents = await queryService.getDocuments(candidateMatches.map((m) => m.id))
-    const excludeIds =
-      state.excludeRouteIds ?? (state.excludeRouteId ? [state.excludeRouteId] : [])
+    const excludeIds = state.excludeRouteIds ?? (state.excludeRouteId ? [state.excludeRouteId] : [])
     if (excludeIds.length > 0) {
       const excludeSet = new Set(excludeIds)
       for (const [embeddingId, doc] of documents) {

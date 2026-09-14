@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
-import { GoalService } from '../../domain/goals'
-import type { UserGoal } from '../../domain/goals'
-import { goalsTool } from '../tools/goals'
 import type { Env } from '../../../types'
+import type { UserGoal } from '../../domain/goals'
+import { GoalService } from '../../domain/goals'
 import type { AgentCache } from '../cache'
+import { goalsTool } from '../tools/goals'
 import { DefaultTokenTracker } from '../tracker'
 import type { ToolContext } from '../types'
 
@@ -44,11 +44,9 @@ function makeGoal(overrides: Partial<UserGoal> = {}): UserGoal {
   }
 }
 
-function makePrepareChain(options: {
-  allResults?: unknown[]
-  firstResult?: unknown
-  runResult?: unknown
-} = {}) {
+function makePrepareChain(
+  options: { allResults?: unknown[]; firstResult?: unknown; runResult?: unknown } = {}
+) {
   return () => ({
     bind: () => ({
       all: async () => ({ results: options.allResults ?? [] }),
@@ -353,10 +351,10 @@ describe('goalsTool (manage_goals)', () => {
       const db = stubDb()
       const ctx = makeCtx({ userId: 'user-1', env: stubEnv(db) })
 
-      const result = (await goalsTool.execute(
-        { action: 'achieve', goal_id: 'goal-1' },
-        ctx
-      )) as { achieved: boolean; goal_id: string }
+      const result = (await goalsTool.execute({ action: 'achieve', goal_id: 'goal-1' }, ctx)) as {
+        achieved: boolean
+        goal_id: string
+      }
 
       expect(result.achieved).toBe(true)
       expect(result.goal_id).toBe('goal-1')
@@ -403,9 +401,7 @@ describe('goalsTool (manage_goals)', () => {
 
     it('formats progress summary with suggestions', () => {
       const result = goalsTool.formatResult({
-        activeGoals: [
-          { title: '挑戰 5.12', target: '5.12a', progressNote: '差 2 個子級' },
-        ],
+        activeGoals: [{ title: '挑戰 5.12', target: '5.12a', progressNote: '差 2 個子級' }],
         recentlyAchieved: [{ title: '完攀飛簷' }],
         suggestions: ['你離 5.12a 只差 2 個子級了！'],
       })

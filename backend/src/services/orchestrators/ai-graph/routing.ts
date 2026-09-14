@@ -7,12 +7,9 @@ export function routeAfterSemanticCache(state: GraphState): 'END' | 'toolSelecti
 }
 
 /** tool-selection 後的分流 */
-export function routeAfterToolSelection(state: GraphState):
-  | 'textToSql'
-  | 'multiSourceRetrieval'
-  | 'filterBuild'
-  | 'llmGeneration'
-  | 'END' {
+export function routeAfterToolSelection(
+  state: GraphState
+): 'textToSql' | 'multiSourceRetrieval' | 'filterBuild' | 'llmGeneration' | 'END' {
   if (state.earlyReturn) return 'END'
   if (state.queryType === 'sql') return 'textToSql'
   if (state.queryType === 'clarification-needed') return 'END'
@@ -57,9 +54,7 @@ export function routeAfterHybridSearch(state: GraphState): 'retrievalFallback' |
 }
 
 /** retrievalFallback 後：loopBack 回 filterBuild 重新執行 */
-export function routeAfterRetrievalFallback(
-  state: GraphState
-): 'filterBuild' | 'crossEncoder' {
+export function routeAfterRetrievalFallback(state: GraphState): 'filterBuild' | 'crossEncoder' {
   if (state.loopBack?.reason === 'tool_fallback') return 'filterBuild'
   return 'crossEncoder'
 }
@@ -95,10 +90,12 @@ export function routeAfterSelfReflection(state: GraphState): 'queryRewrite' | 'l
 export function routeAfterRetrievalQualityJudge(
   state: GraphState
 ): 'queryRewrite' | 'llmGeneration' {
-  const trace = state.trace?.retrieval_quality as {
-    recall_sufficient?: boolean
-    skipped?: boolean
-  } | undefined
+  const trace = state.trace?.retrieval_quality as
+    | {
+        recall_sufficient?: boolean
+        skipped?: boolean
+      }
+    | undefined
   const retryCount = state.loopCount ?? 0
   const maxRetries = 2
 
@@ -115,9 +112,9 @@ export function routeAfterRetrievalQualityJudge(
 export function routeByStrategy(state: GraphState):
   | 'textToSql'
   | 'multiSourceRetrieval'
-  | 'filterBuild'         // baseline path
-  | 'filterBuildAgentic'  // agentic path
-  | 'planning'            // plan-execute path
+  | 'filterBuild' // baseline path
+  | 'filterBuildAgentic' // agentic path
+  | 'planning' // plan-execute path
   | 'llmGeneration'
   | 'END' {
   if (state.earlyReturn) return 'END'
@@ -135,10 +132,9 @@ export function routeByStrategy(state: GraphState):
 // ---- Agentic Strategy ----
 
 /** agentic decision 後的分流 */
-export function routeAgenticDecision(state: GraphState):
-  | 'agenticRetrieve'
-  | 'llmGeneration'
-  | 'END' {
+export function routeAgenticDecision(
+  state: GraphState
+): 'agenticRetrieve' | 'llmGeneration' | 'END' {
   if (state.earlyReturn) return 'END'
   if (state.agenticAction === 'ANSWER') return 'llmGeneration'
   return 'agenticRetrieve'

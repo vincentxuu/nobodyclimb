@@ -2,9 +2,9 @@
 
 import {
   ANTI_STYLE_PROTOCOLS,
-  TRAINING_BY_LEVEL,
   getExerciseById,
   getTrainingSchoolMapping,
+  TRAINING_BY_LEVEL,
 } from '@nobodyclimb/constants'
 import type { PersonalityTypeCode } from '@nobodyclimb/types'
 
@@ -24,7 +24,8 @@ export interface WeaknessInsight {
 function resolveTrainingLevel(level?: string): 'beginner' | 'intermediate' | 'advanced' {
   if (!level) return 'beginner'
   if (level.includes('5.13') || level.includes('高級')) return 'advanced'
-  if (level.includes('5.11') || level.includes('5.12') || level.includes('中')) return 'intermediate'
+  if (level.includes('5.11') || level.includes('5.12') || level.includes('中'))
+    return 'intermediate'
   return 'beginner'
 }
 
@@ -66,9 +67,7 @@ export function analyzeWeaknessesStructured(
             ? 'sport_to_boulder_transition'
             : null
 
-      const protocol = antiStyleId
-        ? ANTI_STYLE_PROTOCOLS.find((p) => p.id === antiStyleId)
-        : null
+      const protocol = antiStyleId ? ANTI_STYLE_PROTOCOLS.find((p) => p.id === antiStyleId) : null
 
       const exerciseNames = protocol
         ? formatExerciseNames([...protocol.emphasisExerciseIds].slice(0, 3))
@@ -107,14 +106,14 @@ export function analyzeWeaknessesStructured(
   }
 
   if (data.recentAscents && data.recentAscents.length >= 5) {
-    const grades = data.recentAscents
-      .map((a) => a.grade?.match(/5\.(\d+)/)?.[1])
-      .filter(Boolean)
+    const grades = data.recentAscents.map((a) => a.grade?.match(/5\.(\d+)/)?.[1]).filter(Boolean)
     const unique = new Set(grades)
     if (unique.size === 1 && grades.length >= 5) {
       const levelExercises = levelRec?.recommendedExerciseIds ?? []
       const strengthExercises = levelExercises
-        .filter((id) => id.startsWith('hangboard') || id.startsWith('campus') || id.startsWith('pullups'))
+        .filter(
+          (id) => id.startsWith('hangboard') || id.startsWith('campus') || id.startsWith('pullups')
+        )
         .slice(0, 3)
       insights.push({
         id: 'grade_plateau',

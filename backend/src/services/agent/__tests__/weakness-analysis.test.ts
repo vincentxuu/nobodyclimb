@@ -7,9 +7,9 @@ describe('analyzeWeaknesses', () => {
   })
 
   it('returns insufficient data message for empty fields', () => {
-    expect(analyzeWeaknesses({ typeDistribution: [], styleDistribution: {}, recentAscents: [] })).toBe(
-      '目前數據不足以判斷明顯弱點'
-    )
+    expect(
+      analyzeWeaknesses({ typeDistribution: [], styleDistribution: {}, recentAscents: [] })
+    ).toBe('目前數據不足以判斷明顯弱點')
   })
 
   // -- 類型偏科 --

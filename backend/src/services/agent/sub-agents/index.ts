@@ -5,7 +5,10 @@ import type { SubAgent, SubAgentToolOutput } from './types'
 import { formatSubAgentResult } from './types'
 
 /** 把 SubAgent 包裝成 Tool interface */
-function wrapSubAgent(agent: SubAgent, toolConfig: Omit<Tool, 'execute' | 'formatResult' | 'prompt'>): Tool {
+function wrapSubAgent(
+  agent: SubAgent,
+  toolConfig: Omit<Tool, 'execute' | 'formatResult' | 'prompt'>
+): Tool {
   return {
     ...toolConfig,
     prompt(ctx: ToolContext): string {
@@ -20,7 +23,7 @@ function wrapSubAgent(agent: SubAgent, toolConfig: Omit<Tool, 'execute' | 'forma
         return { error: '用戶未登入，無法使用此工具' }
       }
 
-      const query = (input as Record<string, unknown>)?.query as string ?? ''
+      const query = ((input as Record<string, unknown>)?.query as string) ?? ''
       const context = await agent.gatherContext(input, ctx)
       const result = await agent.synthesize(query, context, ctx)
 

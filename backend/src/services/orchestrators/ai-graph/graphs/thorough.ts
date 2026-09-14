@@ -8,4 +8,7 @@
  *
  * 與 baseline 共用同一個 graph 定義 — baseline 就是 Thorough。
  */
-export { baselineGraph as thoroughGraph, buildBaselineGraph as buildThoroughGraph } from './baseline'
+export {
+  baselineGraph as thoroughGraph,
+  buildBaselineGraph as buildThoroughGraph,
+} from './baseline'

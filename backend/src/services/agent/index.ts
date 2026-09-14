@@ -2,8 +2,6 @@ import { getMemoriesSummary } from '../../repositories/memory'
 import type { Env } from '../../types'
 import { buildAgentBasePrompt } from '../../utils/ai-prompts'
 import type { LangfuseParent } from '../../utils/langfuse'
-import { createProvider } from '../orchestrators/ai-graph/providers'
-import type { ProviderName as LegacyProviderName } from '../orchestrators/ai-graph/providers/types'
 import { extractMemoriesFromQuery } from '../domain/memory'
 import {
   buildAscentContext,
@@ -11,6 +9,8 @@ import {
   estimateAbilityLevel,
   getRecentAscents,
 } from '../domain/personalization'
+import { createProvider } from '../orchestrators/ai-graph/providers'
+import type { ProviderName as LegacyProviderName } from '../orchestrators/ai-graph/providers/types'
 import { runAgentLoop } from './agent-loop'
 import { KVAgentCache } from './cache'
 import { classifyQuery, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
