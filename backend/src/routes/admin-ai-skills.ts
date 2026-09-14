@@ -714,3 +714,179 @@ adminAiSkillsRoutes.get('/skills/:id/invocations', async (c) => {
     },
   })
 })
+
+// POST /skills/seed-anthropic — import 6 official Anthropic skills from GitHub
+adminAiSkillsRoutes.post('/skills/seed-anthropic', async (c) => {
+  const ANTHROPIC_SKILLS = ['docx', 'pdf', 'pptx', 'xlsx', 'mcp-builder', 'skill-creator']
+  const GITHUB_RAW = 'https://raw.githubusercontent.com/anthropics/skills/main/skills'
+  const GITHUB_API = 'https://api.github.com/repos/anthropics/skills/contents/skills'
+  const ghHeaders = { 'User-Agent': 'NobodyClimb' }
+
+  const results: Array<{
+    slug: string
+    name?: string
+    description?: string
+    files?: number
+    tokenCount?: number
+    error?: string
+  }> = []
+
+  for (const slug of ANTHROPIC_SKILLS) {
+    try {
+      // 1. Download SKILL.md
+      const skillMdRes = await fetch(`${GITHUB_RAW}/${slug}/SKILL.md`, {
+        headers: ghHeaders,
+      })
+      if (!skillMdRes.ok) {
+        results.push({
+          slug,
+          error: `Failed to fetch SKILL.md: ${skillMdRes.status}`,
+        })
+        continue
+      }
+      const skillMdContent = await skillMdRes.text()
+
+      // 2. Parse frontmatter
+      const parsed = parseSkillMd(skillMdContent)
+      const name = (parsed.frontmatter.name as string) ?? slug
+      const description =
+        (parsed.frontmatter.description as string) ?? `Anthropic official skill: ${slug}`
+
+      // 3. Upload SKILL.md to R2
+      await c.env.AGENT_STORAGE.put(`skills/${slug}/SKILL.md`, skillMdContent, {
+        httpMetadata: { contentType: 'text/markdown' },
+      })
+
+      // 4. Download and upload subsidiary files
+      const files: Array<{ path: string; size: number }> = []
+
+      const dirRes = await fetch(`${GITHUB_API}/${slug}`, {
+        headers: ghHeaders,
+      })
+      if (dirRes.ok) {
+        const items = (await dirRes.json()) as Array<{
+          name: string
+          type: string
+          url?: string
+          download_url?: string
+        }>
+
+        for (const item of items) {
+          if (item.type === 'dir') {
+            await fetchDirRecursive(
+              c.env.AGENT_STORAGE,
+              item.url!,
+              slug,
+              item.name,
+              files,
+              ghHeaders
+            )
+          } else if (
+            item.type === 'file' &&
+            item.name !== 'SKILL.md' &&
+            item.name !== 'LICENSE.txt' &&
+            item.download_url
+          ) {
+            const fileRes = await fetch(item.download_url, {
+              headers: ghHeaders,
+            })
+            const content = await fileRes.arrayBuffer()
+            await c.env.AGENT_STORAGE.put(`skills/${slug}/${item.name}`, content)
+            files.push({ path: item.name, size: content.byteLength })
+          }
+        }
+      }
+
+      // 5. Create DB records
+      const skillId = `sk_anthropic_${slug.replace(/-/g, '_')}`
+      const versionId = `skv_anthropic_${slug.replace(/-/g, '_')}_1`
+      const contentHash = computeContentHash(skillMdContent)
+      const tokenCount = estimateTokenCount(parsed.body)
+
+      // Upsert skill
+      await c.env.DB.prepare(
+        `INSERT OR REPLACE INTO skill (id, tenant_id, slug, display_name, scope, source, latest_version_id, created_at)
+         VALUES (?, 'default', ?, ?, 'org', 'marketplace', ?, datetime('now'))`
+      )
+        .bind(skillId, slug, name, versionId)
+        .run()
+
+      // Upsert version
+      await c.env.DB.prepare(
+        `INSERT OR REPLACE INTO skill_version (id, skill_id, version_number, name, description, body, content_hash, status, token_count, published_at, created_at)
+         VALUES (?, ?, 1, ?, ?, ?, ?, 'published', ?, datetime('now'), datetime('now'))`
+      )
+        .bind(versionId, skillId, name, description, parsed.body, contentHash, tokenCount)
+        .run()
+
+      // Insert file records
+      for (const file of files) {
+        await c.env.DB.prepare(
+          `INSERT OR IGNORE INTO skill_file (id, version_id, path, blob_key, size_bytes)
+           VALUES (?, ?, ?, ?, ?)`
+        )
+          .bind(crypto.randomUUID(), versionId, file.path, `skills/${slug}/${file.path}`, file.size)
+          .run()
+      }
+
+      // Binding (enabled by default)
+      await c.env.DB.prepare(
+        `INSERT OR IGNORE INTO skill_binding (id, tenant_id, subject_type, subject_id, skill_id, enabled)
+         VALUES (?, 'default', 'agent', 'default', ?, 1)`
+      )
+        .bind(`sb_anthropic_${slug.replace(/-/g, '_')}`, skillId)
+        .run()
+
+      results.push({
+        slug,
+        name,
+        description: description.slice(0, 120),
+        files: files.length,
+        tokenCount,
+      })
+    } catch (err) {
+      results.push({
+        slug,
+        error: err instanceof Error ? err.message : String(err),
+      })
+    }
+  }
+
+  return c.json({ success: true, data: results })
+})
+
+async function fetchDirRecursive(
+  storage: R2Bucket,
+  dirApiUrl: string,
+  skillSlug: string,
+  prefix: string,
+  files: Array<{ path: string; size: number }>,
+  headers: Record<string, string>
+): Promise<void> {
+  const res = await fetch(dirApiUrl, { headers })
+  if (!res.ok) return
+  const items = (await res.json()) as Array<{
+    name: string
+    type: string
+    url?: string
+    download_url?: string
+  }>
+  for (const item of items) {
+    if (item.type === 'dir' && item.url) {
+      await fetchDirRecursive(
+        storage,
+        item.url,
+        skillSlug,
+        `${prefix}/${item.name}`,
+        files,
+        headers
+      )
+    } else if (item.type === 'file' && item.download_url) {
+      const fileRes = await fetch(item.download_url, { headers })
+      const content = await fileRes.arrayBuffer()
+      const filePath = `${prefix}/${item.name}`
+      await storage.put(`skills/${skillSlug}/${filePath}`, content)
+      files.push({ path: filePath, size: content.byteLength })
+    }
+  }
+}

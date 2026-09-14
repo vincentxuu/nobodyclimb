@@ -1,10 +1,7 @@
 /**
  * 規則式查詢分類器
- * 在 ReAct loop 前分類查詢，閒聊和通用知識問題跳過 orchestrator LLM call
- * selectManifests 根據 manifest triggers 動態篩選工具（Phase C）
+ * 在 Agent loop 前分類查詢，閒聊和通用知識問題跳過 orchestrator LLM call
  */
-
-import type { ToolManifest } from './types'
 
 export type QueryCategory = 'greeting' | 'system' | 'general_knowledge' | 'needs_tool'
 
@@ -37,7 +34,6 @@ const GENERAL_KNOWLEDGE_PATTERNS = [
   /什麼是\s*(快扣|岩楔|cam|nut|chalk|粉袋|安全吊帶|harness)/i,
 ]
 
-// 包含這些關鍵字 → 需要 tool（不歸為通用知識）
 const NEEDS_TOOL_KEYWORDS = [
   '龍洞',
   '大砲岩',
@@ -72,100 +68,23 @@ const NEEDS_TOOL_KEYWORDS = [
 export function classifyQuery(query: string): QueryCategory {
   const trimmed = query.trim()
 
-  // 1. 打招呼
   if (GREETING_PATTERNS.some((p) => p.test(trimmed))) {
     return 'greeting'
   }
 
-  // 2. 系統問題
   if (SYSTEM_PATTERNS.some((p) => p.test(trimmed))) {
     return 'system'
   }
 
-  // 3. 通用攀岩知識（先於 needs_tool，避免「路線」等廣泛關鍵字誤判）
   if (GENERAL_KNOWLEDGE_PATTERNS.some((p) => p.test(trimmed))) {
     return 'general_knowledge'
   }
 
-  // 4. 檢查是否需要 tool
   if (NEEDS_TOOL_KEYWORDS.some((kw) => trimmed.includes(kw))) {
     return 'needs_tool'
   }
 
-  // 5. 預設進 ReAct loop（寧可多花一次 orchestrator call，不可漏回答）
   return 'needs_tool'
-}
-
-// ---------------------------------------------------------------------------
-// Manifest 篩選（Phase C: Dynamic Tool Loading）
-// ---------------------------------------------------------------------------
-
-const ALWAYS_LOAD_MANIFESTS = new Set(['search', 'data'])
-
-/**
- * 根據查詢文字比對 manifest triggers，回傳應載入的 manifests。
- * 保底規則：
- * 1. search + data 永遠載入（核心能力）
- * 2. 無 trigger 命中時全部載入（不猜錯）
- */
-export function selectManifests(query: string, manifests: ToolManifest[]): ToolManifest[] {
-  const trimmed = query.trim()
-  if (!trimmed) return manifests
-
-  const matched = new Set<string>(ALWAYS_LOAD_MANIFESTS)
-  let anyTriggerHit = false
-  for (const m of manifests) {
-    if (m.triggers.some((t) => trimmed.includes(t))) {
-      matched.add(m.name)
-      anyTriggerHit = true
-    }
-  }
-
-  if (!anyTriggerHit) return manifests
-
-  return manifests.filter((m) => matched.has(m.name))
-}
-
-// ---------------------------------------------------------------------------
-// Intent-based Routing（Cascading Router 第一層）
-// ---------------------------------------------------------------------------
-
-/** Sub-agent 可被直接路由的 manifest 名稱 */
-const DIRECT_ROUTE_MANIFESTS = new Set(['coaching'])
-
-/**
- * 偵測是否應直接路由到 sub-agent（跳過 agent loop 的 LLM tool selection）。
- *
- * 規則：
- * 1. 只在「唯一命中的非保底 manifest 是 sub-agent」時路由
- * 2. 如果同時命中 search/data 等非 sub-agent manifest → 進 agent loop（意圖模糊）
- * 3. 回傳 manifest name 或 null（null = 進 agent loop）
- */
-export function detectDirectRoute(query: string, manifests: ToolManifest[]): string | null {
-  const trimmed = query.trim()
-  if (!trimmed) return null
-
-  const matched: string[] = []
-  for (const m of manifests) {
-    if (ALWAYS_LOAD_MANIFESTS.has(m.name)) continue
-    if (m.triggers.some((t) => trimmed.includes(t))) {
-      matched.push(m.name)
-    }
-  }
-
-  if (matched.length === 1 && DIRECT_ROUTE_MANIFESTS.has(matched[0])) {
-    return matched[0]
-  }
-
-  if (matched.length > 1) {
-    const subAgentMatches = matched.filter((m) => DIRECT_ROUTE_MANIFESTS.has(m))
-    const otherMatches = matched.filter((m) => !DIRECT_ROUTE_MANIFESTS.has(m))
-    if (subAgentMatches.length === 1 && otherMatches.length === 0) {
-      return subAgentMatches[0]
-    }
-  }
-
-  return null
 }
 
 // ---------------------------------------------------------------------------
