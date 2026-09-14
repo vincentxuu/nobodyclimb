@@ -249,6 +249,47 @@ describe('coachingSubAgent.gatherContext', () => {
     expect(context).toContain('使用者目標')
     expect(context).toContain('挑戰 5.12')
   })
+
+  it('includes personality and training school when user has quiz result', async () => {
+    let queryCount = 0
+    const personalityDb = {
+      prepare: () => ({
+        bind: () => ({
+          all: async () => {
+            queryCount++
+            if (queryCount === 1) {
+              // training_progress query
+              return {
+                results: [
+                  { week: 1, day: 1, completed: 1 },
+                  { week: 1, day: 2, completed: 1 },
+                  { week: 1, day: 3, completed: 0 },
+                ],
+              }
+            }
+            // user_goals query
+            return { results: [] }
+          },
+          first: async () => {
+            // users personality_type query
+            return { personality_type: 'PGB' }
+          },
+        }),
+      }),
+    } as unknown as D1Database
+    const ctx = makeCtx({ userId: 'user-1', env: { DB: personalityDb } as unknown as Env })
+    const context = await coachingSubAgent.gatherContext({}, ctx)
+    expect(context).toContain('攀岩人格與訓練學派')
+    expect(context).toContain('碎岩者')
+    expect(context).toContain('MacLeod')
+    expect(context).toContain('已完成 2/3')
+  })
+
+  it('omits personality section when user has no quiz result', async () => {
+    const ctx = makeCtx({ userId: 'user-1' })
+    const context = await coachingSubAgent.gatherContext({}, ctx)
+    expect(context).not.toContain('攀岩人格與訓練學派')
+  })
 })
 
 // ---------------------------------------------------------------------------

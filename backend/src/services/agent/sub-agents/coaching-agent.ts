@@ -1,3 +1,5 @@
+import { getPersonalityType, getTrainingSchoolMapping } from '@nobodyclimb/constants'
+import type { PersonalityTypeCode } from '@nobodyclimb/types'
 import { createProvider } from '../../orchestrators/ai-graph/providers'
 import type { ProviderName as LegacyProviderName } from '../../orchestrators/ai-graph/providers/types'
 import { suggestTrainingTool } from '../tools/coaching'
@@ -21,7 +23,57 @@ const COACHING_SYSTEM_PROMPT = `你是 NobodyClimb 的攀岩教練。你的任�
 3. 根據程度調整強度（入門者不建議指板）
 4. 最多 3-4 條核心建議
 5. 使用繁體中文
-6. 可引用使用者近期完攀的路線作為依據`
+6. 可引用使用者近期完攀的路線作為依據
+7. 如果有使用者的攀岩人格型態和對應訓練學派，以該學派的訓練哲學為基底來設計建議
+8. 如果有訓練進度資料，根據已完成和未完成的部分調整建議重點`
+
+async function gatherPersonalityContext(ctx: ToolContext): Promise<string | null> {
+  if (!ctx.userId) return null
+
+  try {
+    const user = await ctx.env.DB.prepare('SELECT personality_type FROM users WHERE id = ?')
+      .bind(ctx.userId)
+      .first<{ personality_type: string | null }>()
+
+    const typeCode = user?.personality_type as PersonalityTypeCode | null
+    if (!typeCode) return null
+
+    const personality = getPersonalityType(typeCode)
+    const school = getTrainingSchoolMapping(typeCode)
+    if (!personality || !school) return null
+
+    const lines: string[] = [
+      `人格型態：${personality.nameZh}（${personality.nameEn}, ${typeCode}）`,
+      `特質：${personality.keywords.join('、')}`,
+      `優勢：${personality.strengths.join('；')}`,
+      `盲點：${personality.blindSpots.join('；')}`,
+      `對應訓練學派：${school.trainingSchoolZh}`,
+      `學派特色：${school.schoolDescription}`,
+    ]
+
+    const progress = await ctx.env.DB.prepare(
+      `SELECT week, day, completed FROM training_progress
+       WHERE user_id = ? AND personality_type = ?
+       ORDER BY week, day`
+    )
+      .bind(ctx.userId, typeCode)
+      .all<{ week: number; day: number; completed: number }>()
+
+    if (progress.results?.length) {
+      const completed = progress.results.filter((p) => p.completed)
+      const total = progress.results.length
+      lines.push(`訓練進度：已完成 ${completed.length}/${total} 個訓練日`)
+      const lastCompleted = completed[completed.length - 1]
+      if (lastCompleted) {
+        lines.push(`最新完成：第 ${lastCompleted.week} 週第 ${lastCompleted.day} 天`)
+      }
+    }
+
+    return `【攀岩人格與訓練學派】\n${lines.join('\n')}`
+  } catch {
+    return null
+  }
+}
 
 export const coachingSubAgent: SubAgent = {
   name: 'coaching_agent',
@@ -42,6 +94,9 @@ export const coachingSubAgent: SubAgent = {
 
     const weaknesses = analyzeWeaknesses(trainingResult)
     sections.push(`【弱點分析】\n${weaknesses}`)
+
+    const personalityContext = await gatherPersonalityContext(ctx)
+    if (personalityContext) sections.push(personalityContext)
 
     try {
       const goals = await ctx.env.DB.prepare(
