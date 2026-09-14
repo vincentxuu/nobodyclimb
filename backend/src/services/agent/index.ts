@@ -221,9 +221,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   if (directRoute && userId) {
     try {
       const models = await loadModelMap(env.DB)
-      const tracker = new DefaultTokenTracker(
-        (await loadAgentConfig(env.DB)).usdToTwd
-      )
+      const tracker = new DefaultTokenTracker((await loadAgentConfig(env.DB)).usdToTwd)
       const cache = new KVAgentCache(env.CACHE)
       const toolCtx: ToolContext = {
         env,
@@ -275,7 +273,10 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
         }
       }
     } catch (err) {
-      console.warn(`[agent] direct route to ${directRoute} failed, falling through to agent loop:`, err)
+      console.warn(
+        `[agent] direct route to ${directRoute} failed, falling through to agent loop:`,
+        err
+      )
     }
   }
 

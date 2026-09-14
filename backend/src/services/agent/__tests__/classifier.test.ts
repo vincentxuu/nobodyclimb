@@ -177,7 +177,6 @@ describe('selectManifests', () => {
   })
 
   it('不載入不在輸入 manifests 中的項目', () => {
-
     const subset = ALL_MANIFESTS.filter((m) => !m.requiresAuth)
     const result = selectManifests('天氣', subset)
     const names = result.map((m) => m.name)
