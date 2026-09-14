@@ -15,12 +15,6 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
   const router = useRouter()
   const pathname = usePathname()
   const [isPageChanging, setIsPageChanging] = useState(false)
-  const [isHydrated, setIsHydrated] = useState(false)
-
-  // 處理 Zustand persist hydration
-  useEffect(() => {
-    setIsHydrated(true)
-  }, [])
 
   // 設置頁面轉換狀態的函數
   const handleRouteChange = useCallback(() => {
@@ -39,15 +33,16 @@ export default function ProfileLayout({ children }: { children: React.ReactNode 
     handleRouteChange()
   }, [pathname, handleRouteChange])
 
-  // 檢查使用者是否已登入（等待 hydration 完成後再檢查）
+  // 檢查使用者是否已登入（等 auth store hydrate 完成後再判斷）
+  // status === 'idle' 表示 hydrate() 尚未執行完畢，不應視為未登入
   useEffect(() => {
-    if (isHydrated && !isStoreLoading && status !== 'signIn') {
+    if (status === 'signOut') {
       router.push('/auth/login?callbackUrl=' + encodeURIComponent(pathname || '/profile'))
     }
-  }, [status, isStoreLoading, isHydrated, router, pathname])
+  }, [status, router, pathname])
 
-  // 如果還在 hydration 或正在載入中，顯示載入畫面
-  if (!isHydrated || isStoreLoading) {
+  // hydrate 進行中（idle 或 isLoading）時顯示載入畫面
+  if (status === 'idle' || isStoreLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#F5F5F5]">
         <AnimatePresence>
