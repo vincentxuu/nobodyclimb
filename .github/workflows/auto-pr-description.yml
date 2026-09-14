@@ -2,97 +2,116 @@ name: Auto PR Description
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
+
+concurrency:
+  group: pr-desc-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   generate_description:
-    name: Generate PR Description with GitHub Models
+    name: Generate PR Description
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
       contents: read
-      models: read
 
     steps:
+      - name: Check if should run
+        id: should_run
+        env:
+          EVENT: ${{ github.event.action }}
+          BODY: ${{ github.event.pull_request.body }}
+        run: |
+          # opened: 只在 body 為空時產生（不覆蓋手寫的）
+          # synchronize: 永遠更新（程式碼有改變）
+          if [ "$EVENT" = "opened" ] && [ -n "$BODY" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "⏭️ PR already has description, skipping initial generation"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout
+        if: steps.should_run.outputs.skip != 'true'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Get commit log
+      - name: Get commit log and diff stat
+        if: steps.should_run.outputs.skip != 'true'
         id: commits
-        env:
-          BASE: ${{ github.event.pull_request.base.ref }}
-          HEAD: ${{ github.event.pull_request.head.ref }}
         run: |
-          COMMITS=$(git log "origin/$BASE..origin/$HEAD" --pretty=format:"- %s (%h)" | head -50)
+          git fetch origin ${{ github.event.pull_request.base.ref }} --depth=100
+          COMMITS=$(git log "origin/${{ github.event.pull_request.base.ref }}..${{ github.event.pull_request.head.sha }}" --pretty=format:"- %s (%h)" | head -50)
+          STAT=$(git diff "origin/${{ github.event.pull_request.base.ref }}..${{ github.event.pull_request.head.sha }}" --stat | tail -10)
           echo "COMMITS<<EOF" >> "$GITHUB_OUTPUT"
           echo "$COMMITS" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "STAT<<EOF2" >> "$GITHUB_OUTPUT"
+          echo "$STAT" >> "$GITHUB_OUTPUT"
+          echo "EOF2" >> "$GITHUB_OUTPUT"
 
-      - name: Generate PR description with GitHub Models
+      - name: Generate PR description with Cloudflare Workers AI
+        if: steps.should_run.outputs.skip != 'true'
         id: generate
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_WORKERS_AI_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_AI_API_TOKEN }}
           COMMITS: ${{ steps.commits.outputs.COMMITS }}
+          STAT: ${{ steps.commits.outputs.STAT }}
           BASE: ${{ github.event.pull_request.base.ref }}
-          HEAD: ${{ github.event.pull_request.head.ref }}
+          HEAD: ${{ github.head_ref }}
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
-          RESPONSE=$(curl -s -X POST "https://models.inference.ai.azure.com/chat/completions" \
-            -H "Authorization: Bearer $GITHUB_TOKEN" \
+          RESPONSE=$(curl -s -X POST \
+            "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT_ID/ai/v1/chat/completions" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
             -H "Content-Type: application/json" \
             -d "$(jq -n \
               --arg commits "$COMMITS" \
+              --arg stat "$STAT" \
               --arg base "$BASE" \
               --arg head "$HEAD" \
               --arg title "$PR_TITLE" \
               '{
-                model: "gpt-4o-mini",
+                model: "@cf/glm-5.3-flash",
                 messages: [
                   {
                     role: "system",
-                    content: "你是一個專業的技術文件撰寫者。根據 git commit 列表，產生繁體中文的 PR 標題和描述。\n\n重要：你必須根據 commit 列表的實際內容來撰寫，不要只看 branch name 就自行推測。commit 列表是唯一的事實來源。\n\n格式必須嚴格按照以下結構，不要加其他內容：\n\n第一行是 PR 標題，使用 conventional commit 格式：type(scope): 繁體中文描述。標題控制在 70 字以內。type 和 scope 從 commit 列表推斷（feat/fix/refactor/perf/docs/chore 等）。如果 commits 包含多種 type，以最主要的為準。\n\n第二行必須是 ---（三個減號，作為分隔符）\n\n之後是 PR description：\n\n## Why is this necessary?\n\n（根據 commit 列表的實際變更，解釋「為什麼」需要這些變更。3-5 點）\n\n## How does it address?\n\n（根據 commit 列表的實際變更，解釋「怎麼做」來解決問題。3-5 點）"
+                    content: "你是一個專業的技術文件撰寫者。根據 git commit 列表和變更統計，產生繁體中文的 PR 描述。\n\n重要：你必須根據 commit 列表的實際內容來撰寫，不要只看 branch name 就自行推測。\n\n格式：\n\n## Why is this necessary?\n\n（根據 commit 列表的實際變更，解釋「為什麼」需要這些變更。3-5 點）\n\n## How does it address?\n\n（根據 commit 列表的實際變更，解釋「怎麼做」來解決問題。3-5 點）\n\n不要產生 PR 標題，只產生描述內容。"
                   },
                   {
                     role: "user",
-                    content: ("以下是 " + $head + " → " + $base + " 的 commit 列表：\n\n" + $commits + "\n\n請根據這些 commits 的實際內容產生 PR 標題和描述。")
+                    content: ("PR 標題：" + $title + "\n\n以下是 " + $head + " → " + $base + " 的 commit 列表：\n\n" + $commits + "\n\n變更統計：\n" + $stat + "\n\n請根據這些 commits 的實際內容產生 PR 描述。")
                   }
                 ],
                 temperature: 0.3
               }'
             )")
 
-          CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty')
+          BODY=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty')
 
-          if [ -z "$CONTENT" ]; then
-            echo "❌ Failed to generate description"
-            echo "$RESPONSE"
-            exit 1
+          if [ -z "$BODY" ]; then
+            echo "⚠️ Failed to generate description, skipping"
+            echo "$RESPONSE" | head -5
+            exit 0
           fi
 
-          TITLE=$(echo "$CONTENT" | head -1)
-          BODY=$(echo "$CONTENT" | sed '1d' | sed '/^---$/d' | sed '/^$/d; :a; N; $!ba; s/^\n*//')
-
-          echo "TITLE<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$TITLE" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
           echo "BODY<<EOF" >> "$GITHUB_OUTPUT"
           echo "$BODY" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
-          echo "✅ Title: $TITLE"
 
-      - name: Update PR title and description
+      - name: Update PR description
+        if: steps.should_run.outputs.skip != 'true' && steps.generate.outputs.BODY != ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TITLE: ${{ steps.generate.outputs.TITLE }}
           BODY: ${{ steps.generate.outputs.BODY }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REPOSITORY: ${{ github.repository }}
         run: |
           gh api "repos/$REPOSITORY/pulls/$PR_NUMBER" \
             --method PATCH \
-            -f title="$TITLE" \
             -f body="$BODY"
 
-          echo "✅ PR #$PR_NUMBER title and description updated"
+          echo "✅ PR #$PR_NUMBER description updated"
