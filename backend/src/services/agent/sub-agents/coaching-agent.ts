@@ -30,7 +30,8 @@ const COACHING_SYSTEM_PROMPT = `你是 NobodyClimb 的攀岩教練。你的任�
 5. 使用繁體中文
 6. 可引用使用者近期完攀的路線作為依據
 7. 如果有使用者的攀岩人格型態和對應訓練學派，以該學派的訓練哲學為基底來設計建議
-8. 如果有訓練進度資料，根據已完成和未完成的部分調整建議重點`
+8. 如果有訓練進度資料，根據已完成和未完成的部分調整建議重點
+9. 如果有 AI 微調計畫和訓練歷史模式，據此調整建議（例如用戶常跳過某天，建議簡化該天訓練）`
 
 async function getUserPersonalityType(ctx: ToolContext): Promise<string | null> {
   if (!ctx.userId) return null
@@ -125,6 +126,128 @@ async function gatherPersonalityContext(
   }
 }
 
+async function gatherTrainingHistoryContext(
+  ctx: ToolContext,
+  personalityTypeCode: string | null
+): Promise<string | null> {
+  if (!ctx.userId || !personalityTypeCode) return null
+
+  try {
+    const [latestPlan, progressRows, feedback] = await Promise.all([
+      ctx.env.DB.prepare(
+        `SELECT week_number, difficulty_level, source, plan_content, generated_at
+         FROM ai_training_plans
+         WHERE user_id = ? AND personality_type = ?
+         ORDER BY generated_at DESC LIMIT 1`
+      )
+        .bind(ctx.userId, personalityTypeCode)
+        .first<{
+          week_number: number
+          difficulty_level: number
+          source: string
+          plan_content: string
+          generated_at: string
+        }>(),
+
+      ctx.env.DB.prepare(
+        `SELECT week, day, completed, notes FROM training_progress
+         WHERE user_id = ? AND personality_type = ?
+         ORDER BY week, day`
+      )
+        .bind(ctx.userId, personalityTypeCode)
+        .all<{ week: number; day: number; completed: number; notes: string | null }>(),
+
+      ctx.env.DB.prepare(
+        `SELECT f.rating, f.comment FROM ai_training_feedback f
+         JOIN ai_training_plans p ON f.plan_id = p.id
+         WHERE f.user_id = ? AND p.personality_type = ?
+         ORDER BY f.created_at DESC LIMIT 1`
+      )
+        .bind(ctx.userId, personalityTypeCode)
+        .first<{ rating: string; comment: string | null }>(),
+    ])
+
+    const lines: string[] = []
+
+    if (latestPlan) {
+      lines.push(
+        `最新 AI 計畫：第 ${latestPlan.week_number} 週，難度 ${latestPlan.difficulty_level}/5（${latestPlan.source === 'ai' ? 'AI 微調' : '基礎模板'}）`
+      )
+
+      try {
+        const plan = JSON.parse(latestPlan.plan_content) as {
+          days?: Array<{ title: string; exercises?: Array<{ name: string }> }>
+        }
+        if (plan.days?.length) {
+          const daySummaries = plan.days.map(
+            (d, i) =>
+              `第${i + 1}天「${d.title}」${d.exercises?.length ? `（${d.exercises.map((e) => e.name).join('、')}）` : ''}`
+          )
+          lines.push(`計畫內容：${daySummaries.join('；')}`)
+        }
+      } catch {
+        // plan_content parse failed, skip
+      }
+    }
+
+    if (progressRows.results?.length) {
+      const rows = progressRows.results
+      const completed = rows.filter((r) => r.completed)
+      const skipped = rows.filter((r) => !r.completed)
+
+      lines.push(`完成率：${completed.length}/${rows.length}（${Math.round((completed.length / rows.length) * 100)}%）`)
+
+      const daySkipCount: Record<number, number> = {}
+      for (const r of skipped) {
+        daySkipCount[r.day] = (daySkipCount[r.day] ?? 0) + 1
+      }
+      const frequentSkips = Object.entries(daySkipCount)
+        .filter(([, count]) => count >= 2)
+        .sort(([, a], [, b]) => b - a)
+
+      if (frequentSkips.length > 0) {
+        const skipDescriptions = frequentSkips.map(
+          ([day, count]) => `第 ${day} 天（跳過 ${count} 次）`
+        )
+        lines.push(`常跳過的訓練日：${skipDescriptions.join('、')}`)
+      }
+
+      let currentStreak = 0
+      for (let i = rows.length - 1; i >= 0; i--) {
+        if (rows[i].completed) currentStreak++
+        else break
+      }
+      if (currentStreak > 0) {
+        lines.push(`目前連續完成：${currentStreak} 天`)
+      }
+
+      const recentNotes = rows
+        .filter((r) => r.notes)
+        .slice(-2)
+        .map((r) => `W${r.week}D${r.day}：${r.notes}`)
+      if (recentNotes.length > 0) {
+        lines.push(`用戶筆記：${recentNotes.join('；')}`)
+      }
+    }
+
+    if (feedback) {
+      const ratingMap: Record<string, string> = {
+        too_easy: '太簡單',
+        just_right: '剛好',
+        too_hard: '太難',
+      }
+      lines.push(
+        `最新回饋：${ratingMap[feedback.rating] ?? feedback.rating}${feedback.comment ? `（${feedback.comment}）` : ''}`
+      )
+    }
+
+    if (lines.length === 0) return null
+    return `【AI 訓練歷史與回饋】\n${lines.join('\n')}`
+  } catch {
+    return null
+  }
+}
+
 export const coachingSubAgent: SubAgent = {
   name: 'coaching_agent',
   description: '攀岩教練訓練建議 sub-agent',
@@ -152,6 +275,9 @@ export const coachingSubAgent: SubAgent = {
 
     const levelExercises = buildLevelExerciseContext(trainingResult)
     if (levelExercises) sections.push(levelExercises)
+
+    const trainingHistory = await gatherTrainingHistoryContext(ctx, personalityTypeCode)
+    if (trainingHistory) sections.push(trainingHistory)
 
     try {
       const goals = await ctx.env.DB.prepare(
