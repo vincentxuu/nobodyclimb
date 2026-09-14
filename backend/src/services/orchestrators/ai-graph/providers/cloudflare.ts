@@ -21,9 +21,13 @@ function parseWorkersAIResponse(response: unknown) {
   const raw = response as Record<string, unknown>
 
   // content: 舊格式 response → 新格式 choices[0].message.content
-  // 用 || 而非 ??：空字串也 fallback 到 choices 格式
+  // 推理模型（GLM 5.3、DeepSeek R1）可能把內容放在 reasoning_content
   const choice = (raw.choices as Array<{ message?: Record<string, unknown> }>)?.[0]
-  const content = (raw.response as string) || (choice?.message?.content as string) || ''
+  const content =
+    (raw.response as string) ||
+    (choice?.message?.content as string) ||
+    (choice?.message?.reasoning_content as string) ||
+    ''
 
   // usage: 頂層 usage 或 choices 旁邊的 usage
   const usage = (raw.usage as { prompt_tokens?: number; completion_tokens?: number }) ?? {}

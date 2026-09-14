@@ -94,6 +94,18 @@ describe('CloudflareProvider response format', () => {
     expect(result.content).toBe('GLM 實際回答')
   })
 
+  it('推理模型 content 空但有 reasoning_content（GLM 5.3 / DeepSeek R1）', async () => {
+    mockAI.run.mockResolvedValueOnce({
+      choices: [
+        { message: { content: '', reasoning_content: '推理過程和回答', role: 'assistant' } },
+      ],
+      usage: { prompt_tokens: 100, completion_tokens: 200, total_tokens: 300 },
+    })
+    const provider = await getProvider()
+    const result = await provider.chat([{ role: 'user', content: '分析弱點' }])
+    expect(result.content).toBe('推理過程和回答')
+  })
+
   it('新格式 tool_calls 在 choices[0].message 裡 + 空頂層 tool_calls', async () => {
     mockAI.run.mockResolvedValueOnce({
       response: '',
