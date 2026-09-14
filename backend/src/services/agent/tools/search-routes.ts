@@ -66,12 +66,15 @@ export const searchRoutesTool: Tool = {
 
     // Embed query
     const embeddingService = new EmbeddingService(ctx.env)
+    const embedStart = Date.now()
     const queryVector = await embeddingService.embed(query)
+    const embeddingMs = Date.now() - embedStart
 
     // 載入檢索設定
     const cfg = await loadPipelineConfig(ctx.env.DB)
 
     // 執行混合搜尋
+    const retrievalStart = Date.now()
     const result = await hybridSearch(ctx.env, {
       query,
       queryVector,
@@ -84,6 +87,7 @@ export const searchRoutesTool: Tool = {
         min_rrf_score_filtered: cfg.min_rrf_score_filtered,
       },
     })
+    const retrievalMs = Date.now() - retrievalStart
 
     // 轉換為 Agent 格式
     const routes = result.candidateMatches
@@ -100,16 +104,33 @@ export const searchRoutesTool: Tool = {
       })
       .filter(Boolean)
 
-    return { results: routes, count: routes.length }
+    return {
+      results: routes,
+      count: routes.length,
+      _trace: {
+        embedding: { duration_ms: embeddingMs },
+        filter: { applied: vectorFilter },
+        retrieval: {
+          ...result.trace,
+          duration_ms: retrievalMs,
+          top_score: result.retrievalScore,
+          doc_count: routes.length,
+        },
+      },
+    }
   },
 
   formatResult(raw: unknown): ToolResult {
     const data = raw as {
       results: Array<{ title: string; excerpt?: string; score?: number; text?: string }>
       count: number
+      _trace?: Record<string, unknown>
     }
     if (!data.results?.length) {
-      return { content: '未找到符合條件的路線。', metadata: { resultCount: 0 } }
+      return {
+        content: '未找到符合條件的路線。',
+        metadata: { resultCount: 0, _trace: data._trace },
+      }
     }
     const lines = data.results.map(
       (r, i) =>
@@ -117,7 +138,7 @@ export const searchRoutesTool: Tool = {
     )
     return {
       content: `找到 ${data.count} 條路線：\n\n${lines.join('\n\n')}`,
-      metadata: { resultCount: data.count },
+      metadata: { resultCount: data.count, _trace: data._trace },
     }
   },
 }

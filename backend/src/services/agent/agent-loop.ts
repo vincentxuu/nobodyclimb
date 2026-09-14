@@ -27,10 +27,28 @@ interface EngineConfig {
   createProvider?: (providerName: string) => AIProvider
 }
 
+export interface ToolCallTrace {
+  name: string
+  durationMs: number
+  resultCount?: number
+  cacheHit?: boolean
+  trace?: Record<string, unknown>
+}
+
+export interface TurnTrace {
+  turn: number
+  llmDurationMs: number
+  tools: ToolCallTrace[]
+  provider: string
+  model: string
+  usedFallback: boolean
+}
+
 interface EngineResult {
   answer: string
   turnCount: number
   toolCallCount: number
+  turnTraces: TurnTrace[]
 }
 
 /**
@@ -57,6 +75,7 @@ export async function runAgentLoop(
 
   let turn = 0
   let totalToolCalls = 0
+  const turnTraces: TurnTrace[] = []
   // 追蹤同一 tool 連續失敗次數
   const consecutiveFailures: Map<string, number> = new Map()
 
@@ -134,6 +153,14 @@ export async function runAgentLoop(
       if (turn === 1 && turn < maxTurns && registry.getToolNames().length > 0) {
         console.warn('[agent-loop] Turn 1 returned no tool calls — injecting retry prompt')
         endSpan(turnSpan, { output: { warning: 'no_tool_calls_turn1', injecting_retry: true } })
+        turnTraces.push({
+          turn,
+          llmDurationMs: callDuration,
+          tools: [],
+          provider: usedProvider,
+          model: usedModel,
+          usedFallback,
+        })
         if (response.content) {
           messages.push({ role: 'assistant', content: response.content })
         }
@@ -144,12 +171,22 @@ export async function runAgentLoop(
         continue
       }
 
+      turnTraces.push({
+        turn,
+        llmDurationMs: callDuration,
+        tools: [],
+        provider: usedProvider,
+        model: usedModel,
+        usedFallback,
+      })
+
       // 後續輪次沒有 tool calls → 最終答案
       endSpan(turnSpan, { output: { answer: response.content } })
       return {
         answer: response.content ?? '',
         turnCount: turn,
         toolCallCount: totalToolCalls,
+        turnTraces,
       }
     }
 
@@ -170,6 +207,22 @@ export async function runAgentLoop(
       opts.onProgress
     )
     totalToolCalls += response.toolCalls.length
+
+    turnTraces.push({
+      turn,
+      llmDurationMs: callDuration,
+      tools: toolResults.map((r) => ({
+        name: r.toolName,
+        durationMs: r.durationMs,
+        resultCount:
+          typeof r.metadata?.resultCount === 'number' ? r.metadata.resultCount : undefined,
+        cacheHit: r.metadata?._cacheHit === true ? true : undefined,
+        trace: r.metadata?._trace as Record<string, unknown> | undefined,
+      })),
+      provider: usedProvider,
+      model: usedModel,
+      usedFallback,
+    })
 
     // 組裝 tool results 成 user message（因為大多 provider 不支援 tool role）
     // 使用 XML-like delimiter 防止 prompt injection
@@ -194,36 +247,65 @@ export async function runAgentLoop(
     content: '請根據以上工具查詢結果，直接回答用戶的問題。不要再使用工具。',
   })
   const finalSpan = startSpan(langfuseParent ?? null, `turn-${turn + 1}-final`)
+  const finalCallStart = Date.now()
 
   try {
-    const finalResponse = await provider.chat(finalMessages, {
+    let finalContent: string
+
+    // Streaming: 最終回答用 streamChat 逐 token 推送
+    if (opts.onToken && provider.streamChat) {
+      const streamResponse = await provider.streamChat(finalMessages, {
+        model: ctx.models.orchestrator.model,
+        maxTokens: ctx.models.orchestrator.maxTokens,
+        temperature: ctx.models.orchestrator.temperature,
+        onToken: opts.onToken,
+      })
+      finalContent = streamResponse.content
+      if (streamResponse.usage) {
+        ctx.tracker.record(
+          ctx.models.orchestrator.provider,
+          ctx.models.orchestrator.model,
+          streamResponse.usage.prompt_tokens ?? 0,
+          streamResponse.usage.completion_tokens ?? 0
+        )
+      }
+    } else {
+      const finalResponse = await provider.chat(finalMessages, {
+        model: ctx.models.orchestrator.model,
+        maxTokens: ctx.models.orchestrator.maxTokens,
+        temperature: ctx.models.orchestrator.temperature,
+      })
+      finalContent = finalResponse.content
+      ctx.tracker.record(
+        ctx.models.orchestrator.provider,
+        ctx.models.orchestrator.model,
+        finalResponse.usage?.prompt_tokens ?? 0,
+        finalResponse.usage?.completion_tokens ?? 0
+      )
+    }
+
+    const finalCallDuration = Date.now() - finalCallStart
+    turnTraces.push({
+      turn: turn + 1,
+      llmDurationMs: finalCallDuration,
+      tools: [],
+      provider: ctx.models.orchestrator.provider,
       model: ctx.models.orchestrator.model,
-      maxTokens: ctx.models.orchestrator.maxTokens,
-      temperature: ctx.models.orchestrator.temperature,
+      usedFallback: false,
     })
-    ctx.tracker.record(
-      ctx.models.orchestrator.provider,
-      ctx.models.orchestrator.model,
-      finalResponse.usage?.prompt_tokens ?? 0,
-      finalResponse.usage?.completion_tokens ?? 0
-    )
+
     logGeneration(finalSpan, {
       name: 'orchestrator-final-answer',
       model: ctx.models.orchestrator.model,
       input: finalMessages[finalMessages.length - 1],
-      output: finalResponse.content,
-      usage: finalResponse.usage
-        ? {
-            promptTokens: finalResponse.usage.prompt_tokens,
-            completionTokens: finalResponse.usage.completion_tokens,
-          }
-        : undefined,
+      output: finalContent,
     })
-    endSpan(finalSpan, { output: { answer: finalResponse.content } })
+    endSpan(finalSpan, { output: { answer: finalContent } })
     return {
-      answer: finalResponse.content,
+      answer: finalContent,
       turnCount: turn + 1,
       toolCallCount: totalToolCalls,
+      turnTraces,
     }
   } catch (err) {
     endSpan(finalSpan, { output: { error: String(err) }, level: 'ERROR' })
@@ -330,6 +412,8 @@ interface ToolExecutionResult {
   toolName: string
   content: string
   isError: boolean
+  durationMs: number
+  metadata?: Record<string, unknown>
 }
 
 async function executeTools(
@@ -409,7 +493,12 @@ async function executeSingleTool(
   if (!registry.getTool(tc.name)) {
     const errorMsg = `工具 ${tc.name} 不可用`
     endSpan(toolSpan, { output: { error: errorMsg }, level: 'WARNING' })
-    return { toolName: tc.name, content: errorMsg, isError: true }
+    return {
+      toolName: tc.name,
+      content: errorMsg,
+      isError: true,
+      durationMs: Date.now() - startTime,
+    }
   }
 
   // Cache 查詢（cacheTTL > 0 才查）— cache hit 不送 progress event（瞬間完成）
@@ -423,7 +512,13 @@ async function executeSingleTool(
         output: { cache: 'hit', contentLength: cached.length },
         metadata: { latency_ms: latencyMs, cache_hit: true },
       })
-      return { toolName: tc.name, content: cached, isError: false }
+      return {
+        toolName: tc.name,
+        content: cached,
+        isError: false,
+        durationMs: latencyMs,
+        metadata: { _cacheHit: true },
+      }
     }
   }
 
@@ -464,7 +559,13 @@ async function executeSingleTool(
       metadata: { latency_ms: latencyMs, cache_hit: false },
     })
 
-    return { toolName: tc.name, content, isError: false }
+    return {
+      toolName: tc.name,
+      content,
+      isError: false,
+      durationMs: latencyMs,
+      metadata: formatted.metadata,
+    }
   } catch (err) {
     const latencyMs = Date.now() - startTime
     ctx.tracker.recordToolCall(tc.name, latencyMs)
@@ -491,6 +592,7 @@ async function executeSingleTool(
       toolName: tc.name,
       content: `[錯誤] ${errorMsg}`,
       isError: true,
+      durationMs: latencyMs,
     }
   }
 }

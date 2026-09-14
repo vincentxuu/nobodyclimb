@@ -460,11 +460,62 @@ export interface AILogDetail {
     per_model_stats?: Array<{
       provider: string
       model: string
-      prompt_tokens: number
-      completion_tokens: number
-      cost_usd: number
-      cost_twd: number
+      inputTokens?: number
+      outputTokens?: number
+      calls?: number
+      prompt_tokens?: number
+      completion_tokens?: number
+      cost_usd?: number
+      cost_twd?: number
     }>
+    // Agent turn-level traces
+    turn_traces?: Array<{
+      turn: number
+      llmDurationMs: number
+      tools: Array<{
+        name: string
+        durationMs: number
+        resultCount?: number
+        cacheHit?: boolean
+        trace?: {
+          embedding?: { duration_ms: number }
+          retrieval?: {
+            retrieval_method?: string
+            paths: string[]
+            path_counts?: Record<string, number>
+            path_results?: Record<string, Array<{ id: string; score: number; name?: string }>>
+            bm25_fts_query?: string | null
+            candidates_before_filter: number
+            candidates_after_filter: number
+            crag_fallback: boolean
+            crag_fallback_stage?: 'grade' | null
+            reranker_used?: boolean
+            rrf?: {
+              paths_count: number
+              merged_count: number
+              min_score_threshold: number
+              after_threshold_count: number
+            }
+            crag_fallback_detail?: {
+              trigger_reason: string
+              retries: Array<{ removed_filter: string; candidates_after: number }>
+            } | null
+          }
+          filter?: Record<string, unknown>
+          text_to_sql?: {
+            template?: string
+            params?: Record<string, unknown>
+            query_ms?: number
+            row_count?: number
+          }
+        }
+      }>
+      provider: string
+      model: string
+      usedFallback: boolean
+    }>
+    cost_usd?: number
+    cost_twd?: number
   } | null
 }
 

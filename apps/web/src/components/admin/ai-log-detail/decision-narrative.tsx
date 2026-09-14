@@ -13,6 +13,30 @@ export function DecisionNarrative({
   latency: AILogDetail['latency']
 }) {
   const pt = pipelineTrace
+
+  // Agent 模式
+  if (pt?.strategy === 'agent') {
+    const turns = pt.turn_traces ?? []
+    const toolNames = turns.flatMap((t) => t.tools.map((tool) => tool.name))
+    const uniqueTools = [...new Set(toolNames)]
+    const agentParts: string[] = ['Agent']
+    if (turns[0]?.model) agentParts.push(turns[0].model.split('/').pop() ?? turns[0].model)
+    if (uniqueTools.length > 0) agentParts.push(uniqueTools.join('+'))
+    agentParts.push(`${pt.turn_count ?? turns.length} turns`)
+    if (pt.tool_call_count) agentParts.push(`${pt.tool_call_count} tool calls`)
+    if (latency.total_ms != null) agentParts.push(`${latency.total_ms} ms`)
+    return (
+      <div className="rounded-xl border border-violet-200 bg-violet-50/60 px-4 py-3">
+        <p className="text-[10px] text-violet-500 mb-1 uppercase tracking-wide font-semibold">
+          Agent 決策摘要
+        </p>
+        <p className="text-[11px] font-medium text-violet-700 font-mono">
+          {agentParts.join(' → ')}
+        </p>
+      </div>
+    )
+  }
+
   const isCacheHit = pipeline?.cache?.hit
   const cacheType = pt?.cache?.type
 

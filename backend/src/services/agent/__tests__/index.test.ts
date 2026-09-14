@@ -12,8 +12,8 @@ describe('loadModelMap', () => {
     const result = await loadModelMap(db)
 
     expect(result.orchestrator.provider).toBe('workers-ai')
-    expect(result.orchestrator.model).toBe('@cf/zai-org/glm-5.3-flash')
-    expect(result.orchestrator.fallback?.model).toBe('@cf/zai-org/glm-4.7-flash')
+    expect(result.orchestrator.model).toBe('@cf/zai-org/glm-4.7-flash')
+    expect(result.orchestrator.fallback?.model).toBe('@cf/qwen/qwen3-4b')
     expect(result.hyde.model).toBe('@cf/zai-org/glm-4.7-flash')
   })
 
@@ -36,7 +36,7 @@ describe('loadModelMap', () => {
     expect(result.orchestrator.model).toBe('@cf/meta/llama-3.3-70b-instruct-fp8-fast')
     expect(result.orchestrator.temperature).toBe(0.3)
     expect(result.orchestrator.maxTokens).toBe(1024)
-    expect(result.orchestrator.fallback?.model).toBe('@cf/zai-org/glm-4.7-flash')
+    expect(result.orchestrator.fallback?.model).toBe('@cf/qwen/qwen3-4b')
     expect(result.judge.model).toBe('@cf/qwen/qwen3-30b-a3b-fp8')
   })
 })

@@ -109,13 +109,19 @@ export class CloudflareProvider implements AIProvider {
           const payload = line.slice(6).trim()
           if (payload === '[DONE]') break
           try {
-            const parsed = JSON.parse(payload) as { response?: string }
-            if (!parsed.response) continue
+            const parsed = JSON.parse(payload) as Record<string, unknown>
+            const delta = (parsed.choices as Array<{ delta?: Record<string, unknown> }>)?.[0]?.delta
+            const token =
+              (parsed.response as string) ||
+              (delta?.content as string) ||
+              (delta?.reasoning_content as string) ||
+              ''
+            if (!token) continue
 
-            fullText += parsed.response
+            fullText += token
             if (suggestionsStarted) continue
 
-            slideBuffer += parsed.response
+            slideBuffer += token
             const markerIdx = slideBuffer.indexOf(MARKER)
             if (markerIdx !== -1) {
               const beforeMarker = slideBuffer.slice(0, markerIdx)

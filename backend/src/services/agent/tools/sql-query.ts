@@ -82,15 +82,36 @@ export const sqlQueryTool: Tool = {
       queryParams.user_id = ctx.userId
     }
 
-    return service.execute(template, queryParams)
+    const queryStart = Date.now()
+    const result = (await service.execute(template, queryParams)) as {
+      rows: Record<string, unknown>[]
+      template: string
+    }
+    const queryMs = Date.now() - queryStart
+
+    return {
+      ...result,
+      _trace: {
+        text_to_sql: {
+          template,
+          params: queryParams,
+          query_ms: queryMs,
+          row_count: result.rows?.length ?? 0,
+        },
+      },
+    }
   },
 
   formatResult(raw: unknown): ToolResult {
-    const data = raw as { rows: Record<string, unknown>[]; template: string }
+    const data = raw as {
+      rows: Record<string, unknown>[]
+      template: string
+      _trace?: Record<string, unknown>
+    }
     if (!data.rows?.length) {
       return {
         content: `查詢 ${data.template} 沒有結果。`,
-        metadata: { resultCount: 0, template: data.template },
+        metadata: { resultCount: 0, template: data.template, _trace: data._trace },
       }
     }
     // 將結果轉為表格文字
@@ -99,7 +120,7 @@ export const sqlQueryTool: Tool = {
     const rows = data.rows.map((row) => keys.map((k) => String(row[k] ?? '')).join(' | '))
     return {
       content: `${data.template} 查詢結果（${data.rows.length} 筆）：\n\n${header}\n${'-'.repeat(header.length)}\n${rows.join('\n')}`,
-      metadata: { resultCount: data.rows.length, template: data.template },
+      metadata: { resultCount: data.rows.length, template: data.template, _trace: data._trace },
     }
   },
 }

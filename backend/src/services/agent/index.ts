@@ -27,12 +27,12 @@ import type { AgentResult, ModelConfig, ModelMap, ProviderName, ToolContext } fr
 const DEFAULT_MODEL_MAP: ModelMap = {
   orchestrator: {
     provider: 'workers-ai',
-    model: '@cf/zai-org/glm-5.3-flash',
+    model: '@cf/zai-org/glm-4.7-flash',
     temperature: 0.3,
     maxTokens: 1024,
     fallback: {
       provider: 'workers-ai',
-      model: '@cf/zai-org/glm-4.7-flash',
+      model: '@cf/qwen/qwen3-4b',
       temperature: 0.3,
       maxTokens: 1024,
     },
@@ -338,6 +338,8 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       systemPrompt,
       maxTurns: agentCfg.maxTurns,
       tokenBudget: agentCfg.tokenBudget,
+      stream: params.stream,
+      onToken: params.onToken,
       onProgress: params.onProgress,
     }
   )
@@ -368,6 +370,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     turnCount: result.turnCount,
     toolCallCount: result.toolCallCount,
     perModelStats: tracker.getPerModelStats(),
+    turnTraces: result.turnTraces,
     costUSD: costSummary.totalCostUSD,
     costTWD: costSummary.totalCostTWD,
   }
