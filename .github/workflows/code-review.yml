@@ -56,8 +56,8 @@ jobs:
       - name: Review with Cloudflare Workers AI
         id: review
         env:
-          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_WORKERS_AI_ACCOUNT_ID }}
-          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_AI_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           DIFF: ${{ steps.diff.outputs.DIFF }}
           STAT: ${{ steps.diff.outputs.STAT }}
           FILES: ${{ steps.diff.outputs.FILES }}
