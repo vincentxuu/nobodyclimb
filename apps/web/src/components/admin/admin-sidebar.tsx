@@ -68,6 +68,8 @@ const AI_GROUP: NavGroup = {
     { href: '/admin/ai/tools', label: '工具管理' },
     { href: '/admin/ai/hooks', label: 'Hooks' },
     { href: '/admin/ai/skills', label: 'Skills' },
+    { href: '/admin/ai/mcp', label: 'MCP Servers' },
+    { href: '/admin/ai/plugins', label: 'Plugins' },
     { href: '/admin/ai/prompts', label: '模板設定' },
     { href: '/admin/ai/knowledge', label: '知識庫' },
     { href: '/admin/ai/metrics', label: '趨勢分析' },

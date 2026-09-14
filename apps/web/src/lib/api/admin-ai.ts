@@ -1453,3 +1453,247 @@ export function useDeleteAdminSkill() {
     },
   })
 }
+
+// =============================================
+// MCP Server Types & API
+// =============================================
+
+export interface AdminMCPServer {
+  id: string
+  tenant_id: string
+  name: string
+  description: string | null
+  transport: string
+  url: string | null
+  auth_type: string
+  secret_ref: string | null
+  enabled: number
+  health_status: 'healthy' | 'unhealthy' | 'unknown'
+  last_health_check: string | null
+  source_plugin_id: string | null
+  created_at: string
+  updated_at: string
+  tool_count?: number
+}
+
+export interface ToolSnapshot {
+  id: string
+  server_id: string
+  tool_name: string
+  qualified_key: string
+  description: string
+  input_schema: string
+  schema_hash: string
+  first_seen_at: string
+  last_seen_at: string
+  removed_at: string | null
+}
+
+export async function getAdminMCPServers(): Promise<AdminMCPServer[]> {
+  const res = await apiClient.get<{ success: boolean; data: AdminMCPServer[] }>('/admin/ai/mcp')
+  return res.data.data
+}
+
+export async function createMCPServer(data: {
+  name: string
+  url: string
+  transport?: string
+  auth_type?: string
+  secret_ref?: string
+  description?: string
+}): Promise<AdminMCPServer> {
+  const res = await apiClient.post<{ success: boolean; data: AdminMCPServer }>(
+    '/admin/ai/mcp',
+    data
+  )
+  return res.data.data
+}
+
+export async function updateMCPServer(
+  id: string,
+  data: {
+    url?: string
+    transport?: string
+    auth_type?: string
+    secret_ref?: string
+    description?: string | null
+    enabled?: number
+  }
+): Promise<void> {
+  await apiClient.put(`/admin/ai/mcp/${id}`, data)
+}
+
+export async function deleteMCPServer(id: string): Promise<void> {
+  await apiClient.delete(`/admin/ai/mcp/${id}`)
+}
+
+export async function discoverMCPTools(
+  id: string
+): Promise<{ added: number; updated: number; removed: number }> {
+  const res = await apiClient.post<{
+    success: boolean
+    data: { added: number; updated: number; removed: number }
+  }>(`/admin/ai/mcp/${id}/discover`)
+  return res.data.data
+}
+
+export async function healthCheckMCP(id: string): Promise<{ healthy: boolean }> {
+  const res = await apiClient.post<{ success: boolean; data: { healthy: boolean } }>(
+    `/admin/ai/mcp/${id}/health`
+  )
+  return res.data.data
+}
+
+export async function getMCPTools(id: string): Promise<ToolSnapshot[]> {
+  const res = await apiClient.get<{ success: boolean; data: ToolSnapshot[] }>(
+    `/admin/ai/mcp/${id}/tools`
+  )
+  return res.data.data
+}
+
+export async function testMCPTool(
+  serverId: string,
+  toolName: string,
+  input: Record<string, unknown>
+): Promise<unknown> {
+  const res = await apiClient.post<{ success: boolean; data: unknown }>(
+    `/admin/ai/mcp/${serverId}/test`,
+    { tool_name: toolName, input }
+  )
+  return res.data.data
+}
+
+export function useAdminMCPServers() {
+  return useQuery<AdminMCPServer[]>({
+    queryKey: ['admin-ai-mcp'],
+    queryFn: getAdminMCPServers,
+  })
+}
+
+export function useCreateMCPServer() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: createMCPServer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+    },
+  })
+}
+
+export function useUpdateMCPServer() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Parameters<typeof updateMCPServer>[1] }) =>
+      updateMCPServer(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+    },
+  })
+}
+
+export function useDeleteMCPServer() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: deleteMCPServer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+    },
+  })
+}
+
+export function useMCPTools(serverId: string) {
+  return useQuery<ToolSnapshot[]>({
+    queryKey: ['admin-ai-mcp-tools', serverId],
+    queryFn: () => getMCPTools(serverId),
+    enabled: !!serverId,
+  })
+}
+
+export function useDiscoverMCPTools() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: discoverMCPTools,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp-tools'] })
+    },
+  })
+}
+
+export function useHealthCheckMCP() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: healthCheckMCP,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+    },
+  })
+}
+
+// =============================================
+// Plugin Types & API
+// =============================================
+
+export interface AdminPlugin {
+  id: string
+  tenant_id: string
+  subject_type: string
+  subject_id: string
+  plugin_version_id: string
+  installed_at: string
+  name: string
+  semver: string
+  description: string | null
+  manifest?: Record<string, unknown>
+  component_counts?: { skills: number; mcp_servers: number; hooks: number }
+}
+
+export async function getAdminPlugins(): Promise<AdminPlugin[]> {
+  const res = await apiClient.get<{ success: boolean; data: AdminPlugin[] }>('/admin/ai/plugins')
+  return res.data.data
+}
+
+export async function installPlugin(
+  manifest: Record<string, unknown>
+): Promise<{ plugin_id: string; skills: number; mcp_servers: number }> {
+  const res = await apiClient.post<{
+    success: boolean
+    data: { plugin_id: string; skills: number; mcp_servers: number }
+  }>('/admin/ai/plugins', { manifest })
+  return res.data.data
+}
+
+export async function uninstallPlugin(id: string): Promise<void> {
+  await apiClient.delete(`/admin/ai/plugins/${id}`)
+}
+
+export function useAdminPlugins() {
+  return useQuery<AdminPlugin[]>({
+    queryKey: ['admin-ai-plugins'],
+    queryFn: getAdminPlugins,
+  })
+}
+
+export function useInstallPlugin() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: installPlugin,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-plugins'] })
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}
+
+export function useUninstallPlugin() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: uninstallPlugin,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-plugins'] })
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}

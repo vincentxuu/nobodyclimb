@@ -18,6 +18,7 @@ import { runOutputGuards } from './guards'
 import { createBuiltinHooks } from './hooks/builtins'
 import { HookBus } from './hooks/bus'
 import { isHookEnabled, loadHookRecords } from './hooks/loader'
+import { registerMCPTools } from './mcp/registry'
 import { buildProactivePromptSection, gatherProactiveContext } from './proactive'
 import { recordSkillInvocation, SkillResolver } from './skills/resolver'
 import { createDBToolRegistry, updateToolStats } from './tools/db-registry'
@@ -317,6 +318,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     isAuthenticated: !!userId,
     requiredTools: requiredToolNames,
   })
+  await registerMCPTools(env.DB, registry, env as unknown as Record<string, unknown>)
   const cache = new KVAgentCache(env.CACHE)
   const toolCtx: ToolContext = {
     env,
