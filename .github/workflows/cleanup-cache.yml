@@ -1,0 +1,33 @@
+name: Cleanup PR Cache
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  cleanup:
+    name: Clear Actions Cache
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Delete PR caches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="refs/pull/${{ github.event.pull_request.number }}/merge"
+
+          echo "Cleaning caches for branch: $BRANCH"
+          CACHE_KEYS=$(gh cache list --ref "$BRANCH" --json key --jq '.[].key' 2>/dev/null || true)
+
+          if [ -z "$CACHE_KEYS" ]; then
+            echo "No caches found for this PR."
+            exit 0
+          fi
+
+          for KEY in $CACHE_KEYS; do
+            echo "Deleting cache: $KEY"
+            gh cache delete "$KEY" || true
+          done
+
+          echo "Done. Cleaned $(echo "$CACHE_KEYS" | wc -l | tr -d ' ') cache entries."
