@@ -41,7 +41,7 @@ const DEFAULT_MODEL_MAP: ModelMap = {
   multiQuery: { provider: 'workers-ai', model: '@cf/glm-4.7-flash' },
   textToSql: { provider: 'workers-ai', model: '@cf/glm-4.7-flash' },
   rerank: { provider: 'workers-ai', model: '@cf/baai/bge-reranker-v2-m3' },
-  judge: { provider: 'workers-ai', model: '@cf/glm-4.7-flash' },
+  judge: { provider: 'workers-ai', model: '@cf/qwen3-30b-a3b-fp8' },
   embedding: { provider: 'workers-ai', model: '@cf/baai/bge-m3' },
 }
 
