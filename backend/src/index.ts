@@ -7,6 +7,7 @@ import { accessLogMiddleware } from './middleware/accessLog'
 import { dateFormatMiddleware } from './middleware/dateFormat'
 import { accessLogsRoutes } from './routes/access-logs'
 import { adminAiRoutes } from './routes/admin-ai'
+import { adminAiHooksRoutes } from './routes/admin-ai-hooks'
 import { adminAiQualityRoutes } from './routes/admin-ai-quality'
 import { adminAiToolsRoutes } from './routes/admin-ai-tools'
 import { adminSectorsRoutes } from './routes/admin-areas'
@@ -132,6 +133,7 @@ v1.route('/admin/import', adminImportRoutes)
 v1.route('/admin/ai', adminAiRoutes)
 v1.route('/admin/ai/quality', adminAiQualityRoutes)
 v1.route('/admin/ai', adminAiToolsRoutes)
+v1.route('/admin/ai', adminAiHooksRoutes)
 v1.route('/ai', aiRoutes)
 v1.route('/quiz', quizRoutes)
 v1.route('/training', trainingRoutes)

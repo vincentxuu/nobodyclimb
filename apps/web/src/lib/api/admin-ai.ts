@@ -1114,3 +1114,66 @@ export function useUpdateAdminTool() {
     },
   })
 }
+
+// =============================================
+// Hook Management
+// =============================================
+
+export type HookEvent =
+  | 'pre_loop'
+  | 'pre_turn'
+  | 'pre_tool'
+  | 'post_tool'
+  | 'post_loop'
+  | 'post_response'
+
+export type HookType = 'gate' | 'enrich' | 'observe'
+
+export interface AdminHook {
+  id: string
+  name: string
+  description: string | null
+  event: HookEvent
+  hook_type: HookType
+  implementation: string
+  config: string | null
+  priority: number
+  enabled: number
+  created_at: string
+  updated_at: string
+}
+
+export async function getAdminHooks(): Promise<AdminHook[]> {
+  const res = await apiClient.get<{ success: boolean; data: AdminHook[] }>('/admin/ai/hooks')
+  return res.data.data
+}
+
+export async function updateAdminHook(
+  id: string,
+  data: {
+    enabled?: number
+    config?: string | null
+    priority?: number
+    description?: string | null
+  }
+): Promise<void> {
+  await apiClient.put(`/admin/ai/hooks/${id}`, data)
+}
+
+export function useAdminHooks() {
+  return useQuery<AdminHook[]>({
+    queryKey: ['admin-ai-hooks'],
+    queryFn: getAdminHooks,
+  })
+}
+
+export function useUpdateAdminHook() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Parameters<typeof updateAdminHook>[1] }) =>
+      updateAdminHook(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-hooks'] })
+    },
+  })
+}

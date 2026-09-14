@@ -66,6 +66,7 @@ const AI_GROUP: NavGroup = {
     { href: '/admin/ai/logs', label: '查詢日誌' },
     { href: '/admin/ai/agent', label: 'Agent' },
     { href: '/admin/ai/tools', label: '工具管理' },
+    { href: '/admin/ai/hooks', label: 'Hooks' },
     { href: '/admin/ai/prompts', label: '模板設定' },
     { href: '/admin/ai/knowledge', label: '知識庫' },
     { href: '/admin/ai/metrics', label: '趨勢分析' },

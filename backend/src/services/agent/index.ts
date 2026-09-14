@@ -14,7 +14,10 @@ import type { ProviderName as LegacyProviderName } from '../orchestrators/ai-gra
 import { runAgentLoop } from './agent-loop'
 import { KVAgentCache } from './cache'
 import { classifyQuery, detectDirectRoute, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
-import { runAsyncJudge, runOutputGuards } from './guards'
+import { runOutputGuards } from './guards'
+import { createBuiltinHooks } from './hooks/builtins'
+import { HookBus } from './hooks/bus'
+import { isHookEnabled, loadHookRecords } from './hooks/loader'
 import { buildProactivePromptSection, gatherProactiveContext } from './proactive'
 import { createDBToolRegistry, updateToolStats } from './tools/db-registry'
 import { DefaultTokenTracker } from './tracker'
@@ -283,12 +286,24 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     ? Promise.all([getMemoriesSummary(userId, env.DB), getRecentAscents(userId, env.DB)])
     : Promise.resolve([null, []] as [string | null, Awaited<ReturnType<typeof getRecentAscents>>])
 
-  const [models, agentCfg, [memorySummary, ascents], proactiveCtx] = await Promise.all([
-    loadModelMap(env.DB),
-    loadAgentConfig(env.DB),
-    personalizationPromise,
-    gatherProactiveContext(env.DB, userId),
-  ])
+  const [models, agentCfg, [memorySummary, ascents], proactiveCtx, hookRecords] = await Promise.all(
+    [
+      loadModelMap(env.DB),
+      loadAgentConfig(env.DB),
+      personalizationPromise,
+      gatherProactiveContext(env.DB, userId),
+      loadHookRecords(env.DB),
+    ]
+  )
+
+  // Build HookBus with DB-controlled enable/disable
+  const hookBus = new HookBus()
+  const builtinHooks = createBuiltinHooks({ env, userId, models, langfuseTrace })
+  for (const hook of builtinHooks) {
+    if (isHookEnabled(hookRecords, `builtin:${hook.name}`)) {
+      hookBus.register(hook)
+    }
+  }
 
   // 2. Create provider + tracker + registry + context
   const orchestratorProvider = createProviderForConfig(models.orchestrator.provider, env)
@@ -347,23 +362,24 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     }
   )
 
-  // 6. Output guards（同步）
-  const guardResult = runOutputGuards(result.answer)
-  if (!guardResult.passed) {
-    console.warn('[agent] output guard failed', { qualityFlag: guardResult.qualityFlag })
+  // 6. Output guards via HookBus
+  const postLoopResult = await hookBus.runGates('post_loop', { answer: result.answer })
+  const finalAnswer = postLoopResult.replacement ?? result.answer
+  if (!postLoopResult.allow) {
+    console.warn('[agent] post_loop hook denied', { reason: postLoopResult.reason })
   }
-  const finalAnswer =
-    guardResult.qualityFlag === 'tool_call_leak'
-      ? '抱歉，AI 助理暫時無法處理您的問題，請稍後再試。'
-      : (guardResult.cleanedAnswer ?? result.answer)
 
-  // 7. Async judge + memory extraction + tool stats（非同步，不擋回應）
+  // 7. Async observers + tool stats（非同步，不擋回應）
   if (waitUntilCtx) {
-    waitUntilCtx.waitUntil(runAsyncJudge(env, query, '', finalAnswer, models, langfuseTrace))
+    waitUntilCtx.waitUntil(
+      hookBus.runObservers('post_response', {
+        query,
+        answer: finalAnswer,
+        userId,
+        totalTokens: tracker.getTotalTokens(),
+      })
+    )
     waitUntilCtx.waitUntil(updateToolStats(env.DB, tracker.getTurnRecords()))
-    if (userId) {
-      waitUntilCtx.waitUntil(extractMemoriesFromQuery(query, userId, env.DB, env.AI))
-    }
   }
 
   const costSummary = tracker.getCostSummary()
