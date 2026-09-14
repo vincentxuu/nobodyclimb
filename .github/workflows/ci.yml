@@ -62,7 +62,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter "./packages/*" build
-      - run: pnpm --filter @nobodyclimb/web test -- --passWithNoTests
+      - run: pnpm --filter @nobodyclimb/web test -- --passWithNoTests --forceExit
 
   test-packages:
     name: Test (Packages)
