@@ -241,7 +241,7 @@ function ExerciseRow({ exercise }: { exercise: CoachingExercise }) {
 }
 
 function ProgressSection({ progress }: { progress: CoachingTrainingProgress }) {
-  const percentage = Math.round(progress.completionRate * 100)
+  const percentage = Math.round(progress.completionRate)
 
   return (
     <div>
