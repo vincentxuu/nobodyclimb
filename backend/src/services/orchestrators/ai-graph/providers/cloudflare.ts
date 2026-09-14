@@ -56,6 +56,16 @@ export class CloudflareProvider implements AIProvider {
       opts.gatewayOptions
     )
     const parsed = parseWorkersAIResponse(response)
+    if (!parsed.content) {
+      console.warn(
+        '[CloudflareProvider] empty content from model',
+        opts.model,
+        'raw keys:',
+        Object.keys(response as object),
+        'raw:',
+        JSON.stringify(response).slice(0, 500)
+      )
+    }
     return { content: parsed.content, usage: parsed.usage as LLMResponse['usage'] }
   }
 
