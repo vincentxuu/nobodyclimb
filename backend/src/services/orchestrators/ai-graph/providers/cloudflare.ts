@@ -12,6 +12,31 @@ import {
   ToolUseResponse,
 } from './types'
 
+/**
+ * Workers AI 回傳格式解析
+ * 舊模型（Llama）回 { response, tool_calls, usage }
+ * 新模型（GLM/Qwen/DeepSeek/Kimi）回 OpenAI 相容 { choices: [{ message: { content, tool_calls } }], usage }
+ */
+function parseWorkersAIResponse(response: unknown) {
+  const raw = response as Record<string, unknown>
+
+  // content: 舊格式 response → 新格式 choices[0].message.content
+  const choice = (raw.choices as Array<{ message?: Record<string, unknown> }>)?.[0]
+  const content = (raw.response as string) ?? (choice?.message?.content as string) ?? ''
+
+  // usage: 頂層 usage 或 choices 旁邊的 usage
+  const usage = (raw.usage as { prompt_tokens?: number; completion_tokens?: number }) ?? {}
+
+  // tool_calls: 頂層 tool_calls / toolCalls 或 choices[0].message.tool_calls
+  const rawToolCalls =
+    (raw.tool_calls as Array<Record<string, unknown>>) ??
+    (raw.toolCalls as Array<Record<string, unknown>>) ??
+    (choice?.message?.tool_calls as Array<Record<string, unknown>>) ??
+    []
+
+  return { content, usage, rawToolCalls }
+}
+
 export class CloudflareProvider implements AIProvider {
   readonly name = 'cloudflare'
   constructor(
@@ -30,18 +55,8 @@ export class CloudflareProvider implements AIProvider {
       } as Parameters<typeof this.ai.run>[1],
       opts.gatewayOptions
     )
-    // parse Workers AI response format（舊格式 { response } 和新格式 { choices } 都支援）
-    const raw = response as Record<string, unknown>
-    const content =
-      (raw.response as string) ??
-      (raw.result as { response?: string })?.response ??
-      (raw.choices as Array<{ message?: { content?: string } }>)?.[0]?.message?.content ??
-      ''
-    const usage =
-      (raw.usage as LLMResponse['usage']) ??
-      ((raw.choices as Array<{ message?: unknown }>)?.[0] as { usage?: LLMResponse['usage'] })
-        ?.usage
-    return { content, usage }
+    const parsed = parseWorkersAIResponse(response)
+    return { content: parsed.content, usage: parsed.usage as LLMResponse['usage'] }
   }
 
   async streamChat(
@@ -156,15 +171,7 @@ export class CloudflareProvider implements AIProvider {
       })),
     } as Parameters<typeof this.ai.run>[1])
 
-    const raw = response as Record<string, unknown>
-    const content = (raw.response as string) ?? ''
-    const usage = (raw.usage as { prompt_tokens?: number; completion_tokens?: number }) ?? {}
-
-    // Workers AI tool_calls 可能出現在不同欄位
-    const rawToolCalls =
-      (raw.tool_calls as Array<Record<string, unknown>>) ??
-      (raw.toolCalls as Array<Record<string, unknown>>) ??
-      []
+    const { content, usage, rawToolCalls } = parseWorkersAIResponse(response)
 
     const toolCalls = rawToolCalls
       .map((tc, idx) => {
