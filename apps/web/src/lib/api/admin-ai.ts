@@ -1139,8 +1139,35 @@ export interface AdminHook {
   config: string | null
   priority: number
   enabled: number
+  matcher: string | null
+  handler_type: string
+  handler_ref: string | null
+  blocking: number
+  timeout_ms: number
+  on_failure: 'fail_open' | 'fail_closed'
+  source_plugin_id: string | null
   created_at: string
   updated_at: string
+}
+
+export interface HookExecution {
+  id: string
+  hook_id: string
+  session_id: string | null
+  decision: 'allow' | 'deny' | 'modify' | 'noop' | null
+  duration_ms: number | null
+  error: string | null
+  executed_at: string
+}
+
+export interface EnablementRecord {
+  subject_type: string
+  subject_id: string
+  component_type: 'skill' | 'tool' | 'hook' | 'command'
+  component_id: string
+  pinned_version_id: string | null
+  source_plugin_id: string | null
+  enabled: number
 }
 
 export async function getAdminHooks(): Promise<AdminHook[]> {
@@ -1155,9 +1182,30 @@ export async function updateAdminHook(
     config?: string | null
     priority?: number
     description?: string | null
+    matcher?: string | null
+    timeout_ms?: number
+    on_failure?: string
+    blocking?: number
   }
 ): Promise<void> {
   await apiClient.put(`/admin/ai/hooks/${id}`, data)
+}
+
+export async function getHookExecutions(hookId: string): Promise<HookExecution[]> {
+  const res = await apiClient.get<{ success: boolean; data: HookExecution[] }>(
+    `/admin/ai/hooks/${hookId}/executions`
+  )
+  return res.data.data
+}
+
+export async function getEnablement(
+  subjectType = 'agent',
+  subjectId = 'default'
+): Promise<EnablementRecord[]> {
+  const res = await apiClient.get<{ success: boolean; data: EnablementRecord[] }>(
+    `/admin/ai/enablement?subject_type=${subjectType}&subject_id=${subjectId}`
+  )
+  return res.data.data
 }
 
 export function useAdminHooks() {
@@ -1175,6 +1223,21 @@ export function useUpdateAdminHook() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-ai-hooks'] })
     },
+  })
+}
+
+export function useHookExecutions(hookId: string) {
+  return useQuery<HookExecution[]>({
+    queryKey: ['admin-ai-hook-executions', hookId],
+    queryFn: () => getHookExecutions(hookId),
+    enabled: !!hookId,
+  })
+}
+
+export function useEnablement(subjectType = 'agent', subjectId = 'default') {
+  return useQuery<EnablementRecord[]>({
+    queryKey: ['admin-ai-enablement', subjectType, subjectId],
+    queryFn: () => getEnablement(subjectType, subjectId),
   })
 }
 

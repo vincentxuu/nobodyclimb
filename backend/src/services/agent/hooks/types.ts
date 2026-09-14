@@ -8,6 +8,8 @@ export type HookEvent =
 
 export type HookType = 'gate' | 'enrich' | 'observe'
 
+export type OnFailure = 'fail_open' | 'fail_closed'
+
 export interface GateResult {
   allow: boolean
   reason?: string
@@ -25,6 +27,9 @@ export interface HookDefinition {
   hookType: HookType
   priority: number
   enabled: boolean
+  matcher?: string
+  timeoutMs?: number
+  onFailure?: OnFailure
   execute(payload: Record<string, unknown>): Promise<GateResult | EnrichResult | void>
 }
 
@@ -38,6 +43,23 @@ export interface HookRecord {
   config: string | null
   priority: number
   enabled: number
+  matcher: string | null
+  handler_type: string
+  handler_ref: string | null
+  blocking: number
+  timeout_ms: number
+  on_failure: OnFailure
+  source_plugin_id: string | null
   created_at: string
   updated_at: string
+}
+
+export interface HookExecutionRecord {
+  id: string
+  hook_id: string
+  session_id: string | null
+  decision: 'allow' | 'deny' | 'modify' | 'noop' | null
+  duration_ms: number | null
+  error: string | null
+  executed_at: string
 }

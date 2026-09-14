@@ -1,12 +1,26 @@
 'use client'
 
-import { ChevronDown, ChevronRight, Eye, Loader2, Shield, Sparkles } from 'lucide-react'
+import {
+  AlertTriangle,
+  ChevronDown,
+  ChevronRight,
+  Clock,
+  Eye,
+  Filter,
+  Loader2,
+  Lock,
+  Shield,
+  ShieldOff,
+  Sparkles,
+} from 'lucide-react'
 import { useCallback, useMemo, useState } from 'react'
 import {
   type AdminHook,
   type HookEvent,
+  type HookExecution,
   type HookType,
   useAdminHooks,
+  useHookExecutions,
   useUpdateAdminHook,
 } from '@/lib/api/admin-ai'
 
@@ -38,27 +52,77 @@ const EVENT_DESCRIPTIONS: Record<HookEvent, string> = {
 }
 
 const TYPE_STYLES: Record<HookType, { label: string; color: string; icon: typeof Shield }> = {
-  gate: {
-    label: '攔截',
-    color: 'bg-red-50 text-red-700 border-red-200',
-    icon: Shield,
-  },
-  enrich: {
-    label: '注入',
-    color: 'bg-blue-50 text-blue-700 border-blue-200',
-    icon: Sparkles,
-  },
-  observe: {
-    label: '觀察',
-    color: 'bg-wb-10 text-wb-60 border-wb-20',
-    icon: Eye,
-  },
+  gate: { label: '攔截', color: 'bg-red-50 text-red-700 border-red-200', icon: Shield },
+  enrich: { label: '注入', color: 'bg-blue-50 text-blue-700 border-blue-200', icon: Sparkles },
+  observe: { label: '觀察', color: 'bg-wb-10 text-wb-60 border-wb-20', icon: Eye },
+}
+
+const DECISION_STYLES: Record<string, string> = {
+  allow: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  deny: 'bg-red-50 text-red-700 border-red-200',
+  modify: 'bg-blue-50 text-blue-700 border-blue-200',
+  noop: 'bg-wb-10 text-wb-60 border-wb-20',
+}
+
+function ExecutionHistory({ hookId }: { hookId: string }) {
+  const { data: executions, isLoading } = useHookExecutions(hookId)
+
+  if (isLoading) {
+    return <Loader2 className="h-3 w-3 animate-spin text-wb-40" />
+  }
+
+  const items = (executions ?? []).slice(0, 10)
+  if (items.length === 0) {
+    return <p className="text-[11px] text-wb-30 italic">尚無執行記錄</p>
+  }
+
+  return (
+    <div className="space-y-1">
+      {items.map((ex: HookExecution) => (
+        <div
+          key={ex.id}
+          className={`flex items-center gap-2 rounded px-2 py-1 text-[11px] ${
+            ex.error ? 'bg-red-50/50' : 'bg-wb-05'
+          }`}
+        >
+          {ex.decision && (
+            <span
+              className={`rounded border px-1.5 py-0.5 text-[9px] font-medium ${
+                DECISION_STYLES[ex.decision] ?? DECISION_STYLES.noop
+              }`}
+            >
+              {ex.decision}
+            </span>
+          )}
+          {ex.duration_ms != null && (
+            <span className="text-wb-50 font-mono tabular-nums">{ex.duration_ms}ms</span>
+          )}
+          {ex.error && (
+            <span className="flex-1 truncate text-red-600" title={ex.error}>
+              {ex.error}
+            </span>
+          )}
+          <span className="ml-auto text-wb-30 shrink-0">
+            {new Date(ex.executed_at).toLocaleTimeString('zh-TW', {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+            })}
+          </span>
+        </div>
+      ))}
+    </div>
+  )
 }
 
 function HookCard({ hook }: { hook: AdminHook }) {
   const [expanded, setExpanded] = useState(false)
   const [priority, setPriority] = useState(hook.priority)
   const [config, setConfig] = useState(hook.config ?? '')
+  const [matcher, setMatcher] = useState(hook.matcher ?? '')
+  const [timeoutMs, setTimeoutMs] = useState(hook.timeout_ms)
+  const [onFailure, setOnFailure] = useState(hook.on_failure)
+  const [blocking, setBlocking] = useState(hook.blocking)
   const [dirty, setDirty] = useState(false)
   const { mutate: updateHook, isPending } = useUpdateAdminHook()
 
@@ -73,11 +137,15 @@ function HookCard({ hook }: { hook: AdminHook }) {
         data: {
           priority,
           config: config || null,
+          matcher: matcher || null,
+          timeout_ms: timeoutMs,
+          on_failure: onFailure,
+          blocking,
         },
       },
       { onSuccess: () => setDirty(false) }
     )
-  }, [hook.id, priority, config, updateHook])
+  }, [hook.id, priority, config, matcher, timeoutMs, onFailure, blocking, updateHook])
 
   const typeStyle = TYPE_STYLES[hook.hook_type]
   const TypeIcon = typeStyle.icon
@@ -94,7 +162,7 @@ function HookCard({ hook }: { hook: AdminHook }) {
         </div>
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm font-semibold text-wb-100">{hook.name}</span>
             <span
               className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${typeStyle.color}`}
@@ -104,6 +172,27 @@ function HookCard({ hook }: { hook: AdminHook }) {
             <span className="rounded-md border border-wb-10 bg-wb-05 px-1.5 py-0.5 text-[10px] text-wb-40 font-mono">
               P{hook.priority}
             </span>
+            {hook.blocking ? (
+              <span title="Blocking">
+                <Lock className="h-3 w-3 text-red-500" />
+              </span>
+            ) : null}
+            <span
+              className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${
+                hook.on_failure === 'fail_closed'
+                  ? 'bg-red-50 text-red-600 border-red-200'
+                  : 'bg-emerald-50 text-emerald-600 border-emerald-200'
+              }`}
+            >
+              {hook.on_failure === 'fail_closed' ? '失敗阻斷' : '失敗放行'}
+            </span>
+            <span className="text-[10px] text-wb-30 font-mono">{hook.timeout_ms}ms</span>
+            {hook.matcher && (
+              <span className="rounded border border-wb-10 bg-wb-05 px-1.5 py-0.5 text-[10px] text-wb-50 font-mono flex items-center gap-1">
+                <Filter className="h-2.5 w-2.5" />
+                {hook.matcher}
+              </span>
+            )}
           </div>
           {hook.description && (
             <p className="mt-0.5 text-xs text-wb-60 truncate">{hook.description}</p>
@@ -143,21 +232,97 @@ function HookCard({ hook }: { hook: AdminHook }) {
       </div>
 
       {expanded && (
-        <div className="border-t border-wb-10 px-4 py-3 space-y-3">
-          <div className="flex items-center gap-4">
-            <label className="text-xs text-wb-60">優先序</label>
+        <div className="border-t border-wb-10 px-4 py-3 space-y-4">
+          {/* Settings grid */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs text-wb-60 mb-1">優先序</label>
+              <input
+                type="number"
+                value={priority}
+                onChange={(e) => {
+                  setPriority(Number(e.target.value))
+                  setDirty(true)
+                }}
+                min={0}
+                max={999}
+                className="w-full rounded border border-wb-20 bg-white px-2 py-1 text-sm text-wb-80 font-mono outline-none focus:border-wb-50"
+              />
+            </div>
+            <div>
+              <label className="block text-xs text-wb-60 mb-1">超時（ms）</label>
+              <input
+                type="number"
+                value={timeoutMs}
+                onChange={(e) => {
+                  setTimeoutMs(Number(e.target.value))
+                  setDirty(true)
+                }}
+                min={100}
+                max={30000}
+                step={100}
+                className="w-full rounded border border-wb-20 bg-white px-2 py-1 text-sm text-wb-80 font-mono outline-none focus:border-wb-50"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs text-wb-60 mb-1">失敗行為</label>
+              <select
+                value={onFailure}
+                onChange={(e) => {
+                  setOnFailure(e.target.value as 'fail_open' | 'fail_closed')
+                  setDirty(true)
+                }}
+                className="w-full rounded border border-wb-20 bg-white px-2 py-1.5 text-sm text-wb-80 outline-none focus:border-wb-50"
+              >
+                <option value="fail_open">Fail Open（放行）</option>
+                <option value="fail_closed">Fail Closed（阻斷）</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs text-wb-60 mb-1">Blocking</label>
+              <button
+                onClick={() => {
+                  setBlocking(blocking ? 0 : 1)
+                  setDirty(true)
+                }}
+                className={`flex items-center gap-2 w-full rounded border px-2 py-1.5 text-sm transition-colors ${
+                  blocking
+                    ? 'border-red-200 bg-red-50 text-red-700'
+                    : 'border-wb-20 bg-white text-wb-60'
+                }`}
+              >
+                {blocking ? (
+                  <>
+                    <Lock className="h-3.5 w-3.5" />
+                    可否決 / 改寫
+                  </>
+                ) : (
+                  <>
+                    <ShieldOff className="h-3.5 w-3.5" />
+                    僅觀察
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs text-wb-60 mb-1">
+              Matcher（正則或 glob，比對 tool qualified_key）
+            </label>
             <input
-              type="number"
-              value={priority}
+              type="text"
+              value={matcher}
               onChange={(e) => {
-                setPriority(Number(e.target.value))
+                setMatcher(e.target.value)
                 setDirty(true)
               }}
-              min={0}
-              max={999}
-              className="w-20 rounded border border-wb-20 bg-white px-2 py-1 text-sm text-wb-80 font-mono outline-none focus:border-wb-50"
+              placeholder="例：search_* 或 mcp_weather_.*"
+              className="w-full rounded border border-wb-20 bg-white px-2 py-1 text-sm text-wb-80 font-mono placeholder:text-wb-30 outline-none focus:border-wb-50"
             />
-            <span className="text-[10px] text-wb-40">數字越小越先執行</span>
           </div>
 
           <div>
@@ -185,6 +350,15 @@ function HookCard({ hook }: { hook: AdminHook }) {
               </button>
             </div>
           )}
+
+          {/* Execution history */}
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <Clock className="h-3.5 w-3.5 text-wb-50" />
+              <span className="text-xs font-medium text-wb-70">最近執行記錄</span>
+            </div>
+            <ExecutionHistory hookId={hook.id} />
+          </div>
         </div>
       )}
     </div>
@@ -201,12 +375,11 @@ function EventGroup({
   isLast: boolean
 }) {
   const sortedHooks = useMemo(() => [...hooks].sort((a, b) => a.priority - b.priority), [hooks])
-
   const isAsync = event === 'post_response'
+  const hasBlocking = hooks.some((h) => h.blocking)
 
   return (
     <div className="flex gap-4">
-      {/* Timeline connector */}
       <div className="flex flex-col items-center">
         <div
           className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 ${
@@ -218,7 +391,6 @@ function EventGroup({
         {!isLast && <div className="w-px flex-1 my-1 bg-wb-20" style={{ minHeight: 16 }} />}
       </div>
 
-      {/* Content */}
       <div className="flex-1 pb-5 pt-0.5">
         <div className="flex items-center gap-2 mb-1">
           <span className="text-sm font-medium text-wb-90">{EVENT_LABELS[event]}</span>
@@ -226,6 +398,12 @@ function EventGroup({
           {isAsync && (
             <span className="rounded-md border border-amber-200 bg-amber-50 px-1.5 py-0.5 text-[10px] font-medium text-amber-700">
               async
+            </span>
+          )}
+          {hasBlocking && (
+            <span className="rounded-md border border-red-200 bg-red-50 px-1.5 py-0.5 text-[10px] font-medium text-red-600 flex items-center gap-0.5">
+              <AlertTriangle className="h-2.5 w-2.5" />
+              blocking
             </span>
           )}
         </div>
@@ -283,6 +461,7 @@ export default function AdminHooksPage() {
 
   const enabledCount = (hooks ?? []).filter((h) => h.enabled).length
   const totalCount = hooks?.length ?? 0
+  const blockingCount = (hooks ?? []).filter((h) => h.blocking).length
 
   return (
     <div className="max-w-2xl space-y-6">
@@ -294,7 +473,7 @@ export default function AdminHooksPage() {
         </p>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 flex-wrap">
         <span className="rounded-xl border border-wb-20 bg-white px-4 py-2 text-sm text-wb-80">
           <span className="font-semibold text-emerald-600">{enabledCount}</span>
           <span className="text-wb-40"> / {totalCount} 啟用</span>
@@ -313,9 +492,14 @@ export default function AdminHooksPage() {
             )
           })}
         </div>
+        {blockingCount > 0 && (
+          <span className="rounded-md border border-red-200 bg-red-50 px-2 py-1 text-[11px] font-medium text-red-600 flex items-center gap-1">
+            <Lock className="h-3 w-3" />
+            {blockingCount} blocking
+          </span>
+        )}
       </div>
 
-      {/* Lifecycle timeline */}
       <div className="rounded-xl border border-wb-20 bg-white p-5">
         <h2 className="text-sm font-semibold text-wb-100 mb-4">Agent 生命週期</h2>
         <div>

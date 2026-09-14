@@ -385,6 +385,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       })
     )
     waitUntilCtx.waitUntil(updateToolStats(env.DB, tracker.getTurnRecords()))
+    waitUntilCtx.waitUntil(hookBus.flushExecutions(env.DB))
     for (const skill of matchedSkills) {
       const outcome = result.toolCallCount > 0 ? 'used' : 'loaded_unused'
       waitUntilCtx.waitUntil(recordSkillInvocation(env.DB, skill.versionId, null, outcome))

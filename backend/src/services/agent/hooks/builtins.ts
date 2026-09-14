@@ -22,6 +22,8 @@ export function createBuiltinHooks(deps: {
       hookType: 'gate',
       priority: 10,
       enabled: true,
+      timeoutMs: 5000,
+      onFailure: 'fail_closed',
       async execute(payload): Promise<GateResult> {
         const query = payload.query as string
         try {
@@ -42,6 +44,8 @@ export function createBuiltinHooks(deps: {
       hookType: 'gate',
       priority: 10,
       enabled: true,
+      timeoutMs: 100,
+      onFailure: 'fail_open',
       async execute(payload): Promise<GateResult> {
         const totalTokens = payload.totalTokens as number
         const tokenBudget = payload.tokenBudget as number
@@ -58,6 +62,8 @@ export function createBuiltinHooks(deps: {
       hookType: 'gate',
       priority: 10,
       enabled: true,
+      timeoutMs: 5000,
+      onFailure: 'fail_closed',
       async execute(payload): Promise<GateResult> {
         const answer = payload.answer as string
         const guardResult = runOutputGuards(answer)
@@ -81,6 +87,8 @@ export function createBuiltinHooks(deps: {
       hookType: 'observe',
       priority: 100,
       enabled: true,
+      timeoutMs: 10000,
+      onFailure: 'fail_open',
       async execute(payload): Promise<void> {
         if (!deps.models) return
         await runAsyncJudge(
@@ -100,6 +108,8 @@ export function createBuiltinHooks(deps: {
       hookType: 'observe',
       priority: 200,
       enabled: true,
+      timeoutMs: 10000,
+      onFailure: 'fail_open',
       async execute(payload): Promise<void> {
         if (!userId) return
         await extractMemoriesFromQuery(payload.query as string, userId, env.DB, env.AI)
