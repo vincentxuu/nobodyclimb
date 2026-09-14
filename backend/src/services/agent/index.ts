@@ -27,21 +27,21 @@ import type { AgentResult, ModelConfig, ModelMap, ProviderName, ToolContext } fr
 const DEFAULT_MODEL_MAP: ModelMap = {
   orchestrator: {
     provider: 'workers-ai',
-    model: '@cf/meta/llama-4-scout-17b-16e-instruct',
+    model: '@cf/glm-5.3-flash',
     temperature: 0.3,
     maxTokens: 1024,
     fallback: {
       provider: 'workers-ai',
-      model: '@cf/meta/llama-3.1-8b-instruct',
+      model: '@cf/glm-4.7-flash',
       temperature: 0.3,
       maxTokens: 1024,
     },
   },
-  hyde: { provider: 'workers-ai', model: '@cf/meta/llama-3.1-8b-instruct' },
-  multiQuery: { provider: 'workers-ai', model: '@cf/meta/llama-3.1-8b-instruct' },
-  textToSql: { provider: 'workers-ai', model: '@cf/meta/llama-3.1-8b-instruct' },
+  hyde: { provider: 'workers-ai', model: '@cf/glm-4.7-flash' },
+  multiQuery: { provider: 'workers-ai', model: '@cf/glm-4.7-flash' },
+  textToSql: { provider: 'workers-ai', model: '@cf/glm-4.7-flash' },
   rerank: { provider: 'workers-ai', model: '@cf/baai/bge-reranker-v2-m3' },
-  judge: { provider: 'workers-ai', model: '@cf/meta/llama-3.1-8b-instruct' },
+  judge: { provider: 'workers-ai', model: '@cf/glm-4.7-flash' },
   embedding: { provider: 'workers-ai', model: '@cf/baai/bge-m3' },
 }
 
