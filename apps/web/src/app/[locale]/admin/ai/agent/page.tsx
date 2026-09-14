@@ -194,22 +194,22 @@ const PIPELINE_MODEL_ROLES = [
 ] as const
 
 const TEXT_MODELS = [
-  '@cf/glm-5.3-flash',
-  '@cf/glm-5.3',
-  '@cf/glm-5.2',
-  '@cf/glm-4.7-flash',
-  '@cf/deepseek-v4-pro-0813',
-  '@cf/deepseek-v4-flash-0731',
-  '@cf/kimi-k2.7-code',
-  '@cf/kimi-k2.6',
-  '@cf/qwen3.8-27b',
-  '@cf/qwen3-30b-a3b-fp8',
-  '@cf/qwen2.5-coder-32b-instruct',
-  '@cf/nemotron-3-120b-a12b',
-  '@cf/gpt-oss-120b',
-  '@cf/gpt-oss-20b',
-  '@cf/gemma-4-26b-a4b-it',
-  '@cf/mistral-small-3.1-24b-instruct',
+  '@cf/zai-org/glm-5.3-flash',
+  '@cf/zai-org/glm-5.3',
+  '@cf/zai-org/glm-5.2',
+  '@cf/zai-org/glm-4.7-flash',
+  '@cf/deepseek-ai/deepseek-v4-pro-0813',
+  '@cf/deepseek-ai/deepseek-v4-flash-0731',
+  '@cf/moonshotai/kimi-k2.7-code',
+  '@cf/moonshotai/kimi-k2.6',
+  '@cf/qwen/qwen3.8-27b',
+  '@cf/qwen/qwen3-30b-a3b-fp8',
+  '@cf/qwen/qwen2.5-coder-32b-instruct',
+  '@cf/nvidia/nemotron-3-120b-a12b',
+  '@cf/openai/gpt-oss-120b',
+  '@cf/openai/gpt-oss-20b',
+  '@cf/google/gemma-4-26b-a4b-it',
+  '@cf/mistralai/mistral-small-3.1-24b-instruct',
   '@cf/meta/llama-4-scout-17b-16e-instruct',
   '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
 ]
@@ -244,16 +244,16 @@ function ModelSettingsPanel() {
   })()
 
   const defaults: Record<string, string> = {
-    orchestrator: '@cf/glm-5.3-flash',
-    hyde: '@cf/glm-4.7-flash',
-    multiQuery: '@cf/glm-4.7-flash',
-    textToSql: '@cf/glm-4.7-flash',
-    judge: '@cf/qwen3-30b-a3b-fp8',
+    orchestrator: '@cf/zai-org/glm-5.3-flash',
+    hyde: '@cf/zai-org/glm-4.7-flash',
+    multiQuery: '@cf/zai-org/glm-4.7-flash',
+    textToSql: '@cf/zai-org/glm-4.7-flash',
+    judge: '@cf/qwen/qwen3-30b-a3b-fp8',
     rerank: '@cf/baai/bge-reranker-v2-m3',
     embedding: '@cf/baai/bge-m3',
-    llm_model: '@cf/glm-5.3-flash',
-    lightweight_model: '@cf/glm-4.7-flash',
-    simple_model: '@cf/glm-4.7-flash',
+    llm_model: '@cf/zai-org/glm-5.3-flash',
+    lightweight_model: '@cf/zai-org/glm-4.7-flash',
+    simple_model: '@cf/zai-org/glm-4.7-flash',
   }
 
   const handleAgentModelChange = useCallback(
