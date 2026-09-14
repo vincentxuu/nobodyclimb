@@ -247,6 +247,18 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       }
 
       if (subAgent) {
+        // Try loading system prompt from R2 SKILL.md (L2+L3), fallback to hardcoded
+        let skillSystemPrompt: string | null = null
+        try {
+          const { loadFullSkillContent } = await import('./skills/loader')
+          skillSystemPrompt = await loadFullSkillContent(env.AGENT_STORAGE, directSkill.slug)
+        } catch {
+          // R2 unavailable — use hardcoded prompt
+        }
+        if (skillSystemPrompt) {
+          subAgent = { ...subAgent, systemPrompt: skillSystemPrompt }
+        }
+
         if (params.onProgress) {
           await params.onProgress({ type: 'progress', tool: subAgent.name, status: 'executing' })
         }
@@ -331,11 +343,16 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     availableTools: registry.getToolNames(),
   }
 
-  // 3. Build personalized system prompt（工具說明動態生成，基於 manifest + ctx）
+  // 3. Build personalized system prompt（工具說明動態生成，基於 skill bodies + ctx）
   const ascentContext = buildAscentContext(ascents)
   const abilityLevel = estimateAbilityLevel(ascents)
   const toolsSection = registry.toSystemPromptSection(toolCtx)
-  const capabilitySection = skillResolver.buildPromptSections(matchedSkills)
+  // L2+L3: 載入 matched skills 的 SKILL.md body + resolve @reference()
+  const skillBodies = await skillResolver.loadSkillBodies(env.AGENT_STORAGE, matchedSkills)
+  const capabilitySection =
+    skillBodies.size > 0
+      ? skillResolver.buildPromptSectionsWithBodies(matchedSkills, skillBodies)
+      : skillResolver.buildPromptSections(matchedSkills)
   const baseSystemPrompt = buildPersonalizedSystemPrompt(
     memorySummary,
     ascentContext,

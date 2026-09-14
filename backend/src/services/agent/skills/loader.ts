@@ -85,6 +85,55 @@ export async function saveSkillContent(
   })
 }
 
+// ---------------------------------------------------------------------------
+// Reference resolution (@reference directives)
+// ---------------------------------------------------------------------------
+
+export function extractReferences(body: string): string[] {
+  const refs: string[] = []
+  const regex = /@reference\(([^)]+)\)/g
+  let match
+  while ((match = regex.exec(body)) !== null) {
+    refs.push(match[1].trim())
+  }
+  return refs
+}
+
+export async function resolveReferences(
+  storage: R2Bucket,
+  skillSlug: string,
+  body: string
+): Promise<string> {
+  const refs = extractReferences(body)
+  if (refs.length === 0) return body
+
+  let resolved = body
+  for (const refPath of refs) {
+    const key = `skills/${skillSlug}/${refPath}`
+    const obj = await storage.get(key)
+    if (obj) {
+      const content = await obj.text()
+      resolved = resolved.replace(`@reference(${refPath})`, content)
+    } else {
+      resolved = resolved.replace(`@reference(${refPath})`, `[Reference not found: ${refPath}]`)
+    }
+  }
+  return resolved
+}
+
+export async function loadFullSkillContent(
+  storage: R2Bucket,
+  skillSlug: string
+): Promise<string | null> {
+  const skillContent = await loadSkillContent(storage, skillSlug)
+  if (!skillContent?.body) return null
+  return resolveReferences(storage, skillSlug, skillContent.body)
+}
+
+// ---------------------------------------------------------------------------
+// Hashing & estimation
+// ---------------------------------------------------------------------------
+
 export function computeContentHash(content: string): string {
   let h = 0x811c9dc5
   for (let i = 0; i < content.length; i++) {

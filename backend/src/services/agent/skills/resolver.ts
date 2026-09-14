@@ -1,3 +1,4 @@
+import { loadFullSkillContent, resolveReferences } from './loader'
 import type { ResolvedSkill } from './types'
 
 const ALWAYS_LOAD_SKILLS = ['search', 'data']
@@ -95,6 +96,36 @@ export class SkillResolver {
 
   getAllSkills(): ResolvedSkill[] {
     return this.skills
+  }
+
+  async loadSkillBodies(storage: R2Bucket, skills: ResolvedSkill[]): Promise<Map<string, string>> {
+    const bodies = new Map<string, string>()
+    for (const skill of skills) {
+      try {
+        if (skill.body) {
+          const resolved = await resolveReferences(storage, skill.slug, skill.body)
+          bodies.set(skill.slug, resolved)
+        } else {
+          const content = await loadFullSkillContent(storage, skill.slug)
+          if (content) bodies.set(skill.slug, content)
+        }
+      } catch {
+        // R2 unavailable (e.g. local dev) — skip silently
+      }
+    }
+    return bodies
+  }
+
+  buildPromptSectionsWithBodies(skills: ResolvedSkill[], bodies: Map<string, string>): string {
+    return skills
+      .map((s) => {
+        const body = bodies.get(s.slug)
+        if (body) {
+          return `## ${s.displayName ?? s.name}\n\n${body}`
+        }
+        return `- **${s.displayName ?? s.name}**：${s.description}`
+      })
+      .join('\n\n')
   }
 }
 

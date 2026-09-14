@@ -464,6 +464,223 @@ adminAiSkillsRoutes.post(
   }
 )
 
+// POST /skills/seed-r2 — upload builtin skill SKILL.md files to R2
+adminAiSkillsRoutes.post('/skills/seed-r2', async (c) => {
+  const BUILTIN_SKILLS: Record<string, string> = {
+    search: `---
+name: search
+description: 搜尋攀岩路線和岩場（混合向量 + 全文檢索）。當使用者問路線、岩場、搜尋、找、有哪些、在哪、怎麼去時觸發。
+allowed-tools:
+  - search_routes
+  - search_crags
+---
+
+# 搜尋路線與岩場
+
+你可以搜尋台灣攀岩路線和岩場資料庫（混合向量 + 全文檢索），根據名稱、難度、類型、位置等條件查找。
+
+## 搜尋策略
+- 使用者提到岩場名稱 → search_crags
+- 使用者提到路線、難度、類型 → search_routes
+- 不確定 → 兩者都搜
+`,
+    weather: `---
+name: weather
+description: 查詢岩場天氣預報，判斷是否適合攀岩。當使用者問天氣、下雨、適合攀岩嗎時觸發。
+allowed-tools:
+  - weather
+---
+
+# 天氣查詢
+
+查詢岩場天氣預報，幫助判斷是否適合出發攀岩。
+
+## 判斷規則
+- 降雨機率 > 60% → 不建議出發
+- 溫度 < 5°C 或 > 35°C → 提醒注意
+- 風速 > 30 km/h → 高處路線注意安全
+`,
+    data: `---
+name: data
+description: 結構化資料查詢與統計（路線數量、難度分佈、排名等）。當使用者問幾條、有多少、統計、排名、FA、影片時觸發。
+allowed-tools:
+  - sql_query
+  - crag_info
+---
+
+# 資料查詢與統計
+
+查詢攀岩資料庫的結構化資料：路線統計、難度分佈、岩場詳細資訊、首攀紀錄、影片等。
+`,
+    profile: `---
+name: profile
+description: 使用者個人攀登檔案與記錄。當使用者問我的、我爬過、我的記錄、完攀時觸發。需登入。
+allowed-tools:
+  - user_profile
+---
+
+# 個人攀登檔案
+
+查詢使用者的攀岩歷史、能力等級、近期完攀記錄與偏好，用於個人化建議。
+`,
+    memory: `---
+name: memory
+description: 使用者記憶召回。當使用者說記得、之前說過、上次、我的偏好時觸發。需登入。
+allowed-tools:
+  - recall_memory
+---
+
+# 記憶召回
+
+回想使用者過去分享的攀岩經歷、偏好和目標，讓對話更個人化。
+`,
+    goals: `---
+name: goals
+description: 攀岩目標設定與追蹤。當使用者說目標、挑戰、想要達到、進度時觸發。需登入。
+allowed-tools:
+  - manage_goals
+---
+
+# 目標追蹤
+
+幫使用者設定攀岩目標（如挑戰某個難度、完攀特定路線），追蹤進度並在接近達成時提醒。
+`,
+    recommend: `---
+name: recommend
+description: 個人化路線推薦（根據攀登歷史和能力分析推薦下一條路線）。當使用者說推薦、建議、適合我、下一條時觸發。需登入。
+allowed-tools:
+  - recommend_agent
+  - user_profile
+references:
+  - references/recommend-rules.md
+---
+
+# 路線推薦專家
+
+你是 NobodyClimb 的攀岩路線推薦專家。根據使用者的攀登歷史，產生個人化的路線推薦。
+
+@reference(references/recommend-rules.md)
+`,
+    coaching: `---
+name: coaching
+description: 訓練計畫建議（分析弱點、制定針對性訓練計畫）。當使用者說訓練、練習、怎麼進步、弱點、指力時觸發。需登入。
+allowed-tools:
+  - coaching_agent
+  - user_profile
+  - suggest_training
+references:
+  - references/coaching-framework.md
+---
+
+# 攀岩教練
+
+你是 NobodyClimb 的攀岩教練。根據使用者的數據，進行系統化分析並提供訓練建議。
+
+@reference(references/coaching-framework.md)
+`,
+  }
+
+  const BUILTIN_REFERENCES: Record<string, Record<string, string>> = {
+    coaching: {
+      'references/coaching-framework.md': `# 教練分析框架
+
+## 分析步驟
+1. 【現況評估】根據攀登歷史數據，總結目前程度和攀登模式
+2. 【弱點識別】基於分析結果指出 1-2 個關鍵弱點
+3. 【目標對齊】如果使用者有設定目標，說明弱點如何影響目標達成
+4. 【訓練計畫】針對弱點設計 2-3 週的漸進式訓練，每項要具體（頻率、強度、組數）
+5. 【下一步行動】本週就能開始做的 1 件事
+
+## 規則
+- 分析基於 context 中的真實數據，不可捏造
+- 訓練建議要具體（如「每週 2 次指板訓練，7:3 秒掛休比，3 組」）
+- 根據程度調整強度（入門者不建議指板）
+- 最多 3-4 條核心建議
+- 使用繁體中文
+- 可引用使用者近期完攀的路線作為依據
+- 如果有使用者的攀岩人格型態和對應訓練學派，以該學派的訓練哲學為基底來設計建議
+- 如果有訓練進度資料，根據已完成和未完成的部分調整建議重點
+- 如果有 AI 微調計畫和訓練歷史模式，據此調整建議（例如用戶常跳過某天，建議簡化該天訓練）
+`,
+    },
+    recommend: {
+      'references/recommend-rules.md': `# 推薦規則
+
+- 只推薦 context 中出現的路線，絕對不可捏造
+- 路線名稱必須完整複製原文
+- 每條路線用一段式描述：「⛰ 路線名稱，難度：X，類型：Y，岩場：Z。推薦理由。」
+- 推薦理由要結合使用者的程度和偏好，不只是列出路線
+- 若使用者有攀岩性格，可以提及「這條路線很適合你的 X 風格」
+- 使用繁體中文
+- 攀登類型術語：sport=運攀、trad=傳攀、boulder=抱石、mixed=混合攀登
+`,
+    },
+  }
+
+  let uploaded = 0
+  let fileRecords = 0
+
+  for (const [slug, content] of Object.entries(BUILTIN_SKILLS)) {
+    await c.env.AGENT_STORAGE.put(`skills/${slug}/SKILL.md`, content, {
+      httpMetadata: { contentType: 'text/markdown' },
+    })
+    uploaded++
+
+    // Upload references
+    const refs = BUILTIN_REFERENCES[slug]
+    if (refs) {
+      for (const [refPath, refContent] of Object.entries(refs)) {
+        await c.env.AGENT_STORAGE.put(`skills/${slug}/${refPath}`, refContent, {
+          httpMetadata: { contentType: 'text/markdown' },
+        })
+
+        // Record in skill_file table
+        const skill = await c.env.DB.prepare(
+          'SELECT id, latest_version_id FROM skill WHERE slug = ?'
+        )
+          .bind(slug)
+          .first<{ id: string; latest_version_id: string | null }>()
+        if (skill?.latest_version_id) {
+          const blobKey = `skills/${slug}/${refPath}`
+          await c.env.DB.prepare(
+            `INSERT OR IGNORE INTO skill_file (id, version_id, path, blob_key, size_bytes, content_type)
+             VALUES (?, ?, ?, ?, ?, 'text/markdown')`
+          )
+            .bind(
+              crypto.randomUUID().replace(/-/g, '').slice(0, 24),
+              skill.latest_version_id,
+              refPath,
+              blobKey,
+              refContent.length
+            )
+            .run()
+          fileRecords++
+        }
+      }
+    }
+
+    // Also update skill_version body with the SKILL.md body (for DB-level fallback)
+    const parsed = parseSkillMd(content)
+    const skill = await c.env.DB.prepare('SELECT latest_version_id FROM skill WHERE slug = ?')
+      .bind(slug)
+      .first<{ latest_version_id: string | null }>()
+    if (skill?.latest_version_id) {
+      const tokenCount = estimateTokenCount(content)
+      const hash = computeContentHash(content)
+      await c.env.DB.prepare(
+        'UPDATE skill_version SET body = ?, token_count = ?, content_hash = ? WHERE id = ?'
+      )
+        .bind(parsed.body, tokenCount, hash, skill.latest_version_id)
+        .run()
+    }
+  }
+
+  return c.json({
+    success: true,
+    data: { skills_uploaded: uploaded, reference_files: fileRecords },
+  })
+})
+
 // GET /skills/:id/invocations — invocation history
 adminAiSkillsRoutes.get('/skills/:id/invocations', async (c) => {
   const skillId = c.req.param('id')
