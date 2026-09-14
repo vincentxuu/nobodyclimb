@@ -152,3 +152,114 @@ describe('CloudflareProvider response format', () => {
     expect(result.content).toBe('')
   })
 })
+
+function createSSEStream(events: string[]): ReadableStream<Uint8Array> {
+  const encoder = new TextEncoder()
+  const sseText = events.map((e) => `data: ${e}\n\n`).join('') + 'data: [DONE]\n\n'
+  return new ReadableStream({
+    start(controller) {
+      controller.enqueue(encoder.encode(sseText))
+      controller.close()
+    },
+  })
+}
+
+describe('CloudflareProvider streamChat SSE format', () => {
+  it('舊格式 SSE: { response }', async () => {
+    mockAI.run.mockResolvedValueOnce(
+      createSSEStream(['{"response":"你"}', '{"response":"好"}', '{"response":"嗎"}'])
+    )
+    const provider = await getProvider()
+    const tokens: string[] = []
+    const result = await provider.streamChat([{ role: 'user', content: 'hi' }], {
+      onToken: async (t) => {
+        tokens.push(t)
+      },
+    })
+    expect(result.content).toBe('你好嗎')
+    expect(tokens.join('')).toBe('你好嗎')
+  })
+
+  it('新格式 SSE: choices[0].delta.content', async () => {
+    mockAI.run.mockResolvedValueOnce(
+      createSSEStream([
+        '{"choices":[{"delta":{"content":"Hello"}}]}',
+        '{"choices":[{"delta":{"content":" world"}}]}',
+      ])
+    )
+    const provider = await getProvider()
+    const tokens: string[] = []
+    const result = await provider.streamChat([{ role: 'user', content: 'hi' }], {
+      onToken: async (t) => {
+        tokens.push(t)
+      },
+    })
+    expect(result.content).toBe('Hello world')
+    expect(tokens.join('')).toBe('Hello world')
+  })
+
+  it('推理模型 SSE: choices[0].delta.reasoning_content', async () => {
+    mockAI.run.mockResolvedValueOnce(
+      createSSEStream([
+        '{"choices":[{"delta":{"content":"","reasoning_content":"思考"}}]}',
+        '{"choices":[{"delta":{"content":"","reasoning_content":"過程"}}]}',
+      ])
+    )
+    const provider = await getProvider()
+    const tokens: string[] = []
+    const result = await provider.streamChat([{ role: 'user', content: '分析' }], {
+      onToken: async (t) => {
+        tokens.push(t)
+      },
+    })
+    expect(result.content).toBe('思考過程')
+    expect(tokens.join('')).toBe('思考過程')
+  })
+
+  it('混合格式：content 優先於 reasoning_content', async () => {
+    mockAI.run.mockResolvedValueOnce(
+      createSSEStream(['{"choices":[{"delta":{"content":"正文","reasoning_content":"推理"}}]}'])
+    )
+    const provider = await getProvider()
+    const tokens: string[] = []
+    const result = await provider.streamChat([{ role: 'user', content: 'hi' }], {
+      onToken: async (t) => {
+        tokens.push(t)
+      },
+    })
+    expect(result.content).toBe('正文')
+  })
+
+  it('空 delta 不推送 token', async () => {
+    mockAI.run.mockResolvedValueOnce(
+      createSSEStream(['{"choices":[{"delta":{}}]}', '{"choices":[{"delta":{"content":"有值"}}]}'])
+    )
+    const provider = await getProvider()
+    const tokens: string[] = []
+    const result = await provider.streamChat([{ role: 'user', content: 'hi' }], {
+      onToken: async (t) => {
+        tokens.push(t)
+      },
+    })
+    expect(result.content).toBe('有值')
+  })
+
+  it('---SUGGESTIONS--- marker 在新格式下也正確切割', async () => {
+    mockAI.run.mockResolvedValueOnce(
+      createSSEStream([
+        '{"choices":[{"delta":{"content":"回答內容"}}]}',
+        '{"choices":[{"delta":{"content":"---SUGGESTIONS---"}}]}',
+        '{"choices":[{"delta":{"content":"建議1"}}]}',
+      ])
+    )
+    const provider = await getProvider()
+    const tokens: string[] = []
+    const result = await provider.streamChat([{ role: 'user', content: 'hi' }], {
+      onToken: async (t) => {
+        tokens.push(t)
+      },
+    })
+    expect(result.content).toBe('回答內容---SUGGESTIONS---建議1')
+    expect(tokens.join('')).toBe('回答內容')
+  })
+})
