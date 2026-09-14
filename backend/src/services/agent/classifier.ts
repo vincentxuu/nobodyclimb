@@ -127,6 +127,48 @@ export function selectManifests(query: string, manifests: ToolManifest[]): ToolM
 }
 
 // ---------------------------------------------------------------------------
+// Intent-based Routing（Cascading Router 第一層）
+// ---------------------------------------------------------------------------
+
+/** Sub-agent 可被直接路由的 manifest 名稱 */
+const DIRECT_ROUTE_MANIFESTS = new Set(['coaching', 'recommend'])
+
+/**
+ * 偵測是否應直接路由到 sub-agent（跳過 agent loop 的 LLM tool selection）。
+ *
+ * 規則：
+ * 1. 只在「唯一命中的非保底 manifest 是 sub-agent」時路由
+ * 2. 如果同時命中 search/data 等非 sub-agent manifest → 進 agent loop（意圖模糊）
+ * 3. 回傳 manifest name 或 null（null = 進 agent loop）
+ */
+export function detectDirectRoute(query: string, manifests: ToolManifest[]): string | null {
+  const trimmed = query.trim()
+  if (!trimmed) return null
+
+  const matched: string[] = []
+  for (const m of manifests) {
+    if (ALWAYS_LOAD_MANIFESTS.has(m.name)) continue
+    if (m.triggers.some((t) => trimmed.includes(t))) {
+      matched.push(m.name)
+    }
+  }
+
+  if (matched.length === 1 && DIRECT_ROUTE_MANIFESTS.has(matched[0])) {
+    return matched[0]
+  }
+
+  if (matched.length > 1) {
+    const subAgentMatches = matched.filter((m) => DIRECT_ROUTE_MANIFESTS.has(m))
+    const otherMatches = matched.filter((m) => !DIRECT_ROUTE_MANIFESTS.has(m))
+    if (subAgentMatches.length === 1 && otherMatches.length === 0) {
+      return subAgentMatches[0]
+    }
+  }
+
+  return null
+}
+
+// ---------------------------------------------------------------------------
 // 固定回覆
 // ---------------------------------------------------------------------------
 

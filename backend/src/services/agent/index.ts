@@ -13,7 +13,7 @@ import { createProvider } from '../orchestrators/ai-graph/providers'
 import type { ProviderName as LegacyProviderName } from '../orchestrators/ai-graph/providers/types'
 import { runAgentLoop } from './agent-loop'
 import { KVAgentCache } from './cache'
-import { classifyQuery, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
+import { classifyQuery, detectDirectRoute, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
 import { runAsyncJudge, runOutputGuards } from './guards'
 import { buildProactivePromptSection, gatherProactiveContext } from './proactive'
 import { createToolRegistry } from './tools'
@@ -210,6 +210,72 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       }
     } catch (err) {
       console.warn('[agent] general_knowledge hyde failed, falling through to agent loop:', err)
+    }
+  }
+
+  // 0.8 Intent-based routing — Cascading Router 第一層
+  // 規則命中 sub-agent 意圖時直接呼叫，跳過 agent loop 的 LLM tool selection
+  const activeManifests = (await import('./tools/manifests')).getActiveManifests(!!userId)
+  const directRoute = detectDirectRoute(query, activeManifests)
+
+  if (directRoute && userId) {
+    try {
+      const models = await loadModelMap(env.DB)
+      const tracker = new DefaultTokenTracker(
+        (await loadAgentConfig(env.DB)).usdToTwd
+      )
+      const cache = new KVAgentCache(env.CACHE)
+      const toolCtx: ToolContext = {
+        env,
+        userId,
+        locale: 'zh-TW',
+        models,
+        langfuseTrace,
+        tracker,
+        cache,
+        availableTools: [],
+      }
+
+      let subAgent: import('./sub-agents/types').SubAgent | null = null
+      if (directRoute === 'coaching') {
+        subAgent = (await import('./sub-agents/coaching-agent')).coachingSubAgent
+      } else if (directRoute === 'recommend') {
+        subAgent = (await import('./sub-agents/recommend-agent')).recommendSubAgent
+      }
+
+      if (subAgent) {
+        if (params.onProgress) {
+          await params.onProgress({ type: 'progress', tool: subAgent.name, status: 'executing' })
+        }
+
+        const context = await subAgent.gatherContext({ query }, toolCtx)
+        const result = await subAgent.synthesize(query, context, toolCtx)
+
+        if (params.onProgress) {
+          await params.onProgress({ type: 'progress', tool: subAgent.name, status: 'done' })
+        }
+
+        const guardResult = runOutputGuards(result.answer)
+        const finalAnswer = guardResult.cleanedAnswer ?? result.answer
+
+        if (waitUntilCtx && userId) {
+          waitUntilCtx.waitUntil(extractMemoriesFromQuery(query, userId, env.DB, env.AI))
+        }
+
+        const costSummary = tracker.getCostSummary()
+        return {
+          answer: finalAnswer,
+          sources: [],
+          totalTokens: tracker.getTotalTokens(),
+          turnCount: 1,
+          toolCallCount: 1,
+          perModelStats: tracker.getPerModelStats(),
+          costUSD: costSummary.totalCostUSD,
+          costTWD: costSummary.totalCostTWD,
+        }
+      }
+    } catch (err) {
+      console.warn(`[agent] direct route to ${directRoute} failed, falling through to agent loop:`, err)
     }
   }
 
