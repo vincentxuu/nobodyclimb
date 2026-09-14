@@ -152,7 +152,7 @@ function StatCell({
 // 模型設定面板
 // =============================================
 
-const MODEL_ROLES = [
+const AGENT_MODEL_ROLES = [
   { key: 'orchestrator', label: 'Orchestrator', description: '主決策模型（tool selection）', category: 'text' },
   { key: 'hyde', label: 'HyDE / 改寫', description: '假設文件生成、查詢改寫', category: 'text' },
   { key: 'multiQuery', label: 'Multi-Query', description: '多查詢擴展', category: 'text' },
@@ -160,6 +160,12 @@ const MODEL_ROLES = [
   { key: 'judge', label: 'Judge', description: '品質評估（應與 orchestrator 不同家族）', category: 'text' },
   { key: 'rerank', label: 'Reranker', description: '搜尋結果重排序', category: 'rerank' },
   { key: 'embedding', label: 'Embedding', description: '向量嵌入（語義搜尋）', category: 'embedding' },
+] as const
+
+const PIPELINE_MODEL_ROLES = [
+  { key: 'llm_model', label: 'Pipeline 主 LLM', description: '回答生成（Pipeline 模式）', category: 'text' },
+  { key: 'lightweight_model', label: '輕量模型', description: '分類、壓縮、Pipeline judge', category: 'text' },
+  { key: 'simple_model', label: '簡單查詢模型', description: '簡單問題直接回答', category: 'text' },
 ] as const
 
 const TEXT_MODELS = [
@@ -222,9 +228,12 @@ function ModelSettingsPanel() {
     judge: '@cf/qwen3-30b-a3b-fp8',
     rerank: '@cf/baai/bge-reranker-v2-m3',
     embedding: '@cf/baai/bge-m3',
+    llm_model: '@cf/glm-5.3-flash',
+    lightweight_model: '@cf/glm-4.7-flash',
+    simple_model: '@cf/glm-4.7-flash',
   }
 
-  const handleModelChange = useCallback(
+  const handleAgentModelChange = useCallback(
     (roleKey: string, model: string) => {
       const updated = { ...currentModels }
       if (!updated[roleKey]) updated[roleKey] = {}
@@ -240,6 +249,21 @@ function ModelSettingsPanel() {
       )
     },
     [currentModels, updateConfig]
+  )
+
+  const handlePipelineModelChange = useCallback(
+    (key: string, model: string) => {
+      updateConfig(
+        { [key]: model },
+        {
+          onSuccess: () => {
+            setSaved(true)
+            setTimeout(() => setSaved(false), 2500)
+          },
+        }
+      )
+    },
+    [updateConfig]
   )
 
   if (isLoading) return null
@@ -273,31 +297,65 @@ function ModelSettingsPanel() {
       </button>
 
       {expanded && (
-        <div className="border-t border-wb-10 divide-y divide-wb-10">
-          {MODEL_ROLES.map(({ key, label, description, category }) => {
-            const current = currentModels[key]?.model ?? defaults[key] ?? ''
-            const options = MODEL_OPTIONS[category] ?? TEXT_MODELS
-            return (
-              <div key={key} className="flex items-center justify-between px-5 py-3">
-                <div>
-                  <p className="text-sm font-medium text-wb-100">{label}</p>
-                  <p className="text-xs text-wb-50">{description}</p>
+        <div className="border-t border-wb-10">
+          <div className="px-5 py-2 bg-wb-05">
+            <p className="text-xs font-semibold text-wb-60 uppercase tracking-wide">Agent 模式</p>
+          </div>
+          <div className="divide-y divide-wb-10">
+            {AGENT_MODEL_ROLES.map(({ key, label, description, category }) => {
+              const current = currentModels[key]?.model ?? defaults[key] ?? ''
+              const options = MODEL_OPTIONS[category] ?? TEXT_MODELS
+              return (
+                <div key={key} className="flex items-center justify-between px-5 py-3">
+                  <div>
+                    <p className="text-sm font-medium text-wb-100">{label}</p>
+                    <p className="text-xs text-wb-50">{description}</p>
+                  </div>
+                  <select
+                    value={current}
+                    onChange={(e) => handleAgentModelChange(key, e.target.value)}
+                    disabled={isPending}
+                    className="rounded-lg border border-wb-20 bg-white px-3 py-1.5 text-xs font-mono text-wb-80 disabled:opacity-50"
+                  >
+                    {options.map((m) => (
+                      <option key={m} value={m}>
+                        {m.split('/').pop()}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-                <select
-                  value={current}
-                  onChange={(e) => handleModelChange(key, e.target.value)}
-                  disabled={isPending}
-                  className="rounded-lg border border-wb-20 bg-white px-3 py-1.5 text-xs font-mono text-wb-80 disabled:opacity-50"
-                >
-                  {options.map((m) => (
-                    <option key={m} value={m}>
-                      {m.split('/').pop()}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
+          <div className="px-5 py-2 bg-wb-05 border-t border-wb-10">
+            <p className="text-xs font-semibold text-wb-60 uppercase tracking-wide">Pipeline 模式</p>
+          </div>
+          <div className="divide-y divide-wb-10">
+            {PIPELINE_MODEL_ROLES.map(({ key, label, description, category }) => {
+              const current = (config?.[key] as string) ?? defaults[key] ?? ''
+              const options = MODEL_OPTIONS[category] ?? TEXT_MODELS
+              return (
+                <div key={key} className="flex items-center justify-between px-5 py-3">
+                  <div>
+                    <p className="text-sm font-medium text-wb-100">{label}</p>
+                    <p className="text-xs text-wb-50">{description}</p>
+                  </div>
+                  <select
+                    value={current}
+                    onChange={(e) => handlePipelineModelChange(key, e.target.value)}
+                    disabled={isPending}
+                    className="rounded-lg border border-wb-20 bg-white px-3 py-1.5 text-xs font-mono text-wb-80 disabled:opacity-50"
+                  >
+                    {options.map((m) => (
+                      <option key={m} value={m}>
+                        {m.split('/').pop()}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )
+            })}
+          </div>
         </div>
       )}
     </div>
