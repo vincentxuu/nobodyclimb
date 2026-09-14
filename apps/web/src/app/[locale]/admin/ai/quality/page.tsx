@@ -1,7 +1,7 @@
 'use client'
 
-import { Activity, AlertTriangle, Clock, Loader2, Search, TrendingUp } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
+import { Activity, AlertTriangle, Clock, Loader2, Search, TrendingUp } from 'lucide-react'
 import apiClient from '@/lib/api/client'
 
 interface QualityStats {
@@ -114,9 +114,7 @@ export default function AIQualityPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold text-gray-900">AI 品質監控</h1>
         {data._mock && (
-          <span className="rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-600">
-            模擬資料
-          </span>
+          <span className="rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-600">模擬資料</span>
         )}
       </div>
 
@@ -146,7 +144,9 @@ export default function AIQualityPage() {
         <StatCard
           icon={AlertTriangle}
           label="Silent Failure"
-          value={data.quality.silentFailureRate !== null ? `${data.quality.silentFailureRate}%` : '—'}
+          value={
+            data.quality.silentFailureRate !== null ? `${data.quality.silentFailureRate}%` : '—'
+          }
           subtitle="品質 < 2 的比例"
           color={
             data.quality.silentFailureRate !== null && data.quality.silentFailureRate > 10

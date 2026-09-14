@@ -63,6 +63,8 @@
       "!**/dist",
       "!**/.expo",
       "!**/.worktrees",
+      "!**/.claude/worktrees",
+      "!**/backend/scripts",
       "!**/*.min.js",
       "!**/public/data",
       "!**/.claude/settings.local.json"

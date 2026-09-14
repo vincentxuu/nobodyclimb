@@ -24,10 +24,7 @@ describe('coaching /analysis data assembly', () => {
     })
 
     it('returns anti-style insight for PGB personality', () => {
-      const insights = analyzeWeaknessesStructured(
-        { level: '中級（5.11）' },
-        'PGB'
-      )
+      const insights = analyzeWeaknessesStructured({ level: '中級（5.11）' }, 'PGB')
 
       const antiStyle = insights.find((i) => i.id === 'anti_style')
       expect(antiStyle).toBeDefined()
@@ -36,10 +33,7 @@ describe('coaching /analysis data assembly', () => {
     })
 
     it('returns anti-style insight for TFS personality', () => {
-      const insights = analyzeWeaknessesStructured(
-        { level: '入門（5.9 以下）' },
-        'TFS'
-      )
+      const insights = analyzeWeaknessesStructured({ level: '入門（5.9 以下）' }, 'TFS')
 
       const antiStyle = insights.find((i) => i.id === 'anti_style')
       expect(antiStyle).toBeDefined()
@@ -80,17 +74,15 @@ describe('coaching /analysis data assembly', () => {
 
   describe('level resolution', () => {
     it('beginner exercises do not include hangboard_max_hangs', () => {
-      const insights = analyzeWeaknessesStructured(
-        {
-          level: '入門（5.9 以下）',
-          recentAscents: Array.from({ length: 5 }, () => ({
-            route: 'easy',
-            grade: '5.8',
-            type: 'sport',
-            style: 'toprope',
-          })),
-        }
-      )
+      const insights = analyzeWeaknessesStructured({
+        level: '入門（5.9 以下）',
+        recentAscents: Array.from({ length: 5 }, () => ({
+          route: 'easy',
+          grade: '5.8',
+          type: 'sport',
+          style: 'toprope',
+        })),
+      })
 
       const plateau = insights.find((i) => i.id === 'grade_plateau')
       if (plateau) {
