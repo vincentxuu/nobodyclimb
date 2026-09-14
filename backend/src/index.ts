@@ -20,6 +20,7 @@ import { biographiesRoutes } from './routes/biographies'
 import { biographyContentRoutes } from './routes/biography-content'
 import { bucketListRoutes } from './routes/bucket-list'
 import { climbingLocationsRoutes } from './routes/climbing-locations'
+import { coachingRoutes } from './routes/coaching'
 import { cragsRoutes } from './routes/crags'
 import { galleriesRoutes } from './routes/galleries'
 import { goalsRoutes } from './routes/goals'
@@ -132,6 +133,7 @@ v1.route('/admin/ai/quality', adminAiQualityRoutes)
 v1.route('/ai', aiRoutes)
 v1.route('/quiz', quizRoutes)
 v1.route('/training', trainingRoutes)
+v1.route('/coaching', coachingRoutes)
 
 // OpenAPI JSON 端點 - 自動從路由生成 OpenAPI 規格
 v1.get(
