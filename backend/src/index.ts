@@ -7,7 +7,12 @@ import { accessLogMiddleware } from './middleware/accessLog'
 import { dateFormatMiddleware } from './middleware/dateFormat'
 import { accessLogsRoutes } from './routes/access-logs'
 import { adminAiRoutes } from './routes/admin-ai'
+import { adminAiHooksRoutes } from './routes/admin-ai-hooks'
+import { adminAiMcpRoutes } from './routes/admin-ai-mcp'
+import { adminAiPluginsRoutes } from './routes/admin-ai-plugins'
 import { adminAiQualityRoutes } from './routes/admin-ai-quality'
+import { adminAiSkillsRoutes } from './routes/admin-ai-skills'
+import { adminAiToolsRoutes } from './routes/admin-ai-tools'
 import { adminSectorsRoutes } from './routes/admin-areas'
 import { adminCragsRoutes } from './routes/admin-crags'
 import { adminImportRoutes } from './routes/admin-import'
@@ -130,6 +135,11 @@ v1.route('/route-stories', routeStoriesRoutes)
 v1.route('/admin/import', adminImportRoutes)
 v1.route('/admin/ai', adminAiRoutes)
 v1.route('/admin/ai/quality', adminAiQualityRoutes)
+v1.route('/admin/ai', adminAiToolsRoutes)
+v1.route('/admin/ai', adminAiHooksRoutes)
+v1.route('/admin/ai', adminAiSkillsRoutes)
+v1.route('/admin/ai', adminAiMcpRoutes)
+v1.route('/admin/ai', adminAiPluginsRoutes)
 v1.route('/ai', aiRoutes)
 v1.route('/quiz', quizRoutes)
 v1.route('/training', trainingRoutes)

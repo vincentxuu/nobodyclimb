@@ -13,10 +13,15 @@ import { createProvider } from '../orchestrators/ai-graph/providers'
 import type { ProviderName as LegacyProviderName } from '../orchestrators/ai-graph/providers/types'
 import { runAgentLoop } from './agent-loop'
 import { KVAgentCache } from './cache'
-import { classifyQuery, detectDirectRoute, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
-import { runAsyncJudge, runOutputGuards } from './guards'
+import { classifyQuery, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
+import { runOutputGuards } from './guards'
+import { createBuiltinHooks } from './hooks/builtins'
+import { HookBus } from './hooks/bus'
+import { isHookEnabled, loadHookRecords } from './hooks/loader'
+import { registerMCPTools } from './mcp/registry'
 import { buildProactivePromptSection, gatherProactiveContext } from './proactive'
-import { createToolRegistry } from './tools'
+import { recordSkillInvocation, SkillResolver } from './skills/resolver'
+import { createDBToolRegistry, updateToolStats } from './tools/db-registry'
 import { DefaultTokenTracker } from './tracker'
 import type { AgentResult, ModelConfig, ModelMap, ProviderName, ToolContext } from './types'
 
@@ -213,12 +218,12 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     }
   }
 
-  // 0.8 Intent-based routing — Cascading Router 第一層
-  // 規則命中 sub-agent 意圖時直接呼叫，跳過 agent loop 的 LLM tool selection
-  const activeManifests = (await import('./tools/manifests')).getActiveManifests(!!userId)
-  const directRoute = detectDirectRoute(query, activeManifests)
+  // 0.8 Skill-based routing — SkillResolver 取代 manifest + detectDirectRoute
+  const skillResolver = new SkillResolver()
+  await skillResolver.load(env.DB)
+  const directSkill = skillResolver.findDirectRoute(query, !!userId)
 
-  if (directRoute && userId) {
+  if (directSkill && userId) {
     try {
       const models = await loadModelMap(env.DB)
       const tracker = new DefaultTokenTracker((await loadAgentConfig(env.DB)).usdToTwd)
@@ -235,11 +240,25 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       }
 
       let subAgent: import('./sub-agents/types').SubAgent | null = null
-      if (directRoute === 'coaching') {
+      if (directSkill.slug === 'coaching') {
         subAgent = (await import('./sub-agents/coaching-agent')).coachingSubAgent
+      } else if (directSkill.slug === 'recommend') {
+        subAgent = (await import('./sub-agents/recommend-agent')).recommendSubAgent
       }
 
       if (subAgent) {
+        // Try loading system prompt from R2 SKILL.md (L2+L3), fallback to hardcoded
+        let skillSystemPrompt: string | null = null
+        try {
+          const { loadFullSkillContent } = await import('./skills/loader')
+          skillSystemPrompt = await loadFullSkillContent(env.AGENT_STORAGE, directSkill.slug)
+        } catch {
+          // R2 unavailable — use hardcoded prompt
+        }
+        if (skillSystemPrompt) {
+          subAgent = { ...subAgent, systemPrompt: skillSystemPrompt }
+        }
+
         if (params.onProgress) {
           await params.onProgress({ type: 'progress', tool: subAgent.name, status: 'executing' })
         }
@@ -272,7 +291,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       }
     } catch (err) {
       console.warn(
-        `[agent] direct route to ${directRoute} failed, falling through to agent loop:`,
+        `[agent] direct route to skill ${directSkill.slug} failed, falling through to agent loop:`,
         err
       )
     }
@@ -283,17 +302,35 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     ? Promise.all([getMemoriesSummary(userId, env.DB), getRecentAscents(userId, env.DB)])
     : Promise.resolve([null, []] as [string | null, Awaited<ReturnType<typeof getRecentAscents>>])
 
-  const [models, agentCfg, [memorySummary, ascents], proactiveCtx] = await Promise.all([
-    loadModelMap(env.DB),
-    loadAgentConfig(env.DB),
-    personalizationPromise,
-    gatherProactiveContext(env.DB, userId),
-  ])
+  const [models, agentCfg, [memorySummary, ascents], proactiveCtx, hookRecords] = await Promise.all(
+    [
+      loadModelMap(env.DB),
+      loadAgentConfig(env.DB),
+      personalizationPromise,
+      gatherProactiveContext(env.DB, userId),
+      loadHookRecords(env.DB),
+    ]
+  )
+
+  // Build HookBus with DB-controlled enable/disable
+  const hookBus = new HookBus()
+  const builtinHooks = createBuiltinHooks({ env, userId, models, langfuseTrace })
+  for (const hook of builtinHooks) {
+    if (isHookEnabled(hookRecords, `builtin:${hook.name}`)) {
+      hookBus.register(hook)
+    }
+  }
 
   // 2. Create provider + tracker + registry + context
   const orchestratorProvider = createProviderForConfig(models.orchestrator.provider, env)
   const tracker = new DefaultTokenTracker(agentCfg.usdToTwd)
-  const { registry, manifests } = createToolRegistry({ isAuthenticated: !!userId, query })
+  const matchedSkills = skillResolver.resolve(query, !!userId)
+  const requiredToolNames = skillResolver.getRequiredTools(matchedSkills)
+  const { registry } = await createDBToolRegistry(env.DB, {
+    isAuthenticated: !!userId,
+    requiredTools: requiredToolNames,
+  })
+  await registerMCPTools(env.DB, registry, env as unknown as Record<string, unknown>)
   const cache = new KVAgentCache(env.CACHE)
   const toolCtx: ToolContext = {
     env,
@@ -306,11 +343,16 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     availableTools: registry.getToolNames(),
   }
 
-  // 3. Build personalized system prompt（工具說明動態生成，基於 manifest + ctx）
+  // 3. Build personalized system prompt（工具說明動態生成，基於 skill bodies + ctx）
   const ascentContext = buildAscentContext(ascents)
   const abilityLevel = estimateAbilityLevel(ascents)
   const toolsSection = registry.toSystemPromptSection(toolCtx)
-  const capabilitySection = manifests.map((m) => `- **${m.name}**：${m.promptFragment}`).join('\n')
+  // L2+L3: 載入 matched skills 的 SKILL.md body + resolve @reference()
+  const skillBodies = await skillResolver.loadSkillBodies(env.AGENT_STORAGE, matchedSkills)
+  const capabilitySection =
+    skillBodies.size > 0
+      ? skillResolver.buildPromptSectionsWithBodies(matchedSkills, skillBodies)
+      : skillResolver.buildPromptSections(matchedSkills)
   const baseSystemPrompt = buildPersonalizedSystemPrompt(
     memorySummary,
     ascentContext,
@@ -344,21 +386,28 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     }
   )
 
-  // 6. Output guards（同步）
-  const guardResult = runOutputGuards(result.answer)
-  if (!guardResult.passed) {
-    console.warn('[agent] output guard failed', { qualityFlag: guardResult.qualityFlag })
+  // 6. Output guards via HookBus
+  const postLoopResult = await hookBus.runGates('post_loop', { answer: result.answer })
+  const finalAnswer = postLoopResult.replacement ?? result.answer
+  if (!postLoopResult.allow) {
+    console.warn('[agent] post_loop hook denied', { reason: postLoopResult.reason })
   }
-  const finalAnswer =
-    guardResult.qualityFlag === 'tool_call_leak'
-      ? '抱歉，AI 助理暫時無法處理您的問題，請稍後再試。'
-      : (guardResult.cleanedAnswer ?? result.answer)
 
-  // 7. Async judge + memory extraction（非同步，不擋回應）
+  // 7. Async observers + tool stats（非同步，不擋回應）
   if (waitUntilCtx) {
-    waitUntilCtx.waitUntil(runAsyncJudge(env, query, '', finalAnswer, models, langfuseTrace))
-    if (userId) {
-      waitUntilCtx.waitUntil(extractMemoriesFromQuery(query, userId, env.DB, env.AI))
+    waitUntilCtx.waitUntil(
+      hookBus.runObservers('post_response', {
+        query,
+        answer: finalAnswer,
+        userId,
+        totalTokens: tracker.getTotalTokens(),
+      })
+    )
+    waitUntilCtx.waitUntil(updateToolStats(env.DB, tracker.getTurnRecords()))
+    waitUntilCtx.waitUntil(hookBus.flushExecutions(env.DB))
+    for (const skill of matchedSkills) {
+      const outcome = result.toolCallCount > 0 ? 'used' : 'loaded_unused'
+      waitUntilCtx.waitUntil(recordSkillInvocation(env.DB, skill.versionId, null, outcome))
     }
   }
 
