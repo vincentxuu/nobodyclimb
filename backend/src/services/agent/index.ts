@@ -19,7 +19,7 @@ import { createBuiltinHooks } from './hooks/builtins'
 import { HookBus } from './hooks/bus'
 import { isHookEnabled, loadHookRecords } from './hooks/loader'
 import { buildProactivePromptSection, gatherProactiveContext } from './proactive'
-import { SkillResolver } from './skills/resolver'
+import { recordSkillInvocation, SkillResolver } from './skills/resolver'
 import { createDBToolRegistry, updateToolStats } from './tools/db-registry'
 import { DefaultTokenTracker } from './tracker'
 import type { AgentResult, ModelConfig, ModelMap, ProviderName, ToolContext } from './types'
@@ -239,9 +239,9 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       }
 
       let subAgent: import('./sub-agents/types').SubAgent | null = null
-      if (directSkill.name === 'coaching') {
+      if (directSkill.slug === 'coaching') {
         subAgent = (await import('./sub-agents/coaching-agent')).coachingSubAgent
-      } else if (directSkill.name === 'recommend') {
+      } else if (directSkill.slug === 'recommend') {
         subAgent = (await import('./sub-agents/recommend-agent')).recommendSubAgent
       }
 
@@ -278,7 +278,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       }
     } catch (err) {
       console.warn(
-        `[agent] direct route to skill ${directSkill.name} failed, falling through to agent loop:`,
+        `[agent] direct route to skill ${directSkill.slug} failed, falling through to agent loop:`,
         err
       )
     }
@@ -385,6 +385,10 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       })
     )
     waitUntilCtx.waitUntil(updateToolStats(env.DB, tracker.getTurnRecords()))
+    for (const skill of matchedSkills) {
+      const outcome = result.toolCallCount > 0 ? 'used' : 'loaded_unused'
+      waitUntilCtx.waitUntil(recordSkillInvocation(env.DB, skill.versionId, null, outcome))
+    }
   }
 
   const costSummary = tracker.getCostSummary()

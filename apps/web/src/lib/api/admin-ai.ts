@@ -1182,23 +1182,60 @@ export function useUpdateAdminHook() {
 // Admin Skill Management
 // =============================================
 
+// ---------------------------------------------------------------------------
+// Skill types (multi-table: skill + skill_version + skill_file + skill_binding)
+// ---------------------------------------------------------------------------
+
+export interface SkillVersionSummary {
+  id: string
+  version_number: number
+  status: 'draft' | 'published' | 'deprecated'
+  description: string
+  published_at: string | null
+  created_at: string
+}
+
+export interface SkillVersion extends SkillVersionSummary {
+  name: string
+  body: string | null
+  allowed_tools: string[]
+  content_hash: string
+  token_count: number | null
+  metadata: Record<string, unknown> | null
+}
+
+export interface SkillFile {
+  id: string
+  path: string
+  size_bytes: number | null
+  content_type: string | null
+}
+
+export interface SkillBinding {
+  id: string
+  enabled: boolean
+  pinned_version_id: string | null
+}
+
 export interface AdminSkill {
   id: string
-  name: string
-  description: string
-  triggers: string | null
-  execution_mode: 'tool_group' | 'sub_agent' | 'multi_step'
-  required_tools: string
-  requires_auth: number
-  version: number
-  source: string
-  enabled: number
-  priority: number
-  r2_key: string | null
+  tenant_id: string
+  slug: string
+  display_name: string | null
+  scope: 'personal' | 'team' | 'org' | 'public'
+  owner_id: string | null
+  source: 'builtin' | 'custom' | 'marketplace'
+  latest_version_id: string | null
   created_at: string
-  updated_at: string
-  skill_content?: string | null
+  version?: SkillVersion | null
+  binding?: SkillBinding | null
+  versions?: SkillVersionSummary[]
+  files?: SkillFile[]
 }
+
+// ---------------------------------------------------------------------------
+// Skill API functions
+// ---------------------------------------------------------------------------
 
 export async function getAdminSkills(): Promise<AdminSkill[]> {
   const res = await apiClient.get<{ success: boolean; data: AdminSkill[] }>('/admin/ai/skills')
@@ -1211,13 +1248,12 @@ export async function getAdminSkill(id: string): Promise<AdminSkill> {
 }
 
 export async function createAdminSkill(data: {
-  name: string
+  slug: string
+  display_name?: string
+  scope?: string
   description: string
-  triggers?: string[]
-  required_tools: string[]
-  execution_mode: string
-  requires_auth?: boolean
-  system_prompt?: string
+  body?: string
+  allowed_tools?: string[]
 }): Promise<AdminSkill> {
   const res = await apiClient.post<{ success: boolean; data: AdminSkill }>('/admin/ai/skills', data)
   return res.data.data
@@ -1225,15 +1261,33 @@ export async function createAdminSkill(data: {
 
 export async function updateAdminSkill(
   id: string,
-  data: {
-    enabled?: number
-    description?: string
-    triggers?: string
-    priority?: number
-    skill_content?: string
-  }
+  data: { display_name?: string; scope?: string }
 ): Promise<void> {
   await apiClient.put(`/admin/ai/skills/${id}`, data)
+}
+
+export async function publishSkillVersion(
+  id: string,
+  data: { description: string; body?: string; allowed_tools?: string[] }
+): Promise<SkillVersion> {
+  const res = await apiClient.post<{ success: boolean; data: SkillVersion }>(
+    `/admin/ai/skills/${id}/versions`,
+    data
+  )
+  return res.data.data
+}
+
+export async function updateSkillBinding(
+  id: string,
+  data: { enabled?: boolean; pinned_version_id?: string | null }
+): Promise<void> {
+  await apiClient.put(`/admin/ai/skills/${id}/binding`, data)
+}
+
+export async function deprecateSkillVersion(skillId: string, versionId: string): Promise<void> {
+  await apiClient.put(`/admin/ai/skills/${skillId}/versions/${versionId}`, {
+    status: 'deprecated',
+  })
 }
 
 export async function deleteAdminSkill(id: string): Promise<void> {
@@ -1255,13 +1309,19 @@ export async function exportSkill(id: string): Promise<string> {
   return res.data.data.content
 }
 
-export async function testSkillTrigger(query: string): Promise<{ matched: AdminSkill[] }> {
-  const res = await apiClient.post<{ success: boolean; data: { matched: AdminSkill[] } }>(
-    '/admin/ai/skills/test',
-    { query }
-  )
+export async function testSkillTrigger(
+  query: string
+): Promise<{ matched: Array<{ slug: string; description: string; scope: string }> }> {
+  const res = await apiClient.post<{
+    success: boolean
+    data: { matched: Array<{ slug: string; description: string; scope: string }> }
+  }>('/admin/ai/skills/test-trigger', { query })
   return res.data.data
 }
+
+// ---------------------------------------------------------------------------
+// Skill query hooks
+// ---------------------------------------------------------------------------
 
 export function useAdminSkills() {
   return useQuery<AdminSkill[]>({
@@ -1293,6 +1353,28 @@ export function useUpdateAdminSkill() {
   return useMutation({
     mutationFn: ({ id, data }: { id: string; data: Parameters<typeof updateAdminSkill>[1] }) =>
       updateAdminSkill(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}
+
+export function usePublishSkillVersion() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Parameters<typeof publishSkillVersion>[1] }) =>
+      publishSkillVersion(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}
+
+export function useUpdateSkillBinding() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Parameters<typeof updateSkillBinding>[1] }) =>
+      updateSkillBinding(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
     },

@@ -2,9 +2,9 @@ import type { SkillContent } from './types'
 
 export async function loadSkillContent(
   storage: R2Bucket,
-  skillName: string
+  skillSlug: string
 ): Promise<SkillContent | null> {
-  const key = `skills/${skillName}/SKILL.md`
+  const key = `skills/${skillSlug}/SKILL.md`
   const obj = await storage.get(key)
   if (!obj) return null
 
@@ -76,11 +76,30 @@ export function serializeSkillMd(frontmatter: Record<string, unknown>, body: str
 
 export async function saveSkillContent(
   storage: R2Bucket,
-  skillName: string,
+  skillSlug: string,
   content: string
 ): Promise<void> {
-  const key = `skills/${skillName}/SKILL.md`
+  const key = `skills/${skillSlug}/SKILL.md`
   await storage.put(key, content, {
     httpMetadata: { contentType: 'text/markdown' },
   })
+}
+
+export function computeContentHash(content: string): string {
+  let h = 0x811c9dc5
+  for (let i = 0; i < content.length; i++) {
+    h ^= content.charCodeAt(i)
+    h = Math.imul(h, 0x01000193)
+  }
+  return (h >>> 0).toString(16).padStart(8, '0')
+}
+
+export function estimateTokenCount(text: string): number {
+  let cjk = 0
+  let ascii = 0
+  for (const ch of text) {
+    if (ch.charCodeAt(0) > 0x2e80) cjk++
+    else if (ch.charCodeAt(0) > 0x20) ascii++
+  }
+  return Math.ceil(cjk * 0.7 + ascii / 4)
 }

@@ -5,14 +5,21 @@ import {
   Bot,
   ChevronDown,
   ChevronRight,
+  Clock,
   Download,
+  GitBranch,
+  Globe,
+  Hash,
   Layers,
   Loader2,
+  Lock,
+  Pin,
   Plus,
   Search,
   Trash2,
   Upload,
-  Wrench,
+  User,
+  Users,
   X,
   Zap,
 } from 'lucide-react'
@@ -21,101 +28,140 @@ import {
   type AdminSkill,
   exportSkill,
   importSkill,
+  type SkillVersionSummary,
   testSkillTrigger,
   useAdminSkills,
   useCreateAdminSkill,
   useDeleteAdminSkill,
+  usePublishSkillVersion,
   useUpdateAdminSkill,
+  useUpdateSkillBinding,
 } from '@/lib/api/admin-ai'
 
-const MODE_LABELS: Record<string, string> = {
-  tool_group: '工具組',
-  sub_agent: 'Sub-Agent',
-  multi_step: '多步驟',
+const SCOPE_LABELS: Record<string, string> = {
+  personal: '個人',
+  team: '團隊',
+  org: '組織',
+  public: '公開',
 }
 
-const MODE_COLORS: Record<string, string> = {
-  tool_group: 'bg-blue-50 text-blue-700 border-blue-200',
-  sub_agent: 'bg-violet-50 text-violet-700 border-violet-200',
-  multi_step: 'bg-amber-50 text-amber-700 border-amber-200',
+const SCOPE_ICONS: Record<string, React.ReactNode> = {
+  personal: <User className="h-3 w-3" />,
+  team: <Users className="h-3 w-3" />,
+  org: <Globe className="h-3 w-3" />,
+  public: <Globe className="h-3 w-3" />,
 }
 
-const SOURCE_COLORS: Record<string, string> = {
-  builtin: 'bg-wb-10 text-wb-60 border-wb-20',
-  admin: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  plugin: 'bg-blue-50 text-blue-700 border-blue-200',
+const SCOPE_COLORS: Record<string, string> = {
+  personal: 'bg-blue-50 text-blue-700 border-blue-200',
+  team: 'bg-violet-50 text-violet-700 border-violet-200',
+  org: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  public: 'bg-amber-50 text-amber-700 border-amber-200',
 }
 
-const MODE_ICONS: Record<string, React.ReactNode> = {
-  tool_group: <Layers className="h-4 w-4 text-wb-60" />,
-  sub_agent: <Bot className="h-4 w-4 text-wb-60" />,
-  multi_step: <Zap className="h-4 w-4 text-wb-60" />,
+const SOURCE_LABELS: Record<string, string> = {
+  builtin: '內建',
+  custom: '自訂',
+  marketplace: '市集',
 }
 
-function parseTriggers(raw: string | null): string[] {
-  if (!raw) return []
-  try {
-    return JSON.parse(raw) as string[]
-  } catch {
-    return []
-  }
+const STATUS_COLORS: Record<string, string> = {
+  draft: 'bg-yellow-50 text-yellow-700 border-yellow-200',
+  published: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  deprecated: 'bg-wb-10 text-wb-50 border-wb-20',
 }
 
-function parseTools(raw: string): string[] {
-  try {
-    return JSON.parse(raw) as string[]
-  } catch {
-    return []
-  }
+function VersionHistoryRow({
+  ver,
+  isPinned,
+  onPin,
+}: {
+  ver: SkillVersionSummary
+  isPinned: boolean
+  onPin: (versionId: string | null) => void
+}) {
+  return (
+    <div className="flex items-center gap-2 py-1.5 text-xs">
+      <span className="w-8 shrink-0 font-mono text-wb-50 text-right">v{ver.version_number}</span>
+      <span
+        className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${STATUS_COLORS[ver.status] ?? ''}`}
+      >
+        {ver.status}
+      </span>
+      <span className="flex-1 truncate text-wb-70">{ver.description}</span>
+      {ver.published_at && (
+        <span className="shrink-0 text-[10px] text-wb-40">
+          {new Date(ver.published_at).toLocaleDateString('zh-TW')}
+        </span>
+      )}
+      <button
+        onClick={() => onPin(isPinned ? null : ver.id)}
+        className={`shrink-0 p-0.5 rounded ${isPinned ? 'text-violet-600' : 'text-wb-30 hover:text-wb-60'}`}
+        title={isPinned ? '取消固定' : '固定此版本'}
+      >
+        <Pin className="h-3 w-3" />
+      </button>
+    </div>
+  )
 }
 
 function SkillCard({ skill }: { skill: AdminSkill }) {
   const [expanded, setExpanded] = useState(false)
-  const [description, setDescription] = useState(skill.description)
-  const [triggersText, setTriggersText] = useState('')
-  const [priority, setPriority] = useState(skill.priority)
+  const [displayName, setDisplayName] = useState(skill.display_name ?? '')
   const [dirty, setDirty] = useState(false)
+  const [showPublish, setShowPublish] = useState(false)
+  const [publishDesc, setPublishDesc] = useState('')
+  const [publishBody, setPublishBody] = useState('')
+
   const { mutate: updateSkill, isPending } = useUpdateAdminSkill()
+  const { mutate: updateBinding, isPending: isBindingPending } = useUpdateSkillBinding()
+  const { mutate: publishVersion, isPending: isPublishing } = usePublishSkillVersion()
   const { mutate: deleteSkill, isPending: isDeleting } = useDeleteAdminSkill()
 
-  const triggers = parseTriggers(skill.triggers)
-  const tools = parseTools(skill.required_tools)
-  const [localTriggers, setLocalTriggers] = useState<string[]>(triggers)
+  const ver = skill.version
+  const binding = skill.binding
+  const isEnabled = binding?.enabled ?? false
+  const allowedTools = ver?.allowed_tools ?? []
+  const scopeColor = SCOPE_COLORS[skill.scope] ?? 'bg-wb-10 text-wb-60 border-wb-20'
 
   const handleToggle = useCallback(() => {
-    updateSkill({ id: skill.id, data: { enabled: skill.enabled ? 0 : 1 } })
-  }, [skill.id, skill.enabled, updateSkill])
+    updateBinding({ id: skill.id, data: { enabled: !isEnabled } })
+  }, [skill.id, isEnabled, updateBinding])
 
   const handleSave = useCallback(() => {
     updateSkill(
+      { id: skill.id, data: { display_name: displayName || undefined } },
+      { onSuccess: () => setDirty(false) }
+    )
+  }, [skill.id, displayName, updateSkill])
+
+  const handlePin = useCallback(
+    (versionId: string | null) => {
+      updateBinding({ id: skill.id, data: { pinned_version_id: versionId } })
+    },
+    [skill.id, updateBinding]
+  )
+
+  const handlePublish = useCallback(() => {
+    if (!publishDesc.trim()) return
+    publishVersion(
       {
         id: skill.id,
         data: {
-          description,
-          triggers: JSON.stringify(localTriggers),
-          priority,
+          description: publishDesc,
+          body: publishBody || undefined,
+          allowed_tools: allowedTools.length > 0 ? allowedTools : undefined,
         },
       },
-      { onSuccess: () => setDirty(false) }
+      {
+        onSuccess: () => {
+          setShowPublish(false)
+          setPublishDesc('')
+          setPublishBody('')
+        },
+      }
     )
-  }, [skill.id, description, localTriggers, priority, updateSkill])
-
-  const handleAddTrigger = useCallback(() => {
-    const trimmed = triggersText.trim()
-    if (trimmed && !localTriggers.includes(trimmed)) {
-      setLocalTriggers([...localTriggers, trimmed])
-      setTriggersText('')
-      setDirty(true)
-    }
-  }, [triggersText, localTriggers])
-
-  const handleRemoveTrigger = useCallback(
-    (trigger: string) => {
-      setLocalTriggers(localTriggers.filter((t) => t !== trigger))
-      setDirty(true)
-    },
-    [localTriggers]
-  )
+  }, [skill.id, publishDesc, publishBody, allowedTools, publishVersion])
 
   const handleExport = useCallback(async () => {
     try {
@@ -124,64 +170,77 @@ function SkillCard({ skill }: { skill: AdminSkill }) {
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = `${skill.name}.SKILL.md`
+      a.download = `${skill.slug}.SKILL.md`
       a.click()
       URL.revokeObjectURL(url)
     } catch {
       /* ignore */
     }
-  }, [skill.id, skill.name])
+  }, [skill.id, skill.slug])
 
   const handleDelete = useCallback(() => {
     if (skill.source === 'builtin') return
-    if (confirm(`確定要刪除 Skill「${skill.name}」嗎？`)) {
+    if (confirm(`確定要刪除 Skill「${skill.slug}」嗎？此操作不可復原。`)) {
       deleteSkill(skill.id)
     }
-  }, [skill.id, skill.name, skill.source, deleteSkill])
-
-  const modeColor = MODE_COLORS[skill.execution_mode] ?? 'bg-wb-10 text-wb-60 border-wb-20'
-  const sourceColor = SOURCE_COLORS[skill.source] ?? 'bg-wb-10 text-wb-60 border-wb-20'
+  }, [skill.id, skill.slug, skill.source, deleteSkill])
 
   return (
     <div
       className={`rounded-xl border bg-white overflow-hidden transition-colors ${
-        skill.enabled ? 'border-wb-20' : 'border-wb-10 opacity-60'
+        isEnabled ? 'border-wb-20' : 'border-wb-10 opacity-60'
       }`}
     >
+      {/* Header */}
       <div className="flex items-center gap-3 px-5 py-4">
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-wb-05">
-          {MODE_ICONS[skill.execution_mode] ?? <Wrench className="h-4 w-4 text-wb-60" />}
+          {skill.source === 'builtin' ? (
+            <Layers className="h-4 w-4 text-wb-60" />
+          ) : (
+            <Bot className="h-4 w-4 text-wb-60" />
+          )}
         </div>
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-semibold text-wb-100">{skill.name}</span>
+            <span className="text-sm font-semibold text-wb-100 font-mono">{skill.slug}</span>
+            {skill.display_name && <span className="text-xs text-wb-60">{skill.display_name}</span>}
             <span
-              className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${modeColor}`}
+              className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium flex items-center gap-0.5 ${scopeColor}`}
             >
-              {MODE_LABELS[skill.execution_mode] ?? skill.execution_mode}
+              {SCOPE_ICONS[skill.scope]}
+              {SCOPE_LABELS[skill.scope] ?? skill.scope}
             </span>
-            <span
-              className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${sourceColor}`}
-            >
-              {skill.source}
+            <span className="rounded-md border border-wb-20 bg-wb-05 px-1.5 py-0.5 text-[10px] text-wb-50">
+              {SOURCE_LABELS[skill.source] ?? skill.source}
             </span>
-            {skill.requires_auth === 1 && <span className="text-[10px] text-wb-40">🔒</span>}
-            <span className="text-[10px] text-wb-40">v{skill.version}</span>
+            {ver && (
+              <span
+                className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${STATUS_COLORS[ver.status] ?? ''}`}
+              >
+                v{ver.version_number}
+              </span>
+            )}
+            {ver?.token_count != null && (
+              <span className="text-[10px] text-wb-40">{ver.token_count} tokens</span>
+            )}
+            {binding?.pinned_version_id && <Pin className="h-3 w-3 text-violet-500" />}
           </div>
-          <p className="mt-0.5 text-xs text-wb-60 truncate">{skill.description}</p>
-          {triggers.length > 0 && (
+          <p className="mt-0.5 text-xs text-wb-60 truncate">
+            {ver?.description ?? '（無已發佈版本）'}
+          </p>
+          {allowedTools.length > 0 && (
             <div className="mt-1 flex flex-wrap gap-1">
-              {triggers.slice(0, 5).map((t) => (
+              {allowedTools.slice(0, 5).map((t) => (
                 <span
                   key={t}
-                  className="rounded border border-wb-10 bg-wb-05 px-1.5 py-0.5 text-[10px] text-wb-50"
+                  className="rounded border border-wb-10 bg-wb-05 px-1.5 py-0.5 text-[10px] text-wb-60 font-mono"
                 >
                   {t}
                 </span>
               ))}
-              {triggers.length > 5 && (
-                <span className="text-[10px] text-wb-40">+{triggers.length - 5}</span>
+              {allowedTools.length > 5 && (
+                <span className="text-[10px] text-wb-40">+{allowedTools.length - 5}</span>
               )}
             </div>
           )}
@@ -190,14 +249,14 @@ function SkillCard({ skill }: { skill: AdminSkill }) {
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={handleToggle}
-            disabled={isPending}
+            disabled={isBindingPending}
             className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none disabled:opacity-50 ${
-              skill.enabled ? 'bg-emerald-500' : 'bg-wb-30'
+              isEnabled ? 'bg-emerald-500' : 'bg-wb-30'
             }`}
           >
             <span
               className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ${
-                skill.enabled ? 'translate-x-5' : 'translate-x-0'
+                isEnabled ? 'translate-x-5' : 'translate-x-0'
               }`}
             />
           </button>
@@ -211,112 +270,138 @@ function SkillCard({ skill }: { skill: AdminSkill }) {
         </div>
       </div>
 
+      {/* Expanded detail */}
       {expanded && (
         <div className="border-t border-wb-10 px-5 py-4 space-y-4">
-          {/* Description */}
+          {/* Display name */}
           <div>
-            <label className="block text-xs font-medium text-wb-60 mb-1">描述</label>
-            <textarea
-              value={description}
-              onChange={(e) => {
-                setDescription(e.target.value)
-                setDirty(true)
-              }}
-              rows={2}
-              className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-80 placeholder:text-wb-30 outline-none focus:border-wb-50 resize-none"
-            />
-          </div>
-
-          {/* Triggers */}
-          <div>
-            <label className="block text-xs font-medium text-wb-60 mb-1">
-              觸發關鍵字（{localTriggers.length}）
-            </label>
-            <div className="flex flex-wrap gap-1 mb-2">
-              {localTriggers.map((t) => (
-                <span
-                  key={t}
-                  className="flex items-center gap-1 rounded-md border border-violet-200 bg-violet-50 px-2 py-0.5 text-xs text-violet-700"
-                >
-                  {t}
-                  <button
-                    onClick={() => handleRemoveTrigger(t)}
-                    className="hover:text-violet-900"
-                    type="button"
-                  >
-                    <X className="h-3 w-3" />
-                  </button>
-                </span>
-              ))}
-            </div>
+            <label className="block text-xs font-medium text-wb-60 mb-1">顯示名稱</label>
             <div className="flex gap-2">
               <input
-                value={triggersText}
-                onChange={(e) => setTriggersText(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault()
-                    handleAddTrigger()
-                  }
+                value={displayName}
+                onChange={(e) => {
+                  setDisplayName(e.target.value)
+                  setDirty(true)
                 }}
-                placeholder="輸入關鍵字後按 Enter"
+                placeholder={skill.slug}
                 className="flex-1 rounded-lg border border-wb-20 bg-white px-3 py-1.5 text-sm text-wb-80 placeholder:text-wb-30 outline-none focus:border-wb-50"
               />
-              <button
-                onClick={handleAddTrigger}
-                type="button"
-                className="rounded-lg border border-wb-20 px-3 py-1.5 text-xs text-wb-60 hover:bg-wb-05"
-              >
-                新增
-              </button>
-            </div>
-          </div>
-
-          {/* Required Tools */}
-          <div>
-            <label className="block text-xs font-medium text-wb-60 mb-1">
-              使用工具（{tools.length}）
-            </label>
-            <div className="flex flex-wrap gap-1">
-              {tools.map((t) => (
-                <span
-                  key={t}
-                  className="rounded border border-wb-10 bg-wb-05 px-1.5 py-0.5 text-[10px] text-wb-60 font-mono"
+              {dirty && (
+                <button
+                  onClick={handleSave}
+                  disabled={isPending}
+                  className="rounded-lg bg-wb-100 px-4 py-1.5 text-xs font-medium text-white hover:bg-wb-90 disabled:opacity-50"
                 >
-                  {t}
-                </span>
-              ))}
-              {tools.length === 0 && <span className="text-[10px] text-wb-40">（無）</span>}
+                  儲存
+                </button>
+              )}
             </div>
           </div>
 
-          {/* Priority */}
-          <div>
-            <label className="block text-xs font-medium text-wb-60 mb-1">優先級</label>
-            <input
-              type="number"
-              value={priority}
-              onChange={(e) => {
-                setPriority(Number(e.target.value))
-                setDirty(true)
+          {/* Version history */}
+          {skill.versions && skill.versions.length > 0 && (
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <GitBranch className="h-3.5 w-3.5 text-wb-50" />
+                <label className="text-xs font-medium text-wb-60">
+                  版本歷史（{skill.versions.length}）
+                </label>
+              </div>
+              <div className="rounded-lg border border-wb-10 bg-wb-05 px-3 py-2 divide-y divide-wb-10">
+                {skill.versions.map((v) => (
+                  <VersionHistoryRow
+                    key={v.id}
+                    ver={v}
+                    isPinned={binding?.pinned_version_id === v.id}
+                    onPin={handlePin}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Files */}
+          {skill.files && skill.files.length > 0 && (
+            <div>
+              <label className="block text-xs font-medium text-wb-60 mb-1">
+                附屬檔案（{skill.files.length}）
+              </label>
+              <div className="space-y-1">
+                {skill.files.map((f) => (
+                  <div
+                    key={f.id}
+                    className="flex items-center gap-2 rounded border border-wb-10 bg-wb-05 px-2 py-1 text-xs"
+                  >
+                    <span className="flex-1 font-mono text-wb-70">{f.path}</span>
+                    {f.size_bytes != null && (
+                      <span className="text-wb-40">
+                        {f.size_bytes < 1024
+                          ? `${f.size_bytes} B`
+                          : `${(f.size_bytes / 1024).toFixed(1)} KB`}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Publish new version */}
+          {!showPublish ? (
+            <button
+              onClick={() => {
+                setPublishDesc(ver?.description ?? '')
+                setPublishBody(ver?.body ?? '')
+                setShowPublish(true)
               }}
-              min={1}
-              max={999}
-              className="w-24 rounded-lg border border-wb-20 bg-white px-3 py-1.5 text-sm text-wb-80 outline-none focus:border-wb-50"
-            />
-          </div>
+              className="flex items-center gap-1 rounded-lg border border-violet-200 bg-violet-50 px-3 py-1.5 text-xs text-violet-700 hover:bg-violet-100"
+            >
+              <Plus className="h-3 w-3" />
+              發佈新版本
+            </button>
+          ) : (
+            <div className="rounded-lg border border-violet-200 bg-violet-50/30 p-4 space-y-3">
+              <h4 className="text-xs font-semibold text-violet-700">發佈新版本</h4>
+              <div>
+                <label className="block text-[10px] text-wb-50 mb-0.5">
+                  Description（觸發文案）
+                </label>
+                <textarea
+                  value={publishDesc}
+                  onChange={(e) => setPublishDesc(e.target.value)}
+                  rows={2}
+                  className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-80 outline-none focus:border-wb-50 resize-none"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-wb-50 mb-0.5">SKILL.md Body</label>
+                <textarea
+                  value={publishBody}
+                  onChange={(e) => setPublishBody(e.target.value)}
+                  rows={6}
+                  className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-xs text-wb-80 font-mono outline-none focus:border-wb-50 resize-none"
+                />
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={handlePublish}
+                  disabled={isPublishing || !publishDesc.trim()}
+                  className="rounded-lg bg-violet-600 px-4 py-1.5 text-xs font-medium text-white hover:bg-violet-700 disabled:opacity-50"
+                >
+                  {isPublishing ? '發佈中...' : '發佈'}
+                </button>
+                <button
+                  onClick={() => setShowPublish(false)}
+                  className="rounded-lg border border-wb-20 px-3 py-1.5 text-xs text-wb-60 hover:bg-wb-05"
+                >
+                  取消
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Actions */}
           <div className="flex items-center gap-2 pt-1">
-            {dirty && (
-              <button
-                onClick={handleSave}
-                disabled={isPending}
-                className="rounded-lg bg-wb-100 px-4 py-1.5 text-xs font-medium text-white hover:bg-wb-90 disabled:opacity-50"
-              >
-                儲存
-              </button>
-            )}
             <button
               onClick={handleExport}
               className="flex items-center gap-1 rounded-lg border border-wb-20 px-3 py-1.5 text-xs text-wb-60 hover:bg-wb-05"
@@ -390,7 +475,7 @@ function ImportDialog({
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder={`---\nname: my-skill\ndescription: ...\ntriggers: [...]\nrequired_tools: [...]\nexecution_mode: tool_group\n---\n\n# Skill 指令內容\n...`}
+          placeholder={`---\nname: my-skill\ndescription: ...\nallowed-tools:\n  - search_routes\n  - weather\n---\n\n# Skill 指令內容\n...`}
           rows={12}
           className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-80 font-mono placeholder:text-wb-30 outline-none focus:border-wb-50 resize-none"
         />
@@ -417,7 +502,11 @@ function ImportDialog({
 
 function TriggerTestPanel() {
   const [query, setQuery] = useState('')
-  const [matched, setMatched] = useState<AdminSkill[] | null>(null)
+  const [matched, setMatched] = useState<Array<{
+    slug: string
+    description: string
+    scope: string
+  }> | null>(null)
   const [loading, setLoading] = useState(false)
 
   const handleTest = async () => {
@@ -458,18 +547,18 @@ function TriggerTestPanel() {
       {matched !== null && (
         <div className="mt-3">
           {matched.length === 0 ? (
-            <p className="text-xs text-wb-40">沒有 skill 被觸發</p>
+            <p className="text-xs text-wb-40">沒有 skill 被觸發（會 fallback 載入全部）</p>
           ) : (
             <div className="space-y-1">
               {matched.map((s) => (
-                <div key={s.id} className="flex items-center gap-2 text-xs">
+                <div key={s.slug} className="flex items-center gap-2 text-xs">
                   <span
-                    className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${MODE_COLORS[s.execution_mode] ?? ''}`}
+                    className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${SCOPE_COLORS[s.scope] ?? ''}`}
                   >
-                    {MODE_LABELS[s.execution_mode]}
+                    {SCOPE_LABELS[s.scope]}
                   </span>
-                  <span className="font-medium text-wb-80">{s.name}</span>
-                  <span className="text-wb-50">{s.description}</span>
+                  <span className="font-medium font-mono text-wb-80">{s.slug}</span>
+                  <span className="text-wb-50 truncate">{s.description}</span>
                 </div>
               ))}
             </div>
@@ -488,26 +577,24 @@ export default function AdminSkillsPage() {
   const grouped = useMemo(() => {
     const groups: Record<string, AdminSkill[]> = {}
     for (const skill of skills ?? []) {
-      const mode = skill.execution_mode
-      if (!groups[mode]) groups[mode] = []
-      groups[mode].push(skill)
+      const scope = skill.scope
+      if (!groups[scope]) groups[scope] = []
+      groups[scope].push(skill)
     }
     return groups
   }, [skills])
 
-  const modeOrder = ['tool_group', 'sub_agent', 'multi_step']
-  const sortedModes = modeOrder.filter((m) => grouped[m]?.length)
+  const scopeOrder = ['org', 'team', 'personal', 'public']
+  const sortedScopes = scopeOrder.filter((s) => grouped[s]?.length)
 
-  const enabledCount = (skills ?? []).filter((s) => s.enabled).length
+  const enabledCount = (skills ?? []).filter((s) => s.binding?.enabled).length
   const totalCount = skills?.length ?? 0
 
-  const handleCreateSample = useCallback(() => {
+  const handleCreate = useCallback(() => {
     createSkill({
-      name: `custom-skill-${Date.now().toString(36)}`,
-      description: '新建 Skill',
-      triggers: [],
-      required_tools: [],
-      execution_mode: 'tool_group',
+      slug: `custom-${Date.now().toString(36)}`,
+      description: '新建 Skill — 請編輯 description',
+      scope: 'org',
     })
   }, [createSkill])
 
@@ -533,7 +620,7 @@ export default function AdminSkillsPage() {
         <div>
           <h1 className="text-xl font-bold text-wb-100">Skill 管理</h1>
           <p className="mt-1 text-sm text-wb-60">
-            管理 AI Agent 的能力組合。Skill 定義工具分群、觸發條件和專屬 prompt。
+            管理 AI Agent 的能力組合。每個 Skill 是不可變版本鏈，可固定特定版本、匯入匯出 SKILL.md。
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -545,7 +632,7 @@ export default function AdminSkillsPage() {
             匯入
           </button>
           <button
-            onClick={handleCreateSample}
+            onClick={handleCreate}
             disabled={isCreating}
             className="flex items-center gap-1 rounded-lg bg-violet-600 px-3 py-2 text-xs font-medium text-white hover:bg-violet-700 disabled:opacity-50"
           >
@@ -562,20 +649,19 @@ export default function AdminSkillsPage() {
         </span>
       </div>
 
-      {/* Trigger Test */}
       <TriggerTestPanel />
 
-      {/* Skills by execution mode */}
-      {sortedModes.map((mode) => (
-        <div key={mode}>
+      {sortedScopes.map((scope) => (
+        <div key={scope}>
           <div className="mb-3 flex items-center gap-2">
+            {SCOPE_ICONS[scope]}
             <h2 className="text-xs font-semibold uppercase tracking-wide text-wb-50">
-              {MODE_LABELS[mode] ?? mode}
+              {SCOPE_LABELS[scope] ?? scope}
             </h2>
-            <span className="text-[10px] text-wb-40">({grouped[mode].length})</span>
+            <span className="text-[10px] text-wb-40">({grouped[scope].length})</span>
           </div>
           <div className="space-y-2">
-            {grouped[mode].map((skill) => (
+            {grouped[scope].map((skill) => (
               <SkillCard key={skill.id} skill={skill} />
             ))}
           </div>

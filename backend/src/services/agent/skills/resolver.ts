@@ -1,57 +1,117 @@
-import type { SkillRecord } from './types'
+import type { ResolvedSkill } from './types'
 
 const ALWAYS_LOAD_SKILLS = ['search', 'data']
 
 export class SkillResolver {
-  private skills: SkillRecord[] = []
+  private skills: ResolvedSkill[] = []
 
-  async load(db: D1Database): Promise<void> {
+  async load(db: D1Database, subjectType = 'agent', subjectId = 'default'): Promise<void> {
     const { results } = await db
-      .prepare('SELECT * FROM skills WHERE enabled = 1 ORDER BY priority')
+      .prepare(
+        `SELECT
+        s.id AS skillId,
+        s.slug,
+        s.display_name AS displayName,
+        s.source,
+        sv.id AS versionId,
+        sv.version_number AS versionNumber,
+        sv.name,
+        sv.description,
+        sv.body,
+        sv.allowed_tools AS allowedToolsJson,
+        sv.content_hash AS contentHash,
+        sv.token_count AS tokenCount
+      FROM skill_binding sb
+      JOIN skill s ON sb.skill_id = s.id
+      JOIN skill_version sv ON sv.id = COALESCE(sb.pinned_version_id, s.latest_version_id)
+      WHERE sb.subject_type = ? AND sb.subject_id = ? AND sb.enabled = 1
+        AND sv.status = 'published'
+      ORDER BY sv.name`
+      )
+      .bind(subjectType, subjectId)
       .all()
+
     this.skills = (results ?? []).map((r) => ({
-      ...(r as Record<string, unknown>),
-      triggers: JSON.parse((r.triggers as string) ?? '[]') as string[],
-      required_tools: JSON.parse((r.required_tools as string) ?? '[]') as string[],
-      requires_auth: (r.requires_auth as number) === 1,
-      enabled: (r.enabled as number) === 1,
-    })) as SkillRecord[]
+      skillId: r.skillId as string,
+      slug: r.slug as string,
+      displayName: r.displayName as string | null,
+      versionId: r.versionId as string,
+      versionNumber: r.versionNumber as number,
+      name: r.name as string,
+      description: r.description as string,
+      body: r.body as string | null,
+      allowedTools: JSON.parse((r.allowedToolsJson as string) ?? '[]') as string[],
+      contentHash: r.contentHash as string,
+      tokenCount: r.tokenCount as number | null,
+      source: r.source as string,
+    }))
   }
 
-  resolve(query: string, isAuthenticated: boolean): SkillRecord[] {
-    const eligible = this.skills.filter((s) => !s.requires_auth || isAuthenticated)
-    const alwaysLoad = eligible.filter((s) => ALWAYS_LOAD_SKILLS.includes(s.name))
+  resolve(query: string, _isAuthenticated: boolean): ResolvedSkill[] {
+    const alwaysLoad = this.skills.filter((s) => ALWAYS_LOAD_SKILLS.includes(s.slug))
+    const rest = this.skills.filter((s) => !ALWAYS_LOAD_SKILLS.includes(s.slug))
 
-    const matched = eligible.filter((s) => {
-      if (ALWAYS_LOAD_SKILLS.includes(s.name)) return false
-      return s.triggers.some((t) => query.includes(t))
+    const matched = rest.filter((s) => {
+      const triggerMatch = s.description.match(/當使用者[^。]*?([^。]+)觸發/)
+      if (triggerMatch) {
+        const triggers = triggerMatch[1].split(/[、，,]/).map((t) => t.trim())
+        return triggers.some((t) => t.length > 0 && query.includes(t))
+      }
+      return false
     })
 
     if (matched.length > 0) {
       const seen = new Set<string>()
       return [...alwaysLoad, ...matched].filter((s) => {
-        if (seen.has(s.name)) return false
-        seen.add(s.name)
+        if (seen.has(s.slug)) return false
+        seen.add(s.slug)
         return true
       })
     }
 
-    return eligible
+    return this.skills
   }
 
-  getRequiredTools(skills: SkillRecord[]): string[] {
-    return [...new Set(skills.flatMap((s) => s.required_tools))]
+  getRequiredTools(skills: ResolvedSkill[]): string[] {
+    return [...new Set(skills.flatMap((s) => s.allowedTools))]
   }
 
-  buildPromptSections(skills: SkillRecord[]): string {
-    return skills.map((s) => `- **${s.name}**：${s.description}`).join('\n')
+  buildPromptSections(skills: ResolvedSkill[]): string {
+    return skills.map((s) => `- **${s.displayName ?? s.name}**：${s.description}`).join('\n')
   }
 
-  findDirectRoute(query: string, isAuthenticated: boolean): SkillRecord | null {
-    const eligible = this.skills.filter(
-      (s) => s.execution_mode === 'sub_agent' && (!s.requires_auth || isAuthenticated)
+  findDirectRoute(query: string, _isAuthenticated: boolean): ResolvedSkill | null {
+    const subAgentSkills = this.skills.filter((s) =>
+      s.allowedTools.some((t) => t.endsWith('_agent'))
     )
-    const matched = eligible.filter((s) => s.triggers.some((t) => query.includes(t)))
+    const matched = subAgentSkills.filter((s) => {
+      const triggerMatch = s.description.match(/當使用者[^。]*?([^。]+)觸發/)
+      if (!triggerMatch) return false
+      const triggers = triggerMatch[1].split(/[、，,]/).map((t) => t.trim())
+      return triggers.some((t) => t.length > 0 && query.includes(t))
+    })
     return matched.length === 1 ? matched[0] : null
+  }
+
+  getAllSkills(): ResolvedSkill[] {
+    return this.skills
+  }
+}
+
+export async function recordSkillInvocation(
+  db: D1Database,
+  versionId: string,
+  sessionId: string | null,
+  outcome: 'used' | 'loaded_unused' | 'error'
+): Promise<void> {
+  try {
+    await db
+      .prepare(
+        'INSERT INTO skill_invocation (id, version_id, session_id, outcome) VALUES (?, ?, ?, ?)'
+      )
+      .bind(crypto.randomUUID().replace(/-/g, ''), versionId, sessionId, outcome)
+      .run()
+  } catch {
+    /* non-blocking */
   }
 }
