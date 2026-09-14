@@ -5,7 +5,7 @@ import { recommendAgentTool, coachingAgentTool } from '../sub-agents'
 import { recommendSubAgent } from '../sub-agents/recommend-agent'
 import { coachingSubAgent } from '../sub-agents/coaching-agent'
 import { formatSubAgentResult } from '../sub-agents/types'
-import { analyzeWeaknesses } from '../sub-agents/weakness-analysis'
+import { analyzeWeaknesses, analyzeWeaknessesStructured } from '../sub-agents/weakness-analysis'
 import { DefaultTokenTracker } from '../tracker'
 import type { ToolContext } from '../types'
 
@@ -340,5 +340,43 @@ describe('analyzeWeaknesses', () => {
   it('returns default message when data insufficient', () => {
     const result = analyzeWeaknesses({})
     expect(result).toContain('數據不足')
+  })
+
+  it('includes exercise recommendations for sport-heavy type imbalance', () => {
+    const result = analyzeWeaknesses({
+      typeDistribution: [{ type: 'sport', count: 9 }, { type: 'boulder', count: 1 }],
+    })
+    expect(result).toContain('建議練習')
+  })
+
+  it('includes anti-style exercises when personality type is provided', () => {
+    const result = analyzeWeaknesses({
+      typeDistribution: [{ type: 'sport', count: 5 }, { type: 'boulder', count: 5 }],
+    }, 'PGB')
+    expect(result).toContain('人格型態弱點')
+    expect(result).toContain('建議練習')
+  })
+
+  it('structured output contains exercise arrays', () => {
+    const insights = analyzeWeaknessesStructured({
+      typeDistribution: [{ type: 'boulder', count: 9 }, { type: 'sport', count: 1 }],
+      styleDistribution: { redpoint: 10 },
+    })
+    expect(insights.length).toBeGreaterThanOrEqual(2)
+    const typeInsight = insights.find((i) => i.id === 'type_imbalance')
+    expect(typeInsight).toBeDefined()
+    expect(typeInsight!.exercises.length).toBeGreaterThan(0)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// gatherContext: level exercise context
+// ---------------------------------------------------------------------------
+
+describe('coachingSubAgent level exercise context', () => {
+  it('includes level training recommendations when level is present', async () => {
+    const ctx = makeCtx({ userId: 'user-1' })
+    const context = await coachingSubAgent.gatherContext({}, ctx)
+    expect(context).toContain('等級訓練建議')
   })
 })

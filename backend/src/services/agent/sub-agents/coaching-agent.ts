@@ -1,4 +1,9 @@
-import { getPersonalityType, getTrainingSchoolMapping } from '@nobodyclimb/constants'
+import {
+  getPersonalityType,
+  getTrainingSchoolMapping,
+  TRAINING_BY_LEVEL,
+  getExerciseById,
+} from '@nobodyclimb/constants'
 import type { PersonalityTypeCode } from '@nobodyclimb/types'
 import { createProvider } from '../../orchestrators/ai-graph/providers'
 import type { ProviderName as LegacyProviderName } from '../../orchestrators/ai-graph/providers/types'
@@ -27,15 +32,60 @@ const COACHING_SYSTEM_PROMPT = `你是 NobodyClimb 的攀岩教練。你的任�
 7. 如果有使用者的攀岩人格型態和對應訓練學派，以該學派的訓練哲學為基底來設計建議
 8. 如果有訓練進度資料，根據已完成和未完成的部分調整建議重點`
 
-async function gatherPersonalityContext(ctx: ToolContext): Promise<string | null> {
+async function getUserPersonalityType(ctx: ToolContext): Promise<string | null> {
   if (!ctx.userId) return null
-
   try {
     const user = await ctx.env.DB.prepare('SELECT personality_type FROM users WHERE id = ?')
       .bind(ctx.userId)
       .first<{ personality_type: string | null }>()
+    return user?.personality_type ?? null
+  } catch {
+    return null
+  }
+}
 
-    const typeCode = user?.personality_type as PersonalityTypeCode | null
+function buildLevelExerciseContext(trainingResult: unknown): string | null {
+  const data = trainingResult as { level?: string }
+  if (!data.level) return null
+
+  let level: 'beginner' | 'intermediate' | 'advanced' = 'beginner'
+  if (data.level.includes('5.13') || data.level.includes('高級')) level = 'advanced'
+  else if (data.level.includes('5.11') || data.level.includes('5.12') || data.level.includes('中'))
+    level = 'intermediate'
+
+  const rec = TRAINING_BY_LEVEL.find((l) => l.level === level)
+  if (!rec) return null
+
+  const exercises = rec.recommendedExerciseIds
+    .map((id) => {
+      const ex = getExerciseById(id)
+      if (!ex) return null
+      return `- ${ex.nameZh}：${ex.reps}，${ex.sets[0]}-${ex.sets[1]} 組，每週 ${ex.sessionsPerWeek[0]}-${ex.sessionsPerWeek[1]} 次`
+    })
+    .filter(Boolean)
+    .slice(0, 8)
+
+  const lines = [
+    `程度：${rec.labelZh}（${rec.sportGradeRange}）`,
+    `每週訓練：${rec.daysPerWeek[0]}-${rec.daysPerWeek[1]} 天，每次 ${rec.hoursPerSession[0]}-${rec.hoursPerSession[1]} 小時`,
+    `重點：${rec.focusAreas.slice(0, 3).join('；')}`,
+    rec.avoid.length > 0 ? `避免：${rec.avoid.join('；')}` : '',
+    '',
+    '推薦練習：',
+    ...exercises,
+  ].filter(Boolean)
+
+  return `【等級訓練建議】\n${lines.join('\n')}`
+}
+
+async function gatherPersonalityContext(
+  ctx: ToolContext,
+  typeCodeStr?: string | null
+): Promise<string | null> {
+  if (!ctx.userId) return null
+
+  try {
+    const typeCode = typeCodeStr as PersonalityTypeCode | null
     if (!typeCode) return null
 
     const personality = getPersonalityType(typeCode)
@@ -92,11 +142,16 @@ export const coachingSubAgent: SubAgent = {
     const trainingFormatted = suggestTrainingTool.formatResult(trainingResult)
     sections.push(`【訓練分析】\n${trainingFormatted.content}`)
 
-    const weaknesses = analyzeWeaknesses(trainingResult)
+    const personalityTypeCode = await getUserPersonalityType(ctx)
+
+    const weaknesses = analyzeWeaknesses(trainingResult, personalityTypeCode)
     sections.push(`【弱點分析】\n${weaknesses}`)
 
-    const personalityContext = await gatherPersonalityContext(ctx)
+    const personalityContext = await gatherPersonalityContext(ctx, personalityTypeCode)
     if (personalityContext) sections.push(personalityContext)
+
+    const levelExercises = buildLevelExerciseContext(trainingResult)
+    if (levelExercises) sections.push(levelExercises)
 
     try {
       const goals = await ctx.env.DB.prepare(
