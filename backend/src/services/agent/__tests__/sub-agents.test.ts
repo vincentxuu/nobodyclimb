@@ -5,7 +5,7 @@ import { recommendAgentTool, coachingAgentTool } from '../sub-agents'
 import { recommendSubAgent } from '../sub-agents/recommend-agent'
 import { coachingSubAgent } from '../sub-agents/coaching-agent'
 import { formatSubAgentResult } from '../sub-agents/types'
-import { analyzeWeaknesses } from '../sub-agents/weakness-analysis'
+import { analyzeWeaknesses, analyzeWeaknessesStructured } from '../sub-agents/weakness-analysis'
 import { DefaultTokenTracker } from '../tracker'
 import type { ToolContext } from '../types'
 
@@ -249,6 +249,47 @@ describe('coachingSubAgent.gatherContext', () => {
     expect(context).toContain('使用者目標')
     expect(context).toContain('挑戰 5.12')
   })
+
+  it('includes personality and training school when user has quiz result', async () => {
+    let queryCount = 0
+    const personalityDb = {
+      prepare: () => ({
+        bind: () => ({
+          all: async () => {
+            queryCount++
+            if (queryCount === 1) {
+              // training_progress query
+              return {
+                results: [
+                  { week: 1, day: 1, completed: 1 },
+                  { week: 1, day: 2, completed: 1 },
+                  { week: 1, day: 3, completed: 0 },
+                ],
+              }
+            }
+            // user_goals query
+            return { results: [] }
+          },
+          first: async () => {
+            // users personality_type query
+            return { personality_type: 'PGB' }
+          },
+        }),
+      }),
+    } as unknown as D1Database
+    const ctx = makeCtx({ userId: 'user-1', env: { DB: personalityDb } as unknown as Env })
+    const context = await coachingSubAgent.gatherContext({}, ctx)
+    expect(context).toContain('攀岩人格與訓練學派')
+    expect(context).toContain('碎岩者')
+    expect(context).toContain('MacLeod')
+    expect(context).toContain('已完成 2/3')
+  })
+
+  it('omits personality section when user has no quiz result', async () => {
+    const ctx = makeCtx({ userId: 'user-1' })
+    const context = await coachingSubAgent.gatherContext({}, ctx)
+    expect(context).not.toContain('攀岩人格與訓練學派')
+  })
 })
 
 // ---------------------------------------------------------------------------
@@ -299,5 +340,43 @@ describe('analyzeWeaknesses', () => {
   it('returns default message when data insufficient', () => {
     const result = analyzeWeaknesses({})
     expect(result).toContain('數據不足')
+  })
+
+  it('includes exercise recommendations for sport-heavy type imbalance', () => {
+    const result = analyzeWeaknesses({
+      typeDistribution: [{ type: 'sport', count: 9 }, { type: 'boulder', count: 1 }],
+    })
+    expect(result).toContain('建議練習')
+  })
+
+  it('includes anti-style exercises when personality type is provided', () => {
+    const result = analyzeWeaknesses({
+      typeDistribution: [{ type: 'sport', count: 5 }, { type: 'boulder', count: 5 }],
+    }, 'PGB')
+    expect(result).toContain('人格型態弱點')
+    expect(result).toContain('建議練習')
+  })
+
+  it('structured output contains exercise arrays', () => {
+    const insights = analyzeWeaknessesStructured({
+      typeDistribution: [{ type: 'boulder', count: 9 }, { type: 'sport', count: 1 }],
+      styleDistribution: { redpoint: 10 },
+    })
+    expect(insights.length).toBeGreaterThanOrEqual(2)
+    const typeInsight = insights.find((i) => i.id === 'type_imbalance')
+    expect(typeInsight).toBeDefined()
+    expect(typeInsight!.exercises.length).toBeGreaterThan(0)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// gatherContext: level exercise context
+// ---------------------------------------------------------------------------
+
+describe('coachingSubAgent level exercise context', () => {
+  it('includes level training recommendations when level is present', async () => {
+    const ctx = makeCtx({ userId: 'user-1' })
+    const context = await coachingSubAgent.gatherContext({}, ctx)
+    expect(context).toContain('等級訓練建議')
   })
 })
