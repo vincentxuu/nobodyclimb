@@ -27,6 +27,7 @@ function parseWorkersAIResponse(response: unknown) {
     (raw.response as string) ||
     (choice?.message?.content as string) ||
     (choice?.message?.reasoning_content as string) ||
+    (choice?.message?.reasoning as string) ||
     ''
 
   // usage: 頂層 usage 或 choices 旁邊的 usage

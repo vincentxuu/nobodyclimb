@@ -135,6 +135,16 @@ describe('CloudflareProvider response format', () => {
     expect(result.toolCalls[0].name).toBe('coaching_agent')
   })
 
+  it('Qwen thinking 模型用 reasoning key（非 reasoning_content）', async () => {
+    mockAI.run.mockResolvedValueOnce({
+      choices: [{ message: { content: null, reasoning: 'Qwen 思考過程', role: 'assistant' } }],
+      usage: { prompt_tokens: 50, completion_tokens: 100, total_tokens: 150 },
+    })
+    const provider = await getProvider()
+    const result = await provider.chat([{ role: 'user', content: 'hi' }])
+    expect(result.content).toBe('Qwen 思考過程')
+  })
+
   it('空回應不 crash', async () => {
     mockAI.run.mockResolvedValueOnce({})
     const provider = await getProvider()
