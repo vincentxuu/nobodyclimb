@@ -243,6 +243,7 @@ export interface Env {
   DB: D1Database
   CACHE: KVNamespace
   STORAGE: R2Bucket
+  AGENT_STORAGE: R2Bucket
   ACCESS_LOGS: AnalyticsEngineDataset
   CORS_ORIGIN: string
   JWT_ISSUER: string

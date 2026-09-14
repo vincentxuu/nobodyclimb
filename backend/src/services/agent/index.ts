@@ -13,12 +13,13 @@ import { createProvider } from '../orchestrators/ai-graph/providers'
 import type { ProviderName as LegacyProviderName } from '../orchestrators/ai-graph/providers/types'
 import { runAgentLoop } from './agent-loop'
 import { KVAgentCache } from './cache'
-import { classifyQuery, detectDirectRoute, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
+import { classifyQuery, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
 import { runOutputGuards } from './guards'
 import { createBuiltinHooks } from './hooks/builtins'
 import { HookBus } from './hooks/bus'
 import { isHookEnabled, loadHookRecords } from './hooks/loader'
 import { buildProactivePromptSection, gatherProactiveContext } from './proactive'
+import { SkillResolver } from './skills/resolver'
 import { createDBToolRegistry, updateToolStats } from './tools/db-registry'
 import { DefaultTokenTracker } from './tracker'
 import type { AgentResult, ModelConfig, ModelMap, ProviderName, ToolContext } from './types'
@@ -216,12 +217,12 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     }
   }
 
-  // 0.8 Intent-based routing — Cascading Router 第一層
-  // 規則命中 sub-agent 意圖時直接呼叫，跳過 agent loop 的 LLM tool selection
-  const activeManifests = (await import('./tools/manifests')).getActiveManifests(!!userId)
-  const directRoute = detectDirectRoute(query, activeManifests)
+  // 0.8 Skill-based routing — SkillResolver 取代 manifest + detectDirectRoute
+  const skillResolver = new SkillResolver()
+  await skillResolver.load(env.DB)
+  const directSkill = skillResolver.findDirectRoute(query, !!userId)
 
-  if (directRoute && userId) {
+  if (directSkill && userId) {
     try {
       const models = await loadModelMap(env.DB)
       const tracker = new DefaultTokenTracker((await loadAgentConfig(env.DB)).usdToTwd)
@@ -238,8 +239,10 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       }
 
       let subAgent: import('./sub-agents/types').SubAgent | null = null
-      if (directRoute === 'coaching') {
+      if (directSkill.name === 'coaching') {
         subAgent = (await import('./sub-agents/coaching-agent')).coachingSubAgent
+      } else if (directSkill.name === 'recommend') {
+        subAgent = (await import('./sub-agents/recommend-agent')).recommendSubAgent
       }
 
       if (subAgent) {
@@ -275,7 +278,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       }
     } catch (err) {
       console.warn(
-        `[agent] direct route to ${directRoute} failed, falling through to agent loop:`,
+        `[agent] direct route to skill ${directSkill.name} failed, falling through to agent loop:`,
         err
       )
     }
@@ -308,9 +311,11 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   // 2. Create provider + tracker + registry + context
   const orchestratorProvider = createProviderForConfig(models.orchestrator.provider, env)
   const tracker = new DefaultTokenTracker(agentCfg.usdToTwd)
-  const { registry, manifests } = await createDBToolRegistry(env.DB, {
+  const matchedSkills = skillResolver.resolve(query, !!userId)
+  const requiredToolNames = skillResolver.getRequiredTools(matchedSkills)
+  const { registry } = await createDBToolRegistry(env.DB, {
     isAuthenticated: !!userId,
-    query,
+    requiredTools: requiredToolNames,
   })
   const cache = new KVAgentCache(env.CACHE)
   const toolCtx: ToolContext = {
@@ -328,7 +333,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   const ascentContext = buildAscentContext(ascents)
   const abilityLevel = estimateAbilityLevel(ascents)
   const toolsSection = registry.toSystemPromptSection(toolCtx)
-  const capabilitySection = manifests.map((m) => `- **${m.name}**：${m.promptFragment}`).join('\n')
+  const capabilitySection = skillResolver.buildPromptSections(matchedSkills)
   const baseSystemPrompt = buildPersonalizedSystemPrompt(
     memorySummary,
     ascentContext,

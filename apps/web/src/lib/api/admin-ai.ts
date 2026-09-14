@@ -1177,3 +1177,134 @@ export function useUpdateAdminHook() {
     },
   })
 }
+
+// =============================================
+// Admin Skill Management
+// =============================================
+
+export interface AdminSkill {
+  id: string
+  name: string
+  description: string
+  triggers: string | null
+  execution_mode: 'tool_group' | 'sub_agent' | 'multi_step'
+  required_tools: string
+  requires_auth: number
+  version: number
+  source: string
+  enabled: number
+  priority: number
+  r2_key: string | null
+  created_at: string
+  updated_at: string
+  skill_content?: string | null
+}
+
+export async function getAdminSkills(): Promise<AdminSkill[]> {
+  const res = await apiClient.get<{ success: boolean; data: AdminSkill[] }>('/admin/ai/skills')
+  return res.data.data
+}
+
+export async function getAdminSkill(id: string): Promise<AdminSkill> {
+  const res = await apiClient.get<{ success: boolean; data: AdminSkill }>(`/admin/ai/skills/${id}`)
+  return res.data.data
+}
+
+export async function createAdminSkill(data: {
+  name: string
+  description: string
+  triggers?: string[]
+  required_tools: string[]
+  execution_mode: string
+  requires_auth?: boolean
+  system_prompt?: string
+}): Promise<AdminSkill> {
+  const res = await apiClient.post<{ success: boolean; data: AdminSkill }>('/admin/ai/skills', data)
+  return res.data.data
+}
+
+export async function updateAdminSkill(
+  id: string,
+  data: {
+    enabled?: number
+    description?: string
+    triggers?: string
+    priority?: number
+    skill_content?: string
+  }
+): Promise<void> {
+  await apiClient.put(`/admin/ai/skills/${id}`, data)
+}
+
+export async function deleteAdminSkill(id: string): Promise<void> {
+  await apiClient.delete(`/admin/ai/skills/${id}`)
+}
+
+export async function importSkill(content: string): Promise<AdminSkill> {
+  const res = await apiClient.post<{ success: boolean; data: AdminSkill }>(
+    '/admin/ai/skills/import',
+    { content }
+  )
+  return res.data.data
+}
+
+export async function exportSkill(id: string): Promise<string> {
+  const res = await apiClient.get<{ success: boolean; data: { content: string } }>(
+    `/admin/ai/skills/${id}/export`
+  )
+  return res.data.data.content
+}
+
+export async function testSkillTrigger(query: string): Promise<{ matched: AdminSkill[] }> {
+  const res = await apiClient.post<{ success: boolean; data: { matched: AdminSkill[] } }>(
+    '/admin/ai/skills/test',
+    { query }
+  )
+  return res.data.data
+}
+
+export function useAdminSkills() {
+  return useQuery<AdminSkill[]>({
+    queryKey: ['admin-ai-skills'],
+    queryFn: getAdminSkills,
+  })
+}
+
+export function useAdminSkill(id: string) {
+  return useQuery<AdminSkill>({
+    queryKey: ['admin-ai-skill', id],
+    queryFn: () => getAdminSkill(id),
+    enabled: !!id,
+  })
+}
+
+export function useCreateAdminSkill() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: createAdminSkill,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}
+
+export function useUpdateAdminSkill() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Parameters<typeof updateAdminSkill>[1] }) =>
+      updateAdminSkill(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}
+
+export function useDeleteAdminSkill() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: deleteAdminSkill,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}

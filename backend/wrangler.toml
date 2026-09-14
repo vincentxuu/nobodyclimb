@@ -21,6 +21,11 @@ database_id = "local"
 binding = "CACHE"
 id = "local"
 
+# R2 Agent Storage (local dev)
+[[r2_buckets]]
+binding = "AGENT_STORAGE"
+bucket_name = "nobodyclimb-agent-local"
+
 # Workers AI Binding (local dev)
 [ai]
 binding = "AI"
@@ -106,6 +111,12 @@ id = "396df52e16864a35a3cb7898fcd686e7"
 binding = "STORAGE"
 
 bucket_name = "nobodyclimb-storage-preview"
+
+[[env.preview.r2_buckets]]
+
+binding = "AGENT_STORAGE"
+
+bucket_name = "nobodyclimb-agent-preview"
 
 
 
@@ -211,6 +222,12 @@ id = "608d1fb3c4424146abe50ab56e246aca"
 binding = "STORAGE"
 
 bucket_name = "nobodyclimb-storage"
+
+[[env.production.r2_buckets]]
+
+binding = "AGENT_STORAGE"
+
+bucket_name = "nobodyclimb-agent-production"
 
 
 

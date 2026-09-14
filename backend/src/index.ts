@@ -9,6 +9,7 @@ import { accessLogsRoutes } from './routes/access-logs'
 import { adminAiRoutes } from './routes/admin-ai'
 import { adminAiHooksRoutes } from './routes/admin-ai-hooks'
 import { adminAiQualityRoutes } from './routes/admin-ai-quality'
+import { adminAiSkillsRoutes } from './routes/admin-ai-skills'
 import { adminAiToolsRoutes } from './routes/admin-ai-tools'
 import { adminSectorsRoutes } from './routes/admin-areas'
 import { adminCragsRoutes } from './routes/admin-crags'
@@ -134,6 +135,7 @@ v1.route('/admin/ai', adminAiRoutes)
 v1.route('/admin/ai/quality', adminAiQualityRoutes)
 v1.route('/admin/ai', adminAiToolsRoutes)
 v1.route('/admin/ai', adminAiHooksRoutes)
+v1.route('/admin/ai', adminAiSkillsRoutes)
 v1.route('/ai', aiRoutes)
 v1.route('/quiz', quizRoutes)
 v1.route('/training', trainingRoutes)

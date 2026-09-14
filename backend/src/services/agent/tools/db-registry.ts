@@ -20,7 +20,7 @@ function withDescriptionOverride(tool: Tool, override: string): Tool {
 
 export async function createDBToolRegistry(
   db: D1Database,
-  opts: { isAuthenticated: boolean; query?: string }
+  opts: { isAuthenticated: boolean; query?: string; requiredTools?: string[] }
 ): Promise<{ registry: ToolRegistry; manifests: ToolManifest[] }> {
   const { results: dbTools } = await db
     .prepare('SELECT name, enabled, description_override, config FROM tools WHERE enabled = 1')
@@ -29,13 +29,23 @@ export async function createDBToolRegistry(
   const enabledNames = new Set((dbTools ?? []).map((r) => r.name))
   const overrides = new Map((dbTools ?? []).map((r) => [r.name, r]))
 
-  let manifests = getActiveManifests(opts.isAuthenticated)
-  if (opts.query) {
-    manifests = selectManifests(opts.query, manifests)
+  // If requiredTools provided (from SkillResolver), use those directly
+  // Otherwise fall back to manifest-based selection
+  let activeToolNames: Set<string>
+  let manifests: ToolManifest[]
+
+  if (opts.requiredTools) {
+    activeToolNames = new Set(opts.requiredTools)
+    manifests = []
+  } else {
+    manifests = getActiveManifests(opts.isAuthenticated)
+    if (opts.query) {
+      manifests = selectManifests(opts.query, manifests)
+    }
+    activeToolNames = new Set(manifests.flatMap((m) => m.tools))
   }
 
   const registry = new ToolRegistry()
-  const activeToolNames = new Set(manifests.flatMap((m) => m.tools))
   for (const name of activeToolNames) {
     if (!enabledNames.has(name)) continue
     const tool = TOOL_MAP[name]
