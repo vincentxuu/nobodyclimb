@@ -347,3 +347,4 @@ export const galleryPhotos = [
     uploadDate: '2023. 12. 27',
   },
 ]
+// CI trigger test 1789357927
