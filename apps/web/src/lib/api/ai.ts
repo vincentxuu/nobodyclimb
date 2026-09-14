@@ -431,3 +431,81 @@ export async function achieveGoal(goalId: string): Promise<void> {
 export async function deleteGoal(goalId: string): Promise<void> {
   await apiClient.delete(`/ai/goals/${goalId}`)
 }
+
+// =============================================
+// Coaching Analysis API
+// =============================================
+
+export interface CoachingExercise {
+  nameZh: string
+  reps: string
+  sets: [number, number]
+  sessionsPerWeek: [number, number]
+}
+
+export interface CoachingWeakness {
+  id: string
+  description: string
+  exercises: string[]
+}
+
+export interface CoachingPersonality {
+  code: string
+  nameZh: string
+  nameEn: string
+  keywords: string[]
+  strengths: string[]
+  blindSpots: string[]
+  trainingSchool: string
+  schoolDescription: string
+}
+
+export interface CoachingLevelRecommendation {
+  label: string
+  daysPerWeek: [number, number]
+  focusAreas: string[]
+  avoid: string[]
+  exercises: CoachingExercise[]
+}
+
+export interface CoachingTrainingProgress {
+  completed: number
+  total: number
+  completionRate: number
+  lastCompleted: { week: number; day: number } | null
+}
+
+export interface CoachingGoal {
+  title: string
+  target: string
+  currentProgress: string | null
+  status: string
+}
+
+export interface CoachingAnalysis {
+  level: string
+  totalAscents: number
+  uniqueCrags: number
+  personality: CoachingPersonality | null
+  weaknesses: CoachingWeakness[]
+  levelRecommendation: CoachingLevelRecommendation | null
+  trainingProgress: CoachingTrainingProgress | null
+  goals: CoachingGoal[]
+}
+
+export async function getCoachingAnalysis(): Promise<CoachingAnalysis> {
+  const res = await apiClient.get<{ success: boolean; data: CoachingAnalysis }>(
+    '/coaching/analysis',
+    { timeout: 30000 }
+  )
+  return res.data.data
+}
+
+export function useCoachingAnalysis() {
+  return useQuery({
+    queryKey: ['coaching-analysis'],
+    queryFn: getCoachingAnalysis,
+    staleTime: 5 * 60 * 1000,
+    retry: 1,
+  })
+}
