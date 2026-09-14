@@ -131,7 +131,7 @@ export function selectManifests(query: string, manifests: ToolManifest[]): ToolM
 // ---------------------------------------------------------------------------
 
 /** Sub-agent 可被直接路由的 manifest 名稱 */
-const DIRECT_ROUTE_MANIFESTS = new Set(['coaching', 'recommend'])
+const DIRECT_ROUTE_MANIFESTS = new Set(['coaching'])
 
 /**
  * 偵測是否應直接路由到 sub-agent（跳過 agent loop 的 LLM tool selection）。

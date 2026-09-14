@@ -237,8 +237,6 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       let subAgent: import('./sub-agents/types').SubAgent | null = null
       if (directRoute === 'coaching') {
         subAgent = (await import('./sub-agents/coaching-agent')).coachingSubAgent
-      } else if (directRoute === 'recommend') {
-        subAgent = (await import('./sub-agents/recommend-agent')).recommendSubAgent
       }
 
       if (subAgent) {

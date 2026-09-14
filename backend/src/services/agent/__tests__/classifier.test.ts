@@ -210,12 +210,9 @@ describe('detectDirectRoute', () => {
     expect(detectDirectRoute('我的弱點是什麼', ALL_MANIFESTS)).toBeNull()
   })
 
-  it('推薦意圖 → 直接路由到 recommend', () => {
-    expect(detectDirectRoute('推薦我一條', ALL_MANIFESTS)).toBe('recommend')
-  })
-
-  it('推薦 + 搜尋混合 → 直接路由（search 是 always-load 被跳過）', () => {
-    expect(detectDirectRoute('推薦路線', ALL_MANIFESTS)).toBe('recommend')
+  it('推薦意圖 → 不直接路由（recommend 需搭配 search，走 agent loop）', () => {
+    expect(detectDirectRoute('推薦我一條', ALL_MANIFESTS)).toBeNull()
+    expect(detectDirectRoute('推薦路線', ALL_MANIFESTS)).toBeNull()
   })
 
   it('混合意圖（coaching + profile）→ 不直接路由', () => {
