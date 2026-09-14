@@ -380,3 +380,73 @@ describe('coachingSubAgent level exercise context', () => {
     expect(context).toContain('等級訓練建議')
   })
 })
+
+// ---------------------------------------------------------------------------
+// gatherContext: AI training history
+// ---------------------------------------------------------------------------
+
+describe('coachingSubAgent AI training history context', () => {
+  it('includes training history when AI plans and progress exist', async () => {
+    const historyDb = {
+      prepare: (sql: string) => ({
+        bind: () => ({
+          all: async () => {
+            if (sql.includes('training_progress')) {
+              return {
+                results: [
+                  { week: 1, day: 1, completed: 1, notes: null },
+                  { week: 1, day: 2, completed: 1, notes: '感覺很好' },
+                  { week: 1, day: 3, completed: 0, notes: null },
+                  { week: 2, day: 1, completed: 1, notes: null },
+                  { week: 2, day: 2, completed: 0, notes: null },
+                  { week: 2, day: 3, completed: 0, notes: null },
+                ],
+              }
+            }
+            return { results: [] }
+          },
+          first: async () => {
+            if (sql.includes('personality_type') && sql.includes('users')) {
+              return { personality_type: 'PGB' }
+            }
+            if (sql.includes('ai_training_feedback')) {
+              return { rating: 'too_easy', comment: '可以再難一點' }
+            }
+            if (sql.includes('ai_training_plans')) {
+              return {
+                week_number: 2,
+                difficulty_level: 3,
+                source: 'ai',
+                plan_content: JSON.stringify({
+                  days: [
+                    { title: '最大力量', exercises: [{ name: '指力板' }, { name: '核心' }] },
+                    { title: '抱石循環', exercises: [{ name: '抱石' }] },
+                    { title: '恢復', exercises: [{ name: '伸展' }] },
+                  ],
+                }),
+                generated_at: '2026-09-14T00:00:00Z',
+              }
+            }
+            return null
+          },
+        }),
+      }),
+    } as unknown as D1Database
+    const ctx = makeCtx({ userId: 'user-1', env: { DB: historyDb } as unknown as Env })
+    const context = await coachingSubAgent.gatherContext({}, ctx)
+    expect(context).toContain('AI 訓練歷史與回饋')
+    expect(context).toContain('難度 3/5')
+    expect(context).toContain('AI 微調')
+    expect(context).toContain('完成率')
+    expect(context).toContain('常跳過的訓練日')
+    expect(context).toContain('第 3 天')
+    expect(context).toContain('太簡單')
+    expect(context).toContain('可以再難一點')
+  })
+
+  it('omits training history when no AI plans exist', async () => {
+    const ctx = makeCtx({ userId: 'user-1' })
+    const context = await coachingSubAgent.gatherContext({}, ctx)
+    expect(context).not.toContain('AI 訓練歷史與回饋')
+  })
+})
