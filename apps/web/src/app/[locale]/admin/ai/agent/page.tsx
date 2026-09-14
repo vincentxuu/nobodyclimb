@@ -153,18 +153,43 @@ function StatCell({
 // =============================================
 
 const AGENT_MODEL_ROLES = [
-  { key: 'orchestrator', label: 'Orchestrator', description: '主決策模型（tool selection）', category: 'text' },
+  {
+    key: 'orchestrator',
+    label: 'Orchestrator',
+    description: '主決策模型（tool selection）',
+    category: 'text',
+  },
   { key: 'hyde', label: 'HyDE / 改寫', description: '假設文件生成、查詢改寫', category: 'text' },
   { key: 'multiQuery', label: 'Multi-Query', description: '多查詢擴展', category: 'text' },
   { key: 'textToSql', label: 'Text-to-SQL', description: '自然語言轉 SQL', category: 'text' },
-  { key: 'judge', label: 'Judge', description: '品質評估（應與 orchestrator 不同家族）', category: 'text' },
+  {
+    key: 'judge',
+    label: 'Judge',
+    description: '品質評估（應與 orchestrator 不同家族）',
+    category: 'text',
+  },
   { key: 'rerank', label: 'Reranker', description: '搜尋結果重排序', category: 'rerank' },
-  { key: 'embedding', label: 'Embedding', description: '向量嵌入（語義搜尋）', category: 'embedding' },
+  {
+    key: 'embedding',
+    label: 'Embedding',
+    description: '向量嵌入（語義搜尋）',
+    category: 'embedding',
+  },
 ] as const
 
 const PIPELINE_MODEL_ROLES = [
-  { key: 'llm_model', label: 'Pipeline 主 LLM', description: '回答生成（Pipeline 模式）', category: 'text' },
-  { key: 'lightweight_model', label: '輕量模型', description: '分類、壓縮、Pipeline judge', category: 'text' },
+  {
+    key: 'llm_model',
+    label: 'Pipeline 主 LLM',
+    description: '回答生成（Pipeline 模式）',
+    category: 'text',
+  },
+  {
+    key: 'lightweight_model',
+    label: '輕量模型',
+    description: '分類、壓縮、Pipeline judge',
+    category: 'text',
+  },
   { key: 'simple_model', label: '簡單查詢模型', description: '簡單問題直接回答', category: 'text' },
 ] as const
 
@@ -189,9 +214,7 @@ const TEXT_MODELS = [
   '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
 ]
 
-const RERANK_MODELS = [
-  '@cf/baai/bge-reranker-v2-m3',
-]
+const RERANK_MODELS = ['@cf/baai/bge-reranker-v2-m3']
 
 const EMBEDDING_MODELS = [
   '@cf/baai/bge-m3',
@@ -328,7 +351,9 @@ function ModelSettingsPanel() {
             })}
           </div>
           <div className="px-5 py-2 bg-wb-05 border-t border-wb-10">
-            <p className="text-xs font-semibold text-wb-60 uppercase tracking-wide">Pipeline 模式</p>
+            <p className="text-xs font-semibold text-wb-60 uppercase tracking-wide">
+              Pipeline 模式
+            </p>
           </div>
           <div className="divide-y divide-wb-10">
             {PIPELINE_MODEL_ROLES.map(({ key, label, description, category }) => {
