@@ -30,12 +30,18 @@ export class CloudflareProvider implements AIProvider {
       } as Parameters<typeof this.ai.run>[1],
       opts.gatewayOptions
     )
-    // parse Workers AI response format
+    // parse Workers AI response format（舊格式 { response } 和新格式 { choices } 都支援）
+    const raw = response as Record<string, unknown>
     const content =
-      (response as { response?: string; result?: { response: string } })?.response ??
-      (response as { result?: { response: string } })?.result?.response ??
+      (raw.response as string) ??
+      (raw.result as { response?: string })?.response ??
+      (raw.choices as Array<{ message?: { content?: string } }>)?.[0]?.message?.content ??
       ''
-    return { content, usage: (response as { usage?: LLMResponse['usage'] }).usage }
+    const usage =
+      (raw.usage as LLMResponse['usage']) ??
+      ((raw.choices as Array<{ message?: unknown }>)?.[0] as { usage?: LLMResponse['usage'] })
+        ?.usage
+    return { content, usage }
   }
 
   async streamChat(
