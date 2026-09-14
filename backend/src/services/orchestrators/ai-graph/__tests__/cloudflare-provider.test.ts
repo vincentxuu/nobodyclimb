@@ -83,6 +83,46 @@ describe('CloudflareProvider response format', () => {
     expect(result.toolCalls[0].name).toBe('weather')
   })
 
+  it('新格式 + response 空字串 fallback 到 choices', async () => {
+    mockAI.run.mockResolvedValueOnce({
+      response: '',
+      choices: [{ message: { content: 'GLM 實際回答', role: 'assistant' } }],
+      usage: { prompt_tokens: 100, completion_tokens: 50, total_tokens: 150 },
+    })
+    const provider = await getProvider()
+    const result = await provider.chat([{ role: 'user', content: 'hi' }])
+    expect(result.content).toBe('GLM 實際回答')
+  })
+
+  it('新格式 tool_calls 在 choices[0].message 裡 + 空頂層 tool_calls', async () => {
+    mockAI.run.mockResolvedValueOnce({
+      response: '',
+      tool_calls: [],
+      choices: [
+        {
+          message: {
+            content: '',
+            tool_calls: [
+              {
+                id: 'call_2',
+                function: { name: 'coaching_agent', arguments: '{"query":"訓練"}' },
+              },
+            ],
+          },
+        },
+      ],
+      usage: { prompt_tokens: 200, completion_tokens: 30, total_tokens: 230 },
+    })
+    const provider = await getProvider()
+    const result = await provider.chatWithTools(
+      [{ role: 'user', content: '訓練' }],
+      [{ name: 'coaching_agent', description: '教練', parameters: {} }]
+    )
+    expect(result.stopReason).toBe('tool_use')
+    expect(result.toolCalls).toHaveLength(1)
+    expect(result.toolCalls[0].name).toBe('coaching_agent')
+  })
+
   it('空回應不 crash', async () => {
     mockAI.run.mockResolvedValueOnce({})
     const provider = await getProvider()

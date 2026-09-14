@@ -21,17 +21,22 @@ function parseWorkersAIResponse(response: unknown) {
   const raw = response as Record<string, unknown>
 
   // content: 舊格式 response → 新格式 choices[0].message.content
+  // 用 || 而非 ??：空字串也 fallback 到 choices 格式
   const choice = (raw.choices as Array<{ message?: Record<string, unknown> }>)?.[0]
-  const content = (raw.response as string) ?? (choice?.message?.content as string) ?? ''
+  const content = (raw.response as string) || (choice?.message?.content as string) || ''
 
   // usage: 頂層 usage 或 choices 旁邊的 usage
   const usage = (raw.usage as { prompt_tokens?: number; completion_tokens?: number }) ?? {}
 
   // tool_calls: 頂層 tool_calls / toolCalls 或 choices[0].message.tool_calls
-  const rawToolCalls =
+  // 用 length 判斷：空陣列也要 fallback
+  const topToolCalls =
     (raw.tool_calls as Array<Record<string, unknown>>) ??
-    (raw.toolCalls as Array<Record<string, unknown>>) ??
-    (choice?.message?.tool_calls as Array<Record<string, unknown>>) ??
+    (raw.toolCalls as Array<Record<string, unknown>>)
+  const choiceToolCalls = choice?.message?.tool_calls as Array<Record<string, unknown>>
+  const rawToolCalls =
+    (topToolCalls?.length ? topToolCalls : null) ??
+    (choiceToolCalls?.length ? choiceToolCalls : null) ??
     []
 
   return { content, usage, rawToolCalls }
