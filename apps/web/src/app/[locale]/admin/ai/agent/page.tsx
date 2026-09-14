@@ -149,6 +149,245 @@ function StatCell({
 }
 
 // =============================================
+// 模型設定面板
+// =============================================
+
+const AGENT_MODEL_ROLES = [
+  {
+    key: 'orchestrator',
+    label: 'Orchestrator',
+    description: '主決策模型（tool selection）',
+    category: 'text',
+  },
+  { key: 'hyde', label: 'HyDE / 改寫', description: '假設文件生成、查詢改寫', category: 'text' },
+  { key: 'multiQuery', label: 'Multi-Query', description: '多查詢擴展', category: 'text' },
+  { key: 'textToSql', label: 'Text-to-SQL', description: '自然語言轉 SQL', category: 'text' },
+  {
+    key: 'judge',
+    label: 'Judge',
+    description: '品質評估（應與 orchestrator 不同家族）',
+    category: 'text',
+  },
+  { key: 'rerank', label: 'Reranker', description: '搜尋結果重排序', category: 'rerank' },
+  {
+    key: 'embedding',
+    label: 'Embedding',
+    description: '向量嵌入（語義搜尋）',
+    category: 'embedding',
+  },
+] as const
+
+const PIPELINE_MODEL_ROLES = [
+  {
+    key: 'llm_model',
+    label: 'Pipeline 主 LLM',
+    description: '回答生成（Pipeline 模式）',
+    category: 'text',
+  },
+  {
+    key: 'lightweight_model',
+    label: '輕量模型',
+    description: '分類、壓縮、Pipeline judge',
+    category: 'text',
+  },
+  { key: 'simple_model', label: '簡單查詢模型', description: '簡單問題直接回答', category: 'text' },
+] as const
+
+const TEXT_MODELS = [
+  '@cf/glm-5.3-flash',
+  '@cf/glm-5.3',
+  '@cf/glm-5.2',
+  '@cf/glm-4.7-flash',
+  '@cf/deepseek-v4-pro-0813',
+  '@cf/deepseek-v4-flash-0731',
+  '@cf/kimi-k2.7-code',
+  '@cf/kimi-k2.6',
+  '@cf/qwen3.8-27b',
+  '@cf/qwen3-30b-a3b-fp8',
+  '@cf/qwen2.5-coder-32b-instruct',
+  '@cf/nemotron-3-120b-a12b',
+  '@cf/gpt-oss-120b',
+  '@cf/gpt-oss-20b',
+  '@cf/gemma-4-26b-a4b-it',
+  '@cf/mistral-small-3.1-24b-instruct',
+  '@cf/meta/llama-4-scout-17b-16e-instruct',
+  '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+]
+
+const RERANK_MODELS = ['@cf/baai/bge-reranker-v2-m3']
+
+const EMBEDDING_MODELS = [
+  '@cf/baai/bge-m3',
+  '@cf/baai/bge-large-en-v1.5',
+  '@cf/baai/bge-base-en-v1.5',
+  '@cf/baai/bge-small-en-v1.5',
+]
+
+const MODEL_OPTIONS: Record<string, string[]> = {
+  text: TEXT_MODELS,
+  rerank: RERANK_MODELS,
+  embedding: EMBEDDING_MODELS,
+}
+
+function ModelSettingsPanel() {
+  const { data: config, isLoading } = useAIConfig()
+  const { mutate: updateConfig, isPending } = useUpdateAIConfig()
+  const [expanded, setExpanded] = useState(false)
+  const [saved, setSaved] = useState(false)
+
+  const currentModels: Record<string, { model?: string; provider?: string }> = (() => {
+    try {
+      return JSON.parse(config?.['agent_models'] ?? '{}')
+    } catch {
+      return {}
+    }
+  })()
+
+  const defaults: Record<string, string> = {
+    orchestrator: '@cf/glm-5.3-flash',
+    hyde: '@cf/glm-4.7-flash',
+    multiQuery: '@cf/glm-4.7-flash',
+    textToSql: '@cf/glm-4.7-flash',
+    judge: '@cf/qwen3-30b-a3b-fp8',
+    rerank: '@cf/baai/bge-reranker-v2-m3',
+    embedding: '@cf/baai/bge-m3',
+    llm_model: '@cf/glm-5.3-flash',
+    lightweight_model: '@cf/glm-4.7-flash',
+    simple_model: '@cf/glm-4.7-flash',
+  }
+
+  const handleAgentModelChange = useCallback(
+    (roleKey: string, model: string) => {
+      const updated = { ...currentModels }
+      if (!updated[roleKey]) updated[roleKey] = {}
+      updated[roleKey].model = model
+      updateConfig(
+        { agent_models: JSON.stringify(updated) },
+        {
+          onSuccess: () => {
+            setSaved(true)
+            setTimeout(() => setSaved(false), 2500)
+          },
+        }
+      )
+    },
+    [currentModels, updateConfig]
+  )
+
+  const handlePipelineModelChange = useCallback(
+    (key: string, model: string) => {
+      updateConfig(
+        { [key]: model },
+        {
+          onSuccess: () => {
+            setSaved(true)
+            setTimeout(() => setSaved(false), 2500)
+          },
+        }
+      )
+    },
+    [updateConfig]
+  )
+
+  if (isLoading) return null
+
+  return (
+    <div className="rounded-xl border border-wb-20 bg-white overflow-hidden">
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="flex w-full items-center justify-between px-5 py-4 hover:bg-wb-05 transition-colors"
+      >
+        <div className="flex items-center gap-3">
+          <Zap className="h-5 w-5 text-wb-60" />
+          <div className="text-left">
+            <h2 className="text-sm font-semibold text-wb-100">模型設定</h2>
+            <p className="mt-0.5 text-xs text-wb-50">每個 Agent 角色可獨立選擇模型</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          {saved && (
+            <span className="flex items-center gap-1.5 text-sm text-emerald-600">
+              <CheckCircle className="h-4 w-4" />
+              已儲存
+            </span>
+          )}
+          {expanded ? (
+            <ChevronDown className="h-4 w-4 text-wb-40" />
+          ) : (
+            <ChevronRight className="h-4 w-4 text-wb-40" />
+          )}
+        </div>
+      </button>
+
+      {expanded && (
+        <div className="border-t border-wb-10">
+          <div className="px-5 py-2 bg-wb-05">
+            <p className="text-xs font-semibold text-wb-60 uppercase tracking-wide">Agent 模式</p>
+          </div>
+          <div className="divide-y divide-wb-10">
+            {AGENT_MODEL_ROLES.map(({ key, label, description, category }) => {
+              const current = currentModels[key]?.model ?? defaults[key] ?? ''
+              const options = MODEL_OPTIONS[category] ?? TEXT_MODELS
+              return (
+                <div key={key} className="flex items-center justify-between px-5 py-3">
+                  <div>
+                    <p className="text-sm font-medium text-wb-100">{label}</p>
+                    <p className="text-xs text-wb-50">{description}</p>
+                  </div>
+                  <select
+                    value={current}
+                    onChange={(e) => handleAgentModelChange(key, e.target.value)}
+                    disabled={isPending}
+                    className="rounded-lg border border-wb-20 bg-white px-3 py-1.5 text-xs font-mono text-wb-80 disabled:opacity-50"
+                  >
+                    {options.map((m) => (
+                      <option key={m} value={m}>
+                        {m.split('/').pop()}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )
+            })}
+          </div>
+          <div className="px-5 py-2 bg-wb-05 border-t border-wb-10">
+            <p className="text-xs font-semibold text-wb-60 uppercase tracking-wide">
+              Pipeline 模式
+            </p>
+          </div>
+          <div className="divide-y divide-wb-10">
+            {PIPELINE_MODEL_ROLES.map(({ key, label, description, category }) => {
+              const current = (config?.[key] as string) ?? defaults[key] ?? ''
+              const options = MODEL_OPTIONS[category] ?? TEXT_MODELS
+              return (
+                <div key={key} className="flex items-center justify-between px-5 py-3">
+                  <div>
+                    <p className="text-sm font-medium text-wb-100">{label}</p>
+                    <p className="text-xs text-wb-50">{description}</p>
+                  </div>
+                  <select
+                    value={current}
+                    onChange={(e) => handlePipelineModelChange(key, e.target.value)}
+                    disabled={isPending}
+                    className="rounded-lg border border-wb-20 bg-white px-3 py-1.5 text-xs font-mono text-wb-80 disabled:opacity-50"
+                  >
+                    {options.map((m) => (
+                      <option key={m} value={m}>
+                        {m.split('/').pop()}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// =============================================
 // React Trace 顯示
 // =============================================
 
@@ -454,6 +693,7 @@ export default function AgentPage() {
       </div>
 
       <StatusPanel />
+      <ModelSettingsPanel />
       <TestQueryPanel />
     </div>
   )

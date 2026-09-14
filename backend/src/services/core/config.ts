@@ -3,8 +3,8 @@ import type { PipelineConfig } from '../orchestrators/pipeline/types'
 
 export const DEFAULT_TOP_K = 5
 export const MIN_VECTOR_SCORE = 0.5
-export const DEFAULT_LLM_MODEL = '@cf/google/gemma-3-12b-it'
-export const DEFAULT_LIGHTWEIGHT_MODEL = '@cf/meta/llama-3.1-8b-instruct'
+export const DEFAULT_LLM_MODEL = '@cf/glm-5.3-flash'
+export const DEFAULT_LIGHTWEIGHT_MODEL = '@cf/glm-4.7-flash'
 
 // 後台可設定的 RAG 策略白名單（Pipeline 模式用）。
 // 必須與 apps/web/src/components/admin/ai-settings/sections.ts 的 rag_strategy options

@@ -12,9 +12,9 @@ describe('loadModelMap', () => {
     const result = await loadModelMap(db)
 
     expect(result.orchestrator.provider).toBe('workers-ai')
-    expect(result.orchestrator.model).toBe('@cf/meta/llama-4-scout-17b-16e-instruct')
-    expect(result.orchestrator.fallback?.model).toBe('@cf/meta/llama-3.1-8b-instruct')
-    expect(result.hyde.model).toBe('@cf/meta/llama-3.1-8b-instruct')
+    expect(result.orchestrator.model).toBe('@cf/glm-5.3-flash')
+    expect(result.orchestrator.fallback?.model).toBe('@cf/glm-4.7-flash')
+    expect(result.hyde.model).toBe('@cf/glm-4.7-flash')
   })
 
   it('merges partial react_models config with defaults', async () => {
@@ -36,7 +36,7 @@ describe('loadModelMap', () => {
     expect(result.orchestrator.model).toBe('@cf/meta/llama-3.3-70b-instruct-fp8-fast')
     expect(result.orchestrator.temperature).toBe(0.3)
     expect(result.orchestrator.maxTokens).toBe(1024)
-    expect(result.orchestrator.fallback?.model).toBe('@cf/meta/llama-3.1-8b-instruct')
-    expect(result.judge.model).toBe('@cf/meta/llama-3.1-8b-instruct')
+    expect(result.orchestrator.fallback?.model).toBe('@cf/glm-4.7-flash')
+    expect(result.judge.model).toBe('@cf/qwen3-30b-a3b-fp8')
   })
 })

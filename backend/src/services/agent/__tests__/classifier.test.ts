@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { classifyQuery, selectManifests } from '../classifier'
+import { classifyQuery, detectDirectRoute, selectManifests } from '../classifier'
 import type { ToolManifest } from '../types'
 
 // ---------------------------------------------------------------------------
@@ -94,8 +94,16 @@ const ALL_MANIFESTS: ToolManifest[] = [
   {
     name: 'coaching',
     description: '教練',
-    triggers: ['訓練', '怎麼進步'],
-    tools: ['suggest_training'],
+    triggers: ['訓練', '練習', '怎麼進步', '弱點', '加強', '指力', '耐力'],
+    tools: ['coaching_agent'],
+    promptFragment: '',
+    requiresAuth: true,
+  },
+  {
+    name: 'goals',
+    description: '目標',
+    triggers: ['目標', '挑戰', '想要達到', '進度', '計畫'],
+    tools: ['manage_goals'],
     promptFragment: '',
     requiresAuth: true,
   },
@@ -184,5 +192,43 @@ describe('selectManifests', () => {
     // 不應載入不相關的 coaching/memory
     expect(names).not.toContain('coaching')
     expect(names).not.toContain('memory')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// detectDirectRoute（Cascading Router 第一層）
+// ---------------------------------------------------------------------------
+
+describe('detectDirectRoute', () => {
+  it('教練意圖 → 直接路由到 coaching', () => {
+    expect(detectDirectRoute('怎麼進步', ALL_MANIFESTS)).toBe('coaching')
+    expect(detectDirectRoute('加強指力', ALL_MANIFESTS)).toBe('coaching')
+    expect(detectDirectRoute('耐力訓練怎麼練', ALL_MANIFESTS)).toBe('coaching')
+  })
+
+  it('教練 + profile 混合意圖 → 不直接路由', () => {
+    expect(detectDirectRoute('我的弱點是什麼', ALL_MANIFESTS)).toBeNull()
+  })
+
+  it('推薦意圖 → 不直接路由（recommend 需搭配 search，走 agent loop）', () => {
+    expect(detectDirectRoute('推薦我一條', ALL_MANIFESTS)).toBeNull()
+    expect(detectDirectRoute('推薦路線', ALL_MANIFESTS)).toBeNull()
+  })
+
+  it('混合意圖（coaching + profile）→ 不直接路由', () => {
+    expect(detectDirectRoute('我的訓練紀錄', ALL_MANIFESTS)).toBeNull()
+  })
+
+  it('搜尋意圖 → 不直接路由（非 sub-agent）', () => {
+    expect(detectDirectRoute('龍洞的路線', ALL_MANIFESTS)).toBeNull()
+    expect(detectDirectRoute('天氣怎麼樣', ALL_MANIFESTS)).toBeNull()
+  })
+
+  it('無 trigger 命中 → 不直接路由', () => {
+    expect(detectDirectRoute('今天好熱', ALL_MANIFESTS)).toBeNull()
+  })
+
+  it('空查詢 → 不直接路由', () => {
+    expect(detectDirectRoute('', ALL_MANIFESTS)).toBeNull()
   })
 })

@@ -69,7 +69,7 @@ describe('BadgeShowcase', () => {
     fireEvent.click(storyButton)
 
     // Button should be active (has different background)
-    expect(storyButton).toHaveClass('bg-gray-900')
+    expect(storyButton).toHaveClass('bg-brand-dark')
   })
 
   it('shows "即將解鎖" section when there are badges near completion', () => {
