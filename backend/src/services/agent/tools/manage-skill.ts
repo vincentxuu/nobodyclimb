@@ -1,10 +1,9 @@
-import {
-  computeContentHash,
-  estimateTokenCount,
-  saveSkillContent,
-  serializeSkillMd,
-} from '../skills/loader'
+import { computeContentHash, estimateTokenCount, serializeSkillMd } from '../skills/loader'
 import type { Tool, ToolContext, ToolResult } from '../types'
+
+function r2Path(slug: string, userId: string | null): string {
+  return userId ? `skills/personal/${userId}/${slug}` : `skills/${slug}`
+}
 
 export const manageSkillTool: Tool = {
   name: 'manage_skill',
@@ -42,8 +41,10 @@ export const manageSkillTool: Tool = {
     required: ['action', 'name'],
   },
 
-  prompt(): string {
-    return '建立、更新或刪除 managed skill。每個 skill 是一個 SKILL.md 檔案，包含 frontmatter（name + description）和 markdown 正文。建立的 skill 會立即可用於後續對話。'
+  prompt(ctx: ToolContext): string {
+    return ctx.userId
+      ? '建立、更新或刪除你的個人 skill。建立的 skill 只有你看得到，不會影響其他使用者。'
+      : '建立、更新或刪除 managed skill（需登入才能使用）。'
   },
 
   async execute(input: unknown, ctx: ToolContext): Promise<unknown> {
@@ -53,6 +54,10 @@ export const manageSkillTool: Tool = {
       description?: string
       body?: string
       allowed_tools?: string[]
+    }
+
+    if (!ctx.userId) {
+      return { error: '需要登入才能管理 skill' }
     }
 
     const slug = name
@@ -67,24 +72,25 @@ export const manageSkillTool: Tool = {
 
     const db = ctx.env.DB
     const storage = ctx.env.AGENT_STORAGE
+    const userId = ctx.userId
+    const r2Prefix = r2Path(slug, userId)
 
     if (action === 'delete') {
       const existing = await db
-        .prepare("SELECT id, source FROM skill WHERE tenant_id = 'default' AND slug = ?")
-        .bind(slug)
-        .first<{ id: string; source: string }>()
+        .prepare(
+          "SELECT id, source, owner_id FROM skill WHERE tenant_id = 'default' AND slug = ? AND scope = 'personal' AND owner_id = ?"
+        )
+        .bind(slug, userId)
+        .first<{ id: string; source: string; owner_id: string }>()
 
       if (!existing) {
-        return { error: `找不到 skill: ${slug}` }
-      }
-      if (existing.source === 'builtin') {
-        return { error: '無法刪除 builtin skill' }
+        return { error: `找不到你的 personal skill: ${slug}` }
       }
 
       await db.prepare('DELETE FROM skill WHERE id = ?').bind(existing.id).run()
 
       try {
-        const listed = await storage.list({ prefix: `skills/${slug}/` })
+        const listed = await storage.list({ prefix: `${r2Prefix}/` })
         for (const obj of listed.objects) {
           await storage.delete(obj.key)
         }
@@ -111,50 +117,50 @@ export const manageSkillTool: Tool = {
     const contentHash = computeContentHash(skillMdContent)
     const tokenCount = estimateTokenCount(description + body)
 
-    // 存 R2
-    await saveSkillContent(storage, slug, skillMdContent)
+    // 存 R2（personal 路徑隔離）
+    await storage.put(`${r2Prefix}/SKILL.md`, skillMdContent, {
+      httpMetadata: { contentType: 'text/markdown' },
+    })
 
-    // 查現有 skill
+    // 查現有 personal skill
     const existing = await db
-      .prepare("SELECT id FROM skill WHERE tenant_id = 'default' AND slug = ?")
-      .bind(slug)
+      .prepare(
+        "SELECT id FROM skill WHERE tenant_id = 'default' AND slug = ? AND scope = 'personal' AND owner_id = ?"
+      )
+      .bind(slug, userId)
       .first<{ id: string }>()
 
     if (action === 'create' && existing) {
-      return { error: `skill "${slug}" 已存在，請用 update` }
+      return { error: `你已有 skill「${slug}」，請用 update` }
     }
 
     const skillId = existing?.id ?? crypto.randomUUID()
     const versionId = crypto.randomUUID()
 
     if (!existing) {
-      // 建 skill
       await db
         .prepare(
-          `INSERT INTO skill (id, tenant_id, slug, display_name, scope, source, latest_version_id, created_at)
-           VALUES (?, 'default', ?, ?, 'org', 'custom', ?, datetime('now'))`
+          `INSERT INTO skill (id, tenant_id, slug, display_name, scope, owner_id, source, latest_version_id, created_at)
+           VALUES (?, 'default', ?, ?, 'personal', ?, 'custom', ?, datetime('now'))`
         )
-        .bind(skillId, slug, name, versionId)
+        .bind(skillId, slug, name, userId, versionId)
         .run()
 
-      // 建 binding
       await db
         .prepare(
           `INSERT OR IGNORE INTO skill_binding (id, tenant_id, subject_type, subject_id, skill_id, enabled)
-           VALUES (?, 'default', 'agent', 'default', ?, 1)`
+           VALUES (?, 'default', 'user', ?, ?, 1)`
         )
-        .bind(crypto.randomUUID(), skillId)
+        .bind(crypto.randomUUID(), userId, skillId)
         .run()
     }
 
-    // 計算 version number
     const lastVer = await db
       .prepare('SELECT MAX(version_number) AS max_ver FROM skill_version WHERE skill_id = ?')
       .bind(skillId)
       .first<{ max_ver: number | null }>()
     const nextVersion = (lastVer?.max_ver ?? 0) + 1
 
-    // 建 version
     await db
       .prepare(
         `INSERT INTO skill_version (id, skill_id, version_number, name, description, body, allowed_tools, content_hash, status, token_count, published_at, created_at)
@@ -173,7 +179,6 @@ export const manageSkillTool: Tool = {
       )
       .run()
 
-    // 更新 latest_version_id
     await db
       .prepare('UPDATE skill SET latest_version_id = ? WHERE id = ?')
       .bind(versionId, skillId)
@@ -184,6 +189,7 @@ export const manageSkillTool: Tool = {
       slug,
       version: nextVersion,
       tokenCount,
+      scope: 'personal',
     }
   },
 
@@ -193,10 +199,10 @@ export const manageSkillTool: Tool = {
       return { content: `錯誤：${data.error}`, metadata: { error: true } }
     }
     if (data.action === 'deleted') {
-      return { content: `已刪除 skill「${data.slug}」。` }
+      return { content: `已刪除你的 skill「${data.slug}」。` }
     }
     return {
-      content: `已${data.action === 'created' ? '建立' : '更新'} skill「${data.slug}」（版本 ${data.version}，約 ${data.tokenCount} tokens）。下次對話即可使用。`,
+      content: `已${data.action === 'created' ? '建立' : '更新'}你的個人 skill「${data.slug}」（版本 ${data.version}，約 ${data.tokenCount} tokens）。下次對話即可使用。`,
     }
   },
 }
