@@ -715,145 +715,136 @@ adminAiSkillsRoutes.get('/skills/:id/invocations', async (c) => {
   })
 })
 
-// POST /skills/seed-anthropic — import 6 official Anthropic skills from GitHub
-adminAiSkillsRoutes.post('/skills/seed-anthropic', async (c) => {
-  const ANTHROPIC_SKILLS = ['docx', 'pdf', 'pptx', 'xlsx', 'mcp-builder', 'skill-creator']
-  const GITHUB_RAW = 'https://raw.githubusercontent.com/anthropics/skills/main/skills'
-  const GITHUB_API = 'https://api.github.com/repos/anthropics/skills/contents/skills'
-  const ghHeaders = { 'User-Agent': 'NobodyClimb' }
+// POST /skills/import-github — import a skill from any GitHub repo directory
+// Body: { repo: "owner/repo", path: "skills/docx", branch?: "main" }
+const importGithubSchema = z.object({
+  repo: z.string().min(3),
+  path: z.string().min(1),
+  branch: z.string().default('main'),
+})
 
-  const results: Array<{
-    slug: string
-    name?: string
-    description?: string
-    files?: number
-    tokenCount?: number
-    error?: string
-  }> = []
+adminAiSkillsRoutes.post(
+  '/skills/import-github',
+  validator('json', importGithubSchema),
+  async (c) => {
+    const { repo, path: skillPath, branch } = c.req.valid('json')
+    const ghHeaders: Record<string, string> = { 'User-Agent': 'NobodyClimb' }
+    const slug = skillPath
+      .split('/')
+      .pop()!
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, '-')
 
-  for (const slug of ANTHROPIC_SKILLS) {
-    try {
-      // 1. Download SKILL.md
-      const skillMdRes = await fetch(`${GITHUB_RAW}/${slug}/SKILL.md`, {
-        headers: ghHeaders,
-      })
-      if (!skillMdRes.ok) {
-        results.push({
-          slug,
-          error: `Failed to fetch SKILL.md: ${skillMdRes.status}`,
-        })
-        continue
-      }
-      const skillMdContent = await skillMdRes.text()
+    // 1. Download SKILL.md
+    const rawUrl = `https://raw.githubusercontent.com/${repo}/${branch}/${skillPath}/SKILL.md`
+    const skillMdRes = await fetch(rawUrl, { headers: ghHeaders })
+    if (!skillMdRes.ok) {
+      return c.json(
+        { success: false, error: 'NotFound', message: `SKILL.md not found at ${rawUrl}` },
+        404
+      )
+    }
+    const skillMdContent = await skillMdRes.text()
 
-      // 2. Parse frontmatter
-      const parsed = parseSkillMd(skillMdContent)
-      const name = (parsed.frontmatter.name as string) ?? slug
-      const description =
-        (parsed.frontmatter.description as string) ?? `Anthropic official skill: ${slug}`
+    // 2. Parse frontmatter
+    const parsed = parseSkillMd(skillMdContent)
+    const name = (parsed.frontmatter.name as string) ?? slug
+    const description =
+      (parsed.frontmatter.description as string) ?? `Imported from ${repo}/${skillPath}`
 
-      // 3. Upload SKILL.md to R2
-      await c.env.AGENT_STORAGE.put(`skills/${slug}/SKILL.md`, skillMdContent, {
-        httpMetadata: { contentType: 'text/markdown' },
-      })
+    // 3. Upload SKILL.md to R2
+    await c.env.AGENT_STORAGE.put(`skills/${slug}/SKILL.md`, skillMdContent, {
+      httpMetadata: { contentType: 'text/markdown' },
+    })
 
-      // 4. Download and upload subsidiary files
-      const files: Array<{ path: string; size: number }> = []
-
-      const dirRes = await fetch(`${GITHUB_API}/${slug}`, {
-        headers: ghHeaders,
-      })
-      if (dirRes.ok) {
-        const items = (await dirRes.json()) as Array<{
-          name: string
-          type: string
-          url?: string
-          download_url?: string
-        }>
-
-        for (const item of items) {
-          if (item.type === 'dir') {
-            await fetchDirRecursive(
-              c.env.AGENT_STORAGE,
-              item.url!,
-              slug,
-              item.name,
-              files,
-              ghHeaders
-            )
-          } else if (
-            item.type === 'file' &&
-            item.name !== 'SKILL.md' &&
-            item.name !== 'LICENSE.txt' &&
-            item.download_url
-          ) {
-            const fileRes = await fetch(item.download_url, {
-              headers: ghHeaders,
-            })
-            const content = await fileRes.arrayBuffer()
-            await c.env.AGENT_STORAGE.put(`skills/${slug}/${item.name}`, content)
-            files.push({ path: item.name, size: content.byteLength })
-          }
+    // 4. Download and upload subsidiary files
+    const files: Array<{ path: string; size: number }> = []
+    const apiUrl = `https://api.github.com/repos/${repo}/contents/${skillPath}?ref=${branch}`
+    const dirRes = await fetch(apiUrl, { headers: ghHeaders })
+    if (dirRes.ok) {
+      const items = (await dirRes.json()) as Array<{
+        name: string
+        type: string
+        url?: string
+        download_url?: string
+      }>
+      for (const item of items) {
+        if (item.type === 'dir') {
+          await fetchDirRecursive(c.env.AGENT_STORAGE, item.url!, slug, item.name, files, ghHeaders)
+        } else if (
+          item.type === 'file' &&
+          item.name !== 'SKILL.md' &&
+          item.name !== 'LICENSE.txt' &&
+          item.download_url
+        ) {
+          const fileRes = await fetch(item.download_url, { headers: ghHeaders })
+          const content = await fileRes.arrayBuffer()
+          await c.env.AGENT_STORAGE.put(`skills/${slug}/${item.name}`, content)
+          files.push({ path: item.name, size: content.byteLength })
         }
       }
+    }
 
-      // 5. Create DB records
-      const skillId = `sk_anthropic_${slug.replace(/-/g, '_')}`
-      const versionId = `skv_anthropic_${slug.replace(/-/g, '_')}_1`
-      const contentHash = computeContentHash(skillMdContent)
-      const tokenCount = estimateTokenCount(parsed.body)
+    // 5. Create DB records
+    const skillId = crypto.randomUUID()
+    const versionId = crypto.randomUUID()
+    const contentHash = computeContentHash(skillMdContent)
+    const tokenCount = estimateTokenCount(parsed.body)
 
-      // Upsert skill
+    await c.env.DB.prepare(
+      `INSERT OR IGNORE INTO skill (id, tenant_id, slug, display_name, scope, source, latest_version_id, created_at)
+       VALUES (?, 'default', ?, ?, 'org', 'marketplace', ?, datetime('now'))`
+    )
+      .bind(skillId, slug, name, versionId)
+      .run()
+
+    const existingSkill = await c.env.DB.prepare(
+      "SELECT id FROM skill WHERE tenant_id = 'default' AND slug = ?"
+    )
+      .bind(slug)
+      .first<{ id: string }>()
+    const actualSkillId = existingSkill?.id ?? skillId
+
+    await c.env.DB.prepare(
+      `INSERT OR REPLACE INTO skill_version (id, skill_id, version_number, name, description, body, content_hash, status, token_count, published_at, created_at)
+       VALUES (?, ?, 1, ?, ?, ?, ?, 'published', ?, datetime('now'), datetime('now'))`
+    )
+      .bind(versionId, actualSkillId, name, description, parsed.body, contentHash, tokenCount)
+      .run()
+
+    await c.env.DB.prepare('UPDATE skill SET latest_version_id = ? WHERE id = ?')
+      .bind(versionId, actualSkillId)
+      .run()
+
+    for (const file of files) {
       await c.env.DB.prepare(
-        `INSERT OR REPLACE INTO skill (id, tenant_id, slug, display_name, scope, source, latest_version_id, created_at)
-         VALUES (?, 'default', ?, ?, 'org', 'marketplace', ?, datetime('now'))`
+        `INSERT OR IGNORE INTO skill_file (id, version_id, path, blob_key, size_bytes)
+         VALUES (?, ?, ?, ?, ?)`
       )
-        .bind(skillId, slug, name, versionId)
+        .bind(crypto.randomUUID(), versionId, file.path, `skills/${slug}/${file.path}`, file.size)
         .run()
+    }
 
-      // Upsert version
-      await c.env.DB.prepare(
-        `INSERT OR REPLACE INTO skill_version (id, skill_id, version_number, name, description, body, content_hash, status, token_count, published_at, created_at)
-         VALUES (?, ?, 1, ?, ?, ?, ?, 'published', ?, datetime('now'), datetime('now'))`
-      )
-        .bind(versionId, skillId, name, description, parsed.body, contentHash, tokenCount)
-        .run()
+    await c.env.DB.prepare(
+      `INSERT OR IGNORE INTO skill_binding (id, tenant_id, subject_type, subject_id, skill_id, enabled)
+       VALUES (?, 'default', 'agent', 'default', ?, 1)`
+    )
+      .bind(crypto.randomUUID(), actualSkillId)
+      .run()
 
-      // Insert file records
-      for (const file of files) {
-        await c.env.DB.prepare(
-          `INSERT OR IGNORE INTO skill_file (id, version_id, path, blob_key, size_bytes)
-           VALUES (?, ?, ?, ?, ?)`
-        )
-          .bind(crypto.randomUUID(), versionId, file.path, `skills/${slug}/${file.path}`, file.size)
-          .run()
-      }
-
-      // Binding (enabled by default)
-      await c.env.DB.prepare(
-        `INSERT OR IGNORE INTO skill_binding (id, tenant_id, subject_type, subject_id, skill_id, enabled)
-         VALUES (?, 'default', 'agent', 'default', ?, 1)`
-      )
-        .bind(`sb_anthropic_${slug.replace(/-/g, '_')}`, skillId)
-        .run()
-
-      results.push({
+    return c.json({
+      success: true,
+      data: {
         slug,
         name,
         description: description.slice(0, 120),
         files: files.length,
         tokenCount,
-      })
-    } catch (err) {
-      results.push({
-        slug,
-        error: err instanceof Error ? err.message : String(err),
-      })
-    }
+        source: `${repo}/${skillPath}`,
+      },
+    })
   }
-
-  return c.json({ success: true, data: results })
-})
+)
 
 async function fetchDirRecursive(
   storage: R2Bucket,
