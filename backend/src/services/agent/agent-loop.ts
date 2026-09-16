@@ -244,7 +244,11 @@ export async function runAgentLoop(
   const finalMessages = [...messages]
   finalMessages.push({
     role: 'user',
-    content: '請根據以上工具查詢結果，直接回答用戶的問題。不要再使用工具。',
+    content:
+      '請根據以上工具查詢結果，直接回答用戶的問題。不要再使用工具。\n\n' +
+      '【嚴格規定】只輸出給使用者看的最終回答。' +
+      '禁止輸出任何內部推理過程（如「我需要」「讓我看看」「根據規則」）。' +
+      '禁止重複相同段落。若工具結果與使用者聲明矛盾，以使用者的聲明為準。',
   })
   const finalSpan = startSpan(langfuseParent ?? null, `turn-${turn + 1}-final`)
   const finalCallStart = Date.now()

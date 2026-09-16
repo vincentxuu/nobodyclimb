@@ -14,7 +14,6 @@ import type { ProviderName as LegacyProviderName } from '../orchestrators/ai-gra
 import { runAgentLoop } from './agent-loop'
 import { KVAgentCache } from './cache'
 import { classifyQuery, GREETING_RESPONSE, SYSTEM_RESPONSE } from './classifier'
-import { runOutputGuards } from './guards'
 import { createBuiltinHooks } from './hooks/builtins'
 import { HookBus } from './hooks/bus'
 import { isHookEnabled, loadHookRecords } from './hooks/loader'
@@ -97,6 +96,29 @@ export async function loadModelMap(db: D1Database): Promise<ModelMap> {
   } catch {
     return DEFAULT_MODEL_MAP
   }
+}
+
+// ---------------------------------------------------------------------------
+// 共用：建立 mini HookBus 跑 post_loop gates（供快速路徑使用）
+// ---------------------------------------------------------------------------
+
+async function runPostLoopGuards(
+  answer: string,
+  query: string,
+  env: Env,
+  models: ModelMap,
+  hookRecords?: import('./hooks/types').HookRecord[]
+): Promise<string> {
+  const records = hookRecords ?? (await loadHookRecords(env.DB))
+  const hooks = createBuiltinHooks({ env, userId: null, models, hookRecords: records })
+  const bus = new HookBus()
+  for (const hook of hooks) {
+    if (hook.event === 'post_loop' && isHookEnabled(records, hook.id)) {
+      bus.register(hook)
+    }
+  }
+  const result = await bus.runGates('post_loop', { answer, query, models, env })
+  return result.replacement ?? answer
 }
 
 // ---------------------------------------------------------------------------
@@ -195,9 +217,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
         ],
         { model: models.hyde.model, maxTokens: 512, temperature: 0.3 }
       )
-      // 通用知識也過 output guards
-      const guardResult = runOutputGuards(response.content)
-      const answer = guardResult.cleanedAnswer ?? response.content
+      const answer = await runPostLoopGuards(response.content, query, env, models)
       const tracker = new DefaultTokenTracker()
       tracker.record(
         models.hyde.provider,
@@ -270,8 +290,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
           await params.onProgress({ type: 'progress', tool: subAgent.name, status: 'done' })
         }
 
-        const guardResult = runOutputGuards(result.answer)
-        const finalAnswer = guardResult.cleanedAnswer ?? result.answer
+        const finalAnswer = await runPostLoopGuards(result.answer, query, env, models)
 
         if (waitUntilCtx && userId) {
           waitUntilCtx.waitUntil(extractMemoriesFromQuery(query, userId, env.DB, env.AI))
@@ -314,7 +333,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
 
   // Build HookBus with DB-controlled enable/disable
   const hookBus = new HookBus()
-  const builtinHooks = createBuiltinHooks({ env, userId, models, langfuseTrace })
+  const builtinHooks = createBuiltinHooks({ env, userId, models, langfuseTrace, hookRecords })
   for (const hook of builtinHooks) {
     if (isHookEnabled(hookRecords, `builtin:${hook.name}`)) {
       hookBus.register(hook)
@@ -386,8 +405,13 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     }
   )
 
-  // 6. Output guards via HookBus
-  const postLoopResult = await hookBus.runGates('post_loop', { answer: result.answer })
+  // 6. Output guards via HookBus（偵測 + 重生成邏輯都在 builtin:output_guard hook 中）
+  const postLoopResult = await hookBus.runGates('post_loop', {
+    answer: result.answer,
+    query,
+    models,
+    env,
+  })
   const finalAnswer = postLoopResult.replacement ?? result.answer
   if (!postLoopResult.allow) {
     console.warn('[agent] post_loop hook denied', { reason: postLoopResult.reason })
