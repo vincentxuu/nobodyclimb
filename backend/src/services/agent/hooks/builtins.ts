@@ -109,8 +109,13 @@ async function retryGeneration(
 // ---------------------------------------------------------------------------
 
 const DEFAULT_FALLBACK = '抱歉，AI 助理暫時無法處理您的問題，請稍後再試。'
-const DEFAULT_RETRY_PROMPT =
-  '你是 NobodyClimb 攀岩助理。用繁體中文回答。只輸出給使用者看的最終回答，禁止輸出任何內部推理、分析過程或重複內容。'
+const DEFAULT_RETRY_PROMPT = `你是 NobodyClimb 攀岩助理。用繁體中文回答。只輸出給使用者看的最終回答，禁止輸出任何內部推理、分析過程或重複內容。
+
+格式規則：
+- 推薦路線格式：「⛰ 路線名稱，難度等級：5.10a，類型：運攀，岩場：龍洞。描述。」（一段式）
+- 若資料有路線連結，用 [路線名稱](連結) 格式
+- 列表用 - 符號，禁止 ## 標題
+- 回答結尾加建議問題，格式：---SUGGESTIONS---\\n1. 問句？\\n2. 問句？\\n3. 問句？`
 
 export function createBuiltinHooks(deps: {
   env: Env
