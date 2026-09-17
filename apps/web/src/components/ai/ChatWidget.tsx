@@ -2,6 +2,7 @@
 
 import {
   ChevronLeft,
+  Expand,
   History,
   Loader2,
   MessageCircle,
@@ -13,6 +14,7 @@ import {
   X,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import type { AIChatHistoryMessage, AiQuota, ChatSession } from '@/lib/api/ai'
@@ -780,6 +782,17 @@ export function ChatWidget() {
                   <ChevronLeft className="h-4 w-4" />
                 </button>
               )}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false)
+                  window.location.href = '/chat'
+                }}
+                className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                aria-label="展開全螢幕"
+              >
+                <Expand className="h-4 w-4" />
+              </button>
               <button
                 type="button"
                 onClick={() => {
