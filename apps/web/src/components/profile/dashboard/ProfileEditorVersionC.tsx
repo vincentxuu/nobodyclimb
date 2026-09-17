@@ -344,9 +344,9 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
   const progress = ((currentStep + 1) / steps.length) * 100
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-gray-50 to-white">
+    <div className="flex min-h-screen flex-col bg-linear-to-b from-gray-50 to-white">
       {/* 頂部進度條 */}
-      <div className="sticky top-0 z-10 bg-white/80 backdrop-blur">
+      <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm">
         <div className="h-1 bg-gray-100">
           <motion.div
             className="h-full bg-gray-900"
@@ -432,7 +432,7 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
             </div>
 
             {/* 步驟內容 */}
-            <div className="rounded-lg bg-white p-6 shadow-sm">{currentStepData.component}</div>
+            <div className="rounded-lg bg-white p-6 shadow-xs">{currentStepData.component}</div>
           </motion.div>
         </AnimatePresence>
       </div>

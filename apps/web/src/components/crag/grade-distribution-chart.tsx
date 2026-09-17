@@ -75,7 +75,7 @@ export const GradeDistributionChart: React.FC<GradeDistributionChartProps> = ({
                 />
                 {count > 0 && (
                   <div className="absolute inset-0 flex items-center px-3">
-                    <span className="text-xs font-semibold text-white drop-shadow-sm">{count}</span>
+                    <span className="text-xs font-semibold text-white drop-shadow-xs">{count}</span>
                   </div>
                 )}
               </div>

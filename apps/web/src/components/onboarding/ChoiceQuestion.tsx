@@ -179,7 +179,7 @@ export function ChoiceQuestion({ question, onSubmit, onSkip, onComplete }: Choic
               value={customText}
               onChange={(e) => setCustomText(e.target.value)}
               placeholder="請描述你的開始..."
-              className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-[#1B1A1A] placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-[#1B1A1A] placeholder:text-gray-400 focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
               autoFocus
             />
             <Button
@@ -258,7 +258,7 @@ export function ChoiceQuestion({ question, onSubmit, onSkip, onComplete }: Choic
             value={followUpText}
             onChange={(e) => setFollowUpText(e.target.value)}
             placeholder={question.followUpPlaceholder || '輸入你的故事...'}
-            className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-[#1B1A1A] placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-[#1B1A1A] placeholder:text-gray-400 focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
             autoFocus
           />
 

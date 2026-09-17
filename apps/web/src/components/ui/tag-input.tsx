@@ -75,7 +75,7 @@ export function TagInput({
         onKeyDown={handleKeyDown}
         placeholder={value.length === 0 ? placeholder : ''}
         disabled={disabled}
-        className="min-w-[120px] flex-1 border-none bg-transparent text-sm outline-none placeholder:text-gray-400"
+        className="min-w-[120px] flex-1 border-none bg-transparent text-sm outline-hidden placeholder:text-gray-400"
       />
     </div>
   )

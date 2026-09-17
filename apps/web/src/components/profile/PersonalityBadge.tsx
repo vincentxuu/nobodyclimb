@@ -32,7 +32,7 @@ export function PersonalityBadge({
     <div className={cn('inline-block', className)}>
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center gap-2 rounded-xl border px-3 py-1.5 transition-colors hover:shadow-sm bg-gray-50"
+        className="flex items-center gap-2 rounded-xl border px-3 py-1.5 transition-colors hover:shadow-xs bg-gray-50"
         style={{ borderColor: color + '40' }}
       >
         <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
@@ -69,7 +69,7 @@ export function PersonalityBadge({
       </button>
       {isExpanded && (
         <div
-          className="mt-2 rounded-xl border p-4 shadow-sm"
+          className="mt-2 rounded-xl border p-4 shadow-xs"
           style={{ borderColor: color + '30', backgroundColor: color + '08' }}
         >
           <div className="mb-2">

@@ -423,7 +423,7 @@ export default function AdminUserManagement() {
       {/* 統計卡片 */}
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white rounded-lg shadow-sm border border-wb-20 p-5">
+          <div className="bg-white rounded-lg shadow-xs border border-wb-20 p-5">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-brand-yellow-100/10 rounded-lg">
                 <Users className="h-5 w-5 text-brand-yellow-200" />
@@ -434,7 +434,7 @@ export default function AdminUserManagement() {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow-sm border border-wb-20 p-5">
+          <div className="bg-white rounded-lg shadow-xs border border-wb-20 p-5">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-wb-90/10 rounded-lg">
                 <UserCheck className="h-5 w-5 text-wb-90" />
@@ -446,7 +446,7 @@ export default function AdminUserManagement() {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow-sm border border-wb-20 p-5">
+          <div className="bg-white rounded-lg shadow-xs border border-wb-20 p-5">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-brand-yellow-200/10 rounded-lg">
                 <TrendingUp className="h-5 w-5 text-brand-yellow-200" />
@@ -457,7 +457,7 @@ export default function AdminUserManagement() {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow-sm border border-wb-20 p-5">
+          <div className="bg-white rounded-lg shadow-xs border border-wb-20 p-5">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-brand-yellow-100/10 rounded-lg">
                 <Calendar className="h-5 w-5 text-brand-yellow-200" />
@@ -472,7 +472,7 @@ export default function AdminUserManagement() {
       )}
 
       {/* 搜尋和篩選 */}
-      <div className="bg-white rounded-lg shadow-sm border border-wb-20 p-4 space-y-3">
+      <div className="bg-white rounded-lg shadow-xs border border-wb-20 p-4 space-y-3">
         <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-3">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-wb-60" />
@@ -481,7 +481,7 @@ export default function AdminUserManagement() {
               placeholder="搜尋用戶名稱、Email..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white text-wb-100 border border-wb-20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary placeholder:text-wb-50"
+              className="w-full pl-10 pr-4 py-2 bg-white text-wb-100 border border-wb-20 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-primary/50 focus:border-primary placeholder:text-wb-50"
             />
           </div>
           <select
@@ -490,7 +490,7 @@ export default function AdminUserManagement() {
               setRoleFilter(e.target.value)
               setPage(1)
             }}
-            className="px-4 py-2 bg-white text-wb-100 border border-wb-20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+            className="px-4 py-2 bg-white text-wb-100 border border-wb-20 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-primary/50 focus:border-primary"
           >
             <option value="">所有角色</option>
             <option value="user">一般用戶</option>
@@ -503,7 +503,7 @@ export default function AdminUserManagement() {
               setStatusFilter(e.target.value)
               setPage(1)
             }}
-            className="px-4 py-2 bg-white text-wb-100 border border-wb-20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+            className="px-4 py-2 bg-white text-wb-100 border border-wb-20 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-primary/50 focus:border-primary"
           >
             <option value="">所有帳號狀態</option>
             <option value="active">已啟用</option>
@@ -581,7 +581,7 @@ export default function AdminUserManagement() {
       </div>
 
       {/* 用戶列表 */}
-      <div className="bg-white rounded-lg shadow-sm border border-wb-20 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-xs border border-wb-20 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>

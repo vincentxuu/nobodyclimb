@@ -33,7 +33,7 @@ export function ResultTraining({ personality }: { personality: PersonalityType }
               key={week.weekNumber}
               className={`rounded-xl border border-gray-200 p-4 ${isLocked ? 'relative overflow-hidden' : ''}`}
             >
-              {isLocked && <div className="absolute inset-0 z-10 backdrop-blur-sm" />}
+              {isLocked && <div className="absolute inset-0 z-10 backdrop-blur-xs" />}
               <h3 className="mb-2 text-sm font-semibold text-gray-700">
                 Week {week.weekNumber}：{week.theme}
               </h3>

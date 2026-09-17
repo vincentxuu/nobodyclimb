@@ -92,7 +92,7 @@ export function GuardrailTagInput({
           onKeyDown={handleKeyDown}
           onPaste={handlePaste}
           placeholder="輸入關鍵字後按 Enter 新增，支援多行貼上"
-          className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-100 placeholder:text-wb-40 outline-none focus:border-wb-50 focus:ring-1 focus:ring-wb-50 transition-colors font-mono"
+          className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-100 placeholder:text-wb-40 outline-hidden focus:border-wb-50 focus:ring-1 focus:ring-wb-50 transition-colors font-mono"
         />
 
         <div className="flex items-center gap-3">

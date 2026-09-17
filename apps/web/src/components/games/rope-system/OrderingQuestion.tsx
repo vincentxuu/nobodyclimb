@@ -73,7 +73,7 @@ function DraggableItem({
       {/* 序號 */}
       <div
         className={cn(
-          'flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-sm font-medium',
+          'flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-sm font-medium',
           showResult && isCorrectPosition
             ? 'bg-[#22C55E] text-white'
             : showResult && isWrongPosition

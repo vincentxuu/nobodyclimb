@@ -281,7 +281,7 @@ export default function BucketListDetailPage({ params }: BucketListDetailPagePro
           <Link href={backHref}>
             <Button
               variant="ghost"
-              className="flex items-center gap-2 bg-white text-brand-dark shadow-sm hover:bg-brand-light"
+              className="flex items-center gap-2 bg-white text-brand-dark shadow-xs hover:bg-brand-light"
             >
               <ArrowLeft size={16} />
               <span>{tCommon('back')}</span>
@@ -368,7 +368,7 @@ export default function BucketListDetailPage({ params }: BucketListDetailPagePro
             </div>
           </div>
 
-          <div className="relative mb-8 overflow-hidden rounded-2xl bg-white shadow-sm">
+          <div className="relative mb-8 overflow-hidden rounded-2xl bg-white shadow-xs">
             <div className={cn('px-6 py-8 md:px-10 md:py-10', isCompleted && 'bg-brand-accent/10')}>
               <h2 className="mb-3 text-lg font-semibold text-brand-dark">{t('goalDescription')}</h2>
               {item.description ? (
@@ -398,7 +398,7 @@ export default function BucketListDetailPage({ params }: BucketListDetailPagePro
 
           {isCompleted &&
             (item.completion_story || item.psychological_insights || item.technical_insights) && (
-              <div className="mb-8 rounded-2xl bg-white p-6 shadow-sm md:p-8">
+              <div className="mb-8 rounded-2xl bg-white p-6 shadow-xs md:p-8">
                 <h2 className="text-lg font-semibold text-brand-dark">{t('completionStory')}</h2>
 
                 {item.completion_story && (
@@ -479,7 +479,7 @@ export default function BucketListDetailPage({ params }: BucketListDetailPagePro
               </div>
             )}
 
-          <div className="mb-8 rounded-2xl bg-white p-5 shadow-sm md:p-6">
+          <div className="mb-8 rounded-2xl bg-white p-5 shadow-xs md:p-6">
             <ContentActions
               isLiked={isLiked}
               likeCount={likeCount}

@@ -54,7 +54,7 @@ export default function ExplorePage() {
           />
           <Link
             href="/biography/community"
-            className="flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50"
+            className="flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-xs transition-colors hover:bg-gray-50"
           >
             <BarChart3 className="h-4 w-4" />
             {t('communityStats')}

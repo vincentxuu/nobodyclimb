@@ -120,7 +120,7 @@ export function BiographyHero({
   return (
     <div className={cn('relative', className)}>
       {/* Cover Image */}
-      <div className="relative w-full aspect-[3/1] md:aspect-[4/1] bg-gradient-to-br from-[#EBEAEA] to-[#DBD8D8] overflow-hidden">
+      <div className="relative w-full aspect-3/1 md:aspect-4/1 bg-linear-to-br from-[#EBEAEA] to-[#DBD8D8] overflow-hidden">
         <Image
           src={
             biography.cover_url || getDefaultCoverUrl(biography.id || biography.name || 'default')
@@ -131,7 +131,7 @@ export function BiographyHero({
           priority
         />
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
       </div>
 
       {/* Profile Info Container */}

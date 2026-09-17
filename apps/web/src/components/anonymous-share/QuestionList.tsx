@@ -48,7 +48,7 @@ function AnsweredStories({
           return (
             <div
               key={story.question_id}
-              className="flex items-center gap-3 rounded-lg bg-white p-4 shadow-sm"
+              className="flex items-center gap-3 rounded-lg bg-white p-4 shadow-xs"
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-100">
                 <Check className="h-4 w-4 text-green-600" />
@@ -96,7 +96,7 @@ function QuestionButton({
   return (
     <button
       onClick={onClick}
-      className="flex w-full items-center gap-3 rounded-lg bg-white p-4 text-left shadow-sm transition-colors hover:bg-gray-50"
+      className="flex w-full items-center gap-3 rounded-lg bg-white p-4 text-left shadow-xs transition-colors hover:bg-gray-50"
     >
       <div className={`flex h-8 w-8 items-center justify-center rounded-full ${iconBgClass}`}>
         <Plus className="h-4 w-4 text-[#1B1A1A]" />

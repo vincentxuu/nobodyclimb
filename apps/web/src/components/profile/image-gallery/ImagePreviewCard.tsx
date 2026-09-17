@@ -50,7 +50,7 @@ export default function ImagePreviewCard({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image container with aspect ratio */}
-      <div className="relative aspect-[4/3] w-full">
+      <div className="relative aspect-4/3 w-full">
         <Image
           src={image.url}
           alt={image.caption || '攀岩照片'}
@@ -103,7 +103,7 @@ export default function ImagePreviewCard({
               onChange={(e) => setCaptionValue(e.target.value)}
               onBlur={handleCaptionBlur}
               onKeyDown={handleCaptionKeyDown}
-              className="w-full rounded border border-gray-300 px-2 py-1 text-sm focus:border-primary focus:outline-none"
+              className="w-full rounded border border-gray-300 px-2 py-1 text-sm focus:border-primary focus:outline-hidden"
               placeholder="輸入圖片說明..."
               autoFocus
               maxLength={100}

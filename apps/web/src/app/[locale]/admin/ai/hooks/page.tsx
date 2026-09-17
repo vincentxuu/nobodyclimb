@@ -207,7 +207,7 @@ function HookCard({ hook }: { hook: AdminHook }) {
           <button
             onClick={handleToggle}
             disabled={isPending}
-            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none disabled:opacity-50 ${
+            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-hidden disabled:opacity-50 ${
               hook.enabled ? 'bg-emerald-500' : 'bg-wb-30'
             }`}
           >
@@ -246,7 +246,7 @@ function HookCard({ hook }: { hook: AdminHook }) {
                 }}
                 min={0}
                 max={999}
-                className="w-full rounded border border-wb-20 bg-white px-2 py-1 text-sm text-wb-80 font-mono outline-none focus:border-wb-50"
+                className="w-full rounded border border-wb-20 bg-white px-2 py-1 text-sm text-wb-80 font-mono outline-hidden focus:border-wb-50"
               />
             </div>
             <div>
@@ -261,7 +261,7 @@ function HookCard({ hook }: { hook: AdminHook }) {
                 min={100}
                 max={30000}
                 step={100}
-                className="w-full rounded border border-wb-20 bg-white px-2 py-1 text-sm text-wb-80 font-mono outline-none focus:border-wb-50"
+                className="w-full rounded border border-wb-20 bg-white px-2 py-1 text-sm text-wb-80 font-mono outline-hidden focus:border-wb-50"
               />
             </div>
           </div>
@@ -275,7 +275,7 @@ function HookCard({ hook }: { hook: AdminHook }) {
                   setOnFailure(e.target.value as 'fail_open' | 'fail_closed')
                   setDirty(true)
                 }}
-                className="w-full rounded border border-wb-20 bg-white px-2 py-1.5 text-sm text-wb-80 outline-none focus:border-wb-50"
+                className="w-full rounded border border-wb-20 bg-white px-2 py-1.5 text-sm text-wb-80 outline-hidden focus:border-wb-50"
               >
                 <option value="fail_open">Fail Open（放行）</option>
                 <option value="fail_closed">Fail Closed（阻斷）</option>
@@ -321,7 +321,7 @@ function HookCard({ hook }: { hook: AdminHook }) {
                 setDirty(true)
               }}
               placeholder="例：search_* 或 mcp_weather_.*"
-              className="w-full rounded border border-wb-20 bg-white px-2 py-1 text-sm text-wb-80 font-mono placeholder:text-wb-30 outline-none focus:border-wb-50"
+              className="w-full rounded border border-wb-20 bg-white px-2 py-1 text-sm text-wb-80 font-mono placeholder:text-wb-30 outline-hidden focus:border-wb-50"
             />
           </div>
 
@@ -335,7 +335,7 @@ function HookCard({ hook }: { hook: AdminHook }) {
               }}
               placeholder="{}"
               rows={3}
-              className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-xs text-wb-80 font-mono placeholder:text-wb-30 outline-none focus:border-wb-50 resize-none"
+              className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-xs text-wb-80 font-mono placeholder:text-wb-30 outline-hidden focus:border-wb-50 resize-none"
             />
           </div>
 

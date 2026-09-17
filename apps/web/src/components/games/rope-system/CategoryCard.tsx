@@ -51,7 +51,7 @@ export function CategoryCard({ category, progress, className }: CategoryCardProp
     <Link href={ROUTES.LEARN(category.id)}>
       <motion.div
         className={cn(
-          'group cursor-pointer rounded-lg border border-[#E5E5E5] bg-white p-5 shadow-sm transition-shadow',
+          'group cursor-pointer rounded-lg border border-[#E5E5E5] bg-white p-5 shadow-xs transition-shadow',
           'hover:shadow-md',
           className
         )}

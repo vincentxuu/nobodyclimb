@@ -112,9 +112,9 @@ function ClimberCard({ person }: ClimberCardProps) {
       className="h-full"
     >
       <Link href={`/biography/profile/${person.slug}`} className="block h-full group">
-        <div className="h-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md cursor-pointer">
+        <div className="h-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xs transition-shadow duration-300 hover:shadow-md cursor-pointer">
           {/* 封面圖 */}
-          <div className="relative aspect-[3/1] w-full overflow-hidden bg-gradient-to-br from-[#EBEAEA] to-[#DBD8D8]">
+          <div className="relative aspect-3/1 w-full overflow-hidden bg-linear-to-br from-[#EBEAEA] to-[#DBD8D8]">
             <Image
               src={coverUrl}
               alt={t('biographyCoverAlt', { name: displayName })}
@@ -123,7 +123,7 @@ function ClimberCard({ person }: ClimberCardProps) {
               sizes="(max-width: 768px) 100vw, 33vw"
             />
             {/* 漸層遮罩 */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
           </div>
 
           {/* 內容區 */}

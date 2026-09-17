@@ -82,7 +82,7 @@ export function ShareInvitation({ onStartShare }: ShareInvitationProps) {
 
             <div className="flex items-start gap-4">
               {/* 圖示 */}
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#ffe70c]">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ffe70c]">
                 <Pen className="h-6 w-6 text-[#1B1A1A]" />
               </div>
 

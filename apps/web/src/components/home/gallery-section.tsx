@@ -77,13 +77,13 @@ function PhotoCard({ photo, index }: { photo: DisplayPhoto; index: number }) {
       />
 
       {/* 漸層遮罩 */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       {/* 位置資訊 */}
       {(photo.location.city || photo.location.spot) && (
         <div className="absolute bottom-0 left-0 right-0 translate-y-full p-4 transition-transform duration-300 group-hover:translate-y-0">
           <div className="flex items-center gap-2 text-white">
-            <MapPin size={16} className="flex-shrink-0" />
+            <MapPin size={16} className="shrink-0" />
             <span className="text-sm font-medium">
               {[photo.location.city, photo.location.spot].filter(Boolean).join(' · ')}
             </span>

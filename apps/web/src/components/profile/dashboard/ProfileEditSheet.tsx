@@ -91,7 +91,7 @@ export function ProfileEditSheet({
                 <div className="h-1.5 w-12 rounded-full bg-gray-300" />
               </div>
             )}
-            <SheetHeader className="flex-shrink-0">
+            <SheetHeader className="shrink-0">
               <SheetTitle>{config.title}</SheetTitle>
               <SheetDescription>{config.description}</SheetDescription>
             </SheetHeader>
@@ -186,7 +186,7 @@ export function ProfileEditSheet({
 
             {/* 底部按鈕 */}
             {showSaveButton && (
-              <div className="flex flex-shrink-0 gap-3 border-t pt-4">
+              <div className="flex shrink-0 gap-3 border-t pt-4">
                 <Button variant="outline" onClick={onClose} className="flex-1">
                   取消
                 </Button>

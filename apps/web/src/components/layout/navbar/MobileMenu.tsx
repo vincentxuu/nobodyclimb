@@ -93,9 +93,9 @@ export default function MobileMenu() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed right-0 top-0 z-[10001] flex h-[100dvh] max-h-[100dvh] w-[280px] flex-col bg-white shadow-xl md:hidden"
+            className="fixed right-0 top-0 z-[10001] flex h-dvh max-h-dvh w-[280px] flex-col bg-white shadow-xl md:hidden"
           >
-            <div className="flex flex-shrink-0 items-center justify-between bg-white px-3 py-2 xs:p-3">
+            <div className="flex shrink-0 items-center justify-between bg-white px-3 py-2 xs:p-3">
               <h2 className="font-['Noto_Sans_TC'] text-sm font-bold text-[#1B1A1A] xs:text-base">
                 {t('menuTitle')}
               </h2>
@@ -112,7 +112,7 @@ export default function MobileMenu() {
               {status === 'signIn' ? (
                 <div className="border-b border-gray-200 bg-white px-3 py-2 xs:p-3">
                   <div className="mb-1.5 flex items-center space-x-2 xs:mb-2">
-                    <div className="h-8 w-8 flex-shrink-0 overflow-hidden rounded-full xs:h-10 xs:w-10">
+                    <div className="h-8 w-8 shrink-0 overflow-hidden rounded-full xs:h-10 xs:w-10">
                       <AvatarWithFallback
                         src={user?.avatar}
                         alt="用戶頭像"
@@ -180,7 +180,7 @@ export default function MobileMenu() {
                       onClick={() => setActiveTab('explore')}
                       className={`rounded-md px-2 py-1.5 text-sm font-medium transition-colors ${
                         activeTab === 'explore'
-                          ? 'bg-white text-[#1B1A1A] shadow-sm'
+                          ? 'bg-white text-[#1B1A1A] shadow-xs'
                           : 'text-[#6D6C6C] hover:text-[#1B1A1A]'
                       }`}
                     >
@@ -191,7 +191,7 @@ export default function MobileMenu() {
                       onClick={() => setActiveTab('personal')}
                       className={`rounded-md px-2 py-1.5 text-sm font-medium transition-colors ${
                         activeTab === 'personal'
-                          ? 'bg-white text-[#1B1A1A] shadow-sm'
+                          ? 'bg-white text-[#1B1A1A] shadow-xs'
                           : 'text-[#6D6C6C] hover:text-[#1B1A1A]'
                       }`}
                     >

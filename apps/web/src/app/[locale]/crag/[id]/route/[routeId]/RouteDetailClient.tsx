@@ -77,7 +77,7 @@ export default function RouteDetailClient({ data }: RouteDetailClientProps) {
         </div>
 
         {/* 主要內容區 */}
-        <div className="mb-12 rounded-lg bg-white p-6 shadow-sm md:p-8">
+        <div className="mb-12 rounded-lg bg-white p-6 shadow-xs md:p-8">
           {/* 標題區 */}
           <RouteHeader
             route={{
@@ -149,7 +149,7 @@ export default function RouteDetailClient({ data }: RouteDetailClientProps) {
                     <button
                       key={index}
                       onClick={() => setCurrentPhotoIndex(index)}
-                      className={`h-16 w-24 flex-shrink-0 overflow-hidden rounded-md border-2 transition ${
+                      className={`h-16 w-24 shrink-0 overflow-hidden rounded-md border-2 transition ${
                         currentPhotoIndex === index
                           ? 'border-[#FFE70C]'
                           : 'border-transparent hover:border-gray-300'

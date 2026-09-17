@@ -213,7 +213,7 @@ function ServerCard({ server }: { server: AdminMCPServer }) {
                   setEditUrl(e.target.value)
                   setDirty(true)
                 }}
-                className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs font-mono text-wb-80 focus:border-teal-300 focus:outline-none"
+                className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs font-mono text-wb-80 focus:border-teal-300 focus:outline-hidden"
               />
             </div>
             <div>
@@ -224,7 +224,7 @@ function ServerCard({ server }: { server: AdminMCPServer }) {
                   setEditTransport(e.target.value)
                   setDirty(true)
                 }}
-                className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-none"
+                className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-hidden"
               >
                 <option value="streamable_http">Streamable HTTP</option>
                 <option value="http">HTTP</option>
@@ -240,7 +240,7 @@ function ServerCard({ server }: { server: AdminMCPServer }) {
                   setEditAuthType(e.target.value)
                   setDirty(true)
                 }}
-                className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-none"
+                className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-hidden"
               >
                 <option value="none">None</option>
                 <option value="api_key">API Key</option>
@@ -261,7 +261,7 @@ function ServerCard({ server }: { server: AdminMCPServer }) {
                   setDirty(true)
                 }}
                 placeholder="secret manager key"
-                className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs font-mono text-wb-80 focus:border-teal-300 focus:outline-none"
+                className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs font-mono text-wb-80 focus:border-teal-300 focus:outline-hidden"
               />
             </div>
           </div>
@@ -275,7 +275,7 @@ function ServerCard({ server }: { server: AdminMCPServer }) {
                 setEditDesc(e.target.value)
                 setDirty(true)
               }}
-              className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-none"
+              className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-hidden"
             />
           </div>
 
@@ -373,7 +373,7 @@ function AddServerDialog({ onClose }: { onClose: () => void }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="weather-api"
-            className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs font-mono text-wb-80 focus:border-teal-300 focus:outline-none"
+            className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs font-mono text-wb-80 focus:border-teal-300 focus:outline-hidden"
           />
         </div>
         <div>
@@ -383,7 +383,7 @@ function AddServerDialog({ onClose }: { onClose: () => void }) {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="https://mcp.example.com/sse"
-            className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs font-mono text-wb-80 focus:border-teal-300 focus:outline-none"
+            className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs font-mono text-wb-80 focus:border-teal-300 focus:outline-hidden"
           />
         </div>
         <div>
@@ -391,7 +391,7 @@ function AddServerDialog({ onClose }: { onClose: () => void }) {
           <select
             value={transport}
             onChange={(e) => setTransport(e.target.value)}
-            className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-none"
+            className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-hidden"
           >
             <option value="streamable_http">Streamable HTTP</option>
             <option value="http">HTTP</option>
@@ -403,7 +403,7 @@ function AddServerDialog({ onClose }: { onClose: () => void }) {
           <select
             value={authType}
             onChange={(e) => setAuthType(e.target.value)}
-            className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-none"
+            className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-hidden"
           >
             <option value="none">None</option>
             <option value="api_key">API Key</option>
@@ -420,7 +420,7 @@ function AddServerDialog({ onClose }: { onClose: () => void }) {
             value={secretRef}
             onChange={(e) => setSecretRef(e.target.value)}
             placeholder="MCP_TOKEN_WEATHER"
-            className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs font-mono text-wb-80 focus:border-teal-300 focus:outline-none"
+            className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs font-mono text-wb-80 focus:border-teal-300 focus:outline-hidden"
           />
         </div>
       )}
@@ -431,7 +431,7 @@ function AddServerDialog({ onClose }: { onClose: () => void }) {
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
           placeholder="天氣 API MCP Server"
-          className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-none"
+          className="w-full rounded border border-wb-20 bg-white px-2.5 py-1.5 text-xs text-wb-80 focus:border-teal-300 focus:outline-hidden"
         />
       </div>
       <button

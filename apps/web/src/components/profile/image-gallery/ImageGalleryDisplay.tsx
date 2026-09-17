@@ -31,13 +31,13 @@ export default function ImageGalleryDisplay({ images, layout }: ImageGalleryDisp
   const getAspectRatio = () => {
     switch (layout) {
       case 'single':
-        return 'aspect-[16/9]'
+        return 'aspect-video'
       case 'double':
-        return 'aspect-[4/3]'
+        return 'aspect-4/3'
       case 'grid':
         return 'aspect-square'
       default:
-        return 'aspect-[4/3]'
+        return 'aspect-4/3'
     }
   }
 

@@ -348,12 +348,12 @@ export function NotificationCenter({ className }: NotificationCenterProps) {
                                 <Link
                                   href={`/biography/profile/${notification.actor_slug}`}
                                   onClick={() => setIsOpen(false)}
-                                  className="w-10 h-10 rounded-full flex-shrink-0 overflow-hidden block hover:opacity-80 transition-opacity"
+                                  className="w-10 h-10 rounded-full shrink-0 overflow-hidden block hover:opacity-80 transition-opacity"
                                 >
                                   {avatarContent}
                                 </Link>
                               ) : (
-                                <div className="w-10 h-10 rounded-full flex-shrink-0 overflow-hidden">
+                                <div className="w-10 h-10 rounded-full shrink-0 overflow-hidden">
                                   {avatarContent}
                                 </div>
                               )}

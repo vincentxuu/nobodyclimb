@@ -50,12 +50,12 @@ function TimelineLocationItem({
     >
       {/* 連接線 */}
       {!isLast && (
-        <div className="absolute left-[11px] top-6 h-full w-0.5 bg-gradient-to-b from-[#DBD8D8] to-transparent" />
+        <div className="absolute left-[11px] top-6 h-full w-0.5 bg-linear-to-b from-[#DBD8D8] to-transparent" />
       )}
 
       {/* 節點圓點 */}
       <div className="absolute left-0 top-1.5 flex h-6 w-6 items-center justify-center">
-        <div className="h-3 w-3 rounded-full border-2 border-[#3F3D3D] bg-white shadow-sm" />
+        <div className="h-3 w-3 rounded-full border-2 border-[#3F3D3D] bg-white shadow-xs" />
       </div>
 
       {/* 內容卡片 */}
@@ -305,7 +305,7 @@ export function BiographyFootprints({ biography, className }: BiographyFootprint
       {/* 時間軸 */}
       <div className="relative">
         {/* 主時間線 */}
-        <div className="absolute left-5 top-0 h-full w-0.5 bg-gradient-to-b from-[#3F3D3D] via-[#DBD8D8] to-transparent" />
+        <div className="absolute left-5 top-0 h-full w-0.5 bg-linear-to-b from-[#3F3D3D] via-[#DBD8D8] to-transparent" />
 
         {/* 年份區塊 */}
         <div className="space-y-8">

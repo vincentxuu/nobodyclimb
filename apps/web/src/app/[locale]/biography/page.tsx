@@ -81,7 +81,7 @@ function BiographyPageContent() {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6 flex flex-col items-center justify-between gap-3 rounded-lg border border-brand-gray bg-white p-4 shadow-sm sm:flex-row md:mb-8"
+            className="mb-6 flex flex-col items-center justify-between gap-3 rounded-lg border border-brand-gray bg-white p-4 shadow-xs sm:flex-row md:mb-8"
           >
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-gray-light">

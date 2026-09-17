@@ -44,7 +44,7 @@ export function TextToSqlTrace({ trace }: { trace: PipelineTrace }) {
             {info.context_preview && (
               <div className="space-y-1">
                 <p className="text-[11px] font-medium text-wb-50">Context 摘要</p>
-                <pre className="rounded-lg border border-wb-10 bg-wb-05 p-2 text-[10px] text-wb-50 whitespace-pre-wrap break-words">
+                <pre className="rounded-lg border border-wb-10 bg-wb-05 p-2 text-[10px] text-wb-50 whitespace-pre-wrap wrap-break-word">
                   {info.context_preview}
                 </pre>
               </div>

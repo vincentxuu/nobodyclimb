@@ -46,7 +46,7 @@ export function RelatedStories({ stories, authorName }: RelatedStoriesProps) {
             transition={{ duration: 0.3, delay: index * 0.1 }}
           >
             <Link href={`/story/${story.type}/${story.id}`}>
-              <div className="group h-full rounded-xl bg-white p-5 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5">
+              <div className="group h-full rounded-xl bg-white p-5 shadow-xs transition-all hover:shadow-md hover:-translate-y-0.5">
                 {/* 類型標籤 */}
                 <div className="mb-3 flex items-center gap-2">
                   <span className="text-xs font-medium text-[#8E8C8C]">

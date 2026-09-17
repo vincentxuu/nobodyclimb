@@ -124,7 +124,7 @@ export default function InlineRouteForm({
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-wb-20 flex items-center justify-between flex-shrink-0">
+      <div className="px-4 py-3 border-b border-wb-20 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center">
             <RouteIcon className="h-5 w-5 text-emerald-600" />
@@ -154,7 +154,7 @@ export default function InlineRouteForm({
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="例：勇者之路"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                   required
                 />
               </div>
@@ -166,7 +166,7 @@ export default function InlineRouteForm({
                   value={form.grade}
                   onChange={(e) => setForm({ ...form, grade: e.target.value })}
                   placeholder="例：5.10a"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
 
@@ -175,7 +175,7 @@ export default function InlineRouteForm({
                 <select
                   value={form.grade_system}
                   onChange={(e) => setForm({ ...form, grade_system: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg focus:outline-none focus:ring-2 focus:ring-wb-100/20 bg-white"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 bg-white"
                 >
                   <option value="yds">YDS</option>
                   <option value="french">French</option>
@@ -189,7 +189,7 @@ export default function InlineRouteForm({
                 <select
                   value={form.route_type}
                   onChange={(e) => setForm({ ...form, route_type: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg focus:outline-none focus:ring-2 focus:ring-wb-100/20 bg-white"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 bg-white"
                 >
                   {Object.entries(routeTypeLabels).map(([value, label]) => (
                     <option key={value} value={value}>
@@ -206,7 +206,7 @@ export default function InlineRouteForm({
                   value={form.height}
                   onChange={(e) => setForm({ ...form, height: e.target.value })}
                   placeholder="例：15"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
 
@@ -217,7 +217,7 @@ export default function InlineRouteForm({
                   value={form.bolt_count}
                   onChange={(e) => setForm({ ...form, bolt_count: e.target.value })}
                   placeholder="例：8"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
 
@@ -228,7 +228,7 @@ export default function InlineRouteForm({
                   value={form.first_ascent}
                   onChange={(e) => setForm({ ...form, first_ascent: e.target.value })}
                   placeholder="例：王小明 (2020)"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
             </div>
@@ -243,7 +243,7 @@ export default function InlineRouteForm({
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
                 rows={4}
                 placeholder="描述路線特色、技巧要點、注意事項等..."
-                className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20 resize-none"
+                className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 resize-none"
               />
             </div>
           </fieldset>
@@ -283,7 +283,7 @@ export default function InlineRouteForm({
       </form>
 
       {/* Footer actions */}
-      <div className="px-4 py-3 border-t border-wb-20 flex items-center justify-between flex-shrink-0 bg-white">
+      <div className="px-4 py-3 border-t border-wb-20 flex items-center justify-between shrink-0 bg-white">
         <div>
           {route && !isNew && (
             <>

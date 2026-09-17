@@ -250,7 +250,7 @@ function SkillCard({ skill }: { skill: AdminSkill }) {
           <button
             onClick={handleToggle}
             disabled={isBindingPending}
-            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none disabled:opacity-50 ${
+            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-hidden disabled:opacity-50 ${
               isEnabled ? 'bg-emerald-500' : 'bg-wb-30'
             }`}
           >
@@ -284,7 +284,7 @@ function SkillCard({ skill }: { skill: AdminSkill }) {
                   setDirty(true)
                 }}
                 placeholder={skill.slug}
-                className="flex-1 rounded-lg border border-wb-20 bg-white px-3 py-1.5 text-sm text-wb-80 placeholder:text-wb-30 outline-none focus:border-wb-50"
+                className="flex-1 rounded-lg border border-wb-20 bg-white px-3 py-1.5 text-sm text-wb-80 placeholder:text-wb-30 outline-hidden focus:border-wb-50"
               />
               {dirty && (
                 <button
@@ -370,7 +370,7 @@ function SkillCard({ skill }: { skill: AdminSkill }) {
                   value={publishDesc}
                   onChange={(e) => setPublishDesc(e.target.value)}
                   rows={2}
-                  className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-80 outline-none focus:border-wb-50 resize-none"
+                  className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-80 outline-hidden focus:border-wb-50 resize-none"
                 />
               </div>
               <div>
@@ -379,7 +379,7 @@ function SkillCard({ skill }: { skill: AdminSkill }) {
                   value={publishBody}
                   onChange={(e) => setPublishBody(e.target.value)}
                   rows={6}
-                  className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-xs text-wb-80 font-mono outline-none focus:border-wb-50 resize-none"
+                  className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-xs text-wb-80 font-mono outline-hidden focus:border-wb-50 resize-none"
                 />
               </div>
               <div className="flex gap-2">
@@ -477,7 +477,7 @@ function ImportDialog({
           onChange={(e) => setContent(e.target.value)}
           placeholder={`---\nname: my-skill\ndescription: ...\nallowed-tools:\n  - search_routes\n  - weather\n---\n\n# Skill 指令內容\n...`}
           rows={12}
-          className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-80 font-mono placeholder:text-wb-30 outline-none focus:border-wb-50 resize-none"
+          className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-80 font-mono placeholder:text-wb-30 outline-hidden focus:border-wb-50 resize-none"
         />
         {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
         <div className="mt-4 flex justify-end gap-2">
@@ -533,7 +533,7 @@ function TriggerTestPanel() {
             if (e.key === 'Enter') handleTest()
           }}
           placeholder="輸入查詢測試哪些 skill 會被觸發..."
-          className="flex-1 rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-80 placeholder:text-wb-30 outline-none focus:border-wb-50"
+          className="flex-1 rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-80 placeholder:text-wb-30 outline-hidden focus:border-wb-50"
         />
         <button
           onClick={handleTest}

@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl'
 export function HeroIntroSection() {
   const t = useTranslations('HomePage')
   return (
-    <section className="relative flex min-h-[calc(100vh-80px)] flex-col items-center justify-center bg-gradient-to-b from-[#F5F5F5] to-white">
+    <section className="relative flex min-h-[calc(100vh-80px)] flex-col items-center justify-center bg-linear-to-b from-[#F5F5F5] to-white">
       <div className="container mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

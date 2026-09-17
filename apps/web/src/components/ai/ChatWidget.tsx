@@ -2,6 +2,7 @@
 
 import {
   ChevronLeft,
+  Expand,
   History,
   Loader2,
   MessageCircle,
@@ -13,6 +14,7 @@ import {
   X,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import type { AIChatHistoryMessage, AiQuota, ChatSession } from '@/lib/api/ai'
@@ -784,6 +786,17 @@ export function ChatWidget() {
                 type="button"
                 onClick={() => {
                   setIsOpen(false)
+                  window.location.href = '/chat'
+                }}
+                className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                aria-label="展開全螢幕"
+              >
+                <Expand className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false)
                   setShowHistory(false)
                   setShowConfirmClear(false)
                   setShowLoginPrompt(false)
@@ -924,7 +937,7 @@ export function ChatWidget() {
                     onKeyDown={handleKeyDown}
                     placeholder="輸入問題... (Enter 送出)"
                     rows={1}
-                    className="flex-1 resize-none bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                    className="flex-1 resize-none bg-transparent text-sm outline-hidden placeholder:text-muted-foreground"
                     style={{ maxHeight: '120px' }}
                     aria-label="輸入問題"
                   />

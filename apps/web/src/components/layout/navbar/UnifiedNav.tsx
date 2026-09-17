@@ -25,7 +25,7 @@ export default function UnifiedNav() {
   return (
     <nav className="relative flex h-full flex-1 items-center overflow-hidden">
       {/* 右側漸層提示 - 手機版顯示，提示可滑動 */}
-      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-white to-transparent md:hidden" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-linear-to-l from-white to-transparent md:hidden" />
 
       <div
         ref={scrollRef}

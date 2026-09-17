@@ -175,12 +175,12 @@ export function ArticleCoverGenerator({
   const aspectClasses = {
     video: 'aspect-video',
     square: 'aspect-square',
-    wide: 'aspect-[21/9]',
+    wide: 'aspect-21/9',
   }
 
   return (
     <div
-      className={`relative overflow-hidden bg-gradient-to-br ${theme.gradient} ${aspectClasses[aspectRatio]} ${className}`}
+      className={`relative overflow-hidden bg-linear-to-br ${theme.gradient} ${aspectClasses[aspectRatio]} ${className}`}
     >
       {/* 背景圖案 - 使用 brand-yellow-100 */}
       <PatternOverlay pattern={theme.pattern} />
@@ -189,7 +189,7 @@ export function ArticleCoverGenerator({
       <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-white sm:p-4 md:p-6">
         {/* 圖標 - 響應式大小，白色帶陰影 */}
         {showIcon && (
-          <div className="mb-2 rounded-full bg-white/20 p-2.5 backdrop-blur-sm sm:mb-3 sm:p-3 md:p-4">
+          <div className="mb-2 rounded-full bg-white/20 p-2.5 backdrop-blur-xs sm:mb-3 sm:p-3 md:p-4">
             <IconComponent
               className="h-8 w-8 text-white drop-shadow-md sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14"
               strokeWidth={1.5}
@@ -287,7 +287,7 @@ export function getCategoryTheme(category: PostCategory | string | null | undefi
  */
 export function getCategoryGradient(category: PostCategory | string | null | undefined): string {
   const theme = getCategoryTheme(category)
-  return `bg-gradient-to-br ${theme.gradient}`
+  return `bg-linear-to-br ${theme.gradient}`
 }
 
 export default ArticleCoverGenerator

@@ -78,7 +78,7 @@ export default function TrainingPage() {
 
 function OverviewCard({ data }: { data: CoachingAnalysis }) {
   return (
-    <div className="rounded-lg border border-gray-100 bg-white p-5 shadow-sm">
+    <div className="rounded-lg border border-gray-100 bg-white p-5 shadow-xs">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-50">
@@ -123,7 +123,7 @@ function WeaknessSection({ weaknesses }: { weaknesses: CoachingWeakness[] }) {
       <SectionTitle icon={<Target className="h-4 w-4" />} title="弱點分析與建議" />
       <div className="space-y-3">
         {weaknesses.map((w) => (
-          <div key={w.id} className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+          <div key={w.id} className="rounded-lg border border-gray-100 bg-white p-4 shadow-xs">
             <p className="text-sm text-gray-700">{w.description}</p>
             {w.exercises.length > 0 && (
               <div className="mt-2 flex flex-wrap gap-1.5">
@@ -152,7 +152,7 @@ function LevelRecommendationSection({
   return (
     <div>
       <SectionTitle icon={<Dumbbell className="h-4 w-4" />} title="等級訓練建議" />
-      <div className="rounded-lg border border-gray-100 bg-white p-5 shadow-sm">
+      <div className="rounded-lg border border-gray-100 bg-white p-5 shadow-xs">
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-medium text-gray-800">{recommendation.label}</p>
@@ -246,7 +246,7 @@ function ProgressSection({ progress }: { progress: CoachingTrainingProgress }) {
   return (
     <div>
       <SectionTitle icon={<Sparkles className="h-4 w-4" />} title="訓練進度" />
-      <div className="rounded-lg border border-gray-100 bg-white p-5 shadow-sm">
+      <div className="rounded-lg border border-gray-100 bg-white p-5 shadow-xs">
         <div className="flex items-center gap-5">
           <ProgressRing percentage={percentage} />
           <div>
@@ -297,7 +297,7 @@ function GoalsSection({ goals }: { goals: CoachingGoal[] }) {
   return (
     <div>
       <SectionTitle icon={<Flag className="h-4 w-4" />} title="活躍目標" />
-      <div className="rounded-lg border border-gray-100 bg-white shadow-sm">
+      <div className="rounded-lg border border-gray-100 bg-white shadow-xs">
         <ul className="divide-y divide-gray-50">
           {goals.map((g) => (
             <li key={g.title} className="flex items-center justify-between px-4 py-3">

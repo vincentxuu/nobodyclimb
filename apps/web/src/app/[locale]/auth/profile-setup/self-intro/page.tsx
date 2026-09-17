@@ -147,7 +147,7 @@ export default function SelfIntroPage() {
                   value={formData[question.id] || ''}
                   onChange={handleChange}
                   placeholder={question.placeholder || ''}
-                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-hidden focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
                 />
               </div>
             ))

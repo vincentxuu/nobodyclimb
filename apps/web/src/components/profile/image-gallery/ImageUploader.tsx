@@ -214,7 +214,7 @@ export default function ImageUploader({
 
         {error && (
           <div className="flex items-center gap-2 rounded-md bg-red-50 p-2 text-sm text-red-600">
-            <AlertCircle className="h-4 w-4 flex-shrink-0" />
+            <AlertCircle className="h-4 w-4 shrink-0" />
             <span>{error}</span>
             <button onClick={() => setError(null)} className="ml-auto rounded p-1 hover:bg-red-100">
               <X className="h-3 w-3" />

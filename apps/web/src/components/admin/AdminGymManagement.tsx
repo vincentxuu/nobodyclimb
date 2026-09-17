@@ -348,7 +348,7 @@ export default function AdminGymManagement() {
 
       {/* 新增/編輯表單 */}
       {showForm && (
-        <div className="bg-white rounded-lg shadow-sm border border-wb-20 p-6">
+        <div className="bg-white rounded-lg shadow-xs border border-wb-20 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-wb-100">
               {editingGym ? '編輯岩館' : '新增岩館'}
@@ -370,7 +370,7 @@ export default function AdminGymManagement() {
                   type="text"
                   value={gymForm.name}
                   onChange={(e) => setGymForm({ ...gymForm, name: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                   required
                 />
               </div>
@@ -381,7 +381,7 @@ export default function AdminGymManagement() {
                   value={gymForm.city}
                   onChange={(e) => setGymForm({ ...gymForm, city: e.target.value })}
                   placeholder="例：台北市"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div>
@@ -389,7 +389,7 @@ export default function AdminGymManagement() {
                 <select
                   value={gymForm.region}
                   onChange={(e) => setGymForm({ ...gymForm, region: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg focus:outline-none focus:ring-2 focus:ring-wb-100/20 bg-white"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 bg-white"
                 >
                   <option value="">選擇區域</option>
                   <option value="北部">北部</option>
@@ -405,7 +405,7 @@ export default function AdminGymManagement() {
                   type="text"
                   value={gymForm.address}
                   onChange={(e) => setGymForm({ ...gymForm, address: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div>
@@ -414,7 +414,7 @@ export default function AdminGymManagement() {
                   type="text"
                   value={gymForm.phone}
                   onChange={(e) => setGymForm({ ...gymForm, phone: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div>
@@ -423,7 +423,7 @@ export default function AdminGymManagement() {
                   type="email"
                   value={gymForm.email}
                   onChange={(e) => setGymForm({ ...gymForm, email: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div>
@@ -433,7 +433,7 @@ export default function AdminGymManagement() {
                   value={gymForm.website}
                   onChange={(e) => setGymForm({ ...gymForm, website: e.target.value })}
                   placeholder="https://"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div className="sm:col-span-2 lg:col-span-3">
@@ -443,7 +443,7 @@ export default function AdminGymManagement() {
                   value={gymForm.facilities}
                   onChange={(e) => setGymForm({ ...gymForm, facilities: e.target.value })}
                   placeholder="以逗號分隔，例：抱石區, 先鋒區, 速度牆, 淋浴間"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div className="sm:col-span-2 lg:col-span-3">
@@ -452,7 +452,7 @@ export default function AdminGymManagement() {
                   value={gymForm.description}
                   onChange={(e) => setGymForm({ ...gymForm, description: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20 resize-none"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 resize-none"
                 />
               </div>
             </div>
@@ -467,7 +467,7 @@ export default function AdminGymManagement() {
                   value={gymForm.latitude}
                   onChange={(e) => setGymForm({ ...gymForm, latitude: e.target.value })}
                   placeholder="例：25.0330"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div>
@@ -478,7 +478,7 @@ export default function AdminGymManagement() {
                   value={gymForm.longitude}
                   onChange={(e) => setGymForm({ ...gymForm, longitude: e.target.value })}
                   placeholder="例：121.5654"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
             </div>
@@ -503,7 +503,7 @@ export default function AdminGymManagement() {
                         })
                       }
                       placeholder="例：10:00-22:00 或 公休"
-                      className="w-full px-3 py-1.5 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                      className="w-full px-3 py-1.5 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                     />
                   </div>
                 ))}
@@ -522,7 +522,7 @@ export default function AdminGymManagement() {
                 placeholder={
                   '例：\n{\n  "單次入場": "350元",\n  "月票": "2000元",\n  "學生優惠": "300元"\n}'
                 }
-                className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20 resize-none font-mono"
+                className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 resize-none font-mono"
               />
             </div>
 
@@ -564,7 +564,7 @@ export default function AdminGymManagement() {
       )}
 
       {/* 搜尋和篩選 */}
-      <div className="bg-white rounded-lg shadow-sm border border-wb-20 p-4">
+      <div className="bg-white rounded-lg shadow-xs border border-wb-20 p-4">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-wb-50" />
@@ -573,13 +573,13 @@ export default function AdminGymManagement() {
               placeholder="搜尋岩館名稱、地址..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20 focus:border-wb-100"
+              className="w-full pl-10 pr-4 py-2 border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 focus:border-wb-100"
             />
           </div>
           <select
             value={cityFilter}
             onChange={(e) => setCityFilter(e.target.value)}
-            className="px-4 py-2 border border-wb-20 rounded-lg focus:outline-none focus:ring-2 focus:ring-wb-100/20 focus:border-wb-100 bg-white"
+            className="px-4 py-2 border border-wb-20 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 focus:border-wb-100 bg-white"
           >
             <option value="">所有城市</option>
             {cities.map((c) => (
@@ -592,7 +592,7 @@ export default function AdminGymManagement() {
       </div>
 
       {/* 岩館列表 */}
-      <div className="bg-white rounded-lg shadow-sm border border-wb-20 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-xs border border-wb-20 overflow-hidden">
         {loading ? (
           <div className="flex items-center justify-center py-12">
             <Loader2 className="h-8 w-8 animate-spin text-wb-50" />
@@ -790,7 +790,7 @@ function StatCard({
   loading?: boolean
 }) {
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-wb-20 p-4">
+    <div className="bg-white rounded-lg shadow-xs border border-wb-20 p-4">
       <div className="flex items-center gap-3">
         <div className="p-2 bg-wb-10 rounded-lg">
           <Icon className="h-5 w-5 text-wb-100" />

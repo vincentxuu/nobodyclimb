@@ -65,7 +65,7 @@ export default function AdminAIPromptsPage() {
               <div
                 key={name}
                 className={`rounded-xl border bg-white transition-all ${
-                  isOpen ? 'border-wb-40 shadow-sm' : 'border-wb-20'
+                  isOpen ? 'border-wb-40 shadow-xs' : 'border-wb-20'
                 }`}
               >
                 {/* Card header — 點擊展開/收合 */}
@@ -234,7 +234,7 @@ function PromptEditor({
           <button
             onClick={() => setTab('editor')}
             className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
-              tab === 'editor' ? 'bg-white text-wb-100 shadow-sm' : 'text-wb-50 hover:text-wb-70'
+              tab === 'editor' ? 'bg-white text-wb-100 shadow-xs' : 'text-wb-50 hover:text-wb-70'
             }`}
           >
             <Edit className="h-3 w-3" />
@@ -243,7 +243,7 @@ function PromptEditor({
           <button
             onClick={() => setTab('history')}
             className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
-              tab === 'history' ? 'bg-white text-wb-100 shadow-sm' : 'text-wb-50 hover:text-wb-70'
+              tab === 'history' ? 'bg-white text-wb-100 shadow-xs' : 'text-wb-50 hover:text-wb-70'
             }`}
           >
             <History className="h-3 w-3" />
@@ -300,7 +300,7 @@ function PromptEditor({
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={14}
-            className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2.5 font-mono text-xs leading-relaxed outline-none focus:ring-2 focus:ring-wb-100 resize-y"
+            className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2.5 font-mono text-xs leading-relaxed outline-hidden focus:ring-2 focus:ring-wb-100 resize-y"
             placeholder="輸入 prompt 內容..."
             spellCheck={false}
           />

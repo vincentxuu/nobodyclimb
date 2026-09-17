@@ -106,7 +106,7 @@ export default function InlineSectorForm({
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-wb-20 flex items-center justify-between flex-shrink-0">
+      <div className="px-4 py-3 border-b border-wb-20 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
             <Layers className="h-5 w-5 text-blue-600" />
@@ -134,7 +134,7 @@ export default function InlineSectorForm({
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="例：人面岩"
-              className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+              className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
               required
             />
           </div>
@@ -146,7 +146,7 @@ export default function InlineSectorForm({
               value={form.name_en}
               onChange={(e) => setForm({ ...form, name_en: e.target.value })}
               placeholder="例：Face Rock"
-              className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+              className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
             />
           </div>
 
@@ -161,7 +161,7 @@ export default function InlineSectorForm({
       </form>
 
       {/* Footer actions */}
-      <div className="px-4 py-3 border-t border-wb-20 flex items-center justify-between flex-shrink-0 bg-white">
+      <div className="px-4 py-3 border-t border-wb-20 flex items-center justify-between shrink-0 bg-white">
         <div>
           {sector && !isNew && (
             <>

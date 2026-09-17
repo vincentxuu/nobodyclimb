@@ -25,7 +25,7 @@ function GymCard({ gym }: { gym: Gym }) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
 
         {/* 評分 */}
         <div className="absolute bottom-2 right-2 flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 text-xs font-medium text-black">
@@ -147,7 +147,7 @@ export function GymHighlights() {
 
         {/* 加入新攀岩館提示 */}
         <motion.div
-          className="mt-12 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20 p-6 text-center"
+          className="mt-12 rounded-lg bg-linear-to-r from-primary/20 to-secondary/20 p-6 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

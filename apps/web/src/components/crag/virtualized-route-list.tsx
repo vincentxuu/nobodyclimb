@@ -62,7 +62,7 @@ const RouteItem = React.memo(function RouteItem({
             </div>
             <div className="mt-0.5 text-xs text-gray-500">{route.areaName}</div>
           </div>
-          <span className="flex-shrink-0 rounded bg-yellow-100 px-2 py-0.5 text-xs font-medium text-[#1B1A1A]">
+          <span className="shrink-0 rounded bg-yellow-100 px-2 py-0.5 text-xs font-medium text-[#1B1A1A]">
             {route.grade}
           </span>
         </div>

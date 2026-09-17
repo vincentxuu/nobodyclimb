@@ -178,7 +178,7 @@ export default function ProfileClient({ params }: ProfileClientProps) {
             <Link href="/biography">
               <Button
                 variant="ghost"
-                className="flex items-center gap-2 bg-white shadow-sm hover:bg-[#dbd8d8]"
+                className="flex items-center gap-2 bg-white shadow-xs hover:bg-[#dbd8d8]"
               >
                 <ArrowLeft size={16} />
                 <span>{t('breadcrumbBiography')}</span>
@@ -196,7 +196,7 @@ export default function ProfileClient({ params }: ProfileClientProps) {
               <Link href="/profile">
                 <Button
                   variant="ghost"
-                  className="flex items-center gap-2 bg-brand-accent shadow-sm hover:bg-brand-accent/80"
+                  className="flex items-center gap-2 bg-brand-accent shadow-xs hover:bg-brand-accent/80"
                 >
                   <Pencil size={16} />
                   <span>{t('backToEdit')}</span>

@@ -60,7 +60,7 @@ function StatCard({
   color: string
 }) {
   return (
-    <div className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+    <div className="rounded-lg border border-gray-100 bg-white p-4 shadow-xs">
       <div className="flex items-center gap-2 text-sm text-gray-500">
         <Icon className={`h-4 w-4 ${color}`} />
         {label}
@@ -158,7 +158,7 @@ export default function AIQualityPage() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* 工具使用分佈 */}
-        <div className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+        <div className="rounded-lg border border-gray-100 bg-white p-4 shadow-xs">
           <h2 className="mb-3 text-sm font-medium text-gray-700">工具使用分佈（7 天）</h2>
           <div className="space-y-2">
             {data.toolUsage.length > 0 ? (
@@ -172,7 +172,7 @@ export default function AIQualityPage() {
         </div>
 
         {/* Agent vs Pipeline */}
-        <div className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+        <div className="rounded-lg border border-gray-100 bg-white p-4 shadow-xs">
           <h2 className="mb-3 text-sm font-medium text-gray-700">Agent vs Pipeline（7 天）</h2>
           {totalMode > 0 ? (
             <>

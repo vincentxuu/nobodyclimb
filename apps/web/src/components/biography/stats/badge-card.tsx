@@ -30,7 +30,7 @@ export function BadgeCard({ badge, progress, className }: BadgeCardProps) {
       className={cn(
         'relative flex flex-col items-center p-4 rounded-lg border transition-all',
         isUnlocked
-          ? `bg-white ${BADGE_COLORS.unlocked.border} shadow-sm`
+          ? `bg-white ${BADGE_COLORS.unlocked.border} shadow-xs`
           : `bg-page-bg ${BADGE_COLORS.locked.border}`,
         className
       )}

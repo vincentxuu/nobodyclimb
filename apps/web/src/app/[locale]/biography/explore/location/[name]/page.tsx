@@ -129,7 +129,7 @@ export default function LocationDetailPage({ params }: LocationDetailPageProps) 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
-              className="overflow-hidden rounded-lg border bg-white shadow-sm"
+              className="overflow-hidden rounded-lg border bg-white shadow-xs"
             >
               <Link href={`/biography/profile/${visitor.biography_slug || visitor.biography_id}`}>
                 <div className="p-4">

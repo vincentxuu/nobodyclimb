@@ -106,7 +106,7 @@ function ToolCard({ tool }: { tool: AdminTool }) {
           <button
             onClick={handleToggle}
             disabled={isPending}
-            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none disabled:opacity-50 ${
+            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-hidden disabled:opacity-50 ${
               tool.enabled ? 'bg-emerald-500' : 'bg-wb-30'
             }`}
           >
@@ -140,7 +140,7 @@ function ToolCard({ tool }: { tool: AdminTool }) {
               }}
               placeholder={tool.description ?? '工具描述...'}
               rows={2}
-              className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-80 placeholder:text-wb-30 outline-none focus:border-wb-50 resize-none"
+              className="w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-80 placeholder:text-wb-30 outline-hidden focus:border-wb-50 resize-none"
             />
             {dirty && (
               <div className="mt-2 flex justify-end">

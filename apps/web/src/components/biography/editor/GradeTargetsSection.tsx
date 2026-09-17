@@ -112,7 +112,7 @@ export function GradeTargetsSection({
                     grade: options[Math.floor(options.length / 2)],
                   })
                 }}
-                className="w-[104px] shrink-0 rounded-lg border border-[#B6B3B3] bg-white px-2 py-1.5 text-sm text-[#1B1A1A] appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
+                className="w-[104px] shrink-0 rounded-lg border border-[#B6B3B3] bg-white px-2 py-1.5 text-sm text-[#1B1A1A] appearance-none cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50"
               >
                 {CLIMBING_TYPES.filter((t) => t.value !== 'mixed').map((type) => (
                   <option key={type.value} value={type.value}>
@@ -125,7 +125,7 @@ export function GradeTargetsSection({
               <select
                 value={target.grade}
                 onChange={(e) => handleUpdateTarget(index, { grade: e.target.value })}
-                className="w-20 shrink-0 rounded-lg border border-[#B6B3B3] bg-white px-2 py-1.5 text-sm text-[#1B1A1A] appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
+                className="w-20 shrink-0 rounded-lg border border-[#B6B3B3] bg-white px-2 py-1.5 text-sm text-[#1B1A1A] appearance-none cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50"
               >
                 {GRADE_TARGET_OPTIONS[target.grade_system]?.map((grade) => (
                   <option key={grade} value={grade}>
@@ -146,7 +146,7 @@ export function GradeTargetsSection({
                       completed_count: Math.max(0, parseInt(e.target.value) || 0),
                     })
                   }
-                  className="w-14 rounded-lg border border-[#B6B3B3] bg-white px-2 py-1.5 text-center text-sm text-[#1B1A1A] focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
+                  className="w-14 rounded-lg border border-[#B6B3B3] bg-white px-2 py-1.5 text-center text-sm text-[#1B1A1A] focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50"
                 />
                 <span className="text-sm text-[#6D6C6C]">/</span>
                 <input
@@ -159,7 +159,7 @@ export function GradeTargetsSection({
                       target_count: Math.max(1, parseInt(e.target.value) || 1),
                     })
                   }
-                  className="w-14 rounded-lg border border-[#B6B3B3] bg-white px-2 py-1.5 text-center text-sm text-[#1B1A1A] focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
+                  className="w-14 rounded-lg border border-[#B6B3B3] bg-white px-2 py-1.5 text-center text-sm text-[#1B1A1A] focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50"
                 />
                 <span className="text-sm text-[#6D6C6C]">{t('gradeTargetsCountUnit')}</span>
               </div>

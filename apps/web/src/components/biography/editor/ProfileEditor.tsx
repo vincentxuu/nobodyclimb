@@ -351,7 +351,7 @@ export function ProfileEditor({
         {/* Desktop Layout: Sidebar + Content */}
         <div className="flex flex-col md:flex-row gap-6">
           {/* Sidebar: Progress (Desktop only) */}
-          <aside className="hidden md:block w-64 flex-shrink-0">
+          <aside className="hidden md:block w-64 shrink-0">
             <div className="sticky top-6">
               <ProgressIndicator
                 sections={sections}

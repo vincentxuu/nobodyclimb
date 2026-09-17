@@ -113,7 +113,7 @@ function StoryCard({ content }: StoryCardProps) {
       className="h-full"
     >
       <Link href={getLinkHref()} className="block h-full">
-        <Card className="h-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md">
+        <Card className="h-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xs transition-shadow duration-300 hover:shadow-md">
           <CardContent className="flex h-full flex-col p-6">
             <div className="mb-4 flex-1 space-y-2">
               <p className="text-xs text-[#8E8C8C]">{label}</p>
@@ -126,7 +126,7 @@ function StoryCard({ content }: StoryCardProps) {
 
             <div className="flex items-center justify-between border-t border-gray-100 pt-3">
               <div className="flex items-center gap-3">
-                <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full bg-gray-100">
+                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
                   {content.author_avatar ? (
                     isSvgUrl(content.author_avatar) ? (
                       <img
@@ -165,7 +165,7 @@ function StoryCard({ content }: StoryCardProps) {
                   </div>
                 </div>
               </div>
-              <ArrowRightCircle size={18} className="flex-shrink-0 text-gray-400" />
+              <ArrowRightCircle size={18} className="shrink-0 text-gray-400" />
             </div>
           </CardContent>
         </Card>

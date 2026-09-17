@@ -38,7 +38,7 @@ function VideoCard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group cursor-pointer overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md"
+      className="group cursor-pointer overflow-hidden rounded-lg bg-white shadow-xs transition-shadow hover:shadow-md"
       onClick={onClick}
     >
       {/* 縮圖 */}

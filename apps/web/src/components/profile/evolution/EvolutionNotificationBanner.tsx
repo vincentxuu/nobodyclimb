@@ -42,7 +42,7 @@ export default function EvolutionNotificationBanner() {
   return (
     <AnimatePresence>
       <motion.div
-        className="mb-4 cursor-pointer overflow-hidden rounded-lg border border-emerald-200 bg-gradient-to-r from-emerald-50 to-emerald-100/50 shadow-sm"
+        className="mb-4 cursor-pointer overflow-hidden rounded-lg border border-emerald-200 bg-linear-to-r from-emerald-50 to-emerald-100/50 shadow-xs"
         initial={{ opacity: 0, y: -10, height: 0 }}
         animate={{ opacity: 1, y: 0, height: 'auto' }}
         exit={{ opacity: 0, y: -10, height: 0 }}

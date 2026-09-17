@@ -2,14 +2,14 @@ export default function RouteLoading() {
   return (
     <div className="lg:flex lg:h-[calc(100vh-70px)] lg:overflow-hidden">
       {/* 側邊欄骨架 - 桌面版 */}
-      <aside className="hidden lg:flex lg:w-80 lg:flex-shrink-0 lg:flex-col border-r border-gray-200 bg-white">
-        <div className="flex-shrink-0 border-b border-gray-200 p-4">
+      <aside className="hidden lg:flex lg:w-80 lg:shrink-0 lg:flex-col border-r border-gray-200 bg-white">
+        <div className="shrink-0 border-b border-gray-200 p-4">
           <div className="mb-3 h-4 w-20 animate-pulse rounded bg-gray-200" />
           <div className="mb-2 h-6 w-32 animate-pulse rounded bg-gray-200" />
           <div className="h-4 w-24 animate-pulse rounded bg-gray-200" />
         </div>
 
-        <div className="flex-shrink-0 border-b border-gray-200 p-4 space-y-3">
+        <div className="shrink-0 border-b border-gray-200 p-4 space-y-3">
           <div className="h-10 animate-pulse rounded bg-gray-200" />
           <div className="flex gap-2">
             <div className="h-9 flex-1 animate-pulse rounded bg-gray-200" />
@@ -31,7 +31,7 @@ export default function RouteLoading() {
           <div className="mb-4 h-5 w-64 animate-pulse rounded bg-gray-200" />
 
           {/* 內容卡片骨架 */}
-          <div className="rounded-lg bg-white p-6 shadow-sm md:p-8">
+          <div className="rounded-lg bg-white p-6 shadow-xs md:p-8">
             {/* 標題 */}
             <div className="mb-6">
               <div className="mb-2 h-8 w-48 animate-pulse rounded bg-gray-200" />

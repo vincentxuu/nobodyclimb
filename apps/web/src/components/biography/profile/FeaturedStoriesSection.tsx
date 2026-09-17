@@ -161,7 +161,7 @@ export function FeaturedStoriesSection({ person }: FeaturedStoriesSectionProps) 
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="w-80 flex-shrink-0 snap-center rounded-lg bg-white p-6 shadow-sm flex flex-col"
+              className="w-80 shrink-0 snap-center rounded-lg bg-white p-6 shadow-xs flex flex-col"
             >
               {/* 分類標籤 */}
               {(story.category_id || story.category_name) && (

@@ -30,7 +30,7 @@ export function WeekTabs({
             key={week.weekNumber}
             onClick={() => onWeekChange(week.weekNumber)}
             className={`flex min-w-0 flex-1 flex-col items-center gap-1.5 rounded-xl border-2 px-3 py-3 transition-all ${
-              isActive ? 'shadow-sm' : 'border-gray-200 hover:border-gray-300'
+              isActive ? 'shadow-xs' : 'border-gray-200 hover:border-gray-300'
             }`}
             style={isActive ? { borderColor: accentColor, color: accentColor } : undefined}
           >

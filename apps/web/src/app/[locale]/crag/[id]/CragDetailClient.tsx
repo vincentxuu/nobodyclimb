@@ -129,9 +129,9 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
     <main className="min-h-screen bg-gray-50">
       <div className="lg:flex lg:h-[calc(100vh-70px)] lg:overflow-hidden">
         {/* 桌面版 Sidebar */}
-        <aside className="hidden lg:flex lg:w-80 lg:flex-shrink-0 lg:flex-col border-r border-gray-200 bg-white">
+        <aside className="hidden lg:flex lg:w-80 lg:shrink-0 lg:flex-col border-r border-gray-200 bg-white">
           {/* 標題區 */}
-          <div className="flex-shrink-0 border-b border-gray-200 p-4">
+          <div className="shrink-0 border-b border-gray-200 p-4">
             <Link
               href="/crag"
               prefetch={false}
@@ -154,7 +154,7 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
           </div>
 
           {/* 篩選區 */}
-          <div className="flex-shrink-0 border-b border-gray-200 p-4">
+          <div className="shrink-0 border-b border-gray-200 p-4">
             <RouteListFilter
               searchQuery={filterState.searchQuery}
               onSearchChange={setSearchQuery}
@@ -196,7 +196,7 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
             </div>
 
             {/* 主要內容區 */}
-            <div className="rounded-lg bg-white p-6 shadow-sm lg:p-8">
+            <div className="rounded-lg bg-white p-6 shadow-xs lg:p-8">
               {/* 封面展示區 */}
               <div className="mb-8">
                 <div
@@ -252,41 +252,35 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
                   <div className="mt-4 space-y-3">
                     {currentCrag.type && (
                       <div className="flex">
-                        <span className="w-28 flex-shrink-0 text-gray-500">{t('cragType')}</span>
+                        <span className="w-28 shrink-0 text-gray-500">{t('cragType')}</span>
                         <span>{currentCrag.type}</span>
                       </div>
                     )}
                     {currentCrag.rockType && (
                       <div className="flex">
-                        <span className="w-28 flex-shrink-0 text-gray-500">{t('rockType')}</span>
+                        <span className="w-28 shrink-0 text-gray-500">{t('rockType')}</span>
                         <span>{currentCrag.rockType}</span>
                       </div>
                     )}
                     <div className="flex">
-                      <span className="w-28 flex-shrink-0 text-gray-500">
-                        {t('routeCountLabel')}
-                      </span>
+                      <span className="w-28 shrink-0 text-gray-500">{t('routeCountLabel')}</span>
                       <span>~{currentCrag.routes}</span>
                     </div>
                     {currentCrag.difficulty && (
                       <div className="flex">
-                        <span className="w-28 flex-shrink-0 text-gray-500">
-                          {t('difficultyRange')}
-                        </span>
+                        <span className="w-28 shrink-0 text-gray-500">{t('difficultyRange')}</span>
                         <span>{currentCrag.difficulty}</span>
                       </div>
                     )}
                     {currentCrag.height && (
                       <div className="flex">
-                        <span className="w-28 flex-shrink-0 text-gray-500">{t('wallHeight')}</span>
+                        <span className="w-28 shrink-0 text-gray-500">{t('wallHeight')}</span>
                         <span>{currentCrag.height}</span>
                       </div>
                     )}
                     {currentCrag.approach && (
                       <div className="flex">
-                        <span className="w-28 flex-shrink-0 text-gray-500">
-                          {t('approachTime')}
-                        </span>
+                        <span className="w-28 shrink-0 text-gray-500">{t('approachTime')}</span>
                         <span>{currentCrag.approach}</span>
                       </div>
                     )}
@@ -302,13 +296,13 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
                   <div className="mt-4 space-y-3">
                     {currentCrag.transportation.map((item, index) => (
                       <div key={index} className="flex">
-                        <span className="w-20 flex-shrink-0 text-gray-500">{item.type}：</span>
+                        <span className="w-20 shrink-0 text-gray-500">{item.type}：</span>
                         <span className="flex-1">{item.description}</span>
                       </div>
                     ))}
                     {currentCrag.parking && (
                       <div className="flex pt-2">
-                        <span className="w-20 flex-shrink-0 text-gray-500">{t('parking')}</span>
+                        <span className="w-20 shrink-0 text-gray-500">{t('parking')}</span>
                         <span className="flex-1">{currentCrag.parking}</span>
                       </div>
                     )}
@@ -424,9 +418,9 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
                         key={area.id || index}
                         href={`/crag/${id}/area/${area.id}`}
                         prefetch={false}
-                        className="group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:border-[#FFE70C] hover:shadow"
+                        className="group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xs transition-all hover:border-[#FFE70C] hover:shadow-sm"
                       >
-                        <div className="relative aspect-[4/1] overflow-hidden">
+                        <div className="relative aspect-4/1 overflow-hidden">
                           <CragCoverGenerator
                             rockType={currentCrag.rockType}
                             name={area.name}
@@ -517,7 +511,7 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
               </div>
 
               {/* 篩選區 */}
-              <div className="flex-shrink-0 border-b border-gray-200 p-4">
+              <div className="shrink-0 border-b border-gray-200 p-4">
                 <RouteListFilter
                   searchQuery={filterState.searchQuery}
                   onSearchChange={setSearchQuery}

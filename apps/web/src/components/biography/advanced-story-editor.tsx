@@ -87,7 +87,7 @@ function FilledStoryCard({
       layout
       id={`story-${question.field}`}
       className={cn(
-        'rounded-lg bg-white p-6 shadow-sm transition-all duration-200',
+        'rounded-lg bg-white p-6 shadow-xs transition-all duration-200',
         isEditing
           ? 'border-2 border-brand-accent shadow-lg'
           : 'border border-gray-200 hover:border-brand-accent/50 hover:shadow-md cursor-pointer'
@@ -97,7 +97,7 @@ function FilledStoryCard({
     >
       {/* 問題標題 */}
       <div className="mb-3 flex items-start gap-3">
-        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-brand-accent/20">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-accent/20">
           <Icon className="h-5 w-5 text-brand-dark" />
         </div>
         <div className="flex-1">
@@ -180,7 +180,7 @@ function EmptyStoryCard({
       onClick={onStartEdit}
     >
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gray-100">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-100">
           <Icon className="h-5 w-5 text-gray-400" />
         </div>
         <div className="flex-1">

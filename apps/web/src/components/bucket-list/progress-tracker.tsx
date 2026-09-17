@@ -193,7 +193,7 @@ export function ProgressTracker({
                   <span className="whitespace-nowrap text-[10px] font-medium">
                     {milestone.percentage}%
                   </span>
-                  <span className="max-w-[3rem] truncate text-[10px]">{milestone.title}</span>
+                  <span className="max-w-12 truncate text-[10px]">{milestone.title}</span>
                 </div>
               ))}
               {/* 佔位元素，確保容器有高度 */}
