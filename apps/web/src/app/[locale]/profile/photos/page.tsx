@@ -47,7 +47,7 @@ const PhotoCard = ({ photo, onEdit, onDelete, isDeleting }: PhotoCardProps) => {
       {/* 照片資訊 */}
       <div className="p-3 md:p-4">
         {/* 說明 */}
-        <p className="mb-2 line-clamp-2 text-sm text-[#3F3D3D] min-h-[2.5rem]">
+        <p className="mb-2 line-clamp-2 text-sm text-[#3F3D3D] min-h-10">
           {photo.caption || t('noCaption')}
         </p>
 

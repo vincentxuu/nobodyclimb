@@ -303,7 +303,7 @@ export default function CompletePage() {
 
           {/* 引導式問答提示卡片 */}
           {guidedQuestions.length > 0 && (
-            <div className="w-full max-w-md rounded-xl border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-primary/10 p-5 text-left">
+            <div className="w-full max-w-md rounded-xl border-2 border-primary/30 bg-linear-to-br from-primary/5 to-primary/10 p-5 text-left">
               <div className="flex items-start gap-3">
                 <div className="rounded-full bg-primary/20 p-2">
                   <Sparkles size={20} className="text-primary" />
@@ -326,7 +326,7 @@ export default function CompletePage() {
           )}
 
           {/* 原有提示卡片 */}
-          <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white p-4 text-left shadow-sm">
+          <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white p-4 text-left shadow-xs">
             <div className="flex items-start gap-3">
               <div className="rounded-full bg-gray-100 p-2">
                 <Edit3 size={20} className="text-gray-600" />

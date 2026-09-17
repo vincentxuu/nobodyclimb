@@ -116,7 +116,7 @@ export function RouteMobileDrawer({
               </div>
 
               {/* 篩選區 */}
-              <div className="flex-shrink-0 border-b border-gray-200 p-4">
+              <div className="shrink-0 border-b border-gray-200 p-4">
                 <RouteListFilter
                   searchQuery={filterState.searchQuery}
                   onSearchChange={onSearchChange}

@@ -180,7 +180,7 @@ function CreateBlogPageContent() {
       {/* 頂部工具列 */}
       <div className="sticky top-0 z-10 border-b bg-white">
         <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-2 px-4 py-3">
-          <Button variant="ghost" onClick={handleBack} className="flex-shrink-0">
+          <Button variant="ghost" onClick={handleBack} className="shrink-0">
             <ArrowLeft className="h-4 w-4 md:mr-2" />
             <span className="hidden md:inline">{t('back')}</span>
           </Button>
@@ -303,7 +303,7 @@ function CreateBlogPageContent() {
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
                 placeholder={t('createSummaryPlaceholder')}
-                className="h-24 w-full resize-none rounded-lg border border-gray-200 bg-white p-3 text-sm text-brand-dark placeholder:text-gray-400 focus:border-brand-dark focus:outline-none"
+                className="h-24 w-full resize-none rounded-lg border border-gray-200 bg-white p-3 text-sm text-brand-dark placeholder:text-gray-400 focus:border-brand-dark focus:outline-hidden"
                 maxLength={200}
               />
               <p className="mt-1 text-right text-xs text-gray-400">{summary.length}/200</p>

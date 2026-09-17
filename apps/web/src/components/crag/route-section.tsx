@@ -255,7 +255,7 @@ export const CragRouteSection: React.FC<CragRouteSectionProps> = ({
                 <div className="text-xs text-gray-400 truncate mt-0.5">{route.englishName}</div>
               )}
             </div>
-            <div className="flex items-center gap-4 ml-4 flex-shrink-0">
+            <div className="flex items-center gap-4 ml-4 shrink-0">
               {route.length && (
                 <span className="text-xs text-gray-500 hidden md:inline">{route.length}</span>
               )}

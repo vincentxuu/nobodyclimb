@@ -14,7 +14,7 @@ import type { GymListItem } from '@/lib/gym-data'
 // 岩館卡片組件（使用 CSS 動畫）
 function GymCard({ gym }: { gym: GymListItem }) {
   return (
-    <div className="overflow-hidden rounded-lg bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+    <div className="overflow-hidden rounded-lg bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
       <Link href={`/gym/${gym.id}`}>
         <div className="relative h-48 w-full">
           <GymCoverGenerator
@@ -122,7 +122,7 @@ export default function GymListPage() {
         </div>
 
         {/* 篩選區塊 */}
-        <div className="mb-8 rounded-lg bg-white p-6 shadow-sm">
+        <div className="mb-8 rounded-lg bg-white p-6 shadow-xs">
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-xl font-bold">{t('filterTitle')}</h2>
             <button

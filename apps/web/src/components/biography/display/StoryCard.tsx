@@ -85,7 +85,7 @@ export function StoryCard({
         {(() => {
           const IconComponent = icon ? iconMap[icon] : null
           return IconComponent ? (
-            <IconComponent size={18} className="text-[#3F3D3D] flex-shrink-0 mt-0.5" />
+            <IconComponent size={18} className="text-[#3F3D3D] shrink-0 mt-0.5" />
           ) : null
         })()}
         <h3 className="font-medium text-[#1B1A1A]">

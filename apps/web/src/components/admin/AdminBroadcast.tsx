@@ -118,7 +118,7 @@ export default function AdminBroadcast() {
       </div>
 
       {/* 發送表單 */}
-      <div className="bg-white rounded-lg shadow-sm border border-wb-20 p-6">
+      <div className="bg-white rounded-lg shadow-xs border border-wb-20 p-6">
         <div className="flex items-center gap-2 mb-4">
           <Megaphone className="h-5 w-5 text-primary" />
           <h2 className="font-semibold text-wb-100">發送新公告</h2>
@@ -135,7 +135,7 @@ export default function AdminBroadcast() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="輸入公告標題..."
-              className="w-full px-4 py-2 bg-white border border-wb-20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-yellow-100/50 focus:border-brand-yellow-100 text-wb-100 placeholder:text-wb-50"
+              className="w-full px-4 py-2 bg-white border border-wb-20 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-brand-yellow-100/50 focus:border-brand-yellow-100 text-wb-100 placeholder:text-wb-50"
               maxLength={100}
             />
           </div>
@@ -150,7 +150,7 @@ export default function AdminBroadcast() {
               onChange={(e) => setMessage(e.target.value)}
               placeholder="輸入公告內容..."
               rows={4}
-              className="w-full px-4 py-2 bg-white border border-wb-20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-yellow-100/50 focus:border-brand-yellow-100 text-wb-100 placeholder:text-wb-50 resize-none"
+              className="w-full px-4 py-2 bg-white border border-wb-20 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-brand-yellow-100/50 focus:border-brand-yellow-100 text-wb-100 placeholder:text-wb-50 resize-none"
               maxLength={500}
             />
             <p className="text-xs text-wb-50 mt-1">{message.length} / 500</p>
@@ -164,7 +164,7 @@ export default function AdminBroadcast() {
               id="targetRole"
               value={targetRole}
               onChange={(e) => setTargetRole(e.target.value as typeof targetRole)}
-              className="w-full px-4 py-2 bg-white border border-wb-20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-yellow-100/50 focus:border-brand-yellow-100 text-wb-100"
+              className="w-full px-4 py-2 bg-white border border-wb-20 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-brand-yellow-100/50 focus:border-brand-yellow-100 text-wb-100"
             >
               <option value="all">所有用戶</option>
               <option value="user">僅一般用戶</option>
@@ -180,9 +180,9 @@ export default function AdminBroadcast() {
               }`}
             >
               {result.success ? (
-                <CheckCircle className="h-5 w-5 text-wb-90 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-wb-90 shrink-0 mt-0.5" />
               ) : (
-                <AlertCircle className="h-5 w-5 text-brand-red-100 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="h-5 w-5 text-brand-red-100 shrink-0 mt-0.5" />
               )}
               <div>
                 <p className="font-medium">{result.message}</p>
@@ -217,7 +217,7 @@ export default function AdminBroadcast() {
       </div>
 
       {/* 歷史記錄 */}
-      <div className="bg-white rounded-lg shadow-sm border border-wb-20 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-xs border border-wb-20 overflow-hidden">
         <div className="flex items-center justify-between p-6 border-b border-wb-20">
           <div className="flex items-center gap-2">
             <Clock className="h-5 w-5 text-wb-50" />

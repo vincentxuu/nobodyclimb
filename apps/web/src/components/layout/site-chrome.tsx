@@ -3,8 +3,9 @@
 import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 
-// 判斷是否為 admin 路徑（含 /en/admin、/ja/admin 等 locale 前綴）
+// 判斷是否為 admin 或 chat 路徑（含 /en/admin、/ja/chat 等 locale 前綴）
 const ADMIN_PATH_RE = /^\/(?:[a-z]{2}\/)?admin(?:\/|$)/
+const CHAT_PATH_RE = /^\/(?:[a-z]{2}\/)?chat(?:\/|$)/
 
 interface SiteChromeProps {
   children: ReactNode
@@ -22,8 +23,9 @@ interface SiteChromeProps {
 export function SiteChrome({ children, navbar, footer, extras }: SiteChromeProps) {
   const pathname = usePathname()
   const isAdmin = ADMIN_PATH_RE.test(pathname)
+  const isChat = CHAT_PATH_RE.test(pathname)
 
-  if (isAdmin) {
+  if (isAdmin || isChat) {
     return <main className="min-h-screen">{children}</main>
   }
 

@@ -79,7 +79,7 @@ export default function ProfileEditorSelector() {
 
   // 選擇器頁面
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
       <div className="mx-auto max-w-4xl px-4 py-12">
         {/* 標題 */}
         <div className="mb-12 text-center">

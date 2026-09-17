@@ -6,8 +6,8 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, React.ComponentProps<'div'>
     <div
       ref={ref}
       className={cn(
-        'inline-flex -space-x-px rounded-lg shadow-sm shadow-black/5 rtl:space-x-reverse',
-        '[&>*]:rounded-none [&>*:first-child]:rounded-s-lg [&>*:last-child]:rounded-e-lg',
+        'inline-flex -space-x-px rounded-lg shadow-xs shadow-black/5 rtl:space-x-reverse',
+        '*:rounded-none [&>*:first-child]:rounded-s-lg [&>*:last-child]:rounded-e-lg',
         className
       )}
       role="group"
@@ -17,4 +17,11 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, React.ComponentProps<'div'>
 )
 ButtonGroup.displayName = 'ButtonGroup'
 
-export { ButtonGroup }
+const ButtonGroupText = React.forwardRef<HTMLSpanElement, React.ComponentProps<'span'>>(
+  ({ className, ...props }, ref) => (
+    <span ref={ref} className={cn('flex items-center px-2 text-sm', className)} {...props} />
+  )
+)
+ButtonGroupText.displayName = 'ButtonGroupText'
+
+export { ButtonGroup, ButtonGroupText }

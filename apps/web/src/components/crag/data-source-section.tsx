@@ -46,7 +46,7 @@ export function DataSourceSection({ data }: DataSourceSectionProps) {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {/* 資料來源 */}
           <div className="flex items-start gap-3">
-            <Database size={18} className="mt-0.5 flex-shrink-0 text-gray-500" />
+            <Database size={18} className="mt-0.5 shrink-0 text-gray-500" />
             <div>
               <p className="text-sm text-gray-500">{t('dataSourceLabel')}</p>
               {data.sourceUrl ? (
@@ -66,7 +66,7 @@ export function DataSourceSection({ data }: DataSourceSectionProps) {
 
           {/* 最後更新時間 */}
           <div className="flex items-start gap-3">
-            <Clock size={18} className="mt-0.5 flex-shrink-0 text-gray-500" />
+            <Clock size={18} className="mt-0.5 shrink-0 text-gray-500" />
             <div>
               <p className="text-sm text-gray-500">{t('lastUpdatedLabel')}</p>
               <p className="text-sm font-medium text-gray-900">
@@ -77,7 +77,7 @@ export function DataSourceSection({ data }: DataSourceSectionProps) {
 
           {/* 資料維護者 */}
           <div className="flex items-start gap-3">
-            <User size={18} className="mt-0.5 flex-shrink-0 text-gray-500" />
+            <User size={18} className="mt-0.5 shrink-0 text-gray-500" />
             <div>
               <p className="text-sm text-gray-500">{t('maintainerLabel')}</p>
               {data.maintainerUrl ? (
@@ -97,7 +97,7 @@ export function DataSourceSection({ data }: DataSourceSectionProps) {
 
           {/* 回報錯誤連結 */}
           <div className="flex items-start gap-3">
-            <MessageSquare size={18} className="mt-0.5 flex-shrink-0 text-gray-500" />
+            <MessageSquare size={18} className="mt-0.5 shrink-0 text-gray-500" />
             <div>
               <p className="text-sm text-gray-500">{t('reportErrorLabel')}</p>
               <a

@@ -97,7 +97,7 @@ export function ClimberCharacter({
   return (
     <div className={cn('relative h-full w-full', className)}>
       {/* 繩索 */}
-      <div className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gradient-to-b from-[#8B7355] to-[#6B5344]" />
+      <div className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-linear-to-b from-[#8B7355] to-[#6B5344]" />
 
       {/* 攀岩牆背景紋理 */}
       <div className="absolute inset-0 opacity-10">

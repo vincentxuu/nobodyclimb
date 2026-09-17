@@ -362,7 +362,7 @@ export function BiographyWizard({
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
-          className="rounded-lg bg-white p-6 shadow-sm"
+          className="rounded-lg bg-white p-6 shadow-xs"
         >
           {/* 步驟 1: 基本資訊 */}
           {currentStep === 1 && (

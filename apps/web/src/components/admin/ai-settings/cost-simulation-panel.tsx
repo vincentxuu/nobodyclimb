@@ -124,14 +124,14 @@ export function CostSimulationPanel({ config }: { config: Record<string, string>
                 className="grid grid-cols-[1fr_120px_120px_80px] gap-2 px-5 py-3 items-center bg-blue-50/30"
               >
                 <input
-                  className="rounded border border-wb-30 px-2 py-1 text-sm text-wb-100 outline-none focus:border-blue-400 w-full"
+                  className="rounded border border-wb-30 px-2 py-1 text-sm text-wb-100 outline-hidden focus:border-blue-400 w-full"
                   value={editValues.name ?? ''}
                   onChange={(e) => setEditValues((v) => ({ ...v, name: e.target.value }))}
                   placeholder="供應商名稱"
                 />
                 <input
                   type="number"
-                  className="rounded border border-wb-30 px-2 py-1 text-sm font-mono text-wb-100 outline-none focus:border-blue-400 w-full"
+                  className="rounded border border-wb-30 px-2 py-1 text-sm font-mono text-wb-100 outline-hidden focus:border-blue-400 w-full"
                   value={editValues.input_per_1m ?? ''}
                   onChange={(e) =>
                     setEditValues((v) => ({ ...v, input_per_1m: parseFloat(e.target.value) || 0 }))
@@ -140,7 +140,7 @@ export function CostSimulationPanel({ config }: { config: Record<string, string>
                 />
                 <input
                   type="number"
-                  className="rounded border border-wb-30 px-2 py-1 text-sm font-mono text-wb-100 outline-none focus:border-blue-400 w-full"
+                  className="rounded border border-wb-30 px-2 py-1 text-sm font-mono text-wb-100 outline-hidden focus:border-blue-400 w-full"
                   value={editValues.output_per_1m ?? ''}
                   onChange={(e) =>
                     setEditValues((v) => ({ ...v, output_per_1m: parseFloat(e.target.value) || 0 }))
@@ -194,7 +194,7 @@ export function CostSimulationPanel({ config }: { config: Record<string, string>
           {addingNew ? (
             <div className="grid grid-cols-[1fr_120px_120px_80px] gap-2 px-5 py-3 items-center bg-emerald-50/30">
               <input
-                className="rounded border border-wb-30 px-2 py-1 text-sm text-wb-100 outline-none focus:border-emerald-400 w-full"
+                className="rounded border border-wb-30 px-2 py-1 text-sm text-wb-100 outline-hidden focus:border-emerald-400 w-full"
                 value={newProvider.name ?? ''}
                 onChange={(e) => setNewProvider((v) => ({ ...v, name: e.target.value }))}
                 placeholder="供應商名稱"
@@ -202,7 +202,7 @@ export function CostSimulationPanel({ config }: { config: Record<string, string>
               />
               <input
                 type="number"
-                className="rounded border border-wb-30 px-2 py-1 text-sm font-mono text-wb-100 outline-none focus:border-emerald-400 w-full"
+                className="rounded border border-wb-30 px-2 py-1 text-sm font-mono text-wb-100 outline-hidden focus:border-emerald-400 w-full"
                 value={newProvider.input_per_1m ?? ''}
                 onChange={(e) =>
                   setNewProvider((v) => ({ ...v, input_per_1m: parseFloat(e.target.value) || 0 }))
@@ -212,7 +212,7 @@ export function CostSimulationPanel({ config }: { config: Record<string, string>
               />
               <input
                 type="number"
-                className="rounded border border-wb-30 px-2 py-1 text-sm font-mono text-wb-100 outline-none focus:border-emerald-400 w-full"
+                className="rounded border border-wb-30 px-2 py-1 text-sm font-mono text-wb-100 outline-hidden focus:border-emerald-400 w-full"
                 value={newProvider.output_per_1m ?? ''}
                 onChange={(e) =>
                   setNewProvider((v) => ({ ...v, output_per_1m: parseFloat(e.target.value) || 0 }))

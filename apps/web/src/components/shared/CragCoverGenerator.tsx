@@ -100,13 +100,13 @@ export function CragCoverGenerator({
   const aspectClasses = {
     video: 'aspect-video',
     square: 'aspect-square',
-    wide: 'aspect-[21/9]',
-    card: 'aspect-[16/10]',
+    wide: 'aspect-21/9',
+    card: 'aspect-16/10',
   }
 
   return (
     <div
-      className={`relative overflow-hidden bg-gradient-to-br ${theme.gradient} ${aspectClasses[aspectRatio]} ${className}`}
+      className={`relative overflow-hidden bg-linear-to-br ${theme.gradient} ${aspectClasses[aspectRatio]} ${className}`}
     >
       {/* 背景圖案 */}
       <PatternOverlay pattern={theme.pattern} />
@@ -210,7 +210,7 @@ export function getCragTypeTheme(rockType: string | null | undefined) {
  */
 export function getCragTypeGradient(rockType: string | null | undefined): string {
   const theme = getCragTypeTheme(rockType)
-  return `bg-gradient-to-br ${theme.gradient}`
+  return `bg-linear-to-br ${theme.gradient}`
 }
 
 export default CragCoverGenerator

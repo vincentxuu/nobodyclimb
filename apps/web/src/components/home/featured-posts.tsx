@@ -49,7 +49,7 @@ function ExploreCard({ post }: { post: Post }) {
   const title = t(post.titleKey as Parameters<typeof t>[0])
   return (
     <Link href={`/blog/${post.slug}`} className="group block h-full">
-      <div className="relative aspect-[1/1] overflow-hidden">
+      <div className="relative aspect-square overflow-hidden">
         <Image
           src={post.coverImage}
           alt={title}
@@ -61,7 +61,7 @@ function ExploreCard({ post }: { post: Post }) {
         />
 
         {/* 黃色漸層遮罩 */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FFE70C] via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#FFE70C] via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="absolute inset-0 bg-black/40" />
 
         {/* 標題 */}

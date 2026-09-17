@@ -59,7 +59,7 @@ export function ContentInteractorsPanel({
                       href={`/profile/${user.username}`}
                       className="flex items-center gap-1.5 rounded-full border border-gray-200 px-2 py-1 text-xs text-gray-700 hover:border-gray-400 hover:text-gray-900 transition-colors"
                     >
-                      <div className="h-5 w-5 flex-shrink-0 overflow-hidden rounded-full bg-gray-200">
+                      <div className="h-5 w-5 shrink-0 overflow-hidden rounded-full bg-gray-200">
                         {user.avatar_url ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img

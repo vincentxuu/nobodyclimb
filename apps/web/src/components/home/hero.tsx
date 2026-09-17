@@ -12,7 +12,7 @@ import { useTranslations } from 'next-intl'
 export function Hero() {
   const t = useTranslations('HomePage')
   return (
-    <div className="relative h-[100vh] w-full overflow-hidden pt-[80px]">
+    <div className="relative h-screen w-full overflow-hidden pt-[80px]">
       {/* 背景圖片 */}
       <div className="absolute inset-0">
         <Image

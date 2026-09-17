@@ -129,7 +129,7 @@ export function DayCard({
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
                       placeholder="記錄今天的訓練心得..."
-                      className="w-full resize-none rounded-lg border border-gray-200 p-2 text-sm focus:border-gray-300 focus:outline-none"
+                      className="w-full resize-none rounded-lg border border-gray-200 p-2 text-sm focus:border-gray-300 focus:outline-hidden"
                       rows={3}
                     />
                     <button

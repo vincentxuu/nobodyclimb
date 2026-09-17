@@ -68,7 +68,7 @@ export function ChapterAdvice({ biographyId, personName, updatedAt }: ChapterAdv
 
   if (isLoading) {
     return (
-      <section className="my-16 bg-gradient-to-br from-brand-light to-gray-100 px-8 py-20">
+      <section className="my-16 bg-linear-to-br from-brand-light to-gray-100 px-8 py-20">
         <div className="flex justify-center py-8">
           <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
         </div>
@@ -80,7 +80,7 @@ export function ChapterAdvice({ biographyId, personName, updatedAt }: ChapterAdv
 
   return (
     <motion.section
-      className="my-16 bg-gradient-to-br from-brand-light to-gray-100 px-8 py-20"
+      className="my-16 bg-linear-to-br from-brand-light to-gray-100 px-8 py-20"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

@@ -111,7 +111,7 @@ export function AddCustomDimensionModal({
   return (
     <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center">
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-xs" onClick={onClose} />
 
       {/* Modal */}
       <div
@@ -187,7 +187,7 @@ export function AddCustomDimensionModal({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder={t('dimensionNamePlaceholder')}
-              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors text-[#1B1A1A] placeholder:text-[#9D9D9D]"
+              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors text-[#1B1A1A] placeholder:text-[#9D9D9D]"
               maxLength={10}
             />
             <p className="text-xs text-[#8E8C8C]">{t('dimensionNameHint')}</p>
@@ -204,7 +204,7 @@ export function AddCustomDimensionModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder={t('dimensionDescriptionPlaceholder')}
-              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors text-[#1B1A1A] placeholder:text-[#9D9D9D]"
+              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors text-[#1B1A1A] placeholder:text-[#9D9D9D]"
               maxLength={30}
             />
           </div>

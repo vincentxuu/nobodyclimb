@@ -71,9 +71,9 @@ export function AddCustomTagModal({
   const canSave = label.trim().length > 0 && dimensionId
 
   return (
-    <div className="fixed inset-0 z-[150] flex items-end md:items-center justify-center">
+    <div className="fixed inset-0 z-150 flex items-end md:items-center justify-center">
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-xs" onClick={onClose} />
 
       {/* Modal */}
       <div
@@ -109,7 +109,7 @@ export function AddCustomTagModal({
               value={label}
               onChange={(e) => setLabel(e.target.value)}
               placeholder={t('tagNamePlaceholder')}
-              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors text-[#1B1A1A] placeholder:text-[#9D9D9D]"
+              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors text-[#1B1A1A] placeholder:text-[#9D9D9D]"
               maxLength={20}
             />
             <p className="text-xs text-[#8E8C8C]">{t('tagNameHint')}</p>
@@ -126,7 +126,7 @@ export function AddCustomTagModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder={t('tagDescriptionPlaceholder')}
-              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors text-[#1B1A1A] placeholder:text-[#9D9D9D]"
+              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors text-[#1B1A1A] placeholder:text-[#9D9D9D]"
               maxLength={50}
             />
             <p className="text-xs text-[#8E8C8C]">{t('tagDescriptionHint')}</p>
@@ -140,7 +140,7 @@ export function AddCustomTagModal({
             <select
               value={dimensionId}
               onChange={(e) => setDimensionId(e.target.value)}
-              className="w-full px-4 py-3 border border-[#B6B3B3] rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors bg-white"
+              className="w-full px-4 py-3 border border-[#B6B3B3] rounded-lg focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors bg-white"
             >
               {dimensions.map((dim) => (
                 <option key={dim.id} value={dim.id}>

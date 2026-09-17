@@ -67,7 +67,7 @@ export function QuizQuestion({ question, selectedValue, onAnswer, onPrev, questi
                 className={`flex w-full items-center gap-3 rounded-2xl border-2 px-5 py-4 text-left text-base transition-all duration-200 ${
                   isSelected
                     ? 'border-transparent font-medium text-white shadow-lg'
-                    : 'border-gray-100 bg-white text-gray-700 shadow-sm hover:border-gray-200 hover:shadow-md'
+                    : 'border-gray-100 bg-white text-gray-700 shadow-xs hover:border-gray-200 hover:shadow-md'
                 }`}
                 style={
                   isSelected

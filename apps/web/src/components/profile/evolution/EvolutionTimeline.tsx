@@ -128,10 +128,10 @@ export default function EvolutionTimeline({ records }: EvolutionTimelineProps) {
             transition={{ delay: index * 0.1 }}
           >
             {/* Timeline node */}
-            <div className="absolute left-2.5 top-3 h-3 w-3 rounded-full border-2 border-white bg-emerald-500 shadow-sm md:left-4.5" />
+            <div className="absolute left-2.5 top-3 h-3 w-3 rounded-full border-2 border-white bg-emerald-500 shadow-xs md:left-4.5" />
 
             {/* Card */}
-            <div className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+            <div className="rounded-lg border border-gray-100 bg-white p-4 shadow-xs">
               {/* Header: date + trigger */}
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs text-gray-400">

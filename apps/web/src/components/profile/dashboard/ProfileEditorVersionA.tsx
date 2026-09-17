@@ -378,7 +378,7 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* 左側導航 */}
-      <div className="w-64 flex-shrink-0 border-r bg-white">
+      <div className="w-64 shrink-0 border-r bg-white">
         <div className="sticky top-0 p-6">
           {/* 返回按鈕 */}
           {onBack && (
@@ -451,7 +451,7 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.2 }}
-              className="rounded-lg bg-white p-6 shadow-sm"
+              className="rounded-lg bg-white p-6 shadow-xs"
             >
               <div className="mb-6">
                 <h2 className="text-lg font-semibold text-gray-900">{activeTabConfig?.title}</h2>

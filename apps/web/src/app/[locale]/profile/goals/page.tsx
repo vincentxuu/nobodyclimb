@@ -283,7 +283,7 @@ function GoalCard({
 
   return (
     <li
-      className={`flex items-start justify-between gap-3 rounded-lg border px-4 py-3 shadow-sm ${
+      className={`flex items-start justify-between gap-3 rounded-lg border px-4 py-3 shadow-xs ${
         isAchieved ? 'border-amber-100 bg-amber-50/50' : 'border-gray-100 bg-white'
       }`}
     >

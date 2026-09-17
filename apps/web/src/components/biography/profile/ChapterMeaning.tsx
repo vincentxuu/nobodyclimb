@@ -52,7 +52,7 @@ export function ChapterMeaning({ biographyId, personName }: ChapterMeaningProps)
 
   if (isLoading) {
     return (
-      <section className="my-16 bg-gradient-to-br from-brand-accent/10 to-brand-light px-8 py-20">
+      <section className="my-16 bg-linear-to-br from-brand-accent/10 to-brand-light px-8 py-20">
         <div className="flex justify-center py-8">
           <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
         </div>
@@ -66,7 +66,7 @@ export function ChapterMeaning({ biographyId, personName }: ChapterMeaningProps)
 
   return (
     <motion.section
-      className="my-16 bg-gradient-to-br from-brand-accent/10 to-brand-light px-8 py-20"
+      className="my-16 bg-linear-to-br from-brand-accent/10 to-brand-light px-8 py-20"
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}

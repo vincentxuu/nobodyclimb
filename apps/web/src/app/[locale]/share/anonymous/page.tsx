@@ -188,7 +188,7 @@ export default function AnonymousSharePage() {
         {/* Email 輸入 */}
         {showEmailInput && (
           <section className="mb-6">
-            <div className="rounded-xl bg-white p-4 shadow-sm">
+            <div className="rounded-xl bg-white p-4 shadow-xs">
               <label className="block text-sm font-medium text-gray-700">{t('emailLabel')}</label>
               <p className="mb-2 text-xs text-gray-500">{t('emailHint')}</p>
               <input
@@ -196,7 +196,7 @@ export default function AnonymousSharePage() {
                 value={contactEmail}
                 onChange={(e) => setContactEmail(e.target.value)}
                 placeholder="your@email.com"
-                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-[#ffe70c] focus:outline-none"
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-[#ffe70c] focus:outline-hidden"
               />
             </div>
           </section>

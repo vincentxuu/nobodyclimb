@@ -10,7 +10,7 @@ export const ROW_COLS: Record<number, string> = {
 }
 
 const INPUT_CLASS =
-  'w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-100 placeholder:text-wb-40 outline-none focus:border-wb-50 focus:ring-1 focus:ring-wb-50 transition-colors font-mono'
+  'w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-100 placeholder:text-wb-40 outline-hidden focus:border-wb-50 focus:ring-1 focus:ring-wb-50 transition-colors font-mono'
 
 // =============================================
 // 單一欄位

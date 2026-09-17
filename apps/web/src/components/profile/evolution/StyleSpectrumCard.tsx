@@ -65,7 +65,7 @@ export default function StyleSpectrumCard({ data, isLoading }: StyleSpectrumCard
           <span>深耕型 (Redpoint)</span>
           <span>即興型 (Onsight)</span>
         </div>
-        <div className="relative h-3 w-full overflow-hidden rounded-full bg-gradient-to-r from-indigo-400 via-emerald-400 to-amber-400">
+        <div className="relative h-3 w-full overflow-hidden rounded-full bg-linear-to-r from-indigo-400 via-emerald-400 to-amber-400">
           {/* Marker */}
           <motion.div
             className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"

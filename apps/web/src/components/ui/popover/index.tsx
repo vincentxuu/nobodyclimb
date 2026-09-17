@@ -284,7 +284,7 @@ const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
               zIndex: 100,
             }}
             className={cn(
-              'min-w-[8rem] overflow-hidden rounded-md border bg-white p-1 text-popover-foreground shadow-md outline-none',
+              'min-w-32 overflow-hidden rounded-md border bg-white p-1 text-popover-foreground shadow-md outline-hidden',
               className
             )}
             {...(props as HTMLMotionProps<'div'>)}

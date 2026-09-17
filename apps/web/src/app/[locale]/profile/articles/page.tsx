@@ -50,7 +50,7 @@ const ArticleCard = ({ article, onDelete, isDeleting }: ArticleCardProps) => {
     <div className="rounded-sm border border-[#DBD8D8] p-4 md:p-5">
       <div className="flex flex-col gap-3 md:flex-row md:gap-6">
         {/* 封面圖片區域 */}
-        <div className="relative h-[160px] w-full flex-shrink-0 overflow-hidden bg-gray-100 md:h-[120px] md:w-[200px]">
+        <div className="relative h-[160px] w-full shrink-0 overflow-hidden bg-gray-100 md:h-[120px] md:w-[200px]">
           {article.cover_image ? (
             <Image src={article.cover_image} alt={article.title} fill className="object-cover" />
           ) : (

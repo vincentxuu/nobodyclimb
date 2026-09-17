@@ -95,7 +95,7 @@ export function StoryEditFullscreen({
   return (
     <div
       className={cn(
-        'fixed inset-0 z-[1000] bg-white flex flex-col transition-transform duration-300 ease-out',
+        'fixed inset-0 z-1000 bg-white flex flex-col transition-transform duration-300 ease-out',
         isOpen ? 'translate-y-0' : 'translate-y-full',
         className
       )}
@@ -136,7 +136,7 @@ export function StoryEditFullscreen({
           <p className="font-medium text-[#1B1A1A]">{question.title}</p>
           {question.subtitle && (
             <p className="text-sm text-[#6D6C6C] mt-1 flex items-start gap-1">
-              <Lightbulb size={14} className="mt-0.5 flex-shrink-0" />
+              <Lightbulb size={14} className="mt-0.5 shrink-0" />
               {question.subtitle}
             </p>
           )}
@@ -152,7 +152,7 @@ export function StoryEditFullscreen({
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder={question?.placeholder || '寫下你的故事...'}
-            className="w-full h-full resize-none focus:outline-none bg-white text-[#1B1A1A] placeholder:text-[#B6B3B3] text-base leading-relaxed"
+            className="w-full h-full resize-none focus:outline-hidden bg-white text-[#1B1A1A] placeholder:text-[#B6B3B3] text-base leading-relaxed"
             maxLength={5000}
           />
         </div>
@@ -199,7 +199,7 @@ export function StoryEditFullscreen({
           {/* Writing Tip */}
           <div className="bg-brand-accent/10 rounded-lg p-3">
             <p className="text-xs text-[#3F3D3D] flex items-center gap-1.5">
-              <Lightbulb size={14} className="flex-shrink-0" />
+              <Lightbulb size={14} className="shrink-0" />
               <span className="font-medium">{t('writingTipTitle')}</span>
               {randomTip}
             </p>

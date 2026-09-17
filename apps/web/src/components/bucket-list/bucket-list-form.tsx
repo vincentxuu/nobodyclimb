@@ -199,7 +199,7 @@ export function BucketListForm({
                 id="target_date"
                 type="date"
                 {...register('target_date')}
-                className="w-full rounded-lg border border-[#D3D3D3] bg-white px-3 py-3 text-base text-[#1B1A1A] transition-colors focus:border-[#ffe70c] focus:bg-[#F0F0F0] focus:outline-none sm:py-2 sm:text-sm [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:p-2"
+                className="w-full rounded-lg border border-[#D3D3D3] bg-white px-3 py-3 text-base text-[#1B1A1A] transition-colors focus:border-[#ffe70c] focus:bg-[#F0F0F0] focus:outline-hidden sm:py-2 sm:text-sm [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:p-2"
                 style={{
                   minHeight: '48px',
                 }}

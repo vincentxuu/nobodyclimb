@@ -34,7 +34,7 @@ export function StoryCard({
     return (
       <motion.div
         className={cn(
-          'rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-md',
+          'rounded-lg border border-gray-100 bg-white p-4 shadow-xs transition-shadow hover:shadow-md',
           className
         )}
         initial={{ opacity: 0, y: 10 }}
@@ -54,7 +54,7 @@ export function StoryCard({
     return (
       <motion.div
         className={cn(
-          'overflow-hidden rounded-lg border-2 border-gray-100 bg-gradient-to-br from-white to-gray-50 shadow-lg',
+          'overflow-hidden rounded-lg border-2 border-gray-100 bg-linear-to-br from-white to-gray-50 shadow-lg',
           className
         )}
         initial={{ opacity: 0, y: 20 }}
@@ -63,13 +63,13 @@ export function StoryCard({
       >
         {/* 分類標籤 */}
         {showCategory && categoryInfo && (
-          <div className={cn('px-6 py-3', `bg-gradient-to-r from-gray-50 to-white`)}>
+          <div className={cn('px-6 py-3', `bg-linear-to-r from-gray-50 to-white`)}>
             <div className="flex items-center gap-2">
               <span
                 className={cn(
                   'rounded-full px-3 py-1 text-xs font-medium',
                   categoryInfo.color,
-                  'bg-white shadow-sm'
+                  'bg-white shadow-xs'
                 )}
               >
                 {categoryInfo.name}
@@ -83,7 +83,7 @@ export function StoryCard({
           <div className="mb-4 flex items-start gap-3">
             <div
               className={cn(
-                'flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full',
+                'flex h-10 w-10 shrink-0 items-center justify-center rounded-full',
                 'bg-gray-100'
               )}
             >
@@ -97,7 +97,7 @@ export function StoryCard({
 
           {/* 內容 */}
           <div className="relative">
-            <div className="absolute -left-2 top-0 h-full w-1 rounded-full bg-gradient-to-b from-gray-200 to-transparent" />
+            <div className="absolute -left-2 top-0 h-full w-1 rounded-full bg-linear-to-b from-gray-200 to-transparent" />
             <p className="whitespace-pre-wrap pl-4 text-base leading-relaxed text-gray-700">
               {content}
             </p>
@@ -110,7 +110,7 @@ export function StoryCard({
   // Default variant
   return (
     <motion.div
-      className={cn('rounded-lg bg-white p-6 shadow-sm', className)}
+      className={cn('rounded-lg bg-white p-6 shadow-xs', className)}
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}

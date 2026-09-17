@@ -115,7 +115,7 @@ export default function AdvancedStoriesSection({
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden"
           >
-            <div className="rounded-lg border border-gray-200 shadow-sm">
+            <div className="rounded-lg border border-gray-200 shadow-xs">
               <AdvancedStoryEditor
                 biography={biography}
                 onSave={onSave}

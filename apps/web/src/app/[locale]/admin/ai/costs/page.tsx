@@ -196,7 +196,7 @@ function SimulationSection({
             min={0}
             value={simInputTokens}
             onChange={(e) => setSimInputTokens(Math.max(0, parseInt(e.target.value) || 0))}
-            className="w-full rounded-lg border border-wb-20 bg-transparent px-3 py-2 text-sm text-wb-90 focus:outline-none focus:ring-1 focus:ring-wb-40"
+            className="w-full rounded-lg border border-wb-20 bg-transparent px-3 py-2 text-sm text-wb-90 focus:outline-hidden focus:ring-1 focus:ring-wb-40"
           />
         </div>
         <div>
@@ -206,7 +206,7 @@ function SimulationSection({
             min={0}
             value={simOutputTokens}
             onChange={(e) => setSimOutputTokens(Math.max(0, parseInt(e.target.value) || 0))}
-            className="w-full rounded-lg border border-wb-20 bg-transparent px-3 py-2 text-sm text-wb-90 focus:outline-none focus:ring-1 focus:ring-wb-40"
+            className="w-full rounded-lg border border-wb-20 bg-transparent px-3 py-2 text-sm text-wb-90 focus:outline-hidden focus:ring-1 focus:ring-wb-40"
           />
         </div>
       </div>
@@ -356,7 +356,7 @@ export default function AICostsPage() {
                 value={customFrom}
                 max={customTo}
                 onChange={(e) => setCustomFrom(e.target.value)}
-                className="rounded-lg border border-wb-20 bg-transparent px-3 py-1.5 text-sm text-wb-80 focus:outline-none focus:ring-1 focus:ring-wb-40"
+                className="rounded-lg border border-wb-20 bg-transparent px-3 py-1.5 text-sm text-wb-80 focus:outline-hidden focus:ring-1 focus:ring-wb-40"
               />
             </div>
             <div>
@@ -367,7 +367,7 @@ export default function AICostsPage() {
                 min={customFrom}
                 max={todayStr()}
                 onChange={(e) => setCustomTo(e.target.value)}
-                className="rounded-lg border border-wb-20 bg-transparent px-3 py-1.5 text-sm text-wb-80 focus:outline-none focus:ring-1 focus:ring-wb-40"
+                className="rounded-lg border border-wb-20 bg-transparent px-3 py-1.5 text-sm text-wb-80 focus:outline-hidden focus:ring-1 focus:ring-wb-40"
               />
             </div>
           </div>

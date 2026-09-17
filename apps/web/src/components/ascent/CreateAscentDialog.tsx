@@ -345,7 +345,7 @@ export function CreateAscentDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="!left-0 !right-0 !top-auto !bottom-0 !translate-x-0 !translate-y-0 max-h-[92dvh] overflow-y-auto rounded-t-2xl border-x-0 border-b-0 p-4 pb-[calc(env(safe-area-inset-bottom)+1rem)] sm:!left-[50%] sm:!right-auto sm:!top-[50%] sm:!bottom-auto sm:!translate-x-[-50%] sm:!translate-y-[-50%] sm:max-w-lg sm:rounded-lg sm:border sm:p-6 sm:pb-6">
+      <DialogContent className="left-0! right-0! top-auto! bottom-0! translate-x-0! translate-y-0! max-h-[92dvh] overflow-y-auto rounded-t-2xl border-x-0 border-b-0 p-4 pb-[calc(env(safe-area-inset-bottom)+1rem)] sm:left-[50%]! sm:right-auto! sm:top-[50%]! sm:bottom-auto! sm:translate-x-[-50%]! sm:translate-y-[-50%]! sm:max-w-lg sm:rounded-lg sm:border sm:p-6 sm:pb-6">
         <div className="mx-auto mb-2 h-1.5 w-12 rounded-full bg-muted sm:hidden" />
         <DialogHeader>
           <div className="flex items-center gap-2">

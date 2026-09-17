@@ -128,7 +128,7 @@ export default function RegisterPage() {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
-                    className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-4 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-4 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-hidden focus:ring-2 focus:ring-ring"
                   />
                 </div>
               </div>
@@ -142,7 +142,7 @@ export default function RegisterPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-4 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-4 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-hidden focus:ring-2 focus:ring-ring"
                   />
                 </div>
               </div>
@@ -156,7 +156,7 @@ export default function RegisterPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-10 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-10 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-hidden focus:ring-2 focus:ring-ring"
                   />
                   <button
                     type="button"
@@ -178,7 +178,7 @@ export default function RegisterPage() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
-                    className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-10 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full rounded-md border border-input bg-background py-2 pl-10 pr-10 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-hidden focus:ring-2 focus:ring-ring"
                   />
                 </div>
                 <p className="text-xs text-muted-foreground">{t('passwordHint')}</p>
@@ -193,9 +193,9 @@ export default function RegisterPage() {
             {GOOGLE_CLIENT_ID && (
               <>
                 <div className="relative flex items-center">
-                  <div className="flex-grow border-t border-border"></div>
+                  <div className="grow border-t border-border"></div>
                   <div className="mx-4 text-xs text-muted-foreground">{t('orDivider')}</div>
-                  <div className="flex-grow border-t border-border"></div>
+                  <div className="grow border-t border-border"></div>
                 </div>
 
                 <div className="flex justify-center">

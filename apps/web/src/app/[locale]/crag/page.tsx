@@ -15,10 +15,10 @@ import { CragMap } from './crag-map'
 function CragCard({ crag }: { crag: CragListItem }) {
   const t = useTranslations('CragPage')
   return (
-    <div className="group overflow-hidden rounded-lg bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
+    <div className="group overflow-hidden rounded-lg bg-white shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
       <Link href={`/crag/${crag.id}`} className="block h-full">
         {/* 岩場封面 */}
-        <div className="relative aspect-[4/1] overflow-hidden">
+        <div className="relative aspect-4/1 overflow-hidden">
           <CragCoverGenerator
             rockType={crag.rockType}
             name={crag.name}

@@ -90,7 +90,7 @@ export default function QuizTestPage() {
 
   return (
     <div
-      className={`flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center bg-gradient-to-br px-4 transition-all duration-700 ${bgGradient}`}
+      className={`flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center bg-linear-to-br px-4 transition-all duration-700 ${bgGradient}`}
     >
       <div className="w-full max-w-lg">
         <QuizProgress current={currentIndex + 1} total={totalQuestions} />

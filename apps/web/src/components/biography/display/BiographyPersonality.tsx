@@ -165,7 +165,7 @@ export function BiographyPersonality({
   return (
     <section className={cn('py-6', className)}>
       <h3 className="mb-4 text-lg font-semibold text-brand-dark">攀岩人格</h3>
-      <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="rounded-2xl bg-white p-6 shadow-xs">
         <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
           <div className="flex flex-col items-center gap-4">
             <LottieAnim type={personalityType} color={color} />

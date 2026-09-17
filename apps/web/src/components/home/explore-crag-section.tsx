@@ -28,15 +28,15 @@ function CragCard({ crag, index }: { crag: CragListItem; index: number }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="flex-shrink-0"
+      className="shrink-0"
     >
       <Link
         href={`/crag/${crag.id}`}
         prefetch={false}
-        className="group block w-[240px] overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md sm:w-[280px]"
+        className="group block w-[240px] overflow-hidden rounded-lg bg-white shadow-xs transition-shadow hover:shadow-md sm:w-[280px]"
       >
         {/* 岩場封面 */}
-        <div className="relative aspect-[16/9] overflow-hidden">
+        <div className="relative aspect-video overflow-hidden">
           <CragCoverGenerator
             rockType={crag.rockType}
             name={crag.name}
@@ -58,7 +58,7 @@ function CragCard({ crag, index }: { crag: CragListItem; index: number }) {
           <p className="mb-2 truncate text-xs text-[#8E8C8C]">{crag.nameEn}</p>
 
           <div className="mb-2 flex items-center gap-1.5 text-xs text-[#6D6C6C]">
-            <MapPin className="h-3 w-3 flex-shrink-0" />
+            <MapPin className="h-3 w-3 shrink-0" />
             <span className="truncate">{crag.location}</span>
           </div>
 
@@ -112,12 +112,12 @@ function RouteCard({ route, index }: { route: FeaturedRouteItem; index: number }
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="flex-shrink-0"
+      className="shrink-0"
     >
       <Link
         href={`/crag/${route.cragId}/route/${route.id}`}
         prefetch={false}
-        className="group block w-[260px] overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md sm:w-[300px]"
+        className="group block w-[260px] overflow-hidden rounded-lg bg-white shadow-xs transition-shadow hover:shadow-md sm:w-[300px]"
       >
         {/* YouTube 縮圖 */}
         {route.youtubeThumbnail && (
@@ -130,7 +130,7 @@ function RouteCard({ route, index }: { route: FeaturedRouteItem; index: number }
             />
             {/* 難度標籤（覆蓋在圖片上） */}
             <div className="absolute bottom-2 left-2">
-              <span className="rounded-full bg-[#FFE70C] px-2.5 py-1 text-sm font-medium text-[#1B1A1A] shadow-sm">
+              <span className="rounded-full bg-[#FFE70C] px-2.5 py-1 text-sm font-medium text-[#1B1A1A] shadow-xs">
                 {route.grade}
               </span>
             </div>
@@ -146,7 +146,7 @@ function RouteCard({ route, index }: { route: FeaturedRouteItem; index: number }
 
           {/* 所屬岩場・區域 */}
           <div className="mb-3 flex items-center gap-1.5 text-xs text-[#6D6C6C]">
-            <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+            <MapPin className="h-3.5 w-3.5 shrink-0" />
             <span className="truncate">
               {route.cragName}・{route.areaName}
             </span>
@@ -215,7 +215,7 @@ export function TaiwanMap({
 
   return (
     <div
-      className={`relative aspect-[437/555] w-full overflow-visible ${compact ? 'max-w-[120px]' : 'max-w-[320px]'}`}
+      className={`relative aspect-437/555 w-full overflow-visible ${compact ? 'max-w-[120px]' : 'max-w-[320px]'}`}
     >
       {/* 台灣島輪廓 SVG */}
       <Image

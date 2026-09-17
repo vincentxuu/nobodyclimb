@@ -145,7 +145,7 @@ function InstallDialog({ onClose }: { onClose: () => void }) {
         }}
         rows={12}
         placeholder='{"name": "my-plugin", "version": "1.0.0", "skills": [...], "mcp_servers": [...]}'
-        className="w-full rounded border border-wb-20 bg-white px-3 py-2 text-xs font-mono text-wb-80 focus:border-amber-300 focus:outline-none resize-y"
+        className="w-full rounded border border-wb-20 bg-white px-3 py-2 text-xs font-mono text-wb-80 focus:border-amber-300 focus:outline-hidden resize-y"
       />
       {parseError && <p className="text-xs text-red-600">{parseError}</p>}
       <button

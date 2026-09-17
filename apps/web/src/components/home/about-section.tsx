@@ -13,7 +13,7 @@ export function AboutSection() {
   return (
     <section className="relative h-[500px] overflow-hidden bg-white">
       {/* 背景 */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#F5F5F5] to-white" />
+      <div className="absolute inset-0 bg-linear-to-b from-[#F5F5F5] to-white" />
 
       {/* 內容區域 */}
       <div className="container relative z-10 mx-auto flex h-full flex-col items-center justify-center px-4 text-center">

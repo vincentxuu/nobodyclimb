@@ -207,7 +207,7 @@ export function TagsBottomSheet({
   return (
     <div
       className={cn(
-        'fixed inset-0 z-[100] transition-opacity duration-300',
+        'fixed inset-0 z-100 transition-opacity duration-300',
         isOpen ? 'opacity-100' : 'opacity-0'
       )}
       onTransitionEnd={() => {
@@ -215,7 +215,7 @@ export function TagsBottomSheet({
       }}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-xs" onClick={onClose} />
 
       {/* Bottom Sheet */}
       <div

@@ -87,7 +87,7 @@ export function ProgressIndicator({
             {/* Status Icon */}
             <div
               className={cn(
-                'w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0',
+                'w-6 h-6 rounded-full flex items-center justify-center shrink-0',
                 section.isCompleted ? 'bg-brand-accent text-brand-dark' : 'bg-[#EBEAEA]'
               )}
             >

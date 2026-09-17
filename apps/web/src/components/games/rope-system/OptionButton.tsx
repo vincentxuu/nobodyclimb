@@ -62,7 +62,7 @@ export function OptionButton({
       disabled={isDisabled}
       className={cn(
         'relative flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFE70C] focus-visible:ring-offset-2',
+        'focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#FFE70C] focus-visible:ring-offset-2',
         stateStyles[state],
         className
       )}
@@ -70,7 +70,7 @@ export function OptionButton({
       whileTap={isDisabled ? {} : { scale: 0.98 }}
     >
       {/* 圖示區域 */}
-      <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center">
+      <div className="flex h-5 w-5 shrink-0 items-center justify-center">
         {showCheckIcon && <Check className="h-5 w-5 text-[#22C55E]" />}
         {showXIcon && <X className="h-5 w-5 text-[#EF4444]" />}
         {showRadio && (

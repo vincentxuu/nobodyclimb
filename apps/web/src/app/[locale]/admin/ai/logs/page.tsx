@@ -239,9 +239,9 @@ function MobileCard({ log }: { log: AIQueryLog }) {
 // =============================================
 
 const inputCls =
-  'w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-100 outline-none focus:border-wb-60 transition-colors placeholder:text-wb-30'
+  'w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-100 outline-hidden focus:border-wb-60 transition-colors placeholder:text-wb-30'
 const selectCls =
-  'w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-100 outline-none focus:border-wb-60 transition-colors'
+  'w-full rounded-lg border border-wb-20 bg-white px-3 py-2 text-sm text-wb-100 outline-hidden focus:border-wb-60 transition-colors'
 
 type Filters = {
   search: string

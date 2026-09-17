@@ -37,7 +37,7 @@ function HeroSection() {
   return (
     <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
       {/* 背景 */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1B1A1A] to-[#3F3D3D]" />
+      <div className="absolute inset-0 bg-linear-to-b from-[#1B1A1A] to-[#3F3D3D]" />
 
       {/* 內容 */}
       <div className="container relative z-10 mx-auto flex h-full flex-col items-center justify-center px-4 text-center">
@@ -109,7 +109,7 @@ function StorySection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex aspect-[4/3] items-center justify-center"
+            className="flex aspect-4/3 items-center justify-center"
           >
             <Image src="/logo512.png" alt="小人物攀岩 Logo" width={240} height={240} />
           </motion.div>
@@ -167,7 +167,7 @@ function MissionSection() {
             <motion.div
               key={mission.title}
               variants={fadeInUp}
-              className="rounded-lg bg-white p-8 text-center shadow-sm transition-shadow hover:shadow-md"
+              className="rounded-lg bg-white p-8 text-center shadow-xs transition-shadow hover:shadow-md"
             >
               <div
                 className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${mission.color}`}
@@ -255,7 +255,7 @@ function FeaturesSection() {
                 href={feature.href}
                 className="group flex items-start gap-4 rounded-lg border border-[#E5E5E5] bg-white p-6 transition-all hover:border-brand-accent hover:shadow-md"
               >
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#F5F5F5] transition-colors group-hover:bg-brand-accent">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#F5F5F5] transition-colors group-hover:bg-brand-accent">
                   <feature.icon className="h-6 w-6 text-[#1B1A1A] transition-colors group-hover:text-brand-dark" />
                 </div>
                 <div>

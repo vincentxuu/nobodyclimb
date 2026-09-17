@@ -222,7 +222,7 @@ export function StoriesSection({
                           {/* Status Icon */}
                           <div
                             className={cn(
-                              'w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0',
+                              'w-5 h-5 rounded-full flex items-center justify-center shrink-0',
                               isFilled
                                 ? 'bg-brand-accent text-brand-dark'
                                 : 'border-2 border-[#B6B3B3]'
@@ -254,7 +254,7 @@ export function StoriesSection({
                           </div>
 
                           {/* Action */}
-                          <div className="flex items-center gap-2 flex-shrink-0">
+                          <div className="flex items-center gap-2 shrink-0">
                             <span
                               className={cn(
                                 'text-xs font-medium px-2 py-1 rounded-full',

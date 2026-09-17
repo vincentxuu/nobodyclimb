@@ -105,7 +105,7 @@ export function RouteLayoutClient(props: RouteLayoutClientProps) {
     <Suspense
       fallback={
         <div className="lg:flex lg:h-[calc(100vh-70px)] lg:overflow-hidden">
-          <aside className="hidden lg:flex lg:w-80 lg:flex-shrink-0 lg:flex-col border-r border-gray-200 bg-white">
+          <aside className="hidden lg:flex lg:w-80 lg:shrink-0 lg:flex-col border-r border-gray-200 bg-white">
             <div className="animate-pulse p-4">
               <div className="h-4 bg-gray-200 rounded w-24 mb-3" />
               <div className="h-6 bg-gray-200 rounded w-32 mb-2" />

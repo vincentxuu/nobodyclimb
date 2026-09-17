@@ -142,7 +142,7 @@ export default function AiMemoryPage() {
                 {filteredMemories.map((memory) => (
                   <li
                     key={memory.id}
-                    className="flex items-start justify-between gap-3 rounded-lg border border-gray-100 bg-white px-4 py-3 shadow-sm"
+                    className="flex items-start justify-between gap-3 rounded-lg border border-gray-100 bg-white px-4 py-3 shadow-xs"
                   >
                     <div className="flex flex-1 flex-col gap-1">
                       <div className="flex items-center gap-2">

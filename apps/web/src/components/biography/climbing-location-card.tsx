@@ -21,7 +21,7 @@ export function ClimbingLocationCard({ location, index = 0 }: ClimbingLocationCa
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      className="rounded-lg border bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
+      className="rounded-lg border bg-white p-4 shadow-xs transition-shadow hover:shadow-md"
     >
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
@@ -116,7 +116,7 @@ export function LocationExploreCard({ location, index = 0 }: LocationExploreCard
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="group relative overflow-hidden rounded-lg border bg-white p-4 shadow-sm transition-all hover:shadow-md"
+      className="group relative overflow-hidden rounded-lg border bg-white p-4 shadow-xs transition-all hover:shadow-md"
     >
       <Link href={`/biography/explore/location/${encodeURIComponent(location.location)}`}>
         <div className="flex items-start justify-between">
