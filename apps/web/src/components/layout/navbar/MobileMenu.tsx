@@ -80,7 +80,7 @@ export default function MobileMenu() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-10000 bg-black/80 md:hidden"
+            className="fixed inset-0 z-[10000] bg-black/80 md:hidden"
             onClick={closeMenu}
           />
         )}
@@ -93,7 +93,7 @@ export default function MobileMenu() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed right-0 top-0 z-10001 flex h-dvh max-h-dvh w-[280px] flex-col bg-white shadow-xl md:hidden"
+            className="fixed right-0 top-0 z-[10001] flex h-dvh max-h-dvh w-[280px] flex-col bg-white shadow-xl md:hidden"
           >
             <div className="flex shrink-0 items-center justify-between bg-white px-3 py-2 xs:p-3">
               <h2 className="font-['Noto_Sans_TC'] text-sm font-bold text-[#1B1A1A] xs:text-base">

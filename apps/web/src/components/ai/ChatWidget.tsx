@@ -669,7 +669,7 @@ export function ChatWidget() {
         type="button"
         onClick={() => setIsOpen(true)}
         className={cn(
-          'fixed bottom-6 right-6 z-20000 flex h-14 w-14 items-center justify-center rounded-full pointer-events-auto',
+          'fixed bottom-6 right-6 z-[20000] flex h-14 w-14 items-center justify-center rounded-full pointer-events-auto',
           'bg-primary text-primary-foreground shadow-lg',
           'hover:bg-primary/90 hover:scale-105 transition-all',
           isOpen && 'hidden'
@@ -687,7 +687,7 @@ export function ChatWidget() {
           aria-label="NobodyClimb AI 助理"
           aria-modal="true"
           className={cn(
-            'fixed z-20000 flex flex-col bg-background shadow-2xl pointer-events-auto',
+            'fixed z-[20000] flex flex-col bg-background shadow-2xl pointer-events-auto',
             'md:top-auto md:left-auto md:bottom-6 md:right-6 md:rounded-2xl md:border md:border-border',
             'md:h-[600px] md:max-h-[calc(100vh-5rem)] md:w-[400px]',
             'inset-0'

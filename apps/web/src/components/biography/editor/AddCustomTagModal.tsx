@@ -71,7 +71,7 @@ export function AddCustomTagModal({
   const canSave = label.trim().length > 0 && dimensionId
 
   return (
-    <div className="fixed inset-0 z-150 flex items-end md:items-center justify-center">
+    <div className="fixed inset-0 z-[150] flex items-end md:items-center justify-center">
       {/* Backdrop */}
       <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-xs" onClick={onClose} />
 

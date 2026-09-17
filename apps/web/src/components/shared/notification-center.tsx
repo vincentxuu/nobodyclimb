@@ -249,7 +249,7 @@ export function NotificationCenter({ className }: NotificationCenterProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-10000 bg-black/50"
+              className="fixed inset-0 z-[10000] bg-black/50"
               onClick={() => setIsOpen(false)}
             />
             {/* 通知面板 - 從右邊滑入 */}
@@ -258,7 +258,7 @@ export function NotificationCenter({ className }: NotificationCenterProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="fixed right-0 top-0 h-screen z-10001 bg-white flex flex-col w-full max-w-md shadow-2xl"
+              className="fixed right-0 top-0 h-screen z-[10001] bg-white flex flex-col w-full max-w-md shadow-2xl"
             >
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-4 border-b">
