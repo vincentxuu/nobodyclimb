@@ -281,12 +281,13 @@ export async function getMyQuota(): Promise<AiQuota> {
   return response.data.data
 }
 
-export function useMyQuota() {
+export function useMyQuota(options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: ['ai-quota-me'],
     queryFn: getMyQuota,
     staleTime: 30 * 1000,
     retry: false,
+    enabled: options?.enabled ?? true,
   })
 }
 

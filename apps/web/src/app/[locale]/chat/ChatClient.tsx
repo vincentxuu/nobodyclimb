@@ -1,6 +1,8 @@
 'use client'
 
-import { Bot, Check, Copy, User } from 'lucide-react'
+import type { RankId } from '@nobodyclimb/types'
+import { ArrowLeft, Bot, Check, Copy, User } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   Message,
@@ -20,8 +22,9 @@ import {
 import { Reasoning, ReasoningContent, ReasoningTrigger } from '@/components/ai-elements/reasoning'
 import { Source, Sources, SourcesContent, SourcesTrigger } from '@/components/ai-elements/sources'
 import { Suggestion, Suggestions } from '@/components/ai-elements/suggestion'
+import { RankBadge } from '@/components/rank/RankBadge'
 import type { AIChatHistoryMessage, AISource, AIStreamDoneEvent } from '@/lib/api/ai'
-import { askAIStream } from '@/lib/api/ai'
+import { askAIStream, useMyQuota } from '@/lib/api/ai'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/authStore'
 
@@ -64,7 +67,9 @@ function getRandomSuggestions(count: number): string[] {
 // =============================================
 
 export function ChatClient() {
+  const router = useRouter()
   const { isAuthenticated } = useAuthStore()
+  const { data: quota } = useMyQuota({ enabled: isAuthenticated })
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [suggestions, setSuggestions] = useState<string[]>(() => getRandomSuggestions(3))
@@ -190,6 +195,38 @@ export function ChatClient() {
 
   return (
     <div className="mx-auto flex h-screen max-w-3xl flex-col">
+      {/* Header */}
+      <header className="flex items-center justify-between border-b px-4 py-3">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            aria-label="返回"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          <div>
+            <h1 className="text-sm font-semibold">NobodyClimb AI</h1>
+            <p className="text-xs text-muted-foreground">攀岩助理</p>
+          </div>
+        </div>
+        {isAuthenticated && quota && (
+          <div className="flex items-center gap-1.5">
+            {quota.daily_limit === -1 ? (
+              <span className="text-xs text-muted-foreground">無配額限制</span>
+            ) : (
+              <>
+                <RankBadge tier={quota.tier as RankId} size="sm" />
+                <span className="text-xs text-muted-foreground">
+                  剩餘 {quota.remaining}/{quota.daily_limit}
+                </span>
+              </>
+            )}
+          </div>
+        )}
+      </header>
+
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-6">
         {messages.length === 0 ? (
