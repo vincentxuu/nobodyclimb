@@ -88,7 +88,7 @@ aiRoutes.post(
     tags: ['AI'],
     summary: 'RAG 問答',
     description:
-      '使用自然語言詢問攀岩相關問題，系統根據平台資料生成回答（需登入，受等級配額限制）。加上 `?stream=true` 可啟用 SSE 串流回應（Content-Type: text/event-stream），逐詞推送 `{"type":"token","token":"..."}` 事件，結束時推送 `{"type":"done",...}` 事件。',
+      '使用自然語言詢問攀岩相關問題，系統根據平台資料生成回答（需登入，受等級配額限制）。加上 `?stream=true` 可啟用 SSE 串流回應（Content-Type: text/event-stream），逐詞推送 `{"type":"token","token":"..."}` 事件，工具執行時推送 `{"type":"progress","tool":"...","status":"executing"|"done"}` 事件，結束時推送 `{"type":"done",...}` 事件。',
     responses: {
       200: {
         description: '問答成功，回傳 AI 回答與來源及剩餘配額（非串流）；或 SSE 串流（stream=true）',
@@ -262,7 +262,10 @@ aiRoutes.post(
               await stream.writeSSE({ data })
             },
             c.executionCtx,
-            extraTrace
+            extraTrace,
+            async (event) => {
+              await stream.writeSSE({ data: JSON.stringify(event) })
+            }
           )
 
           // Task 4.4: 更新實際 token 消耗（修正預估與實際差額）
