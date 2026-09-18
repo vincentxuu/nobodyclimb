@@ -528,9 +528,15 @@ async function executeSingleTool(
     }
   }
 
-  // 送出 progress: executing（非 cache hit 才送）
+  // 送出 progress: executing（非 cache hit 才送，帶 invocation id 與參數供前端並行顯示）
   if (onProgress) {
-    await onProgress({ type: 'progress', tool: tc.name, status: 'executing' }).catch(() => {})
+    await onProgress({
+      type: 'progress',
+      id: tc.id,
+      tool: tc.name,
+      status: 'executing',
+      input: tc.input,
+    }).catch(() => {})
   }
 
   try {
@@ -557,7 +563,9 @@ async function executeSingleTool(
 
     // 送出 progress: done
     if (onProgress) {
-      await onProgress({ type: 'progress', tool: tc.name, status: 'done' }).catch(() => {})
+      await onProgress({ type: 'progress', id: tc.id, tool: tc.name, status: 'done' }).catch(
+        () => {}
+      )
     }
 
     endSpan(toolSpan, {
@@ -588,7 +596,9 @@ async function executeSingleTool(
 
     // 送出 progress: done（即使失敗也要通知前端結束）
     if (onProgress) {
-      await onProgress({ type: 'progress', tool: tc.name, status: 'done' }).catch(() => {})
+      await onProgress({ type: 'progress', id: tc.id, tool: tc.name, status: 'done' }).catch(
+        () => {}
+      )
     }
 
     const errorMsg = err instanceof Error ? err.message : String(err)

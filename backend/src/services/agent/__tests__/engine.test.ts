@@ -410,4 +410,48 @@ describe('runAgentLoop', () => {
 
     expect(result.answer).toBe('工具不可用，直接回答。')
   })
+
+  it('parallel same-tool calls — progress events carry distinct invocation ids', async () => {
+    const provider = mockProvider([
+      {
+        content: undefined,
+        toolCalls: [
+          { id: 'call-1', name: 'search_routes', input: { query: '龍洞' } },
+          { id: 'call-2', name: 'search_routes', input: { query: '墾丁' } },
+        ],
+        stopReason: 'tool_use',
+        usage: { input: 100, output: 40 },
+      },
+      {
+        content: '兩地都有好路線。',
+        toolCalls: [],
+        stopReason: 'end_turn',
+        usage: { input: 200, output: 40 },
+      },
+    ])
+    const registry = new ToolRegistry()
+    registry.registerTool(makeTool())
+    const ctx = makeCtx()
+
+    const events: Array<{ type: string; id?: string; tool?: string; status?: string }> = []
+    await runAgentLoop(
+      { provider, registry, ctx },
+      {
+        ...DEFAULT_OPTS,
+        onProgress: async (e) => {
+          events.push(e)
+        },
+      }
+    )
+
+    const executing = events.filter((e) => e.status === 'executing')
+    const done = events.filter((e) => e.status === 'done')
+    // 同名 tool 並行呼叫必須能用 id 區分，否則前端會互蓋
+    expect(executing.map((e) => e.id).sort()).toEqual(['call-1', 'call-2'])
+    expect(done.map((e) => e.id).sort()).toEqual(['call-1', 'call-2'])
+    // executing 事件帶呼叫參數供 Tool 元件顯示
+    expect(executing).toContainEqual(
+      expect.objectContaining({ id: 'call-1', tool: 'search_routes', input: { query: '龍洞' } })
+    )
+  })
 })

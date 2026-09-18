@@ -119,8 +119,10 @@ export class QueryService {
     extraTrace?: Record<string, unknown>,
     onProgress?: (event: {
       type: 'progress'
+      id: string
       tool: string
       status: 'executing' | 'done'
+      input?: unknown
     }) => Promise<void>
   ): Promise<AIAskResponse> {
     const streamingMode = !!onToken
@@ -444,8 +446,10 @@ export class QueryService {
     extraTrace?: Record<string, unknown>,
     onProgress?: (event: {
       type: 'progress'
+      id: string
       tool: string
       status: 'executing' | 'done'
+      input?: unknown
     }) => Promise<void>
   ): Promise<AIAskResponse> {
     const onToken = async (token: string) => {

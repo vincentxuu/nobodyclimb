@@ -174,8 +174,10 @@ export interface RunAgentParams {
   onToken?: (token: string) => Promise<void>
   onProgress?: (event: {
     type: 'progress'
+    id: string
     tool: string
     status: 'executing' | 'done'
+    input?: unknown
   }) => Promise<void>
 }
 
@@ -280,14 +282,25 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
         }
 
         if (params.onProgress) {
-          await params.onProgress({ type: 'progress', tool: subAgent.name, status: 'executing' })
+          await params.onProgress({
+            type: 'progress',
+            id: subAgent.name,
+            tool: subAgent.name,
+            status: 'executing',
+            input: { query },
+          })
         }
 
         const context = await subAgent.gatherContext({ query }, toolCtx)
         const result = await subAgent.synthesize(query, context, toolCtx)
 
         if (params.onProgress) {
-          await params.onProgress({ type: 'progress', tool: subAgent.name, status: 'done' })
+          await params.onProgress({
+            type: 'progress',
+            id: subAgent.name,
+            tool: subAgent.name,
+            status: 'done',
+          })
         }
 
         const finalAnswer = await runPostLoopGuards(result.answer, query, env, models)
