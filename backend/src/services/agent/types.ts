@@ -154,8 +154,12 @@ export interface ChatWithToolsOptions {
 
 export interface ProgressEvent {
   type: 'progress'
+  /** Tool call invocation id（對應 LLM 回傳的 tool_call.id，同名 tool 並行時以此區分） */
+  id: string
   tool: string
   status: 'executing' | 'done'
+  /** 呼叫參數（僅 executing 事件帶，前端 Tool 元件顯示用） */
+  input?: unknown
 }
 
 export interface AgentOptions {

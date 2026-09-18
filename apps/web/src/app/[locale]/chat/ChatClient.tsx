@@ -1,21 +1,7 @@
 'use client'
 
 import type { RankId } from '@nobodyclimb/types'
-import {
-  ArrowLeft,
-  Bot,
-  Check,
-  CloudSun,
-  Copy,
-  Database,
-  Dumbbell,
-  History,
-  MapPin,
-  Search,
-  Sparkles,
-  Target,
-  User,
-} from 'lucide-react'
+import { ArrowLeft, Bot, Check, Copy, User } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
@@ -24,7 +10,6 @@ import {
   ChainOfThoughtHeader,
   ChainOfThoughtSearchResult,
   ChainOfThoughtSearchResults,
-  ChainOfThoughtStep,
 } from '@/components/ai-elements/chain-of-thought'
 import {
   Message,
@@ -43,9 +28,16 @@ import {
 } from '@/components/ai-elements/prompt-input'
 import { Source, Sources, SourcesContent, SourcesTrigger } from '@/components/ai-elements/sources'
 import { Suggestion, Suggestions } from '@/components/ai-elements/suggestion'
+import { Tool, ToolContent, ToolHeader, ToolInput } from '@/components/ai-elements/tool'
 import { RankBadge } from '@/components/rank/RankBadge'
-import type { AIChatHistoryMessage, AISource, AIStreamDoneEvent } from '@/lib/api/ai'
+import type {
+  AIChatHistoryMessage,
+  AISource,
+  AIStreamDoneEvent,
+  AIStreamProgressEvent,
+} from '@/lib/api/ai'
 import { askAIStream, useMyQuota } from '@/lib/api/ai'
+import { mergeToolProgress } from '@/lib/chat/tool-progress'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/authStore'
 
@@ -60,7 +52,7 @@ interface ChatMessage {
   sources?: AISource[]
   suggestedQuestions?: string[]
   isStreaming?: boolean
-  toolProgress?: { tool: string; status: 'executing' | 'done' }[]
+  toolProgress?: AIStreamProgressEvent[]
 }
 
 // =============================================
@@ -177,11 +169,18 @@ export function ChatClient() {
         controller.signal,
         (progress) => {
           setMessages((prev) =>
-            prev.map((m) =>
-              m.id === assistantMsg.id
-                ? { ...m, toolProgress: [...(m.toolProgress || []), progress] }
-                : m
-            )
+            prev.map((m) => {
+              if (m.id !== assistantMsg.id) return m
+              // 以 invocation id 合併：同名 tool 並行時各自獨立更新
+              const list = [...(m.toolProgress || [])]
+              const idx = list.findIndex((p) => p.id === progress.id)
+              if (idx >= 0) {
+                list[idx] = { ...list[idx], ...progress, input: progress.input ?? list[idx].input }
+              } else {
+                list.push(progress)
+              }
+              return { ...m, toolProgress: list }
+            })
           )
         }
       )
@@ -355,32 +354,6 @@ const TOOL_LABELS: Record<string, string> = {
   recommend_agent: '推薦助理',
 }
 
-const TOOL_ICONS: Record<string, typeof Search> = {
-  search_routes: Search,
-  search_crags: Search,
-  crag_info: MapPin,
-  sql_query: Database,
-  weather: CloudSun,
-  recall_memory: History,
-  user_profile: User,
-  manage_goals: Target,
-  recommend: Sparkles,
-  suggest_training: Dumbbell,
-  coaching_agent: Dumbbell,
-  recommend_agent: Sparkles,
-}
-
-// progress 事件會對同一 tool 送 executing → done，把同名合併為一步（保留首次出現順序、取最新狀態）
-function toThoughtSteps(toolProgress: { tool: string; status: 'executing' | 'done' }[]) {
-  const order: string[] = []
-  const statusByTool = new Map<string, 'executing' | 'done'>()
-  for (const p of toolProgress) {
-    if (!statusByTool.has(p.tool)) order.push(p.tool)
-    statusByTool.set(p.tool, p.status)
-  }
-  return order.map((tool) => ({ tool, status: statusByTool.get(tool) as 'executing' | 'done' }))
-}
-
 function ChatMessageItem({ message }: { message: ChatMessage }) {
   const [copied, setCopied] = useState(false)
 
@@ -411,7 +384,7 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
               <ChainOfThought defaultOpen={message.isStreaming}>
                 <ChainOfThoughtHeader>
                   {(() => {
-                    const steps = toThoughtSteps(message.toolProgress ?? [])
+                    const steps = mergeToolProgress(message.toolProgress ?? [])
                     const doneCount = steps.filter((s) => s.status === 'done').length
                     return message.isStreaming
                       ? `正在查詢…（${doneCount}/${steps.length}）`
@@ -419,13 +392,19 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
                   })()}
                 </ChainOfThoughtHeader>
                 <ChainOfThoughtContent>
-                  {toThoughtSteps(message.toolProgress).map((step) => (
-                    <ChainOfThoughtStep
-                      key={step.tool}
-                      icon={TOOL_ICONS[step.tool]}
-                      label={TOOL_LABELS[step.tool] ?? step.tool}
-                      status={step.status === 'done' ? 'complete' : 'active'}
-                    />
+                  {mergeToolProgress(message.toolProgress).map((step) => (
+                    <Tool key={step.id} defaultOpen={false}>
+                      <ToolHeader
+                        title={TOOL_LABELS[step.tool] ?? step.tool}
+                        type={`tool-${step.tool}`}
+                        state={step.status === 'done' ? 'output-available' : 'input-available'}
+                      />
+                      {step.input !== undefined && (
+                        <ToolContent>
+                          <ToolInput input={step.input} />
+                        </ToolContent>
+                      )}
+                    </Tool>
                   ))}
                   {message.sources && message.sources.length > 0 && (
                     <ChainOfThoughtSearchResults>

@@ -127,6 +127,14 @@ export interface AIStreamDoneEvent {
   quota_remaining: number
 }
 
+// 後端 progress 事件：同名 tool 並行時以 id 區分 invocation
+export interface AIStreamProgressEvent {
+  id: string
+  tool: string
+  status: 'executing' | 'done'
+  input?: unknown
+}
+
 // SSE 串流問答：使用 fetch + ReadableStream 接收，支援 AbortController 取消
 export async function askAIStream(
   request: AIAskRequest,
@@ -134,7 +142,7 @@ export async function askAIStream(
   onDone: (_event: AIStreamDoneEvent) => void,
   onError: (_message: string) => void,
   signal?: AbortSignal,
-  onProgress?: (_event: { tool: string; status: 'executing' | 'done' }) => void
+  onProgress?: (_event: AIStreamProgressEvent) => void
 ): Promise<void> {
   const { API_BASE_URL } = await import('../constants')
   const { getAccessToken } = await import('@nobodyclimb/api-client/web')
@@ -183,8 +191,10 @@ export async function askAIStream(
           const event = JSON.parse(jsonStr) as {
             type: string
             token?: string
+            id?: string
             tool?: string
             status?: string
+            input?: unknown
           } & Partial<AIStreamDoneEvent> & { message?: string }
           if (event.type === 'token' && event.token !== undefined) {
             onToken(event.token)
@@ -192,8 +202,11 @@ export async function askAIStream(
             onDone(event as AIStreamDoneEvent)
           } else if (event.type === 'progress' && onProgress) {
             onProgress({
+              // 舊後端可能沒送 id，退回以 tool 名合併（舊行為）
+              id: typeof event.id === 'string' && event.id ? event.id : (event.tool as string),
               tool: event.tool as string,
               status: event.status as 'executing' | 'done',
+              input: event.input,
             })
           } else if (event.type === 'error') {
             onError(event.message ?? '抱歉，AI 服務暫時無法使用，請稍後再試。')
