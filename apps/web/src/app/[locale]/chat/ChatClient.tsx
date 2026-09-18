@@ -1,9 +1,29 @@
 'use client'
 
 import type { RankId } from '@nobodyclimb/types'
-import { ArrowLeft, Bot, Check, Copy, User } from 'lucide-react'
+import {
+  ArrowLeft,
+  Bot,
+  Check,
+  CloudSun,
+  Copy,
+  Database,
+  Dumbbell,
+  History,
+  MapPin,
+  Search,
+  Sparkles,
+  Target,
+  User,
+} from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import {
+  ChainOfThought,
+  ChainOfThoughtContent,
+  ChainOfThoughtHeader,
+  ChainOfThoughtStep,
+} from '@/components/ai-elements/chain-of-thought'
 import {
   Message,
   MessageAction,
@@ -19,7 +39,6 @@ import {
   PromptInputTextarea,
   PromptInputTools,
 } from '@/components/ai-elements/prompt-input'
-import { Reasoning, ReasoningContent, ReasoningTrigger } from '@/components/ai-elements/reasoning'
 import { Source, Sources, SourcesContent, SourcesTrigger } from '@/components/ai-elements/sources'
 import { Suggestion, Suggestions } from '@/components/ai-elements/suggestion'
 import { RankBadge } from '@/components/rank/RankBadge'
@@ -318,6 +337,48 @@ function EmptyState({
 // Chat Message Item
 // =============================================
 
+// 後端 tool 名稱 → 中文標籤
+const TOOL_LABELS: Record<string, string> = {
+  search_routes: '搜尋路線',
+  search_crags: '搜尋岩場',
+  crag_info: '查詢岩場資訊',
+  sql_query: '查詢資料庫',
+  weather: '查詢天氣',
+  recall_memory: '回憶偏好',
+  user_profile: '讀取攀登紀錄',
+  manage_goals: '查詢目標',
+  recommend: '產生推薦',
+  suggest_training: '產生訓練建議',
+  coaching_agent: '訓練教練',
+  recommend_agent: '推薦助理',
+}
+
+const TOOL_ICONS: Record<string, typeof Search> = {
+  search_routes: Search,
+  search_crags: Search,
+  crag_info: MapPin,
+  sql_query: Database,
+  weather: CloudSun,
+  recall_memory: History,
+  user_profile: User,
+  manage_goals: Target,
+  recommend: Sparkles,
+  suggest_training: Dumbbell,
+  coaching_agent: Dumbbell,
+  recommend_agent: Sparkles,
+}
+
+// progress 事件會對同一 tool 送 executing → done，把同名合併為一步（保留首次出現順序、取最新狀態）
+function toThoughtSteps(toolProgress: { tool: string; status: 'executing' | 'done' }[]) {
+  const order: string[] = []
+  const statusByTool = new Map<string, 'executing' | 'done'>()
+  for (const p of toolProgress) {
+    if (!statusByTool.has(p.tool)) order.push(p.tool)
+    statusByTool.set(p.tool, p.status)
+  }
+  return order.map((tool) => ({ tool, status: statusByTool.get(tool) as 'executing' | 'done' }))
+}
+
 function ChatMessageItem({ message }: { message: ChatMessage }) {
   const [copied, setCopied] = useState(false)
 
@@ -343,16 +404,29 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
         {/* Content */}
         <div className="min-w-0 flex-1">
           <MessageContent>
-            {/* Tool Progress (Reasoning) */}
+            {/* 工具執行過程（Chain of Thought） */}
             {message.toolProgress && message.toolProgress.length > 0 && (
-              <Reasoning isStreaming={message.isStreaming}>
-                <ReasoningTrigger />
-                <ReasoningContent>
-                  {message.toolProgress
-                    .map((p) => `${p.status === 'done' ? '✓' : '⟳'} ${p.tool}`)
-                    .join('\n')}
-                </ReasoningContent>
-              </Reasoning>
+              <ChainOfThought defaultOpen={message.isStreaming}>
+                <ChainOfThoughtHeader>
+                  {(() => {
+                    const steps = toThoughtSteps(message.toolProgress ?? [])
+                    const doneCount = steps.filter((s) => s.status === 'done').length
+                    return message.isStreaming
+                      ? `正在查詢…（${doneCount}/${steps.length}）`
+                      : `查詢了 ${steps.length} 個資料來源`
+                  })()}
+                </ChainOfThoughtHeader>
+                <ChainOfThoughtContent>
+                  {toThoughtSteps(message.toolProgress).map((step) => (
+                    <ChainOfThoughtStep
+                      key={step.tool}
+                      icon={TOOL_ICONS[step.tool]}
+                      label={TOOL_LABELS[step.tool] ?? step.tool}
+                      status={step.status === 'done' ? 'complete' : 'active'}
+                    />
+                  ))}
+                </ChainOfThoughtContent>
+              </ChainOfThought>
             )}
 
             {/* Message Body */}

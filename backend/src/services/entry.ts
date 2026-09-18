@@ -116,7 +116,12 @@ export class QueryService {
     userId?: string,
     ctx?: { waitUntil(promise: Promise<unknown>): void },
     onToken?: (token: string) => Promise<void>,
-    extraTrace?: Record<string, unknown>
+    extraTrace?: Record<string, unknown>,
+    onProgress?: (event: {
+      type: 'progress'
+      tool: string
+      status: 'executing' | 'done'
+    }) => Promise<void>
   ): Promise<AIAskResponse> {
     const streamingMode = !!onToken
     const { query, chat_history, no_cache = false } = request
@@ -331,6 +336,7 @@ export class QueryService {
               waitUntilCtx: ctx,
               stream: streamingMode,
               onToken,
+              onProgress,
             }),
             pipelineCfg.pipeline_timeout_ms,
             'pipeline'
@@ -435,13 +441,18 @@ export class QueryService {
     userId: string | undefined,
     write: (data: string) => Promise<void>,
     ctx?: { waitUntil(promise: Promise<unknown>): void },
-    extraTrace?: Record<string, unknown>
+    extraTrace?: Record<string, unknown>,
+    onProgress?: (event: {
+      type: 'progress'
+      tool: string
+      status: 'executing' | 'done'
+    }) => Promise<void>
   ): Promise<AIAskResponse> {
     const onToken = async (token: string) => {
       await write(JSON.stringify({ type: 'token', token: toTraditionalChinese(token) }))
     }
     try {
-      return await this.ask(request, userId, ctx, onToken, extraTrace)
+      return await this.ask(request, userId, ctx, onToken, extraTrace, onProgress)
     } catch (error) {
       const message =
         error instanceof TimeoutError
