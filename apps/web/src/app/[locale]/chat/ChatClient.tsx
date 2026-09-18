@@ -22,6 +22,8 @@ import {
   ChainOfThought,
   ChainOfThoughtContent,
   ChainOfThoughtHeader,
+  ChainOfThoughtSearchResult,
+  ChainOfThoughtSearchResults,
   ChainOfThoughtStep,
 } from '@/components/ai-elements/chain-of-thought'
 import {
@@ -425,6 +427,22 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
                       status={step.status === 'done' ? 'complete' : 'active'}
                     />
                   ))}
+                  {message.sources && message.sources.length > 0 && (
+                    <ChainOfThoughtSearchResults>
+                      {message.sources.map((source) => (
+                        <a
+                          key={source.id}
+                          href={source.url || '#'}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          <ChainOfThoughtSearchResult title={source.excerpt || source.title}>
+                            {source.title}
+                          </ChainOfThoughtSearchResult>
+                        </a>
+                      ))}
+                    </ChainOfThoughtSearchResults>
+                  )}
                 </ChainOfThoughtContent>
               </ChainOfThought>
             )}
@@ -440,21 +458,23 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
               </div>
             )}
 
-            {/* Sources */}
-            {message.sources && message.sources.length > 0 && (
-              <Sources>
-                <SourcesTrigger count={message.sources.length} />
-                <SourcesContent>
-                  {message.sources.map((source) => (
-                    <Source
-                      key={source.id}
-                      href={source.url || '#'}
-                      title={`${source.title} (${source.type})`}
-                    />
-                  ))}
-                </SourcesContent>
-              </Sources>
-            )}
+            {/* Sources（沒有工具進度時才獨立顯示；有 CoT 時已收進 CoT 內） */}
+            {(!message.toolProgress || message.toolProgress.length === 0) &&
+              message.sources &&
+              message.sources.length > 0 && (
+                <Sources>
+                  <SourcesTrigger count={message.sources.length} />
+                  <SourcesContent>
+                    {message.sources.map((source) => (
+                      <Source
+                        key={source.id}
+                        href={source.url || '#'}
+                        title={`${source.title} (${source.type})`}
+                      />
+                    ))}
+                  </SourcesContent>
+                </Sources>
+              )}
           </MessageContent>
 
           {/* Actions (only for assistant, non-streaming) */}
