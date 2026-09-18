@@ -6,10 +6,8 @@ const ALWAYS_LOAD_SKILLS = ['search', 'data']
 export class SkillResolver {
   private skills: ResolvedSkill[] = []
 
-  async load(db: D1Database, subjectType = 'agent', subjectId = 'default'): Promise<void> {
-    const { results } = await db
-      .prepare(
-        `SELECT
+  async load(db: D1Database, userId?: string | null): Promise<void> {
+    const query = `SELECT
         s.id AS skillId,
         s.slug,
         s.display_name AS displayName,
@@ -25,27 +23,37 @@ export class SkillResolver {
       FROM skill_binding sb
       JOIN skill s ON sb.skill_id = s.id
       JOIN skill_version sv ON sv.id = COALESCE(sb.pinned_version_id, s.latest_version_id)
-      WHERE sb.subject_type = ? AND sb.subject_id = ? AND sb.enabled = 1
-        AND sv.status = 'published'
+      WHERE sb.enabled = 1 AND sv.status = 'published'
+        AND (
+          (sb.subject_type = 'agent' AND sb.subject_id = 'default')
+          ${userId ? "OR (sb.subject_type = 'user' AND sb.subject_id = ?)" : ''}
+        )
       ORDER BY sv.name`
-      )
-      .bind(subjectType, subjectId)
-      .all()
 
-    this.skills = (results ?? []).map((r) => ({
-      skillId: r.skillId as string,
-      slug: r.slug as string,
-      displayName: r.displayName as string | null,
-      versionId: r.versionId as string,
-      versionNumber: r.versionNumber as number,
-      name: r.name as string,
-      description: r.description as string,
-      body: r.body as string | null,
-      allowedTools: JSON.parse((r.allowedToolsJson as string) ?? '[]') as string[],
-      contentHash: r.contentHash as string,
-      tokenCount: r.tokenCount as number | null,
-      source: r.source as string,
-    }))
+    const stmt = userId ? db.prepare(query).bind(userId) : db.prepare(query)
+    const { results } = await stmt.all()
+
+    const seen = new Set<string>()
+    this.skills = (results ?? [])
+      .map((r) => ({
+        skillId: r.skillId as string,
+        slug: r.slug as string,
+        displayName: r.displayName as string | null,
+        versionId: r.versionId as string,
+        versionNumber: r.versionNumber as number,
+        name: r.name as string,
+        description: r.description as string,
+        body: r.body as string | null,
+        allowedTools: JSON.parse((r.allowedToolsJson as string) ?? '[]') as string[],
+        contentHash: r.contentHash as string,
+        tokenCount: r.tokenCount as number | null,
+        source: r.source as string,
+      }))
+      .filter((s) => {
+        if (seen.has(s.slug)) return false
+        seen.add(s.slug)
+        return true
+      })
   }
 
   resolve(query: string, _isAuthenticated: boolean): ResolvedSkill[] {

@@ -2,6 +2,7 @@ import { coachingAgentTool, recommendAgentTool } from '../sub-agents'
 import { suggestTrainingTool } from './coaching'
 import { cragInfoTool } from './crag-info'
 import { goalsTool } from './goals'
+import { manageSkillTool } from './manage-skill'
 import { recallMemoryTool } from './memory'
 import { recommendTool } from './recommend'
 import { searchCragsTool } from './search-crags'
@@ -23,4 +24,5 @@ export const TOOL_MAP: Record<string, import('../types').Tool> = {
   recommend_agent: recommendAgentTool,
   coaching_agent: coachingAgentTool,
   manage_goals: goalsTool,
+  manage_skill: manageSkillTool,
 }
