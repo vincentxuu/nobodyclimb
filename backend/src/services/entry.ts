@@ -344,11 +344,12 @@ export class QueryService {
           // 寫入 query log
           const reactSources: AISource[] = reactResult.sources.map((s, i) => ({
             id: `react-${i}`,
-            type: 'route' as const,
+            type: s.type === 'crag' ? ('crag' as const) : ('route' as const),
             title: s.title,
             url: s.url,
             excerpt: s.excerpt ?? '',
             score: 0,
+            latestVideoUrl: s.latestVideoUrl,
           }))
 
           const queryId = await this.logQuery({

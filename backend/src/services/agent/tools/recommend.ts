@@ -1,9 +1,10 @@
 import { gradeToNumeric } from '../../core/climbing-schema'
 import { loadPipelineConfig } from '../../core/config'
-import { buildExcerpt, extractTitle } from '../../core/documents'
+import { buildExcerpt, buildUrl, extractTitle } from '../../core/documents'
 import { EmbeddingService } from '../../core/embedding'
 import { hybridSearch } from '../../tools/hybrid-search'
 import type { Tool, ToolContext, ToolResult } from '../types'
+import { type AgentRouteSource, fetchLatestVideoMap } from './route-sources'
 
 export const recommendTool: Tool = {
   name: 'recommend',
@@ -101,7 +102,7 @@ export const recommendTool: Tool = {
       .filter((n) => n > 0)
     const userMaxGrade = gradeNumerics.length > 0 ? Math.max(...gradeNumerics) : null
 
-    // 轉換並排除已攀登路線
+    // 轉換並排除已攀登路線（保留 url，供後續注入站內連結）
     let filtered = searchResult.candidateMatches
       .map((match) => {
         const doc = searchResult.documents.get(match.id)
@@ -113,6 +114,7 @@ export const recommendTool: Tool = {
           excerpt: buildExcerpt(doc),
           score: match.score,
           text: doc.text.slice(0, 300),
+          url: buildUrl(doc),
         }
       })
       .filter(Boolean) as Array<{
@@ -121,6 +123,7 @@ export const recommendTool: Tool = {
       excerpt: string
       score: number
       text: string
+      url?: string
     }>
 
     // 難度過濾
@@ -148,10 +151,20 @@ export const recommendTool: Tool = {
 
     filtered = filtered.slice(0, 10)
 
+    // 補上最新影片連結（與 pipeline 的 popularity-rerank 共用同一資料來源）
+    const latestVideoMap = await fetchLatestVideoMap(
+      db,
+      filtered.map((r) => r.id)
+    )
+    const recommendations = filtered.map((r) => ({
+      ...r,
+      latestVideoUrl: latestVideoMap.get(r.id),
+    }))
+
     return {
       recentAscents: ascents.results ?? [],
-      recommendations: filtered,
-      count: filtered.length,
+      recommendations,
+      count: recommendations.length,
     }
   },
 
@@ -159,7 +172,15 @@ export const recommendTool: Tool = {
     const data = raw as {
       error?: string
       recentAscents?: Array<{ route_name: string; grade: string }>
-      recommendations?: Array<{ title: string; excerpt?: string; text?: string }>
+      recommendations?: Array<{
+        id: string
+        title: string
+        excerpt?: string
+        text?: string
+        url?: string
+        score?: number
+        latestVideoUrl?: string
+      }>
       count?: number
     }
 
@@ -179,9 +200,22 @@ export const recommendTool: Tool = {
       lines.push('目前沒有推薦路線。')
     }
 
+    // 結構化來源保留給 post_loop 注入站內連結與影片連結用
+    const sources: AgentRouteSource[] = (data.recommendations ?? [])
+      .filter((r) => r.url)
+      .map((r) => ({
+        id: r.id,
+        type: 'route' as const,
+        title: r.title,
+        url: r.url,
+        excerpt: r.excerpt,
+        score: r.score,
+        latestVideoUrl: r.latestVideoUrl,
+      }))
+
     return {
       content: lines.join('\n'),
-      metadata: { resultCount: data.count ?? 0 },
+      metadata: { resultCount: data.count ?? 0, sources },
     }
   },
 }

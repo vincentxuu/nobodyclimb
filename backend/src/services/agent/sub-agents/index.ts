@@ -2,7 +2,7 @@ import type { Tool, ToolContext } from '../types'
 import { coachingSubAgent } from './coaching-agent'
 import { recommendSubAgent } from './recommend-agent'
 import type { SubAgent, SubAgentToolOutput } from './types'
-import { formatSubAgentResult } from './types'
+import { formatSubAgentResult, normalizeGatheredContext } from './types'
 
 /** 把 SubAgent 包裝成 Tool interface */
 function wrapSubAgent(
@@ -24,13 +24,14 @@ function wrapSubAgent(
       }
 
       const query = ((input as Record<string, unknown>)?.query as string) ?? ''
-      const context = await agent.gatherContext(input, ctx)
-      const result = await agent.synthesize(query, context, ctx)
+      const gathered = normalizeGatheredContext(await agent.gatherContext(input, ctx))
+      const result = await agent.synthesize(query, gathered.context, ctx)
 
       return {
         answer: result.answer,
         tokensUsed: result.tokensUsed,
         subAgent: agent.name,
+        sources: gathered.sources,
       } satisfies SubAgentToolOutput
     },
 

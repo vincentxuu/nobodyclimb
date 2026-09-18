@@ -4,6 +4,7 @@ import type { AIProvider, ChatMessage } from '../orchestrators/ai-graph/provider
 import { hashForCache } from './cache'
 import type { ToolRegistry } from './registry'
 import { getCircuitBreaker, withRetry } from './resilience'
+import { type AgentRouteSource, mergeSources } from './tools/route-sources'
 import type {
   AgentOptions,
   ModelConfig,
@@ -49,6 +50,8 @@ interface EngineResult {
   turnCount: number
   toolCallCount: number
   turnTraces: TurnTrace[]
+  /** 各輪 tool 回傳的結構化來源（去重後，供連結注入） */
+  sources: AgentRouteSource[]
 }
 
 /**
@@ -76,6 +79,8 @@ export async function runAgentLoop(
   let turn = 0
   let totalToolCalls = 0
   const turnTraces: TurnTrace[] = []
+  // 各輪 tool 回傳的結構化來源（metadata.sources），用於最終連結注入
+  const collectedSources: AgentRouteSource[][] = []
   // 追蹤同一 tool 連續失敗次數
   const consecutiveFailures: Map<string, number> = new Map()
 
@@ -187,6 +192,7 @@ export async function runAgentLoop(
         turnCount: turn,
         toolCallCount: totalToolCalls,
         turnTraces,
+        sources: mergeSources(collectedSources),
       }
     }
 
@@ -207,6 +213,10 @@ export async function runAgentLoop(
       opts.onProgress
     )
     totalToolCalls += response.toolCalls.length
+    for (const r of toolResults) {
+      const sources = r.metadata?.sources as AgentRouteSource[] | undefined
+      if (sources?.length) collectedSources.push(sources)
+    }
 
     turnTraces.push({
       turn,
@@ -312,6 +322,7 @@ export async function runAgentLoop(
       turnCount: turn + 1,
       toolCallCount: totalToolCalls,
       turnTraces,
+      sources: mergeSources(collectedSources),
     }
   } catch (err) {
     endSpan(finalSpan, { output: { error: String(err) }, level: 'ERROR' })
