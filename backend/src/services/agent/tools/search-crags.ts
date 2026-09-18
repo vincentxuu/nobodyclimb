@@ -1,8 +1,9 @@
 import { loadPipelineConfig } from '../../core/config'
-import { buildExcerpt, extractTitle } from '../../core/documents'
+import { buildExcerpt, buildUrl, extractTitle } from '../../core/documents'
 import { EmbeddingService } from '../../core/embedding'
 import { hybridSearch } from '../../tools/hybrid-search'
 import type { Tool, ToolContext, ToolResult } from '../types'
+import type { AgentRouteSource } from './route-sources'
 
 export const searchCragsTool: Tool = {
   name: 'search_crags',
@@ -56,20 +57,29 @@ export const searchCragsTool: Tool = {
     })
     const retrievalMs = Date.now() - retrievalStart
 
-    // 轉換為 Agent 格式
+    // 轉換為 Agent 格式（保留 url，供後續注入站內連結）
     const crags = result.candidateMatches
       .slice(0, 5)
       .map((match) => {
         const doc = result.documents.get(match.id)
         if (!doc) return null
         return {
+          id: doc.source_id,
           title: extractTitle(doc),
           excerpt: buildExcerpt(doc),
           score: Math.round(match.score * 1000) / 1000,
           text: doc.text.slice(0, 500),
+          url: buildUrl(doc),
         }
       })
-      .filter(Boolean)
+      .filter(Boolean) as Array<{
+      id: string
+      title: string
+      excerpt: string
+      score: number
+      text: string
+      url?: string
+    }>
 
     return {
       results: crags,
@@ -89,7 +99,7 @@ export const searchCragsTool: Tool = {
 
   formatResult(raw: unknown): ToolResult {
     const data = raw as {
-      results: Array<{ title: string; excerpt?: string; text?: string }>
+      results: Array<{ id: string; title: string; excerpt?: string; text?: string; url?: string }>
       count: number
       _trace?: Record<string, unknown>
     }
@@ -103,9 +113,19 @@ export const searchCragsTool: Tool = {
       (r, i) =>
         `${i + 1}. ${r.title}${r.excerpt ? `\n   ${r.excerpt}` : ''}${r.text ? `\n   ${r.text.slice(0, 200)}` : ''}`
     )
+    // 結構化來源保留給 post_loop 注入站內連結用
+    const sources: AgentRouteSource[] = data.results
+      .filter((r) => r.url)
+      .map((r) => ({
+        id: r.id,
+        type: 'crag' as const,
+        title: r.title,
+        url: r.url,
+        excerpt: r.excerpt,
+      }))
     return {
       content: `找到 ${data.count} 個岩場：\n\n${lines.join('\n\n')}`,
-      metadata: { resultCount: data.count, _trace: data._trace },
+      metadata: { resultCount: data.count, _trace: data._trace, sources },
     }
   },
 }

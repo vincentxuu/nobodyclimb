@@ -113,7 +113,12 @@ describe('formatSubAgentResult', () => {
       subAgent: 'recommend_agent',
     })
     expect(result.content).toBe('推薦你爬飛簷')
-    expect(result.metadata).toEqual({ subAgent: 'recommend_agent', tokensUsed: 150 })
+    expect(result.metadata).toEqual({
+      subAgent: 'recommend_agent',
+      tokensUsed: 150,
+      resultCount: 0,
+      sources: [],
+    })
   })
 
   it('formats an error result', () => {
@@ -199,7 +204,9 @@ describe('coachingAgentTool (wrapped)', () => {
 describe('recommendSubAgent.gatherContext', () => {
   it('calls recommend + user_profile and returns combined context', async () => {
     const ctx = makeCtx({ userId: 'user-1' })
-    const context = await recommendSubAgent.gatherContext({}, ctx)
+    const gathered = await recommendSubAgent.gatherContext({}, ctx)
+    // gatherContext 回傳 { context, sources }（sources 供連結注入）
+    const context = typeof gathered === 'string' ? gathered : gathered.context
     expect(context).toContain('使用者資料')
     expect(context).toContain('推薦路線')
     expect(context).toContain('TestUser')

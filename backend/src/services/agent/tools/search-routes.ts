@@ -1,10 +1,11 @@
 import { loadPipelineConfig } from '../../core/config'
-import { buildExcerpt, extractTitle } from '../../core/documents'
+import { buildExcerpt, buildUrl, extractTitle } from '../../core/documents'
 import { EmbeddingService } from '../../core/embedding'
 import { extractGradeFilter, extractTypeFilter } from '../../core/nlp'
 import { hybridSearch } from '../../tools/hybrid-search'
 import type { Tool, ToolContext, ToolResult } from '../types'
 import { isSmallModel } from '../types'
+import { type AgentRouteSource, fetchLatestVideoMap } from './route-sources'
 
 export const searchRoutesTool: Tool = {
   name: 'search_routes',
@@ -89,24 +90,43 @@ export const searchRoutesTool: Tool = {
     })
     const retrievalMs = Date.now() - retrievalStart
 
-    // 轉換為 Agent 格式
+    // 轉換為 Agent 格式（保留 url，供後續注入站內連結）
     const routes = result.candidateMatches
       .slice(0, 10)
       .map((match) => {
         const doc = result.documents.get(match.id)
         if (!doc) return null
         return {
+          id: doc.source_id,
           title: extractTitle(doc),
           excerpt: buildExcerpt(doc),
           score: Math.round(match.score * 1000) / 1000,
           text: doc.text.slice(0, 500),
+          url: buildUrl(doc),
         }
       })
-      .filter(Boolean)
+      .filter(Boolean) as Array<{
+      id: string
+      title: string
+      excerpt: string
+      score: number
+      text: string
+      url?: string
+    }>
+
+    // 補上最新影片連結（與 pipeline 的 popularity-rerank 共用同一資料來源）
+    const latestVideoMap = await fetchLatestVideoMap(
+      ctx.env.DB,
+      routes.map((r) => r.id)
+    )
+    const enriched = routes.map((r) => ({
+      ...r,
+      latestVideoUrl: latestVideoMap.get(r.id),
+    }))
 
     return {
-      results: routes,
-      count: routes.length,
+      results: enriched,
+      count: enriched.length,
       _trace: {
         embedding: { duration_ms: embeddingMs },
         filter: { applied: vectorFilter },
@@ -114,7 +134,7 @@ export const searchRoutesTool: Tool = {
           ...result.trace,
           duration_ms: retrievalMs,
           top_score: result.retrievalScore,
-          doc_count: routes.length,
+          doc_count: enriched.length,
         },
       },
     }
@@ -122,7 +142,15 @@ export const searchRoutesTool: Tool = {
 
   formatResult(raw: unknown): ToolResult {
     const data = raw as {
-      results: Array<{ title: string; excerpt?: string; score?: number; text?: string }>
+      results: Array<{
+        id: string
+        title: string
+        excerpt?: string
+        score?: number
+        text?: string
+        url?: string
+        latestVideoUrl?: string
+      }>
       count: number
       _trace?: Record<string, unknown>
     }
@@ -136,9 +164,21 @@ export const searchRoutesTool: Tool = {
       (r, i) =>
         `${i + 1}. ${r.title}${r.excerpt ? `\n   ${r.excerpt}` : ''}${r.text ? `\n   ${r.text.slice(0, 200)}` : ''}`
     )
+    // 結構化來源保留給 post_loop 注入站內連結與影片連結用
+    const sources: AgentRouteSource[] = data.results
+      .filter((r) => r.url)
+      .map((r) => ({
+        id: r.id,
+        type: 'route' as const,
+        title: r.title,
+        url: r.url,
+        excerpt: r.excerpt,
+        score: r.score,
+        latestVideoUrl: r.latestVideoUrl,
+      }))
     return {
       content: `找到 ${data.count} 條路線：\n\n${lines.join('\n\n')}`,
-      metadata: { resultCount: data.count, _trace: data._trace },
+      metadata: { resultCount: data.count, _trace: data._trace, sources },
     }
   },
 }

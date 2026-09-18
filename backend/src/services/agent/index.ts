@@ -2,6 +2,7 @@ import { getMemoriesSummary } from '../../repositories/memory'
 import type { Env } from '../../types'
 import { buildAgentBasePrompt } from '../../utils/ai-prompts'
 import type { LangfuseParent } from '../../utils/langfuse'
+import { injectRouteLinks } from '../core/documents'
 import { extractMemoriesFromQuery } from '../domain/memory'
 import {
   buildAscentContext,
@@ -20,7 +21,9 @@ import { isHookEnabled, loadHookRecords } from './hooks/loader'
 import { registerMCPTools } from './mcp/registry'
 import { buildProactivePromptSection, gatherProactiveContext } from './proactive'
 import { recordSkillInvocation, SkillResolver } from './skills/resolver'
+import { normalizeGatheredContext } from './sub-agents/types'
 import { createDBToolRegistry, updateToolStats } from './tools/db-registry'
+import { toAISource } from './tools/route-sources'
 import { DefaultTokenTracker } from './tracker'
 import type { AgentResult, ModelConfig, ModelMap, ProviderName, ToolContext } from './types'
 
@@ -283,14 +286,17 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
           await params.onProgress({ type: 'progress', tool: subAgent.name, status: 'executing' })
         }
 
-        const context = await subAgent.gatherContext({ query }, toolCtx)
-        const result = await subAgent.synthesize(query, context, toolCtx)
+        const gathered = normalizeGatheredContext(await subAgent.gatherContext({ query }, toolCtx))
+        const result = await subAgent.synthesize(query, gathered.context, toolCtx)
 
         if (params.onProgress) {
           await params.onProgress({ type: 'progress', tool: subAgent.name, status: 'done' })
         }
 
-        const finalAnswer = await runPostLoopGuards(result.answer, query, env, models)
+        const guarded = await runPostLoopGuards(result.answer, query, env, models)
+        // 與 pipeline 一致：後處理注入站內路線連結與影片連結
+        const aiSources = gathered.sources.map(toAISource)
+        const finalAnswer = injectRouteLinks(guarded, aiSources)
 
         if (waitUntilCtx && userId) {
           waitUntilCtx.waitUntil(extractMemoriesFromQuery(query, userId, env.DB, env.AI))
@@ -299,7 +305,15 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
         const costSummary = tracker.getCostSummary()
         return {
           answer: finalAnswer,
-          sources: [],
+          sources: gathered.sources
+            .filter((s) => s.url)
+            .map((s) => ({
+              title: s.title,
+              url: s.url as string,
+              excerpt: s.excerpt,
+              type: s.type,
+              latestVideoUrl: s.latestVideoUrl,
+            })),
           totalTokens: tracker.getTotalTokens(),
           turnCount: 1,
           toolCallCount: 1,
@@ -412,10 +426,13 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     models,
     env,
   })
-  const finalAnswer = postLoopResult.replacement ?? result.answer
+  const guardedAnswer = postLoopResult.replacement ?? result.answer
   if (!postLoopResult.allow) {
     console.warn('[agent] post_loop hook denied', { reason: postLoopResult.reason })
   }
+  // 與 pipeline 一致：後處理注入站內路線連結與影片連結
+  const aiSources = result.sources.map(toAISource)
+  const finalAnswer = injectRouteLinks(guardedAnswer, aiSources)
 
   // 7. Async observers + tool stats（非同步，不擋回應）
   if (waitUntilCtx) {
@@ -438,7 +455,15 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   const costSummary = tracker.getCostSummary()
   return {
     answer: finalAnswer,
-    sources: [],
+    sources: result.sources
+      .filter((s) => s.url)
+      .map((s) => ({
+        title: s.title,
+        url: s.url as string,
+        excerpt: s.excerpt,
+        type: s.type,
+        latestVideoUrl: s.latestVideoUrl,
+      })),
     totalTokens: tracker.getTotalTokens(),
     turnCount: result.turnCount,
     toolCallCount: result.toolCallCount,

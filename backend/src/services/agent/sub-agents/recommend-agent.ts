@@ -1,9 +1,10 @@
 import { createProvider } from '../../orchestrators/ai-graph/providers'
 import type { ProviderName as LegacyProviderName } from '../../orchestrators/ai-graph/providers/types'
 import { recommendTool } from '../tools/recommend'
+import type { AgentRouteSource } from '../tools/route-sources'
 import { userProfileTool } from '../tools/user-profile'
 import type { ToolContext } from '../types'
-import type { SubAgent, SubAgentResult } from './types'
+import type { SubAgent, SubAgentContext, SubAgentResult } from './types'
 
 const RECOMMEND_SYSTEM_PROMPT = `你是 NobodyClimb 的攀岩路線推薦專家。你的唯一任務是根據使用者的攀登歷史，產生個人化的路線推薦。
 
@@ -22,7 +23,7 @@ export const recommendSubAgent: SubAgent = {
   systemPrompt: RECOMMEND_SYSTEM_PROMPT,
   innerTools: ['recommend', 'user_profile'],
 
-  async gatherContext(input: unknown, ctx: ToolContext): Promise<string> {
+  async gatherContext(input: unknown, ctx: ToolContext): Promise<SubAgentContext> {
     const sections: string[] = []
 
     // 取得使用者 profile
@@ -30,12 +31,13 @@ export const recommendSubAgent: SubAgent = {
     const profileFormatted = userProfileTool.formatResult(profileResult)
     sections.push(`【使用者資料】\n${profileFormatted.content}`)
 
-    // 取得推薦路線
+    // 取得推薦路線（結構化來源一併保留，供連結注入）
     const recommendResult = await recommendTool.execute(input, ctx)
     const recommendFormatted = recommendTool.formatResult(recommendResult)
     sections.push(`【推薦路線】\n${recommendFormatted.content}`)
+    const sources = (recommendFormatted.metadata?.sources as AgentRouteSource[] | undefined) ?? []
 
-    return sections.join('\n\n')
+    return { context: sections.join('\n\n'), sources }
   },
 
   async synthesize(query: string, context: string, ctx: ToolContext): Promise<SubAgentResult> {

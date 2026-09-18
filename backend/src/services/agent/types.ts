@@ -189,7 +189,13 @@ export interface AgentTurnTrace {
 
 export interface AgentResult {
   answer: string
-  sources: Array<{ title: string; url: string; excerpt?: string }>
+  sources: Array<{
+    title: string
+    url: string
+    excerpt?: string
+    type?: 'route' | 'crag'
+    latestVideoUrl?: string
+  }>
   totalTokens: number
   turnCount: number
   toolCallCount: number
