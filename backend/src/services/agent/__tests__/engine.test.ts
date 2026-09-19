@@ -464,6 +464,61 @@ describe('runAgentLoop', () => {
     }
   })
 
+  it('resultCount = 0 的空結果不寫入 tool cache', async () => {
+    const cache: AgentCache = {
+      get: vi.fn().mockResolvedValue(null),
+      set: vi.fn().mockResolvedValue(undefined),
+    }
+    const toolCall = (id: string) => ({
+      content: undefined,
+      toolCalls: [{ id, name: 'search_routes', input: { query: '龍洞 5.11' } }],
+      stopReason: 'tool_use' as const,
+      usage: { input: 100, output: 40 },
+    })
+    const final = {
+      content: '最終回答',
+      toolCalls: [],
+      stopReason: 'end_turn' as const,
+      usage: { input: 50, output: 20 },
+    }
+
+    // 空結果 → 不快取
+    const emptyRegistry = new ToolRegistry()
+    emptyRegistry.registerTool(
+      makeTool({
+        cacheTTL: 3600,
+        formatResult: () => ({ content: '未找到符合條件的路線。', metadata: { resultCount: 0 } }),
+      })
+    )
+    await runAgentLoop(
+      {
+        provider: mockProvider([toolCall('c1'), final]),
+        registry: emptyRegistry,
+        ctx: makeCtx({ cache }),
+      },
+      DEFAULT_OPTS
+    )
+    expect(cache.set).not.toHaveBeenCalled()
+
+    // 有結果 → 照常快取
+    const hitRegistry = new ToolRegistry()
+    hitRegistry.registerTool(
+      makeTool({
+        cacheTTL: 3600,
+        formatResult: () => ({ content: '找到 2 條路線', metadata: { resultCount: 2 } }),
+      })
+    )
+    await runAgentLoop(
+      {
+        provider: mockProvider([toolCall('c2'), final]),
+        registry: hitRegistry,
+        ctx: makeCtx({ cache }),
+      },
+      DEFAULT_OPTS
+    )
+    expect(cache.set).toHaveBeenCalledTimes(1)
+  })
+
   it('tool 執行失敗時 done 事件帶 is_error 與錯誤訊息', async () => {
     const provider = mockProvider([
       {

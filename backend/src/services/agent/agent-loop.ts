@@ -568,8 +568,10 @@ async function executeSingleTool(
     // 成功 → 清除連續失敗計數
     consecutiveFailures.delete(tc.name)
 
-    // 寫入 cache（成功結果才寫）
-    if (cacheKey && tool.cacheTTL > 0) {
+    // 寫入 cache（成功且有結果才寫；resultCount = 0 的「查無資料」不快取，
+    // 避免資料補齊或檢索修正後仍被舊的空結果擋住 cacheTTL 這麼久）
+    const isEmptyResult = formatted.metadata?.resultCount === 0
+    if (cacheKey && tool.cacheTTL > 0 && !isEmptyResult) {
       ctx.cache.set(cacheKey, content, tool.cacheTTL).catch(() => {})
     }
 
