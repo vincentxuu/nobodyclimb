@@ -197,6 +197,8 @@ function buildLanguageDirective(locale: AiLocale): string {
 export interface RunAgentParams {
   query: string
   chatHistory?: Array<{ role: 'user' | 'assistant'; content: string }>
+  /** 追問時上一輪回答的來源清單（精簡版），放進 system prompt 讓指代有對象 */
+  carryOverContext?: string | null
   userId: string | null
   env: Env
   /** 使用者介面語言（zh / en / ja），決定回答語言；預設 zh */
@@ -273,7 +275,10 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   // 0.8 Skill-based routing — SkillResolver 取代 manifest + detectDirectRoute
   const skillResolver = new SkillResolver()
   await skillResolver.load(env.DB, userId)
-  const directSkill = skillResolver.findDirectRoute(query, !!userId)
+  // 追問帶著上一輪來源時不走 direct route：sub-agent 收不到 carry-over，指代會沒有對象
+  const directSkill = params.carryOverContext
+    ? null
+    : skillResolver.findDirectRoute(query, !!userId)
 
   if (directSkill && userId) {
     try {
@@ -359,6 +364,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
           sources: gathered.sources
             .filter((s) => s.url)
             .map((s) => ({
+              id: s.id,
               title: s.title,
               url: s.url as string,
               excerpt: s.excerpt,
@@ -444,7 +450,12 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     buildAgentBasePrompt(toolsSection, capabilitySection)
   )
   const proactiveSection = buildProactivePromptSection(proactiveCtx)
-  const systemPrompt = [baseSystemPrompt, proactiveSection, languageDirective]
+  const systemPrompt = [
+    baseSystemPrompt,
+    proactiveSection,
+    params.carryOverContext ?? null,
+    languageDirective,
+  ]
     .filter(Boolean)
     .join('\n\n')
 
@@ -509,6 +520,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     sources: result.sources
       .filter((s) => s.url)
       .map((s) => ({
+        id: s.id,
         title: s.title,
         url: s.url as string,
         excerpt: s.excerpt,

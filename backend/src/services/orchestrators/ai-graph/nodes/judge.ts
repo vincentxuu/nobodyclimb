@@ -40,7 +40,9 @@ export async function judgeNode(state: GraphState): Promise<Partial<GraphState>>
         config: {
           lightweight_model: pipelineConfig.lightweight_model,
           judge_timeout_ms: pipelineConfig.judge_timeout_ms,
-          judge_context_truncate: pipelineConfig.judge_context_truncate,
+          // carry-over 文件放在 context 最前面，視窗不放寬會把檢索結果整段切掉
+          judge_context_truncate:
+            pipelineConfig.judge_context_truncate + (state.carryOverContext?.length ?? 0),
           groundedness_disclaimer_low: pipelineConfig.groundedness_disclaimer_low,
           groundedness_disclaimer_mid: pipelineConfig.groundedness_disclaimer_mid,
           max_output_length: pipelineConfig.max_output_length,

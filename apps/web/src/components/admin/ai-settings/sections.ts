@@ -488,8 +488,16 @@ export const SECTIONS: SectionDef[] = [
           {
             key: 'assistant_history_truncate',
             label: 'Assistant 歷史截斷（字）',
-            placeholder: '500',
+            placeholder: '1200',
             hint: '歷史 assistant 訊息傳入 LLM 前的截斷長度（100–2000）',
+          },
+          {
+            key: 'followup_rewrite_enabled',
+            label: '追問改寫',
+            placeholder: '1',
+            hint: '有對話歷史且問題含指代詞（這些／其中／哪一條）時，用輕量模型改寫成獨立問題再檢索',
+            kind: 'select',
+            options: ON_OFF_OPTIONS,
           },
           {
             key: 'cache_ttl',

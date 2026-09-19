@@ -23,7 +23,7 @@ export async function agenticRetrieveNode(state: GraphState): Promise<Partial<Gr
     const existingMatches = state.candidateMatches ?? []
 
     // 取得本步搜尋的 query：優先使用 loopBack.reason（由 agenticDecision 設定的 refinedQuery）
-    const searchQuery = state.loopBack?.reason ?? request.query
+    const searchQuery = state.loopBack?.reason ?? state.retrievalQuery ?? request.query
     const vectorFilter = state.vectorFilter ?? {}
 
     const cragFilter = vectorFilter['crag_id'] as { $in?: string[] } | undefined

@@ -31,7 +31,7 @@ export const toolSelectionStep: PipelineStep = {
 
   async execute(ctx: PipelineContext): Promise<PipelineContext> {
     const { env, request, pipelineConfig, prompts, gatewayOptions, tokenBreakdown, trace } = ctx
-    const { query } = request
+    const query = ctx.retrievalQuery ?? request.query
     const llmModel = pipelineConfig.llm_model
 
     // --- Pipeline 獨有：sim-route intent（單條路線版） ---

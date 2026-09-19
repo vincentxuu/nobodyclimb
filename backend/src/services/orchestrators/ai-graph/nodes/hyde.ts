@@ -31,7 +31,7 @@ export async function hydeNode(state: GraphState): Promise<Partial<GraphState>> 
     const llmModel = pipelineConfig.llm_model
 
     const hydeResult = await queryService.generateHyDE(
-      request.query,
+      state.retrievalQuery ?? request.query,
       llmModel,
       gatewayOptions,
       prompts['HYDE_PROMPT']

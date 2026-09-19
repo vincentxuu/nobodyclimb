@@ -31,7 +31,7 @@ export const hydeStep: PipelineStep = {
     const llmModel = pipelineConfig.llm_model
 
     const hydeResult = await ctx.queryService.generateHyDE(
-      request.query,
+      ctx.retrievalQuery ?? request.query,
       llmModel,
       gatewayOptions,
       prompts['HYDE_PROMPT']

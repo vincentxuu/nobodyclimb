@@ -70,12 +70,15 @@ export async function loadPipelineConfig(db: D1Database): Promise<PipelineConfig
     // Judge
     judge_timeout_ms: num(cfg['judge_timeout_ms'], 8000, 1000, 30000),
     judge_context_truncate: num(cfg['judge_context_truncate'], 2000, 200, 5000),
-    assistant_history_truncate: num(cfg['assistant_history_truncate'], 500, 100, 2000),
+    // 追問時上一輪回答的路線名稱多半落在 500 字後段，預設放寬避免被截掉
+    assistant_history_truncate: num(cfg['assistant_history_truncate'], 1200, 100, 2000),
     judge_regen_quality_max: num(cfg['judge_regen_quality_max'], 2, 1, 3),
     // Self-reflection
     self_reflection_min_length: num(cfg['self_reflection_min_length'], 50, 10, 500),
     // 對話與快取
     chat_history_depth: num(cfg['chat_history_depth'], 6, 2, 20),
+    // 追問改寫：有對話歷史且 query 含指代詞時，用輕量模型改寫成獨立問題再檢索（預設開）
+    followup_rewrite_enabled: cfg['followup_rewrite_enabled'] !== '0',
     cache_ttl: num(cfg['cache_ttl'], 3600, 60, 86400),
     // 語義快取
     semantic_cache_enabled: cfg['semantic_cache_enabled'] === '1',
