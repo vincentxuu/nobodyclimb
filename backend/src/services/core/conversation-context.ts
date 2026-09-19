@@ -12,7 +12,14 @@
  * 4. 用輕量模型把追問改寫成獨立問題，讓檢索也吃得到脈絡
  */
 
-import type { AIChatMessage, AIDocument, AIDocumentMetadata, AISource, Env } from '../../types'
+import type {
+  AIChatMessage,
+  AIDocument,
+  AIDocumentMetadata,
+  AISource,
+  AiLocale,
+  Env,
+} from '../../types'
 import type { LangfuseParent } from '../../utils/langfuse'
 import { logGeneration } from '../../utils/langfuse'
 import { toTraditionalChinese } from '../../utils/opencc'
@@ -21,16 +28,17 @@ import type { TokenUsageInfo } from '../orchestrators/pipeline/types'
 import { isContextDependentQuery } from './nlp'
 import { estimateTokens, extractResponseText, type LLMResponse } from './types'
 
-// 追問常見的指代詞：這些 / 那條 / 其中 / 哪一個 / 上面 / 剛剛 / 它們 / 第二條 ...
+// 追問常見的指代詞：這些 / 那條 / 其中 / 哪一條 / 上面 / 剛剛 / 它們 / 第二條 ...
+// 指代詞要帶對象才算：「哪個岩場適合新手」「這個週末」「5.11 以上」都是獨立問題，不收 bare 的 哪個／這個／以上
 const ANAPHORA_PATTERN =
-  /這些|那些|這幾|那幾|其中|哪一|哪條|哪個|哪幾|上面|上述|以上|剛剛|剛才|前面|它們|他們|這條|那條|這個|那個|第[一二三四五六七八九十\d]+[條個]|these|those|which one|among them/i
+  /這些|那些|這幾|那幾|其中|哪一條|哪一個|哪條|哪幾|哪個比較|哪個最|上面|上述|剛剛|剛才|前面|它們|這條|那條|第[一二三四五六七八九十\d]+[條個]|these|those|which one|among them/i
 
 /** 上一輪來源最多帶幾筆進 context（避免撐爆 token） */
 const MAX_CARRY_OVER_SOURCES = 10
 /** 回答文字比對長度（去掉標點與連結後只比 CJK 開頭） */
 const RESPONSE_MATCH_LENGTH = 30
-/** 改寫 LLM 的超時（毫秒） */
-const REWRITE_TIMEOUT_MS = 4000
+/** 改寫 LLM 的超時（毫秒）；這段在 pipeline 開始前串行執行，不能太長 */
+const REWRITE_TIMEOUT_MS = 2500
 /** 改寫結果長度上限；超過視為模型失控，退回原 query */
 const REWRITE_MAX_LENGTH = 160
 
@@ -42,9 +50,21 @@ export function isFollowUpQuery(query: string, recentHistory: AIChatMessage[]): 
 
 /** 只留 CJK 字元，讓「有無 markdown 連結」「簡繁差異」都不影響比對 */
 export function normalizeForMatch(text: string): string {
-  return toTraditionalChinese(text)
-    .replace(/[^一-鿿]/g, '')
-    .slice(0, RESPONSE_MATCH_LENGTH)
+  return toTraditionalChinese(text).replace(/[^一-鿿]/g, '')
+}
+
+/**
+ * 判斷 log 的回答與歷史中的 assistant 內容是否為同一則。
+ * 兩邊都可能多出一段：log 端可能被 judge 加上免責前綴，前端端可能保留串流的 SUGGESTIONS 尾段，
+ * 所以取任一方的 CJK 開頭片段，看是否包含在另一方裡。
+ */
+export function isSameResponse(logResponse: string, historyContent: string): boolean {
+  const a = normalizeForMatch(logResponse)
+  const b = normalizeForMatch(historyContent)
+  if (a.length < 8 || b.length < 8) return false
+  return (
+    a.includes(b.slice(0, RESPONSE_MATCH_LENGTH)) || b.includes(a.slice(0, RESPONSE_MATCH_LENGTH))
+  )
 }
 
 /** 找出歷史中最後一則 assistant 訊息 */
@@ -71,8 +91,7 @@ export async function findPreviousTurnSources(
   if (!userId) return []
   const lastAssistant = lastAssistantMessage(recentHistory)
   if (!lastAssistant) return []
-  const target = normalizeForMatch(lastAssistant.content)
-  if (target.length < 8) return []
+  if (normalizeForMatch(lastAssistant.content).length < 8) return []
 
   try {
     const rows = await db
@@ -85,7 +104,7 @@ export async function findPreviousTurnSources(
       .all<{ response: string; sources: string }>()
 
     for (const row of rows.results ?? []) {
-      if (normalizeForMatch(row.response ?? '') !== target) continue
+      if (!isSameResponse(row.response ?? '', lastAssistant.content)) continue
       const parsed = JSON.parse(row.sources) as AISource[]
       if (!Array.isArray(parsed)) return []
       return parsed
@@ -164,7 +183,7 @@ const REWRITE_PROMPT = `你是攀岩問答系統的查詢改寫助手。使用�
 規則：
 - 把「這些」「其中」「那條」等指代詞換成具體的路線名稱或岩場名稱
 - 保留使用者原本的意圖與條件（難度、地點、類型），不要加入新的條件
-- 只輸出改寫後的問題本身，一行，繁體中文，不要解釋、不要加引號
+- 只輸出改寫後的問題本身，一行，使用{language}，不要解釋、不要加引號
 
 對話歷史：
 {history}
@@ -183,6 +202,14 @@ export interface RewriteFollowUpParams {
   langfuseParent?: LangfuseParent | null
   /** assistant 訊息帶入 prompt 的截斷長度 */
   assistantTruncate?: number
+  /** 使用者介面語言，決定改寫輸出語言；預設 zh */
+  locale?: AiLocale
+}
+
+const REWRITE_LANGUAGE: Record<AiLocale, string> = {
+  zh: '繁體中文',
+  en: 'English',
+  ja: '日本語',
 }
 
 export interface RewriteFollowUpResult {
@@ -226,9 +253,11 @@ export async function rewriteFollowUpQuery(
     previousSources.length > 0
       ? `\n上一輪回答的參考路線：${previousSources.map((s) => s.title).join('、')}\n`
       : ''
-  const prompt = REWRITE_PROMPT.replace('{history}', historyText)
-    .replace('{previous_sources}', sourcesText)
-    .replace('{query}', query)
+  // 用函式形式替換，避免內容含 $& / $' 等樣式被 String.replace 展開
+  const prompt = REWRITE_PROMPT.replace('{history}', () => historyText)
+    .replace('{previous_sources}', () => sourcesText)
+    .replace('{language}', () => REWRITE_LANGUAGE[params.locale ?? 'zh'])
+    .replace('{query}', () => query)
 
   try {
     // 與 llm-generation 相同：model 為執行期字串，繞過 Workers AI 的 model 字面型別

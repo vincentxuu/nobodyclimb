@@ -509,6 +509,10 @@ export interface PipelineContext {
   recentHistory: AIChatMessage[]
   /** 追問時帶入的上一輪來源完整文件（放在檢索結果前面） */
   carryOverContext?: string | null
+  /** 追問時上一輪的來源清單；回答有提到的會併入 sources */
+  carryOverSources?: AISource[]
+  /** 追問改寫後的獨立問題，只給檢索用（embedding / BM25 / HyDE / filter）；生成、judge、log 仍用 request.query */
+  retrievalQuery?: string | null
   isAnonymousNoHistory: boolean
   earlyQueryVector: number[] | null
 

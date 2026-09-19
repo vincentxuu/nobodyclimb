@@ -27,7 +27,7 @@ export const multiQueryStep: PipelineStep = {
     const llmModel = pipelineConfig.llm_model
 
     const multiQueryResult = await ctx.queryService.generateMultipleQueries(
-      request.query,
+      ctx.retrievalQuery ?? request.query,
       pipelineConfig.multi_query_count,
       llmModel,
       gatewayOptions,

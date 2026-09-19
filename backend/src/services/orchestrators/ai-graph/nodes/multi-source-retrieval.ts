@@ -9,7 +9,7 @@ export async function multiSourceRetrievalNode(state: GraphState): Promise<Parti
   })
   try {
     const { request, pipelineConfig, queryService } = state
-    const { query } = request
+    const query = state.retrievalQuery ?? request.query
     const plan = state.multiToolPlan
     const multiToolStart = Date.now()
 

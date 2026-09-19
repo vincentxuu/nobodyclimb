@@ -1,3 +1,4 @@
+import type { AISource } from '../../../types'
 /**
  * 解析 LLM 回應中的建議問題，回傳純回答與建議陣列。
  * 支援兩種格式：
@@ -62,4 +63,24 @@ export function parseSuggestedQuestions(raw: string): {
     return { answer: answer || raw.trim(), suggested_questions: questions.slice(0, 3) }
   }
   return { answer: raw.trim(), suggested_questions: [] }
+}
+
+/**
+ * 追問時把「回答有提到」的上一輪來源併入本輪 sources（放前面，依 id 去重）。
+ * 前端來源卡片、injectRouteLinks、以及下一輪追問的來源鏈（findPreviousTurnSources）都靠這個。
+ */
+export function mergeCarryOverSources(
+  answer: string,
+  carryOver: AISource[] | undefined,
+  retrieved: AISource[] | undefined
+): AISource[] {
+  const mentioned = (carryOver ?? []).filter((s) => s.title && answer.includes(s.title))
+  const seen = new Set<string>()
+  const merged: AISource[] = []
+  for (const s of [...mentioned, ...(retrieved ?? [])]) {
+    if (seen.has(s.id)) continue
+    seen.add(s.id)
+    merged.push(s)
+  }
+  return merged
 }

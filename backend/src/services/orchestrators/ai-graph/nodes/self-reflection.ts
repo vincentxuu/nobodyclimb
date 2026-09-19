@@ -98,7 +98,8 @@ export async function selfReflectionNode(state: GraphState): Promise<Partial<Gra
         {
           model: pipelineConfig.lightweight_model,
           timeoutMs: pipelineConfig.judge_timeout_ms,
-          contextTruncate: pipelineConfig.judge_context_truncate,
+          contextTruncate:
+            pipelineConfig.judge_context_truncate + (state.carryOverContext?.length ?? 0),
           promptTemplate: prompts['JUDGE_PROMPT'],
         }
       )

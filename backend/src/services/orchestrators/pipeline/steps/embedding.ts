@@ -30,7 +30,7 @@ export const embeddingStep: PipelineStep = {
 
     const embeddingService = new EmbeddingService(ctx.env)
     const { request, earlyQueryVector, hydeDoc, expandedQueries, trace } = ctx
-    const { query } = request
+    const query = ctx.retrievalQuery ?? request.query
 
     const embedStart = Date.now()
 

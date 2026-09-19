@@ -168,6 +168,8 @@ export class PipelineEngine {
       'cacheKey',
       'recentHistory',
       'carryOverContext',
+      'carryOverSources',
+      'retrievalQuery',
       'isAnonymousNoHistory',
       'earlyQueryVector',
       'memorySummary',
@@ -780,7 +782,8 @@ export class PipelineEngine {
               {
                 model: pipelineConfig.lightweight_model,
                 timeoutMs: pipelineConfig.judge_timeout_ms,
-                contextTruncate: pipelineConfig.judge_context_truncate,
+                contextTruncate:
+                  pipelineConfig.judge_context_truncate + (ctx.carryOverContext?.length ?? 0),
                 promptTemplate: ctx.prompts['JUDGE_PROMPT'],
               }
             )

@@ -1,4 +1,4 @@
-import { AIAskRequest, AIChatMessage, Env } from '../../../types'
+import { AIAskRequest, AIChatMessage, AISource, Env } from '../../../types'
 import { CircuitBreaker } from '../../../utils/circuit-breaker'
 import {
   PipelineConfig,
@@ -18,6 +18,8 @@ export function createPipelineContext(opts: {
   cacheKey: string
   recentHistory: AIChatMessage[]
   carryOverContext?: string | null
+  carryOverSources?: AISource[]
+  retrievalQuery?: string | null
   isAnonymousNoHistory: boolean
   earlyQueryVector: number[] | null
   memorySummary: string | null
@@ -48,6 +50,8 @@ export function createPipelineContext(opts: {
     cacheTtl: opts.pipelineConfig.cache_ttl,
     recentHistory: opts.recentHistory,
     carryOverContext: opts.carryOverContext ?? null,
+    carryOverSources: opts.carryOverSources ?? [],
+    retrievalQuery: opts.retrievalQuery ?? null,
     isAnonymousNoHistory: opts.isAnonymousNoHistory,
     earlyQueryVector: opts.earlyQueryVector,
 

@@ -13,7 +13,7 @@ export async function toolSelectionNode(state: GraphState): Promise<Partial<Grap
   })
   try {
     const { env, request, pipelineConfig, prompts, gatewayOptions, tokenBreakdown, trace } = state
-    const { query } = request
+    const query = state.retrievalQuery ?? request.query
     const llmModel = pipelineConfig.llm_model
 
     // --- Graph 獨有：sim-route intent（多條路線版） ---

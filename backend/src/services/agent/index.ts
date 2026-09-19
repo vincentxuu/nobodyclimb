@@ -275,7 +275,10 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   // 0.8 Skill-based routing — SkillResolver 取代 manifest + detectDirectRoute
   const skillResolver = new SkillResolver()
   await skillResolver.load(env.DB, userId)
-  const directSkill = skillResolver.findDirectRoute(query, !!userId)
+  // 追問帶著上一輪來源時不走 direct route：sub-agent 收不到 carry-over，指代會沒有對象
+  const directSkill = params.carryOverContext
+    ? null
+    : skillResolver.findDirectRoute(query, !!userId)
 
   if (directSkill && userId) {
     try {

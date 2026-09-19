@@ -17,7 +17,10 @@ export async function lexicalFallbackNode(state: GraphState): Promise<Partial<Gr
     const minScore = hasFilter
       ? pipelineConfig.min_rrf_score_filtered
       : pipelineConfig.min_rrf_score
-    const bm25Matches = await queryService.searchBM25(request.query, pipelineConfig.bm25_top_k)
+    const bm25Matches = await queryService.searchBM25(
+      state.retrievalQuery ?? request.query,
+      pipelineConfig.bm25_top_k
+    )
     const candidateMatches = bm25Matches.filter((m) => m.score >= minScore)
     const retrievalScore = bm25Matches.length > 0 ? Math.max(...bm25Matches.map((m) => m.score)) : 0
 

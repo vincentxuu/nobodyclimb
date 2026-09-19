@@ -34,7 +34,7 @@ export const filterBuildStep: PipelineStep = {
         extractRouteReference: (text: string) => queryService.extractRouteReference(text),
       },
       {
-        query: ctx.request.query,
+        query: ctx.retrievalQuery ?? ctx.request.query,
         existingFilter: ctx.vectorFilter,
         parsedQuery: ctx.parsedQuery as Record<string, unknown> | null | undefined,
         queryType: ctx.queryType,

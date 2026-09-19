@@ -3,7 +3,7 @@ import { logGeneration } from '../../../../utils/langfuse'
 import { extractMemoriesFromQuery } from '../../../domain/memory'
 import { buildPersonalizedSystemPrompt } from '../../../domain/personalization'
 import { LLMResponse, PipelineContext, PipelineStep } from '../types'
-import { parseSuggestedQuestions } from '../utils'
+import { mergeCarryOverSources, parseSuggestedQuestions } from '../utils'
 
 // 相容 Workers AI 標準格式（response）與 OpenAI chat completions 格式（choices[0].message.content）
 function extractLLMResponse(result: unknown): string {
@@ -185,9 +185,13 @@ export const llmGenerationStep: PipelineStep = {
         ? ctx.sqlContext
         : (ctx.context ?? '目前沒有找到相關資料。')
     // 追問時把上一輪來源的完整文件放在檢索結果前面，讓「這些路線」有東西可指
-    const context = ctx.carryOverContext
-      ? `${ctx.carryOverContext}\n\n---\n\n${retrievedContext}`
-      : retrievedContext
+    // self-reflection loopBack 重跑時 ctx.context 可能已含該區塊，用 startsWith 避免重複 prepend
+    const context =
+      ctx.carryOverContext && !retrievedContext.startsWith(ctx.carryOverContext)
+        ? `${ctx.carryOverContext}\n\n---\n\n${retrievedContext}`
+        : retrievedContext
+    // 寫回 ctx.context，否則 judge / self-reflection 只拿檢索結果評分，會把引用上一輪路線的回答判為 ungrounded
+    if (ctx.carryOverContext) ctx.context = context
     const prompt = prompts['QUERY_TEMPLATE'].replace('{context}', context).replace('{query}', query)
 
     const recentHistory = ctx.recentHistory
@@ -296,7 +300,10 @@ export const llmGenerationStep: PipelineStep = {
       parsedAnswer.includes('無法提供任何推薦或建議')
 
     ctx.cannotAnswer = cannotAnswer
-    const finalSources = cannotAnswer ? [] : (ctx.sources ?? [])
+    // 回答有提到的上一輪路線併入 sources：來源卡片、連結注入、下一輪追問的來源鏈都靠它
+    const finalSources = cannotAnswer
+      ? []
+      : mergeCarryOverSources(parsedAnswer, ctx.carryOverSources, ctx.sources)
     ctx.sources = finalSources
 
     // 注入路線連結

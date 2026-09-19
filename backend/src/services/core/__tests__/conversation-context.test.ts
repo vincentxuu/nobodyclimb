@@ -5,6 +5,7 @@ import {
   buildCarryOverSummary,
   findPreviousTurnSources,
   isFollowUpQuery,
+  isSameResponse,
   loadCarryOverDocuments,
   normalizeForMatch,
   rewriteFollowUpQuery,
@@ -80,6 +81,10 @@ describe('isFollowUpQuery', () => {
 
   it('獨立問題不是追問', () => {
     expect(isFollowUpQuery('龍洞有哪些 5.11 的運攀路線？', history)).toBe(false)
+    // 「以上」是難度條件、bare 的「哪個」「這個」沒有指代對象
+    expect(isFollowUpQuery('推薦 5.11 以上的運攀路線', history)).toBe(false)
+    expect(isFollowUpQuery('哪個岩場適合新手？', history)).toBe(false)
+    expect(isFollowUpQuery('這個週末龍洞天氣如何', history)).toBe(false)
   })
 })
 
@@ -92,6 +97,22 @@ describe('normalizeForMatch', () => {
 
   it('簡繁差異不影響比對', () => {
     expect(normalizeForMatch('根据你的攀岩经验')).toBe(normalizeForMatch('根據你的攀岩經驗'))
+  })
+})
+
+describe('isSameResponse', () => {
+  const body = '根據你的攀岩經驗和剃刀邊緣的難度，推薦以下路線：熱身路線、好痛、表皮摩擦力'
+
+  it('log 端多了 judge 免責前綴仍視為同一則', () => {
+    expect(isSameResponse(`⚠️ 部分資訊來自推斷，建議實地確認\n\n${body}`, body)).toBe(true)
+  })
+
+  it('前端端保留串流的 SUGGESTIONS 尾段仍視為同一則', () => {
+    expect(isSameResponse(body, `${body}\n---SUGGESTIONS---\n1. 這些路線有影片嗎？`)).toBe(true)
+  })
+
+  it('不同回答不會誤配', () => {
+    expect(isSameResponse('龍洞校門口有以下幾條入門路線可以參考看看', body)).toBe(false)
   })
 })
 
@@ -212,6 +233,22 @@ describe('rewriteFollowUpQuery', () => {
     // prompt 應帶入上一輪的路線名稱，模型才有東西可代換
     const prompt = (run.mock.calls[0] as unknown[])[1] as { messages: Array<{ content: string }> }
     expect(prompt.messages[0].content).toContain('熱身路線、好痛')
+    expect(prompt.messages[0].content).toContain('使用繁體中文')
+  })
+
+  it('依 locale 指定改寫輸出語言，且 query 含 $ 樣式不會被展開', async () => {
+    const run = vi.fn(async () => ({ response: 'Which of 熱身路線 or 好痛 has a view?' }))
+    await rewriteFollowUpQuery({
+      env: envWith(run),
+      query: "which of these has a view? $& $'",
+      recentHistory: history,
+      previousSources: sources.slice(0, 2),
+      model: 'test-model',
+      locale: 'en',
+    })
+    const prompt = (run.mock.calls[0] as unknown[])[1] as { messages: Array<{ content: string }> }
+    expect(prompt.messages[0].content).toContain('使用English')
+    expect(prompt.messages[0].content).toContain("$& $'")
   })
 
   it('模型失敗時回傳 null，不拋錯', async () => {

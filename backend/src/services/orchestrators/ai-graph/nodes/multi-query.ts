@@ -16,7 +16,7 @@ export async function multiQueryNode(state: GraphState): Promise<Partial<GraphSt
     const llmModel = pipelineConfig.llm_model
 
     const multiQueryResult = await queryService.generateMultipleQueries(
-      request.query,
+      state.retrievalQuery ?? request.query,
       pipelineConfig.multi_query_count,
       llmModel,
       gatewayOptions,

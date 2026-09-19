@@ -189,13 +189,19 @@ export class QueryService {
 
     const isAnonymousNoHistory = !userId && recentHistory.length === 0 && !no_cache
 
-    // 批次讀取 pipeline 設定 + 提前 embed query + prompts
-    const [pipelineCfg, earlyQueryVector, dbPrompts] = await Promise.all([
+    // 追問偵測：有對話歷史且 query 含指代詞（這些／其中／哪一條…）
+    const isFollowUp = isFollowUpQuery(query, recentHistory)
+
+    // 批次讀取 pipeline 設定 + 提前 embed query + prompts + 追問時找回上一輪來源
+    const [pipelineCfg, earlyQueryVector, dbPrompts, previousSources] = await Promise.all([
       loadPipelineConfig(this.env.DB),
       isAnonymousNoHistory
         ? this.embeddingService.embed(query)
         : Promise.resolve(null as number[] | null),
       loadPrompts(this.env.DB),
+      isFollowUp
+        ? findPreviousTurnSources(this.env.DB, userId, recentHistory)
+        : Promise.resolve([] as AISource[]),
     ])
 
     const p = {
@@ -301,16 +307,13 @@ export class QueryService {
       }
     }
 
-    // 追問支援：找回上一輪來源 + 把追問改寫成獨立問題
-    // 「這些路線哪一條看得到風景」單獨拿去檢索只會撈到描述含「風景」的路線，
-    // 這裡把上一輪 sources 的完整文件帶進 context，並讓檢索用改寫後的獨立問題
-    const isFollowUp = isFollowUpQuery(query, recentHistory)
-    let previousSources: AISource[] = []
+    // 追問支援：上一輪來源的完整文件帶進 context + 把追問改寫成獨立問題供檢索
+    // 「這些路線哪一條看得到風景」單獨拿去檢索只會撈到描述含「風景」的路線。
+    // 改寫結果只給檢索用（retrievalQuery）；生成、judge、log 仍用使用者原句
     let carryOverContext: string | null = null
-    let effectiveRequest = request
+    let retrievalQuery: string | null = null
     let followupTrace: Record<string, unknown> | undefined
     if (isFollowUp) {
-      previousSources = await findPreviousTurnSources(this.env.DB, userId, recentHistory)
       const [carryDocs, rewrite] = await Promise.all([
         loadCarryOverDocuments(this.env.DB, previousSources),
         // agent 模式的 LLM 自己拿著完整歷史決定工具參數，不需要改寫
@@ -324,15 +327,15 @@ export class QueryService {
               gatewayOptions,
               langfuseParent: langfuseTrace,
               assistantTruncate: pipelineCfg.assistant_history_truncate,
+              locale: request.locale,
             })
           : Promise.resolve(null),
       ])
       carryOverContext = buildCarryOverContext(carryDocs)
-      if (rewrite) {
-        effectiveRequest = { ...request, query: rewrite.rewritten }
-      }
+      retrievalQuery = rewrite?.rewritten ?? null
       followupTrace = {
         detected: true,
+        matched_log: previousSources.length > 0,
         previous_source_count: previousSources.length,
         carry_over_doc_count: carryDocs.length,
         rewritten_query: rewrite?.rewritten ?? null,
@@ -343,7 +346,7 @@ export class QueryService {
     const pipelineCtx = createPipelineContext({
       env: this.env,
       queryService: this,
-      request: effectiveRequest,
+      request,
       userId,
       pipelineConfig: pipelineCfg,
       prompts: p,
@@ -351,6 +354,8 @@ export class QueryService {
       cacheKey,
       recentHistory,
       carryOverContext,
+      carryOverSources: previousSources,
+      retrievalQuery,
       isAnonymousNoHistory,
       earlyQueryVector,
       memorySummary,
