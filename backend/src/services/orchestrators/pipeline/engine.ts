@@ -167,6 +167,7 @@ export class PipelineEngine {
       'startTime',
       'cacheKey',
       'recentHistory',
+      'carryOverContext',
       'isAnonymousNoHistory',
       'earlyQueryVector',
       'memorySummary',

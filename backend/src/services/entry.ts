@@ -37,6 +37,14 @@ import {
 } from './core/cache-log'
 import { DEFAULT_TOP_K, loadPipelineConfig, loadPrompts, resolvePrompt } from './core/config'
 import {
+  buildCarryOverContext,
+  buildCarryOverSummary,
+  findPreviousTurnSources,
+  isFollowUpQuery,
+  loadCarryOverDocuments,
+  rewriteFollowUpQuery,
+} from './core/conversation-context'
+import {
   buildExcerpt,
   buildUrl,
   extractTitle,
@@ -293,16 +301,56 @@ export class QueryService {
       }
     }
 
+    // 追問支援：找回上一輪來源 + 把追問改寫成獨立問題
+    // 「這些路線哪一條看得到風景」單獨拿去檢索只會撈到描述含「風景」的路線，
+    // 這裡把上一輪 sources 的完整文件帶進 context，並讓檢索用改寫後的獨立問題
+    const isFollowUp = isFollowUpQuery(query, recentHistory)
+    let previousSources: AISource[] = []
+    let carryOverContext: string | null = null
+    let effectiveRequest = request
+    let followupTrace: Record<string, unknown> | undefined
+    if (isFollowUp) {
+      previousSources = await findPreviousTurnSources(this.env.DB, userId, recentHistory)
+      const [carryDocs, rewrite] = await Promise.all([
+        loadCarryOverDocuments(this.env.DB, previousSources),
+        // agent 模式的 LLM 自己拿著完整歷史決定工具參數，不需要改寫
+        pipelineCfg.followup_rewrite_enabled && pipelineCfg.ai_mode !== 'agent'
+          ? rewriteFollowUpQuery({
+              env: this.env,
+              query,
+              recentHistory,
+              previousSources,
+              model: pipelineCfg.lightweight_model,
+              gatewayOptions,
+              langfuseParent: langfuseTrace,
+              assistantTruncate: pipelineCfg.assistant_history_truncate,
+            })
+          : Promise.resolve(null),
+      ])
+      carryOverContext = buildCarryOverContext(carryDocs)
+      if (rewrite) {
+        effectiveRequest = { ...request, query: rewrite.rewritten }
+      }
+      followupTrace = {
+        detected: true,
+        previous_source_count: previousSources.length,
+        carry_over_doc_count: carryDocs.length,
+        rewritten_query: rewrite?.rewritten ?? null,
+        rewrite_usage: rewrite?.usage ?? null,
+      }
+    }
+
     const pipelineCtx = createPipelineContext({
       env: this.env,
       queryService: this,
-      request,
+      request: effectiveRequest,
       userId,
       pipelineConfig: pipelineCfg,
       prompts: p,
       gatewayOptions,
       cacheKey,
       recentHistory,
+      carryOverContext,
       isAnonymousNoHistory,
       earlyQueryVector,
       memorySummary,
@@ -318,6 +366,17 @@ export class QueryService {
       langfuseTrace,
     })
 
+    if (followupTrace) {
+      pipelineCtx.trace.followup = followupTrace
+      const rewriteUsage = followupTrace.rewrite_usage as StageTokenUsage | null
+      if (rewriteUsage) {
+        pipelineCtx.tokenBreakdown.followup_rewrite = {
+          ...rewriteUsage,
+          model: pipelineCfg.lightweight_model,
+        }
+      }
+    }
+
     this.setPipelineCtx(pipelineCtx)
 
     try {
@@ -332,6 +391,7 @@ export class QueryService {
                 role: h.role as 'user' | 'assistant',
                 content: h.content,
               })),
+              carryOverContext: buildCarryOverSummary(previousSources),
               userId: userId ?? null,
               env: this.env,
               locale: request.locale,
@@ -346,7 +406,7 @@ export class QueryService {
           )
           // 寫入 query log
           const reactSources: AISource[] = reactResult.sources.map((s, i) => ({
-            id: `react-${i}`,
+            id: s.id || `react-${i}`,
             type: s.type === 'crag' ? ('crag' as const) : ('route' as const),
             title: s.title,
             url: s.url,
@@ -365,6 +425,7 @@ export class QueryService {
             modelUsed: 'agent',
             pipelineTrace: JSON.stringify({
               strategy: 'agent',
+              followup: followupTrace ?? null,
               turn_count: reactResult.turnCount,
               tool_call_count: reactResult.toolCallCount,
               per_model_stats: reactResult.perModelStats,

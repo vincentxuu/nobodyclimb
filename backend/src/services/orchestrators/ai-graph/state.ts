@@ -32,6 +32,7 @@ export const GraphStateAnnotation = Annotation.Root({
   cacheKey: Annotation<string>(),
   cacheTtl: Annotation<number>(),
   recentHistory: Annotation<PipelineContext['recentHistory']>(),
+  carryOverContext: Annotation<string | null | undefined>(),
   isAnonymousNoHistory: Annotation<boolean>(),
   earlyQueryVector: Annotation<number[] | null>(),
 

@@ -210,6 +210,8 @@ export interface AgentTurnTrace {
 export interface AgentResult {
   answer: string
   sources: Array<{
+    /** route / crag 的真實 id，供下一輪追問找回文件 */
+    id?: string
     title: string
     url: string
     excerpt?: string

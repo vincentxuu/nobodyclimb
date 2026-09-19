@@ -197,6 +197,8 @@ function buildLanguageDirective(locale: AiLocale): string {
 export interface RunAgentParams {
   query: string
   chatHistory?: Array<{ role: 'user' | 'assistant'; content: string }>
+  /** 追問時上一輪回答的來源清單（精簡版），放進 system prompt 讓指代有對象 */
+  carryOverContext?: string | null
   userId: string | null
   env: Env
   /** 使用者介面語言（zh / en / ja），決定回答語言；預設 zh */
@@ -359,6 +361,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
           sources: gathered.sources
             .filter((s) => s.url)
             .map((s) => ({
+              id: s.id,
               title: s.title,
               url: s.url as string,
               excerpt: s.excerpt,
@@ -444,7 +447,12 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     buildAgentBasePrompt(toolsSection, capabilitySection)
   )
   const proactiveSection = buildProactivePromptSection(proactiveCtx)
-  const systemPrompt = [baseSystemPrompt, proactiveSection, languageDirective]
+  const systemPrompt = [
+    baseSystemPrompt,
+    proactiveSection,
+    params.carryOverContext ?? null,
+    languageDirective,
+  ]
     .filter(Boolean)
     .join('\n\n')
 
@@ -509,6 +517,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     sources: result.sources
       .filter((s) => s.url)
       .map((s) => ({
+        id: s.id,
         title: s.title,
         url: s.url as string,
         excerpt: s.excerpt,

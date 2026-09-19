@@ -17,6 +17,7 @@ export function createPipelineContext(opts: {
   gatewayOptions?: { gateway: { id: string } }
   cacheKey: string
   recentHistory: AIChatMessage[]
+  carryOverContext?: string | null
   isAnonymousNoHistory: boolean
   earlyQueryVector: number[] | null
   memorySummary: string | null
@@ -46,6 +47,7 @@ export function createPipelineContext(opts: {
     cacheKey: opts.cacheKey,
     cacheTtl: opts.pipelineConfig.cache_ttl,
     recentHistory: opts.recentHistory,
+    carryOverContext: opts.carryOverContext ?? null,
     isAnonymousNoHistory: opts.isAnonymousNoHistory,
     earlyQueryVector: opts.earlyQueryVector,
 

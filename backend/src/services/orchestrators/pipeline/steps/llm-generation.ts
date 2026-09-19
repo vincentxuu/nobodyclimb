@@ -180,10 +180,14 @@ export const llmGenerationStep: PipelineStep = {
     }
 
     // RAG 路徑（含 hybrid 分支）
-    const context =
+    const retrievedContext =
       ctx.queryType === 'hybrid' && ctx.sqlContext
         ? ctx.sqlContext
         : (ctx.context ?? '目前沒有找到相關資料。')
+    // 追問時把上一輪來源的完整文件放在檢索結果前面，讓「這些路線」有東西可指
+    const context = ctx.carryOverContext
+      ? `${ctx.carryOverContext}\n\n---\n\n${retrievedContext}`
+      : retrievedContext
     const prompt = prompts['QUERY_TEMPLATE'].replace('{context}', context).replace('{query}', query)
 
     const recentHistory = ctx.recentHistory

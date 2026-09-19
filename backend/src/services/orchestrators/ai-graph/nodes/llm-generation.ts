@@ -136,10 +136,14 @@ export async function llmGenerationNode(state: GraphState): Promise<Partial<Grap
     }
 
     // RAG 路徑（含 hybrid 分支）
-    const context =
+    const retrievedContext =
       state.queryType === 'hybrid' && state.sqlContext
         ? state.sqlContext
         : (state.context ?? '目前沒有找到相關資料。')
+    // 追問時把上一輪來源的完整文件放在檢索結果前面，讓「這些路線」有東西可指
+    const context = state.carryOverContext
+      ? `${state.carryOverContext}\n\n---\n\n${retrievedContext}`
+      : retrievedContext
     const prompt = prompts['QUERY_TEMPLATE'].replace('{context}', context).replace('{query}', query)
 
     const recentHistory = state.recentHistory
