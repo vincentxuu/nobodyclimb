@@ -1,7 +1,7 @@
 import { loadPipelineConfig } from '../../core/config'
 import { buildExcerpt, buildUrl, extractTitle } from '../../core/documents'
 import { EmbeddingService } from '../../core/embedding'
-import { extractGradeFilter, extractTypeFilter } from '../../core/nlp'
+import { extractGradeFilter } from '../../core/nlp'
 import { hybridSearch } from '../../tools/hybrid-search'
 import type { Tool, ToolContext, ToolResult } from '../types'
 import { isSmallModel } from '../types'
@@ -59,11 +59,13 @@ export const searchRoutesTool: Tool = {
       if (cragRow) vectorFilter['crag_id'] = { $eq: cragRow.id }
     }
 
-    // NLP 提取難度和類型篩選
+    // NLP 提取難度篩選
+    // 注意：不可把 extractTypeFilter() 的結果塞進 route_type。它回傳的是「文件類型」
+    // （'crag' | 'route'），而 route_type 的值是 sport / trad / boulder / mixed；
+    // 誤用會讓含「路線」「5.」的查詢變成 route_type = 'route'，向量搜尋永遠 0 筆。
+    // 文件類型已由上方 type = 'route' 限定。
     const gradeFilter = extractGradeFilter(query)
     if (gradeFilter) vectorFilter['grade_numeric'] = gradeFilter
-    const typeFilter = extractTypeFilter(query)
-    if (typeFilter) vectorFilter['route_type'] = { $eq: typeFilter }
 
     // Embed query
     const embeddingService = new EmbeddingService(ctx.env)

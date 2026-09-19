@@ -4,6 +4,7 @@ import {
   Check,
   Copy,
   ExternalLink,
+  Loader2,
   MountainSnow,
   RefreshCw,
   ThumbsDown,
@@ -301,6 +302,9 @@ export function ChatMessage({
 
   const isUser = message.role === 'user'
   const hasToolProgress = !!message.toolProgress && message.toolProgress.length > 0
+  // 工具執行中由 ToolActivity 的摺疊列負責 loading；其餘等待時間（呼叫工具前、工具完成到第一個 token）顯示思考中
+  const isToolRunning = !!message.toolProgress?.some((p) => p.status === 'executing')
+  const showThinking = !isUser && !!message.isStreaming && !message.content && !isToolRunning
 
   // 非串流的空訊息不渲染，避免空白氣泡（串流中改顯示思考中 / 工具過程）
   if (!isUser && !message.content && !message.isStreaming && !hasToolProgress) return null
@@ -332,8 +336,9 @@ export function ChatMessage({
         )}
 
         {/* 串流中尚無內容：思考中提示 */}
-        {!isUser && message.isStreaming && !message.content && (
-          <p className="pl-1 text-sm text-muted-foreground">
+        {showThinking && (
+          <p className="flex items-center gap-1.5 pl-1 text-sm text-muted-foreground">
+            <Loader2 className="size-3.5 shrink-0 animate-spin" />
             <span className="text-shimmer">{t('thinking')}</span>
           </p>
         )}

@@ -1,7 +1,7 @@
 'use client'
 
 import type { RankId } from '@nobodyclimb/types'
-import { ArrowLeft, Bot, Check, Copy, User } from 'lucide-react'
+import { ArrowLeft, Bot, Check, Copy, Loader2, User } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -359,12 +359,15 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
             {message.content && <MessageResponse>{message.content}</MessageResponse>}
 
             {/* Streaming indicator */}
-            {message.isStreaming && !message.content && (
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <span className="shimmer inline-block h-4 w-4 rounded-full" />
-                {t('thinking')}
-              </div>
-            )}
+            {/* 工具執行中由 ToolActivity 摺疊列負責 loading，其餘等待時間顯示思考中 */}
+            {message.isStreaming &&
+              !message.content &&
+              !message.toolProgress?.some((p) => p.status === 'executing') && (
+                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <Loader2 className="size-3.5 shrink-0 animate-spin" />
+                  <span className="text-shimmer">{t('thinking')}</span>
+                </div>
+              )}
 
             {/* Sources */}
             {message.sources && message.sources.length > 0 && (
