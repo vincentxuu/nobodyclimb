@@ -3,14 +3,8 @@
 import type { RankId } from '@nobodyclimb/types'
 import { ArrowLeft, Bot, Check, Copy, User } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import {
-  ChainOfThought,
-  ChainOfThoughtContent,
-  ChainOfThoughtHeader,
-  ChainOfThoughtSearchResult,
-  ChainOfThoughtSearchResults,
-} from '@/components/ai-elements/chain-of-thought'
 import {
   Message,
   MessageAction,
@@ -28,16 +22,18 @@ import {
 } from '@/components/ai-elements/prompt-input'
 import { Source, Sources, SourcesContent, SourcesTrigger } from '@/components/ai-elements/sources'
 import { Suggestion, Suggestions } from '@/components/ai-elements/suggestion'
-import { Tool, ToolContent, ToolHeader, ToolInput } from '@/components/ai-elements/tool'
+import { ToolActivity } from '@/components/ai-elements/tool-activity'
 import { RankBadge } from '@/components/rank/RankBadge'
+import { Link } from '@/i18n/navigation'
 import type {
   AIChatHistoryMessage,
   AISource,
   AIStreamDoneEvent,
   AIStreamProgressEvent,
+  AiLocale,
 } from '@/lib/api/ai'
 import { askAIStream, useMyQuota } from '@/lib/api/ai'
-import { mergeToolProgress } from '@/lib/chat/tool-progress'
+import { upsertToolProgress } from '@/lib/chat/tool-progress'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/authStore'
 
@@ -55,24 +51,9 @@ interface ChatMessage {
   toolProgress?: AIStreamProgressEvent[]
 }
 
-// =============================================
-// Suggestion Pool
-// =============================================
-
-const SUGGESTION_POOL = [
-  '推薦 3 條龍洞 5.10 的經典路線',
-  '我剛完攀剃刀邊緣 5.10c，推薦類似難度的路線',
-  '壽山有什麼 5.9 到 5.10 適合練習的路線？',
-  '我想突破 5.11，需要加強什麼？',
-  '根據我的攀登記錄，建議我練什麼？',
-  '推薦 3 條墾丁 5.10 的路線',
-  '我爬了白龍夢和白鯨記，推薦我龍洞下一條',
-  '推薦一個針對攀岩的訓練計畫',
-]
-
-function getRandomSuggestions(count: number): string[] {
-  const shuffled = [...SUGGESTION_POOL].sort(() => Math.random() - 0.5)
-  return shuffled.slice(0, count)
+// 建議問題題庫放在 messages 的 Chat.suggestionPool（依語言切換）
+function pickRandomSuggestions(pool: string[], count: number): string[] {
+  return [...pool].sort(() => Math.random() - 0.5).slice(0, count)
 }
 
 // =============================================
@@ -80,12 +61,16 @@ function getRandomSuggestions(count: number): string[] {
 // =============================================
 
 export function ChatClient() {
+  const t = useTranslations('Chat')
+  const locale = useLocale() as AiLocale
   const router = useRouter()
   const { isAuthenticated } = useAuthStore()
   const { data: quota } = useMyQuota({ enabled: isAuthenticated })
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const [suggestions, setSuggestions] = useState<string[]>(() => getRandomSuggestions(3))
+  const [suggestions, setSuggestions] = useState<string[]>(() =>
+    pickRandomSuggestions(t.raw('suggestionPool') as string[], 3)
+  )
   const scrollRef = useRef<HTMLDivElement>(null)
   const abortRef = useRef<AbortController | null>(null)
 
@@ -134,7 +119,7 @@ export function ChatClient() {
       const chatHistory = buildChatHistory()
 
       await askAIStream(
-        { query: query.trim(), chat_history: chatHistory, include_sources: true },
+        { query: query.trim(), chat_history: chatHistory, include_sources: true, locale },
         (token) => {
           setMessages((prev) =>
             prev.map((m) => (m.id === assistantMsg.id ? { ...m, content: m.content + token } : m))
@@ -161,26 +146,20 @@ export function ChatClient() {
           setMessages((prev) =>
             prev.map((m) =>
               m.id === assistantMsg.id
-                ? { ...m, content: errMsg || '抱歉，AI 服務暫時無法使用。', isStreaming: false }
+                ? { ...m, content: errMsg || t('serviceUnavailable'), isStreaming: false }
                 : m
             )
           )
         },
         controller.signal,
         (progress) => {
+          // 以 invocation id 合併：同名 tool 並行時各自獨立更新
           setMessages((prev) =>
-            prev.map((m) => {
-              if (m.id !== assistantMsg.id) return m
-              // 以 invocation id 合併：同名 tool 並行時各自獨立更新
-              const list = [...(m.toolProgress || [])]
-              const idx = list.findIndex((p) => p.id === progress.id)
-              if (idx >= 0) {
-                list[idx] = { ...list[idx], ...progress, input: progress.input ?? list[idx].input }
-              } else {
-                list.push(progress)
-              }
-              return { ...m, toolProgress: list }
-            })
+            prev.map((m) =>
+              m.id === assistantMsg.id
+                ? { ...m, toolProgress: upsertToolProgress(m.toolProgress, progress) }
+                : m
+            )
           )
         }
       )
@@ -188,7 +167,7 @@ export function ChatClient() {
       setIsLoading(false)
       abortRef.current = null
     },
-    [isLoading, buildChatHistory]
+    [isLoading, buildChatHistory, locale, t]
   )
 
   const handleStop = useCallback(() => {
@@ -222,24 +201,24 @@ export function ChatClient() {
             type="button"
             onClick={() => router.back()}
             className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-            aria-label="返回"
+            aria-label={t('back')}
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
           <div>
             <h1 className="text-sm font-semibold">NobodyClimb AI</h1>
-            <p className="text-xs text-muted-foreground">攀岩助理</p>
+            <p className="text-xs text-muted-foreground">{t('subtitle')}</p>
           </div>
         </div>
         {isAuthenticated && quota && (
           <div className="flex items-center gap-1.5">
             {quota.daily_limit === -1 ? (
-              <span className="text-xs text-muted-foreground">無配額限制</span>
+              <span className="text-xs text-muted-foreground">{t('noQuotaLimit')}</span>
             ) : (
               <>
                 <RankBadge tier={quota.tier as RankId} size="sm" />
                 <span className="text-xs text-muted-foreground">
-                  剩餘 {quota.remaining}/{quota.daily_limit}
+                  {t('remaining', { remaining: quota.remaining, limit: quota.daily_limit })}
                 </span>
               </>
             )}
@@ -275,15 +254,17 @@ export function ChatClient() {
       <div className="border-t px-4 py-3">
         {!isAuthenticated ? (
           <p className="text-center text-sm text-muted-foreground">
-            請先{' '}
-            <a href="/auth/login" className="text-primary underline">
-              登入
-            </a>{' '}
-            使用 AI 攀岩助手
+            {t.rich('loginRequired', {
+              link: (chunks) => (
+                <Link href="/auth/login" className="text-primary underline">
+                  {chunks}
+                </Link>
+              ),
+            })}
           </p>
         ) : (
           <PromptInput onSubmit={handleSubmit}>
-            <PromptInputTextarea placeholder="問我任何攀岩問題..." />
+            <PromptInputTextarea placeholder={t('inputPlaceholderPage')} />
             <PromptInputFooter>
               <PromptInputTools />
               {isLoading ? (
@@ -292,7 +273,7 @@ export function ChatClient() {
                   onClick={handleStop}
                   className="rounded-lg bg-destructive px-3 py-1.5 text-xs text-destructive-foreground"
                 >
-                  停止
+                  {t('stop')}
                 </button>
               ) : (
                 <PromptInputSubmit />
@@ -316,14 +297,15 @@ function EmptyState({
   suggestions: string[]
   onSuggestionClick: (s: string) => void
 }) {
+  const t = useTranslations('Chat')
   return (
     <div className="flex h-full flex-col items-center justify-center gap-6">
       <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-wb-10">
         <Bot className="h-8 w-8 text-wb-70" />
       </div>
       <div className="text-center">
-        <h2 className="text-xl font-semibold text-wb-100">AI 攀岩助手</h2>
-        <p className="mt-1 text-sm text-wb-60">問我路線推薦、訓練建議、或任何攀岩問題</p>
+        <h2 className="text-xl font-semibold text-wb-100">{t('emptyTitle')}</h2>
+        <p className="mt-1 text-sm text-wb-60">{t('emptyDesc')}</p>
       </div>
       <Suggestions>
         {suggestions.map((s) => (
@@ -338,23 +320,8 @@ function EmptyState({
 // Chat Message Item
 // =============================================
 
-// 後端 tool 名稱 → 中文標籤
-const TOOL_LABELS: Record<string, string> = {
-  search_routes: '搜尋路線',
-  search_crags: '搜尋岩場',
-  crag_info: '查詢岩場資訊',
-  sql_query: '查詢資料庫',
-  weather: '查詢天氣',
-  recall_memory: '回憶偏好',
-  user_profile: '讀取攀登紀錄',
-  manage_goals: '查詢目標',
-  recommend: '產生推薦',
-  suggest_training: '產生訓練建議',
-  coaching_agent: '訓練教練',
-  recommend_agent: '推薦助理',
-}
-
 function ChatMessageItem({ message }: { message: ChatMessage }) {
+  const t = useTranslations('Chat')
   const [copied, setCopied] = useState(false)
 
   const handleCopy = useCallback(() => {
@@ -379,51 +346,13 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
         {/* Content */}
         <div className="min-w-0 flex-1">
           <MessageContent>
-            {/* 工具執行過程（Chain of Thought） */}
+            {/* 工具使用過程（仿 Claude 摺疊列，可展開看 Request / Response） */}
             {message.toolProgress && message.toolProgress.length > 0 && (
-              <ChainOfThought defaultOpen={message.isStreaming}>
-                <ChainOfThoughtHeader>
-                  {(() => {
-                    const steps = mergeToolProgress(message.toolProgress ?? [])
-                    const doneCount = steps.filter((s) => s.status === 'done').length
-                    return message.isStreaming
-                      ? `正在查詢…（${doneCount}/${steps.length}）`
-                      : `查詢了 ${steps.length} 個資料來源`
-                  })()}
-                </ChainOfThoughtHeader>
-                <ChainOfThoughtContent>
-                  {mergeToolProgress(message.toolProgress).map((step) => (
-                    <Tool key={step.id} defaultOpen={false}>
-                      <ToolHeader
-                        title={TOOL_LABELS[step.tool] ?? step.tool}
-                        type={`tool-${step.tool}`}
-                        state={step.status === 'done' ? 'output-available' : 'input-available'}
-                      />
-                      {step.input !== undefined && (
-                        <ToolContent>
-                          <ToolInput input={step.input} />
-                        </ToolContent>
-                      )}
-                    </Tool>
-                  ))}
-                  {message.sources && message.sources.length > 0 && (
-                    <ChainOfThoughtSearchResults>
-                      {message.sources.map((source) => (
-                        <a
-                          key={source.id}
-                          href={source.url || '#'}
-                          rel="noreferrer"
-                          target="_blank"
-                        >
-                          <ChainOfThoughtSearchResult title={source.excerpt || source.title}>
-                            {source.title}
-                          </ChainOfThoughtSearchResult>
-                        </a>
-                      ))}
-                    </ChainOfThoughtSearchResults>
-                  )}
-                </ChainOfThoughtContent>
-              </ChainOfThought>
+              <ToolActivity
+                events={message.toolProgress}
+                isStreaming={!!message.isStreaming}
+                className="mb-3"
+              />
             )}
 
             {/* Message Body */}
@@ -433,33 +362,35 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
             {message.isStreaming && !message.content && (
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <span className="shimmer inline-block h-4 w-4 rounded-full" />
-                思考中...
+                {t('thinking')}
               </div>
             )}
 
-            {/* Sources（沒有工具進度時才獨立顯示；有 CoT 時已收進 CoT 內） */}
-            {(!message.toolProgress || message.toolProgress.length === 0) &&
-              message.sources &&
-              message.sources.length > 0 && (
-                <Sources>
-                  <SourcesTrigger count={message.sources.length} />
-                  <SourcesContent>
-                    {message.sources.map((source) => (
-                      <Source
-                        key={source.id}
-                        href={source.url || '#'}
-                        title={`${source.title} (${source.type})`}
-                      />
-                    ))}
-                  </SourcesContent>
-                </Sources>
-              )}
+            {/* Sources */}
+            {message.sources && message.sources.length > 0 && (
+              <Sources>
+                <SourcesTrigger count={message.sources.length} />
+                <SourcesContent>
+                  {message.sources.map((source) => (
+                    <Source
+                      key={source.id}
+                      href={source.url || '#'}
+                      title={`${source.title} (${source.type})`}
+                    />
+                  ))}
+                </SourcesContent>
+              </Sources>
+            )}
           </MessageContent>
 
           {/* Actions (only for assistant, non-streaming) */}
           {message.role === 'assistant' && !message.isStreaming && message.content && (
             <MessageActions>
-              <MessageAction tooltip="複製" label={copied ? '已複製' : '複製'} onClick={handleCopy}>
+              <MessageAction
+                tooltip={t('copy')}
+                label={copied ? t('copied') : t('copy')}
+                onClick={handleCopy}
+              >
                 {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
               </MessageAction>
             </MessageActions>

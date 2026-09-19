@@ -1,5 +1,5 @@
 import { getMemoriesSummary } from '../../repositories/memory'
-import type { Env } from '../../types'
+import type { AiLocale, Env } from '../../types'
 import { buildAgentBasePrompt } from '../../utils/ai-prompts'
 import type { LangfuseParent } from '../../utils/langfuse'
 import { injectRouteLinks } from '../core/documents'
@@ -25,7 +25,15 @@ import { normalizeGatheredContext } from './sub-agents/types'
 import { createDBToolRegistry, updateToolStats } from './tools/db-registry'
 import { toAISource } from './tools/route-sources'
 import { DefaultTokenTracker } from './tracker'
-import type { AgentResult, ModelConfig, ModelMap, ProviderName, ToolContext } from './types'
+import type {
+  AgentResult,
+  ModelConfig,
+  ModelMap,
+  ProgressEvent,
+  ProviderName,
+  ToolContext,
+} from './types'
+import { truncateProgressOutput } from './types'
 
 // ---------------------------------------------------------------------------
 // Default Model Map
@@ -163,6 +171,26 @@ function createProviderForConfig(provider: ProviderName, env: Env) {
 }
 
 // ---------------------------------------------------------------------------
+// Locale helpers
+// ---------------------------------------------------------------------------
+
+/** web locale → ToolContext.locale（tools 以 'zh-TW' 判斷中文） */
+function toContextLocale(locale: AiLocale): string {
+  return locale === 'zh' ? 'zh-TW' : locale
+}
+
+/** 非中文介面時附加到 system prompt 的回答語言指令；中文沿用既有 prompt 規範 */
+function buildLanguageDirective(locale: AiLocale): string {
+  if (locale === 'en') {
+    return '【Response language】The user interface is in English. Always reply in English, even if tool results or the question are in Chinese. Keep route, crag and place names in their original form.'
+  }
+  if (locale === 'ja') {
+    return '【回答言語】ユーザーインターフェースは日本語です。ツールの結果や質問が中国語であっても、必ず日本語で回答してください。ルート名・岩場名・地名は原文のまま表記してください。'
+  }
+  return ''
+}
+
+// ---------------------------------------------------------------------------
 // runAgent — 主入口
 // ---------------------------------------------------------------------------
 
@@ -171,21 +199,20 @@ export interface RunAgentParams {
   chatHistory?: Array<{ role: 'user' | 'assistant'; content: string }>
   userId: string | null
   env: Env
+  /** 使用者介面語言（zh / en / ja），決定回答語言；預設 zh */
+  locale?: AiLocale
   langfuseTrace?: LangfuseParent | null
   waitUntilCtx?: { waitUntil(promise: Promise<unknown>): void }
   stream?: boolean
   onToken?: (token: string) => Promise<void>
-  onProgress?: (event: {
-    type: 'progress'
-    id: string
-    tool: string
-    status: 'executing' | 'done'
-    input?: unknown
-  }) => Promise<void>
+  onProgress?: (event: ProgressEvent) => Promise<void>
 }
 
 export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   const { query, chatHistory, userId, env, langfuseTrace, waitUntilCtx } = params
+  const uiLocale: AiLocale = params.locale ?? 'zh'
+  const ctxLocale = toContextLocale(uiLocale)
+  const languageDirective = buildLanguageDirective(uiLocale)
 
   // 0. 查詢分類快速路徑（0 LLM call）
   const category = classifyQuery(query)
@@ -256,7 +283,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       const toolCtx: ToolContext = {
         env,
         userId,
-        locale: 'zh-TW',
+        locale: ctxLocale,
         models,
         langfuseTrace,
         tracker,
@@ -283,6 +310,12 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
         if (skillSystemPrompt) {
           subAgent = { ...subAgent, systemPrompt: skillSystemPrompt }
         }
+        if (languageDirective) {
+          subAgent = {
+            ...subAgent,
+            systemPrompt: `${subAgent.systemPrompt}\n\n${languageDirective}`,
+          }
+        }
 
         if (params.onProgress) {
           await params.onProgress({
@@ -294,8 +327,8 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
           })
         }
 
+        const subAgentStart = Date.now()
         const gathered = normalizeGatheredContext(await subAgent.gatherContext({ query }, toolCtx))
-        const result = await subAgent.synthesize(query, gathered.context, toolCtx)
 
         if (params.onProgress) {
           await params.onProgress({
@@ -303,8 +336,13 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
             id: subAgent.name,
             tool: subAgent.name,
             status: 'done',
+            output: truncateProgressOutput(gathered.context),
+            is_error: false,
+            duration_ms: Date.now() - subAgentStart,
           })
         }
+
+        const result = await subAgent.synthesize(query, gathered.context, toolCtx)
 
         const guarded = await runPostLoopGuards(result.answer, query, env, models)
         // 與 pipeline 一致：後處理注入站內路線連結與影片連結
@@ -381,7 +419,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   const toolCtx: ToolContext = {
     env,
     userId,
-    locale: 'zh-TW',
+    locale: ctxLocale,
     models,
     langfuseTrace,
     tracker,
@@ -406,9 +444,9 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     buildAgentBasePrompt(toolsSection, capabilitySection)
   )
   const proactiveSection = buildProactivePromptSection(proactiveCtx)
-  const systemPrompt = proactiveSection
-    ? `${baseSystemPrompt}\n\n${proactiveSection}`
-    : baseSystemPrompt
+  const systemPrompt = [baseSystemPrompt, proactiveSection, languageDirective]
+    .filter(Boolean)
+    .join('\n\n')
 
   // 5. Run agent loop
   const result = await runAgentLoop(

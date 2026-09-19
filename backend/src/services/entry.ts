@@ -6,6 +6,7 @@ import {
   AIDocument,
   AISearchRequest,
   AISource,
+  AiLocale,
   Env,
   ParsedQuery,
 } from '../types'
@@ -26,6 +27,7 @@ import type { LangfuseParent } from '../utils/langfuse'
 import { createLangfuseClient, createTrace, flushLangfuse } from '../utils/langfuse'
 import { toTraditionalChinese } from '../utils/opencc'
 import { TimeoutError, withTimeout } from '../utils/timeout'
+import type { ProgressEvent } from './agent/types'
 import {
   checkSemanticCache,
   flagResponse,
@@ -102,7 +104,9 @@ export class QueryService {
   }
 
   // 將最終回答與建議問題轉為繁體中文（台灣用語），作為 prompt 指令外的保底防線
-  private finalizeResponse(response: AIAskResponse): AIAskResponse {
+  // 日文介面略過：OpenCC 會把日文漢字誤轉（如 国→國）
+  private finalizeResponse(response: AIAskResponse, locale?: AiLocale): AIAskResponse {
+    if (locale === 'ja') return response
     response.answer = toTraditionalChinese(response.answer)
     response.suggested_questions = response.suggested_questions.map(toTraditionalChinese)
     return response
@@ -117,13 +121,7 @@ export class QueryService {
     ctx?: { waitUntil(promise: Promise<unknown>): void },
     onToken?: (token: string) => Promise<void>,
     extraTrace?: Record<string, unknown>,
-    onProgress?: (event: {
-      type: 'progress'
-      id: string
-      tool: string
-      status: 'executing' | 'done'
-      input?: unknown
-    }) => Promise<void>
+    onProgress?: (event: ProgressEvent) => Promise<void>
   ): Promise<AIAskResponse> {
     const streamingMode = !!onToken
     const { query, chat_history, no_cache = false } = request
@@ -158,7 +156,9 @@ export class QueryService {
     const personalizedContext = [memorySummary, ascentContext].filter(Boolean).join('|')
     const personalizedHash = personalizedContext ? `:p${this.hashQuery(personalizedContext)}` : ''
     const userPrefix = userId ? `${userId}:` : ''
-    const cacheKey = `ai:ask:${userPrefix}${this.hashQuery(query)}${historyHash}${personalizedHash}`
+    // 非中文介面的回答語言不同，快取鍵加 locale 後綴避免互相汙染
+    const localeSuffix = request.locale && request.locale !== 'zh' ? `:l${request.locale}` : ''
+    const cacheKey = `ai:ask:${userPrefix}${this.hashQuery(query)}${historyHash}${personalizedHash}${localeSuffix}`
     const startTime = Date.now()
 
     // KV 快取前置檢查
@@ -175,7 +175,7 @@ export class QueryService {
           cacheHit: true,
           pipelineTrace: JSON.stringify({ cache: { type: 'kv' } }),
         }).catch(() => {})
-        return this.finalizeResponse(JSON.parse(cached) as AIAskResponse)
+        return this.finalizeResponse(JSON.parse(cached) as AIAskResponse, request.locale)
       }
     }
 
@@ -334,6 +334,7 @@ export class QueryService {
               })),
               userId: userId ?? null,
               env: this.env,
+              locale: request.locale,
               langfuseTrace,
               waitUntilCtx: ctx,
               stream: streamingMode,
@@ -378,12 +379,15 @@ export class QueryService {
             parseSuggestedQuestions(reactResult.answer)
 
           // KV cache 寫入
-          const response: AIAskResponse = this.finalizeResponse({
-            answer: parsedReactAnswer,
-            sources: reactSources,
-            query_id: queryId,
-            suggested_questions: reactSuggestions,
-          })
+          const response: AIAskResponse = this.finalizeResponse(
+            {
+              answer: parsedReactAnswer,
+              sources: reactSources,
+              query_id: queryId,
+              suggested_questions: reactSuggestions,
+            },
+            request.locale
+          )
 
           if (!request.no_cache && ctx) {
             ctx.waitUntil(
@@ -416,7 +420,7 @@ export class QueryService {
           pipelineCfg.pipeline_timeout_ms,
           'pipeline'
         )
-        return this.finalizeResponse(result.earlyReturn ?? result.finalResponse!)
+        return this.finalizeResponse(result.earlyReturn ?? result.finalResponse!, request.locale)
       } else {
         // 原有引擎（feature flag 預設 false）
         const engine = new PipelineEngine(this.env)
@@ -425,7 +429,7 @@ export class QueryService {
           pipelineCfg.pipeline_timeout_ms,
           'pipeline'
         )
-        return this.finalizeResponse(result.earlyReturn ?? result.finalResponse!)
+        return this.finalizeResponse(result.earlyReturn ?? result.finalResponse!, request.locale)
       }
     } catch (err) {
       controller.abort()
@@ -445,16 +449,11 @@ export class QueryService {
     write: (data: string) => Promise<void>,
     ctx?: { waitUntil(promise: Promise<unknown>): void },
     extraTrace?: Record<string, unknown>,
-    onProgress?: (event: {
-      type: 'progress'
-      id: string
-      tool: string
-      status: 'executing' | 'done'
-      input?: unknown
-    }) => Promise<void>
+    onProgress?: (event: ProgressEvent) => Promise<void>
   ): Promise<AIAskResponse> {
     const onToken = async (token: string) => {
-      await write(JSON.stringify({ type: 'token', token: toTraditionalChinese(token) }))
+      const text = request.locale === 'ja' ? token : toTraditionalChinese(token)
+      await write(JSON.stringify({ type: 'token', token: text }))
     }
     try {
       return await this.ask(request, userId, ctx, onToken, extraTrace, onProgress)

@@ -453,5 +453,47 @@ describe('runAgentLoop', () => {
     expect(executing).toContainEqual(
       expect.objectContaining({ id: 'call-1', tool: 'search_routes', input: { query: '龍洞' } })
     )
+    // done 事件帶截斷後的 output 與耗時，供前端 Response 區顯示；executing 不帶 output
+    for (const e of done) {
+      expect(e.output).toBe('找到 2 條路線')
+      expect(e.is_error).toBe(false)
+      expect(typeof e.duration_ms).toBe('number')
+    }
+    for (const e of executing) {
+      expect(e.output).toBeUndefined()
+    }
+  })
+
+  it('tool 執行失敗時 done 事件帶 is_error 與錯誤訊息', async () => {
+    const provider = mockProvider([
+      {
+        content: undefined,
+        toolCalls: [{ id: 'call-err', name: 'search_routes', input: { query: '龍洞' } }],
+        stopReason: 'tool_use',
+        usage: { input: 100, output: 40 },
+      },
+      {
+        content: '最終回答',
+        toolCalls: [],
+        stopReason: 'end_turn',
+        usage: { input: 50, output: 20 },
+      },
+    ])
+    const registry = new ToolRegistry()
+    registry.registerTool(makeTool({ execute: vi.fn().mockRejectedValue(new Error('D1 timeout')) }))
+    const events: Array<{ id: string; status: string; output?: string; is_error?: boolean }> = []
+
+    await runAgentLoop(
+      { provider, registry, ctx: makeCtx() },
+      {
+        ...DEFAULT_OPTS,
+        onProgress: async (e) => {
+          events.push(e)
+        },
+      }
+    )
+
+    const done = events.find((e) => e.status === 'done')
+    expect(done).toMatchObject({ id: 'call-err', is_error: true, output: 'D1 timeout' })
   })
 })

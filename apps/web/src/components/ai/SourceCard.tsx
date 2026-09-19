@@ -2,14 +2,9 @@
 
 import { MapPin, MountainSnow, Video } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import type { AISource } from '@/lib/api/ai'
 import { cn } from '@/lib/utils'
-
-const TYPE_LABEL: Record<AISource['type'], string> = {
-  route: '路線',
-  crag: '岩場',
-  video: '影片',
-}
 
 const TYPE_ICON: Record<AISource['type'], React.ElementType> = {
   route: MountainSnow,
@@ -23,8 +18,9 @@ interface SourceCardProps {
 }
 
 export function SourceCard({ source, className }: SourceCardProps) {
+  const t = useTranslations('Chat')
   const Icon = TYPE_ICON[source.type]
-  const label = TYPE_LABEL[source.type]
+  const label = t(`sourceType.${source.type}`)
   const isExternal = source.url?.startsWith('http')
 
   const content = (
