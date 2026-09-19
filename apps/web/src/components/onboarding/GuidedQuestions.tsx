@@ -175,7 +175,7 @@ export function GuidedQuestions({
                 value={answers[currentQuestion.id] || ''}
                 onChange={(e) => handleAnswerChange(e.target.value)}
                 placeholder={currentQuestion.placeholder || '輸入你的回答...'}
-                className="min-h-[150px] w-full resize-none rounded-lg border border-gray-200 bg-white p-4 text-[#1B1A1A] placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="min-h-[150px] w-full resize-none rounded-lg border border-gray-200 bg-white p-4 text-[#1B1A1A] placeholder:text-gray-400 focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
                 autoFocus
               />
             ) : (
@@ -184,7 +184,7 @@ export function GuidedQuestions({
                 value={answers[currentQuestion.id] || ''}
                 onChange={(e) => handleAnswerChange(e.target.value)}
                 placeholder={currentQuestion.placeholder || '輸入你的回答...'}
-                className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-[#1B1A1A] placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-[#1B1A1A] placeholder:text-gray-400 focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
                 autoFocus
               />
             )}

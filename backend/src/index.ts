@@ -7,6 +7,12 @@ import { accessLogMiddleware } from './middleware/accessLog'
 import { dateFormatMiddleware } from './middleware/dateFormat'
 import { accessLogsRoutes } from './routes/access-logs'
 import { adminAiRoutes } from './routes/admin-ai'
+import { adminAiHooksRoutes } from './routes/admin-ai-hooks'
+import { adminAiMcpRoutes } from './routes/admin-ai-mcp'
+import { adminAiPluginsRoutes } from './routes/admin-ai-plugins'
+import { adminAiQualityRoutes } from './routes/admin-ai-quality'
+import { adminAiSkillsRoutes } from './routes/admin-ai-skills'
+import { adminAiToolsRoutes } from './routes/admin-ai-tools'
 import { adminSectorsRoutes } from './routes/admin-areas'
 import { adminCragsRoutes } from './routes/admin-crags'
 import { adminImportRoutes } from './routes/admin-import'
@@ -19,18 +25,22 @@ import { biographiesRoutes } from './routes/biographies'
 import { biographyContentRoutes } from './routes/biography-content'
 import { bucketListRoutes } from './routes/bucket-list'
 import { climbingLocationsRoutes } from './routes/climbing-locations'
+import { coachingRoutes } from './routes/coaching'
 import { cragsRoutes } from './routes/crags'
 import { galleriesRoutes } from './routes/galleries'
+import { goalsRoutes } from './routes/goals'
 import { guestRoutes } from './routes/guest'
 import { gymsRoutes } from './routes/gyms'
 import { mediaRoutes } from './routes/media'
 import { notificationsRoutes } from './routes/notifications'
 import { postsRoutes } from './routes/posts'
+import { quizRoutes } from './routes/quiz'
 import { routeStoriesRoutes } from './routes/route-stories'
 import { searchRoutes } from './routes/search'
 import { statsRoutes } from './routes/stats'
 import { storyPromptsRoutes } from './routes/story-prompts'
 import { trafficRoutes } from './routes/traffic'
+import { trainingRoutes } from './routes/training'
 import { usersRoutes } from './routes/users'
 import { videosRoutes } from './routes/videos'
 import { weatherRoutes } from './routes/weather'
@@ -120,10 +130,20 @@ v1.route('/content', biographyContentRoutes)
 v1.route('/access-logs', accessLogsRoutes)
 v1.route('/guest', guestRoutes)
 v1.route('/ascents', ascentsRoutes)
+v1.route('/goals', goalsRoutes)
 v1.route('/route-stories', routeStoriesRoutes)
 v1.route('/admin/import', adminImportRoutes)
 v1.route('/admin/ai', adminAiRoutes)
+v1.route('/admin/ai/quality', adminAiQualityRoutes)
+v1.route('/admin/ai', adminAiToolsRoutes)
+v1.route('/admin/ai', adminAiHooksRoutes)
+v1.route('/admin/ai', adminAiSkillsRoutes)
+v1.route('/admin/ai', adminAiMcpRoutes)
+v1.route('/admin/ai', adminAiPluginsRoutes)
 v1.route('/ai', aiRoutes)
+v1.route('/quiz', quizRoutes)
+v1.route('/training', trainingRoutes)
+v1.route('/coaching', coachingRoutes)
 
 // OpenAPI JSON 端點 - 自動從路由生成 OpenAPI 規格
 v1.get(
@@ -223,6 +243,7 @@ app.onError((err, c) => {
 // Cron Trigger Handler - 每日等級重置與積分重算
 // =============================================
 
+import { processEvolutionBatch } from './services/domain/evolution'
 import { recalculateAllRanks, resetDailyUsage } from './services/rank'
 
 export default {
@@ -234,6 +255,16 @@ export default {
       await recalculateAllRanks(env.DB)
     } catch (err) {
       console.error('[cron] 每日等級任務失敗:', err)
+    }
+
+    // 每週一執行人格演化批次（UTC 週一 00:00 = 台灣週一 08:00）
+    const now = new Date()
+    if (now.getUTCDay() === 1) {
+      try {
+        await processEvolutionBatch(env)
+      } catch (err) {
+        console.error('[cron] 人格演化批次任務失敗:', err)
+      }
     }
   },
 }

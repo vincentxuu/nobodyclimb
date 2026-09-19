@@ -1,8 +1,8 @@
-import type { AiQuota } from '@nobodyclimb/types'
+import type { AiLocale, AiQuota } from '@nobodyclimb/types'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import apiClient from './client'
 
-export type { AiQuota }
+export type { AiLocale, AiQuota }
 
 // =============================================
 // TypeScript 介面
@@ -29,6 +29,8 @@ export interface AIAskRequest {
   include_sources?: boolean
   chat_history?: AIChatHistoryMessage[]
   no_cache?: boolean
+  /** 介面語言，後端據此決定回答語言 */
+  locale?: AiLocale
 }
 
 export interface AIAskResponse {
@@ -127,13 +129,26 @@ export interface AIStreamDoneEvent {
   quota_remaining: number
 }
 
+// 後端 progress 事件：同名 tool 並行時以 id 區分 invocation
+// executing 事件帶 input（Request）；done 事件帶截斷後的 output（Response）、is_error、duration_ms
+export interface AIStreamProgressEvent {
+  id: string
+  tool: string
+  status: 'executing' | 'done'
+  input?: unknown
+  output?: string
+  is_error?: boolean
+  duration_ms?: number
+}
+
 // SSE 串流問答：使用 fetch + ReadableStream 接收，支援 AbortController 取消
 export async function askAIStream(
   request: AIAskRequest,
   onToken: (_token: string) => void,
   onDone: (_event: AIStreamDoneEvent) => void,
   onError: (_message: string) => void,
-  signal?: AbortSignal
+  signal?: AbortSignal,
+  onProgress?: (_event: AIStreamProgressEvent) => void
 ): Promise<void> {
   const { API_BASE_URL } = await import('../constants')
   const { getAccessToken } = await import('@nobodyclimb/api-client/web')
@@ -182,11 +197,29 @@ export async function askAIStream(
           const event = JSON.parse(jsonStr) as {
             type: string
             token?: string
+            id?: string
+            tool?: string
+            status?: string
+            input?: unknown
+            output?: string
+            is_error?: boolean
+            duration_ms?: number
           } & Partial<AIStreamDoneEvent> & { message?: string }
           if (event.type === 'token' && event.token !== undefined) {
             onToken(event.token)
           } else if (event.type === 'done') {
             onDone(event as AIStreamDoneEvent)
+          } else if (event.type === 'progress' && onProgress) {
+            onProgress({
+              // 舊後端可能沒送 id，退回以 tool 名合併（舊行為）
+              id: typeof event.id === 'string' && event.id ? event.id : (event.tool as string),
+              tool: event.tool as string,
+              status: event.status as 'executing' | 'done',
+              input: event.input,
+              output: event.output,
+              is_error: event.is_error,
+              duration_ms: event.duration_ms,
+            })
           } else if (event.type === 'error') {
             onError(event.message ?? '抱歉，AI 服務暫時無法使用，請稍後再試。')
           }
@@ -273,12 +306,13 @@ export async function getMyQuota(): Promise<AiQuota> {
   return response.data.data
 }
 
-export function useMyQuota() {
+export function useMyQuota(options?: { enabled?: boolean }) {
   return useQuery({
     queryKey: ['ai-quota-me'],
     queryFn: getMyQuota,
     staleTime: 30 * 1000,
     retry: false,
+    enabled: options?.enabled ?? true,
   })
 }
 
@@ -380,5 +414,124 @@ export function useTriggerRecommendation() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['ai-recommendations'] })
     },
+  })
+}
+
+// =============================================
+// Goals API 函式
+// =============================================
+
+export interface UserGoal {
+  id: string
+  goal_type: 'grade' | 'route' | 'volume' | 'custom'
+  title: string
+  target: string
+  current_value: string | null
+  status: 'active' | 'achieved' | 'paused' | 'abandoned'
+  notes: string | null
+  target_date: string | null
+  achieved_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export async function getGoals(): Promise<UserGoal[]> {
+  const res = await apiClient.get<{ success: boolean; data: UserGoal[] }>('/ai/goals')
+  return res.data.data
+}
+
+export async function createGoal(goal: {
+  goal_type: string
+  title: string
+  target: string
+  target_date?: string
+}): Promise<UserGoal> {
+  const res = await apiClient.post<{ success: boolean; data: UserGoal }>('/ai/goals', goal)
+  return res.data.data
+}
+
+export async function achieveGoal(goalId: string): Promise<void> {
+  await apiClient.post(`/ai/goals/${goalId}/achieve`)
+}
+
+export async function deleteGoal(goalId: string): Promise<void> {
+  await apiClient.delete(`/ai/goals/${goalId}`)
+}
+
+// =============================================
+// Coaching Analysis API
+// =============================================
+
+export interface CoachingExercise {
+  nameZh: string
+  reps: string
+  sets: [number, number]
+  sessionsPerWeek: [number, number]
+}
+
+export interface CoachingWeakness {
+  id: string
+  description: string
+  exercises: string[]
+}
+
+export interface CoachingPersonality {
+  code: string
+  nameZh: string
+  nameEn: string
+  keywords: string[]
+  strengths: string[]
+  blindSpots: string[]
+  trainingSchool: string
+  schoolDescription: string
+}
+
+export interface CoachingLevelRecommendation {
+  label: string
+  daysPerWeek: [number, number]
+  focusAreas: string[]
+  avoid: string[]
+  exercises: CoachingExercise[]
+}
+
+export interface CoachingTrainingProgress {
+  completed: number
+  total: number
+  completionRate: number
+  lastCompleted: { week: number; day: number } | null
+}
+
+export interface CoachingGoal {
+  title: string
+  target: string
+  currentProgress: string | null
+  status: string
+}
+
+export interface CoachingAnalysis {
+  level: string
+  totalAscents: number
+  uniqueCrags: number
+  personality: CoachingPersonality | null
+  weaknesses: CoachingWeakness[]
+  levelRecommendation: CoachingLevelRecommendation | null
+  trainingProgress: CoachingTrainingProgress | null
+  goals: CoachingGoal[]
+}
+
+export async function getCoachingAnalysis(): Promise<CoachingAnalysis> {
+  const res = await apiClient.get<{ success: boolean; data: CoachingAnalysis }>(
+    '/coaching/analysis',
+    { timeout: 30000 }
+  )
+  return res.data.data
+}
+
+export function useCoachingAnalysis() {
+  return useQuery({
+    queryKey: ['coaching-analysis'],
+    queryFn: getCoachingAnalysis,
+    staleTime: 5 * 60 * 1000,
+    retry: 1,
   })
 }

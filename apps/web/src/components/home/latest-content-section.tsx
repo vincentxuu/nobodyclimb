@@ -94,10 +94,10 @@ function ArticleCard({ item, index }: { item: ArticleItem; index: number }) {
     >
       <Link
         href={item.link}
-        className="group block h-full overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md"
+        className="group block h-full overflow-hidden rounded-lg bg-white shadow-xs transition-shadow hover:shadow-md"
       >
         {/* 縮圖 */}
-        <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+        <div className="relative aspect-4/3 overflow-hidden bg-gray-100">
           {item.thumbnail ? (
             <Image
               src={item.thumbnail}

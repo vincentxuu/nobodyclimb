@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { use, useEffect, useMemo, useRef, useState } from 'react'
 // V2 展示組件
 import { BiographyOneLiners } from '@/components/biography/display/BiographyOneLiners'
+import { BiographyPersonality } from '@/components/biography/display/BiographyPersonality'
 // 新的章節式組件
 import {
   ChapterAdvice,
@@ -25,6 +26,7 @@ import { Button } from '@/components/ui/button'
 import { Link } from '@/i18n/navigation'
 import { biographyService } from '@/lib/api/services'
 import { useGuestSession } from '@/lib/hooks/useGuestSession'
+import { useUserQuizResult } from '@/lib/hooks/useQuizResult'
 import { Biography, BiographyAdjacent } from '@/lib/types'
 import {
   BiographyBackend,
@@ -56,6 +58,8 @@ export default function ProfileClient({ params }: ProfileClientProps) {
   const { trackBiographyView, isLoading: isGuestSessionLoading } = useGuestSession()
   const trackedSlugsRef = useRef<Set<string>>(new Set())
   const isOwner = user?.id === person?.user_id
+
+  const { data: quizResult } = useUserQuizResult(person?.user_id, !!person?.personality_type)
 
   // 將 person 轉換為 BiographyV2 格式，供新的展示組件使用
   const personV2: BiographyV2 | null = useMemo(() => {
@@ -174,7 +178,7 @@ export default function ProfileClient({ params }: ProfileClientProps) {
             <Link href="/biography">
               <Button
                 variant="ghost"
-                className="flex items-center gap-2 bg-white shadow-sm hover:bg-[#dbd8d8]"
+                className="flex items-center gap-2 bg-white shadow-xs hover:bg-[#dbd8d8]"
               >
                 <ArrowLeft size={16} />
                 <span>{t('breadcrumbBiography')}</span>
@@ -192,7 +196,7 @@ export default function ProfileClient({ params }: ProfileClientProps) {
               <Link href="/profile">
                 <Button
                   variant="ghost"
-                  className="flex items-center gap-2 bg-brand-accent shadow-sm hover:bg-brand-accent/80"
+                  className="flex items-center gap-2 bg-brand-accent shadow-xs hover:bg-brand-accent/80"
                 >
                   <Pencil size={16} />
                   <span>{t('backToEdit')}</span>
@@ -215,6 +219,20 @@ export default function ProfileClient({ params }: ProfileClientProps) {
 
       {/* 2. 快速了解 - 基本資訊卡片 + 關鍵字標籤 */}
       <QuickFactsSection person={personV2} />
+
+      {/* 2.5. 攀岩人格 */}
+      {person.personality_type && quizResult && (
+        <section className="bg-[#F5F5F5]">
+          <div className="container mx-auto max-w-5xl px-4">
+            <BiographyPersonality
+              personalityType={person.personality_type}
+              powerPct={quizResult.power_pct}
+              goalPct={quizResult.goal_pct}
+              boldPct={quizResult.bold_pct}
+            />
+          </div>
+        </section>
+      )}
 
       {/* 3. 關於我 - 一句話系列 */}
       {personV2 && personV2.id && (

@@ -181,7 +181,7 @@ export function CommentSection({ itemId, initialCount = 0, className }: CommentS
             <div className="space-y-4">
               {comments.map((comment) => (
                 <div key={comment.id} className="flex gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
+                  <div className="w-8 h-8 rounded-full bg-gray-200 shrink-0 overflow-hidden">
                     {comment.avatar_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
@@ -210,7 +210,7 @@ export function CommentSection({ itemId, initialCount = 0, className }: CommentS
                         </button>
                       )}
                     </div>
-                    <p className="text-sm text-gray-700 mt-1 break-words">{comment.content}</p>
+                    <p className="text-sm text-gray-700 mt-1 wrap-break-word">{comment.content}</p>
                   </div>
                 </div>
               ))}

@@ -51,7 +51,7 @@ export function AnonymousAvatar({
   return (
     <div
       className={cn(
-        'rounded-full bg-gradient-to-br from-[#E8E6E6] to-[#D4D1D1] flex items-center justify-center border-2 border-white shadow-inner',
+        'rounded-full bg-linear-to-br from-[#E8E6E6] to-[#D4D1D1] flex items-center justify-center border-2 border-white shadow-inner',
         sizeClass.container,
         className
       )}

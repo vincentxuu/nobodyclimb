@@ -360,7 +360,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
           <Link href="/biography?tab=stories">
             <Button
               variant="ghost"
-              className="flex items-center gap-2 bg-white shadow-sm hover:bg-[#dbd8d8]"
+              className="flex items-center gap-2 bg-white shadow-xs hover:bg-[#dbd8d8]"
             >
               <ArrowLeft size={16} />
               <span>返回故事列表</span>
@@ -414,7 +414,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
           </div>
 
           {/* 故事內容卡片 */}
-          <div className="relative mb-8 overflow-hidden rounded-2xl bg-white shadow-sm">
+          <div className="relative mb-8 overflow-hidden rounded-2xl bg-white shadow-xs">
             {/* 內容區 */}
             <div className="px-6 py-8 md:px-10 md:py-12">
               {/* 故事文字 */}
@@ -425,7 +425,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
           </div>
 
           {/* 互動區 */}
-          <div className="mb-8 rounded-2xl bg-white p-5 shadow-sm md:p-6">
+          <div className="mb-8 rounded-2xl bg-white p-5 shadow-xs md:p-6">
             {/* 快速反應和按讚留言 */}
             <ContentInteractionBar
               contentType={storyType}
@@ -445,11 +445,11 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
           </div>
 
           {/* 作者資訊區 */}
-          <div className="rounded-2xl bg-white p-5 shadow-sm md:p-6">
+          <div className="rounded-2xl bg-white p-5 shadow-xs md:p-6">
             <div className="flex items-center gap-4">
               {/* 頭像 */}
               <Link href={`/biography/profile/${story.biography_slug}`}>
-                <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-full bg-gray-100 ring-2 ring-transparent transition-all hover:ring-gray-300 md:h-20 md:w-20">
+                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-gray-100 ring-2 ring-transparent transition-all hover:ring-gray-300 md:h-20 md:w-20">
                   {story.author_avatar ? (
                     isSvgUrl(story.author_avatar) ? (
                       <img
@@ -491,7 +491,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
               {/* CTA 按鈕 - 桌面版 */}
               <Link
                 href={`/biography/profile/${story.biography_slug}`}
-                className="hidden sm:block flex-shrink-0"
+                className="hidden sm:block shrink-0"
               >
                 <Button className="flex items-center gap-2 bg-brand-yellow-100 text-sm font-semibold text-[#1B1A1A] transition-all hover:bg-brand-yellow-200">
                   <span>查看故事</span>

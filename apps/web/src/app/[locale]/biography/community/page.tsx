@@ -53,7 +53,7 @@ export default function CommunityStatsPage() {
           <Link href="/biography">
             <Button
               variant="ghost"
-              className="flex items-center gap-2 bg-white shadow-sm hover:bg-gray-100"
+              className="flex items-center gap-2 bg-white shadow-xs hover:bg-gray-100"
             >
               <ArrowLeft size={16} />
               <span>{t('backToBiography')}</span>

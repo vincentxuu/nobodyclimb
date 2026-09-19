@@ -2,6 +2,7 @@
 
 import {
   ChevronLeft,
+  Expand,
   History,
   Loader2,
   MessageCircle,
@@ -13,9 +14,11 @@ import {
   X,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import type { AIChatHistoryMessage, AiQuota, ChatSession } from '@/lib/api/ai'
+import type { AIChatHistoryMessage, AiLocale, AiQuota, ChatSession } from '@/lib/api/ai'
 import {
   askAIStream,
   createChatSession,
@@ -26,6 +29,7 @@ import {
   saveMessage,
   useAskAI,
 } from '@/lib/api/ai'
+import { upsertToolProgress } from '@/lib/chat/tool-progress'
 import { cn } from '@/lib/utils'
 
 const ENABLE_STREAMING = process.env.NEXT_PUBLIC_ENABLE_AI_STREAMING === 'true'
@@ -35,50 +39,24 @@ import { useAuthStore } from '@/store/authStore'
 import type { ChatMessageData } from './ChatMessage'
 import { ChatMessage } from './ChatMessage'
 
-// =============================================
-// 建議問題題庫（4 類各 5 題，共 20 題，每次隨機取 3 題）
-// 每題皆根據岩場實際資料設計，問法聚焦路線推薦
-// =============================================
-const SUGGESTION_POOL = [
-  // 完攀推薦型：用 5.10 以下熱門路線名，請 AI 推薦下一條
-  '我爬了終極右和天天天藍，推薦我下一條關子嶺路線',
-  '我剛完攀剃刀邊緣 5.10c，推薦我類似難度的路線',
-  '我爬了結婚的日子，接下來推薦什麼？',
-  '我爬了斜陽跟新竹客家人，推薦墾丁下一條',
-  '我完攀了天天天藍 5.10d，推薦我下一條',
-  // 難度挑戰型：指定岩場與難度找路線
-  '推薦 3 條龍洞 5.10 的經典路線',
-  '推薦 3 條墾丁 5.10 的路線',
-  '壽山有什麼 5.9 到 5.10 適合練習的路線？',
-  '關子嶺推薦 2 條 5.10 的路線',
-  '德芙蘭推薦幾條 5.9 的入門路線',
-  // 進階推薦型：帶完攀紀錄，請 AI 推薦進階路線
-  '我爬過白龍夢和白鯨記，推薦我龍洞下一條',
-  '我最高完攀 5.10d，推薦 3 條可以嘗試突破的路線',
-  '我在壽山爬了山頂洞人，推薦我進階路線',
-  '我在關子嶺爬了新手上路和右耳，推薦下一條',
-  '我在墾丁爬了小精靈和水牛，推薦我下一條',
-  // 5.11 挑戰型：用 5.11 熱門路線
-  '我完攀了美人照鏡 5.11b，推薦我類似難度的路線',
-  '我爬了大家的福利和赤頭 5.11a，推薦下一條',
-  '我在龍洞完攀了新法拉利 5.11c，推薦我進階路線',
-  '推薦 3 條龍洞 5.11 的經典路線',
-  '推薦 3 條關子嶺 5.11 的路線',
-]
-
-function getRandomSuggestions(): string[] {
-  return [...SUGGESTION_POOL].sort(() => Math.random() - 0.5).slice(0, 3)
+// 建議問題題庫放在 messages 的 Chat.suggestionPool（依語言切換），每次隨機取 3 題
+function pickRandomSuggestions(pool: string[]): string[] {
+  return [...pool].sort(() => Math.random() - 0.5).slice(0, 3)
 }
 
-function formatRelativeTime(timestamp: number): string {
+type ChatT = ReturnType<typeof useTranslations<'Chat'>>
+
+function formatRelativeTime(timestamp: number, t: ChatT): string {
   const seconds = Math.floor(Date.now() / 1000) - timestamp
-  if (seconds < 60) return '剛剛'
-  if (seconds < 3600) return `${Math.floor(seconds / 60)} 分鐘前`
-  if (seconds < 86400) return `${Math.floor(seconds / 3600)} 小時前`
-  return `${Math.floor(seconds / 86400)} 天前`
+  if (seconds < 60) return t('time.justNow')
+  if (seconds < 3600) return t('time.minutesAgo', { count: Math.floor(seconds / 60) })
+  if (seconds < 86400) return t('time.hoursAgo', { count: Math.floor(seconds / 3600) })
+  return t('time.daysAgo', { count: Math.floor(seconds / 86400) })
 }
 
 export function ChatWidget() {
+  const t = useTranslations('Chat')
+  const locale = useLocale() as AiLocale
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [messages, setMessages] = useState<ChatMessageData[]>([])
@@ -114,13 +92,13 @@ export function ChatWidget() {
   // 開啟時：隨機取建議問題、建立或載入 session、取得配額
   useEffect(() => {
     if (!isOpen) return
-    setDisplaySuggestions(getRandomSuggestions())
+    setDisplaySuggestions(pickRandomSuggestions(t.raw('suggestionPool') as string[]))
 
     const timer = setTimeout(() => inputRef.current?.focus(), 100)
 
     getMyQuota()
       .then(setQuota)
-      .catch(() => { })
+      .catch(() => {})
 
     if (isAuthenticated && !sessionIdRef.current) {
       getChatSessions()
@@ -135,24 +113,24 @@ export function ChatWidget() {
                   prev.length > 0
                     ? prev
                     : msgs.map((m) => ({
-                      id: m.id,
-                      role: m.role,
-                      content: m.content,
-                      sources: undefined,
-                      queryId: m.query_id,
-                      suggestedQuestions: m.suggested_questions
-                        ? typeof m.suggested_questions === 'string'
-                          ? JSON.parse(m.suggested_questions)
-                          : m.suggested_questions
-                        : undefined,
-                    }))
+                        id: m.id,
+                        role: m.role,
+                        content: m.content,
+                        sources: undefined,
+                        queryId: m.query_id,
+                        suggestedQuestions: m.suggested_questions
+                          ? typeof m.suggested_questions === 'string'
+                            ? JSON.parse(m.suggested_questions)
+                            : m.suggested_questions
+                          : undefined,
+                      }))
                 )
               })
-              .catch(() => { })
+              .catch(() => {})
           } else {
             createChatSession()
               .then((s) => updateSessionId(s.id))
-              .catch(() => { })
+              .catch(() => {})
           }
         })
         .catch(() => {
@@ -242,7 +220,16 @@ export function ChatWidget() {
         const abortController = new AbortController()
         abortControllerRef.current = abortController
         const streamingMsgId = crypto.randomUUID()
-        setMessages((prev) => [...prev, { id: streamingMsgId, role: 'assistant', content: '' }])
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: streamingMsgId,
+            role: 'assistant',
+            content: '',
+            isStreaming: true,
+            toolProgress: [],
+          },
+        ])
         setIsStreaming(true)
 
         // 清除舊 queue（防止上一輪殘留）
@@ -262,12 +249,13 @@ export function ChatWidget() {
             prev.map((m) =>
               m.id === streamingMsgId
                 ? {
-                  ...m,
-                  // 用後端後處理版本（已注入路線/影片連結）替換串流原始累積文字
-                  ...(doneEvent.answer ? { content: doneEvent.answer } : {}),
-                  sources: doneEvent.sources,
-                  queryId: doneEvent.query_id,
-                }
+                    ...m,
+                    isStreaming: false,
+                    // 用後端後處理版本（已注入路線/影片連結）替換串流原始累積文字
+                    ...(doneEvent.answer ? { content: doneEvent.answer } : {}),
+                    sources: doneEvent.sources,
+                    queryId: doneEvent.query_id,
+                  }
                 : m
             )
           )
@@ -276,10 +264,10 @@ export function ChatWidget() {
             setQuota((prev) =>
               prev
                 ? {
-                  ...prev,
-                  remaining: doneEvent.quota_remaining,
-                  daily_used: prev.daily_limit - doneEvent.quota_remaining,
-                }
+                    ...prev,
+                    remaining: doneEvent.quota_remaining,
+                    daily_used: prev.daily_limit - doneEvent.quota_remaining,
+                  }
                 : prev
             )
           }
@@ -313,6 +301,7 @@ export function ChatWidget() {
             query: trimmed,
             include_sources: true,
             chat_history: chatHistory.length > 0 ? chatHistory : undefined,
+            locale,
           },
           (token) => {
             tokenQueueRef.current.push(token)
@@ -339,13 +328,27 @@ export function ChatWidget() {
             setMessages((prev) =>
               prev.map((m) =>
                 m.id === streamingMsgId
-                  ? { ...m, content: m.content ? m.content + '\n\n⚠ 生成中斷，請重試' : errMessage }
+                  ? {
+                      ...m,
+                      isStreaming: false,
+                      content: m.content ? `${m.content}\n\n${t('interrupted')}` : errMessage,
+                    }
                   : m
               )
             )
             console.error('Stream error:', errMessage)
           },
-          abortController.signal
+          abortController.signal,
+          (progressEvent) => {
+            // 以 invocation id 併入該則訊息的工具過程，供 ToolActivity 顯示
+            setMessages((prev) =>
+              prev.map((m) =>
+                m.id === streamingMsgId
+                  ? { ...m, toolProgress: upsertToolProgress(m.toolProgress, progressEvent) }
+                  : m
+              )
+            )
+          }
         )
       } else {
         // 非串流模式（原有邏輯）
@@ -354,6 +357,7 @@ export function ChatWidget() {
             query: trimmed,
             include_sources: true,
             chat_history: chatHistory.length > 0 ? chatHistory : undefined,
+            locale,
           },
           {
             onSuccess: (data) => {
@@ -396,7 +400,7 @@ export function ChatWidget() {
                   {
                     id: crypto.randomUUID(),
                     role: 'assistant',
-                    content: `今日 AI 使用配額已用盡（${used}/${limit} 次）。\n\n配額將於台灣時間明日 00:00 重置。\n\n💡 充實你的攀岩日誌（記錄故事、路線攀登、人生清單），即可提升等級獲得更多每日配額。`,
+                    content: t('quotaExhausted', { used, limit }),
                   },
                 ])
                 if (errData) {
@@ -423,7 +427,7 @@ export function ChatWidget() {
                   {
                     id: crypto.randomUUID(),
                     role: 'assistant',
-                    content: '抱歉，AI 服務暫時無法使用，請稍後再試。',
+                    content: t('serviceUnavailable'),
                   },
                 ])
               }
@@ -433,7 +437,7 @@ export function ChatWidget() {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [askAI, isPending, isStreaming, quota, isAuthenticated]
+    [askAI, isPending, isStreaming, quota, isAuthenticated, locale, t]
   )
 
   // 重新生成最後一則 AI 回應
@@ -465,6 +469,7 @@ export function ChatWidget() {
         include_sources: true,
         no_cache: true,
         chat_history: regenHistory.length > 0 ? regenHistory : undefined,
+        locale,
       },
       {
         onSuccess: (data) => {
@@ -511,7 +516,7 @@ export function ChatWidget() {
               {
                 id: crypto.randomUUID(),
                 role: 'assistant',
-                content: `今日 AI 使用配額已用盡（${used}/${limit} 次）。\n\n配額將於台灣時間明日 00:00 重置。\n\n💡 充實你的攀岩日誌（記錄故事、路線攀登、人生清單），即可提升等級獲得更多每日配額。`,
+                content: t('quotaExhausted', { used, limit }),
               },
             ])
             if (errData) {
@@ -538,7 +543,7 @@ export function ChatWidget() {
               {
                 id: crypto.randomUUID(),
                 role: 'assistant',
-                content: '抱歉，重新生成失敗，請稍後再試。',
+                content: t('regenerateFailed'),
               },
             ])
           }
@@ -546,7 +551,7 @@ export function ChatWidget() {
       }
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPending, isRegenerating, messages, askAI, quota])
+  }, [isPending, isRegenerating, messages, askAI, quota, locale, t])
 
   // 清除對話
   const handleClear = useCallback(async () => {
@@ -554,7 +559,7 @@ export function ChatWidget() {
     if (sid) {
       try {
         await deleteChatSession(sid)
-      } catch { }
+      } catch {}
     }
     setMessages([])
     setSuggestedQuestions([])
@@ -566,7 +571,7 @@ export function ChatWidget() {
       try {
         const newSession = await createChatSession()
         updateSessionId(newSession.id)
-      } catch { }
+      } catch {}
     }
   }, [isAuthenticated, updateSessionId])
 
@@ -579,7 +584,7 @@ export function ChatWidget() {
     try {
       const newSession = await createChatSession()
       updateSessionId(newSession.id)
-    } catch { }
+    } catch {}
   }, [updateSessionId])
 
   // 開啟歷史面板
@@ -587,7 +592,7 @@ export function ChatWidget() {
     try {
       const list = await getChatSessions()
       setSessions(list)
-    } catch { }
+    } catch {}
     setShowHistory(true)
   }, [])
 
@@ -613,7 +618,7 @@ export function ChatWidget() {
         )
         setSuggestedQuestions([])
         setShowHistory(false)
-      } catch { }
+      } catch {}
     },
     [updateSessionId]
   )
@@ -642,7 +647,7 @@ export function ChatWidget() {
           'hover:bg-primary/90 hover:scale-105 transition-all',
           isOpen && 'hidden'
         )}
-        aria-label="開啟 AI 助理"
+        aria-label={t('openWidget')}
         aria-haspopup="dialog"
       >
         <MessageCircle className="h-6 w-6" />
@@ -652,7 +657,7 @@ export function ChatWidget() {
       {isOpen && (
         <div
           role="dialog"
-          aria-label="NobodyClimb AI 助理"
+          aria-label={t('widgetAria')}
           aria-modal="true"
           className={cn(
             'fixed z-[20000] flex flex-col bg-background shadow-2xl pointer-events-auto',
@@ -668,7 +673,7 @@ export function ChatWidget() {
               {quota ? (
                 <div className="flex items-center gap-1.5 mt-0.5">
                   {quota.daily_limit === -1 ? (
-                    <span className="text-xs text-muted-foreground">無配額限制</span>
+                    <span className="text-xs text-muted-foreground">{t('noQuotaLimit')}</span>
                   ) : (
                     <>
                       <RankBadge
@@ -676,13 +681,13 @@ export function ChatWidget() {
                         size="sm"
                       />
                       <span className="text-xs text-muted-foreground">
-                        剩餘 {quota.remaining}/{quota.daily_limit}
+                        {t('remaining', { remaining: quota.remaining, limit: quota.daily_limit })}
                       </span>
                     </>
                   )}
                 </div>
               ) : (
-                <p className="text-xs text-muted-foreground">攀岩助理</p>
+                <p className="text-xs text-muted-foreground">{t('subtitle')}</p>
               )}
             </div>
             <div className="flex items-center gap-1">
@@ -692,20 +697,20 @@ export function ChatWidget() {
                   {messages.length > 0 &&
                     (showConfirmClear ? (
                       <div className="flex items-center gap-1">
-                        <span className="text-xs text-muted-foreground">確定清除？</span>
+                        <span className="text-xs text-muted-foreground">{t('confirmClear')}</span>
                         <button
                           type="button"
                           onClick={handleClear}
                           className="rounded px-1.5 py-0.5 text-xs text-destructive hover:bg-destructive/10 transition-colors"
                         >
-                          確定
+                          {t('confirm')}
                         </button>
                         <button
                           type="button"
                           onClick={() => setShowConfirmClear(false)}
                           className="rounded px-1.5 py-0.5 text-xs text-muted-foreground hover:bg-muted transition-colors"
                         >
-                          取消
+                          {t('cancel')}
                         </button>
                       </div>
                     ) : (
@@ -713,7 +718,7 @@ export function ChatWidget() {
                         type="button"
                         onClick={() => setShowConfirmClear(true)}
                         className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                        aria-label="清除對話"
+                        aria-label={t('clearChat')}
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>
@@ -723,7 +728,7 @@ export function ChatWidget() {
                     type="button"
                     onClick={handleNewChat}
                     className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                    aria-label="新對話"
+                    aria-label={t('newChat')}
                   >
                     <SquarePen className="h-4 w-4" />
                   </button>
@@ -732,7 +737,7 @@ export function ChatWidget() {
                     type="button"
                     onClick={handleOpenHistory}
                     className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                    aria-label="聊天記錄"
+                    aria-label={t('history')}
                   >
                     <History className="h-4 w-4" />
                   </button>
@@ -743,11 +748,22 @@ export function ChatWidget() {
                   type="button"
                   onClick={() => setShowHistory(false)}
                   className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                  aria-label="返回對話"
+                  aria-label={t('backToChat')}
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
               )}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false)
+                  window.location.href = '/chat'
+                }}
+                className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                aria-label={t('expand')}
+              >
+                <Expand className="h-4 w-4" />
+              </button>
               <button
                 type="button"
                 onClick={() => {
@@ -757,7 +773,7 @@ export function ChatWidget() {
                   setShowLoginPrompt(false)
                 }}
                 className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                aria-label="關閉 AI 助理"
+                aria-label={t('closeWidget')}
               >
                 <X className="h-4 w-4" />
               </button>
@@ -767,9 +783,9 @@ export function ChatWidget() {
           {/* 歷史面板 */}
           {showHistory ? (
             <div className="flex-1 overflow-y-auto p-3 space-y-1">
-              <p className="text-xs text-muted-foreground px-1 pb-1">最近對話</p>
+              <p className="text-xs text-muted-foreground px-1 pb-1">{t('recentChats')}</p>
               {sessions.length === 0 ? (
-                <p className="text-sm text-muted-foreground text-center py-8">還沒有歷史對話</p>
+                <p className="text-sm text-muted-foreground text-center py-8">{t('noHistory')}</p>
               ) : (
                 sessions.map((session) => (
                   <button
@@ -783,7 +799,7 @@ export function ChatWidget() {
                   >
                     <p className="text-sm font-medium truncate">{session.title}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      {formatRelativeTime(session.updated_at)}
+                      {formatRelativeTime(session.updated_at, t)}
                     </p>
                   </button>
                 ))
@@ -795,9 +811,7 @@ export function ChatWidget() {
               <div className="flex-1 overflow-y-auto p-4 space-y-4">
                 {messages.length === 0 ? (
                   <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
-                    <p className="text-sm text-muted-foreground px-4">
-                      詢問關於台灣攀岩路線、岩場任何問題！
-                    </p>
+                    <p className="text-sm text-muted-foreground px-4">{t('welcome')}</p>
                     <div className="w-full space-y-2">
                       {displaySuggestions.map((suggestion) => (
                         <button
@@ -811,26 +825,28 @@ export function ChatWidget() {
                       ))}
                       <button
                         type="button"
-                        onClick={() => setDisplaySuggestions(getRandomSuggestions())}
+                        onClick={() =>
+                          setDisplaySuggestions(
+                            pickRandomSuggestions(t.raw('suggestionPool') as string[])
+                          )
+                        }
                         className="mx-auto flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
                       >
                         <RefreshCw className="h-3 w-3" />
-                        換一批
+                        {t('shuffle')}
                       </button>
                     </div>
                     {showLoginPrompt && (
                       <div className="w-full text-left rounded-xl border border-border bg-muted/50 p-4 space-y-3">
                         <p className="text-sm text-foreground font-medium">
-                          請登入後使用 AI 攀岩助理
+                          {t('loginPromptTitle')}
                         </p>
-                        <p className="text-xs text-muted-foreground">
-                          登入即可詢問路線推薦、岩場資訊等問題
-                        </p>
+                        <p className="text-xs text-muted-foreground">{t('loginPromptDesc')}</p>
                         <Link
                           href="/auth/login"
                           className="inline-flex items-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
                         >
-                          前往登入
+                          {t('goLogin')}
                         </Link>
                       </div>
                     )}
@@ -849,7 +865,7 @@ export function ChatWidget() {
                     {/* 後續建議按鈕列 */}
                     {!isPending && suggestedQuestions.length > 0 && (
                       <div className="space-y-1.5 pl-1">
-                        <p className="text-xs text-muted-foreground">你可能想問</p>
+                        <p className="text-xs text-muted-foreground">{t('youMightAsk')}</p>
                         {suggestedQuestions.map((q) => (
                           <button
                             key={q}
@@ -865,14 +881,13 @@ export function ChatWidget() {
                         ))}
                       </div>
                     )}
-                    {/* 載入狀態 */}
-                    {(isPending ||
-                      (isStreaming && messages[messages.length - 1]?.content === '')) && (
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                          <span>思考中...</span>
-                        </div>
-                      )}
+                    {/* 載入狀態（非串流模式；串流模式由 ChatMessage 顯示思考中與工具過程） */}
+                    {isPending && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <span>{t('thinking')}</span>
+                      </div>
+                    )}
                     <div ref={messagesEndRef} />
                   </>
                 )}
@@ -886,11 +901,11 @@ export function ChatWidget() {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="輸入問題... (Enter 送出)"
+                    placeholder={t('inputPlaceholder')}
                     rows={1}
-                    className="flex-1 resize-none bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                    className="flex-1 resize-none bg-transparent text-sm outline-hidden placeholder:text-muted-foreground"
                     style={{ maxHeight: '120px' }}
-                    aria-label="輸入問題"
+                    aria-label={t('inputAria')}
                   />
                   {isStreaming ? (
                     <button
@@ -908,7 +923,7 @@ export function ChatWidget() {
                           if (last?.role === 'assistant') {
                             return prev.map((m, i) =>
                               i === prev.length - 1
-                                ? { ...m, content: m.content + '（已停止）' }
+                                ? { ...m, isStreaming: false, content: m.content + t('stopped') }
                                 : m
                             )
                           }
@@ -916,7 +931,7 @@ export function ChatWidget() {
                         })
                       }}
                       className="rounded-lg bg-muted p-1.5 text-foreground hover:bg-muted/80 transition-colors"
-                      aria-label="停止生成"
+                      aria-label={t('stopAria')}
                     >
                       <Square className="h-3.5 w-3.5" />
                     </button>
@@ -926,7 +941,7 @@ export function ChatWidget() {
                       onClick={() => handleSubmit(input)}
                       disabled={!input.trim() || isPending}
                       className="rounded-lg bg-primary p-1.5 text-primary-foreground disabled:opacity-50 hover:bg-primary/90 transition-colors"
-                      aria-label="送出問題"
+                      aria-label={t('sendAria')}
                     >
                       <Send className="h-3.5 w-3.5" />
                     </button>

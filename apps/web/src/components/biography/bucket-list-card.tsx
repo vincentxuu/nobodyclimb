@@ -60,13 +60,13 @@ export function BucketListCard({ item, isOwner = false, className }: BucketListC
   return (
     <div
       className={cn(
-        'bg-white rounded-lg border p-4 hover:shadow-sm transition-shadow',
+        'bg-white rounded-lg border p-4 hover:shadow-xs transition-shadow',
         isCompleted && 'bg-green-50/50 border-green-200',
         className
       )}
     >
       <div className="flex items-start gap-3">
-        <div className="flex-shrink-0 mt-1">
+        <div className="shrink-0 mt-1">
           {isCompleted ? (
             <CheckCircle className="h-5 w-5 text-green-500" />
           ) : (

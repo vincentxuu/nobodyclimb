@@ -117,10 +117,10 @@ export function FunFactSection() {
 
   if (isLoading) {
     return (
-      <section className="bg-gradient-to-r from-brand-accent/20 to-brand-accent/10 py-4 md:py-6">
+      <section className="bg-linear-to-r from-brand-accent/20 to-brand-accent/10 py-4 md:py-6">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl">
-            <div className="rounded-lg bg-white/80 p-4 shadow-sm backdrop-blur-sm md:p-6">
+            <div className="rounded-lg bg-white/80 p-4 shadow-xs backdrop-blur-xs md:p-6">
               <div className="flex items-center gap-3">
                 <div className="h-10 w-10 rounded-full bg-brand-accent/20" />
                 <div className="flex-1 space-y-2">
@@ -140,11 +140,11 @@ export function FunFactSection() {
   }
 
   return (
-    <section className="bg-gradient-to-r from-brand-accent/20 to-brand-accent/10 py-4 md:py-6">
+    <section className="bg-linear-to-r from-brand-accent/20 to-brand-accent/10 py-4 md:py-6">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-3xl">
           <div
-            className="cursor-pointer rounded-lg bg-white/80 p-4 shadow-sm backdrop-blur-sm transition-all hover:shadow-md md:p-6"
+            className="cursor-pointer rounded-lg bg-white/80 p-4 shadow-xs backdrop-blur-xs transition-all hover:shadow-md md:p-6"
             onClick={() => setIsRevealed(!isRevealed)}
           >
             {/* 標題區 */}
@@ -172,7 +172,7 @@ export function FunFactSection() {
                 </div>
               </div>
               <button
-                className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-brand-accent/30 text-brand-dark transition-colors hover:bg-brand-accent/50"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-accent/30 text-brand-dark transition-colors hover:bg-brand-accent/50"
                 aria-label={isRevealed ? t('funFactHideAnswer') : t('funFactShowAnswer')}
               >
                 {isRevealed ? (
@@ -216,7 +216,7 @@ export function FunFactSection() {
                       {currentFact.link && (
                         <Link
                           href={currentFact.link.href}
-                          className="inline-flex flex-shrink-0 items-center gap-1.5 rounded-lg bg-brand-accent/70 px-4 py-2 text-sm font-medium text-brand-dark transition-colors hover:bg-brand-accent"
+                          className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-brand-accent/70 px-4 py-2 text-sm font-medium text-brand-dark transition-colors hover:bg-brand-accent"
                           onClick={(e) => e.stopPropagation()}
                         >
                           {currentFact.link.text}

@@ -86,7 +86,7 @@ export default function ProfileTextDisplay({
     <div
       className={`w-full rounded-sm border border-[#B6B3B3] bg-white p-3 ${minHeight} ${
         isMobile ? 'text-sm' : 'text-base'
-      } break-words`}
+      } wrap-break-word`}
     >
       {text}
     </div>

@@ -228,7 +228,7 @@ export function AscentCard({
                 href={ascent.instagram_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 transition-opacity"
+                className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-purple-500 via-pink-500 to-orange-500 px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 transition-opacity"
               >
                 <Instagram className="h-3.5 w-3.5" />
                 <span>Instagram 貼文</span>

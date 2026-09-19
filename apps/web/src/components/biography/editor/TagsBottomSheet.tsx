@@ -215,7 +215,7 @@ export function TagsBottomSheet({
       }}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-xs" onClick={onClose} />
 
       {/* Bottom Sheet */}
       <div

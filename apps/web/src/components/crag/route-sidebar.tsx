@@ -42,9 +42,9 @@ export function RouteSidebar({
   const t = useTranslations('CragPage')
 
   return (
-    <aside className="hidden lg:flex lg:w-80 lg:flex-shrink-0 lg:flex-col border-r border-gray-200 bg-white">
+    <aside className="hidden lg:flex lg:w-80 lg:shrink-0 lg:flex-col border-r border-gray-200 bg-white">
       {/* 標題區 */}
-      <div className="flex-shrink-0 border-b border-gray-200 p-4">
+      <div className="shrink-0 border-b border-gray-200 p-4">
         <Link
           href={`/crag/${cragId}`}
           prefetch={false}
@@ -62,7 +62,7 @@ export function RouteSidebar({
       </div>
 
       {/* 篩選區 */}
-      <div className="flex-shrink-0 border-b border-gray-200 p-4">
+      <div className="shrink-0 border-b border-gray-200 p-4">
         <RouteListFilter
           searchQuery={filterState.searchQuery}
           onSearchChange={onSearchChange}

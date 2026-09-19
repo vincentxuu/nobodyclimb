@@ -300,7 +300,7 @@ export function BasicInfoSection({
               value={name}
               onChange={(e) => onNameChange(e.target.value)}
               placeholder={t('displayNamePlaceholder')}
-              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
+              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
               maxLength={50}
             />
             <p className="text-xs text-[#8E8C8C]">{t('displayNameHint')}</p>
@@ -317,7 +317,7 @@ export function BasicInfoSection({
               value={title || ''}
               onChange={(e) => onTitleChange(e.target.value || null)}
               placeholder={t('taglinePlaceholder')}
-              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
+              className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
               maxLength={100}
             />
             <p className="text-xs text-[#8E8C8C] flex items-center gap-1">
@@ -341,7 +341,7 @@ export function BasicInfoSection({
                   const value = e.target.value
                   onClimbingStartYearChange(value ? parseInt(value, 10) : null)
                 }}
-                className="w-32 px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors appearance-none cursor-pointer"
+                className="w-32 px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors appearance-none cursor-pointer"
               >
                 <option value="">{t('climbingStartYearSelect')}</option>
                 {yearOptions.map((year) => (
@@ -380,7 +380,7 @@ export function BasicInfoSection({
                   value={heightCm ?? ''}
                   onChange={(e) => onHeightCmChange(parseIntOrNull(e.target.value))}
                   placeholder="170"
-                  className="w-[100px] shrink-0 rounded-lg border border-[#B6B3B3] bg-white px-3 py-2 text-center text-sm text-[#1B1A1A] placeholder:text-[#9D9D9D] transition-colors focus:border-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
+                  className="w-[100px] shrink-0 rounded-lg border border-[#B6B3B3] bg-white px-3 py-2 text-center text-sm text-[#1B1A1A] placeholder:text-[#9D9D9D] transition-colors focus:border-brand-dark focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50"
                 />
                 <span className="shrink-0 whitespace-nowrap text-sm text-[#6D6C6C]">cm</span>
               </div>
@@ -396,7 +396,7 @@ export function BasicInfoSection({
                   value={armSpanCm ?? ''}
                   onChange={(e) => onArmSpanCmChange(parseIntOrNull(e.target.value))}
                   placeholder="175"
-                  className="w-[100px] shrink-0 rounded-lg border border-[#B6B3B3] bg-white px-3 py-2 text-center text-sm text-[#1B1A1A] placeholder:text-[#9D9D9D] transition-colors focus:border-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
+                  className="w-[100px] shrink-0 rounded-lg border border-[#B6B3B3] bg-white px-3 py-2 text-center text-sm text-[#1B1A1A] placeholder:text-[#9D9D9D] transition-colors focus:border-brand-dark focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50"
                 />
                 <span className="shrink-0 whitespace-nowrap text-sm text-[#6D6C6C]">cm</span>
               </div>
@@ -452,7 +452,7 @@ export function BasicInfoSection({
                     }
                   }}
                   placeholder={t('frequentLocationsInputPlaceholder')}
-                  className="w-32 px-3 py-1.5 text-sm bg-white text-[#1B1A1A] border border-dashed border-[#B6B3B3] rounded-full placeholder:text-[#9D9D9D] focus:outline-none focus:border-brand-dark"
+                  className="w-32 px-3 py-1.5 text-sm bg-white text-[#1B1A1A] border border-dashed border-[#B6B3B3] rounded-full placeholder:text-[#9D9D9D] focus:outline-hidden focus:border-brand-dark"
                 />
                 <button
                   type="button"
@@ -559,7 +559,7 @@ export function BasicInfoSection({
                   }
                 }}
                 placeholder={t('favoriteRouteTypesCustomPlaceholder')}
-                className="flex-1 max-w-xs px-3 py-1.5 text-sm bg-white text-[#1B1A1A] border border-dashed border-[#B6B3B3] rounded-full placeholder:text-[#9D9D9D] focus:outline-none focus:border-brand-dark"
+                className="flex-1 max-w-xs px-3 py-1.5 text-sm bg-white text-[#1B1A1A] border border-dashed border-[#B6B3B3] rounded-full placeholder:text-[#9D9D9D] focus:outline-hidden focus:border-brand-dark"
               />
               <button
                 type="button"
@@ -605,7 +605,7 @@ export function BasicInfoSection({
                     }
                   }}
                   placeholder="your_username"
-                  className="flex-1 min-w-0 px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
+                  className="flex-1 min-w-0 px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
                   maxLength={50}
                 />
               </div>
@@ -629,7 +629,7 @@ export function BasicInfoSection({
                   }
                 }}
                 placeholder={t('youtubePlaceholder')}
-                className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
+                className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
                 maxLength={100}
               />
             </div>
@@ -646,7 +646,7 @@ export function BasicInfoSection({
                 value={socialLinks.website || ''}
                 onChange={(e) => handleSocialLinkChange('website', e.target.value)}
                 placeholder="https://your-website.com"
-                className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
+                className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
                 maxLength={200}
               />
             </div>

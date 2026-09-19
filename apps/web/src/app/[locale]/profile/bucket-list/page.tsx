@@ -296,7 +296,7 @@ export default function BucketListPage() {
                 <select
                   value={categoryFilter}
                   onChange={(e) => setCategoryFilter(e.target.value as BucketListCategory | 'all')}
-                  className="flex items-center gap-1 rounded border border-gray-200 bg-white px-2 py-1 pr-7 text-sm text-gray-600 hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-gray-300"
+                  className="flex items-center gap-1 rounded border border-gray-200 bg-white px-2 py-1 pr-7 text-sm text-gray-600 hover:bg-gray-50 focus:outline-hidden focus:ring-1 focus:ring-gray-300"
                 >
                   <option value="all">{t('allCategories')}</option>
                   {BUCKET_LIST_CATEGORIES.map((cat) => (
@@ -367,7 +367,7 @@ export default function BucketListPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/50 sm:p-4"
+              className="fixed inset-0 z-60 flex items-end sm:items-center justify-center bg-black/50 sm:p-4"
               onClick={() => {
                 setShowForm(false)
                 setEditingItem(null)
@@ -418,7 +418,7 @@ export default function BucketListPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/50 sm:p-4"
+              className="fixed inset-0 z-60 flex items-end sm:items-center justify-center bg-black/50 sm:p-4"
               onClick={() => setCompletingItem(null)}
             >
               <motion.div

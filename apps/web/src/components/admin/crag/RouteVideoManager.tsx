@@ -206,10 +206,10 @@ export default function RouteVideoManager({ routeId, cragId }: RouteVideoManager
                 <img
                   src={video.thumbnailUrl}
                   alt={video.title}
-                  className="w-24 h-14 rounded object-cover flex-shrink-0"
+                  className="w-24 h-14 rounded object-cover shrink-0"
                 />
               ) : (
-                <div className="w-24 h-14 rounded bg-wb-20 flex items-center justify-center flex-shrink-0">
+                <div className="w-24 h-14 rounded bg-wb-20 flex items-center justify-center shrink-0">
                   <Video className="h-5 w-5 text-wb-40" />
                 </div>
               )}
@@ -224,7 +224,7 @@ export default function RouteVideoManager({ routeId, cragId }: RouteVideoManager
               </div>
 
               {/* Actions */}
-              <div className="flex items-center gap-1 flex-shrink-0">
+              <div className="flex items-center gap-1 shrink-0">
                 {video.youtubeId && (
                   <a
                     href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
@@ -306,7 +306,7 @@ export default function RouteVideoManager({ routeId, cragId }: RouteVideoManager
                 value={youtubeInput}
                 onChange={(e) => setYoutubeInput(e.target.value)}
                 placeholder="例：https://www.youtube.com/watch?v=xxxxx 或 xxxxx"
-                className="w-full px-3 py-1.5 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                className="w-full px-3 py-1.5 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
               />
             </div>
 
@@ -318,7 +318,7 @@ export default function RouteVideoManager({ routeId, cragId }: RouteVideoManager
                   value={videoTitle}
                   onChange={(e) => setVideoTitle(e.target.value)}
                   placeholder="選填"
-                  className="w-full px-3 py-1.5 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-1.5 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div>
@@ -328,7 +328,7 @@ export default function RouteVideoManager({ routeId, cragId }: RouteVideoManager
                   value={videoChannel}
                   onChange={(e) => setVideoChannel(e.target.value)}
                   placeholder="選填"
-                  className="w-full px-3 py-1.5 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-1.5 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
             </div>
@@ -407,7 +407,7 @@ export default function RouteVideoManager({ routeId, cragId }: RouteVideoManager
                   }
                 }}
                 placeholder="搜尋影片標題、頻道名稱或 YouTube ID..."
-                className="w-full pl-9 pr-3 py-1.5 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                className="w-full pl-9 pr-3 py-1.5 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
               />
             </div>
             <button
@@ -433,10 +433,10 @@ export default function RouteVideoManager({ routeId, cragId }: RouteVideoManager
                     <img
                       src={video.thumbnailUrl}
                       alt={video.title}
-                      className="w-16 h-9 rounded object-cover flex-shrink-0"
+                      className="w-16 h-9 rounded object-cover shrink-0"
                     />
                   ) : (
-                    <div className="w-16 h-9 rounded bg-wb-20 flex items-center justify-center flex-shrink-0">
+                    <div className="w-16 h-9 rounded bg-wb-20 flex items-center justify-center shrink-0">
                       <Video className="h-3.5 w-3.5 text-wb-40" />
                     </div>
                   )}
@@ -447,7 +447,7 @@ export default function RouteVideoManager({ routeId, cragId }: RouteVideoManager
                       {video.duration && ` · ${formatDuration(video.duration)}`}
                     </p>
                   </div>
-                  <Plus className="h-4 w-4 text-wb-50 flex-shrink-0" />
+                  <Plus className="h-4 w-4 text-wb-50 shrink-0" />
                 </div>
               ))}
             </div>

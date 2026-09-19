@@ -2,16 +2,16 @@ name: Code Review
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, ready_for_review]
 
 jobs:
   review:
     name: AI Code Review
     runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
     permissions:
       pull-requests: write
       contents: read
-      models: read
 
     steps:
       - name: Checkout
@@ -21,46 +21,69 @@ jobs:
 
       - name: Get diff
         id: diff
-        env:
-          BASE: ${{ github.event.pull_request.base.ref }}
-          HEAD: ${{ github.event.pull_request.head.ref }}
         run: |
-          DIFF=$(git diff "origin/$BASE..origin/$HEAD" -- '*.ts' '*.tsx' '*.js' '*.jsx' '*.json' | head -c 12000)
-          STAT=$(git diff "origin/$BASE..origin/$HEAD" --stat | tail -5)
-          echo "DIFF<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$DIFF" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
-          echo "STAT<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$STAT" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
+          git fetch origin ${{ github.event.pull_request.base.ref }} --depth=100
 
-      - name: Review with GitHub Models
+          FILES=$(git diff "origin/${{ github.event.pull_request.base.ref }}..${{ github.event.pull_request.head.sha }}" \
+            --name-only -- '*.ts' '*.tsx' '*.js' '*.jsx' '*.yml' '*.yaml' '*.json' \
+            | grep -v 'pnpm-lock.yaml' | grep -v 'package-lock.json' | head -30)
+          STAT=$(git diff "origin/${{ github.event.pull_request.base.ref }}..${{ github.event.pull_request.head.sha }}" --stat | tail -5)
+
+          DIFF=""
+          TOTAL=0
+          MAX=30000
+          for FILE in $FILES; do
+            FILE_DIFF=$(git diff "origin/${{ github.event.pull_request.base.ref }}..${{ github.event.pull_request.head.sha }}" -- "$FILE" 2>/dev/null)
+            FILE_SIZE=${#FILE_DIFF}
+            if [ $((TOTAL + FILE_SIZE)) -gt $MAX ]; then
+              DIFF="${DIFF}\n\n... (truncated, remaining files omitted)"
+              break
+            fi
+            DIFF="${DIFF}\n${FILE_DIFF}"
+            TOTAL=$((TOTAL + FILE_SIZE))
+          done
+
+          echo "DIFF<<DIFFEOF" >> "$GITHUB_OUTPUT"
+          echo -e "$DIFF" >> "$GITHUB_OUTPUT"
+          echo "DIFFEOF" >> "$GITHUB_OUTPUT"
+          echo "STAT<<STATEOF" >> "$GITHUB_OUTPUT"
+          echo "$STAT" >> "$GITHUB_OUTPUT"
+          echo "STATEOF" >> "$GITHUB_OUTPUT"
+          echo "FILES<<FILESEOF" >> "$GITHUB_OUTPUT"
+          echo "$FILES" >> "$GITHUB_OUTPUT"
+          echo "FILESEOF" >> "$GITHUB_OUTPUT"
+
+      - name: Review with Cloudflare Workers AI
         id: review
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           DIFF: ${{ steps.diff.outputs.DIFF }}
           STAT: ${{ steps.diff.outputs.STAT }}
+          FILES: ${{ steps.diff.outputs.FILES }}
           BASE: ${{ github.event.pull_request.base.ref }}
-          HEAD: ${{ github.event.pull_request.head.ref }}
+          HEAD: ${{ github.head_ref }}
         run: |
-          RESPONSE=$(curl -s -X POST "https://models.inference.ai.azure.com/chat/completions" \
-            -H "Authorization: Bearer $GITHUB_TOKEN" \
+          RESPONSE=$(curl -s -X POST \
+            "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT_ID/ai/v1/chat/completions" \
+            -H "Authorization: Bearer $CF_API_TOKEN" \
             -H "Content-Type: application/json" \
             -d "$(jq -n \
               --arg diff "$DIFF" \
               --arg stat "$STAT" \
+              --arg files "$FILES" \
               --arg base "$BASE" \
               --arg head "$HEAD" \
               '{
-                model: "gpt-4o-mini",
+                model: "@cf/kimi-k2.7-code",
                 messages: [
                   {
                     role: "system",
-                    content: "你是一個資深的 code reviewer。根據 git diff 進行 code review，使用繁體中文。\n\n只回報真正的問題，不要吹毛求疵。格式：\n\n## Code Review\n\n### 問題\n\n| 嚴重度 | 檔案 | 問題 | 建議 |\n|--------|------|------|------|\n\n嚴重度：🔴 High（bug/安全）、🟡 Medium（效能/維護）、🟢 Low（風格/優化）\n\n如果沒有發現問題，只回覆「✅ 沒有發現明顯問題」。\n\n### 總結\n\n一句話總結這次變更的品質。"
+                    content: "你是一個資深的 code reviewer，專精 TypeScript、React、Next.js、Hono、Cloudflare Workers。根據 git diff 進行 code review，使用繁體中文。\n\n只回報真正的問題（bug、安全風險、效能問題），不要吹毛求疵。忽略風格和格式問題（有 linter 處理）。\n\n格式：\n\n## Code Review\n\n**變更檔案：** (列出變更的檔案)\n\n### 問題\n\n| 嚴重度 | 檔案 | 問題 | 建議 |\n|--------|------|------|------|\n\n嚴重度：🔴 High（bug/安全）、🟡 Medium（效能/維護）、🟢 Low（可選優化）\n\n如果沒有發現問題，只回覆「✅ 沒有發現明顯問題」。\n\n### 總結\n\n一句話總結這次變更的品質。"
                   },
                   {
                     role: "user",
-                    content: ("Review 這次 " + $head + " → " + $base + " 的變更：\n\n變更統計：\n" + $stat + "\n\nDiff：\n```\n" + $diff + "\n```")
+                    content: ("Review " + $head + " → " + $base + " 的變更：\n\n變更檔案：\n" + $files + "\n\n變更統計：\n" + $stat + "\n\nDiff：\n```\n" + $diff + "\n```")
                   }
                 ],
                 temperature: 0.3
@@ -70,15 +93,14 @@ jobs:
           BODY=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty')
 
           if [ -z "$BODY" ]; then
-            echo "❌ Failed to generate review"
-            echo "$RESPONSE"
+            echo "⚠️ Failed to generate review, skipping"
+            echo "$RESPONSE" | head -5
             exit 0
           fi
 
           echo "BODY<<EOF" >> "$GITHUB_OUTPUT"
           echo "$BODY" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
-          echo "✅ Review generated"
 
       - name: Post review comment
         if: steps.review.outputs.BODY != ''

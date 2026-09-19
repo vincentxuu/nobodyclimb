@@ -22,6 +22,28 @@ jest.mock('framer-motion', () => ({
   AnimatePresence: ({ children }) => <>{children}</>,
 }))
 
+// Mock next-intl with real zh translations
+const zhMessages = require('./messages/zh.json')
+jest.mock('next-intl', () => ({
+  useTranslations: (namespace) => {
+    const msgs = namespace ? zhMessages[namespace] || {} : zhMessages
+    return (key, values) => {
+      let msg = msgs[key] ?? key
+      if (values && typeof msg === 'string') {
+        Object.entries(values).forEach(([k, v]) => {
+          msg = msg.replace(`{${k}}`, String(v))
+        })
+      }
+      return msg
+    }
+  },
+  useLocale: () => 'zh',
+  useMessages: () => zhMessages,
+  useNow: () => new Date(),
+  useTimeZone: () => 'Asia/Taipei',
+  NextIntlClientProvider: ({ children }) => <>{children}</>,
+}))
+
 // Mock next/image
 jest.mock('next/image', () => ({
   __esModule: true,

@@ -55,7 +55,7 @@ const CommentItem = ({
 
   return (
     <div className="flex gap-3">
-      <div className="h-8 w-8 flex-shrink-0 overflow-hidden rounded-full bg-gray-200">
+      <div className="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-gray-200">
         {comment.avatar_url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={comment.avatar_url} alt={displayName} className="h-full w-full object-cover" />
@@ -78,7 +78,7 @@ const CommentItem = ({
             </button>
           )}
         </div>
-        <p className="mt-1 break-words text-sm text-gray-700">{comment.content}</p>
+        <p className="mt-1 wrap-break-word text-sm text-gray-700">{comment.content}</p>
       </div>
     </div>
   )

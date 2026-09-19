@@ -115,7 +115,7 @@ export function OneLinersSection({
                       {/* Status Icon */}
                       <div
                         className={cn(
-                          'w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0',
+                          'w-5 h-5 rounded-full flex items-center justify-center shrink-0',
                           isFilled ? 'bg-brand-accent text-brand-dark' : 'border-2 border-[#B6B3B3]'
                         )}
                       >
@@ -147,7 +147,7 @@ export function OneLinersSection({
                     <ChevronDown
                       size={20}
                       className={cn(
-                        'text-[#B6B3B3] transition-transform flex-shrink-0',
+                        'text-[#B6B3B3] transition-transform shrink-0',
                         isExpanded && 'rotate-180'
                       )}
                     />
@@ -167,7 +167,7 @@ export function OneLinersSection({
                         value={answer || ''}
                         onChange={(e) => onAnswerChange(question.id, e.target.value || null)}
                         placeholder={t('answerInputPlaceholder')}
-                        className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
+                        className="w-full px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg text-[#1B1A1A] placeholder:text-[#9D9D9D] focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors"
                         maxLength={200}
                       />
                       <div className="flex justify-between items-center">

@@ -4,6 +4,7 @@ import {
   Check,
   Copy,
   ExternalLink,
+  Loader2,
   MountainSnow,
   RefreshCw,
   ThumbsDown,
@@ -11,8 +12,10 @@ import {
   Youtube,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import type { AISource } from '@/lib/api/ai'
+import { ToolActivity } from '@/components/ai-elements/tool-activity'
+import type { AISource, AIStreamProgressEvent } from '@/lib/api/ai'
 import { useSubmitFeedback } from '@/lib/api/ai'
 import { cn } from '@/lib/utils'
 import { SourceCard } from './SourceCard'
@@ -273,6 +276,10 @@ export interface ChatMessageData {
   content: string
   sources?: AISource[]
   queryId?: string
+  /** 串流中：尚未收到 done 事件 */
+  isStreaming?: boolean
+  /** 工具使用過程（SSE progress 事件） */
+  toolProgress?: AIStreamProgressEvent[]
 }
 
 interface ChatMessageProps {
@@ -288,11 +295,21 @@ export function ChatMessage({
   onRegenerate,
   isPending = false,
 }: ChatMessageProps) {
+  const t = useTranslations('Chat')
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false)
   const [copied, setCopied] = useState(false)
   const { mutate: submitFeedback } = useSubmitFeedback()
 
   const isUser = message.role === 'user'
+  const hasToolProgress = !!message.toolProgress && message.toolProgress.length > 0
+  // 工具執行中由 ToolActivity 的摺疊列負責 loading；其餘等待時間顯示狀態文字：
+  // 尚未呼叫工具 → 思考中；工具都完成、答案還沒出來 → 正在整理回答（agent 在此階段一次回傳整段答案，沒有 token）
+  const isToolRunning = !!message.toolProgress?.some((p) => p.status === 'executing')
+  const showThinking = !isUser && !!message.isStreaming && !message.content && !isToolRunning
+  const waitingLabel = hasToolProgress ? t('composing') : t('thinking')
+
+  // 非串流的空訊息不渲染，避免空白氣泡（串流中改顯示思考中 / 工具過程）
+  if (!isUser && !message.content && !message.isStreaming && !hasToolProgress) return null
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(message.content)
@@ -311,40 +328,59 @@ export function ChatMessage({
   return (
     <div className={cn('flex', isUser ? 'justify-end' : 'justify-start')}>
       <div className="max-w-[85%] space-y-2">
+        {/* 工具使用過程（僅助理訊息，仿 Claude 摺疊列） */}
+        {!isUser && hasToolProgress && (
+          <ToolActivity
+            events={message.toolProgress ?? []}
+            isStreaming={!!message.isStreaming}
+            className="pl-1"
+          />
+        )}
+
+        {/* 串流中尚無內容：思考中提示 */}
+        {showThinking && (
+          <p className="flex items-center gap-1.5 pl-1 text-sm text-muted-foreground">
+            <Loader2 className="size-3.5 shrink-0 animate-spin" />
+            <span className="text-shimmer">{waitingLabel}</span>
+          </p>
+        )}
+
         {/* 訊息氣泡 */}
-        <div
-          className={cn(
-            'rounded-2xl px-4 py-2.5 text-sm leading-relaxed',
-            isUser
-              ? 'bg-primary text-primary-foreground rounded-br-sm'
-              : 'bg-muted text-foreground rounded-bl-sm'
-          )}
-        >
-          {isUser ? (
-            <span className="whitespace-pre-wrap">{message.content}</span>
-          ) : (
-            <MarkdownContent text={message.content} />
-          )}
-        </div>
+        {(isUser || message.content) && (
+          <div
+            className={cn(
+              'rounded-2xl px-4 py-2.5 text-sm leading-relaxed',
+              isUser
+                ? 'bg-primary text-primary-foreground rounded-br-sm'
+                : 'bg-muted text-foreground rounded-bl-sm'
+            )}
+          >
+            {isUser ? (
+              <span className="whitespace-pre-wrap">{message.content}</span>
+            ) : (
+              <MarkdownContent text={message.content} />
+            )}
+          </div>
+        )}
 
         {/* 來源卡片（僅助理訊息） */}
         {!isUser && message.sources && message.sources.length > 0 && (
           <div className="space-y-1.5 pl-1">
-            <p className="text-xs text-muted-foreground">參考來源</p>
+            <p className="text-xs text-muted-foreground">{t('sources')}</p>
             {message.sources.map((source) => (
               <SourceCard key={source.id} source={source} />
             ))}
           </div>
         )}
 
-        {/* 操作按鈕列（僅助理訊息） */}
-        {!isUser && (
+        {/* 操作按鈕列（僅助理訊息，串流結束後才顯示） */}
+        {!isUser && !message.isStreaming && message.content && (
           <div className="flex items-center gap-1 pl-1">
             {/* 複製按鈕 */}
             <button
               onClick={handleCopy}
               className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-              aria-label="複製內容"
+              aria-label={t('copyAria')}
             >
               {copied ? (
                 <Check className="h-3.5 w-3.5 text-green-600" />
@@ -359,7 +395,7 @@ export function ChatMessage({
                 onClick={onRegenerate}
                 disabled={isPending}
                 className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors disabled:opacity-40"
-                aria-label="重新生成回應"
+                aria-label={t('regenerateAria')}
               >
                 <RefreshCw className={cn('h-3.5 w-3.5', isPending && 'animate-spin')} />
               </button>
@@ -368,20 +404,20 @@ export function ChatMessage({
             {/* 回饋按鈕（需有 queryId） */}
             {message.queryId &&
               (feedbackSubmitted ? (
-                <span className="text-xs text-muted-foreground">感謝您的回饋！</span>
+                <span className="text-xs text-muted-foreground">{t('thanksFeedback')}</span>
               ) : (
                 <>
                   <button
                     onClick={() => handleFeedback(5)}
                     className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                    aria-label="好評"
+                    aria-label={t('goodAria')}
                   >
                     <ThumbsUp className="h-3.5 w-3.5" />
                   </button>
                   <button
                     onClick={() => handleFeedback(1)}
                     className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                    aria-label="差評"
+                    aria-label={t('badAria')}
                   >
                     <ThumbsDown className="h-3.5 w-3.5" />
                   </button>

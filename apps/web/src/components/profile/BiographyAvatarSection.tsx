@@ -114,7 +114,7 @@ export default function BiographyAvatarSection({
         <h3 className="mb-3 text-sm font-medium text-gray-700">人物誌頭像</h3>
         <div className="flex items-start gap-4">
           {/* 頭像顯示 */}
-          <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-full border-2 border-gray-200 bg-gray-100">
+          <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-gray-200 bg-gray-100">
             {avatarUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={avatarUrl} alt="頭像" className="h-full w-full object-cover" />
@@ -163,7 +163,7 @@ export default function BiographyAvatarSection({
         <h3 className="mb-3 text-sm font-medium text-gray-700">人物誌封面照片</h3>
         <div className="space-y-3">
           {/* 封面照片顯示 */}
-          <div className="relative aspect-[21/9] w-full overflow-hidden rounded-lg border-2 border-dashed border-gray-300 bg-gray-100">
+          <div className="relative aspect-21/9 w-full overflow-hidden rounded-lg border-2 border-dashed border-gray-300 bg-gray-100">
             {coverImageUrl ? (
               <>
                 {/* eslint-disable-next-line @next/next/no-img-element */}

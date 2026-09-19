@@ -180,7 +180,7 @@ export default function AdminAccessLogs() {
               setErrorsData(null)
               setSlowData(null)
             }}
-            className="px-3 py-2 bg-white border border-wb-20 rounded-lg text-sm text-wb-100 focus:outline-none focus:ring-2 focus:ring-brand-yellow-100/50 focus:border-brand-yellow-100"
+            className="px-3 py-2 bg-white border border-wb-20 rounded-lg text-sm text-wb-100 focus:outline-hidden focus:ring-2 focus:ring-brand-yellow-100/50 focus:border-brand-yellow-100"
           >
             <option value={1}>過去 1 小時</option>
             <option value={6}>過去 6 小時</option>
@@ -219,7 +219,7 @@ export default function AdminAccessLogs() {
       {/* 錯誤提示 */}
       {error && (
         <div className="mb-6 p-4 bg-brand-red-100/10 border border-brand-red-100/30 rounded-lg flex items-center gap-3">
-          <AlertCircle className="w-5 h-5 text-brand-red-100 flex-shrink-0" />
+          <AlertCircle className="w-5 h-5 text-brand-red-100 shrink-0" />
           <p className="text-brand-red-100">{error}</p>
         </div>
       )}
@@ -237,7 +237,7 @@ export default function AdminAccessLogs() {
         <div className="space-y-6">
           {/* 摘要卡片 */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-            <div className="bg-white p-4 rounded-lg border shadow-sm">
+            <div className="bg-white p-4 rounded-lg border shadow-xs">
               <div className="flex items-center gap-2 text-wb-70 mb-2">
                 <Activity className="w-4 h-4" />
                 <span className="text-sm">總請求數</span>
@@ -246,7 +246,7 @@ export default function AdminAccessLogs() {
                 {summaryData.summary.totalRequests?.toLocaleString() || 0}
               </p>
             </div>
-            <div className="bg-white p-4 rounded-lg border shadow-sm">
+            <div className="bg-white p-4 rounded-lg border shadow-xs">
               <div className="flex items-center gap-2 text-wb-70 mb-2">
                 <Zap className="w-4 h-4" />
                 <span className="text-sm">平均響應時間</span>
@@ -255,7 +255,7 @@ export default function AdminAccessLogs() {
                 {formatResponseTime(summaryData.summary.avgResponseTime || 0)}
               </p>
             </div>
-            <div className="bg-white p-4 rounded-lg border shadow-sm">
+            <div className="bg-white p-4 rounded-lg border shadow-xs">
               <div className="flex items-center gap-2 text-green-500 mb-2">
                 <Server className="w-4 h-4" />
                 <span className="text-sm">成功請求</span>
@@ -264,7 +264,7 @@ export default function AdminAccessLogs() {
                 {summaryData.summary.successCount?.toLocaleString() || 0}
               </p>
             </div>
-            <div className="bg-white p-4 rounded-lg border shadow-sm">
+            <div className="bg-white p-4 rounded-lg border shadow-xs">
               <div className="flex items-center gap-2 text-yellow-500 mb-2">
                 <AlertTriangle className="w-4 h-4" />
                 <span className="text-sm">客戶端錯誤</span>
@@ -273,7 +273,7 @@ export default function AdminAccessLogs() {
                 {summaryData.summary.clientErrorCount?.toLocaleString() || 0}
               </p>
             </div>
-            <div className="bg-white p-4 rounded-lg border shadow-sm">
+            <div className="bg-white p-4 rounded-lg border shadow-xs">
               <div className="flex items-center gap-2 text-red-500 mb-2">
                 <AlertCircle className="w-4 h-4" />
                 <span className="text-sm">伺服器錯誤</span>
@@ -287,7 +287,7 @@ export default function AdminAccessLogs() {
           {/* 圖表區 */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* 熱門路徑 */}
-            <div className="bg-white p-6 rounded-lg border shadow-sm">
+            <div className="bg-white p-6 rounded-lg border shadow-xs">
               <h3 className="text-lg font-semibold text-wb-100 mb-4">熱門 API 路徑</h3>
               <SimpleBarChart
                 data={summaryData.topPaths as unknown as Record<string, unknown>[]}
@@ -297,7 +297,7 @@ export default function AdminAccessLogs() {
             </div>
 
             {/* HTTP 方法分布 */}
-            <div className="bg-white p-6 rounded-lg border shadow-sm">
+            <div className="bg-white p-6 rounded-lg border shadow-xs">
               <h3 className="text-lg font-semibold text-wb-100 mb-4">HTTP 方法分布</h3>
               <SimpleBarChart
                 data={summaryData.methodDistribution as unknown as Record<string, unknown>[]}
@@ -307,7 +307,7 @@ export default function AdminAccessLogs() {
             </div>
 
             {/* 國家分布 */}
-            <div className="bg-white p-6 rounded-lg border shadow-sm">
+            <div className="bg-white p-6 rounded-lg border shadow-xs">
               <h3 className="text-lg font-semibold text-wb-100 mb-4 flex items-center gap-2">
                 <Globe className="w-5 h-5" />
                 訪問國家分布
@@ -320,7 +320,7 @@ export default function AdminAccessLogs() {
             </div>
 
             {/* 每小時請求量 */}
-            <div className="bg-white p-6 rounded-lg border shadow-sm">
+            <div className="bg-white p-6 rounded-lg border shadow-xs">
               <h3 className="text-lg font-semibold text-wb-100 mb-4">每小時請求量</h3>
               <SimpleBarChart
                 data={summaryData.hourlyRequests as unknown as Record<string, unknown>[]}
@@ -335,7 +335,7 @@ export default function AdminAccessLogs() {
 
       {/* 請求日誌 */}
       {!loading && activeTab === 'logs' && logsData && (
-        <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
+        <div className="bg-white rounded-lg border shadow-xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-wb-10">
@@ -404,7 +404,7 @@ export default function AdminAccessLogs() {
 
       {/* 錯誤日誌 */}
       {!loading && activeTab === 'errors' && errorsData && (
-        <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
+        <div className="bg-white rounded-lg border shadow-xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-wb-10">
@@ -471,7 +471,7 @@ export default function AdminAccessLogs() {
 
       {/* 慢請求 */}
       {!loading && activeTab === 'slow' && slowData && (
-        <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
+        <div className="bg-white rounded-lg border shadow-xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-wb-10">

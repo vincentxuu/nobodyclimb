@@ -115,7 +115,7 @@ export default function UserMenu() {
                   type="button"
                   className={`rounded-md px-2 py-1.5 text-sm font-medium transition-colors ${
                     activeTab === 'explore'
-                      ? 'bg-white text-[#1B1A1A] shadow-sm'
+                      ? 'bg-white text-[#1B1A1A] shadow-xs'
                       : 'text-[#6D6C6C] hover:text-[#1B1A1A]'
                   }`}
                   onClick={() => setActiveTab('explore')}
@@ -126,7 +126,7 @@ export default function UserMenu() {
                   type="button"
                   className={`rounded-md px-2 py-1.5 text-sm font-medium transition-colors ${
                     activeTab === 'personal'
-                      ? 'bg-white text-[#1B1A1A] shadow-sm'
+                      ? 'bg-white text-[#1B1A1A] shadow-xs'
                       : 'text-[#6D6C6C] hover:text-[#1B1A1A]'
                   }`}
                   onClick={() => setActiveTab('personal')}

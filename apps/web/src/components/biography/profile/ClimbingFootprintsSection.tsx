@@ -45,12 +45,12 @@ function TimelineLocationItem({
     >
       {/* 連接線 */}
       {!isLast && (
-        <div className="absolute left-[11px] top-6 h-full w-0.5 bg-gradient-to-b from-brand-light to-transparent" />
+        <div className="absolute left-[11px] top-6 h-full w-0.5 bg-linear-to-b from-brand-light to-transparent" />
       )}
 
       {/* 節點圓點 */}
       <div className="absolute left-0 top-1.5 flex h-6 w-6 items-center justify-center">
-        <div className="h-3 w-3 rounded-full border-2 border-brand-dark bg-white shadow-sm" />
+        <div className="h-3 w-3 rounded-full border-2 border-brand-dark bg-white shadow-xs" />
       </div>
 
       {/* 內容卡片 */}
@@ -218,7 +218,7 @@ export function ClimbingFootprintsSection({ person }: ClimbingFootprintsSectionP
 
   if (loading) {
     return (
-      <section className="bg-gradient-to-b from-page-bg to-white py-16">
+      <section className="bg-linear-to-b from-page-bg to-white py-16">
         <div className="container mx-auto flex max-w-3xl justify-center px-4">
           <Loader2 className="h-8 w-8 animate-spin text-brand-dark" />
         </div>
@@ -273,7 +273,7 @@ export function ClimbingFootprintsSection({ person }: ClimbingFootprintsSectionP
       : '-'
 
   return (
-    <section className="bg-gradient-to-b from-page-bg to-white py-16">
+    <section className="bg-linear-to-b from-page-bg to-white py-16">
       <div className="container mx-auto max-w-3xl px-4">
         {/* 標題 */}
         <motion.div
@@ -302,7 +302,7 @@ export function ClimbingFootprintsSection({ person }: ClimbingFootprintsSectionP
             {/* 時間軸 */}
             <div className="relative">
               {/* 主時間線 */}
-              <div className="absolute left-5 top-0 h-full w-0.5 bg-gradient-to-b from-brand-dark via-brand-light to-transparent" />
+              <div className="absolute left-5 top-0 h-full w-0.5 bg-linear-to-b from-brand-dark via-brand-light to-transparent" />
 
               {/* 年份區塊 */}
               <div className="space-y-8">

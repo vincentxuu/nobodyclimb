@@ -109,7 +109,7 @@ export function RouteListFilter({
           placeholder={t('searchRoutePlaceholder')}
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full rounded-lg border border-gray-200 bg-white py-2 pl-9 pr-8 text-sm outline-none transition-colors placeholder:text-gray-400 focus:border-[#FFE70C] focus:ring-1 focus:ring-[#FFE70C]/20"
+          className="w-full rounded-lg border border-gray-200 bg-white py-2 pl-9 pr-8 text-sm outline-hidden transition-colors placeholder:text-gray-400 focus:border-[#FFE70C] focus:ring-1 focus:ring-[#FFE70C]/20"
         />
         {searchQuery && (
           <button
@@ -125,7 +125,7 @@ export function RouteListFilter({
       <select
         value={selectedArea}
         onChange={(e) => onAreaChange(e.target.value)}
-        className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none transition-colors focus:border-[#FFE70C] focus:ring-1 focus:ring-[#FFE70C]/20"
+        className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-hidden transition-colors focus:border-[#FFE70C] focus:ring-1 focus:ring-[#FFE70C]/20"
       >
         <option value="all">{t('filterAllAreas')}</option>
         {areas.map((area) => (
@@ -140,7 +140,7 @@ export function RouteListFilter({
         <select
           value={selectedSector}
           onChange={(e) => onSectorChange(e.target.value)}
-          className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none transition-colors focus:border-[#FFE70C] focus:ring-1 focus:ring-[#FFE70C]/20"
+          className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-hidden transition-colors focus:border-[#FFE70C] focus:ring-1 focus:ring-[#FFE70C]/20"
         >
           <option value="all">{t('filterAllSectors')}</option>
           {sectors.map((sector) => (
@@ -157,7 +157,7 @@ export function RouteListFilter({
         <select
           value={selectedGrade}
           onChange={(e) => onGradeChange(e.target.value)}
-          className="w-full rounded-lg border border-gray-200 bg-white px-2 py-2 text-sm outline-none transition-colors focus:border-[#FFE70C] focus:ring-1 focus:ring-[#FFE70C]/20"
+          className="w-full rounded-lg border border-gray-200 bg-white px-2 py-2 text-sm outline-hidden transition-colors focus:border-[#FFE70C] focus:ring-1 focus:ring-[#FFE70C]/20"
         >
           {GRADE_RANGES.map((grade) => (
             <option key={grade.id} value={grade.id}>
@@ -170,7 +170,7 @@ export function RouteListFilter({
         <select
           value={selectedType}
           onChange={(e) => onTypeChange(e.target.value)}
-          className="w-full rounded-lg border border-gray-200 bg-white px-2 py-2 text-sm outline-none transition-colors focus:border-[#FFE70C] focus:ring-1 focus:ring-[#FFE70C]/20"
+          className="w-full rounded-lg border border-gray-200 bg-white px-2 py-2 text-sm outline-hidden transition-colors focus:border-[#FFE70C] focus:ring-1 focus:ring-[#FFE70C]/20"
         >
           {ROUTE_TYPES.map((type) => (
             <option key={type.id} value={type.id}>

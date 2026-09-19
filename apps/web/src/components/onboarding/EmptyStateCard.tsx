@@ -90,7 +90,7 @@ export function EmptyStateCard({
   variant = 'default',
 }: EmptyStateCardProps) {
   const variants = {
-    default: 'bg-white border border-gray-200 shadow-sm',
+    default: 'bg-white border border-gray-200 shadow-xs',
     encouragement: 'bg-primary/5 border border-primary/20',
     minimal: 'bg-transparent',
   }

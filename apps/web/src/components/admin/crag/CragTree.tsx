@@ -273,7 +273,7 @@ export default function CragTree({
   return (
     <div className="flex flex-col h-full">
       {/* Search and filter */}
-      <div className="p-3 border-b border-wb-20 space-y-2 flex-shrink-0">
+      <div className="p-3 border-b border-wb-20 space-y-2 shrink-0">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-wb-50" />
           <input
@@ -281,13 +281,13 @@ export default function CragTree({
             placeholder="搜尋岩場..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+            className="w-full pl-9 pr-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
           />
         </div>
         <select
           value={region}
           onChange={(e) => setRegion(e.target.value)}
-          className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20 hidden lg:block"
+          className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 hidden lg:block"
         >
           <option value="">所有區域</option>
           {REGIONS.map((r) => (
@@ -391,7 +391,7 @@ function CragNode({
         >
           {crag.is_featured ? (
             <Star
-              className={`h-3.5 w-3.5 flex-shrink-0 ${
+              className={`h-3.5 w-3.5 shrink-0 ${
                 isCragSelected
                   ? 'text-yellow-300 fill-yellow-300'
                   : 'text-yellow-500 fill-yellow-500'
@@ -399,15 +399,11 @@ function CragNode({
             />
           ) : (
             <Mountain
-              className={`h-3.5 w-3.5 flex-shrink-0 ${
-                isCragSelected ? 'text-white/70' : 'text-wb-50'
-              }`}
+              className={`h-3.5 w-3.5 shrink-0 ${isCragSelected ? 'text-white/70' : 'text-wb-50'}`}
             />
           )}
           <span className="text-sm font-medium truncate">{crag.name}</span>
-          <span
-            className={`text-xs flex-shrink-0 ${isCragSelected ? 'text-white/60' : 'text-wb-40'}`}
-          >
+          <span className={`text-xs shrink-0 ${isCragSelected ? 'text-white/60' : 'text-wb-40'}`}>
             ({crag.route_count || 0})
           </span>
         </div>
@@ -523,14 +519,10 @@ function AreaNode({
           onClick={() => onItemClick('area', area.id, { cragId, areaId: area.id }, area, { crag })}
         >
           <FolderOpen
-            className={`h-3.5 w-3.5 flex-shrink-0 ${
-              isAreaSelected ? 'text-white/70' : 'text-wb-50'
-            }`}
+            className={`h-3.5 w-3.5 shrink-0 ${isAreaSelected ? 'text-white/70' : 'text-wb-50'}`}
           />
           <span className="text-sm truncate">{area.name}</span>
-          <span
-            className={`text-xs flex-shrink-0 ${isAreaSelected ? 'text-white/60' : 'text-wb-40'}`}
-          >
+          <span className={`text-xs shrink-0 ${isAreaSelected ? 'text-white/60' : 'text-wb-40'}`}>
             ({area.route_count || 0})
           </span>
         </div>
@@ -684,9 +676,7 @@ function SectorNode({
           }
         >
           <Layers
-            className={`h-3.5 w-3.5 flex-shrink-0 ${
-              isSectorSelected ? 'text-white/70' : 'text-wb-50'
-            }`}
+            className={`h-3.5 w-3.5 shrink-0 ${isSectorSelected ? 'text-white/70' : 'text-wb-50'}`}
           />
           <span className="text-sm truncate">{sector.name}</span>
         </div>
@@ -784,13 +774,11 @@ function RouteNode({
         •
       </span>
       <RouteIcon
-        className={`h-3 w-3 flex-shrink-0 ${isRouteSelected ? 'text-white/70' : 'text-wb-50'}`}
+        className={`h-3 w-3 shrink-0 ${isRouteSelected ? 'text-white/70' : 'text-wb-50'}`}
       />
       <span className="text-sm truncate flex-1">{route.name}</span>
       {route.grade && (
-        <span
-          className={`text-xs flex-shrink-0 ${isRouteSelected ? 'text-white/60' : 'text-wb-40'}`}
-        >
+        <span className={`text-xs shrink-0 ${isRouteSelected ? 'text-white/60' : 'text-wb-40'}`}>
           {route.grade}
         </span>
       )}

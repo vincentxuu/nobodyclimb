@@ -120,7 +120,7 @@ const BookmarkCard = ({ article, onRemoveBookmark, isRemoving, isMobile }: Bookm
   return (
     <div className="rounded-sm border border-[#DBD8D8] p-5">
       <div className="flex gap-6">
-        <div className="relative h-[120px] w-[200px] flex-shrink-0">
+        <div className="relative h-[120px] w-[200px] shrink-0">
           {article.cover_image ? (
             <Image
               src={article.cover_image}

@@ -140,7 +140,7 @@ export function StoryItem({
       {/* Status Icon */}
       <div
         className={cn(
-          'mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0',
+          'mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0',
           isFilled ? 'bg-brand-accent text-brand-dark' : 'border-2 border-[#B6B3B3]'
         )}
       >
@@ -162,7 +162,7 @@ export function StoryItem({
       {/* Action */}
       <span
         className={cn(
-          'text-sm font-medium px-3 py-1 rounded-full flex-shrink-0',
+          'text-sm font-medium px-3 py-1 rounded-full shrink-0',
           isFilled ? 'text-[#1B1A1A] bg-brand-accent/20' : 'text-[#3F3D3D] bg-[#F5F5F5]'
         )}
       >

@@ -33,7 +33,7 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ photos, onPhotoClick }) => {
       {photos.map((photo, index) => (
         <motion.div
           key={photo.id}
-          className="group relative aspect-[2/3] cursor-pointer overflow-hidden"
+          className="group relative aspect-2/3 cursor-pointer overflow-hidden"
           onClick={() => onPhotoClick(photo, index)}
           whileHover={{ scale: 1.03 }}
           transition={{ type: 'spring', stiffness: 300 }}

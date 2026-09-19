@@ -92,7 +92,7 @@ const PhotoEditDialog: React.FC<PhotoEditDialogProps> = ({ isOpen, photo, onClos
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b px-6 py-4 flex-shrink-0">
+          <div className="flex items-center justify-between border-b px-6 py-4 shrink-0">
             <h2 className="text-lg font-semibold text-neutral-800">編輯照片資訊</h2>
             <button
               onClick={handleClose}

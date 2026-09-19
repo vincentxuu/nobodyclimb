@@ -1,6 +1,90 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@config "../../tailwind.config.js";
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+@utility safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* scroll-fade: 滾動容器邊緣漸層淡出 */
+
+@utility scroll-fade {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 1rem,
+    black calc(100% - 1rem),
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 1rem,
+    black calc(100% - 1rem),
+    transparent
+  );
+}
+
+@utility scroll-fade-x {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 1rem,
+    black calc(100% - 1rem),
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 1rem,
+    black calc(100% - 1rem),
+    transparent
+  );
+}
+
+@utility shimmer {
+  background: linear-gradient(90deg, transparent 0%, hsl(var(--muted)) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* 文字掃光：兩端用 currentColor、中段用對比色。
+   搭配 text-muted-foreground 使用；中段若也是 muted-foreground 會與文字同色而看不到動畫 */
+@utility text-shimmer {
+  background: linear-gradient(
+    90deg,
+    currentColor 25%,
+    hsl(var(--foreground)) 50%,
+    currentColor 75%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s infinite;
+}
 
 @layer base {
   :root {
@@ -97,87 +181,103 @@
   }
 }
 
-/* 自定義捲動條樣式 */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgba(155, 155, 155, 0.5);
-  border-radius: 20px;
-  border: transparent;
-}
-
-/* 頁面轉場特效 */
-.page-transition-enter {
-  opacity: 0;
-  transform: translate(0, 15px);
-}
-
-.page-transition-enter-active {
-  opacity: 1;
-  transform: translate(0, 0);
-  transition:
-    opacity 300ms,
-    transform 300ms;
-}
-
-.page-transition-exit {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
-.page-transition-exit-active {
-  opacity: 0;
-  transform: translate(0, -15px);
-  transition:
-    opacity 300ms,
-    transform 300ms;
-}
-
-/* 瀏覽進度條 */
-.progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  background: #4299e1;
-  z-index: 99;
-}
-
-/* 行動版選單滾動優化 - 支援 iPhone 等有瀏海的裝置 */
-.mobile-nav-scroll {
-  /* 基礎底部 padding */
-  padding-bottom: theme("spacing.8");
-}
-
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .mobile-nav-scroll {
-    /* 加上 safe area inset 以支援 iPhone 等裝置的底部區域 */
-    padding-bottom: calc(theme("spacing.8") + env(safe-area-inset-bottom));
-  }
-}
-
-/* 隱藏滾動條但保持滾動功能 */
-.scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
-}
-
-/* Safe area utilities - 支援有瀏海/底部操作條的行動裝置 */
 @layer utilities {
-  .safe-area-top {
-    padding-top: env(safe-area-inset-top);
+  /* 自定義捲動條樣式 */
+  ::-webkit-scrollbar {
+    width: 6px;
   }
-  .safe-area-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
   }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.5);
+    border-radius: 20px;
+    border: transparent;
+  }
+
+  /* 頁面轉場特效 */
+  .page-transition-enter {
+    opacity: 0;
+    transform: translate(0, 15px);
+  }
+
+  .page-transition-enter-active {
+    opacity: 1;
+    transform: translate(0, 0);
+    transition:
+      opacity 300ms,
+      transform 300ms;
+  }
+
+  .page-transition-exit {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  .page-transition-exit-active {
+    opacity: 0;
+    transform: translate(0, -15px);
+    transition:
+      opacity 300ms,
+      transform 300ms;
+  }
+
+  /* 瀏覽進度條 */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: #4299e1;
+    z-index: 99;
+  }
+
+  /* 行動版選單滾動優化 - 支援 iPhone 等有瀏海的裝置 */
+  .mobile-nav-scroll {
+    /* 基礎底部 padding */
+    padding-bottom: --spacing(8);
+  }
+
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .mobile-nav-scroll {
+      /* 加上 safe area inset 以支援 iPhone 等裝置的底部區域 */
+      padding-bottom: calc(--spacing(8) + env(safe-area-inset-bottom));
+    }
+  }
+
+  /* 隱藏滾動條但保持滾動功能 */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  /* Safe area utilities - 支援有瀏海/底部操作條的行動裝置 */
+}
+
+@layer utilities {
+  /* shimmer: 文字/區塊閃爍動畫（AI 串流狀態用） */
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
+
+/* Quiz 模式：隱藏主站導覽列和 footer（由 QuizLayoutWrapper inline style 優先處理 FOUC） */
+body.quiz-mode > div nav,
+body.quiz-mode > div footer {
+  display: none !important;
+}
+body.quiz-mode main {
+  padding-top: 0 !important;
+  min-height: 100vh !important;
 }

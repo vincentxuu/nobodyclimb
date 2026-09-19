@@ -365,7 +365,7 @@ export default function BlogDetailClient() {
             </div>
 
             {/* Main Image */}
-            <div className="relative mb-6 aspect-[16/9] overflow-hidden rounded-lg sm:mb-8">
+            <div className="relative mb-6 aspect-video overflow-hidden rounded-lg sm:mb-8">
               {article.cover_image ? (
                 <Image
                   src={article.cover_image}
@@ -506,7 +506,7 @@ export default function BlogDetailClient() {
                 href={`/blog/${relatedArticle.id}`}
                 className="block overflow-hidden rounded-lg bg-wb-0 transition-shadow hover:shadow-lg"
               >
-                <div className="relative aspect-[16/9]">
+                <div className="relative aspect-video">
                   {relatedArticle.cover_image ? (
                     <Image
                       src={relatedArticle.cover_image}

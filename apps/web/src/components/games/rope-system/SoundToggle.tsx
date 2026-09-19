@@ -18,7 +18,7 @@ export function SoundToggle({ className }: SoundToggleProps) {
       onClick={toggleSound}
       className={cn(
         'flex h-10 w-10 items-center justify-center rounded-lg transition-colors',
-        'hover:bg-[#F5F5F5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFE70C]',
+        'hover:bg-[#F5F5F5] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#FFE70C]',
         className
       )}
       aria-label={soundEnabled ? '關閉音效' : '開啟音效'}

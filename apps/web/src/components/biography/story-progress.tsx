@@ -36,7 +36,7 @@ export function StoryProgress({
 
   if (variant === 'compact') {
     return (
-      <div className={cn('rounded-lg bg-white p-4 shadow-sm', className)}>
+      <div className={cn('rounded-lg bg-white p-4 shadow-xs', className)}>
         <div className="mb-2 flex items-center justify-between">
           <span className="text-sm font-medium text-gray-700">{t('storyProgressTitle')}</span>
           <span className="text-sm text-gray-500">
@@ -60,7 +60,7 @@ export function StoryProgress({
 
   if (variant === 'detailed') {
     return (
-      <div className={cn('rounded-lg bg-white p-6 shadow-sm', className)}>
+      <div className={cn('rounded-lg bg-white p-6 shadow-xs', className)}>
         {/* 總體進度 */}
         <div className="mb-6">
           <div className="mb-2 flex items-center justify-between">
@@ -114,7 +114,7 @@ export function StoryProgress({
               >
                 <div
                   className={cn(
-                    'flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full',
+                    'flex h-9 w-9 shrink-0 items-center justify-center rounded-full',
                     isComplete ? 'bg-brand-accent/20' : 'bg-gray-100'
                   )}
                 >
@@ -138,7 +138,7 @@ export function StoryProgress({
                         isComplete
                           ? 'bg-brand-accent'
                           : percentage > 0
-                            ? 'bg-gradient-to-r from-gray-300 to-gray-400'
+                            ? 'bg-linear-to-r from-gray-300 to-gray-400'
                             : 'bg-gray-200'
                       )}
                       initial={{ width: 0 }}
@@ -147,9 +147,7 @@ export function StoryProgress({
                     />
                   </div>
                 </div>
-                {onCategoryClick && (
-                  <ChevronRight className="h-4 w-4 flex-shrink-0 text-gray-400" />
-                )}
+                {onCategoryClick && <ChevronRight className="h-4 w-4 shrink-0 text-gray-400" />}
               </motion.button>
             )
           })}
@@ -160,7 +158,7 @@ export function StoryProgress({
 
   // Default variant
   return (
-    <div className={cn('rounded-lg bg-white p-6 shadow-sm', className)}>
+    <div className={cn('rounded-lg bg-white p-6 shadow-xs', className)}>
       {/* 總體進度 */}
       <div className="mb-4 flex items-center justify-between">
         <div>

@@ -30,6 +30,7 @@ interface GoldenTestCase {
   expected_min_results?: number
   expected_source_ids?: string[]
   ground_truth_answer?: string
+  must_not_source_ids?: string[]
 }
 
 interface RedTeamTestCase {
@@ -56,13 +57,6 @@ interface MetricsResult {
   recall_at_5: number | null
   filter_accuracy: number | null
   success_rate: number | null
-}
-
-interface RedTeamMetrics {
-  overall_safety_rate: number
-  guardrail_block_rate: number | null
-  safe_refusal_rate: number | null
-  per_type_stats: Record<string, { total: number; passed: number; rate: number }>
 }
 
 interface Thresholds {
@@ -111,7 +105,9 @@ function parseArgs(): {
   apiUrl: string
   token: string
   category?: string
+  strategy?: string
   ci: boolean
+  llmJudge: boolean
   delay: number
   output: string
   baseline?: string
@@ -128,6 +124,8 @@ function parseArgs(): {
       parsed.ci = true
     } else if (arg === '--red-team') {
       parsed.redTeam = true
+    } else if (arg === '--llm-judge') {
+      parsed.llmJudge = true
     } else if (arg.startsWith('--') && i + 1 < args.length) {
       parsed[arg.slice(2)] = args[++i]
     }
@@ -135,7 +133,7 @@ function parseArgs(): {
 
   if (!parsed['api-url'] || !parsed.token) {
     console.error(
-      'Usage: tsx evaluate-rag.ts --api-url <url> --token <jwt> [--category <cat>] [--ci] [--delay <ms>] [--output <path>] [--baseline <path>] [--red-team] [--cf-access-client-id <id>] [--cf-access-client-secret <secret>]'
+      'Usage: tsx evaluate-rag.ts --api-url <url> --token <jwt> [--strategy <name>] [--category <cat>] [--ci] [--delay <ms>] [--output <path>] [--baseline <path>] [--red-team] [--cf-access-client-id <id>] [--cf-access-client-secret <secret>]'
     )
     process.exit(1)
   }
@@ -144,7 +142,9 @@ function parseArgs(): {
     apiUrl: (parsed['api-url'] as string).replace(/\/$/, ''),
     token: parsed.token as string,
     category: parsed.category as string | undefined,
+    strategy: parsed.strategy as string | undefined,
     ci: parsed.ci === true,
+    llmJudge: parsed.llmJudge === true,
     delay: parseInt(parsed.delay as string, 10) || 1000,
     output: (parsed.output as string) || path.resolve(__dirname, '../tests/evaluation-report.json'),
     baseline: parsed.baseline as string | undefined,
@@ -191,9 +191,19 @@ async function callAskApi(
   token: string,
   query: string,
   cfAccessClientId?: string,
-  cfAccessClientSecret?: string
-): Promise<{ status: number; data: Record<string, unknown> | null; error?: string }> {
+  cfAccessClientSecret?: string,
+  ragStrategy?: string
+): Promise<{
+  status: number
+  data: Record<string, unknown> | null
+  error?: string
+  latencyMs: number
+}> {
+  const startTime = Date.now()
   try {
+    const body: Record<string, unknown> = { query, include_sources: true, no_cache: true }
+    if (ragStrategy) body.rag_strategy = ragStrategy
+
     const res = await fetch(`${apiUrl}/api/v1/ai/ask`, {
       method: 'POST',
       headers: {
@@ -205,18 +215,18 @@ async function callAskApi(
             'CF-Access-Client-Secret': cfAccessClientSecret,
           }),
       },
-      body: JSON.stringify({ query, include_sources: true, no_cache: true }),
+      body: JSON.stringify(body),
     })
 
     if (!res.ok) {
       const text = await res.text().catch((err) => `Response parse error: ${String(err)}`)
-      return { status: res.status, data: null, error: text }
+      return { status: res.status, data: null, error: text, latencyMs: Date.now() - startTime }
     }
 
     const data = (await res.json()) as Record<string, unknown>
-    return { status: res.status, data }
+    return { status: res.status, data, latencyMs: Date.now() - startTime }
   } catch (err) {
-    return { status: 0, data: null, error: String(err) }
+    return { status: 0, data: null, error: String(err), latencyMs: Date.now() - startTime }
   }
 }
 
@@ -387,6 +397,214 @@ function calcSuccessRate(results: TestResult[]): number | null {
 }
 
 // =============================================
+// P0: Sub-group Analysis
+// =============================================
+
+type Category = 'simple' | 'complex' | 'general-knowledge' | 'edge-case'
+
+interface SubGroupMetrics {
+  category: string
+  count: number
+  success_rate: number | null
+  tool_accuracy: number | null
+  answer_relevancy: number | null
+  faithfulness: number | null
+  avg_latency_ms: number | null
+  avg_tokens: number | null
+}
+
+function calcSubGroupMetrics(
+  results: TestResult[],
+  cases: GoldenTestCase[]
+): SubGroupMetrics[] {
+  const categories: Category[] = ['simple', 'complex', 'general-knowledge', 'edge-case']
+  const caseMap = new Map(cases.map((c) => [c.id, c]))
+
+  return categories
+    .map((cat) => {
+      const catResults = results.filter((r) => caseMap.get(r.id)?.category === cat)
+      if (catResults.length === 0) return null
+
+      const latencies = catResults
+        .map((r) => r.details.latency_ms as number | undefined)
+        .filter((v): v is number => v != null)
+      const tokens = catResults
+        .map((r) => r.details.token_count as number | undefined)
+        .filter((v): v is number => v != null)
+
+      return {
+        category: cat,
+        count: catResults.length,
+        success_rate: calcSuccessRate(catResults),
+        tool_accuracy: calcToolAccuracy(catResults),
+        answer_relevancy: calcAnswerRelevancy(catResults),
+        faithfulness: calcFaithfulness(catResults),
+        avg_latency_ms: latencies.length > 0
+          ? Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length)
+          : null,
+        avg_tokens: tokens.length > 0
+          ? Math.round(tokens.reduce((a, b) => a + b, 0) / tokens.length)
+          : null,
+      }
+    })
+    .filter((m): m is SubGroupMetrics => m !== null)
+}
+
+// =============================================
+// P0: Retrieval-level Metrics Extraction
+// =============================================
+
+interface RetrievalMetrics {
+  avg_candidates_after_filter: number | null
+  avg_retrieval_paths: number | null
+  bm25_only_count: number
+  crag_fallback_count: number
+  cache_hit_count: number
+  reranker_used_count: number
+}
+
+function calcRetrievalMetrics(results: TestResult[]): RetrievalMetrics {
+  const candidates = results
+    .map((r) => r.details.retrieval_candidates as number | undefined)
+    .filter((v): v is number => v != null)
+  const paths = results
+    .map((r) => r.details.retrieval_paths as number | undefined)
+    .filter((v): v is number => v != null)
+
+  return {
+    avg_candidates_after_filter: candidates.length > 0
+      ? Math.round((candidates.reduce((a, b) => a + b, 0) / candidates.length) * 10) / 10
+      : null,
+    avg_retrieval_paths: paths.length > 0
+      ? Math.round((paths.reduce((a, b) => a + b, 0) / paths.length) * 10) / 10
+      : null,
+    bm25_only_count: results.filter((r) => r.details.retrieval_degraded === true).length,
+    crag_fallback_count: results.filter((r) => r.details.crag_fallback === true).length,
+    cache_hit_count: results.filter((r) => r.details.cache_hit === true).length,
+    reranker_used_count: results.filter((r) => r.details.reranker_used === true).length,
+  }
+}
+
+// =============================================
+// P2: LLM-as-Judge Evaluators
+// =============================================
+
+const FAITHFULNESS_JUDGE_PROMPT = `你是 RAG 品質評估員。請評估以下回答的忠實度（faithfulness）。
+
+使用者問題：{query}
+搜尋到的上下文：{context}
+AI 回答：{answer}
+
+評分標準（0-1）：
+- 1.0：回答完全基於上下文，沒有捏造任何資訊
+- 0.7-0.9：大部分基於上下文，少量合理推論
+- 0.4-0.6：部分基於上下文，有明顯推論或缺乏依據的陳述
+- 0.0-0.3：大量捏造，與上下文無關
+
+回傳 JSON：{"score": 0.0-1.0, "reason": "一句話說明"}`
+
+const RELEVANCE_JUDGE_PROMPT = `你是 RAG 品質評估員。請評估以下回答與問題的相關性（relevance）。
+
+使用者問題：{query}
+AI 回答：{answer}
+
+評分標準（0-1）：
+- 1.0：完全回答了問題，沒有多餘資訊
+- 0.7-0.9：大致回答了問題，有少量偏題
+- 0.4-0.6：部分回答了問題，有明顯遺漏或偏題
+- 0.0-0.3：沒有回答問題或完全偏題
+
+回傳 JSON：{"score": 0.0-1.0, "reason": "一句話說明"}`
+
+const CORRECTNESS_JUDGE_PROMPT = `你是 RAG 品質評估員。請比較 AI 回答與參考答案的正確性。
+
+使用者問題：{query}
+AI 回答：{answer}
+參考答案：{ground_truth}
+
+評分標準（0-1）：
+- 1.0：AI 回答涵蓋參考答案的所有關鍵資訊
+- 0.7-0.9：涵蓋大部分關鍵資訊，少量遺漏
+- 0.4-0.6：涵蓋部分資訊，有明顯遺漏
+- 0.0-0.3：關鍵資訊大量遺漏或錯誤
+
+回傳 JSON：{"score": 0.0-1.0, "reason": "一句話說明"}`
+
+async function llmJudge(
+  apiUrl: string,
+  token: string,
+  prompt: string,
+  cfAccessClientId?: string,
+  cfAccessClientSecret?: string
+): Promise<{ score: number; reason: string } | null> {
+  try {
+    const res = await fetch(`${apiUrl}/api/v1/ai/ask`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        ...(cfAccessClientId && cfAccessClientSecret && {
+          'CF-Access-Client-Id': cfAccessClientId,
+          'CF-Access-Client-Secret': cfAccessClientSecret,
+        }),
+      },
+      body: JSON.stringify({ query: prompt, no_cache: true }),
+    })
+    if (!res.ok) return null
+    const data = (await res.json()) as { answer?: string }
+    const answer = data.answer ?? ''
+    const match = answer.match(/\{[\s\S]*\}/)
+    if (!match) return null
+    const parsed = JSON.parse(match[0])
+    return {
+      score: typeof parsed.score === 'number' ? parsed.score : 0.5,
+      reason: parsed.reason ?? '',
+    }
+  } catch {
+    return null
+  }
+}
+
+// =============================================
+// P2: Error Classification
+// =============================================
+
+type ErrorClass = 'retrieval_miss' | 'ranking_miss' | 'generation_miss' | 'tool_miss' | 'unknown'
+
+function classifyError(result: TestResult): ErrorClass {
+  if (result.status === 'error') return 'unknown'
+  if (result.status === 'pass') return 'unknown'
+
+  const toolMatch = result.details.actual_tool === result.details.expected_tool
+  if (!toolMatch) return 'tool_miss'
+
+  const kwCoverage = (result.details.keyword_coverage as number) ?? 1
+  const groundedness = result.details.groundedness_score as number | null
+  const candidates = result.details.retrieval_candidates as number | undefined
+
+  if (candidates !== undefined && candidates === 0) return 'retrieval_miss'
+  if (groundedness !== null && groundedness !== undefined && groundedness < 0.3) return 'generation_miss'
+  if (kwCoverage < 0.3) return 'ranking_miss'
+
+  return 'generation_miss'
+}
+
+function calcErrorDistribution(results: TestResult[]): Record<ErrorClass, number> {
+  const failed = results.filter((r) => r.status === 'fail')
+  const dist: Record<ErrorClass, number> = {
+    retrieval_miss: 0,
+    ranking_miss: 0,
+    generation_miss: 0,
+    tool_miss: 0,
+    unknown: 0,
+  }
+  for (const r of failed) {
+    dist[classifyError(r)]++
+  }
+  return dist
+}
+
+// =============================================
 // Golden Test Evaluation (Tasks 4.1 - 6.4)
 // =============================================
 
@@ -400,12 +618,13 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
     const tc = cases[i]
     process.stdout.write(`  [${i + 1}/${cases.length}] ${tc.id} ${tc.query.slice(0, 40)}...`)
 
-    const { status, data, error } = await callAskApi(
+    const { status, data, error, latencyMs } = await callAskApi(
       args.apiUrl,
       args.token,
       tc.query,
       args.cfAccessClientId,
-      args.cfAccessClientSecret
+      args.cfAccessClientSecret,
+      args.strategy
     )
 
     if (status !== 200 || !data) {
@@ -414,7 +633,7 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
         id: tc.id,
         query: tc.query,
         status: 'error',
-        details: { error: error ?? `HTTP ${status}`, expected_tool: tc.expected_tool },
+        details: { error: error ?? `HTTP ${status}`, expected_tool: tc.expected_tool, latency_ms: latencyMs },
       })
 
       const totalErrors = results.filter((r) => r.status === 'error').length
@@ -447,10 +666,21 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
     const queryParsing = (pipelineTrace.query_parsing as Record<string, unknown>) ?? {}
     const filterTrace = (pipelineTrace.filter as Record<string, unknown>) ?? {}
     const quality = (traceData?.quality as Record<string, unknown>) ?? {}
+    const retrievalTrace = (pipelineTrace.retrieval as Record<string, unknown>) ?? {}
 
     const actualTool = (queryParsing.tool as string) ?? ''
     const actualFilters = (filterTrace.applied as Record<string, unknown>) ?? {}
     const groundednessScore = (quality.groundedness_score as number | null) ?? null
+
+    // P0: Retrieval-level extraction
+    const retrievalCandidates = (retrievalTrace.candidates_after_filter as number | undefined) ?? undefined
+    const retrievalPaths = (retrievalTrace.paths_count as number | undefined)
+      ?? ((retrievalTrace.paths as string[] | undefined)?.length ?? undefined)
+    const retrievalDegraded = (retrievalTrace.degraded as boolean | undefined) ?? false
+    const cragFallback = (retrievalTrace.crag_fallback as boolean | undefined) ?? false
+    const rerankerUsed = (retrievalTrace.reranker_used as boolean | undefined) ?? false
+    const cacheTrace = (pipelineTrace.cache as Record<string, unknown> | undefined)
+    const cacheHit = cacheTrace?.type === 'kv' || cacheTrace?.type === 'semantic'
 
     // Determine pass/fail
     const toolMatch = actualTool === tc.expected_tool
@@ -461,6 +691,8 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
     const keywordCoverage = keywords.length > 0 ? keywordHits / keywords.length : 1
 
     const passed = toolMatch && keywordCoverage >= 0.5
+
+    const tokenCount = (traceData?.token_count as number | null) ?? null
 
     results.push({
       id: tc.id,
@@ -477,12 +709,84 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
         expected_source_ids: tc.expected_source_ids,
         actual_source_ids: sources.map((s) => s.id),
         groundedness_score: groundednessScore,
+        latency_ms: latencyMs,
+        token_count: tokenCount,
+        retrieval_candidates: retrievalCandidates,
+        retrieval_paths: retrievalPaths,
+        retrieval_degraded: retrievalDegraded,
+        crag_fallback: cragFallback,
+        reranker_used: rerankerUsed,
+        cache_hit: cacheHit,
       },
     })
 
     const _statusIcon = passed ? `${GREEN}PASS${RESET}` : `${RED}FAIL${RESET}`
 
     if (i < cases.length - 1) await sleep(args.delay)
+  }
+
+  // ---- LLM-as-Judge pass (optional) ----
+  interface LlmJudgeScores {
+    faithfulness: { avg: number | null; scores: Array<{ id: string; score: number; reason: string }> }
+    relevance: { avg: number | null; scores: Array<{ id: string; score: number; reason: string }> }
+    correctness: { avg: number | null; scores: Array<{ id: string; score: number; reason: string }> }
+  }
+  let llmJudgeScores: LlmJudgeScores | undefined
+
+  if (args.llmJudge) {
+    console.log('\n  Running LLM-as-Judge evaluation...')
+    const caseMap = new Map(cases.map((c) => [c.id, c]))
+    const successResults = results.filter((r) => r.status !== 'error' && r.details.answer)
+
+    const faithScores: Array<{ id: string; score: number; reason: string }> = []
+    const relScores: Array<{ id: string; score: number; reason: string }> = []
+    const corrScores: Array<{ id: string; score: number; reason: string }> = []
+
+    for (let j = 0; j < successResults.length; j++) {
+      const r = successResults[j]
+      const tc = caseMap.get(r.id)
+      if (!tc) continue
+      const answer = (r.details.answer as string) ?? ''
+      process.stdout.write(`  [${j + 1}/${successResults.length}] Judging ${r.id}...`)
+
+      const fPrompt = FAITHFULNESS_JUDGE_PROMPT
+        .replace('{query}', tc.query)
+        .replace('{context}', '[context from pipeline]')
+        .replace('{answer}', answer)
+      const fResult = await llmJudge(args.apiUrl, args.token, fPrompt, args.cfAccessClientId, args.cfAccessClientSecret)
+      if (fResult) faithScores.push({ id: r.id, ...fResult })
+
+      const rPrompt = RELEVANCE_JUDGE_PROMPT
+        .replace('{query}', tc.query)
+        .replace('{answer}', answer)
+      const rResult = await llmJudge(args.apiUrl, args.token, rPrompt, args.cfAccessClientId, args.cfAccessClientSecret)
+      if (rResult) relScores.push({ id: r.id, ...rResult })
+
+      if (tc.ground_truth_answer) {
+        const cPrompt = CORRECTNESS_JUDGE_PROMPT
+          .replace('{query}', tc.query)
+          .replace('{answer}', answer)
+          .replace('{ground_truth}', tc.ground_truth_answer)
+        const cResult = await llmJudge(args.apiUrl, args.token, cPrompt, args.cfAccessClientId, args.cfAccessClientSecret)
+        if (cResult) corrScores.push({ id: r.id, ...cResult })
+      }
+
+      console.log(' done')
+      await sleep(args.delay)
+    }
+
+    const avg = (arr: Array<{ score: number }>) =>
+      arr.length > 0 ? arr.reduce((a, b) => a + b.score, 0) / arr.length : null
+
+    llmJudgeScores = {
+      faithfulness: { avg: avg(faithScores), scores: faithScores },
+      relevance: { avg: avg(relScores), scores: relScores },
+      correctness: { avg: avg(corrScores), scores: corrScores },
+    }
+
+    console.log(`  Faithfulness: ${llmJudgeScores.faithfulness.avg?.toFixed(3) ?? 'N/A'}`)
+    console.log(`  Relevance: ${llmJudgeScores.relevance.avg?.toFixed(3) ?? 'N/A'}`)
+    console.log(`  Correctness: ${llmJudgeScores.correctness.avg?.toFixed(3) ?? 'N/A'}`)
   }
 
   // Calculate metrics
@@ -499,9 +803,30 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
   const baselinePath = path.resolve(__dirname, '../tests/baseline-metrics.json')
   const thresholds = loadBaseline(baselinePath)
 
+  // Latency & token stats
+  const latencies = results
+    .map((r) => r.details.latency_ms as number | undefined)
+    .filter((v): v is number => v != null && v > 0)
+  const tokens = results
+    .map((r) => r.details.token_count as number | undefined)
+    .filter((v): v is number => v != null && v > 0)
+  const perfStats = {
+    latency_ms: latencies.length > 0 ? {
+      avg: Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length),
+      p50: latencies.sort((a, b) => a - b)[Math.floor(latencies.length * 0.5)],
+      p95: latencies.sort((a, b) => a - b)[Math.floor(latencies.length * 0.95)],
+      min: Math.min(...latencies),
+      max: Math.max(...latencies),
+    } : null,
+    token_count: tokens.length > 0 ? {
+      avg: Math.round(tokens.reduce((a, b) => a + b, 0) / tokens.length),
+      total: tokens.reduce((a, b) => a + b, 0),
+    } : null,
+  }
+
   // Build report
   const context = getGitContext()
-  const report: EvaluationReport = {
+  const report: EvaluationReport & { strategy?: string; performance?: typeof perfStats } = {
     metrics,
     results,
     summary: {
@@ -515,6 +840,12 @@ async function runGoldenEvaluation(args: ReturnType<typeof parseArgs>): Promise<
     api_url: args.apiUrl,
     test_set_count: results.length,
     context,
+    ...(args.strategy ? { strategy: args.strategy } : {}),
+    performance: perfStats,
+    sub_groups: calcSubGroupMetrics(results, cases),
+    retrieval: calcRetrievalMetrics(results),
+    error_distribution: calcErrorDistribution(results),
+    ...(llmJudgeScores ? { llm_judge: llmJudgeScores } : {}),
   }
 
   // Write JSON report
@@ -655,12 +986,13 @@ async function runRedTeamEvaluation(args: ReturnType<typeof parseArgs>): Promise
       `  [${i + 1}/${cases.length}] ${tc.id} [${tc.attack_type}] ${tc.query.slice(0, 35)}...`
     )
 
-    const { status, data, error } = await callAskApi(
+    const { status, data, error: _error } = await callAskApi(
       args.apiUrl,
       args.token,
       tc.query,
       args.cfAccessClientId,
-      args.cfAccessClientSecret
+      args.cfAccessClientSecret,
+      args.strategy
     )
 
     let actualResult: string

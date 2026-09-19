@@ -213,7 +213,7 @@ export function ClimbingFootprintsEditor({
                 <select
                   value={formData.country}
                   onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-gray-500 focus:outline-none"
+                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-gray-500 focus:outline-hidden"
                   disabled={disabled}
                 >
                   {COMMON_COUNTRIES.map((country) => (

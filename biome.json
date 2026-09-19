@@ -63,8 +63,11 @@
       "!**/dist",
       "!**/.expo",
       "!**/.worktrees",
+      "!**/.claude/worktrees",
+      "!**/backend/scripts",
       "!**/*.min.js",
-      "!**/public/data"
+      "!**/public/data",
+      "!**/.claude/settings.local.json"
     ]
   }
 }

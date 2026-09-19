@@ -64,7 +64,7 @@ export function CragInfoPanel({ crag }: CragInfoPanelProps) {
             {crag.images.slice(0, 5).map((photo, index) => (
               <div
                 key={index}
-                className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md lg:h-20 lg:w-20"
+                className="relative h-16 w-16 shrink-0 overflow-hidden rounded-md lg:h-20 lg:w-20"
               >
                 <PlaceholderImage text={`${index + 1}`} bgColor="#444" textColor="#fff" />
               </div>
@@ -125,12 +125,12 @@ export function CragInfoPanel({ crag }: CragInfoPanelProps) {
             <div className="mt-4 space-y-3">
               {crag.transportation.map((item, index) => (
                 <div key={index} className="flex">
-                  <span className="w-20 flex-shrink-0 text-gray-500">{item.type}：</span>
+                  <span className="w-20 shrink-0 text-gray-500">{item.type}：</span>
                   <span className="flex-1">{item.description}</span>
                 </div>
               ))}
               <div className="flex pt-2">
-                <span className="w-20 flex-shrink-0 text-gray-500">{t('parking')}</span>
+                <span className="w-20 shrink-0 text-gray-500">{t('parking')}</span>
                 <span className="flex-1">{crag.parking}</span>
               </div>
             </div>
@@ -238,7 +238,7 @@ export function CragInfoPanel({ crag }: CragInfoPanelProps) {
                   key={area.id || index}
                   href={`/crag/${crag.id}/area/${area.id}`}
                   prefetch={false}
-                  className="group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:border-[#FFE70C] hover:shadow"
+                  className="group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xs transition-all hover:border-[#FFE70C] hover:shadow-sm"
                 >
                   <div className="relative h-32">
                     <PlaceholderImage text={area.name} bgColor="#f8f9fa" />

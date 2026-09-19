@@ -38,7 +38,7 @@ export function Providers({ children }: ProvidersProps) {
   }, [])
 
   const content = (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
       {children}
       <Toaster />
     </ThemeProvider>

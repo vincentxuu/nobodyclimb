@@ -57,7 +57,7 @@ export function BiographyBucketList({ biographyId, className }: BiographyBucketL
           </h3>
           <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth">
             {activeItems.map((item) => (
-              <div key={item.id} className="w-[85vw] max-w-96 flex-shrink-0 snap-start">
+              <div key={item.id} className="w-[85vw] max-w-96 shrink-0 snap-start">
                 <BucketListItemCard
                   item={item}
                   variant="expanded"
@@ -78,7 +78,7 @@ export function BiographyBucketList({ biographyId, className }: BiographyBucketL
           </h3>
           <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth">
             {completedItems.map((item) => (
-              <div key={item.id} className="w-[85vw] max-w-96 flex-shrink-0 snap-start">
+              <div key={item.id} className="w-[85vw] max-w-96 shrink-0 snap-start">
                 <CompletedBucketListCard item={item} />
               </div>
             ))}
@@ -99,7 +99,7 @@ function CompletedBucketListCard({ item }: { item: BucketListItem }) {
     item.completion_story || item.psychological_insights || item.technical_insights
 
   return (
-    <div className="group h-full overflow-hidden rounded-lg border border-brand-accent/30 bg-white shadow-sm transition-all hover:shadow-md hover:border-brand-accent/50">
+    <div className="group h-full overflow-hidden rounded-lg border border-brand-accent/30 bg-white shadow-xs transition-all hover:shadow-md hover:border-brand-accent/50">
       {/* 完成標記與主要內容 */}
       <div className="relative bg-brand-accent/5 p-6">
         {/* 完成勾勾角標 */}

@@ -142,7 +142,7 @@ export default function AreaDetailClient({ cragId, areaId }: AreaDetailClientPro
     return (
       <main className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 pt-20">
-          <div className="rounded-lg bg-white p-8 text-center shadow-sm">
+          <div className="rounded-lg bg-white p-8 text-center shadow-xs">
             <h1 className="text-2xl font-bold text-gray-800">{t('areaNotFound')}</h1>
             <p className="mt-2 text-gray-600">{t('areaNotFoundDesc')}</p>
             <Link href={`/crag/${cragId}`} prefetch={false}>
@@ -182,7 +182,7 @@ export default function AreaDetailClient({ cragId, areaId }: AreaDetailClientPro
             <Link href={`/crag/${crag.id}`} prefetch={false}>
               <Button
                 variant="ghost"
-                className="flex items-center gap-2 bg-white shadow-sm hover:bg-gray-200"
+                className="flex items-center gap-2 bg-white shadow-xs hover:bg-gray-200"
               >
                 <ArrowLeft size={16} />
                 <span>
@@ -194,7 +194,7 @@ export default function AreaDetailClient({ cragId, areaId }: AreaDetailClientPro
         </div>
 
         {/* 主要內容區 */}
-        <div className="mb-12 mt-4 rounded-lg bg-white p-8 shadow-sm">
+        <div className="mb-12 mt-4 rounded-lg bg-white p-8 shadow-xs">
           {/* 區域標題圖片 */}
           <div className="mb-8">
             <div className="relative h-64 w-full overflow-hidden rounded-lg md:h-80">

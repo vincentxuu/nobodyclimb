@@ -80,7 +80,7 @@ export function EmptyState({ type, isOwner = false, className }: EmptyStateProps
       {showOwnerGuide && (
         <div className="bg-brand-accent/10 rounded-lg p-4 mb-6 max-w-sm">
           <p className="text-sm text-brand-dark flex items-center gap-2">
-            <Lightbulb size={16} className="flex-shrink-0" />
+            <Lightbulb size={16} className="shrink-0" />
             {t('ownerGuide')}
           </p>
         </div>

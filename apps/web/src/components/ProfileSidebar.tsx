@@ -5,7 +5,9 @@ import {
   BarChart3,
   Bookmark,
   Brain,
+  Dumbbell,
   FileText,
+  Flag,
   Image as ImageIcon,
   MountainSnow,
   Settings,
@@ -41,6 +43,16 @@ const menuItems: MenuItem[] = [
     name: 'AI 記憶',
     href: '/profile/ai-memory',
     icon: Brain,
+  },
+  {
+    name: '攀岩目標',
+    href: '/profile/goals',
+    icon: Flag,
+  },
+  {
+    name: 'AI 教練',
+    href: '/profile/training',
+    icon: Dumbbell,
   },
   {
     name: '人生清單',

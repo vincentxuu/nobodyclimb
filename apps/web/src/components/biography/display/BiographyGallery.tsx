@@ -82,7 +82,7 @@ export function BiographyGallery({
             <button
               key={image.id}
               onClick={() => setSelectedImage(image)}
-              className="relative flex-shrink-0 w-32 h-32 rounded-lg overflow-hidden"
+              className="relative shrink-0 w-32 h-32 rounded-lg overflow-hidden"
             >
               <Image
                 src={image.url}

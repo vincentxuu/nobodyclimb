@@ -222,7 +222,7 @@ const StoryCard = React.memo(function StoryCard({
   return (
     <button
       onClick={() => onStartEdit(question.field, value)}
-      className="group w-full rounded-lg border border-subtle bg-white p-4 text-left transition-all hover:border-brand-dark hover:shadow-sm"
+      className="group w-full rounded-lg border border-subtle bg-white p-4 text-left transition-all hover:border-brand-dark hover:shadow-xs"
       aria-label={`編輯「${question.title}」`}
     >
       <div className="mb-2 flex items-center justify-between">
@@ -288,7 +288,7 @@ const ImageUploadButton = React.memo(function ImageUploadButton({
       <button
         onClick={() => inputRef.current?.click()}
         disabled={isUploading}
-        className={`flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-sm font-medium text-brand-dark shadow-sm transition-colors hover:bg-white disabled:opacity-50 ${className}`}
+        className={`flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-sm font-medium text-brand-dark shadow-xs transition-colors hover:bg-white disabled:opacity-50 ${className}`}
         aria-label={label}
       >
         {isUploading ? (
@@ -502,7 +502,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
     <div>
       {/* 封面區域 */}
       <div className="relative">
-        <div className="h-48 w-full bg-gradient-to-r from-brand-dark to-brand-dark-hover md:h-64">
+        <div className="h-48 w-full bg-linear-to-r from-brand-dark to-brand-dark-hover md:h-64">
           {profileData.coverImageUrl && (
             <img
               src={profileData.coverImageUrl}
@@ -613,7 +613,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
         </section>
 
         {/* 攀岩資訊卡片 */}
-        <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-sm">
+        <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-xs">
           <div className="mb-4 flex items-center gap-2">
             <Gauge className="h-5 w-5 text-brand-dark" />
             <h2 className="font-semibold text-brand-dark">攀岩資訊</h2>
@@ -656,7 +656,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
         </section>
 
         {/* 社群連結卡片 */}
-        <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-sm">
+        <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-xs">
           <div className="mb-4 flex items-center gap-2">
             <Link2 className="h-5 w-5 text-brand-dark" />
             <h2 className="font-semibold text-brand-dark">社群連結</h2>
@@ -714,7 +714,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
         </section>
 
         {/* 攀岩足跡區塊 */}
-        <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-sm">
+        <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-xs">
           <div className="mb-4 flex items-center gap-2">
             <MapPin className="h-5 w-5 text-brand-dark" />
             <h2 className="font-semibold text-brand-dark">攀岩足跡</h2>
@@ -723,7 +723,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
         </section>
 
         {/* 故事區塊 - 全部合併 */}
-        <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-sm">
+        <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-xs">
           <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <BookOpen className="h-5 w-5 text-brand-dark" />
@@ -831,10 +831,10 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
         </section>
 
         {/* 公開設定 */}
-        <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-sm">
+        <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-xs">
           <div className="flex items-center justify-between gap-4">
             <div className="flex min-w-0 flex-1 items-center gap-2">
-              <Globe className="h-5 w-5 flex-shrink-0 text-brand-dark" />
+              <Globe className="h-5 w-5 shrink-0 text-brand-dark" />
               <div className="min-w-0">
                 <h2 className="font-semibold text-brand-dark">公開設定</h2>
                 <p className="text-sm text-text-subtle">
@@ -844,7 +844,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
             </div>
             <button
               onClick={togglePublicSetting}
-              className={`relative h-7 w-12 flex-shrink-0 overflow-hidden rounded-full transition-colors ${
+              className={`relative h-7 w-12 shrink-0 overflow-hidden rounded-full transition-colors ${
                 profileData.isPublic ? 'bg-brand-accent' : 'bg-subtle'
               }`}
               role="switch"
@@ -852,7 +852,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
               aria-label="公開設定開關"
             >
               <span
-                className={`absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white shadow-sm transition-transform ${
+                className={`absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white shadow-xs transition-transform ${
                   profileData.isPublic ? 'translate-x-5' : 'translate-x-0'
                 }`}
               />

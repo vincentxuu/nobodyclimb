@@ -72,7 +72,7 @@ export function StoryEditModal({
   return (
     <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center">
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-brand-dark/30 backdrop-blur-xs" onClick={onClose} />
 
       {/* Modal */}
       <div
@@ -100,7 +100,7 @@ export function StoryEditModal({
             <p className="font-medium text-[#1B1A1A]">{question.title}</p>
             {question.subtitle && (
               <p className="text-sm text-[#6D6C6C] mt-2 flex items-start gap-1">
-                <Lightbulb size={14} className="mt-0.5 flex-shrink-0" />
+                <Lightbulb size={14} className="mt-0.5 shrink-0" />
                 {question.subtitle}
               </p>
             )}
@@ -112,7 +112,7 @@ export function StoryEditModal({
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder={t('storyTextPlaceholder')}
-              className="w-full h-64 px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors text-[#1B1A1A] placeholder:text-[#9D9D9D]"
+              className="w-full h-64 px-4 py-3 bg-white border border-[#B6B3B3] rounded-lg resize-none focus:outline-hidden focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-dark transition-colors text-[#1B1A1A] placeholder:text-[#9D9D9D]"
               maxLength={5000}
             />
             <div className="flex justify-between items-center">

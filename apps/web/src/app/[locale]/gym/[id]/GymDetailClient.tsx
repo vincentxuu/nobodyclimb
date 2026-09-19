@@ -161,7 +161,7 @@ export default function GymDetailClient({ params }: { params: Promise<{ id: stri
             <Link href="/gym">
               <Button
                 variant="ghost"
-                className="flex items-center gap-2 bg-white shadow-sm hover:bg-gray-200"
+                className="flex items-center gap-2 bg-white shadow-xs hover:bg-gray-200"
               >
                 <ArrowLeft size={16} />
                 <span>{t('pageTitle')}</span>
@@ -171,7 +171,7 @@ export default function GymDetailClient({ params }: { params: Promise<{ id: stri
         </div>
 
         {/* 主要內容區 */}
-        <div className="mb-12 mt-4 rounded-lg bg-white p-8 shadow-sm">
+        <div className="mb-12 mt-4 rounded-lg bg-white p-8 shadow-xs">
           {/* 封面展示區 */}
           <div className="mb-8">
             {/* 大圖 */}
@@ -191,7 +191,7 @@ export default function GymDetailClient({ params }: { params: Promise<{ id: stri
                 {gym.images.map((photo, index) => (
                   <div
                     key={index}
-                    className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md"
+                    className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md"
                   >
                     <PlaceholderImage
                       text={t('photoLabel', { index: index + 1 })}
@@ -493,7 +493,7 @@ export default function GymDetailClient({ params }: { params: Promise<{ id: stri
                     rel="noopener noreferrer"
                     className="group flex items-start gap-3 rounded-lg border border-gray-200 p-4 transition hover:border-orange-300 hover:bg-orange-50"
                   >
-                    <div className="flex-shrink-0">{reviewTypeConfig[review.type].icon}</div>
+                    <div className="shrink-0">{reviewTypeConfig[review.type].icon}</div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-900 group-hover:text-orange-600 line-clamp-2">
                         {review.title}
@@ -504,7 +504,7 @@ export default function GymDetailClient({ params }: { params: Promise<{ id: stri
                     </div>
                     <ExternalLink
                       size={14}
-                      className="flex-shrink-0 text-gray-400 group-hover:text-orange-500"
+                      className="shrink-0 text-gray-400 group-hover:text-orange-500"
                     />
                   </a>
                 ))}
@@ -574,7 +574,7 @@ export default function GymDetailClient({ params }: { params: Promise<{ id: stri
                 <Link
                   href={`/gym/${relatedGym.id}`}
                   key={relatedGym.id}
-                  className="overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow"
+                  className="overflow-hidden rounded-lg bg-white shadow-xs transition-shadow hover:shadow-sm"
                 >
                   <div className="relative h-48">
                     <GymCoverGenerator

@@ -14,6 +14,8 @@ export default function MobileNav() {
     { name: t('navBiography'), href: '/profile' },
     { name: t('navRecommendations'), href: '/profile/recommendations' },
     { name: t('navAiMemory'), href: '/profile/ai-memory' },
+    { name: '攀岩目標', href: '/profile/goals' },
+    { name: 'AI 教練', href: '/profile/training' },
     { name: t('navBucketList'), href: '/profile/bucket-list' },
     { name: t('navAscents'), href: '/profile/ascents' },
     { name: t('navStats'), href: '/profile/stats' },

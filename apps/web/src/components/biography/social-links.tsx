@@ -30,7 +30,7 @@ export function SocialLinksSection({ socialLinks, className }: SocialLinksSectio
           href={`https://instagram.com/${instagram}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 via-pink-500 to-orange-500 px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
         >
           <Instagram className="h-4 w-4" />
           <span>@{instagram}</span>
@@ -78,7 +78,7 @@ export function CompactSocialLinks({ socialLinks, className }: CompactSocialLink
           href={`https://instagram.com/${instagram}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 p-2 text-white transition-opacity hover:opacity-90"
+          className="rounded-full bg-linear-to-r from-purple-500 via-pink-500 to-orange-500 p-2 text-white transition-opacity hover:opacity-90"
           title={`@${instagram}`}
         >
           <Instagram className="h-4 w-4" />

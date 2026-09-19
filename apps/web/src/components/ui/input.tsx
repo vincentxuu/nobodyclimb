@@ -29,7 +29,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     let baseClasses =
-      'w-full rounded-lg border px-3 py-2 text-sm transition-colors focus:outline-none'
+      'w-full rounded-lg border px-3 py-2 text-sm transition-colors focus:outline-hidden'
 
     // 根據狀態設置樣式
     if (state === 'default') {

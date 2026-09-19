@@ -135,7 +135,7 @@ export function FallAnimation({
 
       {/* 掉落軌跡效果 */}
       <motion.div
-        className="pointer-events-none absolute left-1/2 w-0.5 -translate-x-1/2 bg-gradient-to-b from-transparent via-[#EF4444] to-transparent opacity-50"
+        className="pointer-events-none absolute left-1/2 w-0.5 -translate-x-1/2 bg-linear-to-b from-transparent via-[#EF4444] to-transparent opacity-50"
         style={{
           top: `${100 - startPosition}%`,
         }}

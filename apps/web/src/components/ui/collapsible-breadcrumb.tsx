@@ -66,9 +66,7 @@ export function CollapsibleBreadcrumb({ items, className }: CollapsibleBreadcrum
             >
               {items.map((item, index) => (
                 <React.Fragment key={item.label}>
-                  {index > 0 && (
-                    <ChevronRight className="mx-1 h-4 w-4 flex-shrink-0 text-gray-400" />
-                  )}
+                  {index > 0 && <ChevronRight className="mx-1 h-4 w-4 shrink-0 text-gray-400" />}
                   {item.href ? (
                     <Link
                       href={item.href}

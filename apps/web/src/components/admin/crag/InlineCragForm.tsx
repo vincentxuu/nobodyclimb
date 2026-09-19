@@ -129,7 +129,7 @@ export default function InlineCragForm({
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-wb-20 flex items-center justify-between flex-shrink-0">
+      <div className="px-4 py-3 border-b border-wb-20 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-wb-10 flex items-center justify-center">
             <Mountain className="h-5 w-5 text-wb-70" />
@@ -158,7 +158,7 @@ export default function InlineCragForm({
                   type="text"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                   required
                 />
               </div>
@@ -172,7 +172,7 @@ export default function InlineCragForm({
                     value={form.slug}
                     onChange={(e) => setForm({ ...form, slug: e.target.value })}
                     placeholder="例：longdong"
-                    className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                    className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                   />
                 </div>
               )}
@@ -181,7 +181,7 @@ export default function InlineCragForm({
                 <select
                   value={form.region}
                   onChange={(e) => setForm({ ...form, region: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg focus:outline-none focus:ring-2 focus:ring-wb-100/20 bg-white"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 bg-white"
                 >
                   <option value="">選擇區域</option>
                   {REGIONS.map((r) => (
@@ -198,7 +198,7 @@ export default function InlineCragForm({
                   value={form.location}
                   onChange={(e) => setForm({ ...form, location: e.target.value })}
                   placeholder="例：新北市瑞芳區龍洞"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div className="sm:col-span-2">
@@ -207,7 +207,7 @@ export default function InlineCragForm({
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20 resize-none"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 resize-none"
                 />
               </div>
             </div>
@@ -225,7 +225,7 @@ export default function InlineCragForm({
                   value={form.latitude}
                   onChange={(e) => setForm({ ...form, latitude: e.target.value })}
                   placeholder="例：25.1082"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div>
@@ -236,7 +236,7 @@ export default function InlineCragForm({
                   value={form.longitude}
                   onChange={(e) => setForm({ ...form, longitude: e.target.value })}
                   placeholder="例：121.9227"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div>
@@ -245,7 +245,7 @@ export default function InlineCragForm({
                   type="number"
                   value={form.altitude}
                   onChange={(e) => setForm({ ...form, altitude: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
             </div>
@@ -262,7 +262,7 @@ export default function InlineCragForm({
                   value={form.rock_type}
                   onChange={(e) => setForm({ ...form, rock_type: e.target.value })}
                   placeholder="例：砂岩、石灰岩、花崗岩"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div>
@@ -272,7 +272,7 @@ export default function InlineCragForm({
                   value={form.climbing_types}
                   onChange={(e) => setForm({ ...form, climbing_types: e.target.value })}
                   placeholder="逗號分隔，例：sport, trad, boulder"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div>
@@ -282,7 +282,7 @@ export default function InlineCragForm({
                   value={form.difficulty_range}
                   onChange={(e) => setForm({ ...form, difficulty_range: e.target.value })}
                   placeholder="例：5.6-5.13a"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
             </div>
@@ -299,7 +299,7 @@ export default function InlineCragForm({
                   value={form.approach_time}
                   onChange={(e) => setForm({ ...form, approach_time: e.target.value })}
                   placeholder="例：15（分鐘）"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div>
@@ -309,7 +309,7 @@ export default function InlineCragForm({
                   value={form.best_seasons}
                   onChange={(e) => setForm({ ...form, best_seasons: e.target.value })}
                   placeholder="逗號分隔，例：秋, 冬, 春"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20"
                 />
               </div>
               <div className="sm:col-span-2">
@@ -319,7 +319,7 @@ export default function InlineCragForm({
                   onChange={(e) => setForm({ ...form, access_info: e.target.value })}
                   rows={2}
                   placeholder="如何抵達、大眾運輸方式等"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20 resize-none"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 resize-none"
                 />
               </div>
               <div>
@@ -328,7 +328,7 @@ export default function InlineCragForm({
                   value={form.parking_info}
                   onChange={(e) => setForm({ ...form, parking_info: e.target.value })}
                   rows={2}
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20 resize-none"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 resize-none"
                 />
               </div>
               <div>
@@ -338,7 +338,7 @@ export default function InlineCragForm({
                   onChange={(e) => setForm({ ...form, restrictions: e.target.value })}
                   rows={2}
                   placeholder="例：雨後禁止攀爬、需申請入山證等"
-                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-wb-100/20 resize-none"
+                  className="w-full px-3 py-2 text-sm border border-wb-20 rounded-lg bg-white focus:outline-hidden focus:ring-2 focus:ring-wb-100/20 resize-none"
                 />
               </div>
             </div>
@@ -361,7 +361,7 @@ export default function InlineCragForm({
       </form>
 
       {/* Footer actions */}
-      <div className="px-4 py-3 border-t border-wb-20 flex items-center justify-between flex-shrink-0 bg-white">
+      <div className="px-4 py-3 border-t border-wb-20 flex items-center justify-between shrink-0 bg-white">
         <div>
           {crag && !isNew && (
             <>

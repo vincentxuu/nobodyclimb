@@ -453,6 +453,69 @@ export interface AILogDetail {
       skipped?: boolean
       error?: string
     }>
+    // React Agent 策略
+    strategy?: string
+    turn_count?: number
+    tool_call_count?: number
+    per_model_stats?: Array<{
+      provider: string
+      model: string
+      inputTokens?: number
+      outputTokens?: number
+      calls?: number
+      prompt_tokens?: number
+      completion_tokens?: number
+      cost_usd?: number
+      cost_twd?: number
+    }>
+    // Agent turn-level traces
+    turn_traces?: Array<{
+      turn: number
+      llmDurationMs: number
+      tools: Array<{
+        name: string
+        durationMs: number
+        resultCount?: number
+        cacheHit?: boolean
+        trace?: {
+          embedding?: { duration_ms: number }
+          retrieval?: {
+            retrieval_method?: string
+            paths: string[]
+            path_counts?: Record<string, number>
+            path_results?: Record<string, Array<{ id: string; score: number; name?: string }>>
+            bm25_fts_query?: string | null
+            candidates_before_filter: number
+            candidates_after_filter: number
+            crag_fallback: boolean
+            crag_fallback_stage?: 'grade' | null
+            reranker_used?: boolean
+            rrf?: {
+              paths_count: number
+              merged_count: number
+              min_score_threshold: number
+              after_threshold_count: number
+            }
+            crag_fallback_detail?: {
+              trigger_reason: string
+              retries: Array<{ removed_filter: string; candidates_after: number }>
+            } | null
+          }
+          filter?: Record<string, unknown>
+          text_to_sql?: {
+            template?: string
+            params?: Record<string, unknown>
+            query_ms?: number
+            row_count?: number
+          }
+        }
+      }>
+      provider: string
+      model: string
+      usedFallback: boolean
+    }>
+    cost_usd?: number
+    cost_twd?: number
   } | null
 }
 
@@ -996,5 +1059,641 @@ export function useAIMetrics(range: MetricsRange) {
       return res.data.data
     },
     staleTime: 5 * 60 * 1000,
+  })
+}
+
+// =============================================
+// Tool Management
+// =============================================
+
+export interface AdminTool {
+  id: string
+  name: string
+  description: string | null
+  parameters: string | null
+  enabled: number
+  category: string | null
+  tags: string | null
+  description_override: string | null
+  config: string | null
+  source: string
+  requires_auth: number
+  stats_call_count: number
+  stats_error_count: number
+  stats_avg_latency_ms: number | null
+  created_at: string
+  updated_at: string
+}
+
+export async function getAdminTools(): Promise<AdminTool[]> {
+  const res = await apiClient.get<{ success: boolean; data: AdminTool[] }>('/admin/ai/tools')
+  return res.data.data
+}
+
+export async function updateAdminTool(
+  name: string,
+  data: { enabled?: number; description_override?: string | null; config?: string | null }
+): Promise<void> {
+  await apiClient.put(`/admin/ai/tools/${name}`, data)
+}
+
+export function useAdminTools() {
+  return useQuery<AdminTool[]>({
+    queryKey: ['admin-ai-tools'],
+    queryFn: getAdminTools,
+  })
+}
+
+export function useUpdateAdminTool() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ name, data }: { name: string; data: Parameters<typeof updateAdminTool>[1] }) =>
+      updateAdminTool(name, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-tools'] })
+    },
+  })
+}
+
+// =============================================
+// Hook Management
+// =============================================
+
+export type HookEvent =
+  | 'pre_loop'
+  | 'pre_turn'
+  | 'pre_tool'
+  | 'post_tool'
+  | 'post_loop'
+  | 'post_response'
+
+export type HookType = 'gate' | 'enrich' | 'observe'
+
+export interface AdminHook {
+  id: string
+  name: string
+  description: string | null
+  event: HookEvent
+  hook_type: HookType
+  implementation: string
+  config: string | null
+  priority: number
+  enabled: number
+  matcher: string | null
+  handler_type: string
+  handler_ref: string | null
+  blocking: number
+  timeout_ms: number
+  on_failure: 'fail_open' | 'fail_closed'
+  source_plugin_id: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface HookExecution {
+  id: string
+  hook_id: string
+  session_id: string | null
+  decision: 'allow' | 'deny' | 'modify' | 'noop' | null
+  duration_ms: number | null
+  error: string | null
+  executed_at: string
+}
+
+export interface EnablementRecord {
+  subject_type: string
+  subject_id: string
+  component_type: 'skill' | 'tool' | 'hook' | 'command'
+  component_id: string
+  pinned_version_id: string | null
+  source_plugin_id: string | null
+  enabled: number
+}
+
+export async function getAdminHooks(): Promise<AdminHook[]> {
+  const res = await apiClient.get<{ success: boolean; data: AdminHook[] }>('/admin/ai/hooks')
+  return res.data.data
+}
+
+export async function updateAdminHook(
+  id: string,
+  data: {
+    enabled?: number
+    config?: string | null
+    priority?: number
+    description?: string | null
+    matcher?: string | null
+    timeout_ms?: number
+    on_failure?: string
+    blocking?: number
+  }
+): Promise<void> {
+  await apiClient.put(`/admin/ai/hooks/${id}`, data)
+}
+
+export async function getHookExecutions(hookId: string): Promise<HookExecution[]> {
+  const res = await apiClient.get<{ success: boolean; data: HookExecution[] }>(
+    `/admin/ai/hooks/${hookId}/executions`
+  )
+  return res.data.data
+}
+
+export async function getEnablement(
+  subjectType = 'agent',
+  subjectId = 'default'
+): Promise<EnablementRecord[]> {
+  const res = await apiClient.get<{ success: boolean; data: EnablementRecord[] }>(
+    `/admin/ai/enablement?subject_type=${subjectType}&subject_id=${subjectId}`
+  )
+  return res.data.data
+}
+
+export function useAdminHooks() {
+  return useQuery<AdminHook[]>({
+    queryKey: ['admin-ai-hooks'],
+    queryFn: getAdminHooks,
+  })
+}
+
+export function useUpdateAdminHook() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Parameters<typeof updateAdminHook>[1] }) =>
+      updateAdminHook(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-hooks'] })
+    },
+  })
+}
+
+export function useHookExecutions(hookId: string) {
+  return useQuery<HookExecution[]>({
+    queryKey: ['admin-ai-hook-executions', hookId],
+    queryFn: () => getHookExecutions(hookId),
+    enabled: !!hookId,
+  })
+}
+
+export function useEnablement(subjectType = 'agent', subjectId = 'default') {
+  return useQuery<EnablementRecord[]>({
+    queryKey: ['admin-ai-enablement', subjectType, subjectId],
+    queryFn: () => getEnablement(subjectType, subjectId),
+  })
+}
+
+// =============================================
+// Admin Skill Management
+// =============================================
+
+// ---------------------------------------------------------------------------
+// Skill types (multi-table: skill + skill_version + skill_file + skill_binding)
+// ---------------------------------------------------------------------------
+
+export interface SkillVersionSummary {
+  id: string
+  version_number: number
+  status: 'draft' | 'published' | 'deprecated'
+  description: string
+  published_at: string | null
+  created_at: string
+}
+
+export interface SkillVersion extends SkillVersionSummary {
+  name: string
+  body: string | null
+  allowed_tools: string[]
+  content_hash: string
+  token_count: number | null
+  metadata: Record<string, unknown> | null
+}
+
+export interface SkillFile {
+  id: string
+  path: string
+  size_bytes: number | null
+  content_type: string | null
+}
+
+export interface SkillBinding {
+  id: string
+  enabled: boolean
+  pinned_version_id: string | null
+}
+
+export interface AdminSkill {
+  id: string
+  tenant_id: string
+  slug: string
+  display_name: string | null
+  scope: 'personal' | 'team' | 'org' | 'public'
+  owner_id: string | null
+  source: 'builtin' | 'custom' | 'marketplace'
+  latest_version_id: string | null
+  created_at: string
+  version?: SkillVersion | null
+  binding?: SkillBinding | null
+  versions?: SkillVersionSummary[]
+  files?: SkillFile[]
+}
+
+// ---------------------------------------------------------------------------
+// Skill API functions
+// ---------------------------------------------------------------------------
+
+export async function getAdminSkills(): Promise<AdminSkill[]> {
+  const res = await apiClient.get<{ success: boolean; data: AdminSkill[] }>('/admin/ai/skills')
+  return res.data.data
+}
+
+export async function getAdminSkill(id: string): Promise<AdminSkill> {
+  const res = await apiClient.get<{ success: boolean; data: AdminSkill }>(`/admin/ai/skills/${id}`)
+  return res.data.data
+}
+
+export async function createAdminSkill(data: {
+  slug: string
+  display_name?: string
+  scope?: string
+  description: string
+  body?: string
+  allowed_tools?: string[]
+}): Promise<AdminSkill> {
+  const res = await apiClient.post<{ success: boolean; data: AdminSkill }>('/admin/ai/skills', data)
+  return res.data.data
+}
+
+export async function updateAdminSkill(
+  id: string,
+  data: { display_name?: string; scope?: string }
+): Promise<void> {
+  await apiClient.put(`/admin/ai/skills/${id}`, data)
+}
+
+export async function publishSkillVersion(
+  id: string,
+  data: { description: string; body?: string; allowed_tools?: string[] }
+): Promise<SkillVersion> {
+  const res = await apiClient.post<{ success: boolean; data: SkillVersion }>(
+    `/admin/ai/skills/${id}/versions`,
+    data
+  )
+  return res.data.data
+}
+
+export async function updateSkillBinding(
+  id: string,
+  data: { enabled?: boolean; pinned_version_id?: string | null }
+): Promise<void> {
+  await apiClient.put(`/admin/ai/skills/${id}/binding`, data)
+}
+
+export async function deprecateSkillVersion(skillId: string, versionId: string): Promise<void> {
+  await apiClient.put(`/admin/ai/skills/${skillId}/versions/${versionId}`, {
+    status: 'deprecated',
+  })
+}
+
+export async function deleteAdminSkill(id: string): Promise<void> {
+  await apiClient.delete(`/admin/ai/skills/${id}`)
+}
+
+export async function importSkill(content: string): Promise<AdminSkill> {
+  const res = await apiClient.post<{ success: boolean; data: AdminSkill }>(
+    '/admin/ai/skills/import',
+    { content }
+  )
+  return res.data.data
+}
+
+export async function exportSkill(id: string): Promise<string> {
+  const res = await apiClient.get<{ success: boolean; data: { content: string } }>(
+    `/admin/ai/skills/${id}/export`
+  )
+  return res.data.data.content
+}
+
+export async function testSkillTrigger(
+  query: string
+): Promise<{ matched: Array<{ slug: string; description: string; scope: string }> }> {
+  const res = await apiClient.post<{
+    success: boolean
+    data: { matched: Array<{ slug: string; description: string; scope: string }> }
+  }>('/admin/ai/skills/test-trigger', { query })
+  return res.data.data
+}
+
+// ---------------------------------------------------------------------------
+// Skill query hooks
+// ---------------------------------------------------------------------------
+
+export function useAdminSkills() {
+  return useQuery<AdminSkill[]>({
+    queryKey: ['admin-ai-skills'],
+    queryFn: getAdminSkills,
+  })
+}
+
+export function useAdminSkill(id: string) {
+  return useQuery<AdminSkill>({
+    queryKey: ['admin-ai-skill', id],
+    queryFn: () => getAdminSkill(id),
+    enabled: !!id,
+  })
+}
+
+export function useCreateAdminSkill() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: createAdminSkill,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}
+
+export function useUpdateAdminSkill() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Parameters<typeof updateAdminSkill>[1] }) =>
+      updateAdminSkill(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}
+
+export function usePublishSkillVersion() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Parameters<typeof publishSkillVersion>[1] }) =>
+      publishSkillVersion(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}
+
+export function useUpdateSkillBinding() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Parameters<typeof updateSkillBinding>[1] }) =>
+      updateSkillBinding(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}
+
+export function useDeleteAdminSkill() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: deleteAdminSkill,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}
+
+// =============================================
+// MCP Server Types & API
+// =============================================
+
+export interface AdminMCPServer {
+  id: string
+  tenant_id: string
+  name: string
+  description: string | null
+  transport: string
+  url: string | null
+  auth_type: string
+  secret_ref: string | null
+  enabled: number
+  health_status: 'healthy' | 'unhealthy' | 'unknown'
+  last_health_check: string | null
+  source_plugin_id: string | null
+  created_at: string
+  updated_at: string
+  tool_count?: number
+}
+
+export interface ToolSnapshot {
+  id: string
+  server_id: string
+  tool_name: string
+  qualified_key: string
+  description: string
+  input_schema: string
+  schema_hash: string
+  first_seen_at: string
+  last_seen_at: string
+  removed_at: string | null
+}
+
+export async function getAdminMCPServers(): Promise<AdminMCPServer[]> {
+  const res = await apiClient.get<{ success: boolean; data: AdminMCPServer[] }>('/admin/ai/mcp')
+  return res.data.data
+}
+
+export async function createMCPServer(data: {
+  name: string
+  url: string
+  transport?: string
+  auth_type?: string
+  secret_ref?: string
+  description?: string
+}): Promise<AdminMCPServer> {
+  const res = await apiClient.post<{ success: boolean; data: AdminMCPServer }>(
+    '/admin/ai/mcp',
+    data
+  )
+  return res.data.data
+}
+
+export async function updateMCPServer(
+  id: string,
+  data: {
+    url?: string
+    transport?: string
+    auth_type?: string
+    secret_ref?: string
+    description?: string | null
+    enabled?: number
+  }
+): Promise<void> {
+  await apiClient.put(`/admin/ai/mcp/${id}`, data)
+}
+
+export async function deleteMCPServer(id: string): Promise<void> {
+  await apiClient.delete(`/admin/ai/mcp/${id}`)
+}
+
+export async function discoverMCPTools(
+  id: string
+): Promise<{ added: number; updated: number; removed: number }> {
+  const res = await apiClient.post<{
+    success: boolean
+    data: { added: number; updated: number; removed: number }
+  }>(`/admin/ai/mcp/${id}/discover`)
+  return res.data.data
+}
+
+export async function healthCheckMCP(id: string): Promise<{ healthy: boolean }> {
+  const res = await apiClient.post<{ success: boolean; data: { healthy: boolean } }>(
+    `/admin/ai/mcp/${id}/health`
+  )
+  return res.data.data
+}
+
+export async function getMCPTools(id: string): Promise<ToolSnapshot[]> {
+  const res = await apiClient.get<{ success: boolean; data: ToolSnapshot[] }>(
+    `/admin/ai/mcp/${id}/tools`
+  )
+  return res.data.data
+}
+
+export async function testMCPTool(
+  serverId: string,
+  toolName: string,
+  input: Record<string, unknown>
+): Promise<unknown> {
+  const res = await apiClient.post<{ success: boolean; data: unknown }>(
+    `/admin/ai/mcp/${serverId}/test`,
+    { tool_name: toolName, input }
+  )
+  return res.data.data
+}
+
+export function useAdminMCPServers() {
+  return useQuery<AdminMCPServer[]>({
+    queryKey: ['admin-ai-mcp'],
+    queryFn: getAdminMCPServers,
+  })
+}
+
+export function useCreateMCPServer() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: createMCPServer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+    },
+  })
+}
+
+export function useUpdateMCPServer() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Parameters<typeof updateMCPServer>[1] }) =>
+      updateMCPServer(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+    },
+  })
+}
+
+export function useDeleteMCPServer() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: deleteMCPServer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+    },
+  })
+}
+
+export function useMCPTools(serverId: string) {
+  return useQuery<ToolSnapshot[]>({
+    queryKey: ['admin-ai-mcp-tools', serverId],
+    queryFn: () => getMCPTools(serverId),
+    enabled: !!serverId,
+  })
+}
+
+export function useDiscoverMCPTools() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: discoverMCPTools,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp-tools'] })
+    },
+  })
+}
+
+export function useHealthCheckMCP() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: healthCheckMCP,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+    },
+  })
+}
+
+// =============================================
+// Plugin Types & API
+// =============================================
+
+export interface AdminPlugin {
+  id: string
+  tenant_id: string
+  subject_type: string
+  subject_id: string
+  plugin_version_id: string
+  installed_at: string
+  name: string
+  semver: string
+  description: string | null
+  manifest?: Record<string, unknown>
+  component_counts?: { skills: number; mcp_servers: number; hooks: number }
+}
+
+export async function getAdminPlugins(): Promise<AdminPlugin[]> {
+  const res = await apiClient.get<{ success: boolean; data: AdminPlugin[] }>('/admin/ai/plugins')
+  return res.data.data
+}
+
+export async function installPlugin(
+  manifest: Record<string, unknown>
+): Promise<{ plugin_id: string; skills: number; mcp_servers: number }> {
+  const res = await apiClient.post<{
+    success: boolean
+    data: { plugin_id: string; skills: number; mcp_servers: number }
+  }>('/admin/ai/plugins', { manifest })
+  return res.data.data
+}
+
+export async function uninstallPlugin(id: string): Promise<void> {
+  await apiClient.delete(`/admin/ai/plugins/${id}`)
+}
+
+export function useAdminPlugins() {
+  return useQuery<AdminPlugin[]>({
+    queryKey: ['admin-ai-plugins'],
+    queryFn: getAdminPlugins,
+  })
+}
+
+export function useInstallPlugin() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: installPlugin,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-plugins'] })
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
+  })
+}
+
+export function useUninstallPlugin() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: uninstallPlugin,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-plugins'] })
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-mcp'] })
+      queryClient.invalidateQueries({ queryKey: ['admin-ai-skills'] })
+    },
   })
 }

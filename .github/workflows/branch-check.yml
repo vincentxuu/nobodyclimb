@@ -1,0 +1,44 @@
+name: Branch & PR Check
+
+on:
+  pull_request:
+    branches: [develop, main]
+    types: [opened, synchronize]
+
+jobs:
+  check:
+    name: Branch Naming & Size
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check branch naming convention
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          PATTERN="^(feature|fix|bugfix|hotfix|chore|refactor|test|docs|perf|ci)/"
+
+          if [[ ! "$BRANCH" =~ $PATTERN ]]; then
+            echo "::warning::Branch name '$BRANCH' does not follow convention: feature/, fix/, chore/, refactor/, test/, docs/, perf/, ci/"
+          fi
+
+      - name: Check PR base branch (GitFlow)
+        run: |
+          BASE="${{ github.base_ref }}"
+          BRANCH="${{ github.head_ref }}"
+
+          if [[ "$BASE" == "main" && ! "$BRANCH" =~ ^(hotfix/|release/) ]]; then
+            echo "::warning::PR to main should be from hotfix/ or release/ branch (GitFlow). Current: $BRANCH"
+          fi
+
+      - name: Check PR size
+        run: |
+          FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | wc -l | tr -d ' ')
+          echo "Changed files: $FILES"
+
+          if [ "$FILES" -gt 60 ]; then
+            echo "::warning::This PR changes $FILES files — consider splitting into smaller PRs."
+          elif [ "$FILES" -gt 30 ]; then
+            echo "::notice::This PR changes $FILES files."
+          fi

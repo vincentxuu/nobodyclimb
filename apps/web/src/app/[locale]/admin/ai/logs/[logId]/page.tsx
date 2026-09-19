@@ -2,6 +2,7 @@
 
 import { ArrowLeft, Clock, Loader2, ThumbsUp, User } from 'lucide-react'
 import { use } from 'react'
+import { AgentTimeline } from '@/components/admin/ai-log-detail/agent-timeline'
 import { CostAnalysisCard } from '@/components/admin/ai-log-detail/cost-analysis'
 import { DecisionNarrative } from '@/components/admin/ai-log-detail/decision-narrative'
 import { LatencyBreakdown } from '@/components/admin/ai-log-detail/latency-breakdown'
@@ -33,6 +34,7 @@ export default function AdminAILogDetailPage({ params }: { params: Promise<{ log
   }
 
   const isCacheHit = log.pipeline?.cache?.hit
+  const isAgent = log.pipeline_trace?.strategy === 'agent' && !!log.pipeline_trace?.turn_traces
   const sources = Array.isArray(log.sources) ? log.sources : []
 
   return (
@@ -51,6 +53,11 @@ export default function AdminAILogDetailPage({ params }: { params: Promise<{ log
         {isCacheHit && (
           <span className="rounded-md border border-sky-200 bg-sky-50 px-2 py-0.5 text-xs font-medium text-sky-600">
             快取命中
+          </span>
+        )}
+        {isAgent && (
+          <span className="rounded-md border border-violet-200 bg-violet-50 px-2 py-0.5 text-xs font-medium text-violet-600">
+            Agent
           </span>
         )}
       </div>
@@ -91,8 +98,8 @@ export default function AdminAILogDetailPage({ params }: { params: Promise<{ log
         </div>
       </div>
 
-      {/* 費用分析 */}
-      {log.pipeline_trace?.token_breakdown && (
+      {/* 費用分析（pipeline 模式） */}
+      {!isAgent && log.pipeline_trace?.token_breakdown && (
         <CostAnalysisCard pipelineTrace={log.pipeline_trace} />
       )}
 
@@ -111,8 +118,17 @@ export default function AdminAILogDetailPage({ params }: { params: Promise<{ log
         <p className="text-sm text-wb-80 leading-relaxed">{log.query}</p>
       </div>
 
+      {/* Agent 流程 */}
+      {isAgent && log.pipeline_trace?.turn_traces && (
+        <AgentTimeline
+          turnTraces={log.pipeline_trace.turn_traces}
+          latency={log.latency}
+          pipelineTrace={log.pipeline_trace}
+        />
+      )}
+
       {/* Pipeline 流程 */}
-      {log.pipeline && (
+      {!isAgent && log.pipeline && (
         <PipelineTimeline
           pipeline={log.pipeline}
           pipelineTrace={log.pipeline_trace}
@@ -122,8 +138,8 @@ export default function AdminAILogDetailPage({ params }: { params: Promise<{ log
         />
       )}
 
-      {/* 延遲分解 */}
-      {!isCacheHit && log.latency && <LatencyBreakdown latency={log.latency} />}
+      {/* 延遲分解（pipeline 模式） */}
+      {!isAgent && !isCacheHit && log.latency && <LatencyBreakdown latency={log.latency} />}
 
       {/* 品質評估 */}
       {log.quality && <QualitySection quality={log.quality} />}

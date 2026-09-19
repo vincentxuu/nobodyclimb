@@ -43,7 +43,7 @@ export function StoryModal({ story, open, onClose }: StoryModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs"
           />
 
           {/* Modal 內容 */}

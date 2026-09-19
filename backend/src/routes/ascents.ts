@@ -1,7 +1,8 @@
 import { Hono } from 'hono'
 import { describeRoute } from 'hono-openapi'
 import { authMiddleware, optionalAuthMiddleware } from '../middleware/auth'
-import { RecommendationService } from '../services/recommendation'
+import { GoalService } from '../services/domain/goals'
+import { RecommendationService } from '../services/domain/recommendation'
 import { Env, UserRouteAscent } from '../types'
 import {
   generateId,
@@ -446,6 +447,18 @@ ascentsRoutes.post(
     if (withinLimit) {
       c.executionCtx.waitUntil(recommendationService.generate(userId, 'ascent'))
     }
+
+    // 非同步更新目標進度（不阻塞回應）
+    c.executionCtx.waitUntil(
+      new GoalService(c.env.DB)
+        .checkAndUpdateAfterAscent(userId, {
+          route_name: (ascent?.route_name as string) ?? '',
+          grade: (ascent?.route_grade as string) ?? '',
+          route_type: body.ascent_type,
+          crag_name: (ascent?.crag_name as string) ?? null,
+        })
+        .catch((err) => console.error('[goals] auto-update failed', err))
+    )
 
     return c.json(
       {

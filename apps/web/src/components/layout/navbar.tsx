@@ -43,7 +43,7 @@ export function Navbar() {
   return (
     <header
       className={`fixed left-0 right-0 top-0 z-[999] h-14 md:h-[70px] transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 shadow-sm backdrop-blur-sm' : 'bg-white backdrop-blur-sm'
+        isScrolled ? 'bg-white/95 shadow-xs backdrop-blur-xs' : 'bg-white backdrop-blur-xs'
       }`}
     >
       {/* 進度條 */}

@@ -60,6 +60,8 @@ export interface RankScoreBreakdown {
   route_ascents: number
   bucket_list_items: number
   bucket_list_completed: number
+  quiz_completed: number
+  training_completed: number
   total: number
 }
 
@@ -67,3 +69,7 @@ export interface UserRankDetail extends UserRank {
   rank_display_name: string
   score_breakdown: RankScoreBreakdown
 }
+
+/** AI 問答支援的介面語言（對應 web 的 next-intl locales，backend 據此決定回答語言） */
+export const AI_LOCALES = ['zh', 'en', 'ja'] as const
+export type AiLocale = (typeof AI_LOCALES)[number]

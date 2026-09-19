@@ -19,16 +19,22 @@
     "build:cf": "turbo run build:cf --filter=@nobodyclimb/web",
     "lint": "biome check .",
     "test": "turbo run test",
-    "typecheck": "turbo run typecheck",
+    "typecheck": "pnpm -r --if-present run typecheck",
     "format": "biome format --write .",
     "format:check": "biome format .",
     "android": "expo run:android",
-    "ios": "expo run:ios"
+    "ios": "expo run:ios",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.9",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.5.1",
     "turbo": "^2.3.0",
     "typescript": "^5.9.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,css}": "biome check --fix --no-errors-on-unmatched"
   },
   "version": "1.0.0",
   "dependencies": {

@@ -47,7 +47,7 @@ export default function SearchFilters() {
             value={searchQuery}
             onChange={(e) => handleSearch(e.target.value)}
             placeholder={t('searchPlaceholder')}
-            className="h-[40px] w-full rounded-[4px] border border-[#1B1A1A] bg-white text-sm font-light placeholder:text-[#6D6C6C] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#1B1A1A]"
+            className="h-[40px] w-full rounded-[4px] border border-[#1B1A1A] bg-white text-sm font-light placeholder:text-[#6D6C6C] focus:border-transparent focus:outline-hidden focus:ring-2 focus:ring-[#1B1A1A]"
           />
           <Search className="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 transform stroke-[1.5px] text-[#1B1A1A]" />
         </div>

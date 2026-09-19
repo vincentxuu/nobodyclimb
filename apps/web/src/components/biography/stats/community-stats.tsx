@@ -57,7 +57,7 @@ export function CommunityStatsOverview({ stats, className }: CommunityStatsOverv
       {/* 目標完成率與熱門分類 */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* 目標完成率 */}
-        <div className="p-6 bg-white rounded-lg border border-gray-100 shadow-sm">
+        <div className="p-6 bg-white rounded-lg border border-gray-100 shadow-xs">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-green-500" />
             {t('communityGoalCompletionRate')}
@@ -105,7 +105,7 @@ export function CommunityStatsOverview({ stats, className }: CommunityStatsOverv
         </div>
 
         {/* 熱門分類 */}
-        <div className="p-6 bg-white rounded-lg border border-gray-100 shadow-sm">
+        <div className="p-6 bg-white rounded-lg border border-gray-100 shadow-xs">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             {t('trendingGoalCategories')}
           </h3>
@@ -147,7 +147,7 @@ export function Leaderboard({ title, items, valueLabel, className }: Leaderboard
   const resolvedValueLabel = valueLabel ?? t('score')
   if (items.length === 0) {
     return (
-      <div className={cn('p-6 bg-white rounded-lg border border-gray-100 shadow-sm', className)}>
+      <div className={cn('p-6 bg-white rounded-lg border border-gray-100 shadow-xs', className)}>
         <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
         <div className="flex items-center justify-center h-40 text-gray-400">
           {t('noLeaderboardData')}
@@ -157,7 +157,7 @@ export function Leaderboard({ title, items, valueLabel, className }: Leaderboard
   }
 
   return (
-    <div className={cn('p-6 bg-white rounded-lg border border-gray-100 shadow-sm', className)}>
+    <div className={cn('p-6 bg-white rounded-lg border border-gray-100 shadow-xs', className)}>
       <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
       <div className="space-y-3">
         {items.map((item, index) => (

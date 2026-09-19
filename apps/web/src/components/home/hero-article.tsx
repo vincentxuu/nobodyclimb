@@ -129,7 +129,7 @@ export function HeroArticle() {
               priority={index === 0}
             />
             {/* 漸層遮罩 */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
 
             {/* 文章資訊 */}
             <motion.div
@@ -211,14 +211,14 @@ export function HeroArticle() {
       {articles.length > 1 && (
         <>
           <button
-            className="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 opacity-0 backdrop-blur-sm transition-all hover:bg-white/20 group-hover:opacity-100"
+            className="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 opacity-0 backdrop-blur-xs transition-all hover:bg-white/20 group-hover:opacity-100"
             onClick={prevSlide}
             aria-label={t('heroArticlePrevSlide')}
           >
             <ChevronLeft className="h-6 w-6 text-white" />
           </button>
           <button
-            className="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 opacity-0 backdrop-blur-sm transition-all hover:bg-white/20 group-hover:opacity-100"
+            className="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 opacity-0 backdrop-blur-xs transition-all hover:bg-white/20 group-hover:opacity-100"
             onClick={nextSlide}
             aria-label={t('heroArticleNextSlide')}
           >

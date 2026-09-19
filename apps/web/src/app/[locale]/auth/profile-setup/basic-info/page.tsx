@@ -224,7 +224,7 @@ export default function BasicInfoPage() {
               onChange={handleChange}
               placeholder={t('displayNamePlaceholder')}
               required
-              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-hidden focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
               maxLength={50}
             />
           </div>
@@ -241,7 +241,7 @@ export default function BasicInfoPage() {
               value={formData.title}
               onChange={handleChange}
               placeholder={t('titlePlaceholder')}
-              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-hidden focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
               maxLength={100}
             />
             <p className="text-xs text-gray-500 flex items-center gap-1">
@@ -260,7 +260,7 @@ export default function BasicInfoPage() {
               name="startYear"
               value={formData.startYear}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors appearance-none cursor-pointer"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 focus:outline-hidden focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors appearance-none cursor-pointer"
             >
               <option value="">{t('selectYear')}</option>
               {yearOptions.map((year) => (
@@ -305,7 +305,7 @@ export default function BasicInfoPage() {
                     }
                   }}
                   placeholder={t('locationInputPlaceholder')}
-                  className="w-32 px-3 py-1.5 text-sm bg-white text-gray-900 border border-dashed border-gray-300 rounded-full placeholder:text-gray-400 focus:outline-none focus:border-primary"
+                  className="w-32 px-3 py-1.5 text-sm bg-white text-gray-900 border border-dashed border-gray-300 rounded-full placeholder:text-gray-400 focus:outline-hidden focus:border-primary"
                 />
                 <button
                   type="button"

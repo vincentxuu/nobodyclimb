@@ -127,7 +127,7 @@ export function CompleteStoriesSection({ person, isOwner }: CompleteStoriesSecti
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ delay: index * 0.05 }}
-              className="w-80 flex-shrink-0 snap-start rounded-lg bg-white p-6 shadow-sm flex flex-col"
+              className="w-80 shrink-0 snap-start rounded-lg bg-white p-6 shadow-xs flex flex-col"
             >
               {/* 分類標籤 */}
               {(story.category_id || story.category_name) && (
@@ -175,7 +175,7 @@ export function CompleteStoriesSection({ person, isOwner }: CompleteStoriesSecti
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: stories.length * 0.05 }}
-              className="w-80 flex-shrink-0 snap-start"
+              className="w-80 shrink-0 snap-start"
             >
               <Link href="/profile#stories" className="block h-full">
                 <div className="group flex h-full min-h-[240px] cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-6 text-center transition-colors hover:border-brand-accent">

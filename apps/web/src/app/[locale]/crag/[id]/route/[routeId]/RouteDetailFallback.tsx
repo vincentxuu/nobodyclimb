@@ -31,7 +31,7 @@ export default function RouteDetailFallback({ cragId, routeId }: RouteDetailFall
     return (
       <main className="min-h-full bg-gray-50">
         <div className="relative mx-auto px-4 py-4 lg:px-8 lg:py-8">
-          <div className="mb-12 rounded-lg bg-white p-6 shadow-sm md:p-8">
+          <div className="mb-12 rounded-lg bg-white p-6 shadow-xs md:p-8">
             <div className="animate-pulse">
               <div className="h-6 bg-gray-200 rounded w-48 mb-4" />
               <div className="h-8 bg-gray-200 rounded w-64 mb-2" />

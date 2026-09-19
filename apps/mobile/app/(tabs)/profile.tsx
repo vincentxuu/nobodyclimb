@@ -16,15 +16,21 @@ import {
   ListChecks,
   LogOut,
   Mountain,
+  PenLine,
   Settings,
+  Shield,
   Sparkles,
+  TrendingUp,
   User,
 } from 'lucide-react-native'
 import React, { useCallback } from 'react'
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import EvolutionNotificationBanner from '@/components/profile/evolution/EvolutionNotificationBanner'
+import { QuizProfileBadge } from '@/components/quiz/QuizProfileBadge'
 import { Avatar, Button, Divider, Text } from '@/components/ui'
 import { useAuthStore } from '@/store/authStore'
+import { useQuizStore } from '@/store/quizStore'
 
 interface MenuItemProps {
   icon: React.ReactNode
@@ -56,6 +62,8 @@ function MenuItem({ icon, label, onPress, showArrow = true, destructive = false 
 export default function ProfileScreen() {
   const router = useRouter()
   const { user, isAuthenticated, logout } = useAuthStore()
+  const { result: quizResult } = useQuizStore()
+  const canAccessAdmin = user?.role === 'admin' || user?.role === 'moderator'
 
   const handleLogin = useCallback(() => {
     router.push('/auth/login')
@@ -117,12 +125,33 @@ export default function ProfileScreen() {
           </Pressable>
         </View>
 
+        {/* 攀岩人格徽章 */}
+        <View style={styles.quizBadgeSection}>
+          <QuizProfileBadge
+            typeCode={quizResult?.typeCode}
+            size="md"
+            onPress={() =>
+              quizResult
+                ? handleNavigate(`/quiz/result/${quizResult.typeCode}`)
+                : handleNavigate('/quiz')
+            }
+          />
+        </View>
+
+        {/* 演化通知 */}
+        <EvolutionNotificationBanner />
+
         {/* 主要選單 */}
         <View style={styles.menuSection}>
           <MenuItem
             icon={<User size={20} color={SEMANTIC_COLORS.textMain} />}
             label="我的人物誌"
             onPress={() => handleNavigate('/profile/biography')}
+          />
+          <MenuItem
+            icon={<PenLine size={20} color={SEMANTIC_COLORS.textMain} />}
+            label="編輯人物誌"
+            onPress={() => handleNavigate('/profile/editor')}
           />
           <MenuItem
             icon={<ListChecks size={20} color={SEMANTIC_COLORS.textMain} />}
@@ -164,6 +193,18 @@ export default function ProfileScreen() {
             label="路線推薦"
             onPress={() => handleNavigate('/profile/recommendations')}
           />
+          <MenuItem
+            icon={<TrendingUp size={20} color={SEMANTIC_COLORS.success} />}
+            label="人格演化"
+            onPress={() => handleNavigate('/profile/evolution')}
+          />
+          {canAccessAdmin && (
+            <MenuItem
+              icon={<Shield size={20} color={SEMANTIC_COLORS.textMain} />}
+              label="管理後台"
+              onPress={() => handleNavigate('/admin')}
+            />
+          )}
         </View>
 
         <Divider style={styles.divider} />
@@ -230,6 +271,10 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.xs,
     borderRadius: RADIUS.sm,
     backgroundColor: '#F5F5F5',
+  },
+  quizBadgeSection: {
+    paddingHorizontal: SPACING.md,
+    paddingVertical: SPACING.sm,
   },
   menuSection: {
     backgroundColor: SEMANTIC_COLORS.cardBg,
