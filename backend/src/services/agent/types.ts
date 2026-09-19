@@ -160,6 +160,22 @@ export interface ProgressEvent {
   status: 'executing' | 'done'
   /** 呼叫參數（僅 executing 事件帶，前端 Tool 元件顯示用） */
   input?: unknown
+  /** 工具回傳內容（僅 done 事件帶，已截斷至 PROGRESS_OUTPUT_MAX_CHARS，前端 Response 區顯示用） */
+  output?: string
+  /** 工具執行是否失敗（僅 done 事件帶） */
+  is_error?: boolean
+  /** 工具執行耗時（僅 done 事件帶） */
+  duration_ms?: number
+}
+
+/** progress done 事件的 output 截斷長度（SSE 事件不宜過大） */
+export const PROGRESS_OUTPUT_MAX_CHARS = 2000
+
+/** 截斷 tool output 供 progress 事件使用 */
+export function truncateProgressOutput(content: string): string {
+  if (content.length <= PROGRESS_OUTPUT_MAX_CHARS) return content
+  return `${content.slice(0, PROGRESS_OUTPUT_MAX_CHARS)}
+…[已截斷，原始長度 ${content.length} 字元]`
 }
 
 export interface AgentOptions {

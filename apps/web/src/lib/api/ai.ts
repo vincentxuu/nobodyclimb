@@ -1,8 +1,8 @@
-import type { AiQuota } from '@nobodyclimb/types'
+import type { AiLocale, AiQuota } from '@nobodyclimb/types'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import apiClient from './client'
 
-export type { AiQuota }
+export type { AiLocale, AiQuota }
 
 // =============================================
 // TypeScript 介面
@@ -29,6 +29,8 @@ export interface AIAskRequest {
   include_sources?: boolean
   chat_history?: AIChatHistoryMessage[]
   no_cache?: boolean
+  /** 介面語言，後端據此決定回答語言 */
+  locale?: AiLocale
 }
 
 export interface AIAskResponse {
@@ -128,11 +130,15 @@ export interface AIStreamDoneEvent {
 }
 
 // 後端 progress 事件：同名 tool 並行時以 id 區分 invocation
+// executing 事件帶 input（Request）；done 事件帶截斷後的 output（Response）、is_error、duration_ms
 export interface AIStreamProgressEvent {
   id: string
   tool: string
   status: 'executing' | 'done'
   input?: unknown
+  output?: string
+  is_error?: boolean
+  duration_ms?: number
 }
 
 // SSE 串流問答：使用 fetch + ReadableStream 接收，支援 AbortController 取消
@@ -195,6 +201,9 @@ export async function askAIStream(
             tool?: string
             status?: string
             input?: unknown
+            output?: string
+            is_error?: boolean
+            duration_ms?: number
           } & Partial<AIStreamDoneEvent> & { message?: string }
           if (event.type === 'token' && event.token !== undefined) {
             onToken(event.token)
@@ -207,6 +216,9 @@ export async function askAIStream(
               tool: event.tool as string,
               status: event.status as 'executing' | 'done',
               input: event.input,
+              output: event.output,
+              is_error: event.is_error,
+              duration_ms: event.duration_ms,
             })
           } else if (event.type === 'error') {
             onError(event.message ?? '抱歉，AI 服務暫時無法使用，請稍後再試。')

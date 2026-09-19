@@ -1,3 +1,4 @@
+import { AI_LOCALES } from '@nobodyclimb/types'
 import { Hono } from 'hono'
 import { streamSSE } from 'hono/streaming'
 import { describeRoute, validator } from 'hono-openapi'
@@ -52,6 +53,7 @@ const askSchema = z.object({
   no_cache: z.boolean().optional().default(false),
   chat_history: z.array(chatMessageSchema).max(20).optional(),
   eval_mode: z.enum(['agent', 'pipeline']).optional(),
+  locale: z.enum(AI_LOCALES).optional(),
 })
 
 const searchSchema = z.object({
@@ -88,7 +90,7 @@ aiRoutes.post(
     tags: ['AI'],
     summary: 'RAG 問答',
     description:
-      '使用自然語言詢問攀岩相關問題，系統根據平台資料生成回答（需登入，受等級配額限制）。加上 `?stream=true` 可啟用 SSE 串流回應（Content-Type: text/event-stream），逐詞推送 `{"type":"token","token":"..."}` 事件，工具執行時推送 `{"type":"progress","tool":"...","status":"executing"|"done"}` 事件，結束時推送 `{"type":"done",...}` 事件。',
+      '使用自然語言詢問攀岩相關問題，系統根據平台資料生成回答（需登入，受等級配額限制）。加上 `?stream=true` 可啟用 SSE 串流回應（Content-Type: text/event-stream），逐詞推送 `{"type":"token","token":"..."}` 事件，工具執行時推送 `{"type":"progress","id":"...","tool":"...","status":"executing"|"done","input"?:...,"output"?:"...","is_error"?:boolean,"duration_ms"?:number}` 事件（executing 帶 input，done 帶截斷後的 output），結束時推送 `{"type":"done",...}` 事件。',
     responses: {
       200: {
         description: '問答成功，回傳 AI 回答與來源及剩餘配額（非串流）；或 SSE 串流（stream=true）',

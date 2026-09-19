@@ -1,3 +1,5 @@
+import type { AiLocale } from '@nobodyclimb/types'
+
 // ============================================
 // Cloudflare AI Bindings
 // ============================================
@@ -178,12 +180,15 @@ export interface AIChatMessage {
   content: string
 }
 
+export type { AiLocale }
+
 export interface AIAskRequest {
   query: string
   limit?: number // 搜尋結果數量，預設 5
   include_sources?: boolean // 是否回傳來源，預設 true
   chat_history?: AIChatMessage[] // 最近幾輪對話（不含本次 query），供 LLM 記憶和 context 補充
   no_cache?: boolean // 強制跳過 KV 快取（如重新產生時使用）
+  locale?: AiLocale // 使用者介面語言，決定回答語言（預設 zh）
   climbed_route_ids?: string[] // 推薦排除清單：使用者已完攀的 route_id，retrieval 層過濾使用
   rag_strategy?: string // 覆寫 DB 的 rag_strategy 設定（eval/A/B 測試用）
   rag_tools?: RagToolToggles // custom 模式：逐個開關 RAG 工具

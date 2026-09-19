@@ -14,6 +14,7 @@ import type {
   ToolContext,
   ToolUseResponse,
 } from './types'
+import { truncateProgressOutput } from './types'
 
 // ---------------------------------------------------------------------------
 // Agent Loop — 核心 loop
@@ -572,11 +573,17 @@ async function executeSingleTool(
       ctx.cache.set(cacheKey, content, tool.cacheTTL).catch(() => {})
     }
 
-    // 送出 progress: done
+    // 送出 progress: done（帶截斷後的結果，供前端 Response 區顯示）
     if (onProgress) {
-      await onProgress({ type: 'progress', id: tc.id, tool: tc.name, status: 'done' }).catch(
-        () => {}
-      )
+      await onProgress({
+        type: 'progress',
+        id: tc.id,
+        tool: tc.name,
+        status: 'done',
+        output: truncateProgressOutput(content),
+        is_error: false,
+        duration_ms: latencyMs,
+      }).catch(() => {})
     }
 
     endSpan(toolSpan, {
@@ -605,14 +612,21 @@ async function executeSingleTool(
       console.warn(`[agent-loop] Tool ${tc.name} removed after ${failures} consecutive failures`)
     }
 
-    // 送出 progress: done（即使失敗也要通知前端結束）
+    const errorMsg = err instanceof Error ? err.message : String(err)
+
+    // 送出 progress: done（即使失敗也要通知前端結束，並帶錯誤訊息）
     if (onProgress) {
-      await onProgress({ type: 'progress', id: tc.id, tool: tc.name, status: 'done' }).catch(
-        () => {}
-      )
+      await onProgress({
+        type: 'progress',
+        id: tc.id,
+        tool: tc.name,
+        status: 'done',
+        output: truncateProgressOutput(errorMsg),
+        is_error: true,
+        duration_ms: latencyMs,
+      }).catch(() => {})
     }
 
-    const errorMsg = err instanceof Error ? err.message : String(err)
     endSpan(toolSpan, { output: { error: errorMsg }, level: 'ERROR' })
 
     return {
