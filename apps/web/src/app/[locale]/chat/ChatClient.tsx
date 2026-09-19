@@ -365,7 +365,9 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
               !message.toolProgress?.some((p) => p.status === 'executing') && (
                 <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
                   <Loader2 className="size-3.5 shrink-0 animate-spin" />
-                  <span className="text-shimmer">{t('thinking')}</span>
+                  <span className="text-shimmer">
+                    {message.toolProgress?.length ? t('composing') : t('thinking')}
+                  </span>
                 </div>
               )}
 

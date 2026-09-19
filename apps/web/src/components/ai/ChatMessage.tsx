@@ -302,9 +302,11 @@ export function ChatMessage({
 
   const isUser = message.role === 'user'
   const hasToolProgress = !!message.toolProgress && message.toolProgress.length > 0
-  // 工具執行中由 ToolActivity 的摺疊列負責 loading；其餘等待時間（呼叫工具前、工具完成到第一個 token）顯示思考中
+  // 工具執行中由 ToolActivity 的摺疊列負責 loading；其餘等待時間顯示狀態文字：
+  // 尚未呼叫工具 → 思考中；工具都完成、答案還沒出來 → 正在整理回答（agent 在此階段一次回傳整段答案，沒有 token）
   const isToolRunning = !!message.toolProgress?.some((p) => p.status === 'executing')
   const showThinking = !isUser && !!message.isStreaming && !message.content && !isToolRunning
+  const waitingLabel = hasToolProgress ? t('composing') : t('thinking')
 
   // 非串流的空訊息不渲染，避免空白氣泡（串流中改顯示思考中 / 工具過程）
   if (!isUser && !message.content && !message.isStreaming && !hasToolProgress) return null
@@ -339,7 +341,7 @@ export function ChatMessage({
         {showThinking && (
           <p className="flex items-center gap-1.5 pl-1 text-sm text-muted-foreground">
             <Loader2 className="size-3.5 shrink-0 animate-spin" />
-            <span className="text-shimmer">{t('thinking')}</span>
+            <span className="text-shimmer">{waitingLabel}</span>
           </p>
         )}
 
