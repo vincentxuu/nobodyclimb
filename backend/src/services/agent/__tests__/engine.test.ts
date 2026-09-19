@@ -290,6 +290,45 @@ describe('runAgentLoop', () => {
     expect(result.answer).toBe('最終回答（到達 maxTurns）')
   })
 
+  it('無 tool calls 且 content 為空（thinking 吃光預算）→ 不回傳空字串，改走 final call', async () => {
+    // 模擬 GLM-4.7-flash：推理吃光 max_tokens，content 空、只有 reasoning
+    const provider = mockProvider([
+      {
+        content: undefined,
+        toolCalls: [{ id: 'tc-1', name: 'search_routes', input: { query: '龍洞' } }],
+        stopReason: 'tool_use',
+        usage: { input: 100, output: 20 },
+      },
+      {
+        content: '',
+        reasoning: '分析使用者請求：使用者想知道…制定策略：…',
+        toolCalls: [],
+        stopReason: 'end_turn',
+        usage: { input: 200, output: 900 },
+      },
+    ])
+    ;(provider.chat as any).mockResolvedValue({
+      content: '龍洞有以下路線。',
+      usage: { prompt_tokens: 300, completion_tokens: 80 },
+    })
+
+    const registry = new ToolRegistry()
+    registry.registerTool(makeTool())
+    const ctx = makeCtx()
+
+    const result = await runAgentLoop({ provider, registry, ctx }, DEFAULT_OPTS)
+
+    expect(result.answer).toBe('龍洞有以下路線。')
+    expect(result.turnCount).toBe(3) // 2 loop turns + 1 final
+    expect(result.turnTraces[1].reasoningChars).toBeGreaterThan(0)
+    // final call 必須關 thinking
+    const finalOpts = (provider.chat as any).mock.calls[0][1]
+    expect(finalOpts.thinking).toBe(false)
+    // loop 內的 chatWithTools 也預設關 thinking
+    const loopOpts = (provider.chatWithTools as any).mock.calls[0][2]
+    expect(loopOpts.thinking).toBe(false)
+  })
+
   it('token budget guard — stops when budget exceeded', async () => {
     const provider = mockProvider([
       {

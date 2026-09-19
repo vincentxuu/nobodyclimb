@@ -94,7 +94,8 @@ describe('CloudflareProvider response format', () => {
     expect(result.content).toBe('GLM 實際回答')
   })
 
-  it('推理模型 content 空但有 reasoning_content（GLM 5.3 / DeepSeek R1）', async () => {
+  it('推理模型 content 空但有 reasoning_content → content 保持空，推理只進 reasoning', async () => {
+    // thinking 吃光 max_tokens 的情境；以前會把推理當回答送給使用者（2026-09-19 preview 事故）
     mockAI.run.mockResolvedValueOnce({
       choices: [
         { message: { content: '', reasoning_content: '推理過程和回答', role: 'assistant' } },
@@ -103,7 +104,84 @@ describe('CloudflareProvider response format', () => {
     })
     const provider = await getProvider()
     const result = await provider.chat([{ role: 'user', content: '分析弱點' }])
-    expect(result.content).toBe('推理過程和回答')
+    expect(result.content).toBe('')
+    expect(result.reasoning).toBe('推理過程和回答')
+  })
+
+  it('content 與 reasoning_content 並存時各自回傳', async () => {
+    mockAI.run.mockResolvedValueOnce({
+      choices: [{ message: { content: '正文', reasoning_content: '思考', role: 'assistant' } }],
+      usage: { prompt_tokens: 100, completion_tokens: 200, total_tokens: 300 },
+    })
+    const provider = await getProvider()
+    const result = await provider.chat([{ role: 'user', content: 'hi' }])
+    expect(result.content).toBe('正文')
+    expect(result.reasoning).toBe('思考')
+  })
+
+  it('thinking: false → GLM 4.x 帶 chat_template_kwargs.enable_thinking=false', async () => {
+    mockAI.run.mockResolvedValueOnce({
+      choices: [{ message: { content: 'ok', role: 'assistant' } }],
+      usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+    })
+    const provider = await getProvider()
+    await provider.chat([{ role: 'user', content: 'hi' }], {
+      model: '@cf/zai-org/glm-4.7-flash',
+      thinking: false,
+    })
+    const params = mockAI.run.mock.calls.at(-1)?.[1]
+    expect(params.chat_template_kwargs).toEqual({ enable_thinking: false })
+  })
+
+  it('thinking: false → Qwen3 帶 budget_tokens: 0；其他模型不加參數', async () => {
+    mockAI.run.mockResolvedValue({
+      choices: [{ message: { content: 'ok', role: 'assistant' } }],
+      usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+    })
+    const provider = await getProvider()
+    await provider.chat([{ role: 'user', content: 'hi' }], {
+      model: '@cf/qwen/qwen3-4b',
+      thinking: false,
+    })
+    expect(mockAI.run.mock.calls.at(-1)?.[1].budget_tokens).toBe(0)
+
+    await provider.chat([{ role: 'user', content: 'hi' }], {
+      model: '@cf/meta/llama-4-scout-17b-16e-instruct',
+      thinking: false,
+    })
+    const llamaParams = mockAI.run.mock.calls.at(-1)?.[1]
+    expect(llamaParams.chat_template_kwargs).toBeUndefined()
+    expect(llamaParams.budget_tokens).toBeUndefined()
+    mockAI.run.mockReset()
+  })
+
+  it('thinking 未指定 → 沿用模型預設，不加參數', async () => {
+    mockAI.run.mockResolvedValueOnce({
+      choices: [{ message: { content: 'ok', role: 'assistant' } }],
+      usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+    })
+    const provider = await getProvider()
+    await provider.chat([{ role: 'user', content: 'hi' }], { model: '@cf/zai-org/glm-4.7-flash' })
+    expect(mockAI.run.mock.calls.at(-1)?.[1].chat_template_kwargs).toBeUndefined()
+  })
+
+  it('chatWithTools 也套用 thinking 參數並分離 reasoning', async () => {
+    mockAI.run.mockResolvedValueOnce({
+      choices: [{ message: { content: '', reasoning_content: '思考', tool_calls: [] } }],
+      usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+    })
+    const provider = await getProvider()
+    const result = await provider.chatWithTools(
+      [{ role: 'user', content: 'hi' }],
+      [{ name: 'search_routes', description: '搜尋', parameters: {} }],
+      { model: '@cf/zai-org/glm-4.7-flash', thinking: false }
+    )
+    expect(mockAI.run.mock.calls.at(-1)?.[1].chat_template_kwargs).toEqual({
+      enable_thinking: false,
+    })
+    expect(result.content).toBeUndefined()
+    expect(result.reasoning).toBe('思考')
+    expect(result.stopReason).toBe('end_turn')
   })
 
   it('新格式 tool_calls 在 choices[0].message 裡 + 空頂層 tool_calls', async () => {
@@ -135,14 +213,15 @@ describe('CloudflareProvider response format', () => {
     expect(result.toolCalls[0].name).toBe('coaching_agent')
   })
 
-  it('Qwen thinking 模型用 reasoning key（非 reasoning_content）', async () => {
+  it('Qwen thinking 模型用 reasoning key（非 reasoning_content）→ 同樣只進 reasoning', async () => {
     mockAI.run.mockResolvedValueOnce({
       choices: [{ message: { content: null, reasoning: 'Qwen 思考過程', role: 'assistant' } }],
       usage: { prompt_tokens: 50, completion_tokens: 100, total_tokens: 150 },
     })
     const provider = await getProvider()
     const result = await provider.chat([{ role: 'user', content: 'hi' }])
-    expect(result.content).toBe('Qwen 思考過程')
+    expect(result.content).toBe('')
+    expect(result.reasoning).toBe('Qwen 思考過程')
   })
 
   it('空回應不 crash', async () => {
@@ -198,11 +277,12 @@ describe('CloudflareProvider streamChat SSE format', () => {
     expect(tokens.join('')).toBe('Hello world')
   })
 
-  it('推理模型 SSE: choices[0].delta.reasoning_content', async () => {
+  it('推理模型 SSE: reasoning_content delta 不推送給使用者，只收進 reasoning', async () => {
     mockAI.run.mockResolvedValueOnce(
       createSSEStream([
         '{"choices":[{"delta":{"content":"","reasoning_content":"思考"}}]}',
         '{"choices":[{"delta":{"content":"","reasoning_content":"過程"}}]}',
+        '{"choices":[{"delta":{"content":"正文"}}]}',
       ])
     )
     const provider = await getProvider()
@@ -212,8 +292,22 @@ describe('CloudflareProvider streamChat SSE format', () => {
         tokens.push(t)
       },
     })
-    expect(result.content).toBe('思考過程')
-    expect(tokens.join('')).toBe('思考過程')
+    expect(result.content).toBe('正文')
+    expect(result.reasoning).toBe('思考過程')
+    expect(tokens.join('')).toBe('正文')
+  })
+
+  it('streamChat thinking: false → 帶 enable_thinking=false 且 stream: true', async () => {
+    mockAI.run.mockResolvedValueOnce(createSSEStream(['{"choices":[{"delta":{"content":"ok"}}]}']))
+    const provider = await getProvider()
+    await provider.streamChat([{ role: 'user', content: 'hi' }], {
+      model: '@cf/zai-org/glm-4.7-flash',
+      thinking: false,
+      onToken: async () => {},
+    })
+    const params = mockAI.run.mock.calls.at(-1)?.[1]
+    expect(params.stream).toBe(true)
+    expect(params.chat_template_kwargs).toEqual({ enable_thinking: false })
   })
 
   it('混合格式：content 優先於 reasoning_content', async () => {

@@ -86,7 +86,7 @@ import type {
   PipelineConfig,
   StageTokenUsage,
 } from './orchestrators/pipeline/types'
-import { parseSuggestedQuestions } from './orchestrators/pipeline/utils'
+import { isAssistantVoiceQuestion, parseSuggestedQuestions } from './orchestrators/pipeline/utils'
 
 export class QueryService {
   private embeddingService: EmbeddingService
@@ -314,10 +314,14 @@ export class QueryService {
     let retrievalQuery: string | null = null
     let followupTrace: Record<string, unknown> | undefined
     if (isFollowUp) {
+      // agent 模式的 LLM 自己拿著完整歷史決定工具參數，一般不需要改寫；
+      // 例外：使用者送回的是助理口吻的反問句（多半是點了違規的建議問題），agent 對這種句子
+      // 無法決定意圖，會跑滿 max turns。此時改寫成獨立問題，但只當意圖提示，不取代原句
+      const needsAgentRewrite = pipelineCfg.ai_mode === 'agent' && isAssistantVoiceQuestion(query)
       const [carryDocs, rewrite] = await Promise.all([
         loadCarryOverDocuments(this.env.DB, previousSources),
-        // agent 模式的 LLM 自己拿著完整歷史決定工具參數，不需要改寫
-        pipelineCfg.followup_rewrite_enabled && pipelineCfg.ai_mode !== 'agent'
+        pipelineCfg.followup_rewrite_enabled &&
+        (pipelineCfg.ai_mode !== 'agent' || needsAgentRewrite)
           ? rewriteFollowUpQuery({
               env: this.env,
               query,
@@ -396,7 +400,15 @@ export class QueryService {
                 role: h.role as 'user' | 'assistant',
                 content: h.content,
               })),
-              carryOverContext: buildCarryOverSummary(previousSources),
+              carryOverContext:
+                [
+                  buildCarryOverSummary(previousSources),
+                  retrievalQuery
+                    ? `使用者這句話是接續上一輪的追問，等價的獨立問題是：「${retrievalQuery}」。請以此理解意圖並呼叫工具；回答時仍以使用者原句為對象。`
+                    : null,
+                ]
+                  .filter(Boolean)
+                  .join('\n\n') || null,
               userId: userId ?? null,
               env: this.env,
               locale: request.locale,

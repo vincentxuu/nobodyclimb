@@ -73,6 +73,8 @@ function normalizeModelConfig(
     model: value?.model ?? fallback.model,
     temperature: value?.temperature ?? fallback.temperature,
     maxTokens: value?.maxTokens ?? fallback.maxTokens,
+    // admin 可在 agent_models JSON 加 "thinking": true 重新開啟推理模型的 thinking
+    thinking: value?.thinking ?? fallback.thinking,
     fallback: value?.fallback
       ? normalizeModelConfig(value.fallback, fallback.fallback ?? fallback)
       : fallback.fallback,
