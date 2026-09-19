@@ -44,7 +44,22 @@ export interface TurnTrace {
   provider: string
   model: string
   usedFallback: boolean
+  /** 推理模型該輪吐出的思考字數（thinking 未關閉時才會有值），供 admin log 追查預算被吃光 */
+  reasoningChars?: number
 }
+
+/**
+ * maxTurns / tokenBudget 用盡、或最後一輪 content 為空時的收尾指令。
+ * 與 system prompt「必須先呼叫工具」不衝突：明說工具階段已結束，現在只剩作答。
+ */
+export const FINAL_ANSWER_PROMPT =
+  '工具查詢階段已結束，以上 <tool_result> 就是本題全部可用的資料，不需要也不能再呼叫工具。\n\n' +
+  '請只根據這些資料，用繁體中文直接回答使用者的問題。\n' +
+  '【嚴格規定】只輸出給使用者看的最終回答：\n' +
+  '- 禁止輸出任何內部推理、分析步驟或自我對話（如「分析使用者請求」「制定策略」「我需要」「讓我看看」）\n' +
+  '- 禁止重複相同段落\n' +
+  '- 若資料不足，直接說「目前資料中找不到符合條件的路線」\n' +
+  '- 若工具結果與使用者聲明矛盾，以使用者的聲明為準'
 
 interface EngineResult {
   answer: string
@@ -153,6 +168,8 @@ export async function runAgentLoop(
       },
     })
 
+    const reasoningChars = response.reasoning?.length || undefined
+
     // 沒有 tool calls
     if (response.stopReason === 'end_turn' || response.toolCalls.length === 0) {
       // 第一輪就沒呼叫工具，且還有剩餘輪次 → 注入警告強制重試，避免模型直接幻覺作答
@@ -166,6 +183,7 @@ export async function runAgentLoop(
           provider: usedProvider,
           model: usedModel,
           usedFallback,
+          reasoningChars,
         })
         if (response.content) {
           messages.push({ role: 'assistant', content: response.content })
@@ -184,12 +202,27 @@ export async function runAgentLoop(
         provider: usedProvider,
         model: usedModel,
         usedFallback,
+        reasoningChars,
       })
+
+      // 沒有 tool calls 但 content 為空（典型：thinking 吃光 max_tokens）→ 不能拿空字串或推理當答案，
+      // 跳出 loop 走下方不帶工具的收尾 call 重生成一次
+      if (!response.content?.trim()) {
+        console.warn(
+          '[agent-loop] Empty content with no tool calls — falling through to final call',
+          {
+            turn,
+            reasoningChars,
+          }
+        )
+        endSpan(turnSpan, { output: { warning: 'empty_content', falling_through_to_final: true } })
+        break
+      }
 
       // 後續輪次沒有 tool calls → 最終答案
       endSpan(turnSpan, { output: { answer: response.content } })
       return {
-        answer: response.content ?? '',
+        answer: response.content,
         turnCount: turn,
         toolCallCount: totalToolCalls,
         turnTraces,
@@ -233,6 +266,7 @@ export async function runAgentLoop(
       provider: usedProvider,
       model: usedModel,
       usedFallback,
+      reasoningChars,
     })
 
     // 組裝 tool results 成 user message（因為大多 provider 不支援 tool role）
@@ -252,32 +286,31 @@ export async function runAgentLoop(
     })
   }
 
-  // maxTurns / tokenBudget 到達 → 用最後一輪的內容作為回答
-  // 或者做一次 final call 不帶 tools
+  // maxTurns / tokenBudget 到達、或最後一輪 content 為空 → 做一次不帶 tools 的 final call
   const finalMessages = [...messages]
-  finalMessages.push({
-    role: 'user',
-    content:
-      '請根據以上工具查詢結果，直接回答用戶的問題。不要再使用工具。\n\n' +
-      '【嚴格規定】只輸出給使用者看的最終回答。' +
-      '禁止輸出任何內部推理過程（如「我需要」「讓我看看」「根據規則」）。' +
-      '禁止重複相同段落。若工具結果與使用者聲明矛盾，以使用者的聲明為準。',
-  })
+  finalMessages.push({ role: 'user', content: FINAL_ANSWER_PROMPT })
   const finalSpan = startSpan(langfuseParent ?? null, `turn-${turn + 1}-final`)
   const finalCallStart = Date.now()
+  // 收尾只要正文，一律關 thinking，避免推理再次吃光預算
+  const finalCallOpts = {
+    model: ctx.models.orchestrator.model,
+    maxTokens: ctx.models.orchestrator.maxTokens,
+    temperature: ctx.models.orchestrator.temperature,
+    thinking: ctx.models.orchestrator.thinking ?? false,
+  }
 
   try {
     let finalContent: string
+    let finalReasoningChars: number | undefined
 
     // Streaming: 最終回答用 streamChat 逐 token 推送
     if (opts.onToken && provider.streamChat) {
       const streamResponse = await provider.streamChat(finalMessages, {
-        model: ctx.models.orchestrator.model,
-        maxTokens: ctx.models.orchestrator.maxTokens,
-        temperature: ctx.models.orchestrator.temperature,
+        ...finalCallOpts,
         onToken: opts.onToken,
       })
       finalContent = streamResponse.content
+      finalReasoningChars = streamResponse.reasoning?.length || undefined
       if (streamResponse.usage) {
         ctx.tracker.record(
           ctx.models.orchestrator.provider,
@@ -287,12 +320,9 @@ export async function runAgentLoop(
         )
       }
     } else {
-      const finalResponse = await provider.chat(finalMessages, {
-        model: ctx.models.orchestrator.model,
-        maxTokens: ctx.models.orchestrator.maxTokens,
-        temperature: ctx.models.orchestrator.temperature,
-      })
+      const finalResponse = await provider.chat(finalMessages, finalCallOpts)
       finalContent = finalResponse.content
+      finalReasoningChars = finalResponse.reasoning?.length || undefined
       ctx.tracker.record(
         ctx.models.orchestrator.provider,
         ctx.models.orchestrator.model,
@@ -309,6 +339,7 @@ export async function runAgentLoop(
       provider: ctx.models.orchestrator.provider,
       model: ctx.models.orchestrator.model,
       usedFallback: false,
+      reasoningChars: finalReasoningChars,
     })
 
     logGeneration(finalSpan, {
@@ -353,10 +384,12 @@ async function resilientChatWithTools(
 ): Promise<ResilientResult> {
   const cb = getCircuitBreaker(modelConfig.provider)
   const cbState = cb.getState()
+  // orchestrator 預設關 thinking（GLM-4.7-flash 預設開啟，會吃光 1024 max_tokens）
   const callOpts = {
     model: modelConfig.model,
     maxTokens: modelConfig.maxTokens,
     temperature: modelConfig.temperature,
+    thinking: modelConfig.thinking ?? false,
   }
 
   // Circuit breaker OPEN → 直接跳到 fallback
@@ -398,6 +431,7 @@ async function resilientChatWithTools(
         model: currentFallback.model,
         maxTokens: currentFallback.maxTokens ?? modelConfig.maxTokens,
         temperature: currentFallback.temperature ?? modelConfig.temperature,
+        thinking: currentFallback.thinking ?? modelConfig.thinking ?? false,
       }
       const response = await withRetry(async () => {
         if (!fbProvider.chatWithTools) {

@@ -13,6 +13,11 @@ export interface ModelConfig {
   model: string
   temperature?: number
   maxTokens?: number
+  /**
+   * 推理模型的 thinking 開關。orchestrator 預設 false：
+   * GLM-4.7-flash thinking 預設開啟，在 1024 max_tokens 下會吃光預算讓正文為空。
+   */
+  thinking?: boolean
   /** 失敗時的備援配置（可鏈式） */
   fallback?: ModelConfig
 }
@@ -136,6 +141,8 @@ export interface ToolCall {
 
 export interface ToolUseResponse {
   content?: string
+  /** 推理模型的思考內容；只供 trace，絕不可當作回答 */
+  reasoning?: string
   toolCalls: ToolCall[]
   stopReason: 'tool_use' | 'end_turn'
   usage: { input: number; output: number }

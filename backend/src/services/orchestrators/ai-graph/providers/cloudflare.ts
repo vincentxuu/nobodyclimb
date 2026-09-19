@@ -21,14 +21,13 @@ function parseWorkersAIResponse(response: unknown) {
   const raw = response as Record<string, unknown>
 
   // content: 舊格式 response → 新格式 choices[0].message.content
-  // 推理模型（GLM 5.3、DeepSeek R1）可能把內容放在 reasoning_content
+  // 推理模型（GLM 4.7 / GLM 5.3 / Qwen3 / DeepSeek R1）會另外回 reasoning_content 或 reasoning。
+  // 思考內容只能進 reasoning 欄位供 trace，絕不可 fallback 成 content：
+  // 一旦 thinking 吃光 max_tokens，content 為空，若 fallback 就會把整段推理當成回答送給使用者。
   const choice = (raw.choices as Array<{ message?: Record<string, unknown> }>)?.[0]
-  const content =
-    (raw.response as string) ||
-    (choice?.message?.content as string) ||
-    (choice?.message?.reasoning_content as string) ||
-    (choice?.message?.reasoning as string) ||
-    ''
+  const content = (raw.response as string) || (choice?.message?.content as string) || ''
+  const reasoning =
+    (choice?.message?.reasoning_content as string) || (choice?.message?.reasoning as string) || ''
 
   // usage: 頂層 usage 或 choices 旁邊的 usage
   const usage = (raw.usage as { prompt_tokens?: number; completion_tokens?: number }) ?? {}
@@ -44,7 +43,34 @@ function parseWorkersAIResponse(response: unknown) {
     (choiceToolCalls?.length ? choiceToolCalls : null) ??
     []
 
-  return { content, usage, rawToolCalls }
+  return { content, reasoning, usage, rawToolCalls }
+}
+
+/**
+ * 依模型家族產生「關閉 thinking」的 Workers AI 參數。
+ * - GLM 4.x：官方 schema 的 chat_template_kwargs.enable_thinking（預設 true）
+ * - Qwen3：沿用 pipeline（llm-generation.ts）的 budget_tokens: 0 慣例
+ * thinking 為 undefined / true 時不加任何參數，沿用模型預設。
+ */
+export function buildThinkingParams(model: string, thinking?: boolean): Record<string, unknown> {
+  if (thinking !== false) return {}
+  const m = model.toLowerCase()
+  if (m.includes('glm-4')) {
+    return { chat_template_kwargs: { enable_thinking: false } }
+  }
+  if (m.includes('qwen3')) {
+    return { budget_tokens: 0 }
+  }
+  return {}
+}
+
+/** content 空但 reasoning 有值 = thinking 吃光了 max_tokens，記錄以便從 log 追查 */
+function warnIfThinkingConsumedBudget(model: string, content: string, reasoning: string) {
+  if (!content && reasoning) {
+    console.warn(
+      `[CloudflareProvider] THINKING_CONSUMED_BUDGET model=${model} reasoning_chars=${reasoning.length}`
+    )
+  }
 }
 
 export class CloudflareProvider implements AIProvider {
@@ -56,39 +82,54 @@ export class CloudflareProvider implements AIProvider {
   ) {}
 
   async chat(messages: ChatMessage[], opts: LLMCallOptions = {}): Promise<LLMResponse> {
+    const model = opts.model ?? this.defaultModel
     const response = await this.ai.run(
-      opts.model ?? this.defaultModel,
+      model,
       {
         messages,
         max_tokens: opts.maxTokens,
         tools: opts.tools,
+        ...buildThinkingParams(model, opts.thinking),
       } as Parameters<typeof this.ai.run>[1],
       opts.gatewayOptions
     )
     const parsed = parseWorkersAIResponse(response)
-    if (!parsed.content) {
+    warnIfThinkingConsumedBudget(model, parsed.content, parsed.reasoning)
+    if (!parsed.content && !parsed.reasoning) {
       console.error(
-        '[CloudflareProvider] EMPTY_CONTENT model=' + (opts.model ?? 'default'),
+        '[CloudflareProvider] EMPTY_CONTENT model=' + model,
         'keys=' + Object.keys(response as object).join(','),
         'raw=' + JSON.stringify(response).slice(0, 800)
       )
     }
-    return { content: parsed.content, usage: parsed.usage as LLMResponse['usage'] }
+    return {
+      content: parsed.content,
+      ...(parsed.reasoning ? { reasoning: parsed.reasoning } : {}),
+      usage: parsed.usage as LLMResponse['usage'],
+    }
   }
 
   async streamChat(
     messages: ChatMessage[],
     opts: LLMCallOptions & { onToken: (token: string) => Promise<void> }
   ): Promise<LLMResponse> {
+    const model = opts.model ?? this.defaultModel
     const stream = (await (this.ai.run as Function)(
-      opts.model ?? this.defaultModel,
-      { messages, max_tokens: opts.maxTokens, stream: true },
+      model,
+      {
+        messages,
+        max_tokens: opts.maxTokens,
+        stream: true,
+        ...buildThinkingParams(model, opts.thinking),
+      },
       opts.gatewayOptions
     )) as ReadableStream<Uint8Array>
 
     const reader = stream.getReader()
     const decoder = new TextDecoder()
     let fullText = ''
+    // 推理模型的思考 delta 只收集不推送，避免整段推理串流到使用者畫面
+    let reasoningText = ''
     let sseBuffer = ''
     // 偵測 ---SUGGESTIONS--- 標記，標記之前推送給 onToken，之後收集但不推送
     let slideBuffer = ''
@@ -111,11 +152,10 @@ export class CloudflareProvider implements AIProvider {
           try {
             const parsed = JSON.parse(payload) as Record<string, unknown>
             const delta = (parsed.choices as Array<{ delta?: Record<string, unknown> }>)?.[0]?.delta
-            const token =
-              (parsed.response as string) ||
-              (delta?.content as string) ||
-              (delta?.reasoning_content as string) ||
-              ''
+            const reasoningDelta =
+              (delta?.reasoning_content as string) || (delta?.reasoning as string) || ''
+            if (reasoningDelta) reasoningText += reasoningDelta
+            const token = (parsed.response as string) || (delta?.content as string) || ''
             if (!token) continue
 
             fullText += token
@@ -144,7 +184,8 @@ export class CloudflareProvider implements AIProvider {
       reader.releaseLock()
     }
 
-    return { content: fullText }
+    warnIfThinkingConsumedBudget(model, fullText, reasoningText)
+    return { content: fullText, ...(reasoningText ? { reasoning: reasoningText } : {}) }
   }
 
   async embed(text: string, opts: EmbeddingOptions = {}): Promise<number[]> {
@@ -192,9 +233,12 @@ export class CloudflareProvider implements AIProvider {
           parameters: t.parameters,
         },
       })),
+      ...buildThinkingParams(model, opts.thinking),
     } as Parameters<typeof this.ai.run>[1])
 
-    const { content, usage, rawToolCalls } = parseWorkersAIResponse(response)
+    const { content, reasoning, usage, rawToolCalls } = parseWorkersAIResponse(response)
+    // 有 tool calls 的輪次 content 本來就常是空的，只在「沒有 tool calls 也沒有正文」時才算預算被吃光
+    if (rawToolCalls.length === 0) warnIfThinkingConsumedBudget(model, content, reasoning)
 
     const toolCalls = rawToolCalls
       .map((tc, idx) => {
@@ -223,6 +267,7 @@ export class CloudflareProvider implements AIProvider {
 
     return {
       content: content || undefined,
+      ...(reasoning ? { reasoning } : {}),
       toolCalls,
       stopReason: toolCalls.length > 0 ? 'tool_use' : 'end_turn',
       usage: {

@@ -132,6 +132,9 @@ export function ChatClient() {
                 ? {
                     ...m,
                     isStreaming: false,
+                    // 與 ChatWidget 一致：用後端後處理過的版本（guard、連結注入、剝離 SUGGESTIONS）
+                    // 覆蓋串流累積文字；agent loop 內產生的答案不會經過 token 事件，只在這裡送達
+                    ...(event.answer ? { content: event.answer } : {}),
                     sources: event.sources,
                     suggestedQuestions: event.suggested_questions,
                   }
