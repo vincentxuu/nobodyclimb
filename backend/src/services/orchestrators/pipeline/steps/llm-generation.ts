@@ -2,8 +2,9 @@ import { checkOutput } from '../../../../utils/guardrails'
 import { logGeneration } from '../../../../utils/langfuse'
 import { extractMemoriesFromQuery } from '../../../domain/memory'
 import { buildPersonalizedSystemPrompt } from '../../../domain/personalization'
+import { buildThinkingParams } from '../../ai-graph/providers/cloudflare'
 import { LLMResponse, PipelineContext, PipelineStep } from '../types'
-import { parseSuggestedQuestions } from '../utils'
+import { mergeCarryOverSources, parseSuggestedQuestions } from '../utils'
 
 // 相容 Workers AI 標準格式（response）與 OpenAI chat completions 格式（choices[0].message.content）
 function extractLLMResponse(result: unknown): string {
@@ -43,8 +44,9 @@ export const llmGenerationStep: PipelineStep = {
     const effectiveLlmModel = ctx.effectiveLlmModel ?? pipelineConfig.llm_model
 
     // GK 通識路徑
-    // Qwen3 thinking 模型需要 budget_tokens: 0 才能停用 thinking mode
-    const isQwen3Model = effectiveLlmModel.toLowerCase().includes('qwen3')
+    // 生成一律關 thinking：參數依模型家族由 buildThinkingParams 統一決定
+    // （GLM / DeepSeek / Kimi → chat_template_kwargs、Qwen3 → budget_tokens: 0、Mistral 等不加）
+    const thinkingOffParams = buildThinkingParams(effectiveLlmModel, false)
     if (ctx.queryType === 'general-knowledge') {
       const gkPersonalized = buildPersonalizedSystemPrompt(
         ctx.memorySummary ?? null,
@@ -52,22 +54,14 @@ export const llmGenerationStep: PipelineStep = {
         ctx.abilityLevel ?? null,
         prompts['GENERAL_KNOWLEDGE_SYSTEM_PROMPT']
       )
-      const gkParams = isQwen3Model
-        ? {
-            messages: [
-              { role: 'system', content: gkPersonalized },
-              { role: 'user', content: query },
-            ],
-            max_tokens: pipelineConfig.max_tokens_gk,
-            budget_tokens: 0,
-          }
-        : {
-            messages: [
-              { role: 'system', content: gkPersonalized },
-              { role: 'user', content: query },
-            ],
-            max_tokens: pipelineConfig.max_tokens_gk,
-          }
+      const gkParams = {
+        messages: [
+          { role: 'system', content: gkPersonalized },
+          { role: 'user', content: query },
+        ],
+        max_tokens: pipelineConfig.max_tokens_gk,
+        ...thinkingOffParams,
+      }
       const llmResult = (await env.AI.run(
         effectiveLlmModel,
         gkParams,
@@ -180,10 +174,18 @@ export const llmGenerationStep: PipelineStep = {
     }
 
     // RAG 路徑（含 hybrid 分支）
-    const context =
+    const retrievedContext =
       ctx.queryType === 'hybrid' && ctx.sqlContext
         ? ctx.sqlContext
         : (ctx.context ?? '目前沒有找到相關資料。')
+    // 追問時把上一輪來源的完整文件放在檢索結果前面，讓「這些路線」有東西可指
+    // self-reflection loopBack 重跑時 ctx.context 可能已含該區塊，用 startsWith 避免重複 prepend
+    const context =
+      ctx.carryOverContext && !retrievedContext.startsWith(ctx.carryOverContext)
+        ? `${ctx.carryOverContext}\n\n---\n\n${retrievedContext}`
+        : retrievedContext
+    // 寫回 ctx.context，否則 judge / self-reflection 只拿檢索結果評分，會把引用上一輪路線的回答判為 ungrounded
+    if (ctx.carryOverContext) ctx.context = context
     const prompt = prompts['QUERY_TEMPLATE'].replace('{context}', context).replace('{query}', query)
 
     const recentHistory = ctx.recentHistory
@@ -221,13 +223,11 @@ export const llmGenerationStep: PipelineStep = {
       )
       if (!rawLLMAnswer) rawLLMAnswer = '抱歉，無法生成回答，請稍後再試。'
     } else {
-      const ragParams = isQwen3Model
-        ? {
-            messages: llmMessages,
-            max_tokens: pipelineConfig.max_tokens_generation,
-            budget_tokens: 0,
-          }
-        : { messages: llmMessages, max_tokens: pipelineConfig.max_tokens_generation }
+      const ragParams = {
+        messages: llmMessages,
+        max_tokens: pipelineConfig.max_tokens_generation,
+        ...thinkingOffParams,
+      }
       const llmResult = (await (env.AI.run as Function)(
         effectiveLlmModel,
         ragParams,
@@ -292,7 +292,10 @@ export const llmGenerationStep: PipelineStep = {
       parsedAnswer.includes('無法提供任何推薦或建議')
 
     ctx.cannotAnswer = cannotAnswer
-    const finalSources = cannotAnswer ? [] : (ctx.sources ?? [])
+    // 回答有提到的上一輪路線併入 sources：來源卡片、連結注入、下一輪追問的來源鏈都靠它
+    const finalSources = cannotAnswer
+      ? []
+      : mergeCarryOverSources(parsedAnswer, ctx.carryOverSources, ctx.sources)
     ctx.sources = finalSources
 
     // 注入路線連結

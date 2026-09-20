@@ -1,3 +1,4 @@
+import { toAnthropicMessages } from './tool-messages'
 import {
   AIProvider,
   ChatMessage,
@@ -19,7 +20,7 @@ export class AnthropicProvider implements AIProvider {
 
   async chat(messages: ChatMessage[], opts: LLMCallOptions = {}): Promise<LLMResponse> {
     const system = messages.find((m) => m.role === 'system')?.content
-    const nonSystem = messages.filter((m) => m.role !== 'system')
+    const nonSystem = toAnthropicMessages(messages)
     const body: Record<string, unknown> = {
       model: opts.model ?? this.defaultModel,
       max_tokens: opts.maxTokens ?? 1024,
@@ -70,7 +71,7 @@ export class AnthropicProvider implements AIProvider {
     opts: LLMCallOptions & { onToken: (token: string) => Promise<void> }
   ): Promise<LLMResponse> {
     const system = messages.find((m) => m.role === 'system')?.content
-    const nonSystem = messages.filter((m) => m.role !== 'system')
+    const nonSystem = toAnthropicMessages(messages)
     const res = await fetch(`${this.baseUrl}/messages`, {
       method: 'POST',
       headers: {
@@ -132,7 +133,7 @@ export class AnthropicProvider implements AIProvider {
     opts: ChatWithToolsOptions = {}
   ): Promise<ToolUseResponse> {
     const system = opts.system ?? messages.find((m) => m.role === 'system')?.content
-    const nonSystem = messages.filter((m) => m.role !== 'system')
+    const nonSystem = toAnthropicMessages(messages)
     const body: Record<string, unknown> = {
       model: opts.model ?? this.defaultModel,
       max_tokens: opts.maxTokens ?? 1024,

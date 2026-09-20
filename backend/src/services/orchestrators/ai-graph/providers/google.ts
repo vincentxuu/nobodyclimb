@@ -1,3 +1,4 @@
+import { toGoogleContents } from './tool-messages'
 import {
   AIProvider,
   ChatMessage,
@@ -22,12 +23,7 @@ export class GoogleProvider implements AIProvider {
   async chat(messages: ChatMessage[], opts: LLMCallOptions = {}): Promise<LLMResponse> {
     const model = opts.model ?? this.defaultModel
     const systemInstruction = messages.find((m) => m.role === 'system')
-    const contents = messages
-      .filter((m) => m.role !== 'system')
-      .map((m) => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }],
-      }))
+    const contents = toGoogleContents(messages)
     const body: Record<string, unknown> = {
       contents,
       generationConfig: { maxOutputTokens: opts.maxTokens, temperature: opts.temperature ?? 0.7 },
@@ -63,12 +59,7 @@ export class GoogleProvider implements AIProvider {
   ): Promise<LLMResponse> {
     const model = opts.model ?? this.defaultModel
     const systemInstruction = messages.find((m) => m.role === 'system')
-    const contents = messages
-      .filter((m) => m.role !== 'system')
-      .map((m) => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }],
-      }))
+    const contents = toGoogleContents(messages)
     const body: Record<string, unknown> = { contents }
     if (systemInstruction) body.systemInstruction = { parts: [{ text: systemInstruction.content }] }
     const res = await fetch(
@@ -144,12 +135,7 @@ export class GoogleProvider implements AIProvider {
   ): Promise<ToolUseResponse> {
     const model = opts.model ?? this.defaultModel
     const systemInstruction = opts.system ?? messages.find((m) => m.role === 'system')?.content
-    const contents = messages
-      .filter((m) => m.role !== 'system')
-      .map((m) => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }],
-      }))
+    const contents = toGoogleContents(messages)
 
     const body: Record<string, unknown> = {
       contents,

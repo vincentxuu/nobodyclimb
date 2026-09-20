@@ -18,7 +18,7 @@ export async function embeddingNode(state: GraphState): Promise<Partial<GraphSta
     }
 
     const { request, earlyQueryVector, hydeDoc, expandedQueries, embeddingProvider } = state
-    const { query } = request
+    const query = state.retrievalQuery ?? request.query
 
     if (!embeddingProvider) {
       throw new Error('embeddingProvider is not set in GraphState')

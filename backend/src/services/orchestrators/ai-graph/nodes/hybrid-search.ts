@@ -16,7 +16,7 @@ export async function hybridSearchNode(state: GraphState): Promise<Partial<Graph
     const excludeIds = state.excludeRouteIds ?? (state.excludeRouteId ? [state.excludeRouteId] : [])
 
     const result = await hybridSearch(env, {
-      query: request.query,
+      query: state.retrievalQuery ?? request.query,
       queryVector: state.queryVector!,
       hydeVector: state.hydeVector ?? null,
       expandedVectors: state.expandedVectors ?? [],

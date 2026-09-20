@@ -30,7 +30,7 @@ export const crossEncoderStep: PipelineStep = {
     }
 
     const result = await crossEncoderRerank(ctx.env, {
-      query: ctx.request.query,
+      query: ctx.retrievalQuery ?? ctx.request.query,
       candidateMatches: ctx.candidateMatches ?? [],
       documents: ctx.documents ?? new Map(),
       config: {

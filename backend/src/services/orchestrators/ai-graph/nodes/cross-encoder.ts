@@ -23,7 +23,7 @@ export async function crossEncoderNode(state: GraphState): Promise<Partial<Graph
     }
 
     const result = await crossEncoderRerank(state.env, {
-      query: state.request.query,
+      query: state.retrievalQuery ?? state.request.query,
       candidateMatches: state.candidateMatches ?? [],
       documents: state.documents ?? new Map(),
       config: {

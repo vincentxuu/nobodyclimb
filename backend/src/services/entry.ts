@@ -37,6 +37,14 @@ import {
 } from './core/cache-log'
 import { DEFAULT_TOP_K, loadPipelineConfig, loadPrompts, resolvePrompt } from './core/config'
 import {
+  buildCarryOverContext,
+  buildCarryOverSummary,
+  findPreviousTurnSources,
+  isFollowUpQuery,
+  loadCarryOverDocuments,
+  rewriteFollowUpQuery,
+} from './core/conversation-context'
+import {
   buildExcerpt,
   buildUrl,
   extractTitle,
@@ -78,7 +86,7 @@ import type {
   PipelineConfig,
   StageTokenUsage,
 } from './orchestrators/pipeline/types'
-import { parseSuggestedQuestions } from './orchestrators/pipeline/utils'
+import { isAssistantVoiceQuestion, parseSuggestedQuestions } from './orchestrators/pipeline/utils'
 
 export class QueryService {
   private embeddingService: EmbeddingService
@@ -181,13 +189,19 @@ export class QueryService {
 
     const isAnonymousNoHistory = !userId && recentHistory.length === 0 && !no_cache
 
-    // 批次讀取 pipeline 設定 + 提前 embed query + prompts
-    const [pipelineCfg, earlyQueryVector, dbPrompts] = await Promise.all([
+    // 追問偵測：有對話歷史且 query 含指代詞（這些／其中／哪一條…）
+    const isFollowUp = isFollowUpQuery(query, recentHistory)
+
+    // 批次讀取 pipeline 設定 + 提前 embed query + prompts + 追問時找回上一輪來源
+    const [pipelineCfg, earlyQueryVector, dbPrompts, previousSources] = await Promise.all([
       loadPipelineConfig(this.env.DB),
       isAnonymousNoHistory
         ? this.embeddingService.embed(query)
         : Promise.resolve(null as number[] | null),
       loadPrompts(this.env.DB),
+      isFollowUp
+        ? findPreviousTurnSources(this.env.DB, userId, recentHistory)
+        : Promise.resolve([] as AISource[]),
     ])
 
     const p = {
@@ -293,6 +307,46 @@ export class QueryService {
       }
     }
 
+    // 追問支援：上一輪來源的完整文件帶進 context + 把追問改寫成獨立問題供檢索
+    // 「這些路線哪一條看得到風景」單獨拿去檢索只會撈到描述含「風景」的路線。
+    // 改寫結果只給檢索用（retrievalQuery）；生成、judge、log 仍用使用者原句
+    let carryOverContext: string | null = null
+    let retrievalQuery: string | null = null
+    let followupTrace: Record<string, unknown> | undefined
+    if (isFollowUp) {
+      // agent 模式的 LLM 自己拿著完整歷史決定工具參數，一般不需要改寫；
+      // 例外：使用者送回的是助理口吻的反問句（多半是點了違規的建議問題），agent 對這種句子
+      // 無法決定意圖，會跑滿 max turns。此時改寫成獨立問題，但只當意圖提示，不取代原句
+      const needsAgentRewrite = pipelineCfg.ai_mode === 'agent' && isAssistantVoiceQuestion(query)
+      const [carryDocs, rewrite] = await Promise.all([
+        loadCarryOverDocuments(this.env.DB, previousSources),
+        pipelineCfg.followup_rewrite_enabled &&
+        (pipelineCfg.ai_mode !== 'agent' || needsAgentRewrite)
+          ? rewriteFollowUpQuery({
+              env: this.env,
+              query,
+              recentHistory,
+              previousSources,
+              model: pipelineCfg.lightweight_model,
+              gatewayOptions,
+              langfuseParent: langfuseTrace,
+              assistantTruncate: pipelineCfg.assistant_history_truncate,
+              locale: request.locale,
+            })
+          : Promise.resolve(null),
+      ])
+      carryOverContext = buildCarryOverContext(carryDocs)
+      retrievalQuery = rewrite?.rewritten ?? null
+      followupTrace = {
+        detected: true,
+        matched_log: previousSources.length > 0,
+        previous_source_count: previousSources.length,
+        carry_over_doc_count: carryDocs.length,
+        rewritten_query: rewrite?.rewritten ?? null,
+        rewrite_usage: rewrite?.usage ?? null,
+      }
+    }
+
     const pipelineCtx = createPipelineContext({
       env: this.env,
       queryService: this,
@@ -303,6 +357,9 @@ export class QueryService {
       gatewayOptions,
       cacheKey,
       recentHistory,
+      carryOverContext,
+      carryOverSources: previousSources,
+      retrievalQuery,
       isAnonymousNoHistory,
       earlyQueryVector,
       memorySummary,
@@ -318,6 +375,17 @@ export class QueryService {
       langfuseTrace,
     })
 
+    if (followupTrace) {
+      pipelineCtx.trace.followup = followupTrace
+      const rewriteUsage = followupTrace.rewrite_usage as StageTokenUsage | null
+      if (rewriteUsage) {
+        pipelineCtx.tokenBreakdown.followup_rewrite = {
+          ...rewriteUsage,
+          model: pipelineCfg.lightweight_model,
+        }
+      }
+    }
+
     this.setPipelineCtx(pipelineCtx)
 
     try {
@@ -332,6 +400,15 @@ export class QueryService {
                 role: h.role as 'user' | 'assistant',
                 content: h.content,
               })),
+              carryOverContext:
+                [
+                  buildCarryOverSummary(previousSources),
+                  retrievalQuery
+                    ? `使用者這句話是接續上一輪的追問，等價的獨立問題是：「${retrievalQuery}」。請以此理解意圖並呼叫工具；回答時仍以使用者原句為對象。`
+                    : null,
+                ]
+                  .filter(Boolean)
+                  .join('\n\n') || null,
               userId: userId ?? null,
               env: this.env,
               locale: request.locale,
@@ -346,7 +423,7 @@ export class QueryService {
           )
           // 寫入 query log
           const reactSources: AISource[] = reactResult.sources.map((s, i) => ({
-            id: `react-${i}`,
+            id: s.id || `react-${i}`,
             type: s.type === 'crag' ? ('crag' as const) : ('route' as const),
             title: s.title,
             url: s.url,
@@ -365,10 +442,12 @@ export class QueryService {
             modelUsed: 'agent',
             pipelineTrace: JSON.stringify({
               strategy: 'agent',
+              followup: followupTrace ?? null,
               turn_count: reactResult.turnCount,
               tool_call_count: reactResult.toolCallCount,
               per_model_stats: reactResult.perModelStats,
               turn_traces: reactResult.turnTraces,
+              guard: reactResult.guard ?? null,
               cost_usd: reactResult.costUSD,
               cost_twd: reactResult.costTWD,
             }),

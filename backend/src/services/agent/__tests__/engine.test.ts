@@ -1,5 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
-import type { AIProvider, ToolUseResponse } from '../../orchestrators/ai-graph/providers/types'
+import type {
+  AIProvider,
+  ChatMessage,
+  ToolUseResponse,
+} from '../../orchestrators/ai-graph/providers/types'
 import { runAgentLoop } from '../agent-loop'
 import type { AgentCache } from '../cache'
 import { ToolRegistry } from '../registry'
@@ -139,6 +143,16 @@ describe('runAgentLoop', () => {
     expect(result.answer).toBe('根據搜尋結果，龍洞有以下路線...')
     expect(result.turnCount).toBe(2)
     expect(result.toolCallCount).toBe(1)
+
+    // 第二輪送給 LLM 的歷史必須是結構化的 tool call / tool 結果，不再是「[呼叫工具: xxx]」純文字
+    const secondCallMessages = (provider.chatWithTools as any).mock.calls[1][0] as ChatMessage[]
+    const assistantTurn = secondCallMessages.find((m) => m.role === 'assistant')
+    expect(assistantTurn?.toolCalls?.map((tc) => tc.name)).toEqual(['search_routes'])
+    expect(assistantTurn?.content).not.toContain('[呼叫工具')
+    const toolTurn = secondCallMessages.find((m) => m.role === 'tool')
+    expect(toolTurn?.toolCallId).toBe(assistantTurn?.toolCalls?.[0].id)
+    expect(toolTurn?.name).toBe('search_routes')
+    expect(secondCallMessages.some((m) => m.content.includes('<tool_result'))).toBe(false)
   })
 
   it('multiple tool calls in parallel (concurrencySafe)', async () => {
@@ -288,6 +302,81 @@ describe('runAgentLoop', () => {
     // Should reach maxTurns then do a final forced answer
     expect(result.turnCount).toBe(3) // 2 loop turns + 1 final
     expect(result.answer).toBe('最終回答（到達 maxTurns）')
+  })
+
+  it('無 tool calls 且 content 為空（thinking 吃光預算）→ 不回傳空字串，改走 final call', async () => {
+    // 模擬 GLM-4.7-flash：推理吃光 max_tokens，content 空、只有 reasoning
+    const provider = mockProvider([
+      {
+        content: undefined,
+        toolCalls: [{ id: 'tc-1', name: 'search_routes', input: { query: '龍洞' } }],
+        stopReason: 'tool_use',
+        usage: { input: 100, output: 20 },
+      },
+      {
+        content: '',
+        reasoning: '分析使用者請求：使用者想知道…制定策略：…',
+        toolCalls: [],
+        stopReason: 'end_turn',
+        usage: { input: 200, output: 900 },
+      },
+    ])
+    ;(provider.chat as any).mockResolvedValue({
+      content: '龍洞有以下路線。',
+      usage: { prompt_tokens: 300, completion_tokens: 80 },
+    })
+
+    const registry = new ToolRegistry()
+    registry.registerTool(makeTool())
+    const ctx = makeCtx()
+
+    const result = await runAgentLoop({ provider, registry, ctx }, DEFAULT_OPTS)
+
+    expect(result.answer).toBe('龍洞有以下路線。')
+    expect(result.turnCount).toBe(3) // 2 loop turns + 1 final
+    expect(result.turnTraces[1].reasoningChars).toBeGreaterThan(0)
+    // final call 必須關 thinking
+    const finalOpts = (provider.chat as any).mock.calls[0][1]
+    expect(finalOpts.thinking).toBe(false)
+    // loop 內的 chatWithTools 也預設關 thinking
+    const loopOpts = (provider.chatWithTools as any).mock.calls[0][2]
+    expect(loopOpts.thinking).toBe(false)
+  })
+
+  it('無 tool calls 但 content 是模仿的「[呼叫工具: xxx]」文字 → 不當答案，改走 final call', async () => {
+    // 2026-09-19 preview 實測：GLM-4.7-flash 關 thinking 後第二輪直接吐 `[呼叫工具: user_profile]`（8 tokens），
+    // 以前會原樣回傳 → output_guard tool_call_leak → 使用者只看到 fallback 訊息
+    const provider = mockProvider([
+      {
+        content: undefined,
+        toolCalls: [{ id: 'tc-1', name: 'search_routes', input: { query: '壽山 進階' } }],
+        stopReason: 'tool_use',
+        usage: { input: 100, output: 20 },
+      },
+      {
+        content: '[呼叫工具: user_profile]',
+        toolCalls: [],
+        stopReason: 'end_turn',
+        usage: { input: 200, output: 8 },
+      },
+    ])
+    ;(provider.chat as any).mockResolvedValue({
+      content: '⛰ Reach around，難度等級：5.12a，類型：運攀，岩場：壽山。',
+      usage: { prompt_tokens: 300, completion_tokens: 80 },
+    })
+
+    const registry = new ToolRegistry()
+    registry.registerTool(makeTool())
+    const ctx = makeCtx()
+
+    const result = await runAgentLoop({ provider, registry, ctx }, DEFAULT_OPTS)
+
+    expect(result.answer).toBe('⛰ Reach around，難度等級：5.12a，類型：運攀，岩場：壽山。')
+    expect(result.turnCount).toBe(3) // 2 loop turns + 1 final
+    expect(provider.chat).toHaveBeenCalledTimes(1)
+    // 收尾 call 不帶 tools，且前一輪的假 tool call 文字不會被當成 assistant 訊息塞進歷史
+    const finalMessages = (provider.chat as any).mock.calls[0][0] as Array<{ content: string }>
+    expect(finalMessages.some((m) => m.content === '[呼叫工具: user_profile]')).toBe(false)
   })
 
   it('token budget guard — stops when budget exceeded', async () => {

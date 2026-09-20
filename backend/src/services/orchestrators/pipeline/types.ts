@@ -132,6 +132,7 @@ export interface PipelineTokenBreakdown {
   judge?: StageTokenUsage
   judge_2nd?: StageTokenUsage
   query_rewrite?: StageTokenUsage
+  followup_rewrite?: StageTokenUsage
   retrieval_quality_judge?: StageTokenUsage
   context_compression?: StageTokenUsage
 }
@@ -162,6 +163,7 @@ export interface PipelineConfig {
   judge_regen_quality_max: number
   self_reflection_min_length: number
   chat_history_depth: number
+  followup_rewrite_enabled: boolean
   cache_ttl: number
   semantic_cache_enabled: boolean
   semantic_cache_threshold: number
@@ -505,6 +507,12 @@ export interface PipelineContext {
   cacheKey: string
   cacheTtl: number
   recentHistory: AIChatMessage[]
+  /** 追問時帶入的上一輪來源完整文件（放在檢索結果前面） */
+  carryOverContext?: string | null
+  /** 追問時上一輪的來源清單；回答有提到的會併入 sources */
+  carryOverSources?: AISource[]
+  /** 追問改寫後的獨立問題，只給檢索用（embedding / BM25 / HyDE / filter）；生成、judge、log 仍用 request.query */
+  retrievalQuery?: string | null
   isAnonymousNoHistory: boolean
   earlyQueryVector: number[] | null
 

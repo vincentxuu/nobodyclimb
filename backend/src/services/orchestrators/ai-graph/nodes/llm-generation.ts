@@ -2,7 +2,7 @@ import { checkOutput } from '../../../../utils/guardrails'
 import { endSpan, startSpan } from '../../../../utils/langfuse'
 import { extractMemoriesFromQuery } from '../../../domain/memory'
 import { buildPersonalizedSystemPrompt } from '../../../domain/personalization'
-import { parseSuggestedQuestions } from '../../pipeline/utils'
+import { mergeCarryOverSources, parseSuggestedQuestions } from '../../pipeline/utils'
 import { ChatMessage } from '../providers/types'
 import { GraphState } from '../state'
 
@@ -136,10 +136,16 @@ export async function llmGenerationNode(state: GraphState): Promise<Partial<Grap
     }
 
     // RAG 路徑（含 hybrid 分支）
-    const context =
+    const retrievedContext =
       state.queryType === 'hybrid' && state.sqlContext
         ? state.sqlContext
         : (state.context ?? '目前沒有找到相關資料。')
+    // 追問時把上一輪來源的完整文件放在檢索結果前面，讓「這些路線」有東西可指
+    // self-reflection loopBack 重跑時 state.context 可能已含該區塊，用 startsWith 避免重複 prepend
+    const context =
+      state.carryOverContext && !retrievedContext.startsWith(state.carryOverContext)
+        ? `${state.carryOverContext}\n\n---\n\n${retrievedContext}`
+        : retrievedContext
     const prompt = prompts['QUERY_TEMPLATE'].replace('{context}', context).replace('{query}', query)
 
     const recentHistory = state.recentHistory
@@ -231,7 +237,10 @@ export async function llmGenerationNode(state: GraphState): Promise<Partial<Grap
       parsedAnswer.includes('找不到相關路線') ||
       parsedAnswer.includes('無法提供任何推薦或建議')
 
-    const finalSources = cannotAnswer ? [] : (state.sources ?? [])
+    // 回答有提到的上一輪路線併入 sources：來源卡片、連結注入、下一輪追問的來源鏈都靠它
+    const finalSources = cannotAnswer
+      ? []
+      : mergeCarryOverSources(parsedAnswer, state.carryOverSources, state.sources)
 
     // 注入路線連結
     const answer =
@@ -251,6 +260,8 @@ export async function llmGenerationNode(state: GraphState): Promise<Partial<Grap
       llmMessages,
       tokenBreakdown: newTokenBreakdown,
       trace: { generation: generationTrace },
+      // 同 pipeline step：有 carry-over 時把合併後的 context 寫回，judge 才看得到
+      ...(state.carryOverContext ? { context } : {}),
     }
   } catch (err) {
     endSpan(span, { level: 'ERROR', metadata: { error: String(err) } })

@@ -26,6 +26,7 @@ import { createDBToolRegistry, updateToolStats } from './tools/db-registry'
 import { toAISource } from './tools/route-sources'
 import { DefaultTokenTracker } from './tracker'
 import type {
+  AgentGuardTrace,
   AgentResult,
   ModelConfig,
   ModelMap,
@@ -73,6 +74,8 @@ function normalizeModelConfig(
     model: value?.model ?? fallback.model,
     temperature: value?.temperature ?? fallback.temperature,
     maxTokens: value?.maxTokens ?? fallback.maxTokens,
+    // admin 可在 agent_models JSON 加 "thinking": true 重新開啟推理模型的 thinking
+    thinking: value?.thinking ?? fallback.thinking,
     fallback: value?.fallback
       ? normalizeModelConfig(value.fallback, fallback.fallback ?? fallback)
       : fallback.fallback,
@@ -197,6 +200,8 @@ function buildLanguageDirective(locale: AiLocale): string {
 export interface RunAgentParams {
   query: string
   chatHistory?: Array<{ role: 'user' | 'assistant'; content: string }>
+  /** 追問時上一輪回答的來源清單（精簡版），放進 system prompt 讓指代有對象 */
+  carryOverContext?: string | null
   userId: string | null
   env: Env
   /** 使用者介面語言（zh / en / ja），決定回答語言；預設 zh */
@@ -273,7 +278,10 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
   // 0.8 Skill-based routing — SkillResolver 取代 manifest + detectDirectRoute
   const skillResolver = new SkillResolver()
   await skillResolver.load(env.DB, userId)
-  const directSkill = skillResolver.findDirectRoute(query, !!userId)
+  // 追問帶著上一輪來源時不走 direct route：sub-agent 收不到 carry-over，指代會沒有對象
+  const directSkill = params.carryOverContext
+    ? null
+    : skillResolver.findDirectRoute(query, !!userId)
 
   if (directSkill && userId) {
     try {
@@ -359,6 +367,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
           sources: gathered.sources
             .filter((s) => s.url)
             .map((s) => ({
+              id: s.id,
               title: s.title,
               url: s.url as string,
               excerpt: s.excerpt,
@@ -444,7 +453,12 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     buildAgentBasePrompt(toolsSection, capabilitySection)
   )
   const proactiveSection = buildProactivePromptSection(proactiveCtx)
-  const systemPrompt = [baseSystemPrompt, proactiveSection, languageDirective]
+  const systemPrompt = [
+    baseSystemPrompt,
+    proactiveSection,
+    params.carryOverContext ?? null,
+    languageDirective,
+  ]
     .filter(Boolean)
     .join('\n\n')
 
@@ -478,8 +492,15 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     env,
   })
   const guardedAnswer = postLoopResult.replacement ?? result.answer
+  // 攔下的原因只有 console.warn 會在 Workers 上消失，另外記進 result 讓 entry.ts 寫進 pipeline_trace
+  let guardTrace: AgentGuardTrace | undefined
   if (!postLoopResult.allow) {
-    console.warn('[agent] post_loop hook denied', { reason: postLoopResult.reason })
+    guardTrace = {
+      reason: postLoopResult.reason ?? 'denied',
+      original_answer_length: result.answer.length,
+      original_answer_preview: result.answer.slice(0, 300),
+    }
+    console.warn('[agent] post_loop hook denied', guardTrace)
   }
   // 與 pipeline 一致：後處理注入站內路線連結與影片連結
   const aiSources = result.sources.map(toAISource)
@@ -509,6 +530,7 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     sources: result.sources
       .filter((s) => s.url)
       .map((s) => ({
+        id: s.id,
         title: s.title,
         url: s.url as string,
         excerpt: s.excerpt,
@@ -522,5 +544,6 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     turnTraces: result.turnTraces,
     costUSD: costSummary.totalCostUSD,
     costTWD: costSummary.totalCostTWD,
+    ...(guardTrace ? { guard: guardTrace } : {}),
   }
 }

@@ -32,6 +32,33 @@ function runPatternGuard(answer: string, patterns: string[], threshold: number):
   return matchCount >= threshold
 }
 
+/**
+ * 思考外洩的基底 pattern：與 DB config 的 patterns 取聯集，確保 admin 設定漏了也有最低防線。
+ * 前半是 Llama 系的口語推理，後半是 GLM 系的結構化推理（2026-09-19 preview 實際外洩樣本）。
+ */
+export const BASE_THINKING_PATTERNS: string[] = [
+  '我需要根據',
+  '我應該推薦',
+  '我必須根據',
+  '讓我看看',
+  '讓我分析',
+  '現在我需要',
+  '根據規則\\s*\\d+',
+  '分析使用者(的)?請求',
+  '分析.*工具結果',
+  '制定策略',
+  '當前限制',
+  '使用者輸入：',
+  '之前的模型回答',
+  '我必須遵循',
+  '^\\s*(\\d+\\.\\s*)?\\*\\*分析',
+]
+
+/** 聯集去重，保留 DB config 的順序在前 */
+function mergePatterns(configPatterns: string[], basePatterns: string[]): string[] {
+  return Array.from(new Set([...configPatterns, ...basePatterns]))
+}
+
 // ---------------------------------------------------------------------------
 // 通用引擎：repetition guard（重複偵測）
 // ---------------------------------------------------------------------------
@@ -95,9 +122,12 @@ async function retryGeneration(
         model: models.orchestrator.model,
         maxTokens: models.orchestrator.maxTokens,
         temperature: 0.3,
+        // 重生成只要正文，關 thinking 避免再次外洩或吃光預算
+        thinking: false,
       }
     )
-    return retryResponse.content
+    // content 為空（例如 thinking 仍吃光預算）視為重生成失敗，交由呼叫端退回 fallback 訊息
+    return retryResponse.content?.trim() ? retryResponse.content : null
   } catch (err) {
     console.warn('[hook] retryGeneration failed:', err)
     return null
@@ -245,7 +275,8 @@ export function createBuiltinHooks(deps: {
       onFailure: 'fail_open',
       async execute(payload): Promise<GateResult> {
         const answer = payload.answer as string
-        if (!runPatternGuard(answer, thinkingLeakCfg.patterns, thinkingLeakCfg.threshold)) {
+        const patterns = mergePatterns(thinkingLeakCfg.patterns, BASE_THINKING_PATTERNS)
+        if (!runPatternGuard(answer, patterns, thinkingLeakCfg.threshold)) {
           return { allow: true }
         }
         const models = payload.models as ModelMap | undefined

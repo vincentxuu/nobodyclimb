@@ -22,7 +22,7 @@ export async function filterBuildNode(state: GraphState): Promise<Partial<GraphS
         extractRouteReference: (text: string) => queryService.extractRouteReference(text),
       },
       {
-        query: state.request.query,
+        query: state.retrievalQuery ?? state.request.query,
         existingFilter: state.vectorFilter,
         parsedQuery: state.parsedQuery as Record<string, unknown> | null | undefined,
         queryType: state.queryType,

@@ -1,3 +1,4 @@
+import { toOpenAIMessages } from './tool-messages'
 import {
   AIProvider,
   ChatMessage,
@@ -22,7 +23,7 @@ export class OpenAIProvider implements AIProvider {
   async chat(messages: ChatMessage[], opts: LLMCallOptions = {}): Promise<LLMResponse> {
     const body: Record<string, unknown> = {
       model: opts.model ?? this.defaultModel,
-      messages,
+      messages: toOpenAIMessages(messages),
       max_tokens: opts.maxTokens,
       temperature: opts.temperature ?? 0.7,
     }
@@ -67,7 +68,7 @@ export class OpenAIProvider implements AIProvider {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.apiKey}` },
       body: JSON.stringify({
         model: opts.model ?? this.defaultModel,
-        messages,
+        messages: toOpenAIMessages(messages),
         max_tokens: opts.maxTokens,
         stream: true,
       }),
@@ -153,14 +154,14 @@ export async function openAIChatWithTools(
   tools: ToolSchema[],
   opts: ChatWithToolsOptions = {}
 ): Promise<ToolUseResponse> {
-  const apiMessages = [...messages]
+  const allMessages = [...messages]
   if (opts.system) {
-    apiMessages.unshift({ role: 'system', content: opts.system })
+    allMessages.unshift({ role: 'system', content: opts.system })
   }
 
   const body: Record<string, unknown> = {
     model,
-    messages: apiMessages,
+    messages: toOpenAIMessages(allMessages),
     max_tokens: opts.maxTokens,
     temperature: opts.temperature ?? 0.7,
   }

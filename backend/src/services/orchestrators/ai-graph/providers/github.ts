@@ -5,6 +5,7 @@
  */
 
 import { openAIChatWithTools } from './openai'
+import { toOpenAIMessages } from './tool-messages'
 import {
   AIProvider,
   ChatMessage,
@@ -28,7 +29,7 @@ export class GitHubModelsProvider implements AIProvider {
   async chat(messages: ChatMessage[], opts: LLMCallOptions = {}): Promise<LLMResponse> {
     const body: Record<string, unknown> = {
       model: opts.model ?? this.defaultModel,
-      messages,
+      messages: toOpenAIMessages(messages),
       max_tokens: opts.maxTokens,
       temperature: opts.temperature ?? 0.7,
     }
@@ -85,7 +86,7 @@ export class GitHubModelsProvider implements AIProvider {
       },
       body: JSON.stringify({
         model: opts.model ?? this.defaultModel,
-        messages,
+        messages: toOpenAIMessages(messages),
         max_tokens: opts.maxTokens,
         stream: true,
       }),

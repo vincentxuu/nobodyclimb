@@ -13,6 +13,11 @@ export interface ModelConfig {
   model: string
   temperature?: number
   maxTokens?: number
+  /**
+   * 推理模型的 thinking 開關。orchestrator 預設 false：
+   * GLM-4.7-flash thinking 預設開啟，在 1024 max_tokens 下會吃光預算讓正文為空。
+   */
+  thinking?: boolean
   /** 失敗時的備援配置（可鏈式） */
   fallback?: ModelConfig
 }
@@ -136,6 +141,8 @@ export interface ToolCall {
 
 export interface ToolUseResponse {
   content?: string
+  /** 推理模型的思考內容；只供 trace，絕不可當作回答 */
+  reasoning?: string
   toolCalls: ToolCall[]
   stopReason: 'tool_use' | 'end_turn'
   usage: { input: number; output: number }
@@ -210,6 +217,8 @@ export interface AgentTurnTrace {
 export interface AgentResult {
   answer: string
   sources: Array<{
+    /** route / crag 的真實 id，供下一輪追問找回文件 */
+    id?: string
     title: string
     url: string
     excerpt?: string
@@ -223,4 +232,15 @@ export interface AgentResult {
   turnTraces?: AgentTurnTrace[]
   costUSD?: number
   costTWD?: number
+  /** post_loop gate 攔下回答時的紀錄（回答已被換成 fallback 訊息），供 admin log 追查原因 */
+  guard?: AgentGuardTrace
+}
+
+export interface AgentGuardTrace {
+  /** HookBus 給的原因，格式 `<hook name>: <reason>`，例如 `output_guard: too_short` */
+  reason: string
+  /** 被攔下的原始回答長度（0 = 模型根本沒有正文，多半是 thinking 吃光預算） */
+  original_answer_length: number
+  /** 原始回答前 300 字，判斷是外洩推理、重複還是空白 */
+  original_answer_preview: string
 }

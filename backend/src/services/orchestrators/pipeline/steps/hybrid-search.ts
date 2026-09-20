@@ -29,7 +29,7 @@ export const hybridSearchStep: PipelineStep = {
 
   async execute(ctx: PipelineContext): Promise<PipelineContext> {
     const { env, request, pipelineConfig, trace, queryService } = ctx
-    const { query } = request
+    const query = ctx.retrievalQuery ?? request.query
     const vectorFilter = ctx.vectorFilter ?? {}
 
     // Embedding 降級：僅使用 BM25 搜尋（向量不可用）
