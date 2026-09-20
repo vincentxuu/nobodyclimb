@@ -7,6 +7,7 @@ import {
 } from '../../utils/ai-prompts'
 import type { LangfuseParent } from '../../utils/langfuse'
 import { logGeneration } from '../../utils/langfuse'
+import { buildThinkingParams } from '../orchestrators/ai-graph/providers/cloudflare'
 import type { TokenUsageInfo } from '../orchestrators/pipeline/types'
 import toolRegistry from '../orchestrators/tool-registry'
 import { DEFAULT_LIGHTWEIGHT_MODEL } from './config'
@@ -215,9 +216,10 @@ export async function streamLLMGeneration(
   onToken: (token: string) => Promise<void>,
   langfuseParent?: LangfuseParent | null
 ): Promise<string> {
+  // 生成一律關 thinking，參數依模型家族由 buildThinkingParams 統一決定（與非串流路徑一致）
   const stream = (await (env.AI.run as Function)(
     model,
-    { messages, max_tokens: maxTokens, stream: true },
+    { messages, max_tokens: maxTokens, stream: true, ...buildThinkingParams(model, false) },
     gatewayOptions
   )) as ReadableStream<Uint8Array>
 

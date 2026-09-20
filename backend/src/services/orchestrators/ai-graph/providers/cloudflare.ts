@@ -1,6 +1,7 @@
 // 封裝現有的 Cloudflare Workers AI binding 呼叫
 
 import { Env } from '../../../../types'
+import { flattenToolMessages, toOpenAIMessages } from './tool-messages'
 import {
   AIProvider,
   ChatMessage,
@@ -47,15 +48,33 @@ function parseWorkersAIResponse(response: unknown) {
 }
 
 /**
+ * Workers AI 官方 input schema（<model>/sync-input.json）宣告 `chat_template_kwargs.enable_thinking`
+ * 的模型家族，2026-09-19 逐一查證 admin 頁可選的模型：
+ * GLM 4.7 / 5.2 / 5.3(-flash)、DeepSeek v4、Kimi k2.x、Qwen3.8、Nemotron 3、Gemma 4 都有；
+ * gpt-oss / Llama / Mistral / qwen3-30b-a3b 沒有（舊版 schema，只有 max_tokens 等基本參數）。
+ * 這些模型 enable_thinking 預設 true，1024 max_tokens 會被推理吃光讓正文為空。
+ */
+const ENABLE_THINKING_MODEL_FAMILIES = [
+  'glm-',
+  'deepseek-v4',
+  'kimi-',
+  'qwen3.8',
+  'nemotron-3',
+  'gemma-4',
+]
+
+/**
  * 依模型家族產生「關閉 thinking」的 Workers AI 參數。
- * - GLM 4.x：官方 schema 的 chat_template_kwargs.enable_thinking（預設 true）
- * - Qwen3：沿用 pipeline（llm-generation.ts）的 budget_tokens: 0 慣例
+ * - 上述家族：chat_template_kwargs.enable_thinking=false
+ * - 其他 Qwen3（qwen3-4b / qwen3-30b）：沿用 pipeline（llm-generation.ts）的 budget_tokens: 0 慣例
  * thinking 為 undefined / true 時不加任何參數，沿用模型預設。
+ * 注意：只比對 'glm-4' 曾漏掉 glm-5.3-flash（admin 預設 orchestrator），thinking 沒關導致
+ * 收尾回答為空、output_guard 退回 fallback 訊息。
  */
 export function buildThinkingParams(model: string, thinking?: boolean): Record<string, unknown> {
   if (thinking !== false) return {}
   const m = model.toLowerCase()
-  if (m.includes('glm-4')) {
+  if (ENABLE_THINKING_MODEL_FAMILIES.some((family) => m.includes(family))) {
     return { chat_template_kwargs: { enable_thinking: false } }
   }
   if (m.includes('qwen3')) {
@@ -73,6 +92,38 @@ function warnIfThinkingConsumedBudget(model: string, content: string, reasoning:
   }
 }
 
+/**
+ * Workers AI 舊版 input schema 的模型（content 只能是 string、沒有 role: 'tool'）：
+ * llama-3.x、qwen2.5 / qwen3-30b、gpt-oss、mistral。2026-09-19 實測會回 AiError 5006 schema 錯誤。
+ * 新版 schema（GLM、DeepSeek、Kimi、llama-4）接受 OpenAI 格式的 tool_calls / tool 訊息。
+ */
+const LEGACY_MESSAGE_SCHEMA_PATTERN = /llama-3|qwen2\.5|qwen3-|gpt-oss|mistral/i
+
+function hasToolMessages(messages: ChatMessage[]): boolean {
+  return messages.some((m) => m.role === 'tool' || (m.role === 'assistant' && m.toolCalls?.length))
+}
+
+/** Workers AI 對訊息格式的驗證錯誤（oneOf / Type mismatch），用來判斷要不要降級成純文字重送 */
+function isMessageSchemaError(err: unknown): boolean {
+  const text = String(err)
+  return /5006|oneOf at|Type mismatch|required properties/.test(text)
+}
+
+/**
+ * 依模型決定 tool 訊息的送法：新 schema 走 OpenAI 原生格式（模型看到真正的 tool call 區段，
+ * 不會再模仿「[呼叫工具: xxx]」文字），舊 schema 攤平成 user / assistant 純文字。
+ */
+export function prepareWorkersAIMessages(
+  model: string,
+  messages: ChatMessage[],
+  forceFlatten = false
+): unknown[] {
+  if (forceFlatten || LEGACY_MESSAGE_SCHEMA_PATTERN.test(model)) {
+    return flattenToolMessages(messages)
+  }
+  return toOpenAIMessages(messages)
+}
+
 export class CloudflareProvider implements AIProvider {
   readonly name = 'cloudflare'
   constructor(
@@ -81,16 +132,44 @@ export class CloudflareProvider implements AIProvider {
     private readonly defaultEmbeddingModel = '@cf/baai/bge-m3'
   ) {}
 
+  /**
+   * 先用原生 tool 訊息格式送；沒列在舊 schema 清單卻仍被 Workers AI 以 schema 錯誤拒絕時，
+   * 攤平成純文字重送一次（失敗的那次不產生 token 費用）。
+   */
+  private async runWithToolMessageFallback(
+    model: string,
+    messages: ChatMessage[],
+    buildParams: (apiMessages: unknown[]) => Record<string, unknown>,
+    gatewayOptions?: Parameters<typeof this.ai.run>[2]
+  ): Promise<unknown> {
+    // gatewayOptions 沒給時維持兩個參數的呼叫（chatWithTools 原本就沒有 gateway）
+    const run = (params: Record<string, unknown>) =>
+      gatewayOptions === undefined
+        ? this.ai.run(model, params as Parameters<typeof this.ai.run>[1])
+        : this.ai.run(model, params as Parameters<typeof this.ai.run>[1], gatewayOptions)
+    try {
+      return await run(buildParams(prepareWorkersAIMessages(model, messages)))
+    } catch (err) {
+      if (!hasToolMessages(messages) || !isMessageSchemaError(err)) throw err
+      console.warn(
+        `[CloudflareProvider] TOOL_MESSAGES_REJECTED model=${model} — retrying with flattened text`,
+        String(err).slice(0, 200)
+      )
+      return await run(buildParams(prepareWorkersAIMessages(model, messages, true)))
+    }
+  }
+
   async chat(messages: ChatMessage[], opts: LLMCallOptions = {}): Promise<LLMResponse> {
     const model = opts.model ?? this.defaultModel
-    const response = await this.ai.run(
+    const response = await this.runWithToolMessageFallback(
       model,
-      {
-        messages,
+      messages,
+      (apiMessages) => ({
+        messages: apiMessages,
         max_tokens: opts.maxTokens,
         tools: opts.tools,
         ...buildThinkingParams(model, opts.thinking),
-      } as Parameters<typeof this.ai.run>[1],
+      }),
       opts.gatewayOptions
     )
     const parsed = parseWorkersAIResponse(response)
@@ -114,14 +193,15 @@ export class CloudflareProvider implements AIProvider {
     opts: LLMCallOptions & { onToken: (token: string) => Promise<void> }
   ): Promise<LLMResponse> {
     const model = opts.model ?? this.defaultModel
-    const stream = (await (this.ai.run as Function)(
+    const stream = (await this.runWithToolMessageFallback(
       model,
-      {
-        messages,
+      messages,
+      (apiMessages) => ({
+        messages: apiMessages,
         max_tokens: opts.maxTokens,
         stream: true,
         ...buildThinkingParams(model, opts.thinking),
-      },
+      }),
       opts.gatewayOptions
     )) as ReadableStream<Uint8Array>
 
@@ -216,12 +296,12 @@ export class CloudflareProvider implements AIProvider {
     opts: ChatWithToolsOptions = {}
   ): Promise<ToolUseResponse> {
     const model = opts.model ?? this.defaultModel
-    const apiMessages = [...messages]
+    const allMessages = [...messages]
     if (opts.system) {
-      apiMessages.unshift({ role: 'system', content: opts.system })
+      allMessages.unshift({ role: 'system', content: opts.system })
     }
 
-    const response = await this.ai.run(model, {
+    const response = await this.runWithToolMessageFallback(model, allMessages, (apiMessages) => ({
       messages: apiMessages,
       max_tokens: opts.maxTokens,
       temperature: opts.temperature,
@@ -234,7 +314,7 @@ export class CloudflareProvider implements AIProvider {
         },
       })),
       ...buildThinkingParams(model, opts.thinking),
-    } as Parameters<typeof this.ai.run>[1])
+    }))
 
     const { content, reasoning, usage, rawToolCalls } = parseWorkersAIResponse(response)
     // 有 tool calls 的輪次 content 本來就常是空的，只在「沒有 tool calls 也沒有正文」時才算預算被吃光

@@ -1,6 +1,23 @@
+/** assistant 發出的 tool call（provider 無關的中介格式，各 provider 自行轉成 API 格式） */
+export interface ChatToolCall {
+  id: string
+  name: string
+  input: unknown
+}
+
 export interface ChatMessage {
-  role: 'system' | 'user' | 'assistant'
+  role: 'system' | 'user' | 'assistant' | 'tool'
   content: string
+  /**
+   * role: 'assistant' 時，該輪真正發出的 tool calls。
+   * 以前 agent loop 把 tool call 寫成「[呼叫工具: xxx]」純文字塞進歷史，小模型會學著吐同樣的文字
+   * 而不是真的呼叫工具（2026-09-19 preview 事故）；改用結構化欄位，由 provider 轉成各家的原生格式。
+   */
+  toolCalls?: ChatToolCall[]
+  /** role: 'tool' 時，對應的 assistant tool call id */
+  toolCallId?: string
+  /** role: 'tool' 時，工具名稱 */
+  name?: string
 }
 
 export interface LLMCallOptions {
