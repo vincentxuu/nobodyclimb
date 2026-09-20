@@ -26,6 +26,7 @@ import { createDBToolRegistry, updateToolStats } from './tools/db-registry'
 import { toAISource } from './tools/route-sources'
 import { DefaultTokenTracker } from './tracker'
 import type {
+  AgentGuardTrace,
   AgentResult,
   ModelConfig,
   ModelMap,
@@ -491,8 +492,15 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     env,
   })
   const guardedAnswer = postLoopResult.replacement ?? result.answer
+  // 攔下的原因只有 console.warn 會在 Workers 上消失，另外記進 result 讓 entry.ts 寫進 pipeline_trace
+  let guardTrace: AgentGuardTrace | undefined
   if (!postLoopResult.allow) {
-    console.warn('[agent] post_loop hook denied', { reason: postLoopResult.reason })
+    guardTrace = {
+      reason: postLoopResult.reason ?? 'denied',
+      original_answer_length: result.answer.length,
+      original_answer_preview: result.answer.slice(0, 300),
+    }
+    console.warn('[agent] post_loop hook denied', guardTrace)
   }
   // 與 pipeline 一致：後處理注入站內路線連結與影片連結
   const aiSources = result.sources.map(toAISource)
@@ -536,5 +544,6 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     turnTraces: result.turnTraces,
     costUSD: costSummary.totalCostUSD,
     costTWD: costSummary.totalCostTWD,
+    ...(guardTrace ? { guard: guardTrace } : {}),
   }
 }

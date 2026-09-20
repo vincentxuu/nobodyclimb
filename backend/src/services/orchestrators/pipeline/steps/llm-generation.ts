@@ -2,6 +2,7 @@ import { checkOutput } from '../../../../utils/guardrails'
 import { logGeneration } from '../../../../utils/langfuse'
 import { extractMemoriesFromQuery } from '../../../domain/memory'
 import { buildPersonalizedSystemPrompt } from '../../../domain/personalization'
+import { buildThinkingParams } from '../../ai-graph/providers/cloudflare'
 import { LLMResponse, PipelineContext, PipelineStep } from '../types'
 import { mergeCarryOverSources, parseSuggestedQuestions } from '../utils'
 
@@ -43,8 +44,9 @@ export const llmGenerationStep: PipelineStep = {
     const effectiveLlmModel = ctx.effectiveLlmModel ?? pipelineConfig.llm_model
 
     // GK 通識路徑
-    // Qwen3 thinking 模型需要 budget_tokens: 0 才能停用 thinking mode
-    const isQwen3Model = effectiveLlmModel.toLowerCase().includes('qwen3')
+    // 生成一律關 thinking：參數依模型家族由 buildThinkingParams 統一決定
+    // （GLM / DeepSeek / Kimi → chat_template_kwargs、Qwen3 → budget_tokens: 0、Mistral 等不加）
+    const thinkingOffParams = buildThinkingParams(effectiveLlmModel, false)
     if (ctx.queryType === 'general-knowledge') {
       const gkPersonalized = buildPersonalizedSystemPrompt(
         ctx.memorySummary ?? null,
@@ -52,22 +54,14 @@ export const llmGenerationStep: PipelineStep = {
         ctx.abilityLevel ?? null,
         prompts['GENERAL_KNOWLEDGE_SYSTEM_PROMPT']
       )
-      const gkParams = isQwen3Model
-        ? {
-            messages: [
-              { role: 'system', content: gkPersonalized },
-              { role: 'user', content: query },
-            ],
-            max_tokens: pipelineConfig.max_tokens_gk,
-            budget_tokens: 0,
-          }
-        : {
-            messages: [
-              { role: 'system', content: gkPersonalized },
-              { role: 'user', content: query },
-            ],
-            max_tokens: pipelineConfig.max_tokens_gk,
-          }
+      const gkParams = {
+        messages: [
+          { role: 'system', content: gkPersonalized },
+          { role: 'user', content: query },
+        ],
+        max_tokens: pipelineConfig.max_tokens_gk,
+        ...thinkingOffParams,
+      }
       const llmResult = (await env.AI.run(
         effectiveLlmModel,
         gkParams,
@@ -229,13 +223,11 @@ export const llmGenerationStep: PipelineStep = {
       )
       if (!rawLLMAnswer) rawLLMAnswer = '抱歉，無法生成回答，請稍後再試。'
     } else {
-      const ragParams = isQwen3Model
-        ? {
-            messages: llmMessages,
-            max_tokens: pipelineConfig.max_tokens_generation,
-            budget_tokens: 0,
-          }
-        : { messages: llmMessages, max_tokens: pipelineConfig.max_tokens_generation }
+      const ragParams = {
+        messages: llmMessages,
+        max_tokens: pipelineConfig.max_tokens_generation,
+        ...thinkingOffParams,
+      }
       const llmResult = (await (env.AI.run as Function)(
         effectiveLlmModel,
         ragParams,

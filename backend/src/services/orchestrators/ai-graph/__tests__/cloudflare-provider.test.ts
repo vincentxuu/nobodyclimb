@@ -133,6 +133,28 @@ describe('CloudflareProvider response format', () => {
     expect(params.chat_template_kwargs).toEqual({ enable_thinking: false })
   })
 
+  it('thinking: false → GLM 5.x / DeepSeek v4 / Kimi / Qwen3.8 也帶 enable_thinking=false', async () => {
+    // 只比對 'glm-4' 曾漏掉 admin 預設的 glm-5.3-flash，thinking 沒關 → 收尾回答為空 → fallback 訊息
+    mockAI.run.mockResolvedValue({
+      choices: [{ message: { content: 'ok', role: 'assistant' } }],
+      usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+    })
+    const provider = await getProvider()
+    for (const model of [
+      '@cf/zai-org/glm-5.3-flash',
+      '@cf/zai-org/glm-5.2',
+      '@cf/deepseek-ai/deepseek-v4-flash-0731',
+      '@cf/moonshotai/kimi-k2.6',
+      '@cf/qwen/qwen3.8-27b',
+    ]) {
+      await provider.chat([{ role: 'user', content: 'hi' }], { model, thinking: false })
+      const params = mockAI.run.mock.calls.at(-1)?.[1]
+      expect(params.chat_template_kwargs, model).toEqual({ enable_thinking: false })
+      expect(params.budget_tokens, model).toBeUndefined()
+    }
+    mockAI.run.mockReset()
+  })
+
   it('thinking: false → Qwen3 帶 budget_tokens: 0；其他模型不加參數', async () => {
     mockAI.run.mockResolvedValue({
       choices: [{ message: { content: 'ok', role: 'assistant' } }],
@@ -182,6 +204,129 @@ describe('CloudflareProvider response format', () => {
     expect(result.content).toBeUndefined()
     expect(result.reasoning).toBe('思考')
     expect(result.stopReason).toBe('end_turn')
+  })
+
+  it('chatWithTools：新 schema 模型（GLM）以 OpenAI 原生 tool_calls / role: tool 送出歷史', async () => {
+    mockAI.run.mockReset()
+    mockAI.run.mockResolvedValueOnce({
+      choices: [{ message: { content: '推薦 Reach around', tool_calls: [] } }],
+      usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+    })
+    const provider = await getProvider()
+    await provider.chatWithTools(
+      [
+        { role: 'user', content: '推薦進階路線' },
+        {
+          role: 'assistant',
+          content: '',
+          toolCalls: [{ id: 'call_1', name: 'search_routes', input: { crag: '壽山' } }],
+        },
+        { role: 'tool', toolCallId: 'call_1', name: 'search_routes', content: '1. Reach around' },
+      ],
+      [{ name: 'search_routes', description: '搜尋', parameters: {} }],
+      { model: '@cf/zai-org/glm-4.7-flash' }
+    )
+    const sent = mockAI.run.mock.calls.at(-1)?.[1].messages
+    expect(sent[1]).toEqual({
+      role: 'assistant',
+      content: null,
+      tool_calls: [
+        {
+          id: 'call_1',
+          type: 'function',
+          function: { name: 'search_routes', arguments: '{"crag":"壽山"}' },
+        },
+      ],
+    })
+    expect(sent[2]).toEqual({ role: 'tool', tool_call_id: 'call_1', content: '1. Reach around' })
+  })
+
+  it('chatWithTools：舊 schema 模型（llama-3 / qwen3-30b / gpt-oss）直接攤平成純文字', async () => {
+    mockAI.run.mockReset()
+    mockAI.run.mockResolvedValue({
+      choices: [{ message: { content: 'ok', tool_calls: [] } }],
+      usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+    })
+    const provider = await getProvider()
+    const history = [
+      { role: 'user' as const, content: '推薦進階路線' },
+      {
+        role: 'assistant' as const,
+        content: '',
+        toolCalls: [{ id: 'call_1', name: 'search_routes', input: {} }],
+      },
+      {
+        role: 'tool' as const,
+        toolCallId: 'call_1',
+        name: 'search_routes',
+        content: '1. Reach around',
+      },
+    ]
+    for (const model of [
+      '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+      '@cf/qwen/qwen3-30b-a3b-fp8',
+      '@cf/openai/gpt-oss-20b',
+    ]) {
+      await provider.chatWithTools(history, [], { model })
+      const sent = mockAI.run.mock.calls.at(-1)?.[1].messages
+      expect(
+        sent.map((m: { role: string }) => m.role),
+        model
+      ).toEqual(['user', 'assistant', 'user'])
+      expect(sent[2].content, model).toContain('<tool_result name="search_routes">')
+      expect(
+        sent.every((m: object) => !('tool_calls' in m)),
+        model
+      ).toBe(true)
+    }
+    expect(mockAI.run).toHaveBeenCalledTimes(3)
+    mockAI.run.mockReset()
+  })
+
+  it('chatWithTools：未列入舊清單的模型被 Workers AI 以 schema 錯誤拒絕 → 攤平重送一次', async () => {
+    mockAI.run.mockReset()
+    mockAI.run
+      .mockRejectedValueOnce(
+        new Error(
+          "AiError: 5006: Error: oneOf at '/' not met, Type mismatch of '/messages/2/content'"
+        )
+      )
+      .mockResolvedValueOnce({
+        choices: [{ message: { content: 'ok', tool_calls: [] } }],
+        usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 },
+      })
+    const provider = await getProvider()
+    const result = await provider.chatWithTools(
+      [
+        { role: 'user', content: 'q' },
+        { role: 'assistant', content: '', toolCalls: [{ id: 'c1', name: 'weather', input: {} }] },
+        { role: 'tool', toolCallId: 'c1', name: 'weather', content: '晴' },
+      ],
+      [],
+      { model: '@cf/some-vendor/unknown-model' }
+    )
+    expect(result.content).toBe('ok')
+    expect(mockAI.run).toHaveBeenCalledTimes(2)
+    expect(mockAI.run.mock.calls[0][1].messages[1].tool_calls).toBeDefined()
+    expect(mockAI.run.mock.calls[1][1].messages.map((m: { role: string }) => m.role)).toEqual([
+      'user',
+      'assistant',
+      'user',
+    ])
+    mockAI.run.mockReset()
+  })
+
+  it('chatWithTools：沒有 tool 訊息時的錯誤不會觸發重送，直接拋出', async () => {
+    mockAI.run.mockReset()
+    mockAI.run.mockRejectedValueOnce(new Error('AiError: 5006: Type mismatch'))
+    const provider = await getProvider()
+    await expect(
+      provider.chatWithTools([{ role: 'user', content: 'q' }], [], {
+        model: '@cf/zai-org/glm-4.7-flash',
+      })
+    ).rejects.toThrow('5006')
+    expect(mockAI.run).toHaveBeenCalledTimes(1)
+    mockAI.run.mockReset()
   })
 
   it('新格式 tool_calls 在 choices[0].message 裡 + 空頂層 tool_calls', async () => {
