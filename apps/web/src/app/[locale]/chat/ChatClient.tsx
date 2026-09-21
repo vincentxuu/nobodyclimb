@@ -1,10 +1,23 @@
 'use client'
 
 import type { RankId } from '@nobodyclimb/types'
-import { ArrowLeft, Bot, Check, Copy, Loader2, User } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import {
+  ArrowLeft,
+  Bot,
+  Check,
+  ChevronLeft,
+  Copy,
+  History,
+  Loader2,
+  RefreshCw,
+  SquarePen,
+  ThumbsDown,
+  ThumbsUp,
+  User,
+} from 'lucide-react'
+import { useSearchParams } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import {
   Message,
   MessageAction,
@@ -24,37 +37,18 @@ import { Source, Sources, SourcesContent, SourcesTrigger } from '@/components/ai
 import { Suggestion, Suggestions } from '@/components/ai-elements/suggestion'
 import { ToolActivity } from '@/components/ai-elements/tool-activity'
 import { RankBadge } from '@/components/rank/RankBadge'
-import { Link } from '@/i18n/navigation'
-import type {
-  AIChatHistoryMessage,
-  AISource,
-  AIStreamDoneEvent,
-  AIStreamProgressEvent,
-  AiLocale,
-} from '@/lib/api/ai'
-import { askAIStream, useMyQuota } from '@/lib/api/ai'
-import { upsertToolProgress } from '@/lib/chat/tool-progress'
+import { useChatAutoScroll } from '@/hooks/useChatAutoScroll'
+import { useChatSession } from '@/hooks/useChatSession'
+import { Link, useRouter } from '@/i18n/navigation'
+import type { AiLocale } from '@/lib/api/ai'
+import { useSubmitFeedback } from '@/lib/api/ai'
+import type { ChatMessageData } from '@/lib/chat/messages'
+import { formatChatError } from '@/lib/chat/messages'
+import { pickRandomSuggestions } from '@/lib/chat/suggestions'
 import { cn } from '@/lib/utils'
-import { useAuthStore } from '@/store/authStore'
 
-// =============================================
-// Types
-// =============================================
-
-interface ChatMessage {
-  id: string
-  role: 'user' | 'assistant'
-  content: string
-  sources?: AISource[]
-  suggestedQuestions?: string[]
-  isStreaming?: boolean
-  toolProgress?: AIStreamProgressEvent[]
-}
-
-// 建議問題題庫放在 messages 的 Chat.suggestionPool（依語言切換）
-function pickRandomSuggestions(pool: string[], count: number): string[] {
-  return [...pool].sort(() => Math.random() - 0.5).slice(0, count)
-}
+// widget「展開」時帶過來的 session，全頁接續同一段對話
+const SESSION_PARAM = 'session'
 
 // =============================================
 // Chat Page
@@ -64,135 +58,86 @@ export function ChatClient() {
   const t = useTranslations('Chat')
   const locale = useLocale() as AiLocale
   const router = useRouter()
-  const { isAuthenticated } = useAuthStore()
-  const { data: quota } = useMyQuota({ enabled: isAuthenticated })
-  const [messages, setMessages] = useState<ChatMessage[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [suggestions, setSuggestions] = useState<string[]>(() =>
+  const searchParams = useSearchParams()
+  // 只取進頁當下的值：之後網址由下方 effect 跟著 session 改寫，不應再觸發初始載入
+  const [initialSessionId] = useState(() => searchParams.get(SESSION_PARAM))
+  const [showHistory, setShowHistory] = useState(false)
+  const [emptySuggestions] = useState<string[]>(() =>
     pickRandomSuggestions(t.raw('suggestionPool') as string[], 3)
   )
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const abortRef = useRef<AbortController | null>(null)
 
-  const scrollToBottom = useCallback(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
-    }
-  }, [])
+  // 對話狀態（送出 / 停止 / 重新生成 / session / 配額）與浮動 widget 共用同一個 hook
+  const {
+    messages,
+    suggestedQuestions,
+    sessionId,
+    sessions,
+    hasMoreSessions,
+    isLoadingSessions,
+    quota,
+    isAuthenticated,
+    isBusy,
+    send,
+    stop,
+    regenerate,
+    newChat,
+    loadSessions,
+    loadMoreSessions,
+    switchSession,
+  } = useChatSession({ locale, initialSessionId })
 
+  const { containerRef, handleScroll } = useChatAutoScroll<HTMLDivElement>(
+    messages,
+    `${suggestedQuestions.length}:${showHistory}`
+  )
+
+  // 把目前 session 寫進網址（重新整理後接續同一段對話）；用 history API 只改 query，不觸發導頁
+  const hadSessionRef = useRef(false)
+  const writtenSessionRef = useRef<string | null>(null)
   useEffect(() => {
-    scrollToBottom()
-  }, [messages, scrollToBottom])
+    if (!sessionId && !hadSessionRef.current) return
+    hadSessionRef.current = true
+    writtenSessionRef.current = sessionId
+    const url = new URL(window.location.href)
+    if (sessionId) url.searchParams.set(SESSION_PARAM, sessionId)
+    else url.searchParams.delete(SESSION_PARAM)
+    window.history.replaceState(null, '', url)
+  }, [sessionId])
 
-  const buildChatHistory = useCallback((): AIChatHistoryMessage[] => {
-    return messages
-      .filter((m) => !m.isStreaming)
-      .slice(-10)
-      .map((m) => ({ role: m.role, content: m.content }))
-  }, [messages])
-
-  const handleSend = useCallback(
-    async (query: string) => {
-      if (!query.trim() || isLoading) return
-
-      const userMsg: ChatMessage = {
-        id: crypto.randomUUID(),
-        role: 'user',
-        content: query.trim(),
-      }
-
-      const assistantMsg: ChatMessage = {
-        id: crypto.randomUUID(),
-        role: 'assistant',
-        content: '',
-        isStreaming: true,
-        toolProgress: [],
-      }
-
-      setMessages((prev) => [...prev, userMsg, assistantMsg])
-      setIsLoading(true)
-      setSuggestions([])
-
-      const controller = new AbortController()
-      abortRef.current = controller
-
-      const chatHistory = buildChatHistory()
-
-      await askAIStream(
-        { query: query.trim(), chat_history: chatHistory, include_sources: true, locale },
-        (token) => {
-          setMessages((prev) =>
-            prev.map((m) => (m.id === assistantMsg.id ? { ...m, content: m.content + token } : m))
-          )
-        },
-        (event: AIStreamDoneEvent) => {
-          setMessages((prev) =>
-            prev.map((m) =>
-              m.id === assistantMsg.id
-                ? {
-                    ...m,
-                    isStreaming: false,
-                    // 與 ChatWidget 一致：用後端後處理過的版本（guard、連結注入、剝離 SUGGESTIONS）
-                    // 覆蓋串流累積文字；agent loop 內產生的答案不會經過 token 事件，只在這裡送達
-                    ...(event.answer ? { content: event.answer } : {}),
-                    sources: event.sources,
-                    suggestedQuestions: event.suggested_questions,
-                  }
-                : m
-            )
-          )
-          if (event.suggested_questions?.length) {
-            setSuggestions(event.suggested_questions)
-          }
-        },
-        (errMsg) => {
-          setMessages((prev) =>
-            prev.map((m) =>
-              m.id === assistantMsg.id
-                ? { ...m, content: errMsg || t('serviceUnavailable'), isStreaming: false }
-                : m
-            )
-          )
-        },
-        controller.signal,
-        (progress) => {
-          // 以 invocation id 合併：同名 tool 並行時各自獨立更新
-          setMessages((prev) =>
-            prev.map((m) =>
-              m.id === assistantMsg.id
-                ? { ...m, toolProgress: upsertToolProgress(m.toolProgress, progress) }
-                : m
-            )
-          )
-        }
-      )
-
-      setIsLoading(false)
-      abortRef.current = null
-    },
-    [isLoading, buildChatHistory, locale, t]
-  )
-
-  const handleStop = useCallback(() => {
-    abortRef.current?.abort()
-    setIsLoading(false)
-    setMessages((prev) => prev.map((m) => (m.isStreaming ? { ...m, isStreaming: false } : m)))
-  }, [])
-
-  const handleSuggestionClick = useCallback(
-    (suggestion: string) => {
-      handleSend(suggestion)
-    },
-    [handleSend]
-  )
+  // 已在 /chat 時又從 widget「展開」別的 session：網址參數被外部改掉，切到該 session。
+  // 只在參數值變動時反應，且排除上面自己寫進網址的值
+  const paramSessionId = searchParams.get(SESSION_PARAM)
+  const prevParamRef = useRef(paramSessionId)
+  useEffect(() => {
+    const changed = prevParamRef.current !== paramSessionId
+    prevParamRef.current = paramSessionId
+    if (!changed || !paramSessionId) return
+    if (paramSessionId === sessionId || paramSessionId === writtenSessionRef.current) return
+    void switchSession(paramSessionId)
+  }, [paramSessionId, sessionId, switchSession])
 
   const handleSubmit = useCallback(
     (message: PromptInputMessage) => {
-      if (message.text.trim()) {
-        handleSend(message.text)
-      }
+      send(message.text)
     },
-    [handleSend]
+    [send]
+  )
+
+  const handleOpenHistory = useCallback(async () => {
+    await loadSessions()
+    setShowHistory(true)
+  }, [loadSessions])
+
+  const handleSwitchSession = useCallback(
+    async (targetId: string) => {
+      if (await switchSession(targetId)) setShowHistory(false)
+    },
+    [switchSession]
+  )
+
+  const lastAssistantIndex = messages.reduce(
+    (last, m, i) => (m.role === 'assistant' ? i : last),
+    -1
   )
 
   return (
@@ -213,44 +158,125 @@ export function ChatClient() {
             <p className="text-xs text-muted-foreground">{t('subtitle')}</p>
           </div>
         </div>
-        {isAuthenticated && quota && (
-          <div className="flex items-center gap-1.5">
-            {quota.daily_limit === -1 ? (
-              <span className="text-xs text-muted-foreground">{t('noQuotaLimit')}</span>
-            ) : (
-              <>
-                <RankBadge tier={quota.tier as RankId} size="sm" />
-                <span className="text-xs text-muted-foreground">
-                  {t('remaining', { remaining: quota.remaining, limit: quota.daily_limit })}
-                </span>
-              </>
-            )}
-          </div>
-        )}
+        <div className="flex items-center gap-3">
+          {isAuthenticated && quota && (
+            <div className="flex items-center gap-1.5">
+              {quota.daily_limit === -1 ? (
+                <span className="text-xs text-muted-foreground">{t('noQuotaLimit')}</span>
+              ) : (
+                <>
+                  <RankBadge tier={quota.tier as RankId} size="sm" />
+                  <span className="text-xs text-muted-foreground">
+                    {t('remaining', { remaining: quota.remaining, limit: quota.daily_limit })}
+                  </span>
+                </>
+              )}
+            </div>
+          )}
+          {isAuthenticated && (
+            <div className="flex items-center gap-1">
+              {showHistory ? (
+                <button
+                  type="button"
+                  onClick={() => setShowHistory(false)}
+                  className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                  aria-label={t('backToChat')}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={newChat}
+                    className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                    aria-label={t('newChat')}
+                  >
+                    <SquarePen className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleOpenHistory}
+                    className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                    aria-label={t('history')}
+                  >
+                    <History className="h-5 w-5" />
+                  </button>
+                </>
+              )}
+            </div>
+          )}
+        </div>
       </header>
 
-      {/* Messages */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-6">
-        {messages.length === 0 ? (
-          <EmptyState suggestions={suggestions} onSuggestionClick={handleSuggestionClick} />
-        ) : (
-          <div className="space-y-6">
-            {messages.map((msg) => (
-              <ChatMessageItem key={msg.id} message={msg} />
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Suggestions (when there are messages) */}
-      {messages.length > 0 && suggestions.length > 0 && !isLoading && (
-        <div className="border-t px-4 py-2">
-          <Suggestions>
-            {suggestions.map((s) => (
-              <Suggestion key={s} suggestion={s} onClick={() => handleSuggestionClick(s)} />
-            ))}
-          </Suggestions>
+      {showHistory ? (
+        /* 歷史面板 */
+        <div className="flex-1 space-y-1 overflow-y-auto px-4 py-6">
+          <p className="px-1 pb-1 text-xs text-muted-foreground">{t('recentChats')}</p>
+          {sessions.length === 0 ? (
+            <p className="py-8 text-center text-sm text-muted-foreground">{t('noHistory')}</p>
+          ) : (
+            sessions.map((session) => (
+              <button
+                key={session.id}
+                type="button"
+                onClick={() => handleSwitchSession(session.id)}
+                className={cn(
+                  'w-full rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-muted',
+                  session.id === sessionId && 'bg-muted'
+                )}
+              >
+                <p className="truncate text-sm font-medium">{session.title}</p>
+              </button>
+            ))
+          )}
+          {hasMoreSessions && (
+            <button
+              type="button"
+              onClick={loadMoreSessions}
+              disabled={isLoadingSessions}
+              className="w-full rounded-lg px-3 py-2 text-center text-xs text-muted-foreground transition-colors hover:bg-muted disabled:opacity-50"
+            >
+              {t('loadMore')}
+            </button>
+          )}
         </div>
+      ) : (
+        <>
+          {/* Messages */}
+          <div
+            ref={containerRef}
+            onScroll={handleScroll}
+            className="flex-1 overflow-y-auto px-4 py-6"
+          >
+            {messages.length === 0 ? (
+              <EmptyState suggestions={emptySuggestions} onSuggestionClick={send} />
+            ) : (
+              <div className="space-y-6">
+                {messages.map((msg, index) => (
+                  <ChatMessageItem
+                    key={msg.id}
+                    message={msg}
+                    isLast={index === lastAssistantIndex}
+                    onRegenerate={regenerate}
+                    isBusy={isBusy}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Suggestions (when there are messages) */}
+          {messages.length > 0 && suggestedQuestions.length > 0 && !isBusy && (
+            <div className="border-t px-4 py-2">
+              <Suggestions>
+                {suggestedQuestions.map((s) => (
+                  <Suggestion key={s} suggestion={s} onClick={send} />
+                ))}
+              </Suggestions>
+            </div>
+          )}
+        </>
       )}
 
       {/* Input */}
@@ -270,10 +296,10 @@ export function ChatClient() {
             <PromptInputTextarea placeholder={t('inputPlaceholderPage')} />
             <PromptInputFooter>
               <PromptInputTools />
-              {isLoading ? (
+              {isBusy ? (
                 <button
                   type="button"
-                  onClick={handleStop}
+                  onClick={stop}
                   className="rounded-lg bg-destructive px-3 py-1.5 text-xs text-destructive-foreground"
                 >
                   {t('stop')}
@@ -323,15 +349,45 @@ function EmptyState({
 // Chat Message Item
 // =============================================
 
-function ChatMessageItem({ message }: { message: ChatMessage }) {
+interface ChatMessageItemProps {
+  message: ChatMessageData
+  isLast: boolean
+  onRegenerate: () => void
+  isBusy: boolean
+}
+
+// memo：串流時只有內容變動的那一則（最後一則）重繪；onRegenerate 需為穩定參考
+const ChatMessageItem = memo(function ChatMessageItem({
+  message,
+  isLast,
+  onRegenerate,
+  isBusy,
+}: ChatMessageItemProps) {
   const t = useTranslations('Chat')
   const [copied, setCopied] = useState(false)
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false)
+  const { mutate: submitFeedback } = useSubmitFeedback()
+
+  // 錯誤 / 中斷提示依 status 顯示，不寫進 content（content 會進對話歷史）
+  const errorText = message.error ? formatChatError(t, message.error) : null
 
   const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(message.content)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }, [message.content])
+
+  // 回饋邏輯沿用 widget 的 ChatMessage：讚 = 5 分、倒讚 = 1 分，送出後不可再改
+  const handleFeedback = useCallback(
+    (score: 1 | 5) => {
+      if (!message.queryId || feedbackSubmitted) return
+      submitFeedback(
+        { query_id: message.queryId, score },
+        { onSuccess: () => setFeedbackSubmitted(true) }
+      )
+    },
+    [message.queryId, feedbackSubmitted, submitFeedback]
+  )
 
   return (
     <Message from={message.role === 'user' ? 'user' : 'assistant'}>
@@ -374,6 +430,21 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
                 </div>
               )}
 
+            {/* 錯誤（含 429 配額用盡）/ 使用者中斷 */}
+            {errorText && (
+              <p
+                className={cn(
+                  'whitespace-pre-wrap',
+                  message.content ? 'mt-2 text-xs text-muted-foreground' : 'text-sm'
+                )}
+              >
+                {errorText}
+              </p>
+            )}
+            {message.status === 'stopped' && (
+              <p className="mt-2 text-xs text-muted-foreground">{t('stopped')}</p>
+            )}
+
             {/* Sources */}
             {message.sources && message.sources.length > 0 && (
               <Sources>
@@ -401,10 +472,43 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
               >
                 {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
               </MessageAction>
+              {/* 重新生成（僅最後一則 AI 訊息；錯誤訊息不提供，後端可能沒有寫入這一輪） */}
+              {isLast && message.status !== 'error' && (
+                <MessageAction
+                  tooltip={t('regenerateAria')}
+                  label={t('regenerateAria')}
+                  onClick={onRegenerate}
+                  disabled={isBusy}
+                >
+                  <RefreshCw className="h-3.5 w-3.5" />
+                </MessageAction>
+              )}
+              {/* 回饋（需有 queryId） */}
+              {message.queryId &&
+                (feedbackSubmitted ? (
+                  <span className="text-xs text-muted-foreground">{t('thanksFeedback')}</span>
+                ) : (
+                  <>
+                    <MessageAction
+                      tooltip={t('goodAria')}
+                      label={t('goodAria')}
+                      onClick={() => handleFeedback(5)}
+                    >
+                      <ThumbsUp className="h-3.5 w-3.5" />
+                    </MessageAction>
+                    <MessageAction
+                      tooltip={t('badAria')}
+                      label={t('badAria')}
+                      onClick={() => handleFeedback(1)}
+                    >
+                      <ThumbsDown className="h-3.5 w-3.5" />
+                    </MessageAction>
+                  </>
+                ))}
             </MessageActions>
           )}
         </div>
       </div>
     </Message>
   )
-}
+})

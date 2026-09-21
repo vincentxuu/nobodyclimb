@@ -4,7 +4,6 @@ import {
   ChevronLeft,
   Expand,
   History,
-  Loader2,
   MessageCircle,
   RefreshCw,
   Send,
@@ -13,36 +12,20 @@ import {
   Trash2,
   X,
 } from 'lucide-react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import type { AIChatHistoryMessage, AiLocale, AiQuota, ChatSession } from '@/lib/api/ai'
-import {
-  askAIStream,
-  createChatSession,
-  deleteChatSession,
-  getChatMessages,
-  getChatSessions,
-  getMyQuota,
-  saveMessage,
-  useAskAI,
-} from '@/lib/api/ai'
-import { upsertToolProgress } from '@/lib/chat/tool-progress'
-import { cn } from '@/lib/utils'
-
-const ENABLE_STREAMING = process.env.NEXT_PUBLIC_ENABLE_AI_STREAMING === 'true'
-
 import { RankBadge } from '@/components/rank/RankBadge'
-import { useAuthStore } from '@/store/authStore'
-import type { ChatMessageData } from './ChatMessage'
+import { useChatAutoScroll } from '@/hooks/useChatAutoScroll'
+import { useChatSession } from '@/hooks/useChatSession'
+import { Link, useRouter } from '@/i18n/navigation'
+import type { AiLocale } from '@/lib/api/ai'
+import { pickRandomSuggestions } from '@/lib/chat/suggestions'
+import { cn } from '@/lib/utils'
 import { ChatMessage } from './ChatMessage'
 
-// 建議問題題庫放在 messages 的 Chat.suggestionPool（依語言切換），每次隨機取 3 題
-function pickRandomSuggestions(pool: string[]): string[] {
-  return [...pool].sort(() => Math.random() - 0.5).slice(0, 3)
-}
+// textarea 自動長高的上限
+const INPUT_MAX_HEIGHT = 120
 
 type ChatT = ReturnType<typeof useTranslations<'Chat'>>
 
@@ -57,98 +40,56 @@ function formatRelativeTime(timestamp: number, t: ChatT): string {
 export function ChatWidget() {
   const t = useTranslations('Chat')
   const locale = useLocale() as AiLocale
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [messages, setMessages] = useState<ChatMessageData[]>([])
   const [input, setInput] = useState('')
-  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null)
-  // ref 讓非同步 callback（onSuccess 等）永遠能讀到最新 sessionId，避免 stale closure
-  const sessionIdRef = useRef<string | null>(null)
-  const [suggestedQuestions, setSuggestedQuestions] = useState<string[]>([])
   const [displaySuggestions, setDisplaySuggestions] = useState<string[]>([])
   const [showHistory, setShowHistory] = useState(false)
-  const [sessions, setSessions] = useState<ChatSession[]>([])
   const [showConfirmClear, setShowConfirmClear] = useState(false)
-  const [quota, setQuota] = useState<AiQuota | null>(null)
-  const [isRegenerating, setIsRegenerating] = useState(false)
-  const [showLoginPrompt, setShowLoginPrompt] = useState(false)
-  const [isStreaming, setIsStreaming] = useState(false)
-  // ref 確保多次快速點擊時 guard 是同步的，避免 stale closure
-  const isRegeneratingRef = useRef(false)
-  const abortControllerRef = useRef<AbortController | null>(null)
-  const tokenQueueRef = useRef<string[]>([])
-  const drainTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
-  const updateSessionId = useCallback((id: string | null) => {
-    sessionIdRef.current = id
-    setCurrentSessionId(id)
-  }, [])
-  const { mutate: askAI, isPending } = useAskAI()
-  const authUser = useAuthStore((s) => s.user)
-  const isAuthenticated = authUser !== null
+  // 對話狀態（送出 / 停止 / 重新生成 / session / 配額）與全頁 /chat 共用同一個 hook
+  const {
+    messages,
+    suggestedQuestions,
+    sessionId,
+    sessions,
+    hasMoreSessions,
+    isLoadingSessions,
+    quota,
+    isAuthenticated,
+    isBusy,
+    showLoginPrompt,
+    dismissLoginPrompt,
+    send,
+    stop,
+    regenerate,
+    newChat,
+    clearChat,
+    loadSessions,
+    loadMoreSessions,
+    switchSession,
+  } = useChatSession({ locale, enabled: isOpen })
 
-  // 開啟時：隨機取建議問題、建立或載入 session、取得配額
+  const { containerRef, handleScroll } = useChatAutoScroll<HTMLDivElement>(
+    messages,
+    `${suggestedQuestions.length}:${isOpen}:${showHistory}`
+  )
+
+  // 開啟時：隨機取建議問題、聚焦輸入框（session 與配額由 hook 載入）
   useEffect(() => {
     if (!isOpen) return
     setDisplaySuggestions(pickRandomSuggestions(t.raw('suggestionPool') as string[]))
 
     const timer = setTimeout(() => inputRef.current?.focus(), 100)
 
-    getMyQuota()
-      .then(setQuota)
-      .catch(() => {})
-
-    if (isAuthenticated && !sessionIdRef.current) {
-      getChatSessions()
-        .then((list) => {
-          if (list.length > 0) {
-            const latest = list[0]
-            updateSessionId(latest.id)
-            getChatMessages(latest.id)
-              .then((msgs) => {
-                // 若使用者已搶先送出訊息，不覆蓋既有 state
-                setMessages((prev) =>
-                  prev.length > 0
-                    ? prev
-                    : msgs.map((m) => ({
-                        id: m.id,
-                        role: m.role,
-                        content: m.content,
-                        sources: undefined,
-                        queryId: m.query_id,
-                        suggestedQuestions: m.suggested_questions
-                          ? typeof m.suggested_questions === 'string'
-                            ? JSON.parse(m.suggested_questions)
-                            : m.suggested_questions
-                          : undefined,
-                      }))
-                )
-              })
-              .catch(() => {})
-          } else {
-            createChatSession()
-              .then((s) => updateSessionId(s.id))
-              .catch(() => {})
-          }
-        })
-        .catch(() => {
-          // 非登入用戶或 API 失敗，不持久化
-        })
-    }
-
     return () => {
       clearTimeout(timer)
-      setShowLoginPrompt(false)
+      dismissLoginPrompt()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
-
-  // 新訊息時捲動到底部
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages, isPending, isStreaming, suggestedQuestions])
 
   // Escape 鍵關閉
   useEffect(() => {
@@ -166,462 +107,49 @@ export function ChatWidget() {
     setMounted(true)
   }, [])
 
-  // 儲存訊息到後端（靜默失敗）
-  // 刻意讀 sessionIdRef.current 而非 state，確保 onSuccess 等非同步 callback
-  // 即使是舊 closure 也能拿到最新 sessionId
-  const persistMessage = useCallback(
-    async (
-      role: 'user' | 'assistant',
-      content: string,
-      extra?: { suggested_questions?: string[]; query_id?: string }
-    ) => {
-      const sid = sessionIdRef.current
-      if (!sid) return
-      try {
-        await saveMessage(sid, { role, content, ...extra })
-      } catch {
-        // 靜默失敗，不中斷對話
-      }
-    },
-    []
-  ) // 無 deps：直接讀 ref，無 stale closure 問題
+  // textarea 隨內容自動長高（上限 INPUT_MAX_HEIGHT，超過改為捲動）
+  useEffect(() => {
+    const el = inputRef.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = `${Math.min(el.scrollHeight, INPUT_MAX_HEIGHT)}px`
+  }, [input, isOpen, showHistory])
 
   const handleSubmit = useCallback(
     (query: string) => {
-      const trimmed = query.trim()
-      if (!trimmed || isPending || isStreaming) return
-
-      // 未登入：顯示引導卡片，不送出
-      if (!isAuthenticated) {
-        setShowLoginPrompt(true)
-        return
-      }
-
-      setSuggestedQuestions([]) // 清除前一輪建議
-      const userMessage: ChatMessageData = {
-        id: crypto.randomUUID(),
-        role: 'user',
-        content: trimmed,
-      }
-      setMessages((prev) => [...prev, userMessage])
-      setInput('')
-      if (inputRef.current) inputRef.current.value = ''
-
-      persistMessage('user', trimmed)
-
-      // 取最近 6 則歷史（不含本次 query），讓後端有對話記憶
-      const chatHistory: AIChatHistoryMessage[] = messages.slice(-6).map((m) => ({
-        role: m.role,
-        content: m.content,
-      }))
-
-      if (ENABLE_STREAMING) {
-        // 串流模式：用 token queue + setTimeout drain 解耦網路到達與畫面更新
-        const abortController = new AbortController()
-        abortControllerRef.current = abortController
-        const streamingMsgId = crypto.randomUUID()
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: streamingMsgId,
-            role: 'assistant',
-            content: '',
-            isStreaming: true,
-            toolProgress: [],
-          },
-        ])
-        setIsStreaming(true)
-
-        // 清除舊 queue（防止上一輪殘留）
-        tokenQueueRef.current = []
-        if (drainTimerRef.current) {
-          clearTimeout(drainTimerRef.current)
-          drainTimerRef.current = null
-        }
-
-        let isDone = false
-        let pendingDoneEvent: import('@/lib/api/ai').AIStreamDoneEvent | null = null
-
-        const finalizeDone = (doneEvent: import('@/lib/api/ai').AIStreamDoneEvent) => {
-          setIsStreaming(false)
-          abortControllerRef.current = null
-          setMessages((prev) =>
-            prev.map((m) =>
-              m.id === streamingMsgId
-                ? {
-                    ...m,
-                    isStreaming: false,
-                    // 用後端後處理版本（已注入路線/影片連結）替換串流原始累積文字
-                    ...(doneEvent.answer ? { content: doneEvent.answer } : {}),
-                    sources: doneEvent.sources,
-                    queryId: doneEvent.query_id,
-                  }
-                : m
-            )
-          )
-          setSuggestedQuestions(doneEvent.suggested_questions ?? [])
-          if (doneEvent.quota_remaining >= 0) {
-            setQuota((prev) =>
-              prev
-                ? {
-                    ...prev,
-                    remaining: doneEvent.quota_remaining,
-                    daily_used: prev.daily_limit - doneEvent.quota_remaining,
-                  }
-                : prev
-            )
-          }
-          setMessages((prev) => {
-            const msg = prev.find((m) => m.id === streamingMsgId)
-            if (msg) {
-              persistMessage('assistant', msg.content, {
-                suggested_questions: doneEvent.suggested_questions,
-                query_id: doneEvent.query_id,
-              })
-            }
-            return prev
-          })
-        }
-
-        const drainQueue = () => {
-          const token = tokenQueueRef.current.shift()
-          if (token !== undefined) {
-            setMessages((prev) =>
-              prev.map((m) => (m.id === streamingMsgId ? { ...m, content: m.content + token } : m))
-            )
-            drainTimerRef.current = setTimeout(drainQueue, 25)
-          } else {
-            drainTimerRef.current = null
-            if (isDone && pendingDoneEvent) finalizeDone(pendingDoneEvent)
-          }
-        }
-
-        askAIStream(
-          {
-            query: trimmed,
-            include_sources: true,
-            chat_history: chatHistory.length > 0 ? chatHistory : undefined,
-            locale,
-          },
-          (token) => {
-            tokenQueueRef.current.push(token)
-            if (!drainTimerRef.current) {
-              drainTimerRef.current = setTimeout(drainQueue, 0)
-            }
-          },
-          (doneEvent) => {
-            isDone = true
-            pendingDoneEvent = doneEvent
-            // queue 已空則立即 finalize，否則等 drainQueue 跑完再 finalize
-            if (!drainTimerRef.current && tokenQueueRef.current.length === 0) {
-              finalizeDone(doneEvent)
-            }
-          },
-          (errMessage) => {
-            tokenQueueRef.current = []
-            if (drainTimerRef.current) {
-              clearTimeout(drainTimerRef.current)
-              drainTimerRef.current = null
-            }
-            setIsStreaming(false)
-            abortControllerRef.current = null
-            setMessages((prev) =>
-              prev.map((m) =>
-                m.id === streamingMsgId
-                  ? {
-                      ...m,
-                      isStreaming: false,
-                      content: m.content ? `${m.content}\n\n${t('interrupted')}` : errMessage,
-                    }
-                  : m
-              )
-            )
-            console.error('Stream error:', errMessage)
-          },
-          abortController.signal,
-          (progressEvent) => {
-            // 以 invocation id 併入該則訊息的工具過程，供 ToolActivity 顯示
-            setMessages((prev) =>
-              prev.map((m) =>
-                m.id === streamingMsgId
-                  ? { ...m, toolProgress: upsertToolProgress(m.toolProgress, progressEvent) }
-                  : m
-              )
-            )
-          }
-        )
-      } else {
-        // 非串流模式（原有邏輯）
-        askAI(
-          {
-            query: trimmed,
-            include_sources: true,
-            chat_history: chatHistory.length > 0 ? chatHistory : undefined,
-            locale,
-          },
-          {
-            onSuccess: (data) => {
-              const assistantMsg: ChatMessageData = {
-                id: crypto.randomUUID(),
-                role: 'assistant',
-                content: data.answer,
-                sources: data.sources,
-                queryId: data.query_id,
-              }
-              setMessages((prev) => [...prev, assistantMsg])
-              setSuggestedQuestions(data.suggested_questions ?? [])
-              if (data.quota) setQuota(data.quota)
-              persistMessage('assistant', data.answer, {
-                suggested_questions: data.suggested_questions,
-                query_id: data.query_id,
-              })
-            },
-            onError: (error) => {
-              const axiosError = error as {
-                response?: {
-                  status?: number
-                  data?: {
-                    data?: {
-                      daily_limit?: number
-                      daily_used?: number
-                      tier?: string
-                      tier_display?: string
-                      resets_at?: string
-                    }
-                  }
-                }
-              }
-              if (axiosError?.response?.status === 429) {
-                const errData = axiosError?.response?.data?.data
-                const limit = errData?.daily_limit ?? quota?.daily_limit ?? 2
-                const used = errData?.daily_used ?? limit
-                setMessages((prev) => [
-                  ...prev,
-                  {
-                    id: crypto.randomUUID(),
-                    role: 'assistant',
-                    content: t('quotaExhausted', { used, limit }),
-                  },
-                ])
-                if (errData) {
-                  setQuota({
-                    tier: (errData.tier ?? quota?.tier ?? 'foothill') as AiQuota['tier'],
-                    tier_display: errData.tier_display ?? quota?.tier_display ?? '麓',
-                    daily_limit: limit,
-                    daily_used: used,
-                    remaining: 0,
-                    score: quota?.score ?? 0,
-                    resets_at: errData.resets_at ?? quota?.resets_at ?? '',
-                    token_limit: quota?.token_limit ?? 0,
-                    token_used: quota?.token_used ?? 0,
-                    token_remaining: quota?.token_remaining ?? 0,
-                  })
-                } else {
-                  setQuota((prev) =>
-                    prev ? { ...prev, remaining: 0, daily_used: prev.daily_limit } : prev
-                  )
-                }
-              } else {
-                setMessages((prev) => [
-                  ...prev,
-                  {
-                    id: crypto.randomUUID(),
-                    role: 'assistant',
-                    content: t('serviceUnavailable'),
-                  },
-                ])
-              }
-            },
-          }
-        )
-      }
+      if (!query.trim() || isBusy) return
+      // 未登入時 hook 只會顯示登入引導，保留輸入內容
+      if (isAuthenticated) setInput('')
+      send(query)
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [askAI, isPending, isStreaming, quota, isAuthenticated, locale, t]
+    [isBusy, isAuthenticated, send]
   )
-
-  // 重新生成最後一則 AI 回應
-  const handleRegenerate = useCallback(() => {
-    if (isPending || isRegeneratingRef.current) return
-    // 立即鎖定（同步），防止多次快速點擊
-    isRegeneratingRef.current = true
-    // 找最後一則 user 訊息
-    const lastUserMsg = [...messages].reverse().find((m) => m.role === 'user')
-    if (!lastUserMsg) {
-      isRegeneratingRef.current = false
-      return
-    }
-    // 移除最後一則 AI 訊息
-    setMessages((prev) => prev.slice(0, -1))
-    setSuggestedQuestions([])
-    setIsRegenerating(true)
-    // 重新生成時也帶上對話歷史（排除最後一則 AI，因為已被移除）
-    const regenHistory: AIChatHistoryMessage[] = messages
-      .slice(0, -1)
-      .slice(-6)
-      .map((m) => ({
-        role: m.role,
-        content: m.content,
-      }))
-    askAI(
-      {
-        query: lastUserMsg.content,
-        include_sources: true,
-        no_cache: true,
-        chat_history: regenHistory.length > 0 ? regenHistory : undefined,
-        locale,
-      },
-      {
-        onSuccess: (data) => {
-          isRegeneratingRef.current = false
-          setIsRegenerating(false)
-          const assistantMsg: ChatMessageData = {
-            id: crypto.randomUUID(),
-            role: 'assistant',
-            content: data.answer,
-            sources: data.sources,
-            queryId: data.query_id,
-          }
-          setMessages((prev) => [...prev, assistantMsg])
-          setSuggestedQuestions(data.suggested_questions ?? [])
-          if (data.quota) setQuota(data.quota)
-          persistMessage('assistant', data.answer, {
-            suggested_questions: data.suggested_questions,
-            query_id: data.query_id,
-          })
-        },
-        onError: (error) => {
-          isRegeneratingRef.current = false
-          setIsRegenerating(false)
-          const axiosError = error as {
-            response?: {
-              status?: number
-              data?: {
-                data?: {
-                  daily_limit?: number
-                  daily_used?: number
-                  tier?: string
-                  tier_display?: string
-                  resets_at?: string
-                }
-              }
-            }
-          }
-          if (axiosError?.response?.status === 429) {
-            const errData = axiosError?.response?.data?.data
-            const limit = errData?.daily_limit ?? quota?.daily_limit ?? 2
-            const used = errData?.daily_used ?? limit
-            setMessages((prev) => [
-              ...prev,
-              {
-                id: crypto.randomUUID(),
-                role: 'assistant',
-                content: t('quotaExhausted', { used, limit }),
-              },
-            ])
-            if (errData) {
-              setQuota({
-                tier: (errData.tier ?? quota?.tier ?? 'foothill') as AiQuota['tier'],
-                tier_display: errData.tier_display ?? quota?.tier_display ?? '麓',
-                daily_limit: limit,
-                daily_used: used,
-                remaining: 0,
-                score: quota?.score ?? 0,
-                resets_at: errData.resets_at ?? quota?.resets_at ?? '',
-                token_limit: quota?.token_limit ?? 0,
-                token_used: quota?.token_used ?? 0,
-                token_remaining: quota?.token_remaining ?? 0,
-              })
-            } else {
-              setQuota((prev) =>
-                prev ? { ...prev, remaining: 0, daily_used: prev.daily_limit } : prev
-              )
-            }
-          } else {
-            setMessages((prev) => [
-              ...prev,
-              {
-                id: crypto.randomUUID(),
-                role: 'assistant',
-                content: t('regenerateFailed'),
-              },
-            ])
-          }
-        },
-      }
-    )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPending, isRegenerating, messages, askAI, quota, locale, t])
 
   // 清除對話
   const handleClear = useCallback(async () => {
-    const sid = sessionIdRef.current
-    if (sid) {
-      try {
-        await deleteChatSession(sid)
-      } catch {}
-    }
-    setMessages([])
-    setSuggestedQuestions([])
-    setShowLoginPrompt(false)
     setShowConfirmClear(false)
-    updateSessionId(null)
-    // 建立新 session
-    if (isAuthenticated) {
-      try {
-        const newSession = await createChatSession()
-        updateSessionId(newSession.id)
-      } catch {}
-    }
-  }, [isAuthenticated, updateSessionId])
-
-  // 開新對話（保留舊對話在歷史）
-  const handleNewChat = useCallback(async () => {
-    setMessages([])
-    setSuggestedQuestions([])
-    setShowLoginPrompt(false)
-    updateSessionId(null)
-    try {
-      const newSession = await createChatSession()
-      updateSessionId(newSession.id)
-    } catch {}
-  }, [updateSessionId])
+    await clearChat()
+  }, [clearChat])
 
   // 開啟歷史面板
   const handleOpenHistory = useCallback(async () => {
-    try {
-      const list = await getChatSessions()
-      setSessions(list)
-    } catch {}
+    await loadSessions()
     setShowHistory(true)
-  }, [])
+  }, [loadSessions])
 
   // 切換 session
   const handleSwitchSession = useCallback(
-    async (sessionId: string) => {
-      try {
-        const msgs = await getChatMessages(sessionId)
-        updateSessionId(sessionId)
-        setMessages(
-          msgs.map((m) => ({
-            id: m.id,
-            role: m.role,
-            content: m.content,
-            sources: undefined,
-            queryId: m.query_id,
-            suggestedQuestions: m.suggested_questions
-              ? typeof m.suggested_questions === 'string'
-                ? JSON.parse(m.suggested_questions)
-                : m.suggested_questions
-              : undefined,
-          }))
-        )
-        setSuggestedQuestions([])
-        setShowHistory(false)
-      } catch {}
+    async (targetId: string) => {
+      if (await switchSession(targetId)) setShowHistory(false)
     },
-    [updateSessionId]
+    [switchSession]
   )
+
+  // 展開全頁：帶著目前 session，讓 /chat 接續同一段對話
+  const handleExpand = useCallback(() => {
+    setIsOpen(false)
+    router.push(sessionId ? `/chat?session=${encodeURIComponent(sessionId)}` : '/chat')
+  }, [router, sessionId])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
@@ -726,7 +254,7 @@ export function ChatWidget() {
                   {/* 新對話按鈕 */}
                   <button
                     type="button"
-                    onClick={handleNewChat}
+                    onClick={newChat}
                     className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                     aria-label={t('newChat')}
                   >
@@ -755,10 +283,7 @@ export function ChatWidget() {
               )}
               <button
                 type="button"
-                onClick={() => {
-                  setIsOpen(false)
-                  window.location.href = '/chat'
-                }}
+                onClick={handleExpand}
                 className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                 aria-label={t('expand')}
               >
@@ -770,7 +295,7 @@ export function ChatWidget() {
                   setIsOpen(false)
                   setShowHistory(false)
                   setShowConfirmClear(false)
-                  setShowLoginPrompt(false)
+                  dismissLoginPrompt()
                 }}
                 className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                 aria-label={t('closeWidget')}
@@ -794,7 +319,7 @@ export function ChatWidget() {
                     onClick={() => handleSwitchSession(session.id)}
                     className={cn(
                       'w-full rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-muted',
-                      session.id === currentSessionId && 'bg-muted'
+                      session.id === sessionId && 'bg-muted'
                     )}
                   >
                     <p className="text-sm font-medium truncate">{session.title}</p>
@@ -804,11 +329,25 @@ export function ChatWidget() {
                   </button>
                 ))
               )}
+              {hasMoreSessions && (
+                <button
+                  type="button"
+                  onClick={loadMoreSessions}
+                  disabled={isLoadingSessions}
+                  className="w-full rounded-lg px-3 py-2 text-center text-xs text-muted-foreground hover:bg-muted transition-colors disabled:opacity-50"
+                >
+                  {t('loadMore')}
+                </button>
+              )}
             </div>
           ) : (
             <>
               {/* 訊息區 */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              <div
+                ref={containerRef}
+                onScroll={handleScroll}
+                className="flex-1 overflow-y-auto p-4 space-y-4"
+              >
                 {messages.length === 0 ? (
                   <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
                     <p className="text-sm text-muted-foreground px-4">{t('welcome')}</p>
@@ -858,22 +397,19 @@ export function ChatWidget() {
                         key={message.id}
                         message={message}
                         isLast={index === lastAssistantIndex && message.role === 'assistant'}
-                        onRegenerate={handleRegenerate}
-                        isPending={isRegenerating || isPending}
+                        onRegenerate={regenerate}
+                        isPending={isBusy}
                       />
                     ))}
                     {/* 後續建議按鈕列 */}
-                    {!isPending && suggestedQuestions.length > 0 && (
+                    {!isBusy && suggestedQuestions.length > 0 && (
                       <div className="space-y-1.5 pl-1">
                         <p className="text-xs text-muted-foreground">{t('youMightAsk')}</p>
                         {suggestedQuestions.map((q) => (
                           <button
                             key={q}
                             type="button"
-                            onClick={() => {
-                              setSuggestedQuestions([])
-                              handleSubmit(q)
-                            }}
+                            onClick={() => handleSubmit(q)}
                             className="w-full rounded-lg border border-border px-3 py-1.5 text-left text-xs hover:bg-muted transition-colors"
                           >
                             {q}
@@ -881,14 +417,6 @@ export function ChatWidget() {
                         ))}
                       </div>
                     )}
-                    {/* 載入狀態（非串流模式；串流模式由 ChatMessage 顯示思考中與工具過程） */}
-                    {isPending && (
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        <span>{t('thinking')}</span>
-                      </div>
-                    )}
-                    <div ref={messagesEndRef} />
                   </>
                 )}
               </div>
@@ -904,32 +432,13 @@ export function ChatWidget() {
                     placeholder={t('inputPlaceholder')}
                     rows={1}
                     className="flex-1 resize-none bg-transparent text-sm outline-hidden placeholder:text-muted-foreground"
-                    style={{ maxHeight: '120px' }}
+                    style={{ maxHeight: `${INPUT_MAX_HEIGHT}px` }}
                     aria-label={t('inputAria')}
                   />
-                  {isStreaming ? (
+                  {isBusy ? (
                     <button
                       type="button"
-                      onClick={() => {
-                        abortControllerRef.current?.abort()
-                        tokenQueueRef.current = []
-                        if (drainTimerRef.current) {
-                          clearTimeout(drainTimerRef.current)
-                          drainTimerRef.current = null
-                        }
-                        setIsStreaming(false)
-                        setMessages((prev) => {
-                          const last = prev[prev.length - 1]
-                          if (last?.role === 'assistant') {
-                            return prev.map((m, i) =>
-                              i === prev.length - 1
-                                ? { ...m, isStreaming: false, content: m.content + t('stopped') }
-                                : m
-                            )
-                          }
-                          return prev
-                        })
-                      }}
+                      onClick={stop}
                       className="rounded-lg bg-muted p-1.5 text-foreground hover:bg-muted/80 transition-colors"
                       aria-label={t('stopAria')}
                     >
@@ -939,7 +448,7 @@ export function ChatWidget() {
                     <button
                       type="button"
                       onClick={() => handleSubmit(input)}
-                      disabled={!input.trim() || isPending}
+                      disabled={!input.trim()}
                       className="rounded-lg bg-primary p-1.5 text-primary-foreground disabled:opacity-50 hover:bg-primary/90 transition-colors"
                       aria-label={t('sendAria')}
                     >

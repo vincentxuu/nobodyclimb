@@ -156,6 +156,7 @@ export class AnthropicProvider implements AIProvider {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify(body),
+      signal: opts.signal,
     })
     if (!res.ok) throw new Error(`Anthropic error: ${res.status} ${await res.text()}`)
     const data = (await res.json()) as {

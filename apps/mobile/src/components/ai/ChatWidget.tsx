@@ -11,6 +11,7 @@ import {
   MessageCircle,
   RefreshCw,
   Send,
+  Square,
   SquarePen,
   Trash2,
   User,
@@ -21,6 +22,8 @@ import {
   KeyboardAvoidingView,
   Linking,
   Modal,
+  type NativeScrollEvent,
+  type NativeSyntheticEvent,
   Platform,
   Pressable,
   ScrollView,
@@ -30,13 +33,13 @@ import {
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Button, IconButton, Text } from '@/components/ui'
+import type { AIAskRequest } from '@/lib/ai/ask'
+import { AIChatError, getAIErrorMessage } from '@/lib/ai/errors'
+import type { ToolProgressItem } from '@/lib/ai/toolProgress'
 import { apiClient } from '@/lib/api'
+import { useAIAskStream } from '@/lib/hooks/useAIAskStream'
 import { useAuthStore } from '@/store/authStore'
-
-interface AIChatHistoryMessage {
-  role: 'user' | 'assistant'
-  content: string
-}
+import { ToolProgressList } from './ToolProgressList'
 
 interface AISource {
   id: string
@@ -47,14 +50,6 @@ interface AISource {
   score: number
 }
 
-interface AIAskResponse {
-  answer: string
-  sources?: AISource[]
-  query_id?: string
-  suggested_questions?: string[]
-  quota?: AiQuota
-}
-
 interface ChatMessage {
   id: string
   role: 'user' | 'assistant'
@@ -62,6 +57,14 @@ interface ChatMessage {
   sources?: AISource[]
   queryId?: string
   suggestedQuestions?: string[]
+  /** 串流中的工具執行進度 */
+  tools?: ToolProgressItem[]
+  /** streaming：生成中；stopped：使用者停止；interrupted：連線中斷（後兩者保留已產生的部分內容） */
+  status?: 'streaming' | 'stopped' | 'interrupted'
+  /** interrupted 時顯示的中斷原因 */
+  notice?: string
+  /** 前端產生的錯誤提示，後端沒有對應訊息，不可重新生成 */
+  isError?: boolean
 }
 
 interface ChatSession {
@@ -77,15 +80,11 @@ interface SavedChatMessage {
   role: 'user' | 'assistant'
   content: string
   suggested_questions?: string[] | string
+  sources?: AISource[] | null
+  /** 'stopped' = 使用者中斷生成，content 為中斷前的部分內容 */
+  status?: 'stopped' | null
   query_id?: string
   created_at: number
-}
-
-interface SaveMessageRequest {
-  role: 'user' | 'assistant'
-  content: string
-  suggested_questions?: string[]
-  query_id?: string
 }
 
 const SUGGESTION_POOL = [
@@ -126,24 +125,6 @@ function parseSuggestedQuestions(value: SavedChatMessage['suggested_questions'])
   }
 }
 
-async function askAI(query: string, chatHistory: AIChatHistoryMessage[]) {
-  const response = await apiClient.post<ApiResponse<AIAskResponse>>(
-    '/ai/ask',
-    {
-      query,
-      include_sources: true,
-      chat_history: chatHistory.length > 0 ? chatHistory : undefined,
-    },
-    { timeout: 60000 }
-  )
-
-  if (!response.data.success || !response.data.data) {
-    throw new Error(response.data.message || response.data.error || 'AI 服務暫時無法使用')
-  }
-
-  return response.data.data
-}
-
 async function getMyQuota() {
   const response = await apiClient.get<ApiResponse<AiQuota>>('/ai/quota/me')
   return response.data.data ?? null
@@ -171,8 +152,31 @@ async function deleteChatSession(sessionId: string) {
   await apiClient.delete(`/ai/sessions/${sessionId}`)
 }
 
-async function saveMessage(sessionId: string, message: SaveMessageRequest) {
-  await apiClient.post<ApiResponse<{ id: string }>>(`/ai/sessions/${sessionId}/messages`, message)
+// 只送完整的對話內容：前端產生的錯誤提示、被停止或中斷的不完整回答都不送進 chat_history
+function toChatHistory(messages: ChatMessage[]): AIAskRequest['chat_history'] {
+  const history = messages
+    .filter((message) => !message.isError && !message.status && !!message.content)
+    .slice(-6)
+    .map((message) => ({ role: message.role, content: message.content }))
+  return history.length > 0 ? history : undefined
+}
+
+// 重新生成不會新增 user 訊息，所以只開放給「user 訊息已由後端寫入」的回答；
+// 前端產生的錯誤提示（429、輸入被擋等）發生在後端寫入之前，不開放
+function canRegenerateMessage(message: ChatMessage) {
+  return message.role === 'assistant' && !message.isError && message.status !== 'streaming'
+}
+
+function toChatMessage(message: SavedChatMessage): ChatMessage {
+  return {
+    id: message.id,
+    role: message.role,
+    content: message.content,
+    sources: Array.isArray(message.sources) ? message.sources : undefined,
+    queryId: message.query_id,
+    suggestedQuestions: parseSuggestedQuestions(message.suggested_questions),
+    status: message.status === 'stopped' ? 'stopped' : undefined,
+  }
 }
 
 function SourceList({ sources }: { sources: AISource[] }) {
@@ -207,16 +211,20 @@ function SourceList({ sources }: { sources: AISource[] }) {
 
 function MessageBubble({
   message,
-  isLastAssistant,
+  canRegenerate,
   isPending,
   onRegenerate,
 }: {
   message: ChatMessage
-  isLastAssistant: boolean
+  canRegenerate: boolean
   isPending: boolean
   onRegenerate: () => void
 }) {
   const isUser = message.role === 'user'
+  const tools = message.tools ?? []
+
+  // 串流剛開始、還沒有文字也沒有工具進度時不畫空泡泡（由下方 loading 列表示）
+  if (!isUser && !message.content && tools.length === 0) return null
 
   return (
     <View style={[styles.messageRow, isUser && styles.userMessageRow]}>
@@ -224,11 +232,21 @@ function MessageBubble({
         {isUser ? <User size={14} color="#FFFFFF" /> : <Bot size={14} color={WB_COLORS[100]} />}
       </View>
       <View style={[styles.messageBubble, isUser ? styles.userBubble : styles.assistantBubble]}>
-        <Text style={isUser ? styles.userMessageText : styles.assistantMessageText}>
-          {message.content}
-        </Text>
+        {!isUser && <ToolProgressList tools={tools} />}
+        {!!message.content && (
+          <Text style={isUser ? styles.userMessageText : styles.assistantMessageText}>
+            {message.content}
+          </Text>
+        )}
+        {!isUser && message.status && message.status !== 'streaming' && (
+          <Text variant="caption" color="textMuted">
+            {message.status === 'stopped'
+              ? '已停止生成'
+              : (message.notice ?? '生成中斷，內容可能不完整')}
+          </Text>
+        )}
         {!isUser && <SourceList sources={message.sources ?? []} />}
-        {!isUser && isLastAssistant && (
+        {!isUser && canRegenerate && (
           <Pressable
             style={[styles.regenerateButton, isPending && styles.disabledButton]}
             disabled={isPending}
@@ -249,7 +267,9 @@ export function ChatWidget() {
   const router = useRouter()
   const isAuthenticated = useAuthStore((state) => !!state.user)
   const scrollRef = useRef<ScrollView>(null)
+  const isNearBottomRef = useRef(true)
   const sessionIdRef = useRef<string | null>(null)
+  const { isStreaming, run: runAskStream, stop: stopAskStream } = useAIAskStream()
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState('')
@@ -288,15 +308,7 @@ export function ChatWidget() {
             .then((savedMessages) => {
               if (cancelled) return
               updateSessionId(latest.id)
-              setMessages(
-                savedMessages.map((message) => ({
-                  id: message.id,
-                  role: message.role,
-                  content: message.content,
-                  queryId: message.query_id,
-                  suggestedQuestions: parseSuggestedQuestions(message.suggested_questions),
-                }))
-              )
+              setMessages(savedMessages.map(toChatMessage))
             })
             .catch(() => {})
         } else if (!latest && !sessionIdRef.current) {
@@ -317,9 +329,20 @@ export function ChatWidget() {
 
   useEffect(() => {
     if (!isOpen) return
+    // 串流中訊息高頻更新：延遲的 timer 會一直被重設而捲不到底，改為立即、無動畫，
+    // 且只在使用者貼近底部時跟隨，避免往上翻閱時被拉回
+    if (isStreaming) {
+      if (isNearBottomRef.current) scrollRef.current?.scrollToEnd({ animated: false })
+      return
+    }
     const timer = setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 100)
     return () => clearTimeout(timer)
-  }, [isOpen, messages])
+  }, [isOpen, isStreaming, messages])
+
+  const handleScroll = useCallback((event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent
+    isNearBottomRef.current = contentSize.height - layoutMeasurement.height - contentOffset.y < 80
+  }, [])
 
   const handleOpen = () => {
     setSuggestions(getRandomSuggestions())
@@ -332,6 +355,113 @@ export function ChatWidget() {
     updateSessionId(session.id)
     return session.id
   }, [updateSessionId])
+
+  // 送出一次問答（新問題與重新生成共用）：先放一則串流中的 assistant 訊息，再隨串流更新
+  // 帶 session_id 時 user / assistant 訊息由後端寫入，前端不另外儲存
+  const runAsk = useCallback(
+    async (request: Pick<AIAskRequest, 'query' | 'chat_history'>, isRegenerate: boolean) => {
+      const assistantId = createMessageId()
+      const patchAssistant = (patch: Partial<ChatMessage>) =>
+        setMessages((current) =>
+          current.map((message) =>
+            message.id === assistantId ? { ...message, ...patch } : message
+          )
+        )
+
+      isNearBottomRef.current = true
+      setMessages((current) => [
+        ...current,
+        { id: assistantId, role: 'assistant', content: '', status: 'streaming' },
+      ])
+
+      // 重新生成時若原本沒有 session，後端沒有可取代的訊息，改當成一般問答寫入新 session
+      const hadSession = !!sessionIdRef.current
+      let sessionId: string
+      try {
+        sessionId = await ensureSession()
+      } catch {
+        patchAssistant({
+          content: '無法建立 AI 對話，請稍後再試。',
+          status: undefined,
+          isError: true,
+        })
+        return
+      }
+
+      const outcome = await runAskStream(
+        {
+          ...request,
+          include_sources: true,
+          session_id: sessionId,
+          ...(isRegenerate && hadSession ? { regenerate: true } : {}),
+          ...(isRegenerate ? { no_cache: true } : {}),
+        },
+        ({ text, tools }) => patchAssistant({ content: text, tools })
+      )
+
+      if (outcome.status === 'done') {
+        const { result } = outcome
+        patchAssistant({
+          content: result.answer,
+          sources: result.sources,
+          queryId: result.queryId,
+          suggestedQuestions: result.suggestedQuestions,
+          status: undefined,
+        })
+        setSuggestions(result.suggestedQuestions)
+        if (result.quota) {
+          setQuota(result.quota)
+        } else if (result.quotaRemaining !== undefined) {
+          const remaining = result.quotaRemaining
+          setQuota((current) => (current ? { ...current, remaining } : current))
+        }
+        return
+      }
+
+      if (outcome.status === 'stopped') {
+        if (outcome.partialText) {
+          patchAssistant({ content: outcome.partialText, status: 'stopped' })
+        } else {
+          setMessages((current) => current.filter((message) => message.id !== assistantId))
+        }
+        // 後端在 client 中止後會退還配額，重新取一次
+        getMyQuota()
+          .then((latest) => latest && setQuota(latest))
+          .catch(() => {})
+        return
+      }
+
+      const { error } = outcome
+      if (error instanceof AIChatError) {
+        const quotaData = error.quota
+        if (quotaData) {
+          setQuota((current) =>
+            current
+              ? {
+                  ...current,
+                  daily_limit: quotaData.daily_limit,
+                  daily_used: quotaData.daily_used,
+                  remaining: Math.max(quotaData.daily_limit - quotaData.daily_used, 0),
+                }
+              : current
+          )
+        }
+        // session 已不存在：下次送出時重新建立
+        if (error.code === 'session_not_found') updateSessionId(null)
+      }
+
+      if (outcome.partialText) {
+        patchAssistant({
+          content: outcome.partialText,
+          status: 'interrupted',
+          notice: getAIErrorMessage(error),
+        })
+      } else {
+        patchAssistant({ content: getAIErrorMessage(error), status: undefined, isError: true })
+      }
+    },
+    [ensureSession, runAskStream, updateSessionId]
+  )
 
   const handleSubmit = useCallback(
     async (rawQuery: string) => {
@@ -349,10 +479,7 @@ export function ChatWidget() {
         content: query,
       }
 
-      const chatHistory = messages.slice(-6).map((message) => ({
-        role: message.role,
-        content: message.content,
-      }))
+      const chatHistory = toChatHistory(messages)
 
       setMessages((current) => [...current, userMessage])
       setInput('')
@@ -361,113 +488,42 @@ export function ChatWidget() {
       setIsSubmitting(true)
 
       try {
-        const sessionId = await ensureSession()
-        await saveMessage(sessionId, { role: 'user', content: query })
-        const data = await askAI(query, chatHistory)
-        const assistantMessage: ChatMessage = {
-          id: createMessageId(),
-          role: 'assistant',
-          content: data.answer,
-          sources: data.sources ?? [],
-          queryId: data.query_id,
-          suggestedQuestions: data.suggested_questions,
-        }
-        setMessages((current) => [...current, assistantMessage])
-        setSuggestions(data.suggested_questions ?? [])
-        if (data.quota) {
-          setQuota(data.quota)
-        }
-        await saveMessage(sessionId, {
-          role: 'assistant',
-          content: data.answer,
-          suggested_questions: data.suggested_questions,
-          query_id: data.query_id,
-        })
-      } catch (error: unknown) {
-        const axiosError = error as { response?: { status?: number; data?: ApiResponse<AiQuota> } }
-        const quotaData = axiosError.response?.data?.data
-
-        if (axiosError.response?.status === 429 && quotaData) {
-          setQuota(quotaData)
-          setMessages((current) => [
-            ...current,
-            {
-              id: createMessageId(),
-              role: 'assistant',
-              content: `今日 AI 使用配額已用盡（${quotaData.daily_used}/${quotaData.daily_limit} 次）。配額將於明日重置。`,
-            },
-          ])
-        } else {
-          const message = error instanceof Error ? error.message : '抱歉，AI 服務暫時無法使用'
-          setMessages((current) => [
-            ...current,
-            {
-              id: createMessageId(),
-              role: 'assistant',
-              content: message,
-            },
-          ])
-        }
+        await runAsk({ query, chat_history: chatHistory }, false)
       } finally {
         setIsSubmitting(false)
       }
     },
-    [ensureSession, isAuthenticated, isRegenerating, isSubmitting, messages]
+    [isAuthenticated, isRegenerating, isSubmitting, messages, runAsk]
   )
 
   const handleRegenerate = useCallback(async () => {
     if (isSubmitting || isRegenerating) return
-    const lastUserMessage = [...messages].reverse().find((message) => message.role === 'user')
+    const lastMessage = messages[messages.length - 1]
+    if (!lastMessage || !canRegenerateMessage(lastMessage)) return
+
+    const withoutLastAssistant = messages.slice(0, -1)
+    const lastUserMessage = [...withoutLastAssistant]
+      .reverse()
+      .find((message) => message.role === 'user')
     if (!lastUserMessage) return
 
-    const withoutLastAssistant =
-      messages[messages.length - 1]?.role === 'assistant' ? messages.slice(0, -1) : messages
-    const chatHistory = withoutLastAssistant.slice(-6).map((message) => ({
-      role: message.role,
-      content: message.content,
-    }))
+    // 最後一則 user 訊息就是這次的 query，不重複放進 chat_history
+    const lastUserIndex = withoutLastAssistant.lastIndexOf(lastUserMessage)
+    const chatHistory = toChatHistory(withoutLastAssistant.slice(0, lastUserIndex))
 
     setMessages(withoutLastAssistant)
     setSuggestions([])
     setIsRegenerating(true)
 
     try {
-      const sessionId = await ensureSession()
-      const data = await askAI(lastUserMessage.content, chatHistory)
-      setMessages((current) => [
-        ...current,
-        {
-          id: createMessageId(),
-          role: 'assistant',
-          content: data.answer,
-          sources: data.sources ?? [],
-          queryId: data.query_id,
-          suggestedQuestions: data.suggested_questions,
-        },
-      ])
-      setSuggestions(data.suggested_questions ?? [])
-      if (data.quota) setQuota(data.quota)
-      await saveMessage(sessionId, {
-        role: 'assistant',
-        content: data.answer,
-        suggested_questions: data.suggested_questions,
-        query_id: data.query_id,
-      })
-    } catch {
-      setMessages((current) => [
-        ...current,
-        {
-          id: createMessageId(),
-          role: 'assistant',
-          content: '抱歉，重新生成失敗，請稍後再試。',
-        },
-      ])
+      await runAsk({ query: lastUserMessage.content, chat_history: chatHistory }, true)
     } finally {
       setIsRegenerating(false)
     }
-  }, [ensureSession, isRegenerating, isSubmitting, messages])
+  }, [isRegenerating, isSubmitting, messages, runAsk])
 
   const handleClear = useCallback(async () => {
+    stopAskStream()
     const sessionId = sessionIdRef.current
     if (sessionId) {
       try {
@@ -488,9 +544,10 @@ export function ChatWidget() {
         setSessions(await getChatSessions())
       } catch {}
     }
-  }, [isAuthenticated, updateSessionId])
+  }, [isAuthenticated, stopAskStream, updateSessionId])
 
   const handleNewChat = useCallback(async () => {
+    stopAskStream()
     setMessages([])
     setSuggestions(getRandomSuggestions())
     setShowLoginPrompt(false)
@@ -502,7 +559,7 @@ export function ChatWidget() {
       updateSessionId(session.id)
       setSessions(await getChatSessions())
     } catch {}
-  }, [updateSessionId])
+  }, [stopAskStream, updateSessionId])
 
   const handleOpenHistory = useCallback(async () => {
     try {
@@ -515,22 +572,15 @@ export function ChatWidget() {
     async (sessionId: string) => {
       try {
         const savedMessages = await getChatMessages(sessionId)
+        stopAskStream()
         updateSessionId(sessionId)
-        setMessages(
-          savedMessages.map((message) => ({
-            id: message.id,
-            role: message.role,
-            content: message.content,
-            queryId: message.query_id,
-            suggestedQuestions: parseSuggestedQuestions(message.suggested_questions),
-          }))
-        )
+        setMessages(savedMessages.map(toChatMessage))
         setSuggestions([])
         setShowHistory(false)
         setShowConfirmClear(false)
       } catch {}
     },
-    [updateSessionId]
+    [stopAskStream, updateSessionId]
   )
 
   const handleLogin = () => {
@@ -539,11 +589,12 @@ export function ChatWidget() {
     router.push('/auth/login')
   }
 
-  const lastAssistantIndex = messages.reduce(
-    (last, message, index) => (message.role === 'assistant' ? index : last),
-    -1
-  )
+  const lastMessage = messages[messages.length - 1]
   const isBusy = isSubmitting || isRegenerating
+  // 串流中的回答已有文字或工具進度時，由泡泡本身呈現，不再顯示 loading 列
+  const hasStreamingOutput =
+    lastMessage?.status === 'streaming' &&
+    (!!lastMessage.content || (lastMessage.tools?.length ?? 0) > 0)
 
   return (
     <>
@@ -664,6 +715,8 @@ export function ChatWidget() {
                   ref={scrollRef}
                   style={styles.messages}
                   contentContainerStyle={styles.messagesContent}
+                  onScroll={handleScroll}
+                  scrollEventThrottle={100}
                 >
                   {messages.length === 0 ? (
                     <View style={styles.emptyState}>
@@ -682,14 +735,16 @@ export function ChatWidget() {
                       <MessageBubble
                         key={message.id}
                         message={message}
-                        isLastAssistant={index === lastAssistantIndex}
+                        canRegenerate={
+                          index === messages.length - 1 && canRegenerateMessage(message)
+                        }
                         isPending={isBusy}
                         onRegenerate={handleRegenerate}
                       />
                     ))
                   )}
 
-                  {isBusy && (
+                  {isBusy && !hasStreamingOutput && (
                     <View style={styles.loadingRow}>
                       <Loader2 size={16} color={SEMANTIC_COLORS.textMuted} />
                       <Text variant="small" color="textMuted">
@@ -745,12 +800,20 @@ export function ChatWidget() {
                     multiline
                     maxLength={500}
                   />
-                  <IconButton
-                    icon={<Send size={18} color="#FFFFFF" />}
-                    variant="primary"
-                    disabled={isBusy || !input.trim()}
-                    onPress={() => handleSubmit(input)}
-                  />
+                  {isStreaming ? (
+                    <IconButton
+                      icon={<Square size={16} color={SEMANTIC_COLORS.buttonPrimaryText} />}
+                      variant="primary"
+                      onPress={stopAskStream}
+                    />
+                  ) : (
+                    <IconButton
+                      icon={<Send size={18} color={SEMANTIC_COLORS.buttonPrimaryText} />}
+                      variant="primary"
+                      disabled={isBusy || !input.trim()}
+                      onPress={() => handleSubmit(input)}
+                    />
+                  )}
                 </View>
               </>
             )}

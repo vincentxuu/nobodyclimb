@@ -73,6 +73,14 @@ export interface ChatWithToolsOptions {
   system?: string
   /** 同 LLMCallOptions.thinking */
   thinking?: boolean
+  /**
+   * 有給就以串流模式呼叫，正文逐 token 推送（tool call 仍在結束後一次回傳）。
+   * 注意：會呼叫工具的輪次也可能先吐前導文字，呼叫端要自行決定是否作廢已推送的內容。
+   * 不支援串流 tool use 的 provider 會忽略此選項。
+   */
+  onToken?: (token: string) => Promise<void>
+  /** client 中斷時取消進行中的 LLM 呼叫 */
+  signal?: AbortSignal
 }
 
 export interface ToolSchema {

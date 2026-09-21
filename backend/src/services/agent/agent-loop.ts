@@ -106,7 +106,17 @@ export async function runAgentLoop(
   // 追蹤同一 tool 連續失敗次數
   const consecutiveFailures: Map<string, number> = new Map()
 
+  // 已推送給前端、尚未作廢的正文字數；> 0 時若該輪內容不採用就要 reset
+  let streamedChars = 0
+  const resetStreamed = async () => {
+    if (streamedChars === 0) return
+    streamedChars = 0
+    await opts.onTokenReset?.()
+  }
+
   while (turn < maxTurns) {
+    throwIfAborted(opts.signal)
+
     // Token budget 守衛（優先於 maxTurns）
     if (ctx.tracker.getTotalTokens() >= tokenBudget) {
       break
@@ -127,14 +137,33 @@ export async function runAgentLoop(
     let retryCount = 0
     let usedFallback = false
     let cbState: string | undefined
+    // 第一輪若沒呼叫工具，正文會被丟棄並強制重試，所以第一輪（有工具可用時）不串流。
+    // 之後的輪次多半就是最終答案，逐 token 推送；若結果是 tool call 或被判定不是答案，再 reset。
+    const streamThisTurn = !!opts.onToken && (turn > 1 || registry.getToolNames().length === 0)
+    const turnOnToken = streamThisTurn
+      ? createTurnTokenForwarder(opts.onToken!, (n) => {
+          streamedChars += n
+        })
+      : undefined
     try {
       const callResult = await resilientChatWithTools(
         provider,
         messages,
         toolSchemas,
         ctx.models.orchestrator,
-        config.createProvider
+        config.createProvider,
+        turnOnToken
+          ? {
+              onToken: turnOnToken.push,
+              onRetry: async () => {
+                turnOnToken.reset()
+                await resetStreamed()
+              },
+              signal: opts.signal,
+            }
+          : { signal: opts.signal }
       )
+      await turnOnToken?.flush()
       response = callResult.response
       usedProvider = callResult.provider
       usedModel = callResult.model
@@ -191,6 +220,7 @@ export async function runAgentLoop(
           usedFallback,
           reasoningChars,
         })
+        await resetStreamed()
         if (response.content) {
           messages.push({ role: 'assistant', content: response.content })
         }
@@ -223,6 +253,7 @@ export async function runAgentLoop(
           content: trimmedContent.slice(0, 80),
         })
         endSpan(turnSpan, { output: { warning, falling_through_to_final: true } })
+        await resetStreamed()
         break
       }
 
@@ -236,6 +267,10 @@ export async function runAgentLoop(
         sources: mergeSources(collectedSources),
       }
     }
+
+    // 這輪要呼叫工具：已推送的前導文字（「我來幫您搜尋…」）不是答案，作廢
+    await resetStreamed()
+    throwIfAborted(opts.signal)
 
     // 有 tool calls → 以結構化欄位寫入歷史（provider 轉成各家原生的 tool call 格式），然後逐一執行。
     // 以前寫成「[呼叫工具: xxx]」純文字，小模型會學著吐同樣的文字而不是真的呼叫工具。
@@ -292,6 +327,8 @@ export async function runAgentLoop(
       output: { tool_calls: response.toolCalls.length, tool_results: toolResults.length },
     })
   }
+
+  throwIfAborted(opts.signal)
 
   // maxTurns / tokenBudget 到達、或最後一輪 content 為空 → 做一次不帶 tools 的 final call
   const finalMessages = [...messages]
@@ -370,6 +407,60 @@ export async function runAgentLoop(
 }
 
 // ---------------------------------------------------------------------------
+// 串流與中斷輔助
+// ---------------------------------------------------------------------------
+
+export function isAbortError(err: unknown): boolean {
+  return err instanceof Error && err.name === 'AbortError'
+}
+
+function throwIfAborted(signal?: AbortSignal) {
+  if (signal?.aborted) throw new DOMException('The operation was aborted', 'AbortError')
+}
+
+/**
+ * 單輪的 token 轉送器：先扣住開頭幾個字，確認不是模型模仿的「[呼叫工具: xxx]」純文字才開始推送，
+ * 避免那種注定被丟棄的內容閃過使用者畫面。
+ */
+function createTurnTokenForwarder(
+  onToken: (token: string) => Promise<void>,
+  onForwarded: (chars: number) => void
+) {
+  const HOLD_CHARS = 8
+  let held = ''
+  let decided: 'forward' | 'suppress' | null = null
+  const forward = async (text: string) => {
+    if (!text) return
+    onForwarded(text.length)
+    await onToken(text)
+  }
+  return {
+    push: async (token: string) => {
+      if (decided === 'suppress') return
+      if (decided === 'forward') return forward(token)
+      held += token
+      const trimmed = held.trimStart()
+      if (trimmed.length < HOLD_CHARS) return
+      decided = TOOL_CALL_TEXT_PATTERN.test(trimmed) ? 'suppress' : 'forward'
+      if (decided === 'forward') await forward(held)
+      held = ''
+    },
+    /** LLM 呼叫重試前：丟掉上一次嘗試扣住的內容，重新判斷 */
+    reset: () => {
+      held = ''
+      decided = null
+    },
+    /** 內容比扣住的長度還短時，結束前補送 */
+    flush: async () => {
+      if (decided !== null || !held) return
+      decided = TOOL_CALL_TEXT_PATTERN.test(held.trimStart()) ? 'suppress' : 'forward'
+      if (decided === 'forward') await forward(held)
+      held = ''
+    },
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Resilient chatWithTools（retry + circuit breaker + fallback）
 // ---------------------------------------------------------------------------
 
@@ -387,7 +478,13 @@ async function resilientChatWithTools(
   messages: ChatMessage[],
   toolSchemas: ReturnType<ToolRegistry['toAPISchema']>,
   modelConfig: ModelConfig,
-  createProvider?: (providerName: string) => AIProvider
+  createProvider?: (providerName: string) => AIProvider,
+  streamOpts: {
+    onToken?: (token: string) => Promise<void>
+    /** 重試 / 換 fallback 前呼叫：上一次嘗試已推送的 token 要作廢 */
+    onRetry?: () => Promise<void>
+    signal?: AbortSignal
+  } = {}
 ): Promise<ResilientResult> {
   const cb = getCircuitBreaker(modelConfig.provider)
   const cbState = cb.getState()
@@ -397,6 +494,8 @@ async function resilientChatWithTools(
     maxTokens: modelConfig.maxTokens,
     temperature: modelConfig.temperature,
     thinking: modelConfig.thinking ?? false,
+    onToken: streamOpts.onToken,
+    signal: streamOpts.signal,
   }
 
   // Circuit breaker OPEN → 直接跳到 fallback
@@ -406,6 +505,7 @@ async function resilientChatWithTools(
         if (!primaryProvider.chatWithTools) {
           throw new Error(`Provider ${primaryProvider.name} does not support chatWithTools`)
         }
+        await streamOpts.onRetry?.()
         return primaryProvider.chatWithTools(messages, toolSchemas, callOpts)
       })
       cb.recordSuccess()
@@ -418,6 +518,8 @@ async function resilientChatWithTools(
         circuitBreakerState: cbState === 'HALF_OPEN' ? 'half_open' : undefined,
       }
     } catch (err) {
+      // client 中斷不是 provider 故障：不計入熔斷、不換 fallback
+      if (isAbortError(err)) throw err
       cb.recordFailure()
       // 無 fallback → 直接 throw
       if (!modelConfig.fallback || !createProvider) throw err
@@ -439,11 +541,14 @@ async function resilientChatWithTools(
         maxTokens: currentFallback.maxTokens ?? modelConfig.maxTokens,
         temperature: currentFallback.temperature ?? modelConfig.temperature,
         thinking: currentFallback.thinking ?? modelConfig.thinking ?? false,
+        onToken: streamOpts.onToken,
+        signal: streamOpts.signal,
       }
       const response = await withRetry(async () => {
         if (!fbProvider.chatWithTools) {
           throw new Error(`Fallback provider ${fbProvider.name} does not support chatWithTools`)
         }
+        await streamOpts.onRetry?.()
         return fbProvider.chatWithTools(messages, toolSchemas, fbOpts)
       })
       fbCb.recordSuccess()
@@ -454,7 +559,8 @@ async function resilientChatWithTools(
         retryCount: 0,
         usedFallback: true,
       }
-    } catch {
+    } catch (err) {
+      if (isAbortError(err)) throw err
       fbCb.recordFailure()
       currentFallback = currentFallback.fallback
     }

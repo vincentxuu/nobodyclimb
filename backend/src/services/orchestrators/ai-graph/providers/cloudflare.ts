@@ -2,6 +2,7 @@
 
 import { Env } from '../../../../types'
 import { flattenToolMessages, toOpenAIMessages } from './tool-messages'
+import { readToolUseStream } from './tool-stream'
 import {
   AIProvider,
   ChatMessage,
@@ -301,6 +302,9 @@ export class CloudflareProvider implements AIProvider {
       allMessages.unshift({ role: 'system', content: opts.system })
     }
 
+    // 舊版 schema 的模型（llama-3 等）串流時的 tool call 格式未經實測，維持非串流
+    const useStream = !!opts.onToken && !LEGACY_MESSAGE_SCHEMA_PATTERN.test(model)
+
     const response = await this.runWithToolMessageFallback(model, allMessages, (apiMessages) => ({
       messages: apiMessages,
       max_tokens: opts.maxTokens,
@@ -313,8 +317,23 @@ export class CloudflareProvider implements AIProvider {
           parameters: t.parameters,
         },
       })),
+      ...(useStream ? { stream: true } : {}),
       ...buildThinkingParams(model, opts.thinking),
     }))
+
+    // 串流模式：正文逐 token 推送，tool call 讀完後一次回傳。
+    // 模型不支援串流而回一般物件時，落到下方的非串流解析。
+    if (useStream && opts.onToken && response instanceof ReadableStream) {
+      const streamed = await readToolUseStream(response as ReadableStream<Uint8Array>, {
+        onToken: opts.onToken,
+        signal: opts.signal,
+        idPrefix: 'wai-tc',
+      })
+      if (streamed.toolCalls.length === 0) {
+        warnIfThinkingConsumedBudget(model, streamed.content ?? '', streamed.reasoning ?? '')
+      }
+      return streamed
+    }
 
     const { content, reasoning, usage, rawToolCalls } = parseWorkersAIResponse(response)
     // 有 tool calls 的輪次 content 本來就常是空的，只在「沒有 tool calls 也沒有正文」時才算預算被吃光

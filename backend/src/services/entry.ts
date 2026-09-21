@@ -88,6 +88,14 @@ import type {
 } from './orchestrators/pipeline/types'
 import { isAssistantVoiceQuestion, parseSuggestedQuestions } from './orchestrators/pipeline/utils'
 
+/** ask() 的串流控制選項 */
+export interface AskStreamOptions {
+  /** client 中斷訊號（SSE 連線關閉） */
+  signal?: AbortSignal
+  /** 作廢已推送的 token（agent 該輪改為呼叫工具、或 LLM 呼叫重試時） */
+  onTokenReset?: () => Promise<void>
+}
+
 export class QueryService {
   private embeddingService: EmbeddingService
 
@@ -106,6 +114,8 @@ export class QueryService {
   private get langfuseParent(): LangfuseParent | null {
     return this._pipelineCtx?.currentLfSpan ?? this._pipelineCtx?.langfuseTrace ?? null
   }
+
+  private lastTokenCount: number | null = null
 
   constructor(private env: Env) {
     this.embeddingService = new EmbeddingService(env)
@@ -129,7 +139,8 @@ export class QueryService {
     ctx?: { waitUntil(promise: Promise<unknown>): void },
     onToken?: (token: string) => Promise<void>,
     extraTrace?: Record<string, unknown>,
-    onProgress?: (event: ProgressEvent) => Promise<void>
+    onProgress?: (event: ProgressEvent) => Promise<void>,
+    streamOpts?: AskStreamOptions
   ): Promise<AIAskResponse> {
     const streamingMode = !!onToken
     const { query, chat_history, no_cache = false } = request
@@ -285,6 +296,12 @@ export class QueryService {
     })
 
     const controller = new AbortController()
+    // client 中斷（SSE 連線關閉）→ 連動中止 pipeline / agent
+    const clientSignal = streamOpts?.signal
+    if (clientSignal) {
+      if (clientSignal.aborted) controller.abort()
+      else clientSignal.addEventListener('abort', () => controller.abort(), { once: true })
+    }
 
     // eval_mode_override 覆寫 ai_mode（eval A/B 測試用，需 X-Eval-Mode header）
     if (
@@ -416,7 +433,9 @@ export class QueryService {
               waitUntilCtx: ctx,
               stream: streamingMode,
               onToken,
+              onTokenReset: streamOpts?.onTokenReset,
               onProgress,
+              signal: controller.signal,
             }),
             pipelineCfg.pipeline_timeout_ms,
             'pipeline'
@@ -478,7 +497,9 @@ export class QueryService {
         } catch (reactErr) {
           if (
             reactErr instanceof TimeoutError ||
-            (reactErr as any)?.code === 'CIRCUIT_BREAKER_OPEN'
+            (reactErr as any)?.code === 'CIRCUIT_BREAKER_OPEN' ||
+            // client 已中斷：不要退回 pipeline 再跑一次
+            clientSignal?.aborted
           ) {
             throw reactErr
           }
@@ -528,22 +549,33 @@ export class QueryService {
     write: (data: string) => Promise<void>,
     ctx?: { waitUntil(promise: Promise<unknown>): void },
     extraTrace?: Record<string, unknown>,
-    onProgress?: (event: ProgressEvent) => Promise<void>
+    onProgress?: (event: ProgressEvent) => Promise<void>,
+    signal?: AbortSignal
   ): Promise<AIAskResponse> {
     const onToken = async (token: string) => {
+      // client 已中斷：丟 AbortError 打斷 provider 的串流讀取迴圈，不再繼續生成
+      if (signal?.aborted) throw new DOMException('The operation was aborted', 'AbortError')
       const text = request.locale === 'ja' ? token : toTraditionalChinese(token)
       await write(JSON.stringify({ type: 'token', token: text }))
     }
+    const onTokenReset = async () => {
+      await write(JSON.stringify({ type: 'token_reset' }))
+    }
     try {
-      return await this.ask(request, userId, ctx, onToken, extraTrace, onProgress)
+      return await this.ask(request, userId, ctx, onToken, extraTrace, onProgress, {
+        signal,
+        onTokenReset,
+      })
     } catch (error) {
-      const message =
+      // client 中斷時連線已關，不需要（也無法）再寫 error 事件
+      if (signal?.aborted) throw error
+      const [code, message] =
         error instanceof TimeoutError
-          ? '查詢處理超時，請稍後再試'
+          ? (['timeout', '查詢處理超時，請稍後再試'] as const)
           : (error as any)?.code === 'CIRCUIT_BREAKER_OPEN'
-            ? 'AI 服務暫時不可用，請稍後再試'
-            : '抱歉，AI 服務暫時無法使用，請稍後再試。'
-      await write(JSON.stringify({ type: 'error', message }))
+            ? (['circuit_open', 'AI 服務暫時不可用，請稍後再試'] as const)
+            : (['internal', '抱歉，AI 服務暫時無法使用，請稍後再試。'] as const)
+      await write(JSON.stringify({ type: 'error', code, message }))
       throw error
     }
   }
@@ -866,7 +898,13 @@ export class QueryService {
     hydeTriggered?: boolean
     pipelineTrace?: string
   }) {
+    if (!params.cacheHit) this.lastTokenCount = params.tokenCount
     return logQuery(this.env.DB, params)
+  }
+
+  /** 本次 ask() 實際消耗的 token 數（尚未寫過 query log 時為 null），供路由層修正配額預扣量 */
+  getLastTokenCount(): number | null {
+    return this.lastTokenCount
   }
   flagResponse(
     queryLogId: string,

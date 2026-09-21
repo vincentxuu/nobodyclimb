@@ -1,4 +1,5 @@
 import { toOpenAIMessages } from './tool-messages'
+import { readToolUseStream } from './tool-stream'
 import {
   AIProvider,
   ChatMessage,
@@ -173,13 +174,24 @@ export async function openAIChatWithTools(
     body.tool_choice = 'auto'
   }
 
+  if (opts.onToken) {
+    body.stream = true
+    body.stream_options = { include_usage: true }
+  }
+
   const authHeader = authScheme === 'token' ? `token ${apiKey}` : `Bearer ${apiKey}`
   const res = await fetch(`${baseUrl}/chat/completions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: authHeader },
     body: JSON.stringify(body),
+    signal: opts.signal,
   })
   if (!res.ok) throw new Error(`OpenAI-compatible error: ${res.status} ${await res.text()}`)
+
+  // 串流模式：正文逐 token 推送，tool call 讀完後一次回傳
+  if (opts.onToken && res.body) {
+    return readToolUseStream(res.body, { onToken: opts.onToken, signal: opts.signal })
+  }
 
   const data = (await res.json()) as {
     choices: Array<{

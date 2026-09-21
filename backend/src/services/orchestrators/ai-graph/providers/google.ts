@@ -163,6 +163,7 @@ export class GoogleProvider implements AIProvider {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
+      signal: opts.signal,
     })
     if (!res.ok) throw new Error(`Google AI error: ${res.status} ${await res.text()}`)
 
