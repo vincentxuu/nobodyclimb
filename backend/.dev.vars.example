@@ -1,0 +1,47 @@
+# 本機開發用環境變數範例
+# 使用方式：cp .dev.vars.example .dev.vars，再填入自己的值
+# .dev.vars 已被 .gitignore 忽略，絕不可 commit 真實密鑰
+# 線上環境請改用 `wrangler secret put <NAME> --env <preview|production>`
+
+# ===== 必填 =====
+
+# JWT 簽章密鑰（本機隨意填一組足夠長的隨機字串）
+JWT_SECRET=change-me-to-a-long-random-string
+
+# 中央氣象署 API 授權碼（天氣功能用）
+CWA_API_KEY=
+
+# Google OAuth Client ID（Google 登入用）
+GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
+
+# ===== 選填：vars（本機 wrangler.toml 未涵蓋時才需要）=====
+
+# CORS_ORIGIN=http://localhost:3000
+# JWT_ISSUER=nobodyclimb-api
+# R2_PUBLIC_URL=
+# AI_GATEWAY_SLUG=
+# ANALYTICS_DATASET=
+
+# ===== 選填：Analytics Engine 查詢 =====
+
+# CLOUDFLARE_ACCOUNT_ID=
+# CLOUDFLARE_API_TOKEN=
+
+# ===== 選填：AI Provider =====
+
+# LLM provider：cloudflare | openai | anthropic | google | github，預設 cloudflare
+# LLM_PROVIDER=cloudflare
+# Embedding provider：cloudflare | openai | google，預設同 LLM_PROVIDER
+# 注意：更換 EMBEDDING_PROVIDER 需重新索引 Vectorize 內所有文件
+# EMBEDDING_PROVIDER=cloudflare
+# OPENAI_API_KEY=
+# ANTHROPIC_API_KEY=
+# GOOGLE_AI_API_KEY=
+# GITHUB_TOKEN=
+
+# ===== 選填：Langfuse Observability =====
+
+# LANGFUSE_PUBLIC_KEY=
+# LANGFUSE_SECRET_KEY=
+# LANGFUSE_BASEURL 預設 https://cloud.langfuse.com，self-hosted 才需設定
+# LANGFUSE_BASEURL=

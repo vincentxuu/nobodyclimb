@@ -1,3 +1,5 @@
+> ⚠️ 過時：本專案 backend 為 Hono + Cloudflare D1，請以 backend/src 與 project-rules 為準
+
 # Django REST Framework 部署指南
 
 > 將 NobodyClimb 後端 API 部署到生產環境

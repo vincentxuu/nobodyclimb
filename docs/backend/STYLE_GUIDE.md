@@ -1,3 +1,5 @@
+> ⚠️ 過時：本專案 backend 為 Hono + Cloudflare D1，請以 backend/src 與 project-rules 為準
+
 # 文件風格指南 (Documentation Style Guide)
 
 **Feature**: Django REST Framework Backend Documentation

@@ -25,7 +25,7 @@
 
 NobodyClimb is a rock climbing community platform using **pnpm workspaces + Turborepo** monorepo architecture:
 - **Web Frontend**: Next.js 15 + React 19 application deployed on Cloudflare Workers (in `apps/web/`)
-- **Mobile App**: React Native (Expo) + Tamagui cross-platform app (in `apps/mobile/`)
+- **Mobile App**: React Native (Expo) cross-platform app（`app/` 部分頁面用 Tamagui，`src/components/ui/` 以 RN StyleSheet 為主） (in `apps/mobile/`)
 - **Backend API**: Hono framework on Cloudflare Workers with D1 database (in `backend/`)
 - **Shared Packages**: Cross-project shared types, schemas, utils, hooks, etc. (in `packages/`)
 
@@ -76,7 +76,7 @@ pnpm build:cf            # Build web for Cloudflare
 pnpm lint                # Lint all packages
 pnpm test                # Run all tests
 pnpm typecheck           # TypeScript check all packages
-pnpm format              # Format all code with Prettier
+pnpm format              # Format all code with Biome
 pnpm format:check        # Check code formatting
 ```
 
@@ -161,7 +161,7 @@ nobodyclimb/
 │       │   │   └── ...             # Other domain components
 │       │   └── lib/                # Hooks, API, utilities
 │       ├── assets/                 # App assets
-│       └── tamagui.config.ts       # Tamagui UI config
+│       └── tamagui.config.ts       # Tamagui config（僅部分頁面使用）
 │
 ├── backend/                        # Cloudflare Workers API (@nobodyclimb/api)
 │   ├── src/
@@ -362,9 +362,9 @@ commit 時必須依序執行：
 
 ### 品質檢查指令
 
-- `pnpm run lint` — ESLint（turbo 跑所有 packages）
+- `pnpm run lint` — Biome（`biome check .`）
 - `pnpm run typecheck` — TypeScript 類型檢查（turbo 跑所有 packages）
-- `pnpm run format` — Prettier 自動修復格式問題
+- `pnpm run format` — Biome（`biome format --write .`）自動修復格式問題
 
 ## Push 流程
 
@@ -376,26 +376,8 @@ commit 時必須依序執行：
 
 - This is a **pnpm workspaces + Turborepo** monorepo
 - Web frontend uses React 19 and Next.js 15 (requires Node.js 18+)
-- Mobile app uses React Native 0.81 + Expo 54 + Tamagui 2.0
+- Mobile app uses React Native 0.81 + Expo 54（Tamagui 2.0-rc 僅用於部分頁面，UI 元件以 RN StyleSheet 為主）
 - All code is in Traditional Chinese (comments, docs)
 - Currently using static JSON files in `apps/web/public/data/` for video data (KV integration planned)
 - Backend requires Cloudflare account and proper bindings setup
 - JWT secret must be configured via `wrangler secret put JWT_SECRET` for backend
-
-## StartMoving - Idea to Product Framework
-
-StartMoving is a structured framework for turning ideas into products. Use these slash commands:
-
-| Command | Purpose |
-|---------|---------|
-| `/startmoving.new` | Create a new project |
-| `/startmoving.define` | Define your idea (interactive Q&A) |
-| `/startmoving.validate` | Generate validation plan |
-| `/startmoving.plan` | Plan your MVP |
-| `/startmoving.landing` | Generate landing page |
-| `/startmoving.status` | View project status |
-| `/startmoving.list` | List all projects |
-
-**Workflow**: `/startmoving.new` → `/startmoving.define` → `/startmoving.validate` → `/startmoving.plan` → `/startmoving.landing`
-
-For detailed instructions, see `.startmoving/AGENTS.md`.
