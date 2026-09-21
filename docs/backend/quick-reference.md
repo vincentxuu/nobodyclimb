@@ -1,3 +1,5 @@
+> ⚠️ 過時：本專案 backend 為 Hono + Cloudflare D1，請以 backend/src 與 project-rules 為準
+
 # Django REST Framework 快速參考卡
 
 > 常用指令和程式碼範例速查表
