@@ -504,6 +504,8 @@ export class QueryService {
             throw reactErr
           }
           console.error('[query] Agent failed, falling back to baseline:', reactErr)
+          // agent 可能已推送半句正文（串流到一半 provider 出錯且無 fallback），pipeline 的回答不能接在後面
+          await streamOpts?.onTokenReset?.()
           pipelineCtx.pipelineConfig.rag_strategy = 'baseline'
           pipelineCtx.pipelineConfig.ai_mode = 'pipeline'
           pipelineCtx.trace.agent_fallback = {

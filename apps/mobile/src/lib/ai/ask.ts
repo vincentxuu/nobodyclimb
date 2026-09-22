@@ -9,6 +9,7 @@ import type { AiQuota, ApiResponse } from '@nobodyclimb/types'
 import { apiClient } from '@/lib/api'
 import { tokenStorage } from '@/lib/tokenStorage'
 import { AIChatError, createErrorFromResponse } from './errors'
+import { loadExpoFetch } from './expoFetch'
 import {
   type AIStreamDoneEvent,
   type AIStreamProgressEvent,
@@ -59,6 +60,17 @@ interface AIAskResponse {
   quota?: AiQuota
 }
 
+/**
+ * 串流請求在「送出之前」就失敗（expo/fetch 模組載入失敗、原生模組不可用）。
+ * 只有這種情況能確定請求沒到後端，才可安全地退回一次性請求而不重複扣配額。
+ */
+export class AIStreamUnavailableError extends Error {
+  constructor(cause: unknown) {
+    super('AI 串流不可用', { cause })
+    this.name = 'AIStreamUnavailableError'
+  }
+}
+
 function toResult(event: AIStreamDoneEvent, streamedText: string): AIAskResult {
   return {
     // done.answer 是後處理過的最終版，覆蓋串流累積的文字
@@ -72,7 +84,8 @@ function toResult(event: AIStreamDoneEvent, streamedText: string): AIAskResult {
 
 /**
  * SSE 串流問答。
- * - 建立連線階段失敗：丟出原始錯誤（非 AIChatError），由呼叫端決定是否 fallback
+ * - 送出前失敗（expo/fetch 模組不可用）：丟出 AIStreamUnavailableError，請求確定未送達
+ * - fetch 本身被拒（網路錯誤）：丟出 AIChatError('interrupted')；請求可能已送達後端，不可重送
  * - HTTP 錯誤 / SSE error 事件 / 串流中途斷線：丟出 AIChatError
  * - 使用者中止：丟出的錯誤不具特定型別（expo/fetch 不是 AbortError），呼叫端以 signal.aborted 判斷
  */
@@ -81,9 +94,14 @@ export async function askAIStream(
   handlers: AIAskStreamHandlers,
   signal: AbortSignal
 ): Promise<AIAskResult> {
-  // 延後載入：expo/fetch 依賴原生模組，模組不可用（舊 dev client、jest）時只會讓這次串流
-  // 在建立連線階段失敗並退回一次性請求，不會讓整個 ChatWidget 載入失敗
-  const { fetch: expoFetch } = await import('expo/fetch')
+  // 模組不可用（舊 dev client、jest）時在送出前失敗並退回一次性請求
+  let expoFetch: Awaited<ReturnType<typeof loadExpoFetch>>['fetch']
+  try {
+    expoFetch = (await loadExpoFetch()).fetch
+  } catch (error) {
+    throw new AIStreamUnavailableError(error)
+  }
+
   const token = tokenStorage.getAccessToken()
   const response = await expoFetch(`${apiClient.defaults.baseURL}/ai/ask?stream=true`, {
     method: 'POST',
@@ -94,6 +112,10 @@ export async function askAIStream(
     },
     body: JSON.stringify(request),
     signal,
+  }).catch((error: unknown) => {
+    if (signal.aborted) throw error
+    // 後端在回 header 前就已扣配額，網路錯誤不代表請求沒送出，交由使用者自行重試
+    throw new AIChatError('interrupted')
   })
 
   if (!response.ok) {
@@ -177,42 +199,22 @@ export async function askAIOnce(request: AIAskRequest, signal: AbortSignal): Pro
 }
 
 /**
- * 串流優先；僅在「建立連線階段失敗且非 4xx」時退回一次性請求。
- * 例外：401 也退回一次性請求，讓 axios interceptor 走既有的 token refresh 流程
- * （此時後端尚未扣配額、也未寫入訊息，不會重複）。
+ * 串流優先；只在「確定請求沒送達後端」時才退回一次性請求，避免重複扣配額、多跑一次 LLM：
+ * - 送出前失敗（AIStreamUnavailableError：expo/fetch 模組不可用）
+ * - 401：後端在驗證階段就拒絕，退回 axios 讓 interceptor 走既有的 token refresh 流程
+ * 其餘（網路錯誤、5xx、SSE error、中途斷線）一律原樣丟出，由使用者自行重試。
  */
 export async function askAI(
   request: AIAskRequest,
   handlers: AIAskStreamHandlers,
   signal: AbortSignal
 ): Promise<AIAskResult> {
-  let streamStarted = false
   try {
-    return await askAIStream(
-      request,
-      {
-        onToken: (token) => {
-          streamStarted = true
-          handlers.onToken(token)
-        },
-        onTokenReset: handlers.onTokenReset,
-        onProgress: (event) => {
-          streamStarted = true
-          handlers.onProgress(event)
-        },
-      },
-      signal
-    )
+    return await askAIStream(request, handlers, signal)
   } catch (error) {
-    if (signal.aborted || streamStarted) throw error
-
-    if (error instanceof AIChatError) {
-      const status = error.status
-      // 沒有 status = 串流已開始後的錯誤（SSE error 事件 / 中途斷線），不重送
-      if (status === undefined) throw error
-      if (status >= 400 && status < 500 && status !== 401) throw error
-    }
-
-    return askAIOnce(request, signal)
+    if (signal.aborted) throw error
+    if (error instanceof AIStreamUnavailableError) return askAIOnce(request, signal)
+    if (error instanceof AIChatError && error.status === 401) return askAIOnce(request, signal)
+    throw error
   }
 }

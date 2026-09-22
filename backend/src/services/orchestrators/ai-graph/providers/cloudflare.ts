@@ -2,7 +2,7 @@
 
 import { Env } from '../../../../types'
 import { flattenToolMessages, toOpenAIMessages } from './tool-messages'
-import { readToolUseStream } from './tool-stream'
+import { isAbortError, readToolUseStream } from './tool-stream'
 import {
   AIProvider,
   ChatMessage,
@@ -207,6 +207,13 @@ export class CloudflareProvider implements AIProvider {
     )) as ReadableStream<Uint8Array>
 
     const reader = stream.getReader()
+    // Workers AI 的 AI.run 不吃 signal：中斷時取消 reader 讓 read() 立刻結束
+    const onAbort = () => {
+      reader.cancel().catch(() => {})
+    }
+    // AI.run 等待期間就中斷的話，signal 已是 aborted，之後不會再有 abort 事件
+    if (opts.signal?.aborted) onAbort()
+    else opts.signal?.addEventListener('abort', onAbort, { once: true })
     const decoder = new TextDecoder()
     let fullText = ''
     // 推理模型的思考 delta 只收集不推送，避免整段推理串流到使用者畫面
@@ -255,15 +262,19 @@ export class CloudflareProvider implements AIProvider {
                 slideBuffer = slideBuffer.slice(safeLen)
               }
             }
-          } catch {
+          } catch (err) {
+            // 呼叫端用 onToken 丟 AbortError 中止生成，不能跟壞掉的 SSE 行一起吞掉
+            if (isAbortError(err)) throw err
             /* 忽略格式錯誤的 SSE 行 */
           }
         }
       }
       if (!suggestionsStarted && slideBuffer) await opts.onToken(slideBuffer)
     } finally {
+      opts.signal?.removeEventListener('abort', onAbort)
       reader.releaseLock()
     }
+    if (opts.signal?.aborted) throw new DOMException('The operation was aborted', 'AbortError')
 
     warnIfThinkingConsumedBudget(model, fullText, reasoningText)
     return { content: fullText, ...(reasoningText ? { reasoning: reasoningText } : {}) }

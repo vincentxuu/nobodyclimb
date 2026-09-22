@@ -96,3 +96,57 @@ AI chat 目前有幾個直接影響體感與正確性的缺口：
 - [x] 9.2a scratch worker 實測：Workers AI `stream: true` + tools 的回傳格式；client 斷線時需預先 `waitUntil` 收尾才會執行
 - [ ] 9.2b 本機起 backend + web 實測：串流、停止退配額、重新整理後對話與來源仍在、en / ja 錯誤訊息（未執行：全新本機 D1 的 migration 鏈在 `0033` 失敗，與本次變更無關）
 - [ ] 9.3 部署到 preview 後驗證：`migrations/0081` 已套用、agent 模式逐字串流與 `token_reset`、停止後配額與 `status='stopped'` 訊息
+
+## Code review 後的修正（2026-09-22）
+
+三個乾淨 context 的 reviewer（backend / web / mobile）共找到 1 High、14 Medium、約 20 Low。High 與 Medium 全部修掉，Low 列在下方待辦。
+
+### 已修
+
+- [x] R-H1 **停止在 `streamChat` 路徑無效**：五個 provider 的 `streamChat` 都把 `onToken` 包在吞掉所有例外的 catch 裡，AbortError 傳不出去；pipeline 模式、agent 退回 pipeline、agent 收尾 call 三條路徑按停止都會跑完並照扣。修法：catch 只吞非 AbortError；`LLMCallOptions` 新增 `signal`，fetch 傳入、Workers AI 以 `reader.cancel()` 處理；agent 收尾與 `llm-generation` 節點傳 signal。另發現 `AI.run` 等待期間中斷時 signal 已 aborted、事件不會再來，需先檢查 `aborted`
+- [x] R-M1 **孤兒 / 重複 user 訊息**（backend；同時解掉 mobile 的 fallback + axios 重試最多處理 5 次的問題）：user 訊息不再在作答前寫入，改成回合結束時與 assistant 訊息同一個 `db.batch` 落地（`saveTurn`）。失敗、無正文中斷的回合不留任何訊息
+- [x] R-M2 agent 串流到一半 provider 失敗且無 fallback → entry.ts 退回 pipeline 前送 `token_reset`
+- [x] R-M3 中斷收尾搬進 `stream.onAbort` 當下執行（不等 `ask()` unwind），以 `settled` 旗標與正常完成 / 失敗路徑互斥；stopped 內容存檔前過 `checkOutput`
+- [x] R-M4 tool call delta 沒有 `index` 時依 id / name 判斷是否為新的 call，不再互相覆蓋
+- [x] R-M5 補測試：`stream-chat-abort.test.ts`（三個 provider）、`routes/__tests__/ai-ask-stream.test.ts`（正常 / 失敗 / 無正文中斷 / 有正文中斷四條路徑的配額與持久化互斥）、`repositories/__tests__/chat.test.ts`（`saveTurn` 各組合）、parser 邊界
+- [x] R-M6 web widget 按新對話 / 清除後重開不再載回最近 session（`userResetRef`）
+- [x] R-M7 web widget 串流中停用「展開」
+- [x] R-M8 web 重新生成按鈕改用 hook 匯出的 `canRegenerate`，與 `getRegenerateTarget` 一致
+- [x] R-M9 web `done` 沒帶 `answer` 時保留佇列剩餘的字
+- [x] R-M10 mobile fallback 縮到「確定沒送出」（`expo/fetch` 不可用、401）
+- [x] R-M11 mobile 重新生成失敗時還原舊回答
+- [x] R-M12 mobile 串流結束不強制拉回底部
+- [x] R-M13 mobile `MessageBubble` memo + 穩定 callback
+
+### 未修（Low，另開任務）
+
+backend
+- [ ] 快取命中時 `lastTokenCount` 為 null → 以預估值計，舊版是查原始 token 數；決定要記 0 或維持預估
+- [ ] 被中斷的請求沒有 `ai_query_logs` 紀錄；「無正文就中斷」可反覆免費觸發工具 + LLM（僅受 IP 速率限制），建議補 `query_type='client_aborted'` log
+- [ ] `stream_options.include_usage` 只對 Workers AI 實測，GitHub Models 未驗證
+- [ ] `addTokenUsage` 之後 `getUserRank` 失敗現已改為不退款（`.catch(() => null)`），但非串流路徑同樣情況仍會 refund + addTokenUsage 都執行
+- [ ] 迴圈內答案在 output guard / 連結注入前就推給使用者（正常完成由 `done.answer` 覆蓋，只影響短暫顯示）
+- [ ] `schema.sql` 的 `chat_sessions.user_id INTEGER` 與 `users.id TEXT` 不一致（照抄 0048，SQLite affinity 下可運作）
+- [ ] 同一 session 並發 regenerate + 新問題時順序錯置（UI 有擋）
+
+web
+- [ ] `?session=<id>` 回 404 時靜默從空白開始，壞參數留在網址上
+- [ ] `ChatWidget.tsx` 殘留無效的 `eslint-disable`（repo 用 Biome）；切換語系時建議問題不重抽
+- [ ] `useChatSession` 的 sessions / quota 沒走 TanStack Query，widget 與 `/chat` 同時掛載時狀態不同步（延續舊做法）
+- [ ] `chat/page.tsx` metadata 寫死中文（既有）
+- [ ] 缺測試：串流中切換 session、載入中搶先送出、卸載後 callback、非串流路徑、`useChatAutoScroll`
+- [ ] `askAIStream` 的 `try/catch` 同時包住 callback 呼叫，callback 丟例外會被當成壞行吞掉；串流結尾 buffer 殘餘與 `decoder` flush 未處理
+- [ ] 串流走原生 fetch 不經 axios 401 refresh，token 過期顯示成通用錯誤
+- [ ] `createChatSession` 進行中按停止 / 新對話會留下空 session；429 擋在第一問也會
+- [ ] `loadSessionsPage` / `getMyQuota` 沒有登出保護；widget 配額顯示未判斷 `isAuthenticated`
+- [ ] 全頁未登入時點建議問題沒有反應
+- [ ] `handleOpenHistory` 先 await 再切面板，網路慢時沒有回饋
+- [ ] `done` 之後再來的事件仍會套用到已完成的訊息（後端目前不會這樣送）
+
+mobile
+- [ ] `ask.ts` 的 `!response.body` 分支帶 `status: 200`，若命中會誤判為可 fallback；建議刪掉
+- [ ] 4xx 後孤兒 user 訊息仍會進 `chat_history`，形成連續兩則 user（Anthropic / Google 對此敏感）
+- [x] 串流中按「清除」：後端 abort 收尾可能把 stopped 訊息寫進已刪除的 session → 已在寫入前加 session 存在檢查
+- [ ] `canRegenerateMessage` 註解與實際不符：SSE error / 思考階段斷線的錯誤泡泡其實可安全重新生成
+- [ ] `askAI` 的 fallback 分支與 hook 已補部分測試，仍缺 hook 層測試
+

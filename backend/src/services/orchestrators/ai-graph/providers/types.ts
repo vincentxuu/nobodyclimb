@@ -35,6 +35,8 @@ export interface LLMCallOptions {
    * undefined = 沿用模型預設（GLM-4.7-flash 預設開啟）；false = 明確關閉，避免思考吃光 max_tokens。
    */
   thinking?: boolean
+  /** client 中斷時取消進行中的呼叫（streamChat 會停止讀取並丟 AbortError） */
+  signal?: AbortSignal
 }
 
 export interface LLMResponse {

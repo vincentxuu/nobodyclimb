@@ -1,4 +1,5 @@
 import { toAnthropicMessages } from './tool-messages'
+import { isAbortError } from './tool-stream'
 import {
   AIProvider,
   ChatMessage,
@@ -74,6 +75,7 @@ export class AnthropicProvider implements AIProvider {
     const nonSystem = toAnthropicMessages(messages)
     const res = await fetch(`${this.baseUrl}/messages`, {
       method: 'POST',
+      signal: opts.signal,
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': this.apiKey,
@@ -109,7 +111,9 @@ export class AnthropicProvider implements AIProvider {
             fullContent += ev.delta.text
             await opts.onToken(ev.delta.text)
           }
-        } catch {
+        } catch (err) {
+          // 呼叫端用 onToken 丟 AbortError 中止生成，不能跟壞掉的 SSE 行一起吞掉
+          if (isAbortError(err)) throw err
           /* ignore */
         }
       }

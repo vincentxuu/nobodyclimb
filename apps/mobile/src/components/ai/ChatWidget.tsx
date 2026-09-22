@@ -17,7 +17,7 @@ import {
   User,
   X,
 } from 'lucide-react-native'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import {
   KeyboardAvoidingView,
   Linking,
@@ -209,7 +209,9 @@ function SourceList({ sources }: { sources: AISource[] }) {
   )
 }
 
-function MessageBubble({
+// memo：串流中只有最後一則訊息物件會變，其餘訊息 props 全部維持同參考、不重繪
+// （patchAssistant 只替換該則物件；onRegenerate 只傳給可重新生成的最後一則）
+const MessageBubble = memo(function MessageBubble({
   message,
   canRegenerate,
   isPending,
@@ -218,7 +220,7 @@ function MessageBubble({
   message: ChatMessage
   canRegenerate: boolean
   isPending: boolean
-  onRegenerate: () => void
+  onRegenerate?: () => void
 }) {
   const isUser = message.role === 'user'
   const tools = message.tools ?? []
@@ -261,7 +263,7 @@ function MessageBubble({
       </View>
     </View>
   )
-}
+})
 
 export function ChatWidget() {
   const router = useRouter()
@@ -272,6 +274,9 @@ export function ChatWidget() {
   const { isStreaming, run: runAskStream, stop: stopAskStream } = useAIAskStream()
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])
+  // 讓 handleRegenerate 不必依賴 messages，維持穩定參考給 memo 的 MessageBubble
+  const messagesRef = useRef(messages)
+  messagesRef.current = messages
   const [input, setInput] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isRegenerating, setIsRegenerating] = useState(false)
@@ -308,6 +313,7 @@ export function ChatWidget() {
             .then((savedMessages) => {
               if (cancelled) return
               updateSessionId(latest.id)
+              isNearBottomRef.current = true
               setMessages(savedMessages.map(toChatMessage))
             })
             .catch(() => {})
@@ -329,10 +335,12 @@ export function ChatWidget() {
 
   useEffect(() => {
     if (!isOpen) return
-    // 串流中訊息高頻更新：延遲的 timer 會一直被重設而捲不到底，改為立即、無動畫，
-    // 且只在使用者貼近底部時跟隨，避免往上翻閱時被拉回
+    // 只在使用者貼近底部時跟隨，避免往上翻閱時被拉回（含串流結束後的最終更新）；
+    // 送出新訊息、載入歷史、切換 session 時會把 isNearBottomRef 重設為 true
+    if (!isNearBottomRef.current) return
+    // 串流中訊息高頻更新：延遲的 timer 會一直被重設而捲不到底，改為立即、無動畫
     if (isStreaming) {
-      if (isNearBottomRef.current) scrollRef.current?.scrollToEnd({ animated: false })
+      scrollRef.current?.scrollToEnd({ animated: false })
       return
     }
     const timer = setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 100)
@@ -358,15 +366,35 @@ export function ChatWidget() {
 
   // 送出一次問答（新問題與重新生成共用）：先放一則串流中的 assistant 訊息，再隨串流更新
   // 帶 session_id 時 user / assistant 訊息由後端寫入，前端不另外儲存
+  // replacedMessage：重新生成時被取代的舊回答；只有後端確實取代了它（done、或有部分文字的
+  // stopped / interrupted）才丟棄，否則還原到原位，錯誤另外用錯誤泡泡呈現
   const runAsk = useCallback(
-    async (request: Pick<AIAskRequest, 'query' | 'chat_history'>, isRegenerate: boolean) => {
+    async (
+      request: Pick<AIAskRequest, 'query' | 'chat_history'>,
+      isRegenerate: boolean,
+      replacedMessage?: ChatMessage
+    ) => {
       const assistantId = createMessageId()
+      // 只替換該則物件，其餘訊息維持同參考，讓 memo 的 MessageBubble 不重繪
       const patchAssistant = (patch: Partial<ChatMessage>) =>
         setMessages((current) =>
           current.map((message) =>
             message.id === assistantId ? { ...message, ...patch } : message
           )
         )
+      // 這一輪沒有落地：把佔位訊息換回舊回答（沒有舊回答就移除），錯誤提示接在後面
+      const restoreReplaced = (errorMessage?: string) =>
+        setMessages((current) => {
+          const restored = replacedMessage
+            ? current.map((message) => (message.id === assistantId ? replacedMessage : message))
+            : current.filter((message) => message.id !== assistantId)
+          return errorMessage
+            ? [
+                ...restored,
+                { id: createMessageId(), role: 'assistant', content: errorMessage, isError: true },
+              ]
+            : restored
+        })
 
       isNearBottomRef.current = true
       setMessages((current) => [
@@ -380,11 +408,15 @@ export function ChatWidget() {
       try {
         sessionId = await ensureSession()
       } catch {
-        patchAssistant({
-          content: '無法建立 AI 對話，請稍後再試。',
-          status: undefined,
-          isError: true,
-        })
+        if (replacedMessage) {
+          restoreReplaced('無法建立 AI 對話，請稍後再試。')
+        } else {
+          patchAssistant({
+            content: '無法建立 AI 對話，請稍後再試。',
+            status: undefined,
+            isError: true,
+          })
+        }
         return
       }
 
@@ -422,7 +454,7 @@ export function ChatWidget() {
         if (outcome.partialText) {
           patchAssistant({ content: outcome.partialText, status: 'stopped' })
         } else {
-          setMessages((current) => current.filter((message) => message.id !== assistantId))
+          restoreReplaced()
         }
         // 後端在 client 中止後會退還配額，重新取一次
         getMyQuota()
@@ -456,6 +488,8 @@ export function ChatWidget() {
           status: 'interrupted',
           notice: getAIErrorMessage(error),
         })
+      } else if (replacedMessage) {
+        restoreReplaced(getAIErrorMessage(error))
       } else {
         patchAssistant({ content: getAIErrorMessage(error), status: undefined, isError: true })
       }
@@ -498,10 +532,11 @@ export function ChatWidget() {
 
   const handleRegenerate = useCallback(async () => {
     if (isSubmitting || isRegenerating) return
-    const lastMessage = messages[messages.length - 1]
+    const current = messagesRef.current
+    const lastMessage = current[current.length - 1]
     if (!lastMessage || !canRegenerateMessage(lastMessage)) return
 
-    const withoutLastAssistant = messages.slice(0, -1)
+    const withoutLastAssistant = current.slice(0, -1)
     const lastUserMessage = [...withoutLastAssistant]
       .reverse()
       .find((message) => message.role === 'user')
@@ -511,16 +546,17 @@ export function ChatWidget() {
     const lastUserIndex = withoutLastAssistant.lastIndexOf(lastUserMessage)
     const chatHistory = toChatHistory(withoutLastAssistant.slice(0, lastUserIndex))
 
+    // 舊回答先從畫面移除，交給 runAsk 保管：這一輪失敗時會還原
     setMessages(withoutLastAssistant)
     setSuggestions([])
     setIsRegenerating(true)
 
     try {
-      await runAsk({ query: lastUserMessage.content, chat_history: chatHistory }, true)
+      await runAsk({ query: lastUserMessage.content, chat_history: chatHistory }, true, lastMessage)
     } finally {
       setIsRegenerating(false)
     }
-  }, [isRegenerating, isSubmitting, messages, runAsk])
+  }, [isRegenerating, isSubmitting, runAsk])
 
   const handleClear = useCallback(async () => {
     stopAskStream()
@@ -574,6 +610,7 @@ export function ChatWidget() {
         const savedMessages = await getChatMessages(sessionId)
         stopAskStream()
         updateSessionId(sessionId)
+        isNearBottomRef.current = true
         setMessages(savedMessages.map(toChatMessage))
         setSuggestions([])
         setShowHistory(false)
@@ -731,17 +768,20 @@ export function ChatWidget() {
                       </Text>
                     </View>
                   ) : (
-                    messages.map((message, index) => (
-                      <MessageBubble
-                        key={message.id}
-                        message={message}
-                        canRegenerate={
-                          index === messages.length - 1 && canRegenerateMessage(message)
-                        }
-                        isPending={isBusy}
-                        onRegenerate={handleRegenerate}
-                      />
-                    ))
+                    messages.map((message, index) => {
+                      // 只有最後一則可重新生成的回答拿到會變動的 props，其餘維持穩定參考
+                      const canRegenerate =
+                        index === messages.length - 1 && canRegenerateMessage(message)
+                      return (
+                        <MessageBubble
+                          key={message.id}
+                          message={message}
+                          canRegenerate={canRegenerate}
+                          isPending={canRegenerate && isBusy}
+                          onRegenerate={canRegenerate ? handleRegenerate : undefined}
+                        />
+                      )
+                    })
                   )}
 
                   {isBusy && !hasStreamingOutput && (

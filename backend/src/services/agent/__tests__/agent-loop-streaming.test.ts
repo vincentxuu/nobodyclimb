@@ -221,6 +221,34 @@ describe('runAgentLoop — 串流', () => {
   })
 })
 
+describe('runAgentLoop — 串流中 provider 失敗', () => {
+  it('第二輪推了半句後 provider 丟非重試錯誤且無 fallback → 往上丟錯（由 entry.ts 退回 pipeline 前 reset）', async () => {
+    let call = 0
+    const provider: AIProvider = {
+      name: 'mock',
+      chat: vi.fn(),
+      streamChat: vi.fn(),
+      embed: vi.fn(),
+      embedBatch: vi.fn(),
+      chatWithTools: vi.fn(async (_m, _t, opts: ChatWithToolsOptions = {}) => {
+        call++
+        if (call === 1) return TOOL_TURN
+        await opts.onToken?.('龍洞有校門口、音樂廳等岩區，')
+        throw new Error('provider exploded (400)')
+      }),
+    }
+    const sink = makeSink()
+    await expect(
+      runAgentLoop(
+        { provider, registry: makeRegistry(), ctx: makeCtx() },
+        { ...OPTS, onToken: sink.onToken, onTokenReset: sink.onTokenReset }
+      )
+    ).rejects.toThrow('provider exploded')
+    // loop 本身沒有下一次嘗試可以觸發 onRetry；半句仍留在 sink，靠 entry.ts 的 fallback 前 reset 清掉
+    expect(sink.text).toBe('龍洞有校門口、音樂廳等岩區，')
+  })
+})
+
 describe('runAgentLoop — client 中斷', () => {
   it('LLM 回 tool call 後才中斷 → 不執行工具，丟 AbortError', async () => {
     const controller = new AbortController()

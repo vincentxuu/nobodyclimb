@@ -6,10 +6,10 @@ import { z } from 'zod'
 import { adminMiddleware, authMiddleware } from '../middleware/auth'
 import { checkAiRateLimit } from '../middleware/rateLimit'
 import {
-  insertAssistantMessage,
-  insertUserMessage,
+  type AssistantMessageInput,
   isSessionOwnedBy,
   listSessionMessages,
+  saveTurn,
 } from '../repositories/chat'
 import { deleteMemory, getUserMemories } from '../repositories/memory'
 import { EmbeddingService } from '../services/core/embedding'
@@ -286,27 +286,22 @@ aiRoutes.post(
 
     const streamMode = c.req.query('stream') === 'true'
 
-    // 訊息持久化：配額已扣、確定要作答後才寫入 user 訊息；失敗不中斷問答
-    if (sessionId && !body.regenerate) {
-      await insertUserMessage(sessionId, body.query, db).catch((err) =>
-        console.error('AI ask: insert user message failed:', err)
-      )
-    }
-    const saveAssistantMessage = (input: Parameters<typeof insertAssistantMessage>[1]) =>
+    // 訊息持久化：一回合結束才把 user + assistant 一起寫入（失敗 / 無正文中斷的回合不落地，
+    // 重送也不會產生重複的 user 訊息）；寫入失敗不中斷問答
+    const saveTurnMessages = (assistant: AssistantMessageInput) =>
       sessionId
-        ? insertAssistantMessage(sessionId, input, db, { replaceLast: body.regenerate }).catch(
-            (err) => console.error('AI ask: insert assistant message failed:', err)
-          )
+        ? saveTurn(
+            sessionId,
+            { userContent: body.query, regenerate: body.regenerate, assistant },
+            db
+          ).catch((err) => console.error('AI ask: save turn failed:', err))
         : Promise.resolve()
 
     // SSE 串流模式
     if (streamMode) {
       return streamSSE(c, async (stream) => {
-        // client 中斷（按停止、關頁面）→ 中止 LLM / 工具
-        const abortController = new AbortController()
-        stream.onAbort(() => abortController.abort())
         // 先註冊一個 waitUntil 撐住 invocation：2026-09-21 以 wrangler dev 實測，沒有它的話 client 一斷線
-        // runtime 就直接取消整個 handler，onAbort 與下方 catch 的收尾（退配額、存部分回答）都不會執行
+        // runtime 就直接取消整個 handler，onAbort 與收尾（退配額、存部分回答）都不會執行
         let releaseInvocation: () => void = () => {}
         c.executionCtx.waitUntil(
           new Promise<void>((resolve) => {
@@ -318,8 +313,32 @@ aiRoutes.post(
         }, SSE_HEARTBEAT_MS)
         // 已推送給 client 的正文，中斷時存成部分回答
         let streamedText = ''
-        let answerSaved = false
+        // 收尾只能做一次：正常完成、client 中斷、串流失敗三者互斥
+        let settled = false
         const queryService = new QueryService(c.env)
+
+        // client 中斷（按停止、關頁面）：立刻中止 LLM / 工具並做收尾，不等 ask() unwind——
+        // 工具執行與 Workers AI 的 AI.run 無法即時取消，等它們結束可能超過斷線後 waitUntil 的寬限期。
+        // 還沒看到任何正文（思考 / 工具階段就按停止）→ 全額退還、不落地；
+        // 已經看到部分回答 → 次數照扣（避免「快結束才按停止」白嫖），存下部分內容。
+        const abortController = new AbortController()
+        stream.onAbort(() => {
+          abortController.abort()
+          if (settled) return
+          settled = true
+          const partial = streamedText.trim()
+          c.executionCtx.waitUntil(
+            (async () => {
+              if (!partial) {
+                if (!isAdmin) await refundQuota(db, userId, estimatedTokens)
+                return
+              }
+              // 串流中按「清除」會先刪 session，此時不要再把 stopped 訊息寫回去
+              if (sessionId && !(await isSessionOwnedBy(sessionId, userId, db))) return
+              await saveTurnMessages({ content: checkOutput(partial).output, status: 'stopped' })
+            })().catch((err) => console.error('AI ask stream abort cleanup failed:', err))
+          )
+        })
 
         try {
           const result = await queryService.askStream(
@@ -338,6 +357,8 @@ aiRoutes.post(
             },
             abortController.signal
           )
+          if (settled) return
+          settled = true
 
           // Task 4.4: 更新實際 token 消耗（修正預估與實際差額）
           if (!isAdmin) {
@@ -349,18 +370,17 @@ aiRoutes.post(
             )
           }
 
-          await saveAssistantMessage({
+          await saveTurnMessages({
             content: result.answer,
             sources: result.sources,
             suggestedQuestions: result.suggested_questions,
             queryId: result.query_id,
           })
-          answerSaved = true
 
-          // 取得最新配額（供 done 事件）
+          // 取得最新配額（供 done 事件）；查不到就回 -1，不能因此走到退款
           let quotaRemaining = -1
           if (!isAdmin) {
-            const updatedRank = await getUserRank(userId, db)
+            const updatedRank = await getUserRank(userId, db).catch(() => null)
             if (updatedRank) {
               quotaRemaining = Math.max(0, updatedRank.daily_ai_limit - updatedRank.daily_ai_used)
             }
@@ -377,24 +397,9 @@ aiRoutes.post(
             }),
           })
         } catch (error) {
-          if (abortController.signal.aborted) {
-            // client 中斷：連線已關，收尾工作交給 waitUntil 才不會被 runtime 取消。
-            // 還沒看到任何正文（思考 / 工具階段就按停止）→ 全額退還；
-            // 已經看到部分回答 → 次數照扣（避免「快結束才按停止」白嫖），存下部分內容。
-            // 完整回答已存檔才斷線（done 事件送不出去）→ 不需收尾
-            if (answerSaved) return
-            const partial = streamedText.trim()
-            c.executionCtx.waitUntil(
-              (async () => {
-                if (!partial) {
-                  if (!isAdmin) await refundQuota(db, userId, estimatedTokens)
-                  return
-                }
-                await saveAssistantMessage({ content: partial, status: 'stopped' })
-              })().catch((err) => console.error('AI ask stream abort cleanup failed:', err))
-            )
-            return
-          }
+          // client 中斷的收尾已在 onAbort 做完
+          if (settled) return
+          settled = true
           // Task 4.5: 串流失敗時退還次數與 token 預扣量
           if (!isAdmin) await refundQuota(db, userId, estimatedTokens)
           console.error('AI ask stream error:', error)
@@ -424,7 +429,7 @@ aiRoutes.post(
       // Task 4.6: 輸出層防護（路由層二次保護，query.ts 已做過一次）
       const { output: filteredAnswer } = checkOutput(aiResult.answer)
 
-      await saveAssistantMessage({
+      await saveTurnMessages({
         content: filteredAnswer,
         sources: aiResult.sources,
         suggestedQuestions: aiResult.suggested_questions,

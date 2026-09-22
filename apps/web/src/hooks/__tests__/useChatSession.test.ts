@@ -119,6 +119,62 @@ describe('useChatSession', () => {
     expect(mocked.saveMessage).not.toHaveBeenCalled()
   })
 
+  it('按新對話後關閉再開（enabled 切換）不會載回最近的 session', async () => {
+    mocked.getMyQuota.mockResolvedValue(QUOTA)
+    mocked.getChatSessionsPage.mockResolvedValue({
+      sessions: [{ id: 's1', title: 't', created_at: 1, updated_at: 1 }],
+      pagination: { page: 1, limit: 1, total: 1, total_pages: 1 },
+    })
+    mocked.getChatMessages.mockResolvedValue([
+      { id: 'm1', role: 'user', content: '舊問題', created_at: 1 },
+    ])
+    captureStream()
+    const hook = renderHook(({ enabled }) => useChatSession({ locale: 'zh', enabled }), {
+      initialProps: { enabled: true },
+    })
+    await waitFor(() => expect(hook.result.current.messages).toHaveLength(1))
+
+    act(() => hook.result.current.newChat())
+    expect(hook.result.current.messages).toEqual([])
+    hook.rerender({ enabled: false })
+    hook.rerender({ enabled: true })
+    // 給初始載入 effect 機會跑：若它跑了，messages 會變回 1 則
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 0))
+    })
+    expect(hook.result.current.messages).toEqual([])
+    expect(hook.result.current.sessionId).toBeNull()
+  })
+
+  it('done 沒帶 answer（舊後端）時，佇列剩餘的字補進訊息而不是丟掉', async () => {
+    const { hook, calls } = await setup()
+    act(() => hook.result.current.send('hi'))
+    await waitFor(() => expect(calls).toHaveLength(1))
+    jest.useFakeTimers()
+    act(() => {
+      for (const ch of 'abcdefghij') calls[0].onToken(ch)
+    })
+    act(() => {
+      jest.advanceTimersByTime(0)
+    })
+    act(() => calls[0].onDone({ ...DONE, answer: undefined }))
+    expect(hook.result.current.messages[1]).toMatchObject({
+      content: 'abcdefghij',
+      isStreaming: false,
+    })
+  })
+
+  it('canRegenerate 只在列表最後一則是完成的 assistant 回答時為 true', async () => {
+    const { hook, calls } = await setup()
+    expect(hook.result.current.canRegenerate).toBe(false)
+    act(() => hook.result.current.send('hi'))
+    await waitFor(() => expect(calls).toHaveLength(1))
+    expect(hook.result.current.canRegenerate).toBe(false)
+    act(() => calls[0].onDone(DONE))
+    expect(hook.result.current.canRegenerate).toBe(true)
+    act(() => calls[0].onError({ code: 'internal' }))
+  })
+
   it('沒有 session 時先建立再送出', async () => {
     const { hook, calls } = await setup([])
 

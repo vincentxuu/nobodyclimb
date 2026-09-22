@@ -1,5 +1,5 @@
 import { toOpenAIMessages } from './tool-messages'
-import { readToolUseStream } from './tool-stream'
+import { isAbortError, readToolUseStream } from './tool-stream'
 import {
   AIProvider,
   ChatMessage,
@@ -66,6 +66,7 @@ export class OpenAIProvider implements AIProvider {
   ): Promise<LLMResponse> {
     const res = await fetch(`${this.baseUrl}/chat/completions`, {
       method: 'POST',
+      signal: opts.signal,
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.apiKey}` },
       body: JSON.stringify({
         model: opts.model ?? this.defaultModel,
@@ -95,7 +96,9 @@ export class OpenAIProvider implements AIProvider {
             fullContent += token
             await opts.onToken(token)
           }
-        } catch {
+        } catch (err) {
+          // 呼叫端用 onToken 丟 AbortError 中止生成，不能跟壞掉的 SSE 行一起吞掉
+          if (isAbortError(err)) throw err
           /* ignore parse errors */
         }
       }

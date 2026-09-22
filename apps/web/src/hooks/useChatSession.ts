@@ -107,6 +107,8 @@ export function useChatSession({
   const drainTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   // 停止時要把佇列剩餘的字補進哪一則訊息
   const activeMessageIdRef = useRef<string | null>(null)
+  // 使用者按過「新對話 / 清除」後，重開 widget 不可再自動載回最近的 session（否則空白對話會被換掉）
+  const userResetRef = useRef(false)
 
   const updateSessionId = useCallback((id: string | null) => {
     sessionIdRef.current = id
@@ -164,6 +166,7 @@ export function useChatSession({
   }, [cancelRun])
 
   const resetConversation = useCallback(() => {
+    userResetRef.current = true
     cancelRun(false)
     loadSeqRef.current++
     setMessages([])
@@ -304,8 +307,8 @@ export function useChatSession({
         },
         (doneEvent) => {
           if (isStale()) return
-          // done 帶的是完整答案，佇列剩餘的字不必再逐批吐，直接收尾
-          flushTokenQueue(null)
+          // done 帶完整答案時佇列剩餘的字不必再吐；沒帶（舊後端）就把剩餘的字補進訊息
+          flushTokenQueue(doneEvent.answer ? null : assistantId)
           setQuota((prev) => applyQuotaRemaining(prev, doneEvent.quota_remaining))
           finalize({
             answer: doneEvent.answer,
@@ -453,7 +456,7 @@ export function useChatSession({
       .then(setQuota)
       .catch(() => {})
 
-    if (sessionIdRef.current || messagesRef.current.length > 0) return
+    if (sessionIdRef.current || messagesRef.current.length > 0 || userResetRef.current) return
     const seq = ++loadSeqRef.current
     const load = async () => {
       let targetId = initialSessionId
@@ -480,6 +483,7 @@ export function useChatSession({
     wasAuthenticatedRef.current = isAuthenticated
     if (!wasAuthenticated || isAuthenticated) return
     resetConversation()
+    userResetRef.current = false
     setSessions([])
     setQuota(null)
   }, [isAuthenticated, resetConversation])
@@ -494,10 +498,14 @@ export function useChatSession({
 
   const dismissLoginPrompt = useCallback(() => setShowLoginPrompt(false), [])
 
+  // 重新生成按鈕只能出現在 getRegenerateTarget 會接受的那一則上（整個列表最後一則、且是完成的 assistant 回答）
+  const canRegenerate = !isBusy && getRegenerateTarget(messages) !== null
+
   return {
     messages,
     suggestedQuestions,
     sessionId,
+    canRegenerate,
     sessions,
     hasMoreSessions,
     isLoadingSessions,

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { createSuggestionsFilter, readToolUseStream } from '../providers/tool-stream'
 
 /** 把 SSE 文字切成任意大小的 chunk，模擬網路斷點落在行中間 */
@@ -85,6 +85,52 @@ describe('readToolUseStream', () => {
       { id: 'a', name: 'weather', input: { city: '台北' } },
       { id: 'b', name: 'crag_info', input: { id: 'x' } },
     ])
+  })
+
+  it('沒有 index 的兩個 tool call 不會互相覆蓋', async () => {
+    const result = await readToolUseStream(
+      sseStream(
+        chunk({
+          tool_calls: [{ id: 'a', function: { name: 'weather', arguments: '{"city":"台北"}' } }],
+        }) +
+          chunk({
+            tool_calls: [{ id: 'b', function: { name: 'crag_info', arguments: '{"id":"x"}' } }],
+          }) +
+          'data: [DONE]\n\n'
+      ),
+      { onToken: async () => {} }
+    )
+    expect(result.toolCalls).toEqual([
+      { id: 'a', name: 'weather', input: { city: '台北' } },
+      { id: 'b', name: 'crag_info', input: { id: 'x' } },
+    ])
+  })
+
+  it('沒有 index 也沒有 id 時，arguments 分段仍累加到同一個 tool call', async () => {
+    const result = await readToolUseStream(
+      sseStream(
+        chunk({ tool_calls: [{ function: { name: 'weather', arguments: '{"ci' } }] }) +
+          chunk({ tool_calls: [{ function: { arguments: 'ty":"台北"}' } }] }) +
+          'data: [DONE]\n\n'
+      ),
+      { onToken: async () => {} }
+    )
+    expect(result.toolCalls).toEqual([
+      { id: 'stream-tc-0', name: 'weather', input: { city: '台北' } },
+    ])
+  })
+
+  it('進入時 signal 已 aborted → 立刻丟 AbortError，不讀串流', async () => {
+    const controller = new AbortController()
+    controller.abort()
+    const onToken = vi.fn(async () => {})
+    await expect(
+      readToolUseStream(sseStream(chunk({ content: '不該讀到' }) + 'data: [DONE]\n\n'), {
+        onToken,
+        signal: controller.signal,
+      })
+    ).rejects.toMatchObject({ name: 'AbortError' })
+    expect(onToken).not.toHaveBeenCalled()
   })
 
   it('缺 id 補前綴、arguments 壞掉時退回空物件、reasoning 不推送', async () => {

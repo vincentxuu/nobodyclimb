@@ -71,6 +71,7 @@ export function ChatClient() {
     messages,
     suggestedQuestions,
     sessionId,
+    canRegenerate,
     sessions,
     hasMoreSessions,
     isLoadingSessions,
@@ -133,11 +134,6 @@ export function ChatClient() {
       if (await switchSession(targetId)) setShowHistory(false)
     },
     [switchSession]
-  )
-
-  const lastAssistantIndex = messages.reduce(
-    (last, m, i) => (m.role === 'assistant' ? i : last),
-    -1
   )
 
   return (
@@ -257,7 +253,7 @@ export function ChatClient() {
                   <ChatMessageItem
                     key={msg.id}
                     message={msg}
-                    isLast={index === lastAssistantIndex}
+                    isLast={canRegenerate && index === messages.length - 1}
                     onRegenerate={regenerate}
                     isBusy={isBusy}
                   />

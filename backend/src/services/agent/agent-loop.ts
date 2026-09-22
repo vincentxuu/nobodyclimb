@@ -1,5 +1,6 @@
 import type { LangfuseParent } from '../../utils/langfuse'
 import { endSpan, logGeneration, startSpan } from '../../utils/langfuse'
+import { isAbortError } from '../orchestrators/ai-graph/providers/tool-stream'
 import type { AIProvider, ChatMessage } from '../orchestrators/ai-graph/providers/types'
 import { hashForCache } from './cache'
 import type { ToolRegistry } from './registry'
@@ -352,6 +353,7 @@ export async function runAgentLoop(
       const streamResponse = await provider.streamChat(finalMessages, {
         ...finalCallOpts,
         onToken: opts.onToken,
+        signal: opts.signal,
       })
       finalContent = streamResponse.content
       finalReasoningChars = streamResponse.reasoning?.length || undefined
@@ -410,9 +412,7 @@ export async function runAgentLoop(
 // 串流與中斷輔助
 // ---------------------------------------------------------------------------
 
-export function isAbortError(err: unknown): boolean {
-  return err instanceof Error && err.name === 'AbortError'
-}
+export { isAbortError }
 
 function throwIfAborted(signal?: AbortSignal) {
   if (signal?.aborted) throw new DOMException('The operation was aborted', 'AbortError')

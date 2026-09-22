@@ -11,6 +11,13 @@ import { ToolUseResponse } from './types'
 
 const SUGGESTIONS_MARKER = '---SUGGESTIONS---'
 
+/** 不靠 instanceof Error：workerd 的 DOMException 是否繼承 Error 未經實測，只看 name 最穩 */
+export function isAbortError(err: unknown): boolean {
+  return (
+    typeof err === 'object' && err !== null && (err as { name?: unknown }).name === 'AbortError'
+  )
+}
+
 /**
  * 包裝 onToken：`---SUGGESTIONS---` 標記之後的內容只收集不推送（由後端解析成建議問題）。
  * 保留標記長度的滑動視窗，避免標記被切在兩個 token 之間而漏判。
@@ -88,6 +95,11 @@ export async function readToolUseStream(
   const onAbort = () => {
     reader.cancel().catch(() => {})
   }
+  if (opts.signal?.aborted) {
+    await reader.cancel().catch(() => {})
+    reader.releaseLock()
+    throw new DOMException('The operation was aborted', 'AbortError')
+  }
   opts.signal?.addEventListener('abort', onAbort, { once: true })
 
   const handlePayload = async (payload: string) => {
@@ -125,7 +137,17 @@ export async function readToolUseStream(
       | undefined
     if (deltaCalls?.length) {
       for (const dc of deltaCalls) {
-        const index = dc.index ?? 0
+        // 沒有 index 的 delta（部分 OpenAI 相容端點）：帶新 id、或現有項已有 name 而這筆又帶 name，就視為新的 tool call
+        let index = dc.index
+        if (index === undefined) {
+          const last = partialCalls.size - 1
+          const lastCall = partialCalls.get(last)
+          const isNewCall =
+            !lastCall ||
+            (dc.id && lastCall.id && dc.id !== lastCall.id) ||
+            (lastCall.name && dc.function?.name)
+          index = isNewCall ? partialCalls.size : last
+        }
         const existing = partialCalls.get(index) ?? { name: '', args: '' }
         if (dc.id) existing.id = dc.id
         if (dc.function?.name) existing.name += dc.function.name
@@ -156,6 +178,10 @@ export async function readToolUseStream(
       }
     }
     await filter.flush()
+  } catch (err) {
+    // onToken 丟錯提早離開：把上游串流也取消，不讓 provider 繼續生成
+    await reader.cancel().catch(() => {})
+    throw err
   } finally {
     opts.signal?.removeEventListener('abort', onAbort)
     reader.releaseLock()

@@ -54,6 +54,7 @@ export function ChatWidget() {
     messages,
     suggestedQuestions,
     sessionId,
+    canRegenerate,
     sessions,
     hasMoreSessions,
     isLoadingSessions,
@@ -157,11 +158,6 @@ export function ChatWidget() {
       handleSubmit(input)
     }
   }
-
-  const lastAssistantIndex = messages.reduce(
-    (last, m, i) => (m.role === 'assistant' ? i : last),
-    -1
-  )
 
   const widget = (
     <>
@@ -284,7 +280,9 @@ export function ChatWidget() {
               <button
                 type="button"
                 onClick={handleExpand}
-                className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                // 串流中導頁的話，全頁向後端載入時 assistant 訊息還沒寫入，會看不到這一輪回答
+                disabled={isBusy}
+                className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors disabled:opacity-50 disabled:hover:bg-transparent"
                 aria-label={t('expand')}
               >
                 <Expand className="h-4 w-4" />
@@ -396,7 +394,7 @@ export function ChatWidget() {
                       <ChatMessage
                         key={message.id}
                         message={message}
-                        isLast={index === lastAssistantIndex && message.role === 'assistant'}
+                        isLast={canRegenerate && index === messages.length - 1}
                         onRegenerate={regenerate}
                         isPending={isBusy}
                       />

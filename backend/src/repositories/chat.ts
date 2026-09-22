@@ -42,29 +42,6 @@ export async function listSessionMessages(
   return results
 }
 
-/** 寫入 user 訊息，並更新 session 的 updated_at 與 title（第一則 user 訊息前 50 字作為標題） */
-export async function insertUserMessage(
-  sessionId: string,
-  content: string,
-  db: D1Database
-): Promise<string> {
-  const id = crypto.randomUUID()
-  const now = Math.floor(Date.now() / 1000)
-  await db.batch([
-    db
-      .prepare(
-        `INSERT INTO chat_messages (id, session_id, role, content, created_at) VALUES (?, ?, 'user', ?, ?)`
-      )
-      .bind(id, sessionId, content, now),
-    db
-      .prepare(
-        `UPDATE chat_sessions SET updated_at = ?, title = CASE WHEN title = ? THEN ? ELSE title END WHERE id = ?`
-      )
-      .bind(now, DEFAULT_SESSION_TITLE, content.slice(0, 50), sessionId),
-  ])
-  return id
-}
-
 export interface AssistantMessageInput {
   content: string
   sources?: AISource[]
@@ -75,19 +52,21 @@ export interface AssistantMessageInput {
 }
 
 /**
- * 寫入 assistant 訊息。replaceLast = true（重新生成）時先刪掉該 session 最後一則訊息
- * （僅當它是 assistant 訊息），再寫入新回答。
+ * 一回合結束時把 user 訊息與 assistant 訊息放在同一個 batch 寫入。
+ * 刻意不在作答前先寫 user 訊息：問答失敗、或請求被 client / axios 重送時，
+ * 提前寫入會留下孤兒或重複的 user 訊息；改成只有真正產生回答的那一次才落地。
+ * regenerate = true 時不寫 user 訊息，並先刪掉該 session 最後一則訊息（僅當它是 assistant）。
  */
-export async function insertAssistantMessage(
+export async function saveTurn(
   sessionId: string,
-  input: AssistantMessageInput,
-  db: D1Database,
-  opts: { replaceLast?: boolean } = {}
-): Promise<string> {
-  const id = crypto.randomUUID()
+  turn: { userContent: string; regenerate: boolean; assistant: AssistantMessageInput },
+  db: D1Database
+): Promise<{ userMessageId: string | null; assistantMessageId: string }> {
   const now = Math.floor(Date.now() / 1000)
+  const assistantId = crypto.randomUUID()
+  const userId = turn.regenerate ? null : crypto.randomUUID()
   const statements = []
-  if (opts.replaceLast) {
+  if (turn.regenerate) {
     statements.push(
       db
         .prepare(
@@ -98,7 +77,16 @@ export async function insertAssistantMessage(
         )
         .bind(sessionId)
     )
+  } else {
+    statements.push(
+      db
+        .prepare(
+          `INSERT INTO chat_messages (id, session_id, role, content, created_at) VALUES (?, ?, 'user', ?, ?)`
+        )
+        .bind(userId, sessionId, turn.userContent, now)
+    )
   }
+  const a = turn.assistant
   statements.push(
     db
       .prepare(
@@ -106,17 +94,22 @@ export async function insertAssistantMessage(
          VALUES (?, ?, 'assistant', ?, ?, ?, ?, ?, ?)`
       )
       .bind(
-        id,
+        assistantId,
         sessionId,
-        input.content,
-        input.suggestedQuestions?.length ? JSON.stringify(input.suggestedQuestions) : null,
-        input.queryId ?? null,
-        input.sources?.length ? JSON.stringify(input.sources) : null,
-        input.status ?? null,
+        a.content,
+        a.suggestedQuestions?.length ? JSON.stringify(a.suggestedQuestions) : null,
+        a.queryId ?? null,
+        a.sources?.length ? JSON.stringify(a.sources) : null,
+        a.status ?? null,
         now
       ),
-    db.prepare(`UPDATE chat_sessions SET updated_at = ? WHERE id = ?`).bind(now, sessionId)
+    // 第一則 user 訊息的前 50 字作為標題
+    db
+      .prepare(
+        `UPDATE chat_sessions SET updated_at = ?, title = CASE WHEN title = ? THEN ? ELSE title END WHERE id = ?`
+      )
+      .bind(now, DEFAULT_SESSION_TITLE, turn.userContent.slice(0, 50), sessionId)
   )
   await db.batch(statements)
-  return id
+  return { userMessageId: userId, assistantMessageId: assistantId }
 }
