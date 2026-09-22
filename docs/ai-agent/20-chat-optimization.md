@@ -121,8 +121,8 @@ AI chat 目前有幾個直接影響體感與正確性的缺口：
 ### 未修（Low，另開任務）
 
 backend
-- [ ] 快取命中時 `lastTokenCount` 為 null → 以預估值計，舊版是查原始 token 數；決定要記 0 或維持預估
-- [ ] 被中斷的請求沒有 `ai_query_logs` 紀錄；「無正文就中斷」可反覆免費觸發工具 + LLM（僅受 IP 速率限制），建議補 `query_type='client_aborted'` log
+- [x] 快取命中時 `lastTokenCount` 改記 0（退還預扣 token，次數仍扣）
+- [x] 被中斷的請求補 `query_type='client_aborted'` 的 `ai_query_logs`（trace 帶 had_partial / streamed_chars / quota_refunded）；濫用仍只靠 IP 速率限制擋，若 log 顯示有人反覆停止再加對 abort 次數的限制
 - [ ] `stream_options.include_usage` 只對 Workers AI 實測，GitHub Models 未驗證
 - [ ] `addTokenUsage` 之後 `getUserRank` 失敗現已改為不退款（`.catch(() => null)`），但非串流路徑同樣情況仍會 refund + addTokenUsage 都執行
 - [ ] 迴圈內答案在 output guard / 連結注入前就推給使用者（正常完成由 `done.answer` 覆蓋，只影響短暫顯示）

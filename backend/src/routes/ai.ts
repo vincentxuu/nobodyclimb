@@ -329,6 +329,32 @@ aiRoutes.post(
           const partial = streamedText.trim()
           c.executionCtx.waitUntil(
             (async () => {
+              // 被中斷的請求也要留紀錄：LLM / 工具已實際消耗，且「無正文就中斷」會退還配額，
+              // 沒有 log 就無從察覺反覆停止的濫用
+              await db
+                .prepare(
+                  `INSERT INTO ai_query_logs (id, user_id, query, response, sources, latency_ms, token_count, query_type, model_used, retrieval_score, self_reflection_triggered, is_high_consumption, cache_hit, hyde_triggered, pipeline_trace)
+                   VALUES (?, ?, ?, ?, '[]', ?, 0, 'client_aborted', '', 0, 0, 0, 0, 0, ?)`
+                )
+                .bind(
+                  crypto.randomUUID(),
+                  userId,
+                  body.query.slice(0, 500),
+                  partial.slice(0, 2000),
+                  Date.now() - ((extraTrace.startTime as number) || Date.now()),
+                  JSON.stringify({
+                    client_aborted: {
+                      had_partial: partial.length > 0,
+                      streamed_chars: partial.length,
+                      quota_refunded: !partial && !isAdmin,
+                    },
+                    ...(extraTrace.guardrails_input
+                      ? { guardrails_input: extraTrace.guardrails_input }
+                      : {}),
+                  })
+                )
+                .run()
+                .catch((err) => console.error('AI ask: client_aborted log failed:', err))
               if (!partial) {
                 if (!isAdmin) await refundQuota(db, userId, estimatedTokens)
                 return

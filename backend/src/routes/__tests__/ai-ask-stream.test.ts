@@ -112,6 +112,7 @@ async function readAll(res: Response) {
 }
 
 const refunds = (runs: string[]) => runs.filter((s) => s.includes('daily_ai_used - 1')).length
+const abortLogs = (runs: string[]) => runs.filter((s) => s.includes("'client_aborted'")).length
 
 beforeEach(() => {
   vi.clearAllMocks()
@@ -168,6 +169,7 @@ describe('POST /ai/ask?stream=true', () => {
     await Promise.allSettled(waitUntilPromises)
     expect(refunds(runs)).toBe(1)
     expect(chatRepo.saveTurn).not.toHaveBeenCalled()
+    expect(abortLogs(runs)).toBe(1)
   })
 
   it('client 中斷且已有正文：不退款，部分內容以 stopped 存下', async () => {
@@ -190,5 +192,18 @@ describe('POST /ai/ask?stream=true', () => {
     expect(chatRepo.saveTurn.mock.calls[0][1]).toMatchObject({
       assistant: { content: '龍洞有校門口', status: 'stopped' },
     })
+    expect(abortLogs(runs)).toBe(1)
+  })
+
+  it('正常完成與串流失敗都不寫 client_aborted log', async () => {
+    state.askStreamImpl = async () => ({
+      query_id: 'q1',
+      answer: 'a',
+      sources: [],
+      suggested_questions: [],
+    })
+    const ok = fakeEnv()
+    await readAll(await request(ok.env))
+    expect(abortLogs(ok.runs)).toBe(0)
   })
 })
