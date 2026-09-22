@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { ChatClient } from './ChatClient'
 
 export const metadata: Metadata = {
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 }
 
 export default function ChatPage() {
-  return <ChatClient />
+  // ChatClient 用 useSearchParams 讀 ?session=，需要 Suspense 邊界才不會讓整頁退出靜態產生
+  return (
+    <Suspense>
+      <ChatClient />
+    </Suspense>
+  )
 }
