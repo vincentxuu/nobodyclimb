@@ -900,7 +900,9 @@ export class QueryService {
     hydeTriggered?: boolean
     pipelineTrace?: string
   }) {
-    if (!params.cacheHit) this.lastTokenCount = params.tokenCount
+    // 快取命中沒有呼叫 LLM，實際消耗記 0：路由層會據此退還預扣的 token（次數仍扣）。
+    // 舊版是回頭查快取來源那筆 log 的 token 數再扣一次，等於同一筆生成被收兩次費。
+    this.lastTokenCount = params.cacheHit ? 0 : params.tokenCount
     return logQuery(this.env.DB, params)
   }
 
