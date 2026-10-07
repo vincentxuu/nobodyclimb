@@ -75,7 +75,8 @@ export default function UserMenu() {
                 </span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-[160px] rounded-lg border border-[#EBEAEA] bg-white p-2 shadow-md">
+            {/* z-index 需高於 navbar 的 z-[999]，否則選單頂端會被 header 蓋住 */}
+            <DropdownMenuContent className="z-[1000] w-[160px] rounded-lg border border-[#EBEAEA] bg-white p-2 shadow-md">
               <DropdownMenuItem
                 className={createMenuItemClass}
                 onClick={() => router.push('/blog/create')}
@@ -108,7 +109,7 @@ export default function UserMenu() {
             </DropdownMenuTrigger>
             <DropdownMenuContent
               sideOffset={8}
-              className="w-[240px] overflow-visible rounded-lg border border-[#EBEAEA] bg-white p-2 shadow-md"
+              className="z-[1000] w-[240px] overflow-visible rounded-lg border border-[#EBEAEA] bg-white p-2 shadow-md"
             >
               <div className="mb-2 grid grid-cols-2 rounded-lg bg-[#F5F5F5] p-1">
                 <button
