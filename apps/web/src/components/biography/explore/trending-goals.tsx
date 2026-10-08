@@ -25,6 +25,7 @@ interface TrendingItem extends BucketListItem {
 
 export function TrendingGoals({ searchTerm, filter }: TrendingGoalsProps) {
   const t = useTranslations('BiographyPage')
+  const tCategory = useTranslations('BucketListPage')
   const [items, setItems] = useState<TrendingItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -118,7 +119,9 @@ export function TrendingGoals({ searchTerm, filter }: TrendingGoalsProps) {
   }
 
   const getCategoryLabel = (category: string) => {
-    return BUCKET_LIST_CATEGORIES.find((c) => c.value === category)?.label || category
+    // 分類值是存檔用的 id，只在顯示時依語系查既有的 BucketListPage.categoryLabels
+    const known = BUCKET_LIST_CATEGORIES.find((c) => c.value === category)
+    return known ? tCategory(`categoryLabels.${known.value}`) : category
   }
 
   const getCategoryIcon = (category: string) => {

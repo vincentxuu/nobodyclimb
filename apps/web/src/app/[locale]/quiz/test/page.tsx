@@ -2,10 +2,10 @@
 
 import { calculateQuizResult, getPersonalityType, QUIZ_QUESTIONS } from '@nobodyclimb/constants'
 import type { QuizAnswer } from '@nobodyclimb/types'
-import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { QuizProgress } from '@/components/quiz/QuizProgress'
 import { QuizQuestion } from '@/components/quiz/QuizQuestion'
+import { useRouter } from '@/i18n/navigation'
 import { useQuizStore } from '@/store/quizStore'
 
 function encodeScores(result: {

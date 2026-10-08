@@ -2,6 +2,7 @@
 
 import type { TrainingProgressRecord, TrainingWeek } from '@nobodyclimb/types'
 import { Check } from 'lucide-react'
+import { useTrainingText } from '@/lib/quiz/training-i18n'
 
 interface WeekTabsProps {
   weeks: TrainingWeek[]
@@ -18,6 +19,8 @@ export function WeekTabs({
   progress,
   accentColor,
 }: WeekTabsProps) {
+  const tt = useTrainingText()
+
   return (
     <div className="mb-6 flex gap-2 overflow-x-auto pb-2">
       {weeks.map((week) => {
@@ -40,7 +43,7 @@ export function WeekTabs({
               </span>
               {isFullyComplete && <Check className="h-3.5 w-3.5 text-emerald-500" />}
             </div>
-            <span className="truncate text-xs text-gray-500">{week.theme}</span>
+            <span className="truncate text-xs text-gray-500">{tt(week.theme)}</span>
             <div className="flex gap-1">
               {[1, 2, 3].map((day) => (
                 <div

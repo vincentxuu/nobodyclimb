@@ -1,8 +1,8 @@
 import { type ClassValue, clsx } from 'clsx'
 import { format, isToday, isYesterday } from 'date-fns'
-import { zhTW } from 'date-fns/locale'
 import { twMerge } from 'tailwind-merge'
-import { DATE_FORMAT, DATE_TIME_FORMAT } from './constants'
+import { LOCALE_DATE_FORMATS } from './constants'
+import { getDateFnsLocale, getRelativeDayLabel, toIntlLocale } from './date-locale'
 
 /**
  * 合併 Tailwind CSS 類名
@@ -15,21 +15,25 @@ export function cn(...inputs: ClassValue[]) {
  * 格式化日期
  * @param date 日期
  * @param showTime 是否顯示時間
+ * @param locale next-intl 語系（zh / en / ja），預設 zh
  */
-export function formatDate(date: Date | string | number, showTime = false): string {
+export function formatDate(date: Date | string | number, showTime = false, locale = 'zh'): string {
   if (!date) return ''
 
   const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date
 
   if (isToday(dateObj)) {
-    return `今天 ${format(dateObj, 'HH:mm')}`
+    return `${getRelativeDayLabel(0, locale)} ${format(dateObj, 'HH:mm')}`
   }
 
   if (isYesterday(dateObj)) {
-    return `昨天 ${format(dateObj, 'HH:mm')}`
+    return `${getRelativeDayLabel(-1, locale)} ${format(dateObj, 'HH:mm')}`
   }
 
-  return format(dateObj, showTime ? DATE_TIME_FORMAT : DATE_FORMAT, { locale: zhTW })
+  const formats = LOCALE_DATE_FORMATS[locale] ?? LOCALE_DATE_FORMATS.zh
+  return format(dateObj, showTime ? formats.dateTime : formats.date, {
+    locale: getDateFnsLocale(locale),
+  })
 }
 
 /**
@@ -89,15 +93,15 @@ export function parseUTC(dateStr: string): Date {
 /**
  * 將後端 UTC 日期字串格式化為台北時間（完整日期時間）
  */
-export function formatTaipei(dateStr: string): string {
-  return parseUTC(dateStr).toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' })
+export function formatTaipei(dateStr: string, locale = 'zh'): string {
+  return parseUTC(dateStr).toLocaleString(toIntlLocale(locale), { timeZone: 'Asia/Taipei' })
 }
 
 /**
  * 將後端 UTC 日期字串格式化為台北時間（僅日期）
  */
-export function formatTaipeiDate(dateStr: string): string {
-  return parseUTC(dateStr).toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei' })
+export function formatTaipeiDate(dateStr: string, locale = 'zh'): string {
+  return parseUTC(dateStr).toLocaleDateString(toIntlLocale(locale), { timeZone: 'Asia/Taipei' })
 }
 
 /**

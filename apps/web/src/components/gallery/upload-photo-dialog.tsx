@@ -3,6 +3,7 @@
 import imageCompression from 'browser-image-compression'
 import { AnimatePresence, motion } from 'framer-motion'
 import { AlertCircle, CheckCircle, Loader2, MapPin, Upload, X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -39,9 +40,9 @@ interface UploadStatus {
 }
 
 // Validate file type only (size will be handled by compression)
-const validateFileType = (file: File): string | null => {
+const validateFileType = (file: File): 'invalidType' | null => {
   if (!VALID_FILE_TYPES.includes(file.type)) {
-    return '請上傳 JPG、PNG 或 WebP 格式的圖片'
+    return 'invalidType'
   }
   return null
 }
@@ -64,11 +65,12 @@ const compressImageFile = async (file: File): Promise<{ file: File; wasCompresse
     return { file: compressedFile, wasCompressed: true }
   } catch (error) {
     console.error('圖片壓縮失敗:', error)
-    throw new Error(`圖片 "${file.name}" 壓縮失敗`)
+    throw new Error(`Image compression failed: ${file.name}`)
   }
 }
 
 const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, onSuccess }) => {
+  const t = useTranslations('GalleryUI.upload')
   const [files, setFiles] = useState<FileWithPreview[]>([])
   const filesRef = useRef<FileWithPreview[]>([])
   const [caption, setCaption] = useState('')
@@ -107,7 +109,7 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
 
       // Check total count limit
       if (files.length + fileArray.length > MAX_FILE_COUNT) {
-        setError(`最多只能上傳 ${MAX_FILE_COUNT} 張照片`)
+        setError(t('maxFiles', { max: MAX_FILE_COUNT }))
         return
       }
 
@@ -118,7 +120,7 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
       fileArray.forEach((file) => {
         const typeError = validateFileType(file)
         if (typeError) {
-          typeErrors.push(typeError)
+          typeErrors.push(t(typeError))
         } else {
           filesToProcess.push(file)
         }
@@ -154,8 +156,8 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
             originalSize: wasCompressed ? originalSize : undefined,
             wasCompressed,
           })
-        } catch (err) {
-          compressionErrors.push(err instanceof Error ? err.message : `處理 ${file.name} 失敗`)
+        } catch {
+          compressionErrors.push(t('compressFailed', { name: file.name }))
         }
       }
 
@@ -173,7 +175,7 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
         setFiles((prev) => [...prev, ...validFiles])
       }
     },
-    [files.length]
+    [files.length, t]
   )
 
   const handleFileChange = useCallback(
@@ -228,7 +230,7 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (files.length === 0) {
-      setError('請選擇要上傳的圖片')
+      setError(t('noFiles'))
       return
     }
 
@@ -248,7 +250,7 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
         // Step 1: Upload the image file to storage
         const uploadResult = await galleryService.uploadImage(fileItem.file)
         if (!uploadResult.success || !uploadResult.data?.url) {
-          throw new Error('圖片上傳失敗')
+          throw new Error(t('imageUploadFailed'))
         }
 
         // Step 2: Create photo record with metadata
@@ -261,7 +263,7 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
         })
 
         if (!photoResult.success || !photoResult.data) {
-          throw new Error('照片資料儲存失敗')
+          throw new Error(t('photoSaveFailed'))
         }
 
         // Update status to success
@@ -278,7 +280,11 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
         setUploadStatuses((prev) =>
           prev.map((s) =>
             s.id === fileItem.id
-              ? { ...s, status: 'error', error: err instanceof Error ? err.message : '上傳失敗' }
+              ? {
+                  ...s,
+                  status: 'error',
+                  error: err instanceof Error ? err.message : t('uploadFailed'),
+                }
               : s
           )
         )
@@ -297,9 +303,14 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
       onClose()
     } else if (successfulUploads > 0) {
       // Some succeeded, some failed - show message
-      setError(`${successfulUploads} 張照片上傳成功，${files.length - successfulUploads} 張失敗`)
+      setError(
+        t('partialSuccess', {
+          success: successfulUploads,
+          failed: files.length - successfulUploads,
+        })
+      )
     } else {
-      setError('所有照片上傳失敗，請稍後再試')
+      setError(t('allFailed'))
     }
   }
 
@@ -330,7 +341,7 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
         >
           {/* Header */}
           <div className="flex items-center justify-between border-b px-6 py-4 shrink-0">
-            <h2 className="text-lg font-semibold text-neutral-800">上傳照片</h2>
+            <h2 className="text-lg font-semibold text-neutral-800">{t('title')}</h2>
             <button
               onClick={handleClose}
               disabled={isUploading || isCompressing}
@@ -354,9 +365,9 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
               onClick={() => document.getElementById('photo-input')?.click()}
             >
               <Upload size={32} className="mb-2 text-neutral-400" />
-              <p className="text-sm text-neutral-600">拖曳照片到這裡，或點擊選擇</p>
+              <p className="text-sm text-neutral-600">{t('dropHint')}</p>
               <p className="mt-1 text-xs text-neutral-400">
-                支援 JPG、PNG、WebP（超過 500KB 自動壓縮，最多 {MAX_FILE_COUNT} 張）
+                {t('formatHint', { max: MAX_FILE_COUNT })}
               </p>
               <input
                 id="photo-input"
@@ -374,7 +385,10 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
                 <div className="flex items-center gap-2 text-sm text-amber-700">
                   <Loader2 className="h-4 w-4 animate-spin" />
                   <span>
-                    正在處理圖片... ({compressProgress.current}/{compressProgress.total})
+                    {t('processing', {
+                      current: compressProgress.current,
+                      total: compressProgress.total,
+                    })}
                   </span>
                 </div>
                 <div className="mt-2 h-2 bg-amber-200 rounded-full overflow-hidden">
@@ -393,10 +407,12 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
               <div className="mb-4">
                 <div className="flex items-center justify-between mb-2">
                   <Label className="text-sm font-medium">
-                    已選擇 {files.length} 張照片
+                    {t('selectedCount', { count: files.length })}
                     {files.some((f) => f.wasCompressed) && (
                       <span className="ml-2 text-xs text-amber-600">
-                        (已壓縮 {files.filter((f) => f.wasCompressed).length} 張)
+                        {t('compressedCount', {
+                          count: files.filter((f) => f.wasCompressed).length,
+                        })}
                       </span>
                     )}
                   </Label>
@@ -409,7 +425,7 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
                       }}
                       className="text-xs text-red-500 hover:text-red-600"
                     >
-                      清除全部
+                      {t('clearAll')}
                     </button>
                   )}
                 </div>
@@ -473,7 +489,11 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
                           }`}
                         >
                           {fileItem.wasCompressed && fileItem.originalSize ? (
-                            <span title={`原始: ${(fileItem.originalSize / 1024).toFixed(0)}KB`}>
+                            <span
+                              title={t('originalSize', {
+                                size: (fileItem.originalSize / 1024).toFixed(0),
+                              })}
+                            >
                               {(fileItem.originalSize / 1024).toFixed(0)}→
                               {(fileItem.file.size / 1024).toFixed(0)}KB
                             </span>
@@ -494,7 +514,11 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
                 <div className="flex items-center gap-2 text-sm text-blue-700">
                   <Loader2 className="h-4 w-4 animate-spin" />
                   <span>
-                    正在上傳 {uploadingCount} 張照片...（已完成 {successCount}/{files.length}）
+                    {t('uploadingProgress', {
+                      uploading: uploadingCount,
+                      done: successCount,
+                      total: files.length,
+                    })}
                   </span>
                 </div>
                 <div className="mt-2 h-2 bg-blue-200 rounded-full overflow-hidden">
@@ -511,13 +535,13 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
             {/* Caption */}
             <div className="mb-4">
               <Label htmlFor="caption" className="mb-1.5 block text-sm font-medium">
-                說明（選填，套用至所有照片）
+                {t('captionLabel')}
               </Label>
               <Textarea
                 id="caption"
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
-                placeholder="為照片添加說明..."
+                placeholder={t('captionPlaceholder')}
                 className="resize-none"
                 rows={2}
                 disabled={isUploading}
@@ -528,23 +552,23 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
             <div className="mb-4">
               <Label className="mb-1.5 flex items-center gap-1.5 text-sm font-medium">
                 <MapPin size={14} />
-                拍攝地點（選填，套用至所有照片）
+                {t('locationLabel')}
               </Label>
               <div className="grid grid-cols-3 gap-2">
                 <Input
-                  placeholder="國家"
+                  placeholder={t('country')}
                   value={locationCountry}
                   onChange={(e) => setLocationCountry(e.target.value)}
                   disabled={isUploading}
                 />
                 <Input
-                  placeholder="城市"
+                  placeholder={t('city')}
                   value={locationCity}
                   onChange={(e) => setLocationCity(e.target.value)}
                   disabled={isUploading}
                 />
                 <Input
-                  placeholder="地點"
+                  placeholder={t('spot')}
                   value={locationSpot}
                   onChange={(e) => setLocationSpot(e.target.value)}
                   disabled={isUploading}
@@ -568,17 +592,17 @@ const UploadPhotoDialog: React.FC<UploadPhotoDialogProps> = ({ isOpen, onClose, 
               {isCompressing ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  處理中...
+                  {t('submitProcessing')}
                 </>
               ) : isUploading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  上傳中...
+                  {t('submitUploading')}
                 </>
               ) : files.length > 0 ? (
-                `上傳 ${files.length} 張照片`
+                t('submitCount', { count: files.length })
               ) : (
-                '上傳照片'
+                t('submit')
               )}
             </Button>
           </form>

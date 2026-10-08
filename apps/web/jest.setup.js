@@ -28,7 +28,16 @@ jest.mock('next-intl', () => ({
   useTranslations: (namespace) => {
     const msgs = namespace ? zhMessages[namespace] || {} : zhMessages
     return (key, values) => {
-      let msg = msgs[key] ?? key
+      // 支援巢狀 key（如 'types.redpoint.label'），與 next-intl 行為一致
+      let msg =
+        msgs[key] ??
+        String(key)
+          .split('.')
+          .reduce(
+            (node, part) => (node && typeof node === 'object' ? node[part] : undefined),
+            msgs
+          ) ??
+        key
       if (values && typeof msg === 'string') {
         Object.entries(values).forEach(([k, v]) => {
           msg = msg.replace(`{${k}}`, String(v))

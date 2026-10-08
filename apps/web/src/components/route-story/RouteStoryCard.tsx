@@ -1,7 +1,6 @@
 'use client'
 
 import { format } from 'date-fns'
-import { zhTW } from 'date-fns/locale'
 import {
   CheckCircle,
   Instagram,
@@ -11,6 +10,7 @@ import {
   ThumbsUp,
   Youtube,
 } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 import {
   ContentInteractorsPanel,
@@ -21,6 +21,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import apiClient from '@/lib/api/client'
+import { getDateFnsLocale } from '@/lib/date-locale'
 import { RouteStory } from '@/lib/types/route-story'
 import { cn } from '@/lib/utils'
 
@@ -41,7 +42,9 @@ export function RouteStoryCard({
   onComment,
   className,
 }: RouteStoryCardProps) {
+  const t = useTranslations('RouteStory')
   const [isLikersOpen, setIsLikersOpen] = useState(false)
+  const locale = useLocale()
   const [likers, setLikers] = useState<InteractorUser[]>([])
   const [isLoadingLikers, setIsLoadingLikers] = useState(false)
 
@@ -82,7 +85,7 @@ export function RouteStoryCard({
               {story.is_verified && <CheckCircle className="h-4 w-4 text-blue-500" />}
             </div>
             <span className="text-xs text-muted-foreground">
-              {format(new Date(story.created_at), 'PPP', { locale: zhTW })}
+              {format(new Date(story.created_at), 'PPP', { locale: getDateFnsLocale(locale) })}
             </span>
           </div>
         </div>
@@ -103,7 +106,7 @@ export function RouteStoryCard({
           <div className="mt-2">
             <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100">
               <Star className="mr-1 h-3 w-3" />
-              精選
+              {t('featured')}
             </Badge>
           </div>
         )}
@@ -120,7 +123,11 @@ export function RouteStoryCard({
             {story.photos.slice(0, 3).map((photo, index) => (
               <div key={index} className="relative aspect-square overflow-hidden rounded-md">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={photo} alt={`照片 ${index + 1}`} className="h-full w-full object-cover" />
+                <img
+                  src={photo}
+                  alt={t('photoAlt', { index: index + 1 })}
+                  className="h-full w-full object-cover"
+                />
                 {index === 2 && story.photos && story.photos.length > 3 && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-medium">
                     +{story.photos.length - 3}
@@ -141,7 +148,7 @@ export function RouteStoryCard({
               className="flex items-center gap-1 text-xs text-red-500 hover:text-red-600"
             >
               <Youtube className="h-4 w-4" />
-              <span>影片</span>
+              <span>{t('video')}</span>
             </a>
           )}
           {story.instagram_url && (
@@ -152,7 +159,7 @@ export function RouteStoryCard({
               className="flex items-center gap-1 text-xs text-pink-500 hover:text-pink-600"
             >
               <Instagram className="h-4 w-4" />
-              <span>貼文</span>
+              <span>{t('post')}</span>
             </a>
           )}
         </div>
@@ -196,7 +203,7 @@ export function RouteStoryCard({
           >
             <ThumbsUp className={cn('h-4 w-4', story.is_helpful && 'fill-blue-600')} />
             <span>{story.helpful_count || ''}</span>
-            <span className="text-xs">有幫助</span>
+            <span className="text-xs">{t('helpful')}</span>
           </Button>
 
           {/* 留言 - 只有當 onComment 有傳入時才顯示 */}
@@ -221,7 +228,7 @@ export function RouteStoryCard({
           isOpen={isLikersOpen}
           users={likers}
           isLoading={isLoadingLikers}
-          emptyMessage="還沒有人按讚"
+          emptyMessage={t('noLikes')}
         />
       </CardFooter>
     </Card>

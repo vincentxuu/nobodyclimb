@@ -14,6 +14,7 @@ import {
   TrendingUp,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import ProfilePageLayout from '@/components/profile/layout/ProfilePageLayout'
 import ProfilePageTitle from '@/components/profile/ProfilePageTitle'
 import { Badge } from '@/components/ui/badge'
@@ -31,6 +32,7 @@ import type {
 import { getCoachingAnalysis } from '@/lib/api/ai'
 
 export default function TrainingPage() {
+  const t = useTranslations('ProfileTraining')
   const { data, isLoading, error } = useQuery({
     queryKey: ['coaching-analysis'],
     queryFn: getCoachingAnalysis,
@@ -41,11 +43,7 @@ export default function TrainingPage() {
   return (
     <ProfilePageLayout>
       <div className="mx-auto max-w-3xl px-4 py-6">
-        <ProfilePageTitle
-          title="AI 教練"
-          subtitle="根據你的攀登數據，提供個人化的訓練分析與建議"
-          isAI
-        />
+        <ProfilePageTitle title={t('pageTitle')} subtitle={t('pageSubtitle')} isAI />
 
         {isLoading ? (
           <div className="flex justify-center py-16">
@@ -54,10 +52,8 @@ export default function TrainingPage() {
         ) : error ? (
           <div className="rounded-lg border border-dashed border-gray-200 py-12 text-center">
             <AlertTriangle className="mx-auto mb-3 h-8 w-8 text-gray-300" />
-            <p className="text-sm text-gray-400">無法載入教練分析</p>
-            <p className="mx-auto mt-2 max-w-xs text-xs text-gray-300">
-              請確認已登入並有攀登記錄，或稍後再試
-            </p>
+            <p className="text-sm text-gray-400">{t('loadFailed')}</p>
+            <p className="mx-auto mt-2 max-w-xs text-xs text-gray-300">{t('loadFailedHint')}</p>
           </div>
         ) : data ? (
           <div className="space-y-6">
@@ -77,6 +73,7 @@ export default function TrainingPage() {
 }
 
 function OverviewCard({ data }: { data: CoachingAnalysis }) {
+  const t = useTranslations('ProfileTraining')
   return (
     <div className="rounded-lg border border-gray-100 bg-white p-5 shadow-xs">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -87,7 +84,7 @@ function OverviewCard({ data }: { data: CoachingAnalysis }) {
           <div>
             <p className="text-lg font-semibold text-gray-800">{data.level}</p>
             <p className="text-xs text-gray-500">
-              {data.totalAscents} 條完攀 · {data.uniqueCrags} 個岩場
+              {t('overviewStats', { ascents: data.totalAscents, crags: data.uniqueCrags })}
             </p>
           </div>
         </div>
@@ -97,7 +94,7 @@ function OverviewCard({ data }: { data: CoachingAnalysis }) {
         <div className="mt-4 border-t border-gray-50 pt-4">
           <div className="flex items-center gap-2 text-xs text-gray-500">
             <Brain className="h-3.5 w-3.5" />
-            <span>訓練學派：{data.personality.trainingSchool}</span>
+            <span>{t('trainingSchool', { school: data.personality.trainingSchool })}</span>
           </div>
           <p className="mt-1 text-xs text-gray-400">{data.personality.schoolDescription}</p>
         </div>
@@ -118,9 +115,10 @@ function PersonalityBadge({ personality }: { personality: CoachingPersonality })
 }
 
 function WeaknessSection({ weaknesses }: { weaknesses: CoachingWeakness[] }) {
+  const t = useTranslations('ProfileTraining')
   return (
     <div>
-      <SectionTitle icon={<Target className="h-4 w-4" />} title="弱點分析與建議" />
+      <SectionTitle icon={<Target className="h-4 w-4" />} title={t('weaknessTitle')} />
       <div className="space-y-3">
         {weaknesses.map((w) => (
           <div key={w.id} className="rounded-lg border border-gray-100 bg-white p-4 shadow-xs">
@@ -149,15 +147,19 @@ function LevelRecommendationSection({
 }: {
   recommendation: CoachingLevelRecommendation
 }) {
+  const t = useTranslations('ProfileTraining')
   return (
     <div>
-      <SectionTitle icon={<Dumbbell className="h-4 w-4" />} title="等級訓練建議" />
+      <SectionTitle icon={<Dumbbell className="h-4 w-4" />} title={t('levelTitle')} />
       <div className="rounded-lg border border-gray-100 bg-white p-5 shadow-xs">
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-medium text-gray-800">{recommendation.label}</p>
             <p className="text-xs text-gray-500">
-              每週 {recommendation.daysPerWeek[0]}-{recommendation.daysPerWeek[1]} 天
+              {t('daysPerWeek', {
+                min: recommendation.daysPerWeek[0],
+                max: recommendation.daysPerWeek[1],
+              })}
             </p>
           </div>
         </div>
@@ -166,7 +168,7 @@ function LevelRecommendationSection({
           <div className="mb-3">
             <p className="mb-1.5 flex items-center gap-1.5 text-xs font-medium text-gray-600">
               <TrendingUp className="h-3 w-3" />
-              重點項目
+              {t('focusAreas')}
             </p>
             <ul className="space-y-1">
               {recommendation.focusAreas.slice(0, 4).map((area) => (
@@ -182,7 +184,7 @@ function LevelRecommendationSection({
           <div className="mb-4">
             <p className="mb-1.5 flex items-center gap-1.5 text-xs font-medium text-red-500">
               <ShieldAlert className="h-3 w-3" />
-              避免
+              {t('avoid')}
             </p>
             <ul className="space-y-1">
               {recommendation.avoid.map((item) => (
@@ -196,15 +198,15 @@ function LevelRecommendationSection({
 
         {recommendation.exercises.length > 0 && (
           <div>
-            <p className="mb-2 text-xs font-medium text-gray-600">推薦練習</p>
+            <p className="mb-2 text-xs font-medium text-gray-600">{t('recommendedExercises')}</p>
             <div className="overflow-x-auto">
               <table className="w-full text-xs">
                 <thead>
                   <tr className="border-b border-gray-100 text-left text-gray-400">
-                    <th className="pb-2 pr-4 font-medium">練習</th>
-                    <th className="pb-2 pr-4 font-medium">次數/時間</th>
-                    <th className="pb-2 pr-4 font-medium">組數</th>
-                    <th className="pb-2 font-medium">頻率</th>
+                    <th className="pb-2 pr-4 font-medium">{t('colExercise')}</th>
+                    <th className="pb-2 pr-4 font-medium">{t('colReps')}</th>
+                    <th className="pb-2 pr-4 font-medium">{t('colSets')}</th>
+                    <th className="pb-2 font-medium">{t('colFrequency')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -222,40 +224,48 @@ function LevelRecommendationSection({
 }
 
 function ExerciseRow({ exercise }: { exercise: CoachingExercise }) {
+  const t = useTranslations('ProfileTraining')
   return (
     <tr className="border-b border-gray-50 text-gray-600">
       <td className="py-2 pr-4 font-medium">{exercise.nameZh}</td>
       <td className="py-2 pr-4">{exercise.reps}</td>
       <td className="py-2 pr-4">
         {exercise.sets[0] === exercise.sets[1]
-          ? `${exercise.sets[0]} 組`
-          : `${exercise.sets[0]}-${exercise.sets[1]} 組`}
+          ? t('sets', { count: exercise.sets[0] })
+          : t('setsRange', { min: exercise.sets[0], max: exercise.sets[1] })}
       </td>
       <td className="py-2">
         {exercise.sessionsPerWeek[0] === exercise.sessionsPerWeek[1]
-          ? `${exercise.sessionsPerWeek[0]}x/週`
-          : `${exercise.sessionsPerWeek[0]}-${exercise.sessionsPerWeek[1]}x/週`}
+          ? t('perWeek', { count: exercise.sessionsPerWeek[0] })
+          : t('perWeekRange', {
+              min: exercise.sessionsPerWeek[0],
+              max: exercise.sessionsPerWeek[1],
+            })}
       </td>
     </tr>
   )
 }
 
 function ProgressSection({ progress }: { progress: CoachingTrainingProgress }) {
+  const t = useTranslations('ProfileTraining')
   const percentage = Math.round(progress.completionRate)
 
   return (
     <div>
-      <SectionTitle icon={<Sparkles className="h-4 w-4" />} title="訓練進度" />
+      <SectionTitle icon={<Sparkles className="h-4 w-4" />} title={t('progressTitle')} />
       <div className="rounded-lg border border-gray-100 bg-white p-5 shadow-xs">
         <div className="flex items-center gap-5">
           <ProgressRing percentage={percentage} />
           <div>
             <p className="text-sm font-medium text-gray-800">
-              已完成 {progress.completed}/{progress.total} 個訓練日
+              {t('progressSummary', { completed: progress.completed, total: progress.total })}
             </p>
             {progress.lastCompleted && (
               <p className="mt-1 text-xs text-gray-500">
-                最新完成：第 {progress.lastCompleted.week} 週第 {progress.lastCompleted.day} 天
+                {t('lastCompleted', {
+                  week: progress.lastCompleted.week,
+                  day: progress.lastCompleted.day,
+                })}
               </p>
             )}
           </div>
@@ -294,9 +304,10 @@ function ProgressRing({ percentage }: { percentage: number }) {
 }
 
 function GoalsSection({ goals }: { goals: CoachingGoal[] }) {
+  const t = useTranslations('ProfileTraining')
   return (
     <div>
-      <SectionTitle icon={<Flag className="h-4 w-4" />} title="活躍目標" />
+      <SectionTitle icon={<Flag className="h-4 w-4" />} title={t('goalsTitle')} />
       <div className="rounded-lg border border-gray-100 bg-white shadow-xs">
         <ul className="divide-y divide-gray-50">
           {goals.map((g) => (
@@ -304,8 +315,8 @@ function GoalsSection({ goals }: { goals: CoachingGoal[] }) {
               <div>
                 <p className="text-sm font-medium text-gray-700">{g.title}</p>
                 <p className="text-xs text-gray-400">
-                  目標：{g.target}
-                  {g.currentProgress && ` · 目前：${g.currentProgress}`}
+                  {t('goalTarget', { target: g.target })}
+                  {g.currentProgress && ` · ${t('goalCurrent', { value: g.currentProgress })}`}
                 </p>
               </div>
               <Badge
@@ -315,7 +326,7 @@ function GoalsSection({ goals }: { goals: CoachingGoal[] }) {
                     : 'bg-gray-100 text-gray-500'
                 }
               >
-                {g.status === 'active' ? '進行中' : g.status}
+                {g.status === 'active' ? t('statusActive') : g.status}
               </Badge>
             </li>
           ))}
@@ -325,7 +336,7 @@ function GoalsSection({ goals }: { goals: CoachingGoal[] }) {
             href="/profile/goals"
             className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600"
           >
-            管理目標
+            {t('manageGoals')}
             <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
@@ -335,16 +346,15 @@ function GoalsSection({ goals }: { goals: CoachingGoal[] }) {
 }
 
 function PersonalityCTA() {
+  const t = useTranslations('ProfileTraining')
   return (
     <div className="rounded-lg border border-dashed border-amber-200 bg-amber-50/50 p-5 text-center">
       <Brain className="mx-auto mb-2 h-7 w-7 text-amber-500" />
-      <p className="text-sm font-medium text-gray-700">還沒做攀岩人格測驗？</p>
-      <p className="mx-auto mt-1 max-w-xs text-xs text-gray-400">
-        完成測驗後，教練會根據你的人格型態和對應訓練學派提供更精準的建議
-      </p>
+      <p className="text-sm font-medium text-gray-700">{t('quizCtaTitle')}</p>
+      <p className="mx-auto mt-1 max-w-xs text-xs text-gray-400">{t('quizCtaDesc')}</p>
       <Link href="/quiz">
         <Button size="sm" className="mt-3">
-          開始測驗
+          {t('quizCtaButton')}
         </Button>
       </Link>
     </div>

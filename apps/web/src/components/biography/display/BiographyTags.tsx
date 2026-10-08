@@ -4,6 +4,7 @@ import { ChevronDown, ChevronUp, Sparkles, Tag } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 import { getTagOptionById } from '@/lib/constants/biography-tags'
+import { useBiographyTagText } from '@/lib/hooks/useBiographyTagText'
 import type { BiographyV2, TagOption, TagSelection } from '@/lib/types/biography-v2'
 import { renderDynamicTag } from '@/lib/types/biography-v2'
 import { cn } from '@/lib/utils'
@@ -24,10 +25,11 @@ interface BiographyTagsProps {
  */
 export function BiographyTags({ biography, mobileLimit = 8, className }: BiographyTagsProps) {
   const t = useTranslations('BiographyPage')
+  const { tagLabel, tagTemplate } = useBiographyTagText()
   const [showAll, setShowAll] = useState(false)
 
   // 將選中的標籤整理為扁平列表，自訂標籤優先顯示
-  const selectedTags = useMemo(() => {
+  const selectedOptions = useMemo(() => {
     if (!biography.tags || biography.tags.length === 0) return []
 
     // 建立自訂標籤查找表
@@ -67,47 +69,28 @@ export function BiographyTags({ biography, mobileLimit = 8, className }: Biograp
 
     const customTags: Array<{
       id: string
-      label: string
+      option: TagOption
       isCustom: boolean
     }> = []
     const systemTags: Array<{
       id: string
-      label: string
+      option: TagOption
       isCustom: boolean
     }> = []
 
     for (const tagSelection of biography.tags) {
       const option = findTagOption(tagSelection.tag_id)
       if (option) {
-        // 處理動態標籤
-        if (option.is_dynamic) {
-          const renderedLabels = renderDynamicTag(option, biography)
-          if (Array.isArray(renderedLabels)) {
-            for (const label of renderedLabels) {
-              systemTags.push({
-                id: `${tagSelection.tag_id}_${label}`,
-                label,
-                isCustom: false,
-              })
-            }
-          } else {
-            systemTags.push({
-              id: tagSelection.tag_id,
-              label: renderedLabels,
-              isCustom: false,
-            })
-          }
+        const tag = {
+          id: tagSelection.tag_id,
+          option,
+          // 動態標籤一律視為系統標籤
+          isCustom: option.is_dynamic ? false : isCustomTag(tagSelection),
+        }
+        if (tag.isCustom) {
+          customTags.push(tag)
         } else {
-          const tag = {
-            id: tagSelection.tag_id,
-            label: option.label,
-            isCustom: isCustomTag(tagSelection),
-          }
-          if (tag.isCustom) {
-            customTags.push(tag)
-          } else {
-            systemTags.push(tag)
-          }
+          systemTags.push(tag)
         }
       }
     }
@@ -115,6 +98,23 @@ export function BiographyTags({ biography, mobileLimit = 8, className }: Biograp
     // 自訂標籤優先,然後是系統標籤
     return [...customTags, ...systemTags]
   }, [biography])
+
+  // 依語系取得顯示文字（id 不變，只換 label／動態模板）
+  const selectedTags = selectedOptions.flatMap(({ id, option, isCustom }) => {
+    const label = tagLabel(option.id, option.label)
+    if (!option.is_dynamic) return [{ id, label, isCustom }]
+    const rendered = renderDynamicTag(
+      {
+        ...option,
+        label,
+        template: option.template ? tagTemplate(option.id, option.template) : option.template,
+      },
+      biography
+    )
+    return Array.isArray(rendered)
+      ? rendered.map((text) => ({ id: `${id}_${text}`, label: text, isCustom: false }))
+      : [{ id, label: rendered, isCustom: false }]
+  })
 
   if (selectedTags.length === 0) {
     return null

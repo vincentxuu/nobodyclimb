@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { normalizeNewlines } from '@/lib/utils'
 
 interface RelatedStory {
@@ -20,13 +21,16 @@ interface RelatedStoriesProps {
   authorSlug?: string
 }
 
-const TYPE_LABELS = {
-  'core-stories': '核心故事',
-  'one-liners': '一句話',
-  stories: '小故事',
-}
+const TYPE_LABEL_KEYS = {
+  'core-stories': 'coreStories',
+  'one-liners': 'oneLiners',
+  stories: 'stories',
+} as const
 
 export function RelatedStories({ stories, authorName }: RelatedStoriesProps) {
+  const t = useTranslations('StoryDetail')
+  const tType = useTranslations('StoryPage.typeLabels')
+
   if (stories.length === 0) {
     return null
   }
@@ -34,7 +38,9 @@ export function RelatedStories({ stories, authorName }: RelatedStoriesProps) {
   return (
     <div className="mt-12">
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-[#1B1A1A]">來自 {authorName} 的更多故事</h2>
+        <h2 className="text-xl font-semibold text-[#1B1A1A]">
+          {t('moreFrom', { name: authorName })}
+        </h2>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -50,7 +56,7 @@ export function RelatedStories({ stories, authorName }: RelatedStoriesProps) {
                 {/* 類型標籤 */}
                 <div className="mb-3 flex items-center gap-2">
                   <span className="text-xs font-medium text-[#8E8C8C]">
-                    {TYPE_LABELS[story.type]}
+                    {tType(TYPE_LABEL_KEYS[story.type])}
                   </span>
                   {story.category && (
                     <>
@@ -77,7 +83,7 @@ export function RelatedStories({ stories, authorName }: RelatedStoriesProps) {
 
                 {/* 查看更多指示 */}
                 <div className="mt-3 flex items-center gap-1 text-xs font-medium text-brand-yellow-100 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span>閱讀全文</span>
+                  <span>{t('readMore')}</span>
                   <ArrowRight size={12} />
                 </div>
               </div>

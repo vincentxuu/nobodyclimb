@@ -13,10 +13,12 @@ import {
   Wrench,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import * as React from 'react'
-import { DIFFICULTY_COLORS, DIFFICULTY_LABELS, ROUTES } from '@/lib/games/rope-system/constants'
+import { DIFFICULTY_COLORS, ROUTES } from '@/lib/games/rope-system/constants'
 import type { Category, CategoryIconName, CategoryProgress } from '@/lib/games/rope-system/types'
 import { cn } from '@/lib/utils'
+import { useCategoryText } from './use-category-text'
 
 /** 類別圖示對應 */
 const CategoryIcons: Record<CategoryIconName, React.ComponentType<{ className?: string }>> = {
@@ -39,8 +41,11 @@ interface CategoryCardProps {
 }
 
 export function CategoryCard({ category, progress, className }: CategoryCardProps) {
+  const t = useTranslations('RopeGame')
+  const getCategoryText = useCategoryText()
   const difficultyColor = DIFFICULTY_COLORS[category.difficulty]
-  const difficultyLabel = DIFFICULTY_LABELS[category.difficulty]
+  const difficultyLabel = t(`difficulty.${category.difficulty}`)
+  const categoryText = getCategoryText(category)
 
   // 計算進度百分比
   const progressPercent = progress
@@ -66,8 +71,8 @@ export function CategoryCard({ category, progress, className }: CategoryCardProp
               return <IconComponent className="h-6 w-6 text-[#1B1A1A]" />
             })()}
             <div>
-              <h3 className="font-medium text-[#1B1A1A]">{category.name}</h3>
-              <p className="text-sm text-[#535353]">{category.description}</p>
+              <h3 className="font-medium text-[#1B1A1A]">{categoryText.name}</h3>
+              <p className="text-sm text-[#535353]">{categoryText.description}</p>
             </div>
           </div>
         </div>
@@ -90,7 +95,9 @@ export function CategoryCard({ category, progress, className }: CategoryCardProp
         </div>
 
         {/* 題數 */}
-        <div className="mb-3 text-sm text-[#535353]">{category.questionCount} 題</div>
+        <div className="mb-3 text-sm text-[#535353]">
+          {t('questionCount', { count: category.questionCount })}
+        </div>
 
         {/* 進度條 */}
         <div className="relative h-2 overflow-hidden rounded-full bg-[#E5E5E5]">

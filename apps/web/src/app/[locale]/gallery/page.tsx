@@ -1,6 +1,6 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import React, { useCallback, useEffect, useState } from 'react'
 import GalleryGrid from '@/components/gallery/gallery-grid'
 import PhotoPopup from '@/components/gallery/photo-popup'
@@ -9,6 +9,7 @@ import { LoadMoreButton } from '@/components/ui/load-more-button'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import { PageHeader } from '@/components/ui/page-header'
 import { galleryService } from '@/lib/api/services'
+import { toIntlLocale } from '@/lib/date-locale'
 import { GalleryPhoto } from '@/lib/types'
 
 // Transform API photo to component format
@@ -30,7 +31,11 @@ interface DisplayPhoto {
   }
 }
 
-const transformPhoto = (photo: GalleryPhoto, photoAltFallback: string): DisplayPhoto => ({
+const transformPhoto = (
+  photo: GalleryPhoto,
+  photoAltFallback: string,
+  locale: string
+): DisplayPhoto => ({
   id: photo.id,
   src: photo.image_url,
   alt: photo.caption || photoAltFallback,
@@ -43,7 +48,7 @@ const transformPhoto = (photo: GalleryPhoto, photoAltFallback: string): DisplayP
         }
       : undefined,
   uploadDate: photo.created_at
-    ? new Date(photo.created_at).toLocaleDateString('zh-TW', {
+    ? new Date(photo.created_at).toLocaleDateString(toIntlLocale(locale), {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
@@ -59,6 +64,7 @@ const transformPhoto = (photo: GalleryPhoto, photoAltFallback: string): DisplayP
 
 const GalleryPage: React.FC = () => {
   const t = useTranslations('GalleryPage')
+  const locale = useLocale()
   const [selectedPhoto, setSelectedPhoto] = useState<DisplayPhoto | null>(null)
   const [currentIndex, setCurrentIndex] = useState<number>(0)
   const [photos, setPhotos] = useState<DisplayPhoto[]>([])
@@ -83,7 +89,7 @@ const GalleryPage: React.FC = () => {
 
         if (response.success && response.data) {
           const transformedPhotos = response.data.map((photo) =>
-            transformPhoto(photo, t('photoAlt'))
+            transformPhoto(photo, t('photoAlt'), locale)
           )
 
           if (append) {
@@ -106,7 +112,7 @@ const GalleryPage: React.FC = () => {
         setIsLoadingMore(false)
       }
     },
-    [t]
+    [t, locale]
   )
 
   // Initial load

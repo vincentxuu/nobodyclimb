@@ -4,6 +4,7 @@ import type { RankId } from '@nobodyclimb/types'
 import { motion } from 'framer-motion'
 import { Eye, MessageCircle, Users } from 'lucide-react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 import { PersonalityBadge } from '@/components/profile/PersonalityBadge'
 import { PersonalityCTA } from '@/components/profile/PersonalityCTA'
@@ -32,6 +33,8 @@ interface HeroSectionProps {
  */
 export function HeroSection({ person, followerCount, isOwner, onFollowChange }: HeroSectionProps) {
   const { user } = useAuthStore()
+  const t = useTranslations('BiographyPage')
+  const tm = useTranslations('BiographyMisc')
   const hasPersonality = !!person.personality_type
   const isViewingOwnProfile = isOwner && !!user
   const { data: quizResult } = useQuizResult(hasPersonality && isViewingOwnProfile)
@@ -60,7 +63,7 @@ export function HeroSection({ person, followerCount, isOwner, onFollowChange }: 
         <div className="relative w-full aspect-3/1 bg-gray-200 overflow-hidden rounded-b-xl">
           <Image
             src={person.cover_image || getDefaultCoverUrl(person.id || person.name || 'default')}
-            alt={`${person.name} 的封面照片`}
+            alt={tm('coverPhotoAlt', { name: person.name })}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 1024px"
@@ -79,7 +82,7 @@ export function HeroSection({ person, followerCount, isOwner, onFollowChange }: 
             <ProfileAvatar
               src={person.avatar_url}
               name={person.name || 'anonymous'}
-              alt={`${person.name} 的頭像`}
+              alt={t('avatarAlt', { name: person.name })}
               size={160}
               priority
             />
@@ -158,8 +161,8 @@ export function HeroSection({ person, followerCount, isOwner, onFollowChange }: 
                   <span>{commentsCount}</span>
                 </button>
                 <ShareButton
-                  title={`${person.name} 的攀岩人物誌 - NobodyClimb`}
-                  description={person.title || `來看看 ${person.name} 的攀岩故事`}
+                  title={tm('shareTitle', { name: person.name })}
+                  description={person.title || tm('shareDescription', { name: person.name })}
                   className="text-text-subtle hover:text-text-subtle"
                 />
               </div>

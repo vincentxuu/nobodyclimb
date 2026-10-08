@@ -2,17 +2,17 @@
 
 import type { RankId } from '@nobodyclimb/types'
 import { formatDistanceToNow } from 'date-fns'
-import { zhTW } from 'date-fns/locale'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, ChevronUp, Loader2, MessageCircle, Send, Trash2 } from 'lucide-react'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import { RankBadge } from '@/components/rank/RankBadge'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
 import type { ContentComment } from '@/lib/api/services'
+import { getDateFnsLocale } from '@/lib/date-locale'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/authStore'
 
@@ -34,11 +34,11 @@ interface ContentCommentSheetProps {
 }
 
 // 格式化時間
-const formatTime = (dateString: string) => {
+const formatTime = (dateString: string, locale: string) => {
   try {
     return formatDistanceToNow(new Date(dateString), {
       addSuffix: true,
-      locale: zhTW,
+      locale: getDateFnsLocale(locale),
     })
   } catch {
     return dateString
@@ -56,6 +56,7 @@ function CommentItem({
   onDelete?: (_id: string) => void
 }) {
   const t = useTranslations('BiographyPage')
+  const locale = useLocale()
   const displayName = comment.display_name || comment.username || t('anonymous')
 
   return (
@@ -76,7 +77,7 @@ function CommentItem({
           {comment.user_rank_id && comment.user_rank_id !== 'foothill' && (
             <RankBadge tier={comment.user_rank_id as RankId} size="sm" />
           )}
-          <span className="text-xs text-gray-400">{formatTime(comment.created_at)}</span>
+          <span className="text-xs text-gray-400">{formatTime(comment.created_at, locale)}</span>
           {onDelete && currentUserId === comment.user_id && (
             <button
               onClick={() => onDelete(comment.id)}

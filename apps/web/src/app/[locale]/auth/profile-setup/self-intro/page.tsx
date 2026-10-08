@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import { biographyService } from '@/lib/api/services'
 import { useAuth } from '@/lib/hooks/useAuth'
+import { useBiographyStoryText } from '@/lib/hooks/useBiographyStoryText'
 import { useQuestions } from '@/lib/hooks/useQuestions'
 import { cn } from '@/lib/utils'
 
@@ -25,6 +26,8 @@ interface OneLinerFormData {
 export default function SelfIntroPage() {
   const router = useRouter()
   const t = useTranslations('Auth')
+  // 核心故事題目文字來自 API（中文）；依 id 查訊息檔取當前語系，查不到才用 API 原文
+  const { questionTitle, questionSubtitle, questionPlaceholder } = useBiographyStoryText()
   const { status, isLoading } = useAuth()
   const { toast } = useToast()
   const { data: questionsData, isLoading: questionsLoading } = useQuestions()
@@ -139,14 +142,20 @@ export default function SelfIntroPage() {
           ) : (
             questionsToShow.map((question) => (
               <div key={question.id} className="space-y-2">
-                <label className="text-gray-700 font-medium">{question.title}</label>
-                {question.subtitle && <p className="text-xs text-gray-500">{question.subtitle}</p>}
+                <label className="text-gray-700 font-medium">
+                  {questionTitle(question.id, question.title)}
+                </label>
+                {question.subtitle && (
+                  <p className="text-xs text-gray-500">
+                    {questionSubtitle(question.id, question.subtitle)}
+                  </p>
+                )}
                 <input
                   type="text"
                   name={question.id}
                   value={formData[question.id] || ''}
                   onChange={handleChange}
-                  placeholder={question.placeholder || ''}
+                  placeholder={questionPlaceholder(question.id, question.placeholder || '')}
                   className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-hidden focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
                 />
               </div>

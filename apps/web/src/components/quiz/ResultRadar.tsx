@@ -2,6 +2,7 @@
 
 import type { PersonalityType } from '@nobodyclimb/types'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useRef } from 'react'
 
 interface Props {
@@ -12,10 +13,10 @@ interface Props {
 }
 
 const AXES = [
-  { label: '力量/技巧', labelLeft: 'Power', labelRight: 'Technique' },
-  { label: '目標/自由', labelLeft: 'Goal', labelRight: 'Free' },
-  { label: '大膽/穩健', labelLeft: 'Bold', labelRight: 'Steady' },
-]
+  { key: 'body', labelLeft: 'Power', labelRight: 'Technique' },
+  { key: 'motive', labelLeft: 'Goal', labelRight: 'Free' },
+  { key: 'mind', labelLeft: 'Bold', labelRight: 'Steady' },
+] as const
 
 function getDefaultPercents(code: string): [number, number, number] {
   const body = code[0] === 'P' ? 72 : 28
@@ -29,7 +30,8 @@ export function drawRadar(
   width: number,
   height: number,
   percents: [number, number, number],
-  color: string
+  color: string,
+  axisLabels: readonly [string, string, string]
 ) {
   const cx = width / 2
   const cy = height / 2
@@ -105,17 +107,21 @@ export function drawRadar(
   ctx.fillStyle = '#374151'
 
   const labelRadius = radius * 1.2
-  AXES.forEach((axis, i) => {
+  AXES.forEach((_axis, i) => {
     const x = cx + labelRadius * Math.cos(angles[i])
     const y = cy + labelRadius * Math.sin(angles[i])
-    ctx.fillText(axis.label, x, y + 5)
+    ctx.fillText(axisLabels[i], x, y + 5)
   })
 
   ctx.restore()
 }
 
 export function ResultRadar({ personality, bodyPercent, motivePercent, mindPercent }: Props) {
+  const t = useTranslations('Quiz.result')
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const bodyLabel = t('radarAxes.body')
+  const motiveLabel = t('radarAxes.motive')
+  const mindLabel = t('radarAxes.mind')
   const defaults = getDefaultPercents(personality.code)
   const percents = useMemo<[number, number, number]>(
     () => [bodyPercent ?? defaults[0], motivePercent ?? defaults[1], mindPercent ?? defaults[2]],
@@ -136,8 +142,8 @@ export function ResultRadar({ personality, bodyPercent, motivePercent, mindPerce
     canvas.style.height = `${size}px`
     ctx.scale(dpr, dpr)
 
-    drawRadar(ctx, size, size, percents, personality.color)
-  }, [percents, personality.color])
+    drawRadar(ctx, size, size, percents, personality.color, [bodyLabel, motiveLabel, mindLabel])
+  }, [percents, personality.color, bodyLabel, motiveLabel, mindLabel])
 
   return (
     <motion.div
@@ -146,12 +152,12 @@ export function ResultRadar({ personality, bodyPercent, motivePercent, mindPerce
       transition={{ duration: 0.5, delay: 0.2 }}
       className="mb-10 flex flex-col items-center"
     >
-      <h2 className="mb-4 text-lg font-semibold text-gray-900">性格雷達圖</h2>
+      <h2 className="mb-4 text-lg font-semibold text-gray-900">{t('radarTitle')}</h2>
       <canvas ref={canvasRef} className="max-w-full" />
       <div className="mt-4 flex gap-6 text-sm text-gray-500">
         {AXES.map((axis, i) => (
-          <span key={axis.label}>
-            {axis.label}: <strong className="text-gray-900">{percents[i]}%</strong>
+          <span key={axis.key}>
+            {t(`radarAxes.${axis.key}`)}: <strong className="text-gray-900">{percents[i]}%</strong>
           </span>
         ))}
       </div>

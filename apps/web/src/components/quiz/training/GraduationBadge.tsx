@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { Trophy } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 
 interface GraduationBadgeProps {
@@ -15,6 +16,7 @@ export function GraduationBadge({
   accentColor,
   personalityName,
 }: GraduationBadgeProps) {
+  const t = useTranslations('Quiz.training')
   const [showCelebration, setShowCelebration] = useState(false)
   const wasGraduated = useRef(isGraduated)
 
@@ -75,8 +77,8 @@ export function GraduationBadge({
           <Trophy className="h-7 w-7" style={{ color: accentColor }} />
         </div>
         <div>
-          <h3 className="font-bold text-gray-900">訓練計畫完成！</h3>
-          <p className="text-sm text-gray-600">恭喜你完成 {personalityName} 的 4 週訓練計畫</p>
+          <h3 className="font-bold text-gray-900">{t('graduatedTitle')}</h3>
+          <p className="text-sm text-gray-600">{t('graduatedDesc', { name: personalityName })}</p>
         </div>
       </motion.div>
     </div>

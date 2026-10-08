@@ -27,6 +27,7 @@ import { Button } from '@/components/ui/button'
 import PlaceholderImage from '@/components/ui/placeholder-image'
 import { useAdjacentGyms, useGymDetail, useRelatedGyms } from '@/hooks/api/useGyms'
 import { Link } from '@/i18n/navigation'
+import { facilityLabel, gymTypeLabel } from '@/lib/data-i18n/enum-labels'
 import type { GymDetailData } from '@/lib/gym-data'
 
 // 開箱介紹類型對應的圖標和標籤
@@ -48,6 +49,7 @@ const reviewTypeConfig = {
 export default function GymDetailClient({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const t = useTranslations('GymPage')
+  const tData = useTranslations('GymData')
 
   // 使用 API hooks 獲取資料
   const { data: gym, isLoading, error } = useGymDetail(id)
@@ -179,7 +181,7 @@ export default function GymDetailClient({ params }: { params: Promise<{ id: stri
               <GymCoverGenerator
                 type={gym.type}
                 name={gym.name}
-                typeLabel={gym.typeLabel}
+                typeLabel={gymTypeLabel(tData, gym.type)}
                 aspectRatio="video"
                 className="h-full w-full"
               />
@@ -213,7 +215,7 @@ export default function GymDetailClient({ params }: { params: Promise<{ id: stri
               )}
             </div>
             <span className="rounded bg-orange-100 px-3 py-1 text-sm text-orange-600">
-              {gym.typeLabel}
+              {gymTypeLabel(tData, gym.type)}
             </span>
           </div>
 
@@ -228,7 +230,7 @@ export default function GymDetailClient({ params }: { params: Promise<{ id: stri
             <div className="flex flex-wrap gap-2">
               {gym.facilities.map((facility, index) => (
                 <span key={index} className="rounded bg-gray-100 px-2 py-1 text-sm text-gray-600">
-                  {facility}
+                  {facilityLabel(tData, facility)}
                 </span>
               ))}
             </div>
@@ -580,7 +582,7 @@ export default function GymDetailClient({ params }: { params: Promise<{ id: stri
                     <GymCoverGenerator
                       type={relatedGym.type}
                       name={relatedGym.name}
-                      typeLabel={relatedGym.typeLabel}
+                      typeLabel={gymTypeLabel(tData, relatedGym.type)}
                       aspectRatio="card"
                       className="h-full w-full"
                     />

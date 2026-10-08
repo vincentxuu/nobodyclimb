@@ -4,6 +4,7 @@ import { getPersonalityColor, getPersonalityType } from '@nobodyclimb/constants'
 import type { PersonalityTypeCode } from '@nobodyclimb/types'
 import lottie, { AnimationItem } from 'lottie-web'
 import { Flame, Wind } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 
@@ -159,12 +160,13 @@ export function BiographyPersonality({
   boldPct,
   className,
 }: BiographyPersonalityProps) {
+  const tm = useTranslations('BiographyMisc')
   const t = getPersonalityType(personalityType as PersonalityTypeCode)
   const color = getPersonalityColor(personalityType as PersonalityTypeCode)
   if (!t) return null
   return (
     <section className={cn('py-6', className)}>
-      <h3 className="mb-4 text-lg font-semibold text-brand-dark">攀岩人格</h3>
+      <h3 className="mb-4 text-lg font-semibold text-brand-dark">{tm('personalityTitle')}</h3>
       <div className="rounded-2xl bg-white p-6 shadow-xs">
         <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
           <div className="flex flex-col items-center gap-4">
@@ -184,7 +186,9 @@ export function BiographyPersonality({
               </span>
             </p>
             <div className="mb-3">
-              <span className="text-xs font-medium text-gray-500">優勢</span>
+              <span className="text-xs font-medium text-gray-500">
+                {tm('personalityStrengths')}
+              </span>
               <div className="mt-1 flex flex-wrap justify-center gap-1.5 md:justify-start">
                 {t.strengths.map((s) => (
                   <span
@@ -198,7 +202,9 @@ export function BiographyPersonality({
               </div>
             </div>
             <div className="mb-4">
-              <span className="text-xs font-medium text-gray-500">盲點</span>
+              <span className="text-xs font-medium text-gray-500">
+                {tm('personalityBlindSpots')}
+              </span>
               <div className="mt-1 flex flex-wrap justify-center gap-1.5 md:justify-start">
                 {t.blindSpots.map((w) => (
                   <span
@@ -211,7 +217,9 @@ export function BiographyPersonality({
               </div>
             </div>
             <div className="flex items-center justify-center gap-2 md:justify-start">
-              <span className="text-xs font-medium text-gray-500">最佳狀態</span>
+              <span className="text-xs font-medium text-gray-500">
+                {tm('personalityBestState')}
+              </span>
               <span className="inline-flex items-center gap-1 rounded-full bg-cyan-50 px-3 py-1 text-sm font-medium text-cyan-700">
                 <Wind className="h-4 w-4" />
                 Flow

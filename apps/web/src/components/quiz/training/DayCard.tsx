@@ -3,7 +3,9 @@
 import type { PersonalityTypeCode, TrainingDay, TrainingProgressRecord } from '@nobodyclimb/types'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, ChevronDown, Clock, Dumbbell, StickyNote } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
+import { useTrainingText } from '@/lib/quiz/training-i18n'
 
 interface DayCardProps {
   day: TrainingDay
@@ -28,6 +30,9 @@ export function DayCard({
   onToggleComplete,
   personalityType,
 }: DayCardProps) {
+  const t = useTranslations('Quiz.training')
+  const tResult = useTranslations('Quiz.result')
+  const tt = useTrainingText()
   const isCompleted = !!progressRecord?.completed
   const [showNotes, setShowNotes] = useState(false)
   const [notes, setNotes] = useState(progressRecord?.notes ?? '')
@@ -81,16 +86,16 @@ export function DayCard({
         <div className={`min-w-0 flex-1 ${isCompleted ? 'opacity-60' : ''}`}>
           <div className="flex items-center gap-2">
             <h3 className="font-semibold text-gray-900">
-              Day {day.dayNumber}：{day.title}
+              {tResult('dayHeading', { day: day.dayNumber, title: tt(day.title) })}
             </h3>
             {hasNotes && <StickyNote className="h-3.5 w-3.5 shrink-0 text-amber-500" />}
           </div>
 
-          <p className="mt-1 text-sm text-gray-600">{day.description}</p>
+          <p className="mt-1 text-sm text-gray-600">{tt(day.description)}</p>
 
           <div className="mt-2 flex items-center gap-1 text-xs text-gray-400">
             <Clock className="h-3.5 w-3.5" />
-            <span>{day.duration} 分鐘</span>
+            <span>{tResult('minutes', { count: day.duration })}</span>
           </div>
 
           <div className="mt-3 space-y-2">
@@ -98,8 +103,8 @@ export function DayCard({
               <div key={i} className="flex items-start gap-2 text-sm">
                 <Dumbbell className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gray-400" />
                 <div>
-                  <span className="font-medium text-gray-700">{exercise.name}</span>
-                  <span className="text-gray-500"> — {exercise.description}</span>
+                  <span className="font-medium text-gray-700">{tt(exercise.name)}</span>
+                  <span className="text-gray-500"> — {tt(exercise.description)}</span>
                 </div>
               </div>
             ))}
@@ -113,7 +118,7 @@ export function DayCard({
               <ChevronDown
                 className={`h-3.5 w-3.5 transition-transform ${showNotes ? 'rotate-180' : ''}`}
               />
-              {hasNotes ? '查看筆記' : '新增筆記'}
+              {hasNotes ? t('viewNotes') : t('addNotes')}
             </button>
 
             <AnimatePresence>
@@ -128,7 +133,7 @@ export function DayCard({
                     <textarea
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
-                      placeholder="記錄今天的訓練心得..."
+                      placeholder={t('notesPlaceholder')}
                       className="w-full resize-none rounded-lg border border-gray-200 p-2 text-sm focus:border-gray-300 focus:outline-hidden"
                       rows={3}
                     />
@@ -138,7 +143,7 @@ export function DayCard({
                       className="rounded-lg px-3 py-1.5 text-xs font-medium text-white transition-colors"
                       style={{ backgroundColor: accentColor }}
                     >
-                      {isSavingNotes ? '儲存中...' : '儲存筆記'}
+                      {isSavingNotes ? t('savingNotes') : t('saveNotes')}
                     </button>
                   </div>
                 </motion.div>

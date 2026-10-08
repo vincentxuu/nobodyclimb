@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 
 interface ProgressRingProps {
   completed: number
@@ -17,6 +18,7 @@ export function ProgressRing({
   strokeWidth = 8,
   color = '#10b981',
 }: ProgressRingProps) {
+  const t = useTranslations('Quiz.training')
   const radius = (size - strokeWidth) / 2
   const circumference = 2 * Math.PI * radius
   const percent = total > 0 ? completed / total : 0
@@ -50,7 +52,7 @@ export function ProgressRing({
         <span className="text-2xl font-bold text-gray-900">
           {completed}/{total}
         </span>
-        <span className="text-xs text-gray-500">天</span>
+        <span className="text-xs text-gray-500">{t('daysUnit')}</span>
       </div>
     </div>
   )

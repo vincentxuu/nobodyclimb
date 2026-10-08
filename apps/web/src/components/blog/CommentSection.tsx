@@ -1,15 +1,15 @@
 'use client'
 
 import { formatDistanceToNow } from 'date-fns'
-import { zhTW } from 'date-fns/locale'
 import { Loader2, MessageCircle, Send, Trash2 } from 'lucide-react'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
 import { postService } from '@/lib/api/services'
+import { getDateFnsLocale } from '@/lib/date-locale'
 import { useAuthStore } from '@/store/authStore'
 
 // 評論類型定義
@@ -29,11 +29,11 @@ interface CommentSectionProps {
 }
 
 // 格式化時間
-const formatTime = (dateString: string) => {
+const formatTime = (dateString: string, locale: string) => {
   try {
     return formatDistanceToNow(new Date(dateString), {
       addSuffix: true,
-      locale: zhTW,
+      locale: getDateFnsLocale(locale),
     })
   } catch {
     return dateString
@@ -51,6 +51,7 @@ const CommentItem = ({
   onDelete: (_id: string) => void
 }) => {
   const t = useTranslations('BlogPage')
+  const locale = useLocale()
   const displayName = comment.display_name || comment.username || t('anonymous')
 
   return (
@@ -68,7 +69,7 @@ const CommentItem = ({
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">{displayName}</span>
-          <span className="text-xs text-gray-400">{formatTime(comment.created_at)}</span>
+          <span className="text-xs text-gray-400">{formatTime(comment.created_at, locale)}</span>
           {currentUserId === comment.user_id && (
             <button
               onClick={() => onDelete(comment.id)}

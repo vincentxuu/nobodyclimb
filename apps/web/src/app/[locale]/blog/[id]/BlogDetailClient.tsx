@@ -3,7 +3,7 @@
 import { Bookmark, Eye, Loader2, Mountain } from 'lucide-react'
 import Image from 'next/image'
 import { useParams, useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import {
   ContentInteractorsPanel,
@@ -19,6 +19,7 @@ import { useToast } from '@/components/ui/use-toast'
 import { Link } from '@/i18n/navigation'
 import apiClient from '@/lib/api/client'
 import { postService } from '@/lib/api/services'
+import { toIntlLocale } from '@/lib/date-locale'
 import { BackendPost } from '@/lib/types'
 import { normalizeNewlines } from '@/lib/utils'
 import { decodeHtmlEntities } from '@/lib/utils/article'
@@ -45,6 +46,7 @@ const ErrorState = ({ message, backLabel }: { message: string; backLabel: string
 
 export default function BlogDetailClient() {
   const t = useTranslations('BlogPage')
+  const locale = useLocale()
   const params = useParams()
   const router = useRouter()
   const { toast } = useToast()
@@ -243,7 +245,7 @@ export default function BlogDetailClient() {
   // 格式化日期
   const dateToFormat = article.published_at || article.created_at
   const formattedDate = dateToFormat
-    ? new Date(dateToFormat).toLocaleDateString('zh-TW', {
+    ? new Date(dateToFormat).toLocaleDateString(toIntlLocale(locale), {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -485,7 +487,9 @@ export default function BlogDetailClient() {
                       <Chip>{popularArticle.tags?.[0] || t('categoryTechnique')}</Chip>
                       <span className="text-xs text-wb-70 sm:text-sm">
                         {popularArticle.published_at
-                          ? new Date(popularArticle.published_at).toLocaleDateString('zh-TW')
+                          ? new Date(popularArticle.published_at).toLocaleDateString(
+                              toIntlLocale(locale)
+                            )
                           : ''}
                       </span>
                     </div>
@@ -529,7 +533,9 @@ export default function BlogDetailClient() {
                     <Chip>{relatedArticle.tags?.[0] || t('categoryTechnique')}</Chip>
                     <span className="text-xs text-wb-70 sm:text-sm">
                       {relatedArticle.published_at
-                        ? new Date(relatedArticle.published_at).toLocaleDateString('zh-TW')
+                        ? new Date(relatedArticle.published_at).toLocaleDateString(
+                            toIntlLocale(locale)
+                          )
                         : ''}
                     </span>
                   </div>

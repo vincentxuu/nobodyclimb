@@ -1,8 +1,10 @@
 'use client'
 
 import { AlertCircle, Cloud, Droplets, Loader2, ThermometerSun } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState } from 'react'
 import { weatherService } from '@/lib/api/services'
+import { toIntlLocale } from '@/lib/date-locale'
 import { Weather } from '@/lib/types'
 
 interface WeatherDisplayProps {
@@ -16,9 +18,6 @@ interface WeatherDisplayProps {
 
 // 預報時段數常數（7天 × 2時段）
 const FORECAST_PERIODS = 14
-
-// 星期常數
-const WEEKDAYS = ['週日', '週一', '週二', '週三', '週四', '週五', '週六']
 
 // 格式化數值顯示，null 時顯示 "--"
 function formatTemp(value: number | null): string {
@@ -40,27 +39,38 @@ function getWeatherColor(condition: string | null): string {
 }
 
 // 格式化日期顯示（含早晚時段）
-function formatForecastDate(dateString: string, todayStr: string, tomorrowStr: string): string {
+function formatForecastDate(
+  dateString: string,
+  todayStr: string,
+  tomorrowStr: string,
+  t: ReturnType<typeof useTranslations>,
+  locale: string
+): string {
   const date = new Date(dateString)
   // 根據實際時間判斷早晚：06:00 為早，18:00 為晚
   const hour = date.getHours()
-  const period = hour < 12 ? '早' : '晚'
+  const period = hour < 12 ? t('morning') : t('evening')
 
   let dayLabel: string
   if (date.toDateString() === todayStr) {
-    dayLabel = '今天'
+    dayLabel = t('today')
   } else if (date.toDateString() === tomorrowStr) {
-    dayLabel = '明天'
+    dayLabel = t('tomorrow')
   } else {
-    dayLabel = WEEKDAYS[date.getDay()]
+    // 星期縮寫依語系產生（zh：週日、en：Sun、ja：日）
+    dayLabel = new Intl.DateTimeFormat(toIntlLocale(locale), { weekday: 'short' }).format(date)
   }
 
-  return `${dayLabel}${period}`
+  return t('forecastLabel', { day: dayLabel, period })
 }
 
-// 格式化天氣狀況顯示
-function formatCondition(condition: string | null, maxLength?: number): string {
-  if (!condition) return '未知'
+// 格式化天氣狀況顯示（condition 來自後端天氣 API，為中文原文）
+function formatCondition(
+  condition: string | null,
+  unknownLabel: string,
+  maxLength?: number
+): string {
+  if (!condition) return unknownLabel
   if (maxLength && condition.length > maxLength) {
     return condition.slice(0, maxLength)
   }
@@ -75,6 +85,8 @@ export function WeatherDisplay({
   showForecast = true,
   className = '',
 }: WeatherDisplayProps) {
+  const t = useTranslations('Weather')
+  const locale = useLocale()
   const [weather, setWeather] = useState<Weather | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -111,24 +123,24 @@ export function WeatherDisplay({
         if (response.success && response.data) {
           setWeather(response.data)
         } else {
-          setError(response.message || '無法取得天氣資料')
+          setError(response.message || t('fetchFailed'))
         }
       } catch (err) {
         console.error('Failed to fetch weather:', err)
-        setError('無法連接天氣服務')
+        setError(t('serviceUnavailable'))
       } finally {
         setLoading(false)
       }
     }
 
     fetchWeather()
-  }, [location, latitude, longitude])
+  }, [location, latitude, longitude, t])
 
   if (loading) {
     return (
       <div className={`flex items-center justify-center p-4 ${className}`}>
         <Loader2 className="h-5 w-5 animate-spin text-gray-400" />
-        <span className="ml-2 text-sm text-gray-500">載入天氣資料...</span>
+        <span className="ml-2 text-sm text-gray-500">{t('loading')}</span>
       </div>
     )
   }
@@ -137,7 +149,7 @@ export function WeatherDisplay({
     return (
       <div className={`flex items-center p-4 text-gray-500 ${className}`}>
         <AlertCircle className="h-5 w-5 text-gray-400" />
-        <span className="ml-2 text-sm">{error || '無法取得天氣資料'}</span>
+        <span className="ml-2 text-sm">{error || t('fetchFailed')}</span>
       </div>
     )
   }
@@ -151,7 +163,9 @@ export function WeatherDisplay({
         <Cloud className={`h-5 w-5 ${getWeatherColor(weather.condition)}`} />
         <span className="text-lg font-medium">{formatTemp(weather.temperature)}°C</span>
         <div className="border-l border-gray-300 pl-2">
-          <span className="text-sm text-gray-600">{formatCondition(weather.condition)}</span>
+          <span className="text-sm text-gray-600">
+            {formatCondition(weather.condition, t('unknown'))}
+          </span>
           <div className="flex items-center text-xs text-gray-500">
             <Droplets className="mr-1 h-3 w-3" />
             {formatPercent(weather.precipitation)}
@@ -175,7 +189,9 @@ export function WeatherDisplay({
           </div>
         </div>
         <div className="text-right">
-          <p className="font-medium text-gray-700">{formatCondition(weather.condition)}</p>
+          <p className="font-medium text-gray-700">
+            {formatCondition(weather.condition, t('unknown'))}
+          </p>
           <div className="flex items-center justify-end gap-3 text-sm text-gray-500">
             <span className="flex items-center">
               <ThermometerSun className="mr-1 h-4 w-4" />
@@ -193,15 +209,15 @@ export function WeatherDisplay({
       {/* 天氣預報 */}
       {showForecast && weather.forecast.length > 0 && (
         <div className="border-t border-gray-200 pt-4">
-          <h4 className="mb-3 text-sm font-medium text-gray-700">未來七天天氣</h4>
+          <h4 className="mb-3 text-sm font-medium text-gray-700">{t('forecastTitle')}</h4>
           <div className="grid grid-cols-4 gap-2 sm:grid-cols-7">
             {weather.forecast.slice(0, FORECAST_PERIODS).map((day, index) => (
               <div key={`${day.date}-${index}`} className="rounded-lg bg-white p-2 text-center">
                 <p className="text-xs font-medium text-gray-600">
-                  {formatForecastDate(day.date, todayStr, tomorrowStr)}
+                  {formatForecastDate(day.date, todayStr, tomorrowStr, t, locale)}
                 </p>
                 <p className={`my-1 text-xs ${getWeatherColor(day.condition)}`}>
-                  {formatCondition(day.condition, 4)}
+                  {formatCondition(day.condition, t('unknown'), 4)}
                 </p>
                 <p className="text-sm font-medium">
                   {formatTemp(day.minTemp)}° / {formatTemp(day.maxTemp)}°

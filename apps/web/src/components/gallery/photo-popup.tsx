@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, MapPin, User, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import { AvatarWithFallback } from '@/components/ui/avatar-with-fallback'
 
@@ -31,6 +32,7 @@ interface PhotoPopupProps {
 }
 
 const PhotoPopup: React.FC<PhotoPopupProps> = ({ photo, onClose, onNext, onPrev }) => {
+  const t = useTranslations('GalleryUI.popup')
   // Prevent background scroll when popup is open
   React.useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -124,7 +126,8 @@ const PhotoPopup: React.FC<PhotoPopupProps> = ({ photo, onClose, onNext, onPrev 
               {/* Upload Date */}
               {photo.uploadDate && (
                 <div className="text-xs text-neutral-400">
-                  <span className="font-medium text-neutral-300">上傳日期:</span> {photo.uploadDate}
+                  <span className="font-medium text-neutral-300">{t('uploadDate')}</span>{' '}
+                  {photo.uploadDate}
                 </div>
               )}
             </div>

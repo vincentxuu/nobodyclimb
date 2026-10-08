@@ -1,6 +1,7 @@
 'use client'
 
 import { ChevronLeft, Grid3X3, Layers, MapPin, Route, Search } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
@@ -32,6 +33,8 @@ export function CreateAscentDialog({
   onSubmit,
   isLoading = false,
 }: CreateAscentDialogProps) {
+  const t = useTranslations('Ascent.dialog')
+  const tForm = useTranslations('Ascent.form')
   const [step, setStep] = useState<Step>('crag')
   const [searchQuery, setSearchQuery] = useState('')
   const [routeSearchQuery, setRouteSearchQuery] = useState('')
@@ -269,15 +272,15 @@ export function CreateAscentDialog({
   const renderTitle = () => {
     switch (step) {
       case 'crag':
-        return '選擇岩場'
+        return t('selectCrag')
       case 'area':
-        return `選擇區域 (${selectedCrag?.name})`
+        return t('selectArea', { name: selectedCrag?.name ?? '' })
       case 'sector':
-        return `選擇子區域 (${selectedArea?.name})`
+        return t('selectSector', { name: selectedArea?.name ?? '' })
       case 'route':
-        return `選擇路線 (${selectedSector?.name || selectedArea?.name})`
+        return t('selectRoute', { name: selectedSector?.name || selectedArea?.name || '' })
       case 'form':
-        return '記錄攀爬'
+        return tForm('title')
     }
   }
 
@@ -300,7 +303,7 @@ export function CreateAscentDialog({
         <div className="relative">
           <Route className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
-            placeholder="直接搜尋路線名稱或難度..."
+            placeholder={t('routeSearchPlaceholder')}
             value={routeSearchQuery}
             onChange={(e) => setRouteSearchQuery(e.target.value)}
             className="pl-9 border-dashed"
@@ -309,7 +312,7 @@ export function CreateAscentDialog({
         {showResults && (
           <div className="rounded-lg border bg-muted/30 p-2">
             {globalRouteResults.length === 0 ? (
-              <p className="py-2 text-center text-sm text-muted-foreground">找不到符合的路線</p>
+              <p className="py-2 text-center text-sm text-muted-foreground">{t('noRoutes')}</p>
             ) : (
               <ScrollArea className="max-h-[200px]">
                 <div className="space-y-1">
@@ -377,7 +380,7 @@ export function CreateAscentDialog({
 
             <div className="relative flex items-center gap-2">
               <div className="h-px flex-1 bg-border" />
-              <span className="text-xs text-muted-foreground">或逐步選擇</span>
+              <span className="text-xs text-muted-foreground">{t('orStepByStep')}</span>
               <div className="h-px flex-1 bg-border" />
             </div>
 
@@ -385,7 +388,7 @@ export function CreateAscentDialog({
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="搜尋岩場..."
+                placeholder={t('searchCrag')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9"
@@ -394,7 +397,7 @@ export function CreateAscentDialog({
             <ScrollArea className="h-[280px] pr-4">
               <div className="space-y-2">
                 {filteredCrags.length === 0 ? (
-                  <p className="py-8 text-center text-sm text-muted-foreground">找不到符合的岩場</p>
+                  <p className="py-8 text-center text-sm text-muted-foreground">{t('noCrags')}</p>
                 ) : (
                   filteredCrags.map((crag) => (
                     <button
@@ -410,7 +413,9 @@ export function CreateAscentDialog({
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="font-medium text-text-main">{crag.name}</p>
-                        <p className="text-sm text-text-subtle">{crag.routes} 條路線</p>
+                        <p className="text-sm text-text-subtle">
+                          {t('routeCount', { count: crag.routes })}
+                        </p>
                       </div>
                     </button>
                   ))
@@ -428,7 +433,7 @@ export function CreateAscentDialog({
 
             <div className="relative flex items-center gap-2">
               <div className="h-px flex-1 bg-border" />
-              <span className="text-xs text-muted-foreground">或選擇區域</span>
+              <span className="text-xs text-muted-foreground">{t('orSelectArea')}</span>
               <div className="h-px flex-1 bg-border" />
             </div>
 
@@ -436,7 +441,7 @@ export function CreateAscentDialog({
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="搜尋區域..."
+                placeholder={t('searchArea')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9"
@@ -445,7 +450,7 @@ export function CreateAscentDialog({
             <ScrollArea className="h-[280px] pr-4">
               <div className="space-y-2">
                 {filteredAreas.length === 0 ? (
-                  <p className="py-8 text-center text-sm text-muted-foreground">找不到符合的區域</p>
+                  <p className="py-8 text-center text-sm text-muted-foreground">{t('noAreas')}</p>
                 ) : (
                   filteredAreas.map((area) => (
                     <button
@@ -463,7 +468,9 @@ export function CreateAscentDialog({
                         <p className="font-medium text-text-main">
                           {getRouteName(area.name, area.nameEn)}
                         </p>
-                        <p className="text-sm text-text-subtle">{area.routesCount} 條路線</p>
+                        <p className="text-sm text-text-subtle">
+                          {t('routeCount', { count: area.routesCount })}
+                        </p>
                       </div>
                     </button>
                   ))
@@ -481,7 +488,7 @@ export function CreateAscentDialog({
 
             <div className="relative flex items-center gap-2">
               <div className="h-px flex-1 bg-border" />
-              <span className="text-xs text-muted-foreground">或選擇子區域</span>
+              <span className="text-xs text-muted-foreground">{t('orSelectSector')}</span>
               <div className="h-px flex-1 bg-border" />
             </div>
 
@@ -489,7 +496,7 @@ export function CreateAscentDialog({
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="搜尋子區域..."
+                placeholder={t('searchSector')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9"
@@ -509,17 +516,15 @@ export function CreateAscentDialog({
                     <Route className="h-5 w-5 text-gray-600" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="font-medium text-text-main">顯示所有路線</p>
+                    <p className="font-medium text-text-main">{t('showAllRoutes')}</p>
                     <p className="text-sm text-text-subtle">
-                      不篩選子區域，顯示 {routes.length} 條路線
+                      {t('showAllRoutesDesc', { count: routes.length })}
                     </p>
                   </div>
                 </button>
 
                 {filteredSectors.length === 0 ? (
-                  <p className="py-4 text-center text-sm text-muted-foreground">
-                    找不到符合的子區域
-                  </p>
+                  <p className="py-4 text-center text-sm text-muted-foreground">{t('noSectors')}</p>
                 ) : (
                   filteredSectors.map((sector) => {
                     // 計算該子區域的路線數
@@ -540,7 +545,9 @@ export function CreateAscentDialog({
                         </div>
                         <div className="min-w-0 flex-1">
                           <p className="font-medium text-text-main">{sector.name}</p>
-                          <p className="text-sm text-text-subtle">{sectorRouteCount} 條路線</p>
+                          <p className="text-sm text-text-subtle">
+                            {t('routeCount', { count: sectorRouteCount })}
+                          </p>
                         </div>
                       </button>
                     )
@@ -557,7 +564,7 @@ export function CreateAscentDialog({
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="搜尋路線..."
+                placeholder={t('searchRoute')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9"
@@ -566,7 +573,7 @@ export function CreateAscentDialog({
             <ScrollArea className="h-[400px] pr-4">
               <div className="space-y-2">
                 {filteredRoutes.length === 0 ? (
-                  <p className="py-8 text-center text-sm text-muted-foreground">找不到符合的路線</p>
+                  <p className="py-8 text-center text-sm text-muted-foreground">{t('noRoutes')}</p>
                 ) : (
                   filteredRoutes.map((route) => (
                     <button
@@ -661,6 +668,7 @@ function AscentFormContent({
   onCancel,
   isLoading = false,
 }: AscentFormContentProps) {
+  const t = useTranslations('Ascent.form')
   const [photos, setPhotos] = useState<string[]>([])
 
   const form = useForm<AscentFormData>({
@@ -702,7 +710,7 @@ function AscentFormContent({
       <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-6">
         {/* 攀爬類型 */}
         <div className="space-y-2">
-          <Label>攀爬類型</Label>
+          <Label>{t('type')}</Label>
           <AscentTypeSelect
             value={form.watch('ascent_type') as AscentType}
             onChange={(type) => form.setValue('ascent_type', type)}
@@ -711,7 +719,7 @@ function AscentFormContent({
 
         {/* 攀爬日期 */}
         <div className="space-y-2">
-          <Label>攀爬日期</Label>
+          <Label>{t('date')}</Label>
           <Input
             type="date"
             variant="outline"
@@ -724,7 +732,7 @@ function AscentFormContent({
 
         {/* 嘗試次數 */}
         <div className="space-y-2">
-          <Label htmlFor="attempts_count">嘗試次數</Label>
+          <Label htmlFor="attempts_count">{t('attempts')}</Label>
           <Input
             id="attempts_count"
             type="number"
@@ -735,7 +743,7 @@ function AscentFormContent({
 
         {/* 個人評分 */}
         <div className="space-y-2">
-          <Label>個人評分 (可選)</Label>
+          <Label>{t('rating')}</Label>
           <div className="flex gap-1">
             {[1, 2, 3, 4, 5].map((star) => (
               <button
@@ -759,20 +767,20 @@ function AscentFormContent({
 
         {/* 感受難度 */}
         <div className="space-y-2">
-          <Label htmlFor="perceived_grade">感受難度 (可選)</Label>
+          <Label htmlFor="perceived_grade">{t('perceivedGrade')}</Label>
           <Input
             id="perceived_grade"
-            placeholder="例如：比標示難度稍難"
+            placeholder={t('perceivedGradePlaceholder')}
             {...form.register('perceived_grade')}
           />
         </div>
 
         {/* 筆記 */}
         <div className="space-y-2">
-          <Label htmlFor="notes">筆記 (可選)</Label>
+          <Label htmlFor="notes">{t('notes')}</Label>
           <Textarea
             id="notes"
-            placeholder="記錄這次攀爬的心得..."
+            placeholder={t('notesPlaceholder')}
             rows={3}
             {...form.register('notes')}
           />
@@ -780,7 +788,7 @@ function AscentFormContent({
 
         {/* 照片上傳 */}
         <div className="space-y-2">
-          <Label>照片 (可選)</Label>
+          <Label>{t('photos')}</Label>
           <PhotoUpload
             photos={photos}
             onChange={setPhotos}
@@ -792,15 +800,15 @@ function AscentFormContent({
 
         {/* 媒體連結 */}
         <div className="space-y-4">
-          <Label>媒體連結 (可選)</Label>
+          <Label>{t('mediaLinks')}</Label>
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <Youtube className="h-5 w-5 text-red-500" />
-              <Input placeholder="YouTube 影片連結" {...form.register('youtube_url')} />
+              <Input placeholder={t('youtubePlaceholder')} {...form.register('youtube_url')} />
             </div>
             <div className="flex items-center gap-2">
               <Instagram className="h-5 w-5 text-pink-500" />
-              <Input placeholder="Instagram 貼文連結" {...form.register('instagram_url')} />
+              <Input placeholder={t('instagramPlaceholder')} {...form.register('instagram_url')} />
             </div>
           </div>
         </div>
@@ -808,10 +816,10 @@ function AscentFormContent({
         {/* 提交按鈕 */}
         <div className="flex gap-2 pt-2">
           <Button type="button" variant="outline" onClick={onCancel} className="flex-1">
-            取消
+            {t('cancel')}
           </Button>
           <Button type="submit" className="flex-1" disabled={isLoading}>
-            {isLoading ? '儲存中...' : '儲存'}
+            {isLoading ? t('saving') : t('save')}
           </Button>
         </div>
       </form>
