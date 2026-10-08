@@ -1,7 +1,8 @@
 'use client'
 
 import { Clock, Database, MessageSquare, User } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
+import { toIntlLocale } from '@/lib/date-locale'
 
 export interface DataSourceInfo {
   source: string
@@ -19,12 +20,12 @@ interface DataSourceSectionProps {
 /**
  * 格式化日期時間
  */
-function formatDateTime(dateString: string | undefined | null): string {
+function formatDateTime(dateString: string | undefined | null, locale: string): string {
   if (!dateString) return '-'
   try {
     const date = new Date(dateString)
     if (isNaN(date.getTime())) return '-'
-    return date.toLocaleDateString('zh-TW', {
+    return date.toLocaleDateString(toIntlLocale(locale), {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -36,6 +37,7 @@ function formatDateTime(dateString: string | undefined | null): string {
 
 export function DataSourceSection({ data }: DataSourceSectionProps) {
   const t = useTranslations('CragPage')
+  const locale = useLocale()
   return (
     <div className="mb-6">
       <div className="mb-1">
@@ -70,7 +72,7 @@ export function DataSourceSection({ data }: DataSourceSectionProps) {
             <div>
               <p className="text-sm text-gray-500">{t('lastUpdatedLabel')}</p>
               <p className="text-sm font-medium text-gray-900">
-                {formatDateTime(data.lastUpdated)}
+                {formatDateTime(data.lastUpdated, locale)}
               </p>
             </div>
           </div>

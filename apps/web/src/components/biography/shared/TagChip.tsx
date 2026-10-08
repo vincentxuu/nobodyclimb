@@ -1,6 +1,7 @@
 'use client'
 
 import { Check, Sparkles } from 'lucide-react'
+import { useBiographyTagText } from '@/lib/hooks/useBiographyTagText'
 import type { TagOption } from '@/lib/types/biography-v2'
 import { cn } from '@/lib/utils'
 
@@ -35,6 +36,7 @@ export function TagChip({
   className,
 }: TagChipProps) {
   const isCustom = tag.source === 'user'
+  const { tagLabel } = useBiographyTagText()
 
   const sizeClasses = {
     sm: 'px-2 py-0.5 text-xs',
@@ -60,7 +62,7 @@ export function TagChip({
   const content = (
     <>
       {isCustom && <Sparkles size={12} className="text-brand-accent" />}
-      <span>{tag.label}</span>
+      <span>{tagLabel(tag.id, tag.label)}</span>
       {editable && selected && <Check size={12} className="ml-0.5 opacity-70" />}
     </>
   )
@@ -95,6 +97,8 @@ export function TagCard({
   className,
 }: TagCardProps) {
   const isCustom = tag.source === 'user'
+  const { tagLabel, tagDescription } = useBiographyTagText()
+  const description = tag.description ? tagDescription(tag.id, tag.description) : ''
 
   return (
     <button
@@ -120,7 +124,7 @@ export function TagCard({
           )}
         >
           {isCustom && <Sparkles size={14} className="text-brand-accent" />}
-          {tag.label}
+          {tagLabel(tag.id, tag.label)}
         </span>
         <span
           className={cn(
@@ -136,7 +140,7 @@ export function TagCard({
           {selected && <Check size={12} />}
         </span>
       </div>
-      {tag.description && <span className="text-xs text-[#6D6C6C]">{tag.description}</span>}
+      {description && <span className="text-xs text-[#6D6C6C]">{description}</span>}
     </button>
   )
 }

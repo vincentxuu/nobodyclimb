@@ -1,3 +1,5 @@
+> ⚠️ 過時：本專案 backend 為 Hono + Cloudflare D1，請以 backend/src 與 project-rules 為準
+
 # Next.js + Django REST Framework 前端集成指南
 
 > 完整的前後端整合方案

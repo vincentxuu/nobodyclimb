@@ -3,6 +3,7 @@
 import type { PersonalityType } from '@nobodyclimb/types'
 import { useSearchParams } from 'next/navigation'
 import { decodeScores } from '@/lib/quiz/decode-scores'
+import { useLocalizedPersonality } from '@/lib/quiz/personality-i18n'
 import { ResultActions } from './ResultActions'
 import { ResultCompat } from './ResultCompat'
 import { ResultHero } from './ResultHero'
@@ -11,7 +12,12 @@ import { ResultRadar } from './ResultRadar'
 import { ResultStrengths } from './ResultStrengths'
 import { ResultTraining } from './ResultTraining'
 
-export function ResultPageClient({ personality }: { personality: PersonalityType }) {
+export function ResultPageClient({
+  personality: rawPersonality,
+}: {
+  personality: PersonalityType
+}) {
+  const personality = useLocalizedPersonality(rawPersonality)
   const searchParams = useSearchParams()
   const scores = decodeScores(searchParams.get('s'))
   const hasPersonalScores = scores !== null

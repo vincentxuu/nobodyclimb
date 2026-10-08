@@ -2,7 +2,7 @@
 
 import { Edit2, Loader2, MapPin, Trash2, Upload } from 'lucide-react'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import PhotoEditDialog from '@/components/gallery/photo-edit-dialog'
 import UploadPhotoDialog from '@/components/gallery/upload-photo-dialog'
@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button'
 import { ConfirmDialog } from '@/components/ui/confirm-dialog'
 import { useToast } from '@/components/ui/use-toast'
 import { galleryService } from '@/lib/api/services'
+import { toIntlLocale } from '@/lib/date-locale'
 import { GalleryPhoto } from '@/lib/types'
 
 // 照片卡片元件
@@ -26,6 +27,8 @@ interface PhotoCardProps {
 
 const PhotoCard = ({ photo, onEdit, onDelete, isDeleting }: PhotoCardProps) => {
   const t = useTranslations('ProfilePage')
+  const locale = useLocale()
+  const tMisc = useTranslations('ProfilePagesMisc')
   const locationParts = [photo.location_country, photo.location_city, photo.location_spot].filter(
     Boolean
   )
@@ -37,7 +40,7 @@ const PhotoCard = ({ photo, onEdit, onDelete, isDeleting }: PhotoCardProps) => {
       <div className="relative aspect-square w-full overflow-hidden bg-gray-100">
         <Image
           src={photo.image_url}
-          alt={photo.caption || '照片'}
+          alt={photo.caption || tMisc('photoAlt')}
           fill
           className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -59,7 +62,7 @@ const PhotoCard = ({ photo, onEdit, onDelete, isDeleting }: PhotoCardProps) => {
               <span className="truncate">{locationText}</span>
             </div>
           )}
-          <span>{new Date(photo.created_at).toLocaleDateString('zh-TW')}</span>
+          <span>{new Date(photo.created_at).toLocaleDateString(toIntlLocale(locale))}</span>
         </div>
 
         {/* 操作按鈕 */}

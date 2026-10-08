@@ -1,8 +1,10 @@
 import { Eye, Play } from 'lucide-react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import { Card } from '@/components/ui/card'
 import type { Video } from '@/lib/types'
+import { VIDEO_CATEGORY_KEYS, VIDEO_EXTRA_CATEGORY_KEYS } from './category-keys'
 
 interface VideoCardProps {
   video: Video
@@ -11,6 +13,15 @@ interface VideoCardProps {
 }
 
 const VideoCard: React.FC<VideoCardProps> = ({ video, onClick }) => {
+  const t = useTranslations('VideosFilter')
+  // 資料中若出現未定義的分類值，原樣顯示
+  const categoryKey: string | undefined =
+    VIDEO_CATEGORY_KEYS[video.category] ?? VIDEO_EXTRA_CATEGORY_KEYS[video.category]
+  const categoryLabel =
+    categoryKey && t.has(`categories.${categoryKey}`)
+      ? t(`categories.${categoryKey}` as Parameters<typeof t>[0])
+      : video.category
+
   const formatDuration = (duration: string) => {
     return duration
   }
@@ -50,7 +61,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onClick }) => {
         {/* 精選標籤 */}
         {video.featured && (
           <div className="absolute left-2 top-2 rounded bg-red-600 px-2 py-1 text-xs font-medium text-white">
-            精選
+            {t('featured')}
           </div>
         )}
       </div>
@@ -73,7 +84,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onClick }) => {
         {/* 分類標籤 */}
         <div className="mt-2 flex flex-wrap gap-1">
           <span className="inline-block rounded-full bg-neutral-100 px-2 py-1 text-xs text-neutral-600">
-            {video.category}
+            {categoryLabel}
           </span>
           {video.tags &&
             video.tags.slice(0, 3).map((tag) => (

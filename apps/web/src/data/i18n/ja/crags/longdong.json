@@ -1,0 +1,3290 @@
+{
+  "crag": {
+    "description": {
+      "zh": "龍洞是台灣最具代表性的戶外攀岩場地，位於新北市貢寮區，擁有壯觀的海岸岩壁和多樣化的攀登路線。是台灣規模最大、路線最多的天然岩場。",
+      "text": "龍洞は台湾を代表するアウトドアクライミングエリアで、新北市貢寮区に位置し、壮観な海岸の岩壁と多彩なルートを備えています。台湾で最も規模が大きく、ルート数も最も多い自然の岩場です。"
+    },
+    "approach": {
+      "zh": "5-30分鐘步行",
+      "text": "徒歩5〜30分"
+    },
+    "parking": {
+      "zh": "龍洞灣公園停車場",
+      "text": "龍洞湾公園駐車場"
+    },
+    "liveVideoTitle": {
+      "zh": "龍洞即時影像",
+      "text": "龍洞ライブ映像"
+    },
+    "liveVideoDescription": {
+      "zh": "龍洞岩場周邊即時影像，可了解當地天氣與海況",
+      "text": "龍洞の岩場周辺のライブ映像です。現地の天気と海況を確認できます。"
+    }
+  },
+  "transportation": [
+    {
+      "zh": "從台北走國道1號轉台2線濱海公路，約1.5小時車程",
+      "text": "台北から国道1号を経て台2線（濱海公路）へ。車で約1.5時間です。"
+    },
+    {
+      "zh": "從瑞芳火車站搭乘基隆客運至龍洞站",
+      "text": "瑞芳駅から基隆客運バスに乗り、龍洞停留所で下車します。"
+    }
+  ],
+  "areas": {
+    "school-gate": {
+      "description": {
+        "zh": "校門口攀登區域",
+        "text": "校門口のクライミングエリア"
+      }
+    },
+    "clocktower": {
+      "description": {
+        "zh": "鐘塔攀登區域",
+        "text": "鐘塔のクライミングエリア"
+      }
+    },
+    "long-lane": {
+      "description": {
+        "zh": "長巷攀登區域",
+        "text": "長巷のクライミングエリア"
+      }
+    },
+    "music-hall": {
+      "description": {
+        "zh": "音樂廳攀登區域",
+        "text": "音樂廳のクライミングエリア"
+      }
+    },
+    "grand-auditorium": {
+      "description": {
+        "zh": "大禮堂攀登區域",
+        "text": "大禮堂のクライミングエリア"
+      }
+    },
+    "first-cave": {
+      "description": {
+        "zh": "第一洞攀登區域",
+        "text": "第一洞のクライミングエリア"
+      }
+    },
+    "second-cave": {
+      "description": {
+        "zh": "第二洞攀登區域",
+        "text": "第二洞のクライミングエリア"
+      }
+    },
+    "golden-valley": {
+      "description": {
+        "zh": "黃金谷攀登區域",
+        "text": "黃金谷のクライミングエリア"
+      }
+    },
+    "back-door": {
+      "description": {
+        "zh": "後門攀登區域",
+        "text": "後門のクライミングエリア"
+      }
+    }
+  },
+  "routes": {
+    "LD-MUSIC-HALL-329": {
+      "description": {
+        "zh": "可步行下撤",
+        "text": "歩いて下降できます。"
+      }
+    },
+    "LD-MUSIC-HALL-330": {
+      "description": {
+        "zh": "可步行下撤",
+        "text": "歩いて下降できます。"
+      }
+    },
+    "LD-MUSIC-HALL-331": {
+      "description": {
+        "zh": "可步行下撤",
+        "text": "歩いて下降できます。"
+      }
+    },
+    "LD-MUSIC-HALL-332": {
+      "description": {
+        "zh": "可步行下撤",
+        "text": "歩いて下降できます。"
+      }
+    },
+    "LD-MUSIC-HALL-333": {
+      "description": {
+        "zh": "可步行下撤",
+        "text": "歩いて下降できます。"
+      }
+    },
+    "LD-MUSIC-HALL-334": {
+      "description": {
+        "zh": "可步行下撤",
+        "text": "歩いて下降できます。"
+      }
+    },
+    "LD-MUSIC-HALL-335": {
+      "description": {
+        "zh": "可步行下撤",
+        "text": "歩いて下降できます。"
+      }
+    },
+    "LD-MUSIC-HALL-336": {
+      "description": {
+        "zh": "可步行下撤，或與 <直接嘗試> 共用 Anchor",
+        "text": "歩いて下降できます。または <直接嘗試> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-337": {
+      "description": {
+        "zh": "與 <直接嘗試> 共用 Anchor",
+        "text": "<直接嘗試> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-338": {
+      "description": {
+        "zh": "原為上⽅架繩路線，2012更新為運攀路線",
+        "text": "元はトップロープルートで、2012年にスポートルートに更新されました。"
+      }
+    },
+    "LD-MUSIC-HALL-339": {
+      "description": {
+        "zh": "原為傳攀路線，2012更新為運攀路線",
+        "text": "元はトラッドルートで、2012年にスポートルートに更新されました。"
+      }
+    },
+    "LD-MUSIC-HALL-341": {
+      "description": {
+        "zh": "與 <偷臉> 共用 Anchor",
+        "text": "<偷臉> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-342": {
+      "description": {
+        "zh": "與 <偷臉> 共用 Anchor",
+        "text": "<偷臉> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-343": {
+      "description": {
+        "zh": "與 <偷臉> 共用 Anchor",
+        "text": "<偷臉> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-344": {
+      "description": {
+        "zh": "部分岩點鬆動",
+        "text": "一部のホールドが緩んでいます。"
+      }
+    },
+    "LD-MUSIC-HALL-345": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。"
+      }
+    },
+    "LD-MUSIC-HALL-346": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤；原為傳攀路線，2012更新為運攀路線",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。元はトラッドルートで、2012年にスポートルートに更新されました。"
+      }
+    },
+    "LD-MUSIC-HALL-347": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。"
+      }
+    },
+    "LD-MUSIC-HALL-348": {
+      "description": {
+        "zh": "原為上方架繩路線，2012更新為運攀路線",
+        "text": "元はトップロープルートで、2012年にスポートルートに更新されました。"
+      }
+    },
+    "LD-MUSIC-HALL-349": {
+      "description": {
+        "zh": "Anchor左側Bolt曾發⽣黏著膠混合問題，雖已解決但仍需注意",
+        "text": "終了点左側のボルトでは、過去に接着剤の混合不良が発生しました。すでに解決済みですが、引き続き注意が必要です。"
+      }
+    },
+    "LD-MUSIC-HALL-350": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤；原為傳攀路線，2012更新為運攀路線",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。元はトラッドルートで、2012年にスポートルートに更新されました。"
+      }
+    },
+    "LD-MUSIC-HALL-351": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。"
+      }
+    },
+    "LD-MUSIC-HALL-352": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤；2019/05/12通報：路線上方落石風險高，建議勿攀登",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。2019/05/12の通報：ルート上部は落石の危険性が高く、登らないことが推奨されています。"
+      }
+    },
+    "LD-MUSIC-HALL-352.1": {
+      "description": {
+        "zh": "2019/05/12通報：路線上方落石風險高，建議勿攀登",
+        "text": "2019/05/12の通報：ルート上部は落石の危険性が高く、登らないことが推奨されています。"
+      }
+    },
+    "LD-MUSIC-HALL-353": {
+      "description": {
+        "zh": "與 <倒拉夾⼿> 共用 Anchor",
+        "text": "<倒拉夾手> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-354": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。"
+      }
+    },
+    "LD-MUSIC-HALL-355": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。"
+      }
+    },
+    "LD-MUSIC-HALL-356": {
+      "description": {
+        "zh": "《RCT》P.183路線圖路線走向繪製錯誤",
+        "text": "《RCT》P.183のトポは、ルートのラインが誤って描かれています。"
+      }
+    },
+    "LD-MUSIC-HALL-357": {
+      "description": {
+        "zh": "與 <倒拉夾⼿> 共用 Anchor",
+        "text": "<倒拉夾手> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-357.1": {
+      "description": {
+        "zh": "自 <倒拉夾⼿> 起攀，往左上攀至平台後架設確保站；繩隊完攀後再往右橫渡到 <結婚路線> 平台垂降。",
+        "text": "<倒拉夾手> から取り付き、左上へ登ってテラスに着いたらビレイステーションを構築します。パーティ全員が登り終えたら、右へトラバースして <結婚路線> のテラスから懸垂下降します。"
+      }
+    },
+    "LD-MUSIC-HALL-358.1": {
+      "description": {
+        "zh": "自 <音樂廳煙囪> Anchor 起攀，往小鯨魚頭左側上攀至平台後架設確保站；繩隊完攀後再往右橫渡到 <結婚路線> 平台垂降。",
+        "text": "<音樂廳煙囪> の終了点から取り付き、小鯨魚頭の左側を登ってテラスに着いたらビレイステーションを構築します。パーティ全員が登り終えたら、右へトラバースして <結婚路線> のテラスから懸垂下降します。"
+      }
+    },
+    "LD-MUSIC-HALL-358.2": {
+      "description": {
+        "zh": "自 <音樂廳煙囪> Anchor 起攀，往小鯨魚頭右側上攀至平台後架設確保站；繩隊完攀後再往右橫渡到 <結婚路線> 平台垂降。",
+        "text": "<音樂廳煙囪> の終了点から取り付き、小鯨魚頭の右側を登ってテラスに着いたらビレイステーションを構築します。パーティ全員が登り終えたら、右へトラバースして <結婚路線> のテラスから懸垂下降します。"
+      }
+    },
+    "LD-MUSIC-HALL-359": {
+      "description": {
+        "zh": "《RCT》P.183、P.185路線圖路線位置繪製錯誤",
+        "text": "《RCT》P.183、P.185のトポは、ルートの位置が誤って描かれています。"
+      }
+    },
+    "LD-MUSIC-HALL-361": {
+      "description": {
+        "zh": "與 <大韓民國> 共⽤ Anchor",
+        "text": "<大韓民國> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-362": {
+      "description": {
+        "zh": "與 <大韓民國> 共⽤ Anchor",
+        "text": "<大韓民國> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-363": {
+      "description": {
+        "zh": "與 <大韓民國> 共⽤ Anchor",
+        "text": "<大韓民國> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-364": {
+      "description": {
+        "zh": "攀登時需避免使用內角裂隙，以降低擺盪式墜落的風險",
+        "text": "登る際はコーナーのクラックを使わないようにしてください。振り子状の墜落のリスクを下げるためです。"
+      }
+    },
+    "LD-MUSIC-HALL-365": {
+      "description": {
+        "zh": "與 <Fucking Fall> 共⽤ Anchor",
+        "text": "<Fucking Fall> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-366": {
+      "description": {
+        "zh": "與 <Fucking Fall> 共⽤ Anchor",
+        "text": "<Fucking Fall> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-368": {
+      "description": {
+        "zh": "與 <大鼓> 共⽤ Anchor",
+        "text": "<大鼓> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-369": {
+      "description": {
+        "zh": "舊 Anchor (Petzl Collinox / 304，2006設置) 於 2015/07/24 同時斷裂失效，導致一位新加坡攀岩者於下降至接近地面時墜落輕傷",
+        "text": "旧終了点（Petzl Collinox / 304、2006年設置）は2015/07/24に同時に破断して機能を失い、シンガポール人クライマー1名が下降中、地面近くで墜落して軽傷を負いました。"
+      }
+    },
+    "LD-MUSIC-HALL-370": {
+      "description": {
+        "zh": "B01-B04 與 <大鼓> 共⽤ B05-B07 與 <豎琴> 共用",
+        "text": "B01〜B04は <大鼓> と共用、B05〜B07は <豎琴> と共用です。"
+      }
+    },
+    "LD-MUSIC-HALL-371": {
+      "description": {
+        "zh": "原 Ti-ETN 於 2014 拉測時出現變形，於2019/06/06 將 A02 更新為 Ti-TW 並加上羊角",
+        "text": "元のTi-ETNは2014年の引張試験で変形が見られたため、2019/06/06にA02をTi-TWに交換し、ラムズホーン（羊角フック）を追加しました。"
+      }
+    },
+    "LD-MUSIC-HALL-372": {
+      "description": {
+        "zh": "《RCT》P.190路線圖編號372的完攀點誤植為375",
+        "text": "《RCT》P.190のトポでは、番号372の終了点が誤って375と記載されています。"
+      }
+    },
+    "LD-MUSIC-HALL-375": {
+      "description": {
+        "zh": "《RCT》P.190路線圖編號372的完攀點誤植為375",
+        "text": "《RCT》P.190のトポでは、番号372の終了点が誤って375と記載されています。"
+      }
+    },
+    "LD-MUSIC-HALL-377": {
+      "description": {
+        "zh": "2011/03 斷點後變得較簡單",
+        "text": "2011/03にホールドが欠けてから、やや易しくなりました。"
+      }
+    },
+    "LD-MUSIC-HALL-383": {
+      "description": {
+        "zh": "岩友毛祖琦、楊思碧於1987/08/24在此路線上結為連理而得名。原為運攀路線，2017/10/28將老舊Bolt (304) 切除後保留為傳攀路線",
+        "text": "クライマーの毛祖琦さんと楊思碧さんが1987/08/24にこのルート上で結婚したことから名付けられました。元はスポートルートでしたが、2017/10/28に老朽化したボルト（304）を切除し、トラッドルートとして残されています。"
+      }
+    },
+    "LD-MUSIC-HALL-384": {
+      "description": {
+        "zh": "原為運攀路線，2017/10/28將老舊Bolt (304) 切除後保留為傳攀路線",
+        "text": "元はスポートルートでしたが、2017/10/28に老朽化したボルト（304）を切除し、トラッドルートとして残されています。"
+      }
+    },
+    "LD-MUSIC-HALL-388": {
+      "description": {
+        "zh": "原為運攀路線，切除老舊Bolt後保留為傳攀路線",
+        "text": "元はスポートルートでしたが、老朽化したボルトを切除し、トラッドルートとして残されています。"
+      }
+    },
+    "LD-MUSIC-HALL-388.1": {
+      "description": {
+        "zh": "與 <小三角> 共⽤ Anchor",
+        "text": "<小三角> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-389": {
+      "description": {
+        "zh": "與 <小三角> 共⽤ Anchor",
+        "text": "<小三角> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-390": {
+      "description": {
+        "zh": "可由 <演奏台五> 下攀，或利用該路線 Anchor 垂降",
+        "text": "<演奏台五> をクライムダウンするか、同ルートの終了点を使って懸垂下降できます。"
+      }
+    },
+    "LD-MUSIC-HALL-391": {
+      "description": {
+        "zh": "可由 <演奏台五> 下攀，或利用該路線 Anchor 垂降",
+        "text": "<演奏台五> をクライムダウンするか、同ルートの終了点を使って懸垂下降できます。"
+      }
+    },
+    "LD-MUSIC-HALL-392": {
+      "description": {
+        "zh": "可由 <演奏台五> 下攀，或利用該路線 Anchor 垂降",
+        "text": "<演奏台五> をクライムダウンするか、同ルートの終了点を使って懸垂下降できます。"
+      }
+    },
+    "LD-MUSIC-HALL-393": {
+      "description": {
+        "zh": "可由 <演奏台五> 下攀，或利用該路線 Anchor 垂降",
+        "text": "<演奏台五> をクライムダウンするか、同ルートの終了点を使って懸垂下降できます。"
+      }
+    },
+    "LD-MUSIC-HALL-396": {
+      "description": {
+        "zh": "與 <小提琴> 共⽤ Anchor",
+        "text": "<小提琴> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-397": {
+      "description": {
+        "zh": "原為上方架繩路線，2018更新為運攀路線",
+        "text": "元はトップロープルートで、2018年にスポートルートに更新されました。"
+      }
+    },
+    "LD-MUSIC-HALL-399": {
+      "description": {
+        "zh": "與 <舞臺作手> 共⽤ Anchor",
+        "text": "<舞臺作手> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-400": {
+      "description": {
+        "zh": "天花板岩質不穩",
+        "text": "ルーフの岩が不安定です。"
+      }
+    },
+    "LD-MUSIC-HALL-401": {
+      "description": {
+        "zh": "與 <七號包廂> 共⽤ Anchor",
+        "text": "<七號包廂> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-401.1": {
+      "description": {
+        "zh": "自 <包廂內角> Anchor 起攀，沿內角與天花板往右上攀",
+        "text": "<包廂內角> の終了点から取り付き、コーナーとルーフに沿って右上へ登ります。"
+      }
+    },
+    "LD-MUSIC-HALL-401.2": {
+      "description": {
+        "zh": "<包廂內角> 左側岩面",
+        "text": "<包廂內角> の左側のフェイスです。"
+      }
+    },
+    "LD-MUSIC-HALL-403": {
+      "description": {
+        "zh": "與 <七號包廂> 共⽤ Anchor",
+        "text": "<七號包廂> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-405": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。"
+      }
+    },
+    "LD-MUSIC-HALL-406": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。"
+      }
+    },
+    "LD-MUSIC-HALL-407": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。"
+      }
+    },
+    "LD-MUSIC-HALL-408": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。"
+      }
+    },
+    "LD-MUSIC-HALL-410": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-MUSIC-HALL-411": {
+      "description": {
+        "zh": "與 <有驚無險的斜板> 共⽤ Anchor",
+        "text": "<有驚無險的斜板> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-413": {
+      "description": {
+        "zh": "與 <無傷之盾> 共⽤ Anchor",
+        "text": "<無傷之盾> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-414": {
+      "description": {
+        "zh": "舊名「劍」，早期攀岩者常只用被動岩楔 (沒用Friend) 先鋒這條路線",
+        "text": "旧名は「劍」。初期のクライマーは、パッシブプロテクション（ナッツ類）だけで（フレンズは使わずに）このルートをリードすることがよくありました。"
+      }
+    },
+    "LD-MUSIC-HALL-415": {
+      "description": {
+        "zh": "舊名「劍直上」，原為混合路線，切除老舊Bolt後保留為傳攀路線",
+        "text": "旧名は「劍直上」。元はミックス（ボルトとトラッドの混合）ルートでしたが、老朽化したボルトを切除し、トラッドルートとして残されています。"
+      }
+    },
+    "LD-MUSIC-HALL-415.1": {
+      "description": {
+        "zh": "早期曾有攀岩者嘗試過，但因當時活動岩楔尚未普及，因此僅攀登到第一處難關便因安全考量而放棄",
+        "text": "初期に試みたクライマーがいましたが、当時はカムがまだ普及しておらず、最初の核心部まで登ったところで安全上の理由から断念しました。"
+      }
+    },
+    "LD-MUSIC-HALL-417.1": {
+      "description": {
+        "zh": "自 <白鯨記> Anchor 起攀，沿著岩角直上，在頂端利用 <叫我以實瑪利> 的天然固定點確保，完攀後再以 <無傷之盾> 的 Anchor 垂降",
+        "text": "<白鯨記> の終了点から取り付き、カンテ沿いに直上します。トップでは <叫我以實瑪利> のナチュラルアンカー（自然物の支点）でビレイし、完登後は <無傷之盾> の終了点から懸垂下降します。"
+      }
+    },
+    "LD-MUSIC-HALL-418": {
+      "description": {
+        "zh": "與 <小白鯨> 共⽤ Anchor",
+        "text": "<小白鯨> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-419": {
+      "description": {
+        "zh": "與 <白鯨記> 共⽤ Anchor",
+        "text": "<白鯨記> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-420": {
+      "description": {
+        "zh": "在頂端利用天然固定點確保，繩隊完攀後再以 <無傷之盾> 的 Anchor 垂降",
+        "text": "トップではナチュラルアンカー（自然物の支点）でビレイし、パーティ全員が登り終えたら <無傷之盾> の終了点から懸垂下降します。"
+      }
+    },
+    "LD-SCHOOL-GATE-521": {
+      "description": {
+        "zh": "需自行架設確保站 再以 <V槽> 的 Anchor 垂降",
+        "text": "各自でビレイステーションを構築する必要があります。下降は <V槽> の終了点から懸垂下降します。"
+      }
+    },
+    "LD-SCHOOL-GATE-522": {
+      "description": {
+        "zh": "需自行架設確保站 再以 <V槽> 的 Anchor 垂降",
+        "text": "各自でビレイステーションを構築する必要があります。下降は <V槽> の終了点から懸垂下降します。"
+      }
+    },
+    "LD-SCHOOL-GATE-524": {
+      "description": {
+        "zh": "與 <V槽> 共用 Anchor",
+        "text": "<V槽> と終了点を共用します。"
+      }
+    },
+    "LD-SCHOOL-GATE-529": {
+      "description": {
+        "zh": "與 <戰鬥> 共用 Anchor",
+        "text": "<戰鬥> と終了点を共用します。"
+      }
+    },
+    "LD-SCHOOL-GATE-530": {
+      "description": {
+        "zh": "與 <戰鬥> 共用 Anchor",
+        "text": "<戰鬥> と終了点を共用します。"
+      }
+    },
+    "LD-SCHOOL-GATE-531": {
+      "description": {
+        "zh": "與 <戰鬥> 共用 Anchor",
+        "text": "<戰鬥> と終了点を共用します。"
+      }
+    },
+    "LD-SCHOOL-GATE-532": {
+      "description": {
+        "zh": "需⾃⾏架設確保站 再以 <戰⾾> 的 Anchor 垂降",
+        "text": "各自でビレイステーションを構築する必要があります。下降は <戰鬥> の終了点から懸垂下降します。"
+      }
+    },
+    "LD-SCHOOL-GATE-533": {
+      "description": {
+        "zh": "《RCT》書中路線圖懸岩後部分過度偏右",
+        "text": "《RCT》のトポでは、ハングより後の部分が右に寄りすぎて描かれています。"
+      }
+    },
+    "LD-SCHOOL-GATE-534": {
+      "description": {
+        "zh": "原級數為5.13c/d，但Yuji Hirayama在試過後認為5.14a應會更恰當",
+        "text": "元のグレードは5.13c/dでしたが、平山ユージ氏がトライした後、5.14aのほうが適切だろうとの見解を示しました。"
+      }
+    },
+    "LD-SCHOOL-GATE-535": {
+      "description": {
+        "zh": "據傳更早前曾有人以傳攀先鋒",
+        "text": "さらに以前にトラッドでリードした人がいたと伝えられています。"
+      }
+    },
+    "LD-SCHOOL-GATE-536": {
+      "description": {
+        "zh": "據傳更早前曾有人以傳攀先鋒",
+        "text": "さらに以前にトラッドでリードした人がいたと伝えられています。"
+      }
+    },
+    "LD-SCHOOL-GATE-537": {
+      "description": {
+        "zh": "與 <明明點很⼩> 共⽤ Anchor",
+        "text": "<明明點很小> と終了点を共用します。"
+      }
+    },
+    "LD-SCHOOL-GATE-539": {
+      "description": {
+        "zh": "沒有 Anchor",
+        "text": "終了点はありません。"
+      }
+    },
+    "LD-SCHOOL-GATE-540": {
+      "description": {
+        "zh": "《RCT》書中路線圖繪製錯誤，應為更左側的內角與懸岩 需自行架設確保站，再以 <阿彌陀佛> 的 Anchor 垂降",
+        "text": "《RCT》のトポは誤って描かれており、正しくはさらに左側のコーナーとハングです。各自でビレイステーションを構築する必要があり、下降は <阿彌陀佛> の終了点から懸垂下降します。"
+      }
+    },
+    "LD-SCHOOL-GATE-541": {
+      "description": {
+        "zh": "需自行架設確保站 再以 <阿彌陀佛> 的 Anchor 垂降",
+        "text": "各自でビレイステーションを構築する必要があります。下降は <阿彌陀佛> の終了点から懸垂下降します。"
+      }
+    },
+    "LD-SCHOOL-GATE-544": {
+      "description": {
+        "zh": "與 <阿彌陀佛> 共用 Anchor",
+        "text": "<阿彌陀佛> と終了点を共用します。"
+      }
+    },
+    "LD-SCHOOL-GATE-546.1": {
+      "description": {
+        "zh": "《前進龍洞岩場》有收錄 《RCT》未收錄",
+        "text": "《前進龍洞岩場》には収録されていますが、《RCT》には収録されていません。"
+      }
+    },
+    "LD-SCHOOL-GATE-548": {
+      "description": {
+        "zh": "與 <輪迴> 共用Top Anchor",
+        "text": "<輪迴> とトップの終了点を共用します。"
+      }
+    },
+    "LD-SCHOOL-GATE-551": {
+      "description": {
+        "zh": "《RCT》書中路線圖起攀位置有誤",
+        "text": "《RCT》のトポは取付の位置が誤っています。"
+      }
+    },
+    "LD-SCHOOL-GATE-552": {
+      "description": {
+        "zh": "首攀者在得知此路線尚無人完攀時感到意外，因而將其命名為 <出乎意料>",
+        "text": "初登者は、このルートがまだ誰にも完登されていないと知って意外に思い、<出乎意料> と名付けました。"
+      }
+    },
+    "LD-SCHOOL-GATE-554": {
+      "description": {
+        "zh": "與 <樓梯> 共用Top Anchor",
+        "text": "<樓梯> とトップの終了点を共用します。"
+      }
+    },
+    "LD-SCHOOL-GATE-555": {
+      "description": {
+        "zh": "與 <樓梯> 共用Top Anchor",
+        "text": "<樓梯> とトップの終了点を共用します。"
+      }
+    },
+    "LD-SCHOOL-GATE-556": {
+      "description": {
+        "zh": "與 <樓梯> 共用Top Anchor",
+        "text": "<樓梯> とトップの終了点を共用します。"
+      }
+    },
+    "LD-SCHOOL-GATE-558": {
+      "description": {
+        "zh": "可步行至頂端架設 Anchor",
+        "text": "歩いてトップまで行き、終了点（支点）を構築できます。"
+      }
+    },
+    "LD-SCHOOL-GATE-559": {
+      "description": {
+        "zh": "可步行至頂端架設 Anchor 書中路線圖繪製有誤",
+        "text": "歩いてトップまで行き、終了点（支点）を構築できます。書籍のトポは誤って描かれています。"
+      }
+    },
+    "LD-SCHOOL-GATE-560": {
+      "description": {
+        "zh": "可步行至頂端架設 Anchor 書中路線圖繪製有誤",
+        "text": "歩いてトップまで行き、終了点（支点）を構築できます。書籍のトポは誤って描かれています。"
+      }
+    },
+    "LD-SCHOOL-GATE-561": {
+      "description": {
+        "zh": "可步行至頂端架設 Anchor",
+        "text": "歩いてトップまで行き、終了点（支点）を構築できます。"
+      }
+    },
+    "LD-SCHOOL-GATE-562": {
+      "description": {
+        "zh": "可步行至頂端架設 Anchor",
+        "text": "歩いてトップまで行き、終了点（支点）を構築できます。"
+      }
+    },
+    "LD-SCHOOL-GATE-563": {
+      "description": {
+        "zh": "可步行至頂端架設 Anchor",
+        "text": "歩いてトップまで行き、終了点（支点）を構築できます。"
+      }
+    },
+    "LD-SCHOOL-GATE-564": {
+      "description": {
+        "zh": "可步行至頂端架設 Anchor",
+        "text": "歩いてトップまで行き、終了点（支点）を構築できます。"
+      }
+    },
+    "LD-SCHOOL-GATE-565": {
+      "description": {
+        "zh": "建議佩戴岩盔，確保者提高警覺",
+        "text": "ヘルメットの着用を推奨します。ビレイヤーは警戒を強めてください。"
+      }
+    },
+    "LD-SCHOOL-GATE-566": {
+      "description": {
+        "zh": "與 <第一外角> 共用Top Anchor",
+        "text": "<第一外角> とトップの終了点を共用します。"
+      }
+    },
+    "LD-SCHOOL-GATE-568": {
+      "description": {
+        "zh": "與 <Z字> 共用Top Anchor",
+        "text": "<Z字> とトップの終了点を共用します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-303": {
+      "description": {
+        "zh": "岩質極差，有鬆動岩塊與草坡， 不易架設⽀點。強烈建議配戴岩盔。",
+        "text": "岩質は極めて悪く、浮石や草付きの斜面があり、支点の構築が困難です。ヘルメットの着用を強く推奨します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-304": {
+      "description": {
+        "zh": "少數區塊岩質不穩",
+        "text": "一部に岩が不安定な箇所があります。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-305": {
+      "description": {
+        "zh": "少數區塊岩質不穩",
+        "text": "一部に岩が不安定な箇所があります。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-306": {
+      "description": {
+        "zh": "少數區塊岩質不穩",
+        "text": "一部に岩が不安定な箇所があります。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-307": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-309": {
+      "description": {
+        "zh": "部分岩點鬆動",
+        "text": "一部のホールドが緩んでいます。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-310": {
+      "description": {
+        "zh": "與 <三角關係> 共用 Anchor",
+        "text": "<三角關係> と終了点を共用します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-311": {
+      "description": {
+        "zh": "與 <三角關係> 共用 Anchor",
+        "text": "<三角關係> と終了点を共用します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-312": {
+      "description": {
+        "zh": "可用 <三角關係> Anchor，或繼續上攀至更高的 Anchor (約60m高)",
+        "text": "<三角關係> の終了点を使うか、さらに上部の終了点（高さ約60m）まで登り続けることができます。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-313": {
+      "description": {
+        "zh": "與 <三角關係> 或 <面壁> 共用 Anchor",
+        "text": "<三角關係> または <面壁> と終了点を共用します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314": {
+      "description": {
+        "zh": "無 Anchor",
+        "text": "終了点はありません。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314.1": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314.2": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314.3": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314.4": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314.5": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314.6": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314.7": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314.8": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314.9": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-315": {
+      "description": {
+        "zh": "與 <大懸岩> 共用 Anchor",
+        "text": "<大懸岩> と終了点を共用します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-315.1": {
+      "description": {
+        "zh": "路線圖 Topo",
+        "text": "トポ"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-318.1": {
+      "description": {
+        "zh": "從 Anchor 左側直上約20m",
+        "text": "終了点の左側から約20m直上します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-318.2": {
+      "description": {
+        "zh": "從 Anchor 右側的內角起攀",
+        "text": "終了点の右側のコーナーから取り付きます。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-319": {
+      "description": {
+        "zh": "一路爬到岩壁頂端的步道涼亭。極度危險，最好連冰攀⼯具都帶",
+        "text": "岩壁最上部の遊歩道にある東屋まで登り続けます。極めて危険で、アイスクライミングの道具まで持って行ったほうがよいほどです。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-320": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-321": {
+      "description": {
+        "zh": "限制爬法，爬Face為5.12c",
+        "text": "限定あり。フェイスを登る場合は5.12cです。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-322": {
+      "description": {
+        "zh": "前三個 Bolt 與 <海闊天空> 共用",
+        "text": "最初の3本のボルトは <海闊天空> と共用です。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-325": {
+      "description": {
+        "zh": "B02、B03 與 <倒掛金鉤> 共用；與 <阿魯巴> 共用 Anchor",
+        "text": "B02、B03は <倒掛金鉤> と共用です。終了点は <阿魯巴> と共用します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-327.1": {
+      "description": {
+        "zh": "從龍路第二段繩距左側平台起攀，爬左上方的寬裂隙",
+        "text": "龍路の2ピッチ目の左側にあるテラスから取り付き、左上のワイドクラックを登ります。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-327.2": {
+      "description": {
+        "zh": "從龍路第二段繩距左側平台起攀，爬正上方的手指裂隙",
+        "text": "龍路の2ピッチ目の左側にあるテラスから取り付き、真上のフィンガークラックを登ります。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-328": {
+      "description": {
+        "zh": "無 Anchor",
+        "text": "終了点はありません。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-328.1": {
+      "description": {
+        "zh": "完攀後可繼續往上至步道觀景平台 topout，或由大禮堂攀岩者小徑步行回到起攀處",
+        "text": "完登後は、そのまま上へ登って遊歩道の展望台にトップアウトするか、大禮堂のクライマー用の踏み跡を歩いて取付に戻ることができます。"
+      }
+    },
+    "LD-CLOCKTOWER-468": {
+      "description": {
+        "zh": "需自行架設確保站 再以 <金魚藻> 的 Anchor 垂降",
+        "text": "各自でビレイステーションを構築する必要があります。下降は <金魚藻> の終了点から懸垂下降します。"
+      }
+    },
+    "LD-CLOCKTOWER-470": {
+      "description": {
+        "zh": "與 <觀護人> 共⽤ Anchor",
+        "text": "<觀護人> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-471": {
+      "description": {
+        "zh": "與 <觀護人> 共⽤ Anchor",
+        "text": "<觀護人> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-472": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-CLOCKTOWER-473": {
+      "description": {
+        "zh": "岩質不穩 與 <翻牆> 共⽤ Anchor",
+        "text": "岩が不安定です。<翻牆> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-474": {
+      "description": {
+        "zh": "岩質很差",
+        "text": "岩質は非常に悪いです。"
+      }
+    },
+    "LD-CLOCKTOWER-474a": {
+      "description": {
+        "zh": "待確認",
+        "text": "確認待ち"
+      }
+    },
+    "LD-CLOCKTOWER-476": {
+      "description": {
+        "zh": "與 <留校察看> 共用 Anchor",
+        "text": "<留校察看> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-477": {
+      "description": {
+        "zh": "路線上有兩個老舊Bolt，請勿使用",
+        "text": "ルート上に老朽化したボルトが2本あります。使用しないでください。"
+      }
+    },
+    "LD-CLOCKTOWER-478": {
+      "description": {
+        "zh": "《RCT》P.242路線圖繪製有誤",
+        "text": "《RCT》P.242のトポは誤って描かれています。"
+      }
+    },
+    "LD-CLOCKTOWER-479": {
+      "description": {
+        "zh": "英文名稱音譯為韓文時，意指需張開雙臂抱著岩角上攀。原為上方架繩路線，2013更新後改為運動攀登路線",
+        "text": "英語名を韓国語に音訳すると、両腕を広げてカンテを抱えながら登る必要があるという意味になります。元はトップロープルートで、2013年の更新後にスポートルートになりました。"
+      }
+    },
+    "LD-CLOCKTOWER-480": {
+      "description": {
+        "zh": "《RCT》P.242路線圖繪製有誤",
+        "text": "《RCT》P.242のトポは誤って描かれています。"
+      }
+    },
+    "LD-CLOCKTOWER-482": {
+      "description": {
+        "zh": "需自行架設確保站 以 <訓導處煙囪> 的 Anchor 垂降",
+        "text": "各自でビレイステーションを構築する必要があります。下降は <訓導處煙囪> の終了点から懸垂下降します。"
+      }
+    },
+    "LD-CLOCKTOWER-484": {
+      "description": {
+        "zh": "與 <水池畔煙囪> 共用 Anchor",
+        "text": "<水池畔煙囪> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-485": {
+      "description": {
+        "zh": "與 <水池畔煙囪> 共用 Anchor",
+        "text": "<水池畔煙囪> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-487": {
+      "description": {
+        "zh": "與 <小藍魚> 共用 Anchor",
+        "text": "<小藍魚> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-488": {
+      "description": {
+        "zh": "與 <小藍魚> 共用 Anchor",
+        "text": "<小藍魚> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-489": {
+      "description": {
+        "zh": "與 <小藍魚> 共用 Anchor",
+        "text": "<小藍魚> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-490": {
+      "description": {
+        "zh": "《RCT》P.247路線圖起攀位置有誤",
+        "text": "《RCT》P.247のトポは取付の位置が誤っています。"
+      }
+    },
+    "LD-CLOCKTOWER-491": {
+      "description": {
+        "zh": "《RCT》P.247路線圖繪製有誤",
+        "text": "《RCT》P.247のトポは誤って描かれています。"
+      }
+    },
+    "LD-CLOCKTOWER-492": {
+      "description": {
+        "zh": "原為上方架繩路線 《RCT》P.247路線圖繪製有誤",
+        "text": "元はトップロープルートです。《RCT》P.247のトポは誤って描かれています。"
+      }
+    },
+    "LD-CLOCKTOWER-493": {
+      "description": {
+        "zh": "原為傳攀或上方架繩路線 《RCT》P.247路線圖繪製有誤",
+        "text": "元はトラッドまたはトップロープのルートです。《RCT》P.247のトポは誤って描かれています。"
+      }
+    },
+    "LD-CLOCKTOWER-494": {
+      "description": {
+        "zh": "《RCT》P.247路線圖起攀位置有誤",
+        "text": "《RCT》P.247のトポは取付の位置が誤っています。"
+      }
+    },
+    "LD-CLOCKTOWER-495": {
+      "description": {
+        "zh": "原為上方架繩路線 《RCT》P.247路線圖繪製有誤",
+        "text": "元はトップロープルートです。《RCT》P.247のトポは誤って描かれています。"
+      }
+    },
+    "LD-CLOCKTOWER-496": {
+      "description": {
+        "zh": "Anchor⽼舊，需自行架設確保站",
+        "text": "終了点が老朽化しているため、各自でビレイステーションを構築する必要があります。"
+      }
+    },
+    "LD-CLOCKTOWER-497": {
+      "description": {
+        "zh": "Anchor⽼舊，需自行架設確保站",
+        "text": "終了点が老朽化しているため、各自でビレイステーションを構築する必要があります。"
+      }
+    },
+    "LD-CLOCKTOWER-498": {
+      "description": {
+        "zh": "與 <叢林熱> 共用 Anchor",
+        "text": "<叢林熱> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-499": {
+      "description": {
+        "zh": "Anchor 設於 2011 年",
+        "text": "終了点は2011年に設置されました。"
+      }
+    },
+    "LD-CLOCKTOWER-500": {
+      "description": {
+        "zh": "與 <叢林熱> 共用 Anchor",
+        "text": "<叢林熱> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-501": {
+      "description": {
+        "zh": "天然固定點於 2025 年更新",
+        "text": "ナチュラルアンカー（自然物の支点）は2025年に更新されました。"
+      }
+    },
+    "LD-CLOCKTOWER-502": {
+      "description": {
+        "zh": "可與 <奶油刀> 共用天然固定點",
+        "text": "<奶油刀> とナチュラルアンカー（自然物の支点）を共用できます。"
+      }
+    },
+    "LD-CLOCKTOWER-503": {
+      "description": {
+        "zh": "與 <奶油刀> 共用天然固定點",
+        "text": "<奶油刀> とナチュラルアンカー（自然物の支点）を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-504": {
+      "description": {
+        "zh": "祝賀禤志剛與李寶蓮結婚",
+        "text": "禤志剛さんと李寶蓮さんの結婚を祝して。"
+      }
+    },
+    "LD-CLOCKTOWER-505": {
+      "description": {
+        "zh": "與 <奶油刀> 共用天然固定點",
+        "text": "<奶油刀> とナチュラルアンカー（自然物の支点）を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-507": {
+      "description": {
+        "zh": "與 <奶油刀> 共用天然固定點",
+        "text": "<奶油刀> とナチュラルアンカー（自然物の支点）を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-509": {
+      "description": {
+        "zh": "與 <到此一遊> 共用 Anchor",
+        "text": "<到此一遊> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-510": {
+      "description": {
+        "zh": "與 <到此一遊> 共用 Anchor",
+        "text": "<到此一遊> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-511": {
+      "description": {
+        "zh": "與 <剃刀邊緣> 共用 Anchor",
+        "text": "<剃刀邊緣> と終了点を共用します。"
+      }
+    },
+    "LD-CLOCKTOWER-512": {
+      "description": {
+        "zh": "可用Bolt-Anchor垂降 亦可步行回到地面",
+        "text": "ボルトの終了点から懸垂下降できます。歩いて地上に戻ることもできます。"
+      }
+    },
+    "LD-CLOCKTOWER-513": {
+      "description": {
+        "zh": "與 <黑人總統> 共用 Anchor 亦可步行回到地面",
+        "text": "<黑人總統> と終了点を共用します。歩いて地上に戻ることもできます。"
+      }
+    },
+    "LD-CLOCKTOWER-514": {
+      "description": {
+        "zh": "與 <黑人總統> 共用 Anchor 亦可步行回到地面",
+        "text": "<黑人總統> と終了点を共用します。歩いて地上に戻ることもできます。"
+      }
+    },
+    "LD-CLOCKTOWER-515": {
+      "description": {
+        "zh": "與 <黑人總統> 共用 Anchor 亦可步行回到地面",
+        "text": "<黑人總統> と終了点を共用します。歩いて地上に戻ることもできます。"
+      }
+    },
+    "LD-CLOCKTOWER-516": {
+      "description": {
+        "zh": "可落水，亦可步行回到地面",
+        "text": "水に落ちても構いません。歩いて地上に戻ることもできます。"
+      }
+    },
+    "LD-CLOCKTOWER-517": {
+      "description": {
+        "zh": "可步行回到地面",
+        "text": "歩いて地上に戻れます。"
+      }
+    },
+    "LD-CLOCKTOWER-518": {
+      "description": {
+        "zh": "可步行回到地面",
+        "text": "歩いて地上に戻れます。"
+      }
+    },
+    "LD-CLOCKTOWER-519": {
+      "description": {
+        "zh": "可步行回到地面",
+        "text": "歩いて地上に戻れます。"
+      }
+    },
+    "LD-CLOCKTOWER-520": {
+      "description": {
+        "zh": "可步行回到地面",
+        "text": "歩いて地上に戻れます。"
+      }
+    },
+    "LD-FIRST-CAVE-238.1": {
+      "description": {
+        "zh": "路線相關資訊  Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-FIRST-CAVE-238.2": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-FIRST-CAVE-238.3": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-FIRST-CAVE-240": {
+      "description": {
+        "zh": "路線仍使用拉膨式錨栓 (304)",
+        "text": "ルートには現在も拡張式アンカーボルト（304）が使われています。"
+      }
+    },
+    "LD-FIRST-CAVE-241": {
+      "description": {
+        "zh": "路線仍使用拉膨式錨栓 (304)",
+        "text": "ルートには現在も拡張式アンカーボルト（304）が使われています。"
+      }
+    },
+    "LD-FIRST-CAVE-243": {
+      "description": {
+        "zh": "與 <石花凍> 共用所有 Bolt",
+        "text": "すべてのボルトを <石花凍> と共用します。"
+      }
+    },
+    "LD-FIRST-CAVE-244": {
+      "description": {
+        "zh": "岩質鬆動",
+        "text": "岩が緩んでいます。"
+      }
+    },
+    "LD-FIRST-CAVE-245": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-FIRST-CAVE-246": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-FIRST-CAVE-247": {
+      "description": {
+        "zh": "路線仍使用 304 錨栓",
+        "text": "ルートには現在も304のボルトが使われています。"
+      }
+    },
+    "LD-FIRST-CAVE-248": {
+      "description": {
+        "zh": "路線仍使用 304 錨栓",
+        "text": "ルートには現在も304のボルトが使われています。"
+      }
+    },
+    "LD-FIRST-CAVE-249": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-FIRST-CAVE-250": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-FIRST-CAVE-251": {
+      "description": {
+        "zh": "原為傳攀路線，2012 更新為運攀路線",
+        "text": "元はトラッドルートで、2012年にスポートルートに更新されました。"
+      }
+    },
+    "LD-FIRST-CAVE-252": {
+      "description": {
+        "zh": "路線上曾有巨石崩落，攀登前請務必審慎評估",
+        "text": "ルート上で過去に巨石の崩落がありました。登る前に必ず慎重に判断してください。"
+      }
+    },
+    "LD-FIRST-CAVE-254": {
+      "description": {
+        "zh": "B01-B04 與 <曙光裂隙> 共用",
+        "text": "B01〜B04は <曙光裂隙> と共用です。"
+      }
+    },
+    "LD-FIRST-CAVE-257": {
+      "description": {
+        "zh": "B09-B11、Anchor 與 <烏鴉> 共⽤",
+        "text": "B09〜B11と終了点は <烏鴉> と共用です。"
+      }
+    },
+    "LD-FIRST-CAVE-258": {
+      "description": {
+        "zh": "岩質不穩，且路線仍使用 304 錨栓",
+        "text": "岩が不安定で、ルートには現在も304のボルトが使われています。"
+      }
+    },
+    "LD-FIRST-CAVE-260": {
+      "description": {
+        "zh": "路線中有個 Bolt 設置的岩壁岩質可能有問題",
+        "text": "ルート中のボルト1本は、設置されている壁の岩質に問題がある可能性があります。"
+      }
+    },
+    "LD-FIRST-CAVE-261": {
+      "description": {
+        "zh": "岩質不穩，只爬到約25m左右",
+        "text": "岩が不安定で、約25m付近までしか登っていません。"
+      }
+    },
+    "LD-FIRST-CAVE-264": {
+      "description": {
+        "zh": "B01-B08 與 <鴿子> 共⽤",
+        "text": "B01〜B08は <鴿子> と共用です。"
+      }
+    },
+    "LD-FIRST-CAVE-266": {
+      "description": {
+        "zh": "路線中有個 Bolt 設置的岩壁岩質可能有問題",
+        "text": "ルート中のボルト1本は、設置されている壁の岩質に問題がある可能性があります。"
+      }
+    },
+    "LD-FIRST-CAVE-267": {
+      "description": {
+        "zh": "原路線名稱為：上班不上班 / Skipping Work (5.13a, 張登榮)，更新後改變路線走向，並改為 Project",
+        "text": "元のルート名は「上班不上班 / Skipping Work」（5.13a、張登榮）。更新後にルートのラインが変更され、プロジェクトになりました。"
+      }
+    },
+    "LD-FIRST-CAVE-268": {
+      "description": {
+        "zh": "B01-B09 與 <洪來瘋> 共⽤ 與 <無人完攀> 共⽤ Anchor",
+        "text": "B01〜B09は <洪來瘋> と共用です。終了点は <無人完攀> と共用します。"
+      }
+    },
+    "LD-FIRST-CAVE-269": {
+      "description": {
+        "zh": "B01-B09 與 <洪來瘋> 共⽤ B10 以及 Anchor 與 <無人完攀> 共⽤",
+        "text": "B01〜B09は <洪來瘋> と共用、B10と終了点は <無人完攀> と共用です。"
+      }
+    },
+    "LD-FIRST-CAVE-270": {
+      "description": {
+        "zh": "於難關處墜落時需⼩⼼岩階，且路線仍使用 304 錨栓",
+        "text": "核心部で墜落する際はレッジ（岩棚）に注意が必要です。また、ルートには現在も304のボルトが使われています。"
+      }
+    },
+    "LD-FIRST-CAVE-271": {
+      "description": {
+        "zh": "部分岩點鬆動",
+        "text": "一部のホールドが緩んでいます。"
+      }
+    },
+    "LD-FIRST-CAVE-272": {
+      "description": {
+        "zh": "部分岩點鬆動",
+        "text": "一部のホールドが緩んでいます。"
+      }
+    },
+    "LD-FIRST-CAVE-274": {
+      "description": {
+        "zh": "Bolt 數量待清查 與 <早安龍洞> 共⽤ Anchor",
+        "text": "ボルトの本数は調査待ちです。<早安龍洞> と終了点を共用します。"
+      }
+    },
+    "LD-FIRST-CAVE-275": {
+      "description": {
+        "zh": "少數區塊岩質不穩 Bolt 數量待確認",
+        "text": "一部に岩が不安定な箇所があります。ボルトの本数は確認待ちです。"
+      }
+    },
+    "LD-FIRST-CAVE-276": {
+      "description": {
+        "zh": "Bolt 數量待確認",
+        "text": "ボルトの本数は確認待ちです。"
+      }
+    },
+    "LD-FIRST-CAVE-279": {
+      "description": {
+        "zh": "《RCT》中英內文描述的難度不同",
+        "text": "《RCT》の中国語本文と英語本文で、記載されているグレードが異なります。"
+      }
+    },
+    "LD-FIRST-CAVE-282": {
+      "description": {
+        "zh": "無 Anchor",
+        "text": "終了点はありません。"
+      }
+    },
+    "LD-FIRST-CAVE-283": {
+      "description": {
+        "zh": "少數區塊岩質不穩",
+        "text": "一部に岩が不安定な箇所があります。"
+      }
+    },
+    "LD-FIRST-CAVE-284": {
+      "description": {
+        "zh": "2015/09/06 發現遭不知名人士以 Ushba Tortuga Ti Bolt 新設 P1 與 P2 兩組 Anchor (原為單繩距路線)",
+        "text": "2015/09/06、何者かがUshba Tortuga Tiボルトを使ってP1とP2の2組の終了点を新設しているのが見つかりました（元はシングルピッチのルートです）。"
+      }
+    },
+    "LD-FIRST-CAVE-286": {
+      "description": {
+        "zh": "《RCT》路線圖編號誤植為285",
+        "text": "《RCT》のトポでは番号が誤って285と記載されています。"
+      }
+    },
+    "LD-FIRST-CAVE-289": {
+      "description": {
+        "zh": "與 <人行道> 共⽤ Anchor",
+        "text": "<人行道> と終了点を共用します。"
+      }
+    },
+    "LD-FIRST-CAVE-291": {
+      "description": {
+        "zh": "與 <歷史> 共⽤ Anchor",
+        "text": "<歷史> と終了点を共用します。"
+      }
+    },
+    "LD-FIRST-CAVE-293": {
+      "description": {
+        "zh": "路線仍使用 304 錨栓",
+        "text": "ルートには現在も304のボルトが使われています。"
+      }
+    },
+    "LD-FIRST-CAVE-294": {
+      "description": {
+        "zh": "路線仍使用 304 錨栓",
+        "text": "ルートには現在も304のボルトが使われています。"
+      }
+    },
+    "LD-FIRST-CAVE-295": {
+      "description": {
+        "zh": "路線仍使用 304 錨栓",
+        "text": "ルートには現在も304のボルトが使われています。"
+      }
+    },
+    "LD-FIRST-CAVE-296": {
+      "description": {
+        "zh": "路線仍使用 304 錨栓",
+        "text": "ルートには現在も304のボルトが使われています。"
+      }
+    },
+    "LD-FIRST-CAVE-297": {
+      "description": {
+        "zh": "路線仍使用 304 錨栓",
+        "text": "ルートには現在も304のボルトが使われています。"
+      }
+    },
+    "LD-FIRST-CAVE-298": {
+      "description": {
+        "zh": "路線上半段⼀⽚⼤岩板有斷裂之虞；且路線仍使用 304 錨栓",
+        "text": "ルート上半部にある大きなフレーク1枚に破断のおそれがあります。また、ルートには現在も304のボルトが使われています。"
+      }
+    },
+    "LD-SECOND-CAVE-197": {
+      "description": {
+        "zh": "與 <Yum Yum的高級作業> 共用 Anchor",
+        "text": "<Yum Yum的高級作業> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-198": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-SECOND-CAVE-200": {
+      "description": {
+        "zh": "與 <恐龍> 共用 Anchor",
+        "text": "<恐龍> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-201": {
+      "description": {
+        "zh": "與 <恐龍> 共用 Anchor",
+        "text": "<恐龍> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-202": {
+      "description": {
+        "zh": "與 <恐龍> 共用 Anchor",
+        "text": "<恐龍> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-204": {
+      "description": {
+        "zh": "路線兩側岩質不穩",
+        "text": "ルートの両側は岩が不安定です。"
+      }
+    },
+    "LD-SECOND-CAVE-206": {
+      "description": {
+        "zh": "與 <裂嘴一笑> 共用 Anchor",
+        "text": "<裂嘴一笑> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-207": {
+      "description": {
+        "zh": "與 <裂嘴一笑> 共用 Anchor",
+        "text": "<裂嘴一笑> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-208": {
+      "description": {
+        "zh": "與 <裂嘴一笑> 共用 Anchor",
+        "text": "<裂嘴一笑> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-209": {
+      "description": {
+        "zh": "與 <裂嘴一笑> 共用 Anchor",
+        "text": "<裂嘴一笑> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-210": {
+      "description": {
+        "zh": "與 <裂嘴一笑> 共用 Anchor",
+        "text": "<裂嘴一笑> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-215": {
+      "description": {
+        "zh": "與 <幸運條紋> 共⽤ Anchor",
+        "text": "<幸運條紋> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-217": {
+      "description": {
+        "zh": "與 <洞穴> 共⽤ Anchor",
+        "text": "<洞穴> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-218": {
+      "description": {
+        "zh": "與 <洞穴> 共⽤ Anchor",
+        "text": "<洞穴> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-219": {
+      "description": {
+        "zh": "與 <洞穴> 共⽤ Anchor",
+        "text": "<洞穴> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-220": {
+      "description": {
+        "zh": "與 <洞穴> 共⽤ Anchor",
+        "text": "<洞穴> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-221": {
+      "description": {
+        "zh": "Bolt 數量待確認",
+        "text": "ボルトの本数は確認待ちです。"
+      }
+    },
+    "LD-SECOND-CAVE-222": {
+      "description": {
+        "zh": "Bolt 數量待確認",
+        "text": "ボルトの本数は確認待ちです。"
+      }
+    },
+    "LD-SECOND-CAVE-223": {
+      "description": {
+        "zh": "Bolt 數量待確認",
+        "text": "ボルトの本数は確認待ちです。"
+      }
+    },
+    "LD-SECOND-CAVE-224": {
+      "description": {
+        "zh": "Bolt 數量待確認",
+        "text": "ボルトの本数は確認待ちです。"
+      }
+    },
+    "LD-SECOND-CAVE-225": {
+      "description": {
+        "zh": "需自行架設固定點",
+        "text": "各自で支点を構築する必要があります。"
+      }
+    },
+    "LD-SECOND-CAVE-226": {
+      "description": {
+        "zh": "需自行架設固定點",
+        "text": "各自で支点を構築する必要があります。"
+      }
+    },
+    "LD-SECOND-CAVE-227": {
+      "description": {
+        "zh": "需自行架設固定點",
+        "text": "各自で支点を構築する必要があります。"
+      }
+    },
+    "LD-SECOND-CAVE-228": {
+      "description": {
+        "zh": "需自行架設固定點",
+        "text": "各自で支点を構築する必要があります。"
+      }
+    },
+    "LD-SECOND-CAVE-231": {
+      "description": {
+        "zh": "與 <西道> 共⽤ Anchor",
+        "text": "<西道> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-232": {
+      "description": {
+        "zh": "與 <西道> 共⽤ Anchor",
+        "text": "<西道> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-233": {
+      "description": {
+        "zh": "與 <西道> 共⽤ Anchor",
+        "text": "<西道> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-236": {
+      "description": {
+        "zh": "與 <裂隙路線> 共⽤ Anchor",
+        "text": "<裂隙路線> と終了点を共用します。"
+      }
+    },
+    "LD-SECOND-CAVE-237": {
+      "description": {
+        "zh": "原為上⽅架繩路線，2012年更新為運動路線",
+        "text": "元はトップロープルートで、2012年にスポートルートに更新されました。"
+      }
+    },
+    "LD-SECOND-CAVE-238": {
+      "description": {
+        "zh": "《前進龍洞岩場》記載為 <空中倒拉> 與 <泥巴> 兩條路線",
+        "text": "《前進龍洞岩場》では <空中倒拉> と <泥巴> の2本のルートとして記載されています。"
+      }
+    },
+    "LD-BACK-DOOR-7": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-8": {
+      "description": {
+        "zh": "無 Anchor",
+        "text": "終了点はありません。"
+      }
+    },
+    "LD-BACK-DOOR-9": {
+      "description": {
+        "zh": "無 Anchor",
+        "text": "終了点はありません。"
+      }
+    },
+    "LD-BACK-DOOR-10": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-11": {
+      "description": {
+        "zh": "原為運動攀登路線，移除⽼舊Bolt後改為上⽅架繩路線",
+        "text": "元はスポートルートでしたが、老朽化したボルトを撤去し、トップロープルートになりました。"
+      }
+    },
+    "LD-BACK-DOOR-12": {
+      "description": {
+        "zh": "原為運動攀登路線，移除⽼舊Bolt後改為上⽅架繩路線",
+        "text": "元はスポートルートでしたが、老朽化したボルトを撤去し、トップロープルートになりました。"
+      }
+    },
+    "LD-BACK-DOOR-13": {
+      "description": {
+        "zh": "原為運動攀登路線，移除⽼舊Bolt後改為上⽅架繩路線",
+        "text": "元はスポートルートでしたが、老朽化したボルトを撤去し、トップロープルートになりました。"
+      }
+    },
+    "LD-BACK-DOOR-14": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-15": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-16": {
+      "description": {
+        "zh": "RCC為早期「攀岩者俱樂部」的簡稱，由高銘和先生於1981年創辦",
+        "text": "RCCは初期の「攀岩者俱樂部（クライマーズクラブ）」の略称で、1981年に高銘和氏が創設しました。"
+      }
+    },
+    "LD-BACK-DOOR-17": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-18": {
+      "description": {
+        "zh": "原為運動攀登路線，移除⽼舊Bolt後改為上⽅架繩路線",
+        "text": "元はスポートルートでしたが、老朽化したボルトを撤去し、トップロープルートになりました。"
+      }
+    },
+    "LD-BACK-DOOR-19": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-20": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-21": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-22": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-23": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-24": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-25": {
+      "description": {
+        "zh": "路線上有鬆動岩石",
+        "text": "ルート上に浮石があります。"
+      }
+    },
+    "LD-BACK-DOOR-26": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-27": {
+      "description": {
+        "zh": "原為混合路線，移除⽼舊Bolt後改為上⽅架繩路線；當初朴來慶為了拍攝雜誌廣告，曾背熱水器攀爬。",
+        "text": "元はミックス（ボルトとトラッドの混合）ルートでしたが、老朽化したボルトを撤去し、トップロープルートになりました。当時、朴來慶さんが雑誌広告の撮影のため、給湯器を背負って登ったことがあります。"
+      }
+    },
+    "LD-BACK-DOOR-32": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-34": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-35": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-36": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-37": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-41": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-42": {
+      "description": {
+        "zh": "天然固定點",
+        "text": "ナチュラルアンカー（自然物の支点）"
+      }
+    },
+    "LD-BACK-DOOR-44": {
+      "description": {
+        "zh": "與 <地下居民> 共⽤ Anchor",
+        "text": "<地下居民> と終了点を共用します。"
+      }
+    },
+    "LD-BACK-DOOR-46": {
+      "description": {
+        "zh": "B01-B04 與 <冤家宜解不宜結> 共⽤",
+        "text": "B01〜B04は <冤家宜解不宜結> と共用です。"
+      }
+    },
+    "LD-BACK-DOOR-47": {
+      "description": {
+        "zh": "路線上約2/3⾼度有⼀鬆動岩塊",
+        "text": "ルートの約3分の2の高さに浮石が1つあります。"
+      }
+    },
+    "LD-BACK-DOOR-52": {
+      "description": {
+        "zh": "首攀者建議修正難度為5.13a/b “It's pretty height dependent but not crazy hard” - Alex Honnold",
+        "text": "初登者はグレードを5.13a/bに修正することを提案しています。“It's pretty height dependent but not crazy hard” - Alex Honnold"
+      }
+    },
+    "LD-BACK-DOOR-53": {
+      "description": {
+        "zh": "書中路線圖的 Anchor 位置錯誤，應在更上⽅",
+        "text": "書籍のトポでは終了点の位置が誤っており、正しくはさらに上です。"
+      }
+    },
+    "LD-BACK-DOOR-54": {
+      "description": {
+        "zh": "書中路線圖的完攀位置錯誤，應在更上⽅",
+        "text": "書籍のトポでは終了位置が誤っており、正しくはさらに上です。"
+      }
+    },
+    "LD-BACK-DOOR-55": {
+      "description": {
+        "zh": "與 <倩女驚魂> 共⽤ Anchor",
+        "text": "<倩女驚魂> と終了点を共用します。"
+      }
+    },
+    "LD-BACK-DOOR-56": {
+      "description": {
+        "zh": "與 <倩女驚魂> 共⽤ Anchor",
+        "text": "<倩女驚魂> と終了点を共用します。"
+      }
+    },
+    "LD-BACK-DOOR-57": {
+      "description": {
+        "zh": "有鬆動岩⽯ (待確認)",
+        "text": "浮石があります（確認待ち）。"
+      }
+    },
+    "LD-BACK-DOOR-61": {
+      "description": {
+        "zh": "書中路線圖 (P.37) 的路線走向有誤",
+        "text": "書籍のトポ（P.37）はルートのラインが誤っています。"
+      }
+    },
+    "LD-BACK-DOOR-62": {
+      "description": {
+        "zh": "路線上有鬆動岩⽯ (待確認)；路線右側於2016/06/04發生大規模落石",
+        "text": "ルート上に浮石があります（確認待ち）。ルートの右側で2016/06/04に大規模な落石が発生しました。"
+      }
+    },
+    "LD-BACK-DOOR-63": {
+      "description": {
+        "zh": "路線右側於2016/06/04發生大規模落石；B09 待查；書中路線圖 (P.37) 的完攀位置錯誤",
+        "text": "ルートの右側で2016/06/04に大規模な落石が発生しました。B09は調査待ちです。書籍のトポ（P.37）は終了位置が誤っています。"
+      }
+    },
+    "LD-BACK-DOOR-64": {
+      "description": {
+        "zh": "路線右側於2016/06/04發生大規模落石；書中路線圖 (P.37) 的完攀位置錯誤",
+        "text": "ルートの右側で2016/06/04に大規模な落石が発生しました。書籍のトポ（P.37）は終了位置が誤っています。"
+      }
+    },
+    "LD-BACK-DOOR-65": {
+      "description": {
+        "zh": "路線右側於2016/06/04發生大規模落石",
+        "text": "ルートの右側で2016/06/04に大規模な落石が発生しました。"
+      }
+    },
+    "LD-BACK-DOOR-66": {
+      "description": {
+        "zh": "路線右側於2016/06/04發生大規模落石，建議不要攀登",
+        "text": "ルートの右側で2016/06/04に大規模な落石が発生しました。登らないことを推奨します。"
+      }
+    },
+    "LD-BACK-DOOR-67": {
+      "description": {
+        "zh": "路線上方於2016/06/04發生大規模落石，固定點已不存在，路線封閉",
+        "text": "ルートの上部で2016/06/04に大規模な落石が発生し、支点はすでに存在しません。ルートは閉鎖されています。"
+      }
+    },
+    "LD-BACK-DOOR-68": {
+      "description": {
+        "zh": "路線上方於2016/06/04發生大規模落石，固定點已不存在，路線封閉",
+        "text": "ルートの上部で2016/06/04に大規模な落石が発生し、支点はすでに存在しません。ルートは閉鎖されています。"
+      }
+    },
+    "LD-BACK-DOOR-69": {
+      "description": {
+        "zh": "路線上方於2016/06/04發生大規模落石，固定點已不存在，路線封閉",
+        "text": "ルートの上部で2016/06/04に大規模な落石が発生し、支点はすでに存在しません。ルートは閉鎖されています。"
+      }
+    },
+    "LD-BACK-DOOR-70": {
+      "description": {
+        "zh": "路線上方於2016/06/04發生大規模落石，固定點已不存在，路線封閉",
+        "text": "ルートの上部で2016/06/04に大規模な落石が発生し、支点はすでに存在しません。ルートは閉鎖されています。"
+      }
+    },
+    "LD-BACK-DOOR-71": {
+      "description": {
+        "zh": "路線上方於2016/06/04發生大規模落石，固定點已不存在，路線封閉",
+        "text": "ルートの上部で2016/06/04に大規模な落石が発生し、支点はすでに存在しません。ルートは閉鎖されています。"
+      }
+    },
+    "LD-BACK-DOOR-72": {
+      "description": {
+        "zh": "原路線從 <牛仔小丑> 橫渡到 <地下室角落>，惟因2016/06/04落石事件，建議改由 <新法拉利起攀>",
+        "text": "元のルートは <牛仔小丑> から <地下室角落> へトラバースするものでしたが、2016/06/04の落石のため、<新法拉利> から取り付くことを推奨します。"
+      }
+    },
+    "LD-BACK-DOOR-73": {
+      "description": {
+        "zh": "路線左側於2016/06/04發生大規模落石，建議不要攀登",
+        "text": "ルートの左側で2016/06/04に大規模な落石が発生しました。登らないことを推奨します。"
+      }
+    },
+    "LD-BACK-DOOR-74": {
+      "description": {
+        "zh": "岩質非常不穩；",
+        "text": "岩が非常に不安定です。"
+      }
+    },
+    "LD-BACK-DOOR-75": {
+      "description": {
+        "zh": "岩質不穩；B01後的Bolt狀態待查",
+        "text": "岩が不安定です。B01より先のボルトの状態は調査待ちです。"
+      }
+    },
+    "LD-BACK-DOOR-76": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-BACK-DOOR-77": {
+      "description": {
+        "zh": "岩質不穩；書中路線圖 (P.38) 的走向有誤",
+        "text": "岩が不安定です。書籍のトポ（P.38）はラインが誤っています。"
+      }
+    },
+    "LD-BACK-DOOR-78": {
+      "description": {
+        "zh": "現有難度評級偏高",
+        "text": "現行のグレードは高めに付けられています。"
+      }
+    },
+    "LD-BACK-DOOR-79": {
+      "description": {
+        "zh": "書中路線圖 (P.40) 編號有誤， 此路線應為錯誤路線圖上的81號路線",
+        "text": "書籍のトポ（P.40）は番号が誤っています。このルートは、誤ったトポ上の81番のルートにあたります。"
+      }
+    },
+    "LD-BACK-DOOR-80": {
+      "description": {
+        "zh": "岩質不穩；Lead Bolt 待查",
+        "text": "岩が不安定です。リード用のボルトは調査待ちです。"
+      }
+    },
+    "LD-BACK-DOOR-81": {
+      "description": {
+        "zh": "書中路線圖 (P.40) 編號有誤， 此路線應為錯誤路線圖上的82號路線",
+        "text": "書籍のトポ（P.40）は番号が誤っています。このルートは、誤ったトポ上の82番のルートにあたります。"
+      }
+    },
+    "LD-BACK-DOOR-82": {
+      "description": {
+        "zh": "書中路線圖 (P.40) 編號有誤， 此路線應為錯誤路線圖上的83號路線，且路線走向亦有所偏差",
+        "text": "書籍のトポ（P.40）は番号が誤っています。このルートは、誤ったトポ上の83番のルートにあたり、ラインにもずれがあります。"
+      }
+    },
+    "LD-BACK-DOOR-83": {
+      "description": {
+        "zh": "書中路線圖 (P.40) 編號有誤， 此路線應為錯誤路線圖上的84號路線，且路線走向亦有所偏差",
+        "text": "書籍のトポ（P.40）は番号が誤っています。このルートは、誤ったトポ上の84番のルートにあたり、ラインにもずれがあります。"
+      }
+    },
+    "LD-BACK-DOOR-84": {
+      "description": {
+        "zh": "書中路線圖 (P.40) 未標示此路線",
+        "text": "書籍のトポ（P.40）にはこのルートが記載されていません。"
+      }
+    },
+    "LD-BACK-DOOR-85": {
+      "description": {
+        "zh": "B01、B04-B10 與 <娶某前生子後> 共用",
+        "text": "B01、B04〜B10は <娶某前生子後> と共用です。"
+      }
+    },
+    "LD-BACK-DOOR-86": {
+      "description": {
+        "zh": "書中路線圖 (P.40) 的走向有誤",
+        "text": "書籍のトポ（P.40）はラインが誤っています。"
+      }
+    },
+    "LD-BACK-DOOR-91": {
+      "description": {
+        "zh": "書中路線圖 (P.40) 的走向有誤",
+        "text": "書籍のトポ（P.40）はラインが誤っています。"
+      }
+    },
+    "LD-BACK-DOOR-92": {
+      "description": {
+        "zh": "與 <三腳狗> 共⽤ Anchor",
+        "text": "<三腳狗> と終了点を共用します。"
+      }
+    },
+    "LD-BACK-DOOR-93": {
+      "description": {
+        "zh": "更新後路線往上延伸約一段繩距",
+        "text": "更新後、ルートは約1ピッチ分上へ延長されました。"
+      }
+    },
+    "LD-BACK-DOOR-94": {
+      "description": {
+        "zh": "與 <三腳狗> 共⽤ Anchor",
+        "text": "<三腳狗> と終了点を共用します。"
+      }
+    },
+    "LD-BACK-DOOR-95": {
+      "description": {
+        "zh": "與 <三腳狗> 共⽤ Anchor",
+        "text": "<三腳狗> と終了点を共用します。"
+      }
+    },
+    "LD-BACK-DOOR-96": {
+      "description": {
+        "zh": "與 <三腳狗> 共⽤ Anchor",
+        "text": "<三腳狗> と終了点を共用します。"
+      }
+    },
+    "LD-BACK-DOOR-97": {
+      "description": {
+        "zh": "與 <三腳狗> 共⽤ Anchor",
+        "text": "<三腳狗> と終了点を共用します。"
+      }
+    },
+    "LD-BACK-DOOR-98.1": {
+      "description": {
+        "zh": "與 <三腳狗> 共⽤ Anchor",
+        "text": "<三腳狗> と終了点を共用します。"
+      }
+    },
+    "LD-BACK-DOOR-98.2": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-BACK-DOOR-99": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-100": {
+      "description": {
+        "zh": "無 Anchor，可步⾏返回起攀處",
+        "text": "終了点はありません。歩いて取付に戻れます。"
+      }
+    },
+    "LD-BACK-DOOR-100.1": {
+      "description": {
+        "zh": "可能有鬆動岩塊",
+        "text": "浮石がある可能性があります。"
+      }
+    },
+    "LD-BACK-DOOR-100.2": {
+      "description": {
+        "zh": "可能有鬆動岩塊",
+        "text": "浮石がある可能性があります。"
+      }
+    },
+    "LD-BACK-DOOR-100.3": {
+      "description": {
+        "zh": "可能有鬆動岩塊 遺落視界 P2 左下方約 5-8m 有一組舊 EXP",
+        "text": "浮石がある可能性があります。遺落視界 P2 の左下約5〜8mに古いEXPが1組あります。"
+      }
+    },
+    "LD-LONG-LANE-421": {
+      "description": {
+        "zh": "可用 <天梯內角> 或 <白鯨記> 的 Anchor 垂降",
+        "text": "<天梯內角> または <白鯨記> の終了点から懸垂下降できます。"
+      }
+    },
+    "LD-LONG-LANE-422": {
+      "description": {
+        "zh": "可用 <天梯內角> 或 <白鯨記> 的 Anchor 垂降",
+        "text": "<天梯內角> または <白鯨記> の終了点から懸垂下降できます。"
+      }
+    },
+    "LD-LONG-LANE-423": {
+      "description": {
+        "zh": "可與<黑洞偏左>共用，亦可用 <天梯內角> 或 <白鯨記> 的 Anchor 垂降",
+        "text": "<黑洞偏左> と共用できます。<天梯內角> または <白鯨記> の終了点から懸垂下降することもできます。"
+      }
+    },
+    "LD-LONG-LANE-424": {
+      "description": {
+        "zh": "可用 <天梯內角> 或 <白鯨記> 的 Anchor 垂降",
+        "text": "<天梯內角> または <白鯨記> の終了点から懸垂下降できます。"
+      }
+    },
+    "LD-LONG-LANE-427": {
+      "description": {
+        "zh": "與 <非想> 共用 Anchor",
+        "text": "<非想> と終了点を共用します。"
+      }
+    },
+    "LD-LONG-LANE-433": {
+      "description": {
+        "zh": "與 <限制級> 共⽤ Anchor",
+        "text": "<限制級> と終了点を共用します。"
+      }
+    },
+    "LD-LONG-LANE-435": {
+      "description": {
+        "zh": "與 <普通級> 共⽤ Anchor",
+        "text": "<普通級> と終了点を共用します。"
+      }
+    },
+    "LD-LONG-LANE-437": {
+      "description": {
+        "zh": "2012 路線更新後往上延長約7m",
+        "text": "2012年のルート更新後、上へ約7m延長されました。"
+      }
+    },
+    "LD-LONG-LANE-438": {
+      "description": {
+        "zh": "與 <忠孝> 或 <信義> 共⽤ Anchor",
+        "text": "<忠孝> または <信義> と終了点を共用します。"
+      }
+    },
+    "LD-LONG-LANE-444": {
+      "description": {
+        "zh": "與 <翻天手> 共⽤ Anchor",
+        "text": "<翻天手> と終了点を共用します。"
+      }
+    },
+    "LD-LONG-LANE-446": {
+      "description": {
+        "zh": "與 <天勾> 共⽤ Anchor",
+        "text": "<天勾> と終了点を共用します。"
+      }
+    },
+    "LD-LONG-LANE-447": {
+      "description": {
+        "zh": "路線上有⽼舊Bolt，請勿使⽤",
+        "text": "ルート上に老朽化したボルトがあります。使用しないでください。"
+      }
+    },
+    "LD-LONG-LANE-449": {
+      "description": {
+        "zh": "與 <天勾> 共⽤ Anchor",
+        "text": "<天勾> と終了点を共用します。"
+      }
+    },
+    "LD-LONG-LANE-453": {
+      "description": {
+        "zh": "《RCT》中英內文描述的難度不同",
+        "text": "《RCT》の中国語本文と英語本文で、記載されているグレードが異なります。"
+      }
+    },
+    "LD-LONG-LANE-455": {
+      "description": {
+        "zh": "需⾃⾏架設固定點垂降⾄起攀處",
+        "text": "各自で支点を構築し、取付まで懸垂下降する必要があります。"
+      }
+    },
+    "LD-LONG-LANE-456": {
+      "description": {
+        "zh": "需⾃⾏架設固定點垂降⾄起攀處",
+        "text": "各自で支点を構築し、取付まで懸垂下降する必要があります。"
+      }
+    },
+    "LD-LONG-LANE-457": {
+      "description": {
+        "zh": "需⾃⾏架設固定點垂降⾄起攀處",
+        "text": "各自で支点を構築し、取付まで懸垂下降する必要があります。"
+      }
+    },
+    "LD-LONG-LANE-458": {
+      "description": {
+        "zh": "與 <弒龍者> 共⽤ Anchor",
+        "text": "<弒龍者> と終了点を共用します。"
+      }
+    },
+    "LD-LONG-LANE-466": {
+      "description": {
+        "zh": "與 <白龍夢> 共⽤ Anchor",
+        "text": "<白龍夢> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-102": {
+      "description": {
+        "zh": "與 <裙舞> 共用 Anchor",
+        "text": "<裙舞> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-103": {
+      "description": {
+        "zh": "與 <裙舞> 共用 Anchor",
+        "text": "<裙舞> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-104": {
+      "description": {
+        "zh": "與 <裙舞> 共用 Anchor",
+        "text": "<裙舞> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-108": {
+      "description": {
+        "zh": "與 <語言學家> 共用 Anchor",
+        "text": "<語言學家> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-109": {
+      "description": {
+        "zh": "與 <語言學家> 共用 Anchor",
+        "text": "<語言學家> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-110": {
+      "description": {
+        "zh": "與 <匏瓜抓狂> 共用 Anchor",
+        "text": "<匏瓜抓狂> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-111": {
+      "description": {
+        "zh": "與 <語言學家> 共用 Anchor",
+        "text": "<語言學家> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-112": {
+      "description": {
+        "zh": "與 <語言學家> 共用 Anchor",
+        "text": "<語言學家> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-113": {
+      "description": {
+        "zh": "與 <語言學家> 或 <瞞天過海> 共用 Anchor",
+        "text": "<語言學家> または <瞞天過海> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-114.1": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-114.2": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-115.1": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-115.2": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-116.1": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-116.2": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-116.3": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-117.1": {
+      "description": {
+        "zh": "Dirk & Edgar 在 2002/12 第一次攀登時，在路線上發現垂降用的傘帶",
+        "text": "Dirk & Edgarが2002/12に初めて登った際、ルート上で懸垂下降用のスリング（テープ）を見つけました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-117.2": {
+      "description": {
+        "zh": "Dirk & Edgar 在 2002/12 第一次攀登時，在路線上發現垂降用的傘帶",
+        "text": "Dirk & Edgarが2002/12に初めて登った際、ルート上で懸垂下降用のスリング（テープ）を見つけました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-117.3": {
+      "description": {
+        "zh": "Dirk & Edgar 在 2002/12 第一次攀登時，在路線上發現垂降用的傘帶",
+        "text": "Dirk & Edgarが2002/12に初めて登った際、ルート上で懸垂下降用のスリング（テープ）を見つけました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-118": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-119": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-120": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-121": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新後正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年の更新後、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-122": {
+      "description": {
+        "zh": "與 <前奏> 共用 Anchor",
+        "text": "<前奏> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-123.1": {
+      "description": {
+        "zh": "原為運攀路線，於2013更新Anchor並切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2013年に終了点を更新して老朽化したボルトを切除し、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-123.2": {
+      "description": {
+        "zh": "原為運攀路線，於2013更新Anchor並切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2013年に終了点を更新して老朽化したボルトを切除し、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-127.0": {
+      "description": {
+        "zh": "舊 Anchor 帶更新 (僅剩一顆Bolt，疑似為304)，需自行架設確保站，再以 <華西街> Anchor 垂降",
+        "text": "旧終了点は更新待ちです（ボルトは1本しか残っておらず、304とみられます）。各自でビレイステーションを構築し、<華西街> の終了点から懸垂下降する必要があります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-129.0": {
+      "description": {
+        "zh": "與 <珍珠項鍊> 共⽤ Anchor",
+        "text": "<珍珠項鍊> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-130.0": {
+      "description": {
+        "zh": "與 <珍珠項鍊> 共⽤ Anchor",
+        "text": "<珍珠項鍊> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-131.0": {
+      "description": {
+        "zh": "原始路線⻑度為12m，更新後延⻑為23m",
+        "text": "元のルートの長さは12mで、更新後に23mへ延長されました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-133.0": {
+      "description": {
+        "zh": "與 <黃金菊> 共⽤ Anchor",
+        "text": "<黃金菊> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-134.0": {
+      "description": {
+        "zh": "與 <黃金浴> 共⽤ Anchor",
+        "text": "<黃金浴> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-135.0": {
+      "description": {
+        "zh": "原始路線⻑度為12m，更新後延⻑為23m",
+        "text": "元のルートの長さは12mで、更新後に23mへ延長されました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-136.0": {
+      "description": {
+        "zh": "路線頂端有鬆動岩⽯",
+        "text": "ルートのトップに浮石があります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-137.0": {
+      "description": {
+        "zh": "路線頂端有鬆動岩⽯",
+        "text": "ルートのトップに浮石があります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-138.0": {
+      "description": {
+        "zh": "不使用左邊的裂隙",
+        "text": "左側のクラックは使いません。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-139.0": {
+      "description": {
+        "zh": "原為上⽅架繩路線，2013新增Bolt後改為運攀路線",
+        "text": "元はトップロープルートで、2013年にボルトを追加してスポートルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-140.0": {
+      "description": {
+        "zh": "原為上⽅架繩路線，2013新增Bolt後改為運攀路線",
+        "text": "元はトップロープルートで、2013年にボルトを追加してスポートルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-142.0": {
+      "description": {
+        "zh": "與 <⻄岸> 共⽤ Anchor",
+        "text": "<西岸> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-143.0": {
+      "description": {
+        "zh": "與 <⻄岸> 共⽤ Anchor",
+        "text": "<西岸> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-145.0": {
+      "description": {
+        "zh": "與 <黑金> 共⽤ Anchor",
+        "text": "<黑金> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-146.0": {
+      "description": {
+        "zh": "與 <黑金> 共⽤ Anchor，亦可繼續往上約10m使用新設的專屬 Anchor",
+        "text": "<黑金> と終了点を共用します。さらに約10m上へ登り、新設された専用の終了点を使うこともできます。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-147.0": {
+      "description": {
+        "zh": "書中路線圖 (P.72) 的路線位置有大幅偏差",
+        "text": "書籍のトポ（P.72）はルートの位置が大きくずれています。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-148.0": {
+      "description": {
+        "zh": "書中路線圖 (P.72) 的路線位置有大幅偏差",
+        "text": "書籍のトポ（P.72）はルートの位置が大きくずれています。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-149.0": {
+      "description": {
+        "zh": "2015/01/04發現Anchor右側Bolt黏著膠出現異常 (軟化外漏)，但bolt本身並未鬆動",
+        "text": "2015/01/04、終了点右側のボルトの接着剤に異常（軟化して漏れ出している）が見つかりましたが、ボルト自体は緩んでいません。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-150.0": {
+      "description": {
+        "zh": "與 <⼤濟路線> 共⽤ Anchor",
+        "text": "<大濟路線> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-151.0": {
+      "description": {
+        "zh": "書中路線圖 (P.72) 起攀位置與路線下段繪製錯誤",
+        "text": "書籍のトポ（P.72）は取付の位置とルート下部が誤って描かれています。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-153.0": {
+      "description": {
+        "zh": "原為傳攀路線，難度評級低於 5.11d，原始路線名稱為 <孤星 Quasar>",
+        "text": "元はトラッドルートで、グレードは5.11dより低く、元のルート名は <孤星 Quasar> でした。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-155.0": {
+      "description": {
+        "zh": "B01-B08 與 <不方便> 共用",
+        "text": "B01〜B08は <不方便> と共用です。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-156.0": {
+      "description": {
+        "zh": "現有難度評級偏低",
+        "text": "現行のグレードは低めに付けられています。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-158.0": {
+      "description": {
+        "zh": "Bolt 數量待確認",
+        "text": "ボルトの本数は確認待ちです。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-159.0": {
+      "description": {
+        "zh": "曾有傳⾔指出⾸攀者另有其⼈，但無相關資料佐證",
+        "text": "初登者は別の人物だという噂がありましたが、それを裏付ける資料はありません。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-160.0": {
+      "description": {
+        "zh": "與 <防彈背心> 共用 Anchor",
+        "text": "<防彈背心> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-161.0": {
+      "description": {
+        "zh": "與 <防彈背心> 共用 Anchor",
+        "text": "<防彈背心> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-162.0": {
+      "description": {
+        "zh": "與 <防彈背心> 共用 Anchor",
+        "text": "<防彈背心> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-163.0": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-164.0": {
+      "description": {
+        "zh": "⽀點多半為⼩號岩楔，且難關處不易架設，請⾃⾏斟酌",
+        "text": "プロテクションの多くは小さいサイズのもので、核心部ではセットしにくくなっています。各自で判断してください。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-165.0": {
+      "description": {
+        "zh": "岩質不穩、⽀點難架設",
+        "text": "岩が不安定で、プロテクションをセットしにくくなっています。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-166.0": {
+      "description": {
+        "zh": "岩質不穩、⽀點難架設",
+        "text": "岩が不安定で、プロテクションをセットしにくくなっています。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-167.0": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-168.0": {
+      "description": {
+        "zh": "無 Anchor (待確認)",
+        "text": "終了点はありません（確認待ち）。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-171.0": {
+      "description": {
+        "zh": "路線上有⼀塊鬆動岩塊",
+        "text": "ルート上に浮石が1つあります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-172.0": {
+      "description": {
+        "zh": "路線上有⼀塊鬆動岩塊",
+        "text": "ルート上に浮石が1つあります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-173.0": {
+      "description": {
+        "zh": "路線上有⼀塊鬆動岩塊",
+        "text": "ルート上に浮石が1つあります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-174.0": {
+      "description": {
+        "zh": "更新時將路線往上延伸，難度未定",
+        "text": "更新時にルートを上へ延長しました。グレードは未定です。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-176.0": {
+      "description": {
+        "zh": "與 <龍船尾> 共⽤ Anchor",
+        "text": "<龍船尾> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-178.0": {
+      "description": {
+        "zh": "與 <開光點睛> 共⽤ Anchor",
+        "text": "<開光點睛> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-180.0": {
+      "description": {
+        "zh": "與 <龍船首> 共⽤ Anchor",
+        "text": "<龍船首> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-182.0": {
+      "description": {
+        "zh": "與 <美好的晴天> 共⽤ Anchor",
+        "text": "<美好的晴天> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-183.0": {
+      "description": {
+        "zh": "與 <美好的晴天> 共⽤ Anchor",
+        "text": "<美好的晴天> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-184.0": {
+      "description": {
+        "zh": "面向傳奇岩的大內角",
+        "text": "傳奇岩に面した大きなコーナーです。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-185.0": {
+      "description": {
+        "zh": "內角左側的裂隙",
+        "text": "コーナーの左側のクラックです。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-186.0": {
+      "description": {
+        "zh": "面向龍船岩的內角",
+        "text": "龍船岩に面したコーナーです。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-187.0": {
+      "description": {
+        "zh": "翻懸岩上平台",
+        "text": "ハングを越えてテラスに上がります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-188.0": {
+      "description": {
+        "zh": "東北面",
+        "text": "北東面"
+      }
+    },
+    "LD-GOLDEN-VALLEY-189.0": {
+      "description": {
+        "zh": "利用指力點爬到圓滑點，再爬到凸起的岩角",
+        "text": "カチを使ってスローパーまで登り、さらに突き出たカンテまで登ります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-190.0": {
+      "description": {
+        "zh": "一路爬岩角直上到頂",
+        "text": "カンテをそのままトップまで直上します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314-1": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314-2": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314-9": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-FIRST-CAVE-238-3": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314-8": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-MUSIC-HALL-352-1": {
+      "description": {
+        "zh": "2019/05/12通報：路線上方落石風險高，建議勿攀登",
+        "text": "2019/05/12の通報：ルート上部は落石の危険性が高く、登らないことが推奨されています。"
+      }
+    },
+    "LD-MUSIC-HALL-401-1": {
+      "description": {
+        "zh": "自 <包廂內角> Anchor 起攀，沿內角與天花板往右上攀",
+        "text": "<包廂內角> の終了点から取り付き、コーナーとルーフに沿って右上へ登ります。"
+      }
+    },
+    "LD-BACK-DOOR-100-3": {
+      "description": {
+        "zh": "可能有鬆動岩塊 遺落視界 P2 左下方約 5-8m 有一組舊 EXP",
+        "text": "浮石がある可能性があります。遺落視界 P2 の左下約5〜8mに古いEXPが1組あります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-116-3": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-123-2": {
+      "description": {
+        "zh": "原為運攀路線，於2013更新Anchor並切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2013年に終了点を更新して老朽化したボルトを切除し、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-165-0": {
+      "description": {
+        "zh": "岩質不穩、⽀點難架設",
+        "text": "岩が不安定で、プロテクションをセットしにくくなっています。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-173-0": {
+      "description": {
+        "zh": "路線上有⼀塊鬆動岩塊",
+        "text": "ルート上に浮石が1つあります。"
+      }
+    },
+    "LD-MUSIC-HALL-358-1": {
+      "description": {
+        "zh": "自 <音樂廳煙囪> Anchor 起攀，往小鯨魚頭左側上攀至平台後架設確保站；繩隊完攀後再往右橫渡到 <結婚路線> 平台垂降。",
+        "text": "<音樂廳煙囪> の終了点から取り付き、小鯨魚頭の左側を登ってテラスに着いたらビレイステーションを構築します。パーティ全員が登り終えたら、右へトラバースして <結婚路線> のテラスから懸垂下降します。"
+      }
+    },
+    "LD-MUSIC-HALL-417-1": {
+      "description": {
+        "zh": "自 <白鯨記> Anchor 起攀，沿著岩角直上，在頂端利用 <叫我以實瑪利> 的天然固定點確保，完攀後再以 <無傷之盾> 的 Anchor 垂降",
+        "text": "<白鯨記> の終了点から取り付き、カンテ沿いに直上します。トップでは <叫我以實瑪利> のナチュラルアンカー（自然物の支点）でビレイし、完登後は <無傷之盾> の終了点から懸垂下降します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314-6": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-BACK-DOOR-98-1": {
+      "description": {
+        "zh": "與 <三腳狗> 共⽤ Anchor",
+        "text": "<三腳狗> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-114-2": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-115-1": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-123-1": {
+      "description": {
+        "zh": "原為運攀路線，於2013更新Anchor並切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2013年に終了点を更新して老朽化したボルトを切除し、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-135-0": {
+      "description": {
+        "zh": "原始路線⻑度為12m，更新後延⻑為23m",
+        "text": "元のルートの長さは12mで、更新後に23mへ延長されました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-146-0": {
+      "description": {
+        "zh": "與 <黑金> 共⽤ Anchor，亦可繼續往上約10m使用新設的專屬 Anchor",
+        "text": "<黑金> と終了点を共用します。さらに約10m上へ登り、新設された専用の終了点を使うこともできます。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-161-0": {
+      "description": {
+        "zh": "與 <防彈背心> 共用 Anchor",
+        "text": "<防彈背心> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-171-0": {
+      "description": {
+        "zh": "路線上有⼀塊鬆動岩塊",
+        "text": "ルート上に浮石が1つあります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-172-0": {
+      "description": {
+        "zh": "路線上有⼀塊鬆動岩塊",
+        "text": "ルート上に浮石が1つあります。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-327-1": {
+      "description": {
+        "zh": "從龍路第二段繩距左側平台起攀，爬左上方的寬裂隙",
+        "text": "龍路の2ピッチ目の左側にあるテラスから取り付き、左上のワイドクラックを登ります。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-327-2": {
+      "description": {
+        "zh": "從龍路第二段繩距左側平台起攀，爬正上方的手指裂隙",
+        "text": "龍路の2ピッチ目の左側にあるテラスから取り付き、真上のフィンガークラックを登ります。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-328-1": {
+      "description": {
+        "zh": "完攀後可繼續往上至步道觀景平台 topout，或由大禮堂攀岩者小徑步行回到起攀處",
+        "text": "完登後は、そのまま上へ登って遊歩道の展望台にトップアウトするか、大禮堂のクライマー用の踏み跡を歩いて取付に戻ることができます。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-114-1": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-116-1": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-127-0": {
+      "description": {
+        "zh": "舊 Anchor 帶更新 (僅剩一顆Bolt，疑似為304)，需自行架設確保站，再以 <華西街> Anchor 垂降",
+        "text": "旧終了点は更新待ちです（ボルトは1本しか残っておらず、304とみられます）。各自でビレイステーションを構築し、<華西街> の終了点から懸垂下降する必要があります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-138-0": {
+      "description": {
+        "zh": "不使用左邊的裂隙",
+        "text": "左側のクラックは使いません。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-159-0": {
+      "description": {
+        "zh": "曾有傳⾔指出⾸攀者另有其⼈，但無相關資料佐證",
+        "text": "初登者は別の人物だという噂がありましたが、それを裏付ける資料はありません。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314-4": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314-5": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-315-1": {
+      "description": {
+        "zh": "路線圖 Topo",
+        "text": "トポ"
+      }
+    },
+    "LD-GOLDEN-VALLEY-116-2": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-130-0": {
+      "description": {
+        "zh": "與 <珍珠項鍊> 共⽤ Anchor",
+        "text": "<珍珠項鍊> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-160-0": {
+      "description": {
+        "zh": "與 <防彈背心> 共用 Anchor",
+        "text": "<防彈背心> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-174-0": {
+      "description": {
+        "zh": "更新時將路線往上延伸，難度未定",
+        "text": "更新時にルートを上へ延長しました。グレードは未定です。"
+      }
+    },
+    "LD-MUSIC-HALL-415-1": {
+      "description": {
+        "zh": "早期曾有攀岩者嘗試過，但因當時活動岩楔尚未普及，因此僅攀登到第一處難關便因安全考量而放棄",
+        "text": "初期に試みたクライマーがいましたが、当時はカムがまだ普及しておらず、最初の核心部まで登ったところで安全上の理由から断念しました。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314-7": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GOLDEN-VALLEY-115-2": {
+      "description": {
+        "zh": "原為運攀路線，於2014更新Anchor，並於2018/03切除老舊Bolt後，正式改為傳攀路線",
+        "text": "元はスポートルートでしたが、2014年に終了点を更新し、2018/03に老朽化したボルトを切除して、正式にトラッドルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-139-0": {
+      "description": {
+        "zh": "原為上⽅架繩路線，2013新增Bolt後改為運攀路線",
+        "text": "元はトップロープルートで、2013年にボルトを追加してスポートルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-148-0": {
+      "description": {
+        "zh": "書中路線圖 (P.72) 的路線位置有大幅偏差",
+        "text": "書籍のトポ（P.72）はルートの位置が大きくずれています。"
+      }
+    },
+    "LD-SCHOOL-GATE-546-1": {
+      "description": {
+        "zh": "《前進龍洞岩場》有收錄 《RCT》未收錄",
+        "text": "《前進龍洞岩場》には収録されていますが、《RCT》には収録されていません。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-187-0": {
+      "description": {
+        "zh": "翻懸岩上平台",
+        "text": "ハングを越えてテラスに上がります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-189-0": {
+      "description": {
+        "zh": "利用指力點爬到圓滑點，再爬到凸起的岩角",
+        "text": "カチを使ってスローパーまで登り、さらに突き出たカンテまで登ります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-153-0": {
+      "description": {
+        "zh": "原為傳攀路線，難度評級低於 5.11d，原始路線名稱為 <孤星 Quasar>",
+        "text": "元はトラッドルートで、グレードは5.11dより低く、元のルート名は <孤星 Quasar> でした。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-164-0": {
+      "description": {
+        "zh": "⽀點多半為⼩號岩楔，且難關處不易架設，請⾃⾏斟酌",
+        "text": "プロテクションの多くは小さいサイズのもので、核心部ではセットしにくくなっています。各自で判断してください。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-190-0": {
+      "description": {
+        "zh": "一路爬岩角直上到頂",
+        "text": "カンテをそのままトップまで直上します。"
+      }
+    },
+    "LD-BACK-DOOR-98-2": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-314-3": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GOLDEN-VALLEY-140-0": {
+      "description": {
+        "zh": "原為上⽅架繩路線，2013新增Bolt後改為運攀路線",
+        "text": "元はトップロープルートで、2013年にボルトを追加してスポートルートになりました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-155-0": {
+      "description": {
+        "zh": "B01-B08 與 <不方便> 共用",
+        "text": "B01〜B08は <不方便> と共用です。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-158-0": {
+      "description": {
+        "zh": "Bolt 數量待確認",
+        "text": "ボルトの本数は確認待ちです。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-129-0": {
+      "description": {
+        "zh": "與 <珍珠項鍊> 共⽤ Anchor",
+        "text": "<珍珠項鍊> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-147-0": {
+      "description": {
+        "zh": "書中路線圖 (P.72) 的路線位置有大幅偏差",
+        "text": "書籍のトポ（P.72）はルートの位置が大きくずれています。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-151-0": {
+      "description": {
+        "zh": "書中路線圖 (P.72) 起攀位置與路線下段繪製錯誤",
+        "text": "書籍のトポ（P.72）は取付の位置とルート下部が誤って描かれています。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-186-0": {
+      "description": {
+        "zh": "面向龍船岩的內角",
+        "text": "龍船岩に面したコーナーです。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-188-0": {
+      "description": {
+        "zh": "東北面",
+        "text": "北東面"
+      }
+    },
+    "LD-MUSIC-HALL-388-1": {
+      "description": {
+        "zh": "與 <小三角> 共⽤ Anchor",
+        "text": "<小三角> と終了点を共用します。"
+      }
+    },
+    "LD-BACK-DOOR-100-2": {
+      "description": {
+        "zh": "可能有鬆動岩塊",
+        "text": "浮石がある可能性があります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-117-1": {
+      "description": {
+        "zh": "Dirk & Edgar 在 2002/12 第一次攀登時，在路線上發現垂降用的傘帶",
+        "text": "Dirk & Edgarが2002/12に初めて登った際、ルート上で懸垂下降用のスリング（テープ）を見つけました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-178-0": {
+      "description": {
+        "zh": "與 <開光點睛> 共⽤ Anchor",
+        "text": "<開光點睛> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-183-0": {
+      "description": {
+        "zh": "與 <美好的晴天> 共⽤ Anchor",
+        "text": "<美好的晴天> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-184-0": {
+      "description": {
+        "zh": "面向傳奇岩的大內角",
+        "text": "傳奇岩に面した大きなコーナーです。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-117-3": {
+      "description": {
+        "zh": "Dirk & Edgar 在 2002/12 第一次攀登時，在路線上發現垂降用的傘帶",
+        "text": "Dirk & Edgarが2002/12に初めて登った際、ルート上で懸垂下降用のスリング（テープ）を見つけました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-136-0": {
+      "description": {
+        "zh": "路線頂端有鬆動岩⽯",
+        "text": "ルートのトップに浮石があります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-176-0": {
+      "description": {
+        "zh": "與 <龍船尾> 共⽤ Anchor",
+        "text": "<龍船尾> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-180-0": {
+      "description": {
+        "zh": "與 <龍船首> 共⽤ Anchor",
+        "text": "<龍船首> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-185-0": {
+      "description": {
+        "zh": "內角左側的裂隙",
+        "text": "コーナーの左側のクラックです。"
+      }
+    },
+    "LD-MUSIC-HALL-358-2": {
+      "description": {
+        "zh": "自 <音樂廳煙囪> Anchor 起攀，往小鯨魚頭右側上攀至平台後架設確保站；繩隊完攀後再往右橫渡到 <結婚路線> 平台垂降。",
+        "text": "<音樂廳煙囪> の終了点から取り付き、小鯨魚頭の右側を登ってテラスに着いたらビレイステーションを構築します。パーティ全員が登り終えたら、右へトラバースして <結婚路線> のテラスから懸垂下降します。"
+      }
+    },
+    "LD-FIRST-CAVE-238-2": {
+      "description": {
+        "zh": "路線相關資訊 Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-GOLDEN-VALLEY-134-0": {
+      "description": {
+        "zh": "與 <黃金浴> 共⽤ Anchor",
+        "text": "<黃金浴> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-137-0": {
+      "description": {
+        "zh": "路線頂端有鬆動岩⽯",
+        "text": "ルートのトップに浮石があります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-143-0": {
+      "description": {
+        "zh": "與 <⻄岸> 共⽤ Anchor",
+        "text": "<西岸> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-145-0": {
+      "description": {
+        "zh": "與 <黑金> 共⽤ Anchor",
+        "text": "<黑金> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-150-0": {
+      "description": {
+        "zh": "與 <⼤濟路線> 共⽤ Anchor",
+        "text": "<大濟路線> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-162-0": {
+      "description": {
+        "zh": "與 <防彈背心> 共用 Anchor",
+        "text": "<防彈背心> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-163-0": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-167-0": {
+      "description": {
+        "zh": "岩質不穩",
+        "text": "岩が不安定です。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-168-0": {
+      "description": {
+        "zh": "無 Anchor (待確認)",
+        "text": "終了点はありません（確認待ち）。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-182-0": {
+      "description": {
+        "zh": "與 <美好的晴天> 共⽤ Anchor",
+        "text": "<美好的晴天> と終了点を共用します。"
+      }
+    },
+    "LD-MUSIC-HALL-357-1": {
+      "description": {
+        "zh": "自 <倒拉夾⼿> 起攀，往左上攀至平台後架設確保站；繩隊完攀後再往右橫渡到 <結婚路線> 平台垂降。",
+        "text": "<倒拉夾手> から取り付き、左上へ登ってテラスに着いたらビレイステーションを構築します。パーティ全員が登り終えたら、右へトラバースして <結婚路線> のテラスから懸垂下降します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-318-1": {
+      "description": {
+        "zh": "從 Anchor 左側直上約20m",
+        "text": "終了点の左側から約20m直上します。"
+      }
+    },
+    "LD-GRAND-AUDITORIUM-318-2": {
+      "description": {
+        "zh": "從 Anchor 右側的內角起攀",
+        "text": "終了点の右側のコーナーから取り付きます。"
+      }
+    },
+    "LD-FIRST-CAVE-238-1": {
+      "description": {
+        "zh": "路線相關資訊  Route info",
+        "text": "ルート関連情報"
+      }
+    },
+    "LD-BACK-DOOR-100-1": {
+      "description": {
+        "zh": "可能有鬆動岩塊",
+        "text": "浮石がある可能性があります。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-117-2": {
+      "description": {
+        "zh": "Dirk & Edgar 在 2002/12 第一次攀登時，在路線上發現垂降用的傘帶",
+        "text": "Dirk & Edgarが2002/12に初めて登った際、ルート上で懸垂下降用のスリング（テープ）を見つけました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-131-0": {
+      "description": {
+        "zh": "原始路線⻑度為12m，更新後延⻑為23m",
+        "text": "元のルートの長さは12mで、更新後に23mへ延長されました。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-133-0": {
+      "description": {
+        "zh": "與 <黃金菊> 共⽤ Anchor",
+        "text": "<黃金菊> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-142-0": {
+      "description": {
+        "zh": "與 <⻄岸> 共⽤ Anchor",
+        "text": "<西岸> と終了点を共用します。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-149-0": {
+      "description": {
+        "zh": "2015/01/04發現Anchor右側Bolt黏著膠出現異常 (軟化外漏)，但bolt本身並未鬆動",
+        "text": "2015/01/04、終了点右側のボルトの接着剤に異常（軟化して漏れ出している）が見つかりましたが、ボルト自体は緩んでいません。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-156-0": {
+      "description": {
+        "zh": "現有難度評級偏低",
+        "text": "現行のグレードは低めに付けられています。"
+      }
+    },
+    "LD-GOLDEN-VALLEY-166-0": {
+      "description": {
+        "zh": "岩質不穩、⽀點難架設",
+        "text": "岩が不安定で、プロテクションをセットしにくくなっています。"
+      }
+    },
+    "LD-MUSIC-HALL-401-2": {
+      "description": {
+        "zh": "<包廂內角> 左側岩面",
+        "text": "<包廂內角> の左側のフェイスです。"
+      }
+    }
+  }
+}

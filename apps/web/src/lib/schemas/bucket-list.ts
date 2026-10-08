@@ -1,23 +1,29 @@
 import { z } from 'zod'
 
 /**
+ * 注意：本檔所有錯誤訊息都是訊息檔 `Validation` namespace 的 key，不是顯示文字。
+ * schema 定義在模組層級、拿不到 `t`，由顯示錯誤的表單元件用
+ * `useValidationMessage()`（同目錄）翻成目前語系。新增訊息時三個訊息檔都要補 key。
+ */
+
+/**
  * YouTube 影片 ID 驗證 (11 個英數字元)
  */
-const youtubeVideoIdSchema = z.string().regex(/^[a-zA-Z0-9_-]{11}$/, '無效的 YouTube 影片 ID')
+const youtubeVideoIdSchema = z.string().regex(/^[a-zA-Z0-9_-]{11}$/, 'invalidYoutubeVideoId')
 
 /**
  * Instagram shortcode 驗證 (英數字元，通常 11 個字元但可能更長)
  */
 const instagramShortcodeSchema = z
   .string()
-  .regex(/^[a-zA-Z0-9_-]{10,}$/, '無效的 Instagram shortcode')
+  .regex(/^[a-zA-Z0-9_-]{10,}$/, 'invalidInstagramShortcode')
 
 /**
  * 日期格式驗證 (YYYY-MM-DD 或空字串)
  */
 const dateStringSchema = z
   .string()
-  .refine((val) => !val || /^\d{4}-\d{2}-\d{2}$/.test(val), '日期格式必須為 YYYY-MM-DD')
+  .refine((val) => !val || /^\d{4}-\d{2}-\d{2}$/.test(val), 'invalidDateFormat')
 
 /**
  * 人生清單分類列舉
@@ -38,7 +44,7 @@ export const bucketListCategorySchema = z.enum([
  */
 export const milestoneSchema = z.object({
   id: z.string(),
-  title: z.string().min(1, '里程碑名稱不能為空'),
+  title: z.string().min(1, 'milestoneTitleRequired'),
   percentage: z.number().min(0).max(100),
   completed: z.boolean(),
   completed_at: z.string().nullable(),
@@ -50,11 +56,11 @@ export const milestoneSchema = z.object({
  */
 export const bucketListItemInputSchema = z
   .object({
-    title: z.string().min(1, '目標名稱不能為空').max(100, '目標名稱不能超過 100 字'),
+    title: z.string().min(1, 'bucketListTitleRequired').max(100, 'bucketListTitleTooLong'),
     category: bucketListCategorySchema.optional().default('other'),
-    description: z.string().max(1000, '描述不能超過 1000 字').optional(),
-    target_grade: z.string().max(50, '目標難度不能超過 50 字').optional(),
-    target_location: z.string().max(100, '目標地點不能超過 100 字').optional(),
+    description: z.string().max(1000, 'bucketListDescriptionTooLong').optional(),
+    target_grade: z.string().max(50, 'bucketListTargetGradeTooLong').optional(),
+    target_location: z.string().max(100, 'bucketListTargetLocationTooLong').optional(),
     target_date: dateStringSchema.optional(),
     status: z.enum(['active', 'completed', 'archived']).optional().default('active'),
     enable_progress: z.boolean().optional().default(false),
@@ -73,7 +79,7 @@ export const bucketListItemInputSchema = z
       return true
     },
     {
-      message: '請選擇進度追蹤方式',
+      message: 'progressModeRequired',
       path: ['progress_mode'],
     }
   )
@@ -89,7 +95,7 @@ export const bucketListItemInputSchema = z
       return true
     },
     {
-      message: '里程碑模式至少需要一個里程碑',
+      message: 'milestoneRequired',
       path: ['milestones'],
     }
   )
@@ -98,14 +104,14 @@ export const bucketListItemInputSchema = z
  * 完成人生清單目標 schema
  */
 export const bucketListCompleteSchema = z.object({
-  completion_story: z.string().max(5000, '完成故事不能超過 5000 字').optional(),
-  psychological_insights: z.string().max(2000, '心理層面心得不能超過 2000 字').optional(),
-  technical_insights: z.string().max(2000, '技術層面心得不能超過 2000 字').optional(),
+  completion_story: z.string().max(5000, 'completionStoryTooLong').optional(),
+  psychological_insights: z.string().max(2000, 'psychologicalInsightsTooLong').optional(),
+  technical_insights: z.string().max(2000, 'technicalInsightsTooLong').optional(),
   completion_media: z
     .object({
       youtube_videos: z.array(youtubeVideoIdSchema).optional(),
       instagram_posts: z.array(instagramShortcodeSchema).optional(),
-      photos: z.array(z.string().url('無效的照片網址')).optional(),
+      photos: z.array(z.string().url('invalidPhotoUrl')).optional(),
     })
     .optional(),
 })
@@ -114,7 +120,7 @@ export const bucketListCompleteSchema = z.object({
  * 進度更新 schema
  */
 export const progressUpdateSchema = z.object({
-  progress: z.number().min(0, '進度不能小於 0').max(100, '進度不能超過 100'),
+  progress: z.number().min(0, 'progressTooSmall').max(100, 'progressTooLarge'),
 })
 
 /**
@@ -123,14 +129,14 @@ export const progressUpdateSchema = z.object({
 export const milestoneUpdateSchema = z.object({
   milestone_id: z.string(),
   completed: z.boolean().optional(),
-  note: z.string().max(500, '筆記不能超過 500 字').optional(),
+  note: z.string().max(500, 'milestoneNoteTooLong').optional(),
 })
 
 /**
  * 留言 schema
  */
 export const commentSchema = z.object({
-  content: z.string().min(1, '留言不能為空').max(500, '留言不能超過 500 字'),
+  content: z.string().min(1, 'commentRequired').max(500, 'commentTooLong'),
 })
 
 // 匯出類型

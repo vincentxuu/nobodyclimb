@@ -4,11 +4,13 @@ import { motion } from 'framer-motion'
 import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
+import { usePostCategoryLabel } from '@/components/blog/use-post-category-label'
 import { ArticleCoverGenerator } from '@/components/shared/ArticleCoverGenerator'
 import { Button } from '@/components/ui/button'
 import { postService } from '@/lib/api/services'
+import { toIntlLocale } from '@/lib/date-locale'
 import { BackendPost, getCategoryLabel, PostCategory } from '@/lib/types'
 import { generateSummary } from '@/lib/utils/article'
 
@@ -86,6 +88,9 @@ function cacheArticles(data: ArticleItem[]): void {
 
 // 文章卡片組件
 function ArticleCard({ item, index }: { item: ArticleItem; index: number }) {
+  const getCategoryLabel = usePostCategoryLabel()
+  // 分類在顯示時才依語系取名，避免快取住其他語系的文字
+  const categoryLabel = item.categoryValue ? getCategoryLabel(item.categoryValue) : item.category
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -116,9 +121,9 @@ function ArticleCard({ item, index }: { item: ArticleItem; index: number }) {
             />
           )}
           {/* 分類標籤 */}
-          {item.category && (
+          {categoryLabel && (
             <div className="absolute left-3 top-3 rounded bg-[#1B1A1A] px-2 py-1 text-xs font-medium text-white">
-              {item.category}
+              {categoryLabel}
             </div>
           )}
         </div>
@@ -145,6 +150,7 @@ function ArticleCard({ item, index }: { item: ArticleItem; index: number }) {
  */
 export function LatestContentSection() {
   const t = useTranslations('HomePage')
+  const locale = useLocale()
   const [articles, setArticles] = useState<ArticleItem[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -174,8 +180,8 @@ export function LatestContentSection() {
           thumbnail: post.cover_image,
           excerpt: post.excerpt || generateSummary(post.content, undefined, 80),
           date: post.published_at
-            ? new Date(post.published_at).toLocaleDateString('zh-TW')
-            : new Date(post.created_at).toLocaleDateString('zh-TW'),
+            ? new Date(post.published_at).toLocaleDateString(toIntlLocale(locale))
+            : new Date(post.created_at).toLocaleDateString(toIntlLocale(locale)),
           link: `/blog/${post.id}`,
           category: getCategoryLabel(post.category) || undefined,
           categoryValue: post.category as PostCategory,

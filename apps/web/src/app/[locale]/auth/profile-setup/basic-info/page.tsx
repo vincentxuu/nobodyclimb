@@ -19,42 +19,44 @@ interface BasicInfoFormData {
 }
 
 // 預設的路線型態選項（與 BasicInfoSection 一致）
+// value 是存進後端的值（既有使用者資料為中文），不可翻譯；顯示文字用 labelKey 查 `ProfileSetup.routeTypes`
 const ROUTE_TYPE_GROUPS = [
   {
-    category: '攀登方式',
+    categoryKey: 'climbing',
     options: [
-      { label: '抱石', value: '抱石' },
-      { label: '運動攀登', value: '運動攀登' },
-      { label: '頂繩攀登', value: '頂繩攀登' },
-      { label: '速度攀登', value: '速度攀登' },
-      { label: '傳統攀登', value: '傳統攀登' },
+      { labelKey: 'bouldering', value: '抱石' },
+      { labelKey: 'sport', value: '運動攀登' },
+      { labelKey: 'toprope', value: '頂繩攀登' },
+      { labelKey: 'speed', value: '速度攀登' },
+      { labelKey: 'trad', value: '傳統攀登' },
     ],
   },
   {
-    category: '地形型態',
+    categoryKey: 'terrain',
     options: [
-      { label: '平板岩', value: '平板岩' },
-      { label: '垂直岩壁', value: '垂直岩壁' },
-      { label: '外傾岩壁', value: '外傾岩壁' },
-      { label: '屋簷', value: '屋簷' },
-      { label: '裂隙', value: '裂隙' },
+      { labelKey: 'slab', value: '平板岩' },
+      { labelKey: 'vertical', value: '垂直岩壁' },
+      { labelKey: 'overhang', value: '外傾岩壁' },
+      { labelKey: 'roof', value: '屋簷' },
+      { labelKey: 'crack', value: '裂隙' },
     ],
   },
   {
-    category: '動作風格',
+    categoryKey: 'movement',
     options: [
-      { label: '動態路線', value: '動態路線' },
-      { label: '靜態', value: '靜態' },
-      { label: '技術性', value: '技術性' },
-      { label: '力量型', value: '力量型' },
-      { label: '耐力型', value: '耐力型' },
+      { labelKey: 'dynamic', value: '動態路線' },
+      { labelKey: 'static', value: '靜態' },
+      { labelKey: 'technical', value: '技術性' },
+      { labelKey: 'power', value: '力量型' },
+      { labelKey: 'endurance', value: '耐力型' },
     ],
   },
-]
+] as const
 
 export default function BasicInfoPage() {
   const router = useRouter()
   const t = useTranslations('Auth')
+  const tSetup = useTranslations('ProfileSetup')
   const { user, updateUser } = useAuth()
   const { toast } = useToast()
 
@@ -326,8 +328,10 @@ export default function BasicInfoPage() {
               <span className="text-gray-400 font-normal ml-1">{t('multiSelect')}</span>
             </label>
             {ROUTE_TYPE_GROUPS.map((group) => (
-              <div key={group.category} className="space-y-2">
-                <span className="text-xs text-gray-500">{group.category}</span>
+              <div key={group.categoryKey} className="space-y-2">
+                <span className="text-xs text-gray-500">
+                  {tSetup(`routeTypeCategories.${group.categoryKey}`)}
+                </span>
                 <div className="flex flex-wrap gap-2">
                   {group.options.map((option) => {
                     const isSelected = formData.favoriteRouteTypes.includes(option.value)
@@ -343,7 +347,7 @@ export default function BasicInfoPage() {
                             : 'bg-white text-gray-700 border-gray-300 hover:border-primary hover:bg-gray-50'
                         )}
                       >
-                        {option.label}
+                        {tSetup(`routeTypes.${option.labelKey}`)}
                       </button>
                     )
                   })}

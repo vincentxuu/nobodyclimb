@@ -210,7 +210,9 @@ export interface RunAgentParams {
   waitUntilCtx?: { waitUntil(promise: Promise<unknown>): void }
   stream?: boolean
   onToken?: (token: string) => Promise<void>
+  onTokenReset?: () => Promise<void>
   onProgress?: (event: ProgressEvent) => Promise<void>
+  signal?: AbortSignal
 }
 
 export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
@@ -480,7 +482,9 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
       tokenBudget: agentCfg.tokenBudget,
       stream: params.stream,
       onToken: params.onToken,
+      onTokenReset: params.onTokenReset,
       onProgress: params.onProgress,
+      signal: params.signal,
     }
   )
 

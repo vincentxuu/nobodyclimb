@@ -9,6 +9,7 @@ import {
   type BadgeCategory,
   getBadgesByCategory,
 } from '@/lib/constants/badges'
+import { useBadgeText } from '@/lib/hooks/useBadgeText'
 import type { BadgeProgress } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { BadgeGrid } from './badge-card'
@@ -21,6 +22,7 @@ interface BadgeShowcaseProps {
 
 export function BadgeShowcase({ badgeProgress, className }: BadgeShowcaseProps) {
   const t = useTranslations('BiographyPage')
+  const { badgeName, categoryLabel } = useBadgeText()
   const [selectedCategory, setSelectedCategory] = useState<BadgeCategory | 'all'>('all')
 
   // 將進度數據轉換為 Map 以便查找
@@ -93,7 +95,7 @@ export function BadgeShowcase({ badgeProgress, className }: BadgeShowcaseProps) 
                 : 'bg-brand-light text-strong hover:bg-subtle'
             )}
           >
-            {BADGE_CATEGORIES[category]}
+            {categoryLabel(category, BADGE_CATEGORIES[category])}
           </button>
         ))}
       </div>
@@ -129,7 +131,9 @@ export function BadgeShowcase({ badgeProgress, className }: BadgeShowcaseProps) 
                   <div key={p.badge_id} className="flex items-center gap-3">
                     <BadgeIcon badge={p.badge_id} size="sm" unlocked={false} />
                     <div>
-                      <p className="text-sm font-medium text-text-main">{badge.name}</p>
+                      <p className="text-sm font-medium text-text-main">
+                        {badgeName(badge.id, badge.name)}
+                      </p>
                       <p className="text-xs text-text-subtle">
                         {p.current_value}/{p.target_value} ({p.progress}%)
                       </p>

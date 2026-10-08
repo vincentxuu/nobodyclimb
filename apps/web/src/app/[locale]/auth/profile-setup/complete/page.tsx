@@ -11,24 +11,26 @@ import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import { biographyService } from '@/lib/api/services'
 import { useAuth } from '@/lib/hooks/useAuth'
+import { useBiographyQuestionText } from '@/lib/hooks/useBiographyQuestions'
 import { useChoiceQuestions, useQuestions, useSubmitChoiceAnswer } from '@/lib/hooks/useQuestions'
 import { buildOneLinersData } from '@/lib/utils/biography'
 
 // 引導式問答的問題（從一句話問題中選取幾個容易回答的）
+// categoryKey 對應訊息檔 `ProfileSetup.guidedCategories`
 const GUIDED_QUESTIONS_CONFIG = [
   {
     id: 'best_moment',
-    category: '攀岩的樂趣',
+    categoryKey: 'fun',
   },
   {
     id: 'current_goal',
-    category: '目標與挑戰',
+    categoryKey: 'goals',
   },
   {
     id: 'climbing_takeaway',
-    category: '成長與收穫',
+    categoryKey: 'growth',
   },
-]
+] as const
 
 // 流程階段
 type FlowPhase = 'complete' | 'choice' | 'guided'
@@ -36,6 +38,8 @@ type FlowPhase = 'complete' | 'choice' | 'guided'
 export default function CompletePage() {
   const router = useRouter()
   const t = useTranslations('Auth')
+  const tSetup = useTranslations('ProfileSetup')
+  const { getOneLinerText } = useBiographyQuestionText()
   const { status, isLoading } = useAuth()
   const { toast } = useToast()
   const { data: questionsData } = useQuestions()
@@ -71,11 +75,11 @@ export default function CompletePage() {
       if (oneLiner) {
         return {
           id: oneLiner.id,
-          question: oneLiner.question,
+          question: getOneLinerText(oneLiner.id, oneLiner.question),
           subtitle: oneLiner.format_hint || undefined,
           placeholder: oneLiner.placeholder || undefined,
           type: 'text' as const,
-          category: config.category,
+          category: tSetup(`guidedCategories.${config.categoryKey}`),
         }
       }
 
@@ -84,17 +88,17 @@ export default function CompletePage() {
       if (coreStory) {
         return {
           id: coreStory.id,
-          question: coreStory.title,
+          question: getOneLinerText(coreStory.id, coreStory.title),
           subtitle: coreStory.subtitle || undefined,
           placeholder: coreStory.placeholder || undefined,
           type: 'textarea' as const,
-          category: config.category,
+          category: tSetup(`guidedCategories.${config.categoryKey}`),
         }
       }
 
       return null
     }).filter((q): q is NonNullable<typeof q> => q !== null)
-  }, [questionsData])
+  }, [questionsData, tSetup])
 
   // 開始引導流程：先選擇題，再一句話
   const handleStartGuided = () => {

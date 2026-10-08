@@ -1,6 +1,7 @@
 'use client'
 
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 
 interface ProfileTextDisplayProps {
@@ -11,6 +12,8 @@ interface ProfileTextDisplayProps {
   asTags?: boolean
   /** 收合時最多顯示幾個標籤（僅在 asTags 為 true 時有效） */
   maxVisibleTags?: number
+  /** 標籤顯示文字轉換（例如把存檔值換成目前語系的名稱），僅在 asTags 為 true 時有效 */
+  formatTag?: (_tag: string) => string
 }
 
 export default function ProfileTextDisplay({
@@ -19,7 +22,9 @@ export default function ProfileTextDisplay({
   isMobile,
   asTags = false,
   maxVisibleTags = 6,
+  formatTag,
 }: ProfileTextDisplayProps) {
+  const t = useTranslations('ProfileSections')
   const [isExpanded, setIsExpanded] = useState(false)
 
   // 將逗號分隔的文字轉為標籤陣列
@@ -52,7 +57,7 @@ export default function ProfileTextDisplay({
                 isMobile ? 'text-xs' : 'text-sm'
               }`}
             >
-              {tag}
+              {formatTag ? formatTag(tag) : tag}
             </span>
           ))}
           {hasMore && (
@@ -65,7 +70,7 @@ export default function ProfileTextDisplay({
             >
               {isExpanded ? (
                 <>
-                  收起
+                  {t('actions.collapse')}
                   <ChevronUp className="h-3 w-3" />
                 </>
               ) : (

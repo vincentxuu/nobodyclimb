@@ -2,6 +2,7 @@
 
 import { Env } from '../../../../types'
 import { flattenToolMessages, toOpenAIMessages } from './tool-messages'
+import { isAbortError, readToolUseStream } from './tool-stream'
 import {
   AIProvider,
   ChatMessage,
@@ -206,6 +207,13 @@ export class CloudflareProvider implements AIProvider {
     )) as ReadableStream<Uint8Array>
 
     const reader = stream.getReader()
+    // Workers AI 的 AI.run 不吃 signal：中斷時取消 reader 讓 read() 立刻結束
+    const onAbort = () => {
+      reader.cancel().catch(() => {})
+    }
+    // AI.run 等待期間就中斷的話，signal 已是 aborted，之後不會再有 abort 事件
+    if (opts.signal?.aborted) onAbort()
+    else opts.signal?.addEventListener('abort', onAbort, { once: true })
     const decoder = new TextDecoder()
     let fullText = ''
     // 推理模型的思考 delta 只收集不推送，避免整段推理串流到使用者畫面
@@ -254,15 +262,19 @@ export class CloudflareProvider implements AIProvider {
                 slideBuffer = slideBuffer.slice(safeLen)
               }
             }
-          } catch {
+          } catch (err) {
+            // 呼叫端用 onToken 丟 AbortError 中止生成，不能跟壞掉的 SSE 行一起吞掉
+            if (isAbortError(err)) throw err
             /* 忽略格式錯誤的 SSE 行 */
           }
         }
       }
       if (!suggestionsStarted && slideBuffer) await opts.onToken(slideBuffer)
     } finally {
+      opts.signal?.removeEventListener('abort', onAbort)
       reader.releaseLock()
     }
+    if (opts.signal?.aborted) throw new DOMException('The operation was aborted', 'AbortError')
 
     warnIfThinkingConsumedBudget(model, fullText, reasoningText)
     return { content: fullText, ...(reasoningText ? { reasoning: reasoningText } : {}) }
@@ -301,6 +313,9 @@ export class CloudflareProvider implements AIProvider {
       allMessages.unshift({ role: 'system', content: opts.system })
     }
 
+    // 舊版 schema 的模型（llama-3 等）串流時的 tool call 格式未經實測，維持非串流
+    const useStream = !!opts.onToken && !LEGACY_MESSAGE_SCHEMA_PATTERN.test(model)
+
     const response = await this.runWithToolMessageFallback(model, allMessages, (apiMessages) => ({
       messages: apiMessages,
       max_tokens: opts.maxTokens,
@@ -313,8 +328,23 @@ export class CloudflareProvider implements AIProvider {
           parameters: t.parameters,
         },
       })),
+      ...(useStream ? { stream: true } : {}),
       ...buildThinkingParams(model, opts.thinking),
     }))
+
+    // 串流模式：正文逐 token 推送，tool call 讀完後一次回傳。
+    // 模型不支援串流而回一般物件時，落到下方的非串流解析。
+    if (useStream && opts.onToken && response instanceof ReadableStream) {
+      const streamed = await readToolUseStream(response as ReadableStream<Uint8Array>, {
+        onToken: opts.onToken,
+        signal: opts.signal,
+        idPrefix: 'wai-tc',
+      })
+      if (streamed.toolCalls.length === 0) {
+        warnIfThinkingConsumedBudget(model, streamed.content ?? '', streamed.reasoning ?? '')
+      }
+      return streamed
+    }
 
     const { content, reasoning, usage, rawToolCalls } = parseWorkersAIResponse(response)
     // 有 tool calls 的輪次 content 本來就常是空的，只在「沒有 tool calls 也沒有正文」時才算預算被吃光

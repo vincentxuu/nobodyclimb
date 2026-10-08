@@ -1,4 +1,5 @@
 import { toGoogleContents } from './tool-messages'
+import { isAbortError } from './tool-stream'
 import {
   AIProvider,
   ChatMessage,
@@ -66,6 +67,7 @@ export class GoogleProvider implements AIProvider {
       `${this.baseUrl}/models/${model}:streamGenerateContent?key=${this.apiKey}&alt=sse`,
       {
         method: 'POST',
+        signal: opts.signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       }
@@ -90,7 +92,9 @@ export class GoogleProvider implements AIProvider {
             fullContent += text
             await opts.onToken(text)
           }
-        } catch {
+        } catch (err) {
+          // 呼叫端用 onToken 丟 AbortError 中止生成，不能跟壞掉的 SSE 行一起吞掉
+          if (isAbortError(err)) throw err
           /* ignore */
         }
       }
@@ -163,6 +167,7 @@ export class GoogleProvider implements AIProvider {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
+      signal: opts.signal,
     })
     if (!res.ok) throw new Error(`Google AI error: ${res.status} ${await res.text()}`)
 

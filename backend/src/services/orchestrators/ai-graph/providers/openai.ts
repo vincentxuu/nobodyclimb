@@ -1,4 +1,5 @@
 import { toOpenAIMessages } from './tool-messages'
+import { isAbortError, readToolUseStream } from './tool-stream'
 import {
   AIProvider,
   ChatMessage,
@@ -65,6 +66,7 @@ export class OpenAIProvider implements AIProvider {
   ): Promise<LLMResponse> {
     const res = await fetch(`${this.baseUrl}/chat/completions`, {
       method: 'POST',
+      signal: opts.signal,
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.apiKey}` },
       body: JSON.stringify({
         model: opts.model ?? this.defaultModel,
@@ -94,7 +96,9 @@ export class OpenAIProvider implements AIProvider {
             fullContent += token
             await opts.onToken(token)
           }
-        } catch {
+        } catch (err) {
+          // 呼叫端用 onToken 丟 AbortError 中止生成，不能跟壞掉的 SSE 行一起吞掉
+          if (isAbortError(err)) throw err
           /* ignore parse errors */
         }
       }
@@ -173,13 +177,24 @@ export async function openAIChatWithTools(
     body.tool_choice = 'auto'
   }
 
+  if (opts.onToken) {
+    body.stream = true
+    body.stream_options = { include_usage: true }
+  }
+
   const authHeader = authScheme === 'token' ? `token ${apiKey}` : `Bearer ${apiKey}`
   const res = await fetch(`${baseUrl}/chat/completions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: authHeader },
     body: JSON.stringify(body),
+    signal: opts.signal,
   })
   if (!res.ok) throw new Error(`OpenAI-compatible error: ${res.status} ${await res.text()}`)
+
+  // 串流模式：正文逐 token 推送，tool call 讀完後一次回傳
+  if (opts.onToken && res.body) {
+    return readToolUseStream(res.body, { onToken: opts.onToken, signal: opts.signal })
+  }
 
   const data = (await res.json()) as {
     choices: Array<{

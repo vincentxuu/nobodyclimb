@@ -3,6 +3,7 @@
 import { Check } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { BADGE_COLORS, type BadgeDefinition, getBadgeById } from '@/lib/constants/badges'
+import { useBadgeText } from '@/lib/hooks/useBadgeText'
 import type { BadgeProgress } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
@@ -14,6 +15,7 @@ interface BadgeCardProps {
 
 export function BadgeCard({ badge, progress, className }: BadgeCardProps) {
   const t = useTranslations('BiographyPage')
+  const { badgeName, badgeDescription } = useBadgeText()
   const badgeData = typeof badge === 'string' ? getBadgeById(badge) : badge
 
   if (!badgeData) {
@@ -62,11 +64,13 @@ export function BadgeCard({ badge, progress, className }: BadgeCardProps) {
           isUnlocked ? 'text-text-main' : 'text-text-subtle'
         )}
       >
-        {badgeData.name}
+        {badgeName(badgeData.id, badgeData.name)}
       </h4>
 
       {/* 徽章描述 */}
-      <p className="text-xs text-text-subtle text-center mb-3">{badgeData.description}</p>
+      <p className="text-xs text-text-subtle text-center mb-3">
+        {badgeDescription(badgeData.id, badgeData.description)}
+      </p>
 
       {/* 進度條 */}
       {!isUnlocked && progress && (

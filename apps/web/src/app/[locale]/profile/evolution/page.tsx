@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
 import { RefreshCw, TrendingUp } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import EvolutionTimeline from '@/components/profile/evolution/EvolutionTimeline'
 import StyleSpectrumCard from '@/components/profile/evolution/StyleSpectrumCard'
 import ProfilePageLayout from '@/components/profile/layout/ProfilePageLayout'
@@ -15,6 +16,7 @@ import { useEvolutionTimeline } from '@/lib/hooks/useEvolutionTimeline'
 import { useStyleSpectrum } from '@/lib/hooks/useStyleSpectrum'
 
 export default function EvolutionPage() {
+  const t = useTranslations('ProfileEvolution')
   const queryClient = useQueryClient()
   const { toast } = useToast()
 
@@ -30,11 +32,11 @@ export default function EvolutionPage() {
       queryClient.invalidateQueries({ queryKey: ['quiz', 'evolution'] })
       if (result.changed) {
         toast({
-          description: `人格已演化為 ${result.personality_type}`,
+          description: t('toastEvolved', { type: result.personality_type ?? '' }),
         })
       } else {
         toast({
-          description: result.reason || '人格類型未改變',
+          description: result.reason || t('toastUnchanged'),
         })
       }
     },
@@ -43,12 +45,12 @@ export default function EvolutionPage() {
       if (status === 429) {
         toast({
           variant: 'destructive',
-          description: '每日只能手動計算一次，請明天再試',
+          description: t('toastRateLimited'),
         })
       } else {
         toast({
           variant: 'destructive',
-          description: '計算失敗，請稍後再試',
+          description: t('toastCalculateFailed'),
         })
       }
     },
@@ -58,8 +60,8 @@ export default function EvolutionPage() {
     <ProfilePageLayout>
       <div className="space-y-6">
         <ProfilePageTitle
-          title="攀岩人格演化"
-          subtitle="追蹤你的攀岩人格隨時間的變化軌跡"
+          title={t('pageTitle')}
+          subtitle={t('pageSubtitle')}
           action={
             <Button
               variant="outline"
@@ -71,7 +73,7 @@ export default function EvolutionPage() {
               <RefreshCw
                 className={`h-4 w-4 ${calculateMutation.isPending ? 'animate-spin' : ''}`}
               />
-              手動計算
+              {t('calculateNow')}
             </Button>
           }
         />
@@ -88,7 +90,7 @@ export default function EvolutionPage() {
         >
           <h2 className="mb-6 flex items-center gap-2 text-lg font-semibold text-[#1B1A1A]">
             <TrendingUp className="h-5 w-5 text-emerald-600" />
-            演化歷程
+            {t('timelineTitle')}
           </h2>
 
           {timelineLoading ? (

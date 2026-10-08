@@ -1,14 +1,17 @@
 'use client'
 
-import type { PersonalityType } from '@nobodyclimb/types'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, Sparkles, Target } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import type { LocalizedPersonality } from '@/lib/quiz/personality-i18n'
 
 interface StartGuideProps {
-  personality: PersonalityType
+  personality: LocalizedPersonality
 }
 
 export function StartGuide({ personality }: StartGuideProps) {
+  const t = useTranslations('Quiz.training')
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -18,29 +21,31 @@ export function StartGuide({ personality }: StartGuideProps) {
     >
       <div className="mb-4 flex items-center gap-2">
         <Sparkles className="h-5 w-5" style={{ color: personality.color }} />
-        <h2 className="text-lg font-bold text-gray-900">開始你的訓練計畫</h2>
+        <h2 className="text-lg font-bold text-gray-900">{t('guideTitle')}</h2>
       </div>
 
       <p className="mb-4 text-sm text-gray-600">
-        這個計畫專為<strong>{personality.nameZh}</strong>
-        設計，核心理念是「訓練你的反面」——透過強化你較少使用的面向，成為更全面的攀岩者。
+        {t.rich('guideBody', {
+          name: personality.name,
+          strong: (chunks) => <strong>{chunks}</strong>,
+        })}
       </p>
 
       <div className="grid grid-cols-3 gap-3">
         <div className="flex flex-col items-center gap-1 rounded-xl bg-gray-50 p-3">
           <Calendar className="h-5 w-5 text-gray-400" />
-          <span className="text-sm font-semibold text-gray-700">4 週</span>
-          <span className="text-xs text-gray-500">完整計畫</span>
+          <span className="text-sm font-semibold text-gray-700">{t('statWeeks')}</span>
+          <span className="text-xs text-gray-500">{t('statWeeksLabel')}</span>
         </div>
         <div className="flex flex-col items-center gap-1 rounded-xl bg-gray-50 p-3">
           <Target className="h-5 w-5 text-gray-400" />
-          <span className="text-sm font-semibold text-gray-700">12 天</span>
-          <span className="text-xs text-gray-500">訓練天數</span>
+          <span className="text-sm font-semibold text-gray-700">{t('statDays')}</span>
+          <span className="text-xs text-gray-500">{t('statDaysLabel')}</span>
         </div>
         <div className="flex flex-col items-center gap-1 rounded-xl bg-gray-50 p-3">
           <Clock className="h-5 w-5 text-gray-400" />
-          <span className="text-sm font-semibold text-gray-700">20-45 分</span>
-          <span className="text-xs text-gray-500">每日時長</span>
+          <span className="text-sm font-semibold text-gray-700">{t('statDuration')}</span>
+          <span className="text-xs text-gray-500">{t('statDurationLabel')}</span>
         </div>
       </div>
     </motion.div>

@@ -193,7 +193,14 @@ export interface AgentOptions {
   tokenBudget: number
   stream?: boolean
   onToken?: (token: string) => Promise<void>
+  /**
+   * 作廢已透過 onToken 推送的正文（前端清空串流累積的文字）。
+   * 觸發時機：該輪推了前導文字後才發現要呼叫工具、正文被判定不是答案、或 LLM 呼叫重試。
+   */
+  onTokenReset?: () => Promise<void>
   onProgress?: (event: ProgressEvent) => Promise<void>
+  /** client 中斷：停止後續 turn、工具與進行中的 LLM 呼叫 */
+  signal?: AbortSignal
 }
 
 export interface ToolCallTrace {

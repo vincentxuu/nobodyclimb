@@ -1,17 +1,20 @@
 'use client'
 
-import type { PersonalityType } from '@nobodyclimb/types'
 import { motion } from 'framer-motion'
 import { Mountain } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import type { LocalizedPersonality } from '@/lib/quiz/personality-i18n'
 import { ProgressRing } from './ProgressRing'
 
 interface TrainingHeaderProps {
-  personality: PersonalityType
+  personality: LocalizedPersonality
   completedDays: number
   totalDays: number
 }
 
 export function TrainingHeader({ personality, completedDays, totalDays }: TrainingHeaderProps) {
+  const t = useTranslations('Quiz.training')
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -26,8 +29,12 @@ export function TrainingHeader({ personality, completedDays, totalDays }: Traini
           <Mountain className="h-8 w-8" style={{ color: personality.color }} />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">{personality.nameZh} 訓練計畫</h1>
-          <p className="mt-1 text-sm text-gray-500">{personality.nameEn} Training Plan</p>
+          <h1 className="text-2xl font-bold text-gray-900">
+            {t('headerTitle', { name: personality.name })}
+          </h1>
+          {personality.name !== personality.nameEn && (
+            <p className="mt-1 text-sm text-gray-500">{personality.nameEn} Training Plan</p>
+          )}
         </div>
       </div>
       <div className="sm:ml-auto">

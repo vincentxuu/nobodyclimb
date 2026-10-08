@@ -11,12 +11,13 @@ import {
   ThumbsUp,
   Youtube,
 } from 'lucide-react'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { ToolActivity } from '@/components/ai-elements/tool-activity'
-import type { AISource, AIStreamProgressEvent } from '@/lib/api/ai'
+import { Link } from '@/i18n/navigation'
 import { useSubmitFeedback } from '@/lib/api/ai'
+import type { ChatMessageData } from '@/lib/chat/messages'
+import { formatChatError } from '@/lib/chat/messages'
 import { cn } from '@/lib/utils'
 import { SourceCard } from './SourceCard'
 
@@ -268,19 +269,9 @@ export function MarkdownContent({ text }: { text: string }) {
 }
 
 // =============================================
-// ChatMessageData 型別
+// ChatMessageData 型別（定義在 lib/chat/messages，與 useChatSession 共用）
 // =============================================
-export interface ChatMessageData {
-  id: string
-  role: 'user' | 'assistant'
-  content: string
-  sources?: AISource[]
-  queryId?: string
-  /** 串流中：尚未收到 done 事件 */
-  isStreaming?: boolean
-  /** 工具使用過程（SSE progress 事件） */
-  toolProgress?: AIStreamProgressEvent[]
-}
+export type { ChatMessageData }
 
 interface ChatMessageProps {
   message: ChatMessageData
@@ -289,7 +280,8 @@ interface ChatMessageProps {
   isPending?: boolean
 }
 
-export function ChatMessage({
+// memo：串流時只有內容變動的那一則（最後一則）重繪；onRegenerate 需為穩定參考
+export const ChatMessage = memo(function ChatMessage({
   message,
   isLast = false,
   onRegenerate,
@@ -308,8 +300,20 @@ export function ChatMessage({
   const showThinking = !isUser && !!message.isStreaming && !message.content && !isToolRunning
   const waitingLabel = hasToolProgress ? t('composing') : t('thinking')
 
+  // 錯誤 / 中斷提示依 status 顯示，不寫進 content（content 會進對話歷史）
+  const errorText = message.error ? formatChatError(t, message.error) : null
+  const isStopped = message.status === 'stopped'
+
   // 非串流的空訊息不渲染，避免空白氣泡（串流中改顯示思考中 / 工具過程）
-  if (!isUser && !message.content && !message.isStreaming && !hasToolProgress) return null
+  if (
+    !isUser &&
+    !message.content &&
+    !message.isStreaming &&
+    !hasToolProgress &&
+    !errorText &&
+    !isStopped
+  )
+    return null
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(message.content)
@@ -363,6 +367,19 @@ export function ChatMessage({
           </div>
         )}
 
+        {/* 沒有任何內容的錯誤：提示本身就是氣泡 */}
+        {errorText && !message.content && (
+          <div className="rounded-2xl rounded-bl-sm bg-muted px-4 py-2.5 text-sm leading-relaxed text-foreground">
+            <span className="whitespace-pre-wrap">{errorText}</span>
+          </div>
+        )}
+
+        {/* 已有部分內容的錯誤 / 使用者中斷：在氣泡下方附註 */}
+        {errorText && message.content && (
+          <p className="pl-1 text-xs text-muted-foreground">{errorText}</p>
+        )}
+        {isStopped && <p className="pl-1 text-xs text-muted-foreground">{t('stopped')}</p>}
+
         {/* 來源卡片（僅助理訊息） */}
         {!isUser && message.sources && message.sources.length > 0 && (
           <div className="space-y-1.5 pl-1">
@@ -389,8 +406,8 @@ export function ChatMessage({
               )}
             </button>
 
-            {/* 重新生成按鈕（僅最後一則 AI 訊息） */}
-            {isLast && onRegenerate && (
+            {/* 重新生成按鈕（僅最後一則 AI 訊息；錯誤訊息不提供，後端可能沒有寫入這一輪） */}
+            {isLast && onRegenerate && message.status !== 'error' && (
               <button
                 onClick={onRegenerate}
                 disabled={isPending}
@@ -428,4 +445,4 @@ export function ChatMessage({
       </div>
     </div>
   )
-}
+})

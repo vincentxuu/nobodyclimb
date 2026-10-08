@@ -3,6 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query'
+import { useLocale } from 'next-intl'
 import {
   type AdaptedCragDetail,
   type AdaptedRouteDetail,
@@ -22,6 +23,13 @@ import type {
   RouteSearchItem,
   RouteSidebarItem,
 } from '@/lib/crag-data'
+import {
+  loadCragOverlays,
+  localizeCragAreas,
+  localizeCragDetail,
+  localizeCragRoutes,
+  localizeRouteDetail,
+} from '@/lib/data-i18n'
 
 // 快取時間常數
 const STALE_TIME = 5 * 60 * 1000 // 5 分鐘
@@ -134,8 +142,9 @@ export function useFeaturedRoutes(limit = 8) {
  * 獲取岩場詳情
  */
 export function useCragDetail(id: string) {
+  const locale = useLocale()
   return useQuery({
-    queryKey: ['crag', id],
+    queryKey: ['crag', id, locale],
     queryFn: async (): Promise<AdaptedCragDetail | null> => {
       // 同時獲取岩場資料和區域資料
       const [cragResponse, areasResponse] = await Promise.all([
@@ -147,7 +156,8 @@ export function useCragDetail(id: string) {
       if (!apiCrag) return null
 
       const apiAreas = areasResponse.data || []
-      return adaptCragToDetail(apiCrag, apiAreas)
+      const overlays = await loadCragOverlays(locale, apiCrag.id)
+      return localizeCragDetail(adaptCragToDetail(apiCrag, apiAreas), overlays, locale)
     },
     enabled: !!id,
     staleTime: STALE_TIME,
@@ -159,8 +169,9 @@ export function useCragDetail(id: string) {
  * 獲取岩場詳情（通過 Slug）
  */
 export function useCragDetailBySlug(slug: string) {
+  const locale = useLocale()
   return useQuery({
-    queryKey: ['crag', 'slug', slug],
+    queryKey: ['crag', 'slug', slug, locale],
     queryFn: async (): Promise<AdaptedCragDetail | null> => {
       const response = await cragService.getCragBySlug(slug)
       const apiCrag = response.data
@@ -168,8 +179,9 @@ export function useCragDetailBySlug(slug: string) {
 
       const areasResponse = await cragService.getCragAreas(apiCrag.id)
       const apiAreas = areasResponse.data || []
+      const overlays = await loadCragOverlays(locale, apiCrag.id)
 
-      return adaptCragToDetail(apiCrag, apiAreas)
+      return localizeCragDetail(adaptCragToDetail(apiCrag, apiAreas), overlays, locale)
     },
     enabled: !!slug,
     staleTime: STALE_TIME,
@@ -223,11 +235,15 @@ export function useCragAreas(cragId: string) {
  * 獲取岩場完整區域資料（含 routesCount、boltCount 等）
  */
 export function useCragFullAreas(cragId: string) {
+  const locale = useLocale()
   return useQuery({
-    queryKey: ['crag', cragId, 'full-areas'],
+    queryKey: ['crag', cragId, 'full-areas', locale],
     queryFn: async (): Promise<CragArea[]> => {
-      const response = await cragService.getCragAreas(cragId)
-      return (response.data || []).map(adaptApiAreaToFullArea)
+      const [response, overlays] = await Promise.all([
+        cragService.getCragAreas(cragId),
+        loadCragOverlays(locale, cragId),
+      ])
+      return localizeCragAreas((response.data || []).map(adaptApiAreaToFullArea), overlays, locale)
     },
     enabled: !!cragId,
     staleTime: STALE_TIME,
@@ -239,11 +255,15 @@ export function useCragFullAreas(cragId: string) {
  * 獲取岩場完整路線資料（CragRoute 格式，含所有欄位）
  */
 export function useCragFullRoutes(cragId: string) {
+  const locale = useLocale()
   return useQuery({
-    queryKey: ['crag', cragId, 'full-routes'],
+    queryKey: ['crag', cragId, 'full-routes', locale],
     queryFn: async (): Promise<CragRoute[]> => {
-      const response = await cragService.getCragRoutes(cragId)
-      return (response.data || []).map(adaptApiRouteToCragRoute)
+      const [response, overlays] = await Promise.all([
+        cragService.getCragRoutes(cragId),
+        loadCragOverlays(locale, cragId),
+      ])
+      return localizeCragRoutes((response.data || []).map(adaptApiRouteToCragRoute), overlays)
     },
     enabled: !!cragId,
     staleTime: STALE_TIME,
@@ -255,18 +275,20 @@ export function useCragFullRoutes(cragId: string) {
  * 獲取路線詳情
  */
 export function useRouteDetail(cragId: string, routeId: string) {
+  const locale = useLocale()
   return useQuery({
-    queryKey: ['crag', cragId, 'route', routeId],
+    queryKey: ['crag', cragId, 'route', routeId, locale],
     queryFn: async (): Promise<{
       route: AdaptedRouteDetail
       crag: { id: string; name: string; slug: string }
       area: { id: string; name: string } | null
     } | null> => {
       // 並行獲取路線、岩場、區域資料
-      const [routesResponse, cragResponse, areasResponse] = await Promise.all([
+      const [routesResponse, cragResponse, areasResponse, overlays] = await Promise.all([
         cragService.getCragRoutes(cragId),
         cragService.getCragById(cragId),
         cragService.getCragAreas(cragId),
+        loadCragOverlays(locale, cragId),
       ])
 
       const apiRoutes = routesResponse.data || []
@@ -282,7 +304,7 @@ export function useRouteDetail(cragId: string, routeId: string) {
         : ''
 
       return {
-        route: adaptRouteToDetail(apiRoute),
+        route: localizeRouteDetail(adaptRouteToDetail(apiRoute), overlays),
         crag: {
           id: apiCrag.id,
           name: apiCrag.name,

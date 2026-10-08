@@ -60,12 +60,16 @@ type VisibilityLevel = 'private' | 'anonymous' | 'community' | 'public' | null |
 /**
  * 根據人物誌可見性取得顯示名稱
  * 匿名人物誌顯示「匿名岩友」，其他則顯示實際名稱
+ *
+ * @param anonymousLabel 匿名時的顯示名稱；元件請傳入目前語系的文字
+ *   （`BiographyPage.anonymousName`），未傳時退回繁中預設值
  */
 export function getDisplayNameForVisibility(
   visibility: VisibilityLevel,
-  actualName: string
+  actualName: string,
+  anonymousLabel: string = '匿名岩友'
 ): string {
-  return visibility === 'anonymous' ? '匿名岩友' : actualName
+  return visibility === 'anonymous' ? anonymousLabel : actualName
 }
 
 // ═══════════════════════════════════════════

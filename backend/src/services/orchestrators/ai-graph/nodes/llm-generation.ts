@@ -176,11 +176,15 @@ export async function llmGenerationNode(state: GraphState): Promise<Partial<Grap
       | undefined
 
     if (state.streamingMode && state.onToken) {
+      // client 已中斷就不要再花一次 LLM 呼叫
+      if (state.abortSignal?.aborted)
+        throw new DOMException('The operation was aborted', 'AbortError')
       const streamResult = await state.llmProvider!.streamChat(llmMessages, {
         model: effectiveLlmModel,
         maxTokens: pipelineConfig.max_tokens_generation,
         gatewayOptions: state.gatewayOptions,
         onToken: state.onToken,
+        signal: state.abortSignal,
       })
       rawLLMAnswer = streamResult.content || '抱歉，無法生成回答，請稍後再試。'
       llmUsage = streamResult.usage

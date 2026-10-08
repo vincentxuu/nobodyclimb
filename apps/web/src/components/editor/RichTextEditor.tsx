@@ -1,16 +1,14 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { useTranslations } from 'next-intl'
 import { useEffect, useMemo } from 'react'
+import { EditorLoading } from './EditorLoading'
 
 // Dynamically import ReactQuill (CSS 透過 layout.tsx CDN 載入)
 const ReactQuill = dynamic(() => import('react-quill-new'), {
   ssr: false,
-  loading: () => (
-    <div className="flex h-[300px] items-center justify-center rounded-lg border border-[#E5E5E5] bg-gray-50">
-      <span className="text-gray-400">載入編輯器中...</span>
-    </div>
-  ),
+  loading: () => <EditorLoading />,
 })
 
 interface RichTextEditorProps {
@@ -77,9 +75,11 @@ const editorStyles = `
 export function RichTextEditor({
   value,
   onChange,
-  placeholder = '請輸入文章內容...',
+  placeholder,
   className = '',
 }: RichTextEditorProps) {
+  const t = useTranslations('Editor')
+
   // Inject global styles for the editor
   useEffect(() => {
     const styleId = 'rich-text-editor-styles'
@@ -136,7 +136,7 @@ export function RichTextEditor({
         onChange={onChange}
         modules={modules}
         formats={formats}
-        placeholder={placeholder}
+        placeholder={placeholder ?? t('contentPlaceholder')}
       />
     </div>
   )

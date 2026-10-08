@@ -5,6 +5,12 @@ import { describeRoute, validator } from 'hono-openapi'
 import { z } from 'zod'
 import { adminMiddleware, authMiddleware } from '../middleware/auth'
 import { checkAiRateLimit } from '../middleware/rateLimit'
+import {
+  type AssistantMessageInput,
+  isSessionOwnedBy,
+  listSessionMessages,
+  saveTurn,
+} from '../repositories/chat'
 import { deleteMemory, getUserMemories } from '../repositories/memory'
 import { EmbeddingService } from '../services/core/embedding'
 import { RecommendationService } from '../services/domain/recommendation'
@@ -54,7 +60,29 @@ const askSchema = z.object({
   chat_history: z.array(chatMessageSchema).max(20).optional(),
   eval_mode: z.enum(['agent', 'pipeline']).optional(),
   locale: z.enum(AI_LOCALES).optional(),
+  // 帶了就由後端把 user / assistant 訊息寫入該 session（前端不需再呼叫 POST /sessions/:id/messages）
+  session_id: z.string().min(1).max(64).optional(),
+  // 重新生成：不新增 user 訊息，新回答取代該 session 最後一則 assistant 訊息
+  regenerate: z.boolean().optional().default(false),
 })
+
+const sessionsQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(50).optional().default(20),
+})
+
+/** SSE heartbeat 間隔：工具執行較久時避免中間 proxy 因閒置切斷連線 */
+const SSE_HEARTBEAT_MS = 15000
+
+/** 退還一次問答的次數與 token 預扣量 */
+async function refundQuota(db: Env['DB'], userId: string, estimatedTokens: number) {
+  await db
+    .prepare(
+      `UPDATE user_ranks SET daily_ai_used = MAX(0, daily_ai_used - 1), daily_token_used = MAX(0, daily_token_used - ?), updated_at = datetime('now') WHERE user_id = ?`
+    )
+    .bind(estimatedTokens, userId)
+    .run()
+}
 
 const searchSchema = z.object({
   q: z.string().min(2, '搜尋關鍵字至少需要 2 個字元'),
@@ -90,13 +118,14 @@ aiRoutes.post(
     tags: ['AI'],
     summary: 'RAG 問答',
     description:
-      '使用自然語言詢問攀岩相關問題，系統根據平台資料生成回答（需登入，受等級配額限制）。加上 `?stream=true` 可啟用 SSE 串流回應（Content-Type: text/event-stream），逐詞推送 `{"type":"token","token":"..."}` 事件，工具執行時推送 `{"type":"progress","id":"...","tool":"...","status":"executing"|"done","input"?:...,"output"?:"...","is_error"?:boolean,"duration_ms"?:number}` 事件（executing 帶 input，done 帶截斷後的 output），結束時推送 `{"type":"done",...}` 事件。',
+      '使用自然語言詢問攀岩相關問題，系統根據平台資料生成回答（需登入，受等級配額限制）。加上 `?stream=true` 可啟用 SSE 串流回應（Content-Type: text/event-stream），逐詞推送 `{"type":"token","token":"..."}` 事件，工具執行時推送 `{"type":"progress","id":"...","tool":"...","status":"executing"|"done","input"?:...,"output"?:"...","is_error"?:boolean,"duration_ms"?:number}` 事件（executing 帶 input，done 帶截斷後的 output），結束時推送 `{"type":"done",...}` 事件。`{"type":"token_reset"}` 表示先前推送的 token 作廢（agent 該輪改為呼叫工具或 LLM 重試），client 應清空已累積的文字；失敗時推送 `{"type":"error","code":"timeout"|"circuit_open"|"internal","message":"..."}`；以 `:` 開頭的行為 heartbeat。client 中斷連線時後端會停止生成：尚未輸出正文則退還配額，已輸出則把部分內容以 `status: "stopped"` 存入 session。帶 `session_id` 時由後端寫入 user / assistant 訊息（`regenerate: true` 則以新回答取代最後一則 assistant 訊息）。',
     responses: {
       200: {
         description: '問答成功，回傳 AI 回答與來源及剩餘配額（非串流）；或 SSE 串流（stream=true）',
       },
       400: { description: '請求格式錯誤' },
       401: { description: '未登入' },
+      404: { description: 'session_id 不存在或無權限' },
       429: { description: '今日配額已用盡' },
       500: { description: 'AI 服務錯誤' },
     },
@@ -124,6 +153,12 @@ aiRoutes.post(
           429
         )
       }
+    }
+
+    // session 歸屬驗證（在配額扣除前，失敗不扣配額）
+    const sessionId = body.session_id
+    if (sessionId && !(await isSessionOwnedBy(sessionId, userId, db))) {
+      return c.json({ success: false, error: 'session_not_found', message: 'Session 不存在' }, 404)
     }
 
     // Task 4.1: 輸入層防護（在配額扣除前執行，驗證失敗不扣配額）
@@ -251,38 +286,127 @@ aiRoutes.post(
 
     const streamMode = c.req.query('stream') === 'true'
 
+    // 訊息持久化：一回合結束才把 user + assistant 一起寫入（失敗 / 無正文中斷的回合不落地，
+    // 重送也不會產生重複的 user 訊息）；寫入失敗不中斷問答
+    const saveTurnMessages = (assistant: AssistantMessageInput) =>
+      sessionId
+        ? saveTurn(
+            sessionId,
+            { userContent: body.query, regenerate: body.regenerate, assistant },
+            db
+          ).catch((err) => console.error('AI ask: save turn failed:', err))
+        : Promise.resolve()
+
     // SSE 串流模式
     if (streamMode) {
-      let streamCompleted = false
       return streamSSE(c, async (stream) => {
+        // 先註冊一個 waitUntil 撐住 invocation：2026-09-21 以 wrangler dev 實測，沒有它的話 client 一斷線
+        // runtime 就直接取消整個 handler，onAbort 與收尾（退配額、存部分回答）都不會執行
+        let releaseInvocation: () => void = () => {}
+        c.executionCtx.waitUntil(
+          new Promise<void>((resolve) => {
+            releaseInvocation = resolve
+          })
+        )
+        const heartbeat = setInterval(() => {
+          stream.write(': ping\n\n').catch(() => {})
+        }, SSE_HEARTBEAT_MS)
+        // 已推送給 client 的正文，中斷時存成部分回答
+        let streamedText = ''
+        // 收尾只能做一次：正常完成、client 中斷、串流失敗三者互斥
+        let settled = false
+        const queryService = new QueryService(c.env)
+
+        // client 中斷（按停止、關頁面）：立刻中止 LLM / 工具並做收尾，不等 ask() unwind——
+        // 工具執行與 Workers AI 的 AI.run 無法即時取消，等它們結束可能超過斷線後 waitUntil 的寬限期。
+        // 還沒看到任何正文（思考 / 工具階段就按停止）→ 全額退還、不落地；
+        // 已經看到部分回答 → 次數照扣（避免「快結束才按停止」白嫖），存下部分內容。
+        const abortController = new AbortController()
+        stream.onAbort(() => {
+          abortController.abort()
+          if (settled) return
+          settled = true
+          const partial = streamedText.trim()
+          c.executionCtx.waitUntil(
+            (async () => {
+              // 被中斷的請求也要留紀錄：LLM / 工具已實際消耗，且「無正文就中斷」會退還配額，
+              // 沒有 log 就無從察覺反覆停止的濫用
+              await db
+                .prepare(
+                  `INSERT INTO ai_query_logs (id, user_id, query, response, sources, latency_ms, token_count, query_type, model_used, retrieval_score, self_reflection_triggered, is_high_consumption, cache_hit, hyde_triggered, pipeline_trace)
+                   VALUES (?, ?, ?, ?, '[]', ?, 0, 'client_aborted', '', 0, 0, 0, 0, 0, ?)`
+                )
+                .bind(
+                  crypto.randomUUID(),
+                  userId,
+                  body.query.slice(0, 500),
+                  partial.slice(0, 2000),
+                  Date.now() - ((extraTrace.startTime as number) || Date.now()),
+                  JSON.stringify({
+                    client_aborted: {
+                      had_partial: partial.length > 0,
+                      streamed_chars: partial.length,
+                      quota_refunded: !partial && !isAdmin,
+                    },
+                    ...(extraTrace.guardrails_input
+                      ? { guardrails_input: extraTrace.guardrails_input }
+                      : {}),
+                  })
+                )
+                .run()
+                .catch((err) => console.error('AI ask: client_aborted log failed:', err))
+              if (!partial) {
+                if (!isAdmin) await refundQuota(db, userId, estimatedTokens)
+                return
+              }
+              // 串流中按「清除」會先刪 session，此時不要再把 stopped 訊息寫回去
+              if (sessionId && !(await isSessionOwnedBy(sessionId, userId, db))) return
+              await saveTurnMessages({ content: checkOutput(partial).output, status: 'stopped' })
+            })().catch((err) => console.error('AI ask stream abort cleanup failed:', err))
+          )
+        })
+
         try {
-          const queryService = new QueryService(c.env)
           const result = await queryService.askStream(
             body,
             userId,
             async (data) => {
+              const event = JSON.parse(data) as { type: string; token?: string }
+              if (event.type === 'token') streamedText += event.token ?? ''
+              else if (event.type === 'token_reset') streamedText = ''
               await stream.writeSSE({ data })
             },
             c.executionCtx,
             extraTrace,
             async (event) => {
               await stream.writeSSE({ data: JSON.stringify(event) })
-            }
+            },
+            abortController.signal
           )
+          if (settled) return
+          settled = true
 
           // Task 4.4: 更新實際 token 消耗（修正預估與實際差額）
           if (!isAdmin) {
-            const logRow = await db
-              .prepare(`SELECT token_count FROM ai_query_logs WHERE id = ?`)
-              .bind(result.query_id)
-              .first<{ token_count: number | null }>()
-            await addTokenUsage(userId, logRow?.token_count ?? estimatedTokens, estimatedTokens, db)
+            await addTokenUsage(
+              userId,
+              queryService.getLastTokenCount() ?? estimatedTokens,
+              estimatedTokens,
+              db
+            )
           }
 
-          // 取得最新配額（供 done 事件）
+          await saveTurnMessages({
+            content: result.answer,
+            sources: result.sources,
+            suggestedQuestions: result.suggested_questions,
+            queryId: result.query_id,
+          })
+
+          // 取得最新配額（供 done 事件）；查不到就回 -1，不能因此走到退款
           let quotaRemaining = -1
           if (!isAdmin) {
-            const updatedRank = await getUserRank(userId, db)
+            const updatedRank = await getUserRank(userId, db).catch(() => null)
             if (updatedRank) {
               quotaRemaining = Math.max(0, updatedRank.daily_ai_limit - updatedRank.daily_ai_used)
             }
@@ -298,19 +422,17 @@ aiRoutes.post(
               quota_remaining: quotaRemaining,
             }),
           })
-          streamCompleted = true
         } catch (error) {
+          // client 中斷的收尾已在 onAbort 做完
+          if (settled) return
+          settled = true
           // Task 4.5: 串流失敗時退還次數與 token 預扣量
-          if (!isAdmin && !streamCompleted) {
-            await db
-              .prepare(
-                `UPDATE user_ranks SET daily_ai_used = MAX(0, daily_ai_used - 1), daily_token_used = MAX(0, daily_token_used - ?), updated_at = datetime('now') WHERE user_id = ?`
-              )
-              .bind(estimatedTokens, userId)
-              .run()
-          }
+          if (!isAdmin) await refundQuota(db, userId, estimatedTokens)
           console.error('AI ask stream error:', error)
           // askStream 已寫入 error 事件，此處確保串流結束
+        } finally {
+          clearInterval(heartbeat)
+          releaseInvocation()
         }
       })
     }
@@ -322,15 +444,23 @@ aiRoutes.post(
 
       // Task 4.4: 更新實際 token 消耗（修正預估與實際差額）
       if (!isAdmin) {
-        const logRow = await db
-          .prepare(`SELECT token_count FROM ai_query_logs WHERE id = ?`)
-          .bind(aiResult.query_id)
-          .first<{ token_count: number | null }>()
-        await addTokenUsage(userId, logRow?.token_count ?? estimatedTokens, estimatedTokens, db)
+        await addTokenUsage(
+          userId,
+          queryService.getLastTokenCount() ?? estimatedTokens,
+          estimatedTokens,
+          db
+        )
       }
 
       // Task 4.6: 輸出層防護（路由層二次保護，query.ts 已做過一次）
       const { output: filteredAnswer } = checkOutput(aiResult.answer)
+
+      await saveTurnMessages({
+        content: filteredAnswer,
+        sources: aiResult.sources,
+        suggestedQuestions: aiResult.suggested_questions,
+        queryId: aiResult.query_id,
+      })
 
       // 管理員不回傳配額資訊；一般用戶取得最新狀態
       let quota = null
@@ -350,14 +480,7 @@ aiRoutes.post(
       return c.json({ success: true, data: { ...aiResult, answer: filteredAnswer, quota } })
     } catch (error) {
       // 所有錯誤都退還配額（408 超時、503 熔斷、500 內部錯誤）
-      if (!isAdmin) {
-        await db
-          .prepare(
-            `UPDATE user_ranks SET daily_ai_used = MAX(0, daily_ai_used - 1), daily_token_used = MAX(0, daily_token_used - ?), updated_at = datetime('now') WHERE user_id = ?`
-          )
-          .bind(estimatedTokens, userId)
-          .run()
-      }
+      if (!isAdmin) await refundQuota(db, userId, estimatedTokens)
       console.error('AI ask error:', error)
 
       // 記錄超時/熔斷事件到 ai_query_logs（不計配額但需追蹤）
@@ -656,23 +779,36 @@ aiRoutes.get(
   describeRoute({
     tags: ['AI'],
     summary: '取得聊天記錄列表',
-    description: '回傳已登入用戶最近 20 個對話 session',
+    description:
+      '回傳已登入用戶的對話 session（依最近更新排序），支援 `page` / `limit` 分頁，預設前 20 筆',
     responses: {
       200: { description: '查詢成功' },
       401: { description: '需要登入' },
     },
   }),
   authMiddleware,
+  validator('query', sessionsQuerySchema),
   async (c) => {
     const userId = c.get('userId')
-    const { results } = await c.env.DB.prepare(
-      `SELECT id, title, created_at, updated_at FROM chat_sessions
-       WHERE user_id = ? ORDER BY updated_at DESC LIMIT 20`
-    )
-      .bind(userId)
-      .all()
+    const { page, limit } = c.req.valid('query')
+    const [{ results }, countRow] = await Promise.all([
+      c.env.DB.prepare(
+        `SELECT id, title, created_at, updated_at FROM chat_sessions
+         WHERE user_id = ? ORDER BY updated_at DESC LIMIT ? OFFSET ?`
+      )
+        .bind(userId, limit, (page - 1) * limit)
+        .all(),
+      c.env.DB.prepare(`SELECT COUNT(*) AS total FROM chat_sessions WHERE user_id = ?`)
+        .bind(userId)
+        .first<{ total: number }>(),
+    ])
+    const total = countRow?.total ?? 0
 
-    return c.json({ success: true, data: results })
+    return c.json({
+      success: true,
+      data: results,
+      pagination: { page, limit, total, total_pages: Math.ceil(total / limit) },
+    })
   }
 )
 
@@ -694,24 +830,25 @@ aiRoutes.get(
     const sessionId = c.req.param('id')
 
     // 驗證 session 歸屬
-    const session = await c.env.DB.prepare(
-      `SELECT id FROM chat_sessions WHERE id = ? AND user_id = ?`
-    )
-      .bind(sessionId, userId)
-      .first()
-
-    if (!session) {
+    if (!(await isSessionOwnedBy(sessionId, userId, c.env.DB))) {
       return c.json({ success: false, error: 'NotFound', message: 'Session 不存在' }, 404)
     }
 
-    const { results } = await c.env.DB.prepare(
-      `SELECT id, role, content, suggested_questions, query_id, created_at
-       FROM chat_messages WHERE session_id = ? ORDER BY created_at ASC`
-    )
-      .bind(sessionId)
-      .all()
+    const rows = await listSessionMessages(sessionId, c.env.DB)
+    // sources 回傳已 parse 的陣列；suggested_questions 維持 JSON 字串（既有 client 自行解析）
+    const data = rows.map((row) => {
+      let sources: unknown = null
+      if (row.sources) {
+        try {
+          sources = JSON.parse(row.sources)
+        } catch {
+          sources = null
+        }
+      }
+      return { ...row, sources }
+    })
 
-    return c.json({ success: true, data: results })
+    return c.json({ success: true, data })
   }
 )
 

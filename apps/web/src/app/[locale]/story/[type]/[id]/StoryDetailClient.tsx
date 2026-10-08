@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Calendar, Loader2 } from 'lucide-react'
 import Image from 'next/image'
+import { useLocale, useTranslations } from 'next-intl'
 import { use, useEffect, useState } from 'react'
 import { ContentInteractionBar } from '@/components/biography/display/ContentInteractionBar'
 import { RelatedStories } from '@/components/story/RelatedStories'
@@ -16,6 +17,7 @@ import {
   OneLiner,
   Story,
 } from '@/lib/api/services'
+import { toIntlLocale } from '@/lib/date-locale'
 import { normalizeNewlines } from '@/lib/utils'
 import { getDefaultAvatarUrl, isSvgUrl } from '@/lib/utils/image'
 
@@ -53,11 +55,11 @@ interface StoryDetailClientProps {
 }
 
 // 故事類型標籤
-const TYPE_LABELS: Record<StoryType, string> = {
-  'core-stories': '核心故事',
-  'one-liners': '一句話',
-  stories: '小故事',
-}
+const TYPE_LABEL_KEYS = {
+  'core-stories': 'coreStories',
+  'one-liners': 'oneLiners',
+  stories: 'stories',
+} as const satisfies Record<StoryType, string>
 
 // 驗證故事類型
 function isValidStoryType(type: string): type is StoryType {
@@ -65,23 +67,34 @@ function isValidStoryType(type: string): type is StoryType {
 }
 
 // 格式化日期
-function formatDate(dateString?: string): string {
+function formatDate(
+  dateString: string | undefined,
+  locale: string,
+  t: ReturnType<typeof useTranslations<'StoryDetail'>>
+): string {
   if (!dateString) return ''
   const date = new Date(dateString)
   const now = new Date()
   const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24))
 
-  if (diffInDays === 0) return '今天'
-  if (diffInDays === 1) return '昨天'
-  if (diffInDays < 7) return `${diffInDays} 天前`
-  if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} 週前`
-  if (diffInDays < 365) return `${Math.floor(diffInDays / 30)} 個月前`
+  if (diffInDays === 0) return t('dateToday')
+  if (diffInDays === 1) return t('dateYesterday')
+  if (diffInDays < 7) return t('dateDaysAgo', { count: diffInDays })
+  if (diffInDays < 30) return t('dateWeeksAgo', { count: Math.floor(diffInDays / 7) })
+  if (diffInDays < 365) return t('dateMonthsAgo', { count: Math.floor(diffInDays / 30) })
 
-  return date.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })
+  return date.toLocaleDateString(toIntlLocale(locale), {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 }
 
 export default function StoryDetailClient({ params }: StoryDetailClientProps) {
   const { type, id } = use(params)
+  const locale = useLocale()
+  const t = useTranslations('StoryDetail')
+  const tType = useTranslations('StoryPage.typeLabels')
   const [story, setStory] = useState<StoryDetail | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -94,7 +107,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
   useEffect(() => {
     const loadStory = async () => {
       if (!isValidStoryType(type)) {
-        setError('無效的故事類型')
+        setError(t('invalidType'))
         setLoading(false)
         return
       }
@@ -126,11 +139,11 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
           // 載入相關故事
           loadRelatedStories(data.biography_id, type)
         } else {
-          setError('找不到這則故事')
+          setError(t('notFound'))
         }
       } catch (err) {
         console.error('Failed to load story:', err)
-        setError('載入故事時發生錯誤')
+        setError(t('loadError'))
       } finally {
         setLoading(false)
       }
@@ -152,7 +165,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
             ...coreStoriesResponse.data.slice(0, 2).map((s: CoreStory) => ({
               id: s.id,
               type: 'core-stories' as const,
-              title: s.title || '核心故事',
+              title: s.title || tType('coreStories'),
               preview: s.content,
               category: undefined,
               categoryEmoji: undefined,
@@ -168,7 +181,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
             ...oneLinersResponse.data.slice(0, 2).map((s: OneLiner) => ({
               id: s.id,
               type: 'one-liners' as const,
-              title: s.question || '一句話',
+              title: s.question || tType('oneLiners'),
               preview: s.answer,
               category: undefined,
               categoryEmoji: undefined,
@@ -184,7 +197,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
             ...storiesResponse.data.slice(0, 2).map((s: Story) => ({
               id: s.id,
               type: 'stories' as const,
-              title: s.title || s.category_name || '小故事',
+              title: s.title || s.category_name || tType('stories'),
               preview: s.content,
               category: s.category_name,
               categoryEmoji: s.category_emoji,
@@ -214,17 +227,17 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
   const getStoryLabel = () => {
     if (!story) return ''
     if (type === 'core-stories') {
-      return story.title || '核心故事'
+      return story.title || tType('coreStories')
     }
     if (type === 'one-liners') {
-      return story.question || '一句話'
+      return story.question || tType('oneLiners')
     }
-    return story.title || story.category_name || '小故事'
+    return story.title || story.category_name || tType('stories')
   }
 
   // 互動處理函數
   const handleToggleLike = async () => {
-    if (!isValidStoryType(type)) throw new Error('無效的故事類型')
+    if (!isValidStoryType(type)) throw new Error(t('invalidType'))
 
     let response
     switch (type) {
@@ -244,7 +257,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
       setLikeCount(response.data.like_count)
       return response.data
     }
-    throw new Error('按讚失敗')
+    throw new Error(t('likeFailed'))
   }
 
   const handleFetchComments = async (): Promise<ContentComment[]> => {
@@ -270,7 +283,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
   }
 
   const handleAddComment = async (content: string): Promise<ContentComment> => {
-    if (!isValidStoryType(type)) throw new Error('無效的故事類型')
+    if (!isValidStoryType(type)) throw new Error(t('invalidType'))
 
     let response
     switch (type) {
@@ -289,11 +302,11 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
       setCommentCount((prev) => prev + 1)
       return response.data
     }
-    throw new Error('新增留言失敗')
+    throw new Error(t('commentFailed'))
   }
 
   const handleDeleteComment = async (commentId: string): Promise<void> => {
-    if (!isValidStoryType(type)) throw new Error('無效的故事類型')
+    if (!isValidStoryType(type)) throw new Error(t('invalidType'))
 
     let response
     switch (type) {
@@ -301,7 +314,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
         response = await biographyContentService.deleteCoreStoryComment(commentId)
         break
       default:
-        throw new Error('此類型不支援刪除留言')
+        throw new Error(t('deleteCommentUnsupported'))
     }
 
     if (response.success) {
@@ -321,10 +334,10 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
     return (
       <div className="min-h-screen bg-page-content-bg">
         <div className="container mx-auto px-4 py-16 text-center">
-          <p className="text-lg text-[#6D6C6C]">{error || '找不到這則故事'}</p>
+          <p className="text-lg text-[#6D6C6C]">{error || t('notFound')}</p>
           <Link href="/biography?tab=stories">
             <Button variant="outline" className="mt-4">
-              瀏覽更多故事
+              {t('browseMore')}
             </Button>
           </Link>
         </div>
@@ -342,9 +355,9 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
         <div className="mb-4 md:mb-8">
           <Breadcrumb
             items={[
-              { label: '首頁', href: '/' },
-              { label: '故事', href: '/biography?tab=stories' },
-              { label: TYPE_LABELS[storyType] || '故事' },
+              { label: t('home'), href: '/' },
+              { label: t('stories'), href: '/biography?tab=stories' },
+              { label: tType(TYPE_LABEL_KEYS[storyType]) },
             ]}
             hideOnMobile
           />
@@ -363,7 +376,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
               className="flex items-center gap-2 bg-white shadow-xs hover:bg-[#dbd8d8]"
             >
               <ArrowLeft size={16} />
-              <span>返回故事列表</span>
+              <span>{t('backToList')}</span>
             </Button>
           </Link>
         </motion.div>
@@ -387,7 +400,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
             <div className="flex flex-wrap items-center gap-2">
               {/* 類型標籤 */}
               <span className="inline-flex items-center rounded-full bg-[#1B1A1A] px-3 py-1 text-xs font-medium text-white">
-                {TYPE_LABELS[storyType]}
+                {tType(TYPE_LABEL_KEYS[storyType])}
               </span>
 
               {/* 分類標籤（僅小故事） */}
@@ -402,13 +415,15 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
               {story.created_at && (
                 <span className="inline-flex items-center gap-1 text-xs text-[#8E8C8C]">
                   <Calendar size={12} />
-                  <span>{formatDate(story.created_at)}</span>
+                  <span>{formatDate(story.created_at, locale, t)}</span>
                 </span>
               )}
 
               {/* 字數（僅小故事） */}
               {storyType === 'stories' && story.word_count && (
-                <span className="text-xs text-[#8E8C8C]">{story.word_count} 字</span>
+                <span className="text-xs text-[#8E8C8C]">
+                  {t('wordCount', { count: story.word_count })}
+                </span>
               )}
             </div>
           </div>
@@ -494,7 +509,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
                 className="hidden sm:block shrink-0"
               >
                 <Button className="flex items-center gap-2 bg-brand-yellow-100 text-sm font-semibold text-[#1B1A1A] transition-all hover:bg-brand-yellow-200">
-                  <span>查看故事</span>
+                  <span>{t('viewStory')}</span>
                   <ArrowRight size={16} />
                 </Button>
               </Link>
@@ -506,7 +521,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
               className="mt-4 block sm:hidden"
             >
               <Button className="flex w-full items-center justify-center gap-2 bg-brand-yellow-100 text-sm font-semibold text-[#1B1A1A] transition-all hover:bg-brand-yellow-200">
-                <span>查看 {story.author_name} 的完整故事</span>
+                <span>{t('viewAuthorStory', { name: story.author_name })}</span>
                 <ArrowRight size={16} />
               </Button>
             </Link>
