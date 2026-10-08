@@ -1,6 +1,7 @@
 'use client'
 
 import { AlertCircle, Scissors, Upload, X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import React, { useCallback, useRef, useState } from 'react'
 import { IMAGE_CONSTRAINTS } from '../types'
 import ImageCropDialog from './ImageCropDialog'
@@ -20,6 +21,7 @@ export default function ImageUploader({
   currentCount,
   enableCrop = true,
 }: ImageUploaderProps) {
+  const t = useTranslations('ProfileGallery')
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
@@ -39,18 +41,20 @@ export default function ImageUploader({
       try {
         // 檢查圖片格式
         if (!validateImageType(file)) {
-          throw new Error('請上傳 JPG、PNG 或 WebP 格式的圖片')
+          throw new Error(t('uploader.invalidType'))
         }
 
         // 一律壓縮圖片到 500KB
-        setProcessingStatus('壓縮中...')
-        const processedFile = await compressImage(file)
+        setProcessingStatus(t('uploader.compressing'))
+        const processedFile = await compressImage(file).catch(() => {
+          throw new Error(t('uploader.compressFailed'))
+        })
 
         // 上傳
-        setProcessingStatus('上傳中...')
+        setProcessingStatus(t('uploader.uploading'))
         await onUpload(processedFile)
       } catch (err) {
-        const message = err instanceof Error ? err.message : '上傳失敗，請稍後再試'
+        const message = err instanceof Error ? err.message : t('uploader.uploadFailed')
         setError(message)
         console.error('Upload error:', err)
       } finally {
@@ -58,7 +62,7 @@ export default function ImageUploader({
         setProcessingStatus('')
       }
     },
-    [onUpload]
+    [onUpload, t]
   )
 
   const handleFile = useCallback(
@@ -67,7 +71,7 @@ export default function ImageUploader({
 
       // 檢查圖片格式
       if (!validateImageType(file)) {
-        setError('請上傳 JPG、PNG 或 WebP 格式的圖片')
+        setError(t('uploader.invalidType'))
         return
       }
 
@@ -81,7 +85,7 @@ export default function ImageUploader({
         await processAndUpload(file)
       }
     },
-    [enableCrop, processAndUpload]
+    [enableCrop, processAndUpload, t]
   )
 
   const handleCropComplete = useCallback(
@@ -183,29 +187,32 @@ export default function ImageUploader({
           {isProcessing ? (
             <div className="flex flex-col items-center gap-2">
               <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-              <span className="text-sm text-gray-500">{processingStatus || '處理中...'}</span>
+              <span className="text-sm text-gray-500">
+                {processingStatus || t('uploader.processing')}
+              </span>
             </div>
           ) : (
             <>
               <Upload className={`mb-2 h-8 w-8 ${canUpload ? 'text-gray-400' : 'text-gray-300'}`} />
               <p className={`text-sm ${canUpload ? 'text-gray-600' : 'text-gray-400'}`}>
-                {canUpload ? (
-                  <>
-                    拖拽圖片到這裡，或<span className="text-primary">點擊上傳</span>
-                  </>
-                ) : remainingSlots <= 0 ? (
-                  '已達到圖片數量上限'
-                ) : (
-                  '無法上傳'
-                )}
+                {canUpload
+                  ? t.rich('uploader.dropHint', {
+                      highlight: (chunks) => <span className="text-primary">{chunks}</span>,
+                    })
+                  : remainingSlots <= 0
+                    ? t('uploader.limitReached')
+                    : t('uploader.cannotUpload')}
               </p>
               <p className="text-xs text-gray-400">
-                還可上傳 {remainingSlots} 張（共 {IMAGE_CONSTRAINTS.maxCount} 張）
+                {t('uploader.remaining', {
+                  remaining: remainingSlots,
+                  max: IMAGE_CONSTRAINTS.maxCount,
+                })}
               </p>
               {enableCrop && (
                 <p className="mt-1 flex items-center gap-1 text-xs text-primary">
                   <Scissors className="h-3 w-3" />
-                  支援裁剪
+                  {t('uploader.cropSupported')}
                 </p>
               )}
             </>

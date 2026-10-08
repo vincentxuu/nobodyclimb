@@ -1,0 +1,752 @@
+{
+  "crag": {
+    "description": {
+      "zh": "墾丁岩場位於船帆石東北側的海岸林中，是台灣南部重要的運動攀登場地。岩場以珊瑚礁石灰岩為主，擁有94條路線。由於地點較為敏感，請保持低調。岩場內有多個攀登區域，從5.6到5.14a都有路線。最佳攀登季節為10月至隔年4月，夏天請選擇有風的日子前往。",
+      "text": "Kenting climbing area is located in the coastal forest northeast of Sail Rock, an important sport climbing destination in southern Taiwan. The crag features coral reef limestone with 94 routes. Please keep a low profile due to the sensitive location. The crag has multiple climbing areas with routes ranging from 5.6 to 5.14a. Best climbing season is October to April. In summer, visit when it's windy."
+    },
+    "approach": {
+      "zh": "8-10分鐘徒步",
+      "text": "8-10 minutes hiking"
+    },
+    "parking": {
+      "zh": "請勿將車輛直接停放於步道入口，需停在較遠處",
+      "text": "Do not park right in front of the trail entrance, park further away"
+    },
+    "liveVideoTitle": {
+      "zh": "墾丁即時影像",
+      "text": "Kenting live camera"
+    },
+    "liveVideoDescription": {
+      "zh": "墾丁海岸即時影像，可了解當地天氣與海況",
+      "text": "Live footage of the Kenting coast, useful for checking local weather and sea conditions"
+    }
+  },
+  "transportation": [
+    {
+      "zh": "從高鐵左營站搭乘墾丁快線約2小時到小灣站，換乘9188號公車至船帆石站下車",
+      "text": "Take Kenting Express from Zuoying HSR Station (2 hours) to Xiaowan, transfer to bus 9188 to Sail Rock"
+    },
+    {
+      "zh": "從高雄市區沿國道3號南下，接台26線往墾丁方向，約2小時車程",
+      "text": "From Kaohsiung city, take Freeway 3 south, connect to Provincial Highway 26 towards Kenting, about 2 hours drive"
+    }
+  ],
+  "areas": {
+    "mysterious-forest": {
+      "description": {
+        "zh": "入口走進這片生態豐富的神秘森林遇到的第一面牆，下午岩壁開始曬太陽，微外傾，小雨尚可攀爬。",
+        "text": "The first wall you encounter when entering this ecologically rich forest. PM sun, slightly overhung, stays dry in light rain."
+      }
+    },
+    "ancient-wall": {
+      "description": {
+        "zh": "下午曬太陽，手點較銳利。一些墾丁岩場已知最古老的路線。",
+        "text": "PM sun, holds are quite sharp. Some of the oldest routes at this crag."
+      }
+    },
+    "sunshine-wall": {
+      "description": {
+        "zh": "腹地最大最舒服的區域，北中南高手拼路線的熱門區域。岩壁午後曬太陽，微外傾，小雨也可攀爬。冬天吹落山風時風最大的區域。",
+        "text": "The most spacious and comfortable area, popular gathering point for climbers. PM sun, slightly overhung, stays dry in light rain. Can be very windy during winter."
+      }
+    },
+    "dragon-wall": {
+      "description": {
+        "zh": "下午曬太陽，岩壁外傾，下雨也可攀爬，刮超強落山風或下雨時的避風港。各種級數都有，非常熱門的區域。",
+        "text": "PM sun, overhung wall that stays dry in the rain. When it's very windy, this is the place to be. Very popular area."
+      }
+    },
+    "dark-wall": {
+      "description": {
+        "zh": "岩壁被樹林環抱，幾乎整天都有陰影，天氣炎熱時躲避太陽的好岩壁。岩壁外傾，下雨時也可攀爬。",
+        "text": "Shady most of the day, sun filtered by trees. Overhung wall stays dry in the rain. Doesn't look nice, but there are some of the best climbs on this wall."
+      }
+    },
+    "love-peace-happiness": {
+      "description": {
+        "zh": "樹林環繞，幾乎整天都陰影。路線較短，可能是最冷門的區域。此區域建議使用掛繩竿。",
+        "text": "Sun filtered by trees. Very quiet area. Using a stick clip to clip the first bolt is recommended."
+      }
+    },
+    "white-wall": {
+      "description": {
+        "zh": "岩壁下午曬太陽。熱門區域，5.10-11攀岩者好去處。",
+        "text": "PM sun. Very popular area for intermediate climbers, some of the best 5.10-5.11 of the crag."
+      }
+    },
+    "land-snail-paradise": {
+      "description": {
+        "zh": "樹林環繞，幾乎整天都在陰影裡。舒服的小角落，躲避人潮的好去處，適合爬5.7-5.10的新手。",
+        "text": "Sun filtered by trees, shady most of the day. Less windy than the other walls."
+      }
+    },
+    "map-wall": {
+      "description": {
+        "zh": "樹林環繞，整天都在陰影下。",
+        "text": "Sun filtered by trees, stay in shady all day."
+      }
+    }
+  },
+  "routes": {
+    "KT-MF-001": {
+      "description": {
+        "zh": "前半段微外傾，大點大動作，到大裂隙之後路線偏簡單。",
+        "text": "Juggy and reachy moves pull through the first session of the rock, then easy moves to the top."
+      }
+    },
+    "KT-MF-002": {
+      "description": {
+        "zh": "熱身路線，第一個快扣前有一個小難關，之後全都是大點。",
+        "text": "Nice warm up route. Just some tricky moves before the first bolt, then it's all jugs."
+      }
+    },
+    "KT-MF-003": {
+      "description": {
+        "zh": "手點有點刺刺的，路線不容易閱讀，如果你是5.11攀岩者，是條不容易on sight 的路線。",
+        "text": "First route at mistery forest. The holds are pretty sharp. If you climb in 5.11range, this is not a easy one for on-sight climbing."
+      }
+    },
+    "KT-MF-004": {
+      "description": {
+        "zh": "神秘森林最棒且最熱門的路線，整條路線的單動都不難，難度平均且連續。",
+        "text": "A great resistance route with nothing too hard, the most popular 5.11 at mistery forest. Pretty sustained, keep pumping and pulling to the top."
+      }
+    },
+    "KT-MF-005": {
+      "description": {
+        "zh": "下半段岩質很棒。如果通過前三個快扣的抱石難關，基本上已經完成了這條路線，後半段很簡單。",
+        "text": "Starts with fun moves, if you can stick the first 3 bolts then you have done the hard stuff just keep walking to the top."
+      }
+    },
+    "KT-MF-006": {
+      "description": {
+        "zh": "很不錯的熱身路線，上半段手點滑順。",
+        "text": "This is a nice warm up route. Smooth holds on the upper part."
+      }
+    },
+    "KT-MF-007": {
+      "description": {
+        "zh": "整面牆最棒的熱身路線，完攀美景令人驚豔。",
+        "text": "The main and best warm up at the crag. Don't forget to enjoy the view when you reach the top."
+      }
+    },
+    "KT-MF-008": {
+      "description": {
+        "zh": "超有趣的路線，有翻懸岩、需要技巧的岩面、內傾的小難關，還有完攀的美麗風景！如果你手長腳長，翻懸岩的難關可能會覺得很憋。",
+        "text": "This route contains a lot of different styles,from overhang, technical face, and slab climbing. There's a very nice view at the top! If you are taller than 175cm, the overhang crux might feel harder."
+      }
+    },
+    "KT-AW-001": {
+      "description": {
+        "zh": "墾丁岩場已知最古老的路線之一，開線者與路線資訊已不可考，推測是1990年代或更早。⚠️Bolt 老舊，請自行評估風險。",
+        "text": "Old old route on Ancient wall, this route was bolted by someone maybe in the 90s , used steel ring-bolt(not stainless steel) ⚠️bolts are rusted, not recommended."
+      }
+    },
+    "KT-AW-003": {
+      "description": {
+        "zh": "有趣的路線。固定點在左側樹上（⚠️請檢視編織品狀況）",
+        "text": "Fun climb. (⚠️please check the ropes on the tree anchor before using it)"
+      }
+    },
+    "KT-AW-004": {
+      "description": {
+        "zh": "整個岩場最老的路線之一，原始開發者與路線資訊已不可考。美國岩友Ron於1998首次攀爬此路線，後來他於2000年12月回到這裡，移除原本已經鏽蝕的吊帽，並使用不鏽鋼錨釘及耳片重新re-bolt。⚠️Bolt老舊，請自行評估風險。手點比較銳利。",
+        "text": "One of the oldest routes at the crag, bolted by an unknown climber, probably in the 90s. Ron rediscovered the route in 1998. In December 2000, he removed the old bolts, and rebolted it ground-up while rope-soloing, before reclimbing it. Old bolts, fun moves at the top. Holds are pretty sharp. ⚠️bolts are rusted, not recommended."
+      }
+    },
+    "KT-AW-005": {
+      "description": {
+        "zh": "前半段簡單，接一個小天花板。",
+        "text": "Easy climb leads to a small overhang and technical finish."
+      }
+    },
+    "KT-AW-007": {
+      "description": {
+        "zh": "新路線岩質較不穩定，確保者建議戴頭盔並不要站在攀登者下方。",
+        "text": "Fairy new route, belayer wearing a helmet is recommended, and do not standing under the climber."
+      }
+    },
+    "KT-SW-001": {
+      "description": {
+        "zh": "起攀抓大點翻懸岩，一路大點大角度。",
+        "text": "Crank the steep start then keep climbing up the wall of jugs, there's a reachy dead point crux."
+      }
+    },
+    "KT-SW-002": {
+      "description": {
+        "zh": "共用固定點",
+        "text": "Shared anchor with Sand storm"
+      }
+    },
+    "KT-SW-003": {
+      "description": {
+        "zh": "路線下半段有一個小難關，或許動態是個好選擇，非常有趣的單動。這條傳奇路線曾經是世界最難的5.11b, 後來級數稍作調整。",
+        "text": "There's a long move at the bottom part of the route. Used to be the hardest 5.11b in the world, until lots of climbers thought it was way harder than other 12a's."
+      }
+    },
+    "KT-SW-004": {
+      "description": {
+        "zh": "下半部的外傾很有趣，爬起來比看起來還累。",
+        "text": "Crank the steep start, it's steeper than you think."
+      }
+    },
+    "KT-SW-005": {
+      "description": {
+        "zh": "很棒的短路線，路線稍短但動作很連續。",
+        "text": "Short but sustained."
+      }
+    },
+    "KT-SW-006": {
+      "description": {
+        "zh": "岩質跟其他經典路線比起來不是那麼好，但卻是非常有趣的路線，動作很豐富，難關有好幾種不同的解法。",
+        "text": "Not very popular, super fun moves, there are many different ways to do the crux session."
+      }
+    },
+    "KT-SW-007": {
+      "description": {
+        "zh": "陽光牆右側角度最大的困難的路線。上下各一個抱石難關，中間有一個很好的休息，耐力需求較低，適合抱石能力好一點的攀岩者。",
+        "text": "The route with the most difficult and steepest angle on the right side of the Sunshine Wall. There is a bouldering crux at both the top and bottom, with a good rest in the middle, making the endurance demand relatively low. It's suitable for boulderers."
+      }
+    },
+    "KT-SW-008": {
+      "description": {
+        "zh": "從High noon 起攀爬兩個快扣，然後偏右直上翻懸岩接Alpha的難關。感謝James給的beta! 難關是一個困難的抱石問題。級數需要更多人攀爬才能確認。",
+        "text": "Thanks to James for the Beta! Starts from High noon for 2 bolts, then climb the overhang crux."
+      }
+    },
+    "KT-SW-009": {
+      "description": {
+        "zh": "很有趣的路線，跟斜陽共用固定點。",
+        "text": "Fun route with a tricky crux. Share anchor with Slanting sunlight."
+      }
+    },
+    "KT-SW-010": {
+      "description": {
+        "zh": "攀爬前兩個快扣外傾抱石難關，之後往右接High noon。",
+        "text": "Link up line. Starts from the overhang, join High noon on the third bolt."
+      }
+    },
+    "KT-SW-011": {
+      "description": {
+        "zh": "攀爬兩條12a路線的難關。",
+        "text": "\"Lock and Trust\" join \"Katabatic winds\""
+      }
+    },
+    "KT-SW-012": {
+      "description": {
+        "zh": "攀爬三個快扣，然後向右攀爬，一路往右上，很棒的熱身路線。",
+        "text": "Katabatic winds join High noon, pumpy route with nice flow. Climb up three bolts, then move to the right."
+      }
+    },
+    "KT-SW-013": {
+      "description": {
+        "zh": "和斜陽一樣的起攀，共用三個快扣後直上。",
+        "text": "Same start as Slanting Sunlight, then straight up."
+      }
+    },
+    "KT-SW-014": {
+      "description": {
+        "zh": "陽光牆的經典路線之一，技巧的岩面攀登風格，非常熱門。難關的手順很重要。",
+        "text": "5.12a testpiece. Another crag classic, very nice technical face climbing, don't mess up the sequence."
+      }
+    },
+    "KT-SW-015": {
+      "description": {
+        "zh": "指力路線，推薦給喜歡小摳點的人。起攀若不走右側簡單岩角，從第一顆bolt 正下方直上困難的face會更有趣！",
+        "text": "Quite fingery crux, fun moves at the top."
+      }
+    },
+    "KT-SW-016": {
+      "description": {
+        "zh": "起攀後即是一個抱石難關，之後還有幾個小難關中間隔著好點，很獨特且有趣的路線。有些手點比較銳利。攀到頂後別忘了回頭望向大海。",
+        "text": "Hard start then a couple of tricky moves split by good holds. Some of the holds are quite sharp. Make sure you stare at the sea when you get to the top."
+      }
+    },
+    "KT-SW-017": {
+      "description": {
+        "zh": "原本訂級5.11b/c…級數稍做調整後，曾經是一條很硬的5.11d，後來又升了一級。第一個快扣右手摳兩指洞（單指洞）正上版本強度比較高，偏左爬比較需要平衡技巧，兩種解法難度差不多。",
+        "text": "Initially graded at 5.11b/c and used to be the hardest 5.11d of the crag for a while, I reckon FA doesn't like sandbagging, he's just too strong, the man with no weakness."
+      }
+    },
+    "KT-SW-018": {
+      "description": {
+        "zh": "陽光牆的經典路線，看起來很簡單，但難關很嚇人。先鋒與跟攀感覺會差很多。",
+        "text": "Another crag classic. Looks like an easy route, but the crux is actually pretty intimidating."
+      }
+    },
+    "KT-SW-019": {
+      "description": {
+        "zh": "指力路線，動作連續，爬起來比看起來難。掛完第三個快扣後偏左爬（掛左邊的bolt)，使用偏左邊的大點的爬法大概是難的5.12c。難關使用小點正上的爬法是5.13a的難度，兩種爬法都很有趣，可以依照自己的喜好決定路線的走向。",
+        "text": "Thin and sustained. Harder than it looks. After clipping the 3rd bolt, head to the left (and clip the bolt on the left) using the jugs and some good holds for the 5.12c version. If you go straight up and follow the bolt line, using those awesome crappy small holds, it's rated 5.13a. Both routes are quite fun, so make your own choice!"
+      }
+    },
+    "KT-SW-020": {
+      "description": {
+        "zh": "這條路線看起來很不怎麼樣，但卻是一條非常有趣且迷人的路線，有一些很酷的岩點與有趣的動作。兩個難關中間有一個不錯的休息點。陽光牆必爬的5.12路線！固定點與12 Plus 共用。新路線確保者建議戴著岩盔。",
+        "text": "A fun and engaging climb with two distinct cruxes, separated by a pretty good rest. While the route might look like crap at first, don't be fooled—it has some really cool holds. It shares anchors with 12+ and is definitely a must-try at Sunshine Wall! Belayer wearing a helmet is recommended."
+      }
+    },
+    "KT-SW-021": {
+      "description": {
+        "zh": "樹右邊，非常漂亮的5.13-路線，需要一些耐力。FA的爬法是掛完第四個快扣後，偏左使用好的側拉與一些隱藏的好點。⚠️前四個快扣請謹慎確保，建議接墜落時都順勢收一把繩，給太多繩攀登者的屁股可能會撞到樹。",
+        "text": "To the right of the tree. Very fun crux at the button, and some tricky moves near the top, you need good endurance for this climb. The FA used a good side pull and some nice hidden jugs after clipping the 4th bolt. ⚠️Belayer should not give too much slack on the first 4 bolts, there's a potential to touch the tree when falling."
+      }
+    },
+    "KT-SW-022": {
+      "description": {
+        "zh": "攀爬岩徑偕行，第5個bolt沿若著bolt正上的爬法是一個困難的抱石難關，目前仍無人完攀。",
+        "text": "Climb The Rock Path, then on the 5th bolt, follow the bolt line and go straight up, avoid using those jugs on the left, it turns into a pretty hard boulder problem, which is still an unfinished project."
+      }
+    },
+    "KT-SW-023": {
+      "description": {
+        "zh": "樹正上。爬雀榕起攀，第6個快扣前大概12c，然後翻懸岩爬岩角，連續抱石難關一路到頂。",
+        "text": "Starts from the big banyan tree. First 6 bolts are around 5.12c, then traverse to the right, follow the arate then some hard moves to the top."
+      }
+    },
+    "KT-SW-024": {
+      "description": {
+        "zh": "前半段與偷電賊共線。掛完第七個快扣後往右橫渡，攀爬連續困難抱石動作一路到頂。",
+        "text": "To the left of the tree. Bottom part of the route is the same as Thieves of Power. Crux starts from the 7th bolt, traversing to the right, thin and sustained crux all the way to the top. This route hasn't been repeated yet, someone with more experience can come confirm the grade."
+      }
+    },
+    "KT-SW-025": {
+      "description": {
+        "zh": "樹左邊起攀，純耐力路線，接連的小難關，一動一動慢慢偷走你的電力。⚠️前四個快扣請謹慎確保，若給太多繩墜落時腳或屁股可能會碰到樹。若使用偏一點的大點休息，難度會簡單一些，天然岩壁是自由的，什麼爬法什麼難度自己決定。",
+        "text": "Well named. It's the straight up variation of the monster line that traverses to the right through the steepest section of the wall. Long pumper with one and another little cruxes. ⚠️Belayer should not give too much slack on the first 4 bolts, there's a potential to touch the tree when falling."
+      }
+    },
+    "KT-SW-026": {
+      "description": {
+        "zh": "起攀後好幾個有趣的動作，之後接一個抱石難關，需要一點耐力才有辦法完成路線。",
+        "text": "Fun start through a tricky bouldery crux, then keep pumping up the wall of jugs."
+      }
+    },
+    "KT-SW-027": {
+      "description": {
+        "zh": "陽光牆的經典路線之一，非常熱門的路線。沿著岩角爬最後難關的版本才有5.12c(跟著topo的紅線爬）, 偏右抓face的好點避開難關的版本比較簡單，大概5.12a。",
+        "text": "Another Sunshine wall classic. The direct line (5.12c, as seen in the topo) goes on the arête for the final crux. Staying on the right face and using better holds, makes it a bit easier maybe 5.12a."
+      }
+    },
+    "KT-SW-028": {
+      "description": {
+        "zh": "可能是陽光牆最棒的5.13路線。起攀後緊接著一個抱石小難關，中段大點休息後，好幾個小點的連續動作接一個令人絕望的紅線難關。",
+        "text": "Some of the best rock at Sunshine wall. A strenuous climb. Easy start through a boulder crux on the second bolt. After a good rest, it's pretty thin and sustained on the upper wall, then you have a frustrating hard redpoint crux near the top, win or whip."
+      }
+    },
+    "KT-SW-029": {
+      "description": {
+        "zh": "陽光牆最棒的5.12之一，難關動作很帥氣。Bolt距離比較遠但安全。",
+        "text": "One of the best 5.12 routes at Sunshine wall. Very cool boulder moves near the top. Bolting is a bit spicy but safe."
+      }
+    },
+    "KT-SW-030": {
+      "description": {
+        "zh": "路線下半段的難關非常有趣，臂展長短都有各自的解法！",
+        "text": "Very nice Boulder problem at the bottom of the route."
+      }
+    },
+    "KT-SW-031": {
+      "description": {
+        "zh": "熱門的熱身路線。如果左繞右繞，繞過所有難關的話，這是一條很不錯的熱身路線。第四個快扣不往左繞過難關，直上版本5.11c，難關非常有趣。",
+        "text": "Nice warm up route. At the 4th bolt, climbing slightly right of the boltboltst line and up is a bit spicier (maybe 5.11c)."
+      }
+    },
+    "KT-SW-032": {
+      "description": {
+        "zh": "跟著快扣爬(參考照片中的紅線），第5個快扣偏左翻懸岩，之後攀爬slab小難關，最後難關偏右正上。若第5個快扣提早往上切，繞過難關的爬法會簡單很多（可能11c?)。",
+        "text": "Follow the bolt line (as seen in the photo guide's red line) , climb the overhang on the 5th bolt, then climb the slabby crux, otherwise, Bu Suan!"
+      }
+    },
+    "KT-SW-033": {
+      "description": {
+        "zh": "兩個困難的抱石難關中間有一個很好的休息。看到這條路線全乾要好好把握機會，這條路線下大雨被打溼後很慢乾。可以從越嶺獵鹿的固定點下降時先放快扣。建議使用25公分以上的長快扣，降低繩子的轉折。",
+        "text": "Two fingery and powerful boulder problems split by a good rest, doesn't get much traffic. It takes a long time to dry out after heavy rains, so if it's dry, jump on it! Using longer quick draws is recommended."
+      }
+    },
+    "KT-SW-034": {
+      "description": {
+        "zh": "陽光牆的熱身路線，非常熱門。下放/坐電梯時稍微磨繩，若擔心繩子損耗建議垂降撤退。",
+        "text": "Very popular warm up route at Sunshine wall. The rock will rub the rope while lowering, rappelling is recommended."
+      }
+    },
+    "KT-SW-035": {
+      "description": {
+        "zh": "熱門路線。最後難關直上版本大概5.10b/c。",
+        "text": "Very popular. Last crux straight up is harder, maybe 5.10b/c."
+      }
+    },
+    "KT-SW-036": {
+      "description": {
+        "zh": "最後難關非常有趣，需要平衡技巧。有人覺得是一個v4抱石。",
+        "text": "Last crux is pretty fun, requires balance, people say it's a v4 boulder problem, what do you think?"
+      }
+    },
+    "KT-SW-037": {
+      "description": {
+        "zh": "好玩的短路線。",
+        "text": "Very fun short route."
+      }
+    },
+    "KT-SW-038": {
+      "description": {
+        "zh": "好玩的短路線。下放時會磨繩。",
+        "text": "Short and fun. The rope will rub the edge of the rock while lowering. Shared anchor."
+      }
+    },
+    "KT-SW-039": {
+      "description": {
+        "zh": "好玩的抱石型態短路線。下放時會磨繩。",
+        "text": "Short and bouldery. The rope will rub the edge of the rock while lowering. Shared anchor."
+      }
+    },
+    "KT-DW-001": {
+      "description": {
+        "zh": "下半段攀岩需要岩面技巧的口袋點，上半段點雖大但角度隨之增加，一條路線綜合兩種不同風格。",
+        "text": "Technical face pockets leads to juggy overhang, different styles in one route."
+      }
+    },
+    "KT-DW-002": {
+      "description": {
+        "zh": "跟5.11b共用固定點。",
+        "text": "Shared anchor with Style bender."
+      }
+    },
+    "KT-DW-003": {
+      "description": {
+        "zh": "不錯的熱身路線，也適合新手練習。",
+        "text": "Nice juggy warm up route. Beginner friendly."
+      }
+    },
+    "KT-DW-004": {
+      "description": {
+        "zh": "龍珠右側起攀，第四個快扣接回龍珠。",
+        "text": "Join Dragon ball on the 4th bolt."
+      }
+    },
+    "KT-DW-005": {
+      "description": {
+        "zh": "龍牆的經典路線。可能是龍牆最熱門的5.12。從右側的大Tufa起攀，到中段大平台約略是個v4-v5的抱石問題，好點稍作休息後緊接著下一個難關。",
+        "text": "Crag classic.The start involves a v4-5 boulder problem, after a good rest climbing through another crux."
+      }
+    },
+    "KT-DW-006": {
+      "description": {
+        "zh": "龍珠的簡單版本，過難關之後偏左爬龍珠左側的岩面，不同top anchor。",
+        "text": "Easier variation of Dragon ball. Different top anchor."
+      }
+    },
+    "KT-DW-007": {
+      "description": {
+        "zh": "龍王 aka「咚龍龍龍牆」。從飛龍起攀，向右橫渡攀爬困難的大外傾抱石難關，到大平台之後接龍珠上半段。可能是整面牆最難的路線，起攀到難關結束大概大約是一個v10/11的抱石問題。級數需要更多強者攀爬後才能確認。",
+        "text": "Definitely the king line on dragon wall! Flying dragon join Dragon ball, hard moves one after another, requires a lot of body tension. From the ground to the jug feels like a v10/11 boulder problem, someone with more experience can come confirm the grade. The second bolt was pre-clipped on the first ascent, and it's climbed that way to this day."
+      }
+    },
+    "KT-DW-008": {
+      "description": {
+        "zh": "如果你喜歡大角度的抱石，這條絕對是你的菜！起攀到第三個快扣的大點是一個v6-v7的抱石難關，之後直上到頂，大家覺得是比較硬的13b。",
+        "text": "Solid for the grade. Climb the left tufa through a v6-v7 bouldering crux, then straight up."
+      }
+    },
+    "KT-DW-009": {
+      "description": {
+        "zh": "爬三個快扣的抱石難關之後，往左接豆豆龍，上半段爬face還有一個小難關。",
+        "text": "Flying Dragon join Totoro"
+      }
+    },
+    "KT-DW-010": {
+      "description": {
+        "zh": "另一條龍牆大外傾抱石型態的經典路線，起攀後即是一個抱石難關，掛完第三個快扣稍作休息後，上半段還有難關在等著你。",
+        "text": "Another of the classic steep 5.13 line at dragon wall. Very powerful and overhanging crux at the button. After a good rest, there is a tricky crux on the face."
+      }
+    },
+    "KT-DW-011": {
+      "description": {
+        "zh": "實際爬起來的感覺比從地面看起來陡多了！從右側內角抓大點起攀5.11b/c。從Tufa直上版本大約5.12b。",
+        "text": "Start from dihedral good holds version 5.11b/c. Straight up from the first bolt is harder, maybe 5.12c."
+      }
+    },
+    "KT-DW-012": {
+      "description": {
+        "zh": "非常獨特且有趣的短路線！台灣少見的石灰岩內角裂隙攀登？第三顆bolt翻懸岩直上的爬法為5.12c, 偏右使用一些好點則為5.11d。",
+        "text": "Very nice climb. Dihedral crack climbing into overhang crux. Straight up on the 3rd bolt to tick a 12c. If you keep right using those juggy pockets is 11d."
+      }
+    },
+    "KT-DW-013": {
+      "description": {
+        "zh": "站在石頭上起攀。很少有人挑戰這條指力短路線。一日「七龍珠大挑戰」（一日攀爬5.13以下龍字輩的7條路線）的必經之路。與短小精幹共用固定點。",
+        "text": "Stand start from the little boulder, some powerful movers at the bottom, doesn't seem many ascents. Share anchor with Short and lean."
+      }
+    },
+    "KT-DW-014": {
+      "description": {
+        "zh": "努力通過起攀的抱石難關，之後直上到頂。",
+        "text": "Crank the boulder crux, then straight up."
+      }
+    },
+    "KT-DW-015": {
+      "description": {
+        "zh": "起攀有一個小難關，很有趣的路線。",
+        "text": "Same start with Wall tiger, then to the left."
+      }
+    },
+    "KT-DW-016": {
+      "description": {
+        "zh": "起攀即是一個指力難關，有些身高矮一點的人會踩羞恥木去抓好一點的點起攀，對身高高的人來說比較容易。很多人會用火龍果熱身，下放時順便掛快扣在醉西瓜。",
+        "text": "Starts with a crimpy boulder crux, then make your own way to the top."
+      }
+    },
+    "KT-DW-017": {
+      "description": {
+        "zh": "前兩個bolt與龍水宮廟共用，和醉西瓜共用固定點。線如其名，外表看起來刺刺的，但很好吃。",
+        "text": "Share the first two bolts with Longshui Temple. Share anchor with Drunken watermelon."
+      }
+    },
+    "KT-DW-018": {
+      "description": {
+        "zh": "上半段靠左爬岩角比較好玩大概10b，爬face 直上比較簡單 。",
+        "text": "Climb the arete tufa, keep left to get the fun part."
+      }
+    },
+    "KT-DW-019": {
+      "description": {
+        "zh": "龍牆最棒的5.12之一，短路線，需要爆發力，有點辣、有點嗆。",
+        "text": "One of the best routes at Dragon wall, short and powerful, a bit sharp a bit spicy."
+      }
+    },
+    "KT-DW-020": {
+      "description": {
+        "zh": "曾經訂級為5.13a，難關目前看過4種不同beta, FA做一個大動態去摳住單指洞，後來岩友找到比較簡單的解法後，難度調整成5.12d。",
+        "text": "Used to be graded 5.13a, the original FA beta was harder, dynamic move to a sharp mono hold, but then easier beta was found by some strong climbers from Taipei, so it was down graded to 5.12d."
+      }
+    },
+    "KT-DW-021": {
+      "description": {
+        "zh": "摳小點抱石難關，考驗你的爆發力、指力跟手皮。",
+        "text": "Technical face climbing with burly, powerful cruxes, if you love crimps you'll love it!"
+      }
+    },
+    "KT-DW-022": {
+      "description": {
+        "zh": "有趣的簡單路線，大點、裂隙、掛腳，外傾+斜上。建議用second 的方式比較容易收快扣。",
+        "text": "A fun easy route. Juggy, crack climbing, heel hooking. Overhanging and climbing diagonally."
+      }
+    },
+    "KT-DW-023": {
+      "description": {
+        "zh": "攀爬\"左下右上\"兩個快扣，接著正上爬外傾岩面的難關。",
+        "text": "Climb \"Bottom left to top right\" for two bolts, then climb the overhang crux."
+      }
+    },
+    "KT-DW-024": {
+      "description": {
+        "zh": "龍牆少見的岩面攀登風格，難關很有意思。難關在前兩個快扣，容易覺得左邊都沒有手點，旁邊那根樹很誘人，不抓又很擋路。",
+        "text": "Very cool technical face climbing. The first two quickdraws are the crux—it feels like there are no holds on the left-hand side. The root beside you is tempting to grab, but we are rock climbers not tree climbers!"
+      }
+    },
+    "KT-DW-025": {
+      "description": {
+        "zh": "建議第一顆先用掛繩竿入繩再攀爬。",
+        "text": "Stick clip the first bolt."
+      }
+    },
+    "KT-DW-026": {
+      "description": {
+        "zh": "跟泡芙寶貝共用固定點。",
+        "text": "Share anchor with Puff Baby."
+      }
+    },
+    "KT-DW-027": {
+      "description": {
+        "zh": "起攀稍微累一點，上面比較簡單。",
+        "text": "A bit steep at the beginning, easy finish."
+      }
+    },
+    "KT-DW-028": {
+      "description": {
+        "zh": "往右橫渡的有趣路線，建議用跟攀的方式收快扣。固定點與短腿大臉共用。",
+        "text": "Fun route traversing to the right."
+      }
+    },
+    "KT-DAR-001": {
+      "description": {
+        "zh": "不錯的簡單熱身路線。起攀是小難關，上面比較簡單。",
+        "text": "Crux is at the bottom, then good holds all the way to the top."
+      }
+    },
+    "KT-DAR-002": {
+      "description": {
+        "zh": "沿著鍾乳爬，之後正上，非常好玩的短路線。建議使用掛繩竿掛第一個快扣。",
+        "text": "Follow the tufa then go straight up. Very fun short route! Using a stick clip to clip the first bolt is recommended."
+      }
+    },
+    "KT-DAR-003": {
+      "description": {
+        "zh": "需要強大的power及指力才能完成。建議使用掛繩竿掛第一個快扣。",
+        "text": "Some powerful moves on steep wall."
+      }
+    },
+    "KT-DAR-004": {
+      "description": {
+        "zh": "暗黑牆最棒的5.11，大點大角度，難關動作有趣。建議使用掛繩竿掛第一個快扣。",
+        "text": "Best 5.11 on Dark wall. Juggy and punchy. Using a stick clip to clip the first bolt is recommended."
+      }
+    },
+    "KT-DAR-005": {
+      "description": {
+        "zh": "建議使用掛繩竿掛第一個快扣。",
+        "text": "Using a stick clip to clip the first bolt is recommended."
+      }
+    },
+    "KT-DAR-006": {
+      "description": {
+        "zh": "建議使用掛繩竿掛第一個快扣。",
+        "text": "Using a stick clip to clip the first bolt is recommended."
+      }
+    },
+    "KT-DAR-007": {
+      "description": {
+        "zh": "建議使用掛繩竿掛第一個快扣。整個岩場最棒的5.12之一！",
+        "text": "One of the best 5.12 routes of the crag! Using a stick clip to clip the first bolt is recommended."
+      }
+    },
+    "KT-DAR-008": {
+      "description": {
+        "zh": "建議使用掛繩竿掛第一個快扣。",
+        "text": "Share anchor with Dark Souls. Using a stick clip to clip the first bolt is recommended."
+      }
+    },
+    "KT-DAR-011": {
+      "description": {
+        "zh": "從金剛起攀，接恆春姑娘的第二顆bolt，繞掉兩條路線的難關。",
+        "text": "Link-up line. Start from King Kong, join Hengchun girl on the second bolt and avoid the crux of both routes."
+      }
+    },
+    "KT-DAR-012": {
+      "description": {
+        "zh": "攀爬有趣的slab難關，跟金剛共用固定點。",
+        "text": "Tricky slab crux, share anchor with King Kong"
+      }
+    },
+    "KT-LPH-001": {
+      "description": {
+        "zh": "跟 Love of power 共用固定點。",
+        "text": "Share anchor with Love of power."
+      }
+    },
+    "KT-LPH-004": {
+      "description": {
+        "zh": "跟 To hate to love 共用固定點。",
+        "text": "Share anchor with To hate to love."
+      }
+    },
+    "KT-LPH-005": {
+      "description": {
+        "zh": "攀爬岩角，跟 To hate to love 共用固定點。⚠️繩圈更換前請不要攀爬此路線。",
+        "text": "Climb the arete, share anchor with To hate to love. ⚠️Please do not climb this route until the slings get changed."
+      }
+    },
+    "KT-WW-001": {
+      "description": {
+        "zh": "簡單的熱身路線，適合當第一條5.10a.",
+        "text": "Easy warm up, it is a good first 5.10a."
+      }
+    },
+    "KT-WW-002": {
+      "description": {
+        "zh": "很好玩的路線，對5.10攀岩者來說可能不容易on-sight。",
+        "text": "Fun route. Not easy to on-sight if you're a 5.10 climber."
+      }
+    },
+    "KT-WW-003": {
+      "description": {
+        "zh": "白牆最棒的路線，可能也是整個岩場最經典的5.11。bolt稍微遠一點點，連前世界冠軍看了都驚呼一聲的run out，但fall下來安全。固定點在樹上，⚠️使用者請自行檢視編織品狀態。",
+        "text": "Crag classic! Some of the best rock at white wall. Using a stick clip to clip the first bolt is recommended. The bolting is a bit spicy but safe. Anchor on the tree, check the condition of the anchor slings before using it."
+      }
+    },
+    "KT-WW-004": {
+      "description": {
+        "zh": "大點大動作，帶點勇氣把它on-sight掉吧！",
+        "text": "Good holds, big moves, another good climb at white wall."
+      }
+    },
+    "KT-WW-005": {
+      "description": {
+        "zh": "難關需要一點指力與好的手順。",
+        "text": "Don't mess up the sequence on the crux."
+      }
+    },
+    "KT-WW-006": {
+      "description": {
+        "zh": "跟水牛共用固定點。",
+        "text": "Share anchor with Buffalo."
+      }
+    },
+    "KT-WW-008": {
+      "description": {
+        "zh": "有趣的短路線，下半段的難關需要想一下手順。",
+        "text": "Cruxy sequence at the bottom half of the route followed by good holds."
+      }
+    },
+    "KT-WW-010": {
+      "description": {
+        "zh": "不錯的熱身路線。",
+        "text": "Pumpy warm up route."
+      }
+    },
+    "KT-LSP-001": {
+      "description": {
+        "zh": "有點銳利，與蝸牛漫步共用固定點。",
+        "text": "Same anchor with snail pace. A bit sharp."
+      }
+    },
+    "KT-LSP-002": {
+      "description": {
+        "zh": "好玩的短路線，點有點銳利。",
+        "text": "Fun route, but a bit sharp."
+      }
+    },
+    "KT-LSP-003": {
+      "description": {
+        "zh": "Slab 路線，固定點在樹上，⚠️請自行檢視編織品狀況。",
+        "text": "Slab, anchor on a tree, please inspect the condition of the anchor slings before using it."
+      }
+    },
+    "KT-LSP-004": {
+      "description": {
+        "zh": "跟 Last action hero 共用固定點。",
+        "text": "Share anchor with Last action hero."
+      }
+    },
+    "KT-LSP-005": {
+      "description": {
+        "zh": "最後兩個bolt靠右翻懸岩比較有趣，難度大概5.11b/c。",
+        "text": "If you keep right on the last two bolts it is a bit spicier, maybe 5.11b/c."
+      }
+    },
+    "KT-LSP-008": {
+      "description": {
+        "zh": "從蝸牛天堂往後繞到石頭後面，大概50m就能看到這面小小的岩壁。新手友善有一點點指力（第一個快扣前直上5.8，左繞走耍吧耍吧大概剩5.7）第二個bolt 之後往右橫渡一點點，腳點較小不過滿好踩的。建議使用掛繩竿掛第一個快扣。",
+        "text": "This wall is behind Land Snail Paradise wall. Using a stick clip to clip the first bolt is recommended."
+      }
+    },
+    "KT-LSP-009": {
+      "description": {
+        "zh": "建議使用掛繩竿掛第一個快扣。",
+        "text": "Using a stick clip to clip the first bolt is recommended."
+      }
+    },
+    "KT-MW-001": {
+      "description": {
+        "zh": "新手友善路線。固定點在樹上（⚠️使用前請檢查繩子狀態）。",
+        "text": "Beginner friendly. Anchor on the tree."
+      }
+    },
+    "KT-MW-002": {
+      "description": {
+        "zh": "很斜的路線，建議用爬second 的方式收快扣。",
+        "text": "Climbing diagonally. Follower to clean the quick draws is recommended."
+      }
+    }
+  }
+}

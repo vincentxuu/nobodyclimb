@@ -2,7 +2,7 @@
 
 import { Edit2, Eye, Loader2, Trash2 } from 'lucide-react'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import ProfilePageLayout from '@/components/profile/layout/ProfilePageLayout'
 import ProfilePageTitle from '@/components/profile/ProfilePageTitle'
@@ -11,6 +11,7 @@ import { ConfirmDialog } from '@/components/ui/confirm-dialog'
 import { useToast } from '@/components/ui/use-toast'
 import { Link } from '@/i18n/navigation'
 import { postService } from '@/lib/api/services'
+import { toIntlLocale } from '@/lib/date-locale'
 
 // 文章類型定義
 interface Article {
@@ -34,6 +35,7 @@ interface ArticleCardProps {
 
 const ArticleCard = ({ article, onDelete, isDeleting }: ArticleCardProps) => {
   const t = useTranslations('ProfilePage')
+  const locale = useLocale()
   const statusLabel = {
     draft: t('statusDraft'),
     published: t('statusPublished'),
@@ -73,7 +75,7 @@ const ArticleCard = ({ article, onDelete, isDeleting }: ArticleCardProps) => {
               )}
             </div>
             <span className="text-xs text-[#6D6C6C] md:text-sm">
-              {new Date(article.created_at).toLocaleDateString('zh-TW')}
+              {new Date(article.created_at).toLocaleDateString(toIntlLocale(locale))}
             </span>
           </div>
 

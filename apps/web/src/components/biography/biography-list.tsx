@@ -7,6 +7,8 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { biographyService } from '@/lib/api/services'
+import { useBiographyQuestionText } from '@/lib/hooks/useBiographyQuestions'
+import { useBiographyTagText } from '@/lib/hooks/useBiographyTagText'
 import { Biography } from '@/lib/types'
 import { getDisplayNameForVisibility, getDisplayTags } from '@/lib/utils/biography'
 import {
@@ -42,7 +44,7 @@ function parseBasicInfoData(json: string | null | undefined): BasicInfoData | nu
 function getDisplayOneLiners(
   oneLinersJson: string | null | undefined,
   maxCount = 3
-): Array<{ question: string; answer: string }> {
+): Array<{ questionId: string; question: string; answer: string }> {
   if (!oneLinersJson) return []
 
   try {
@@ -51,7 +53,7 @@ function getDisplayOneLiners(
       { answer: string; visibility?: string } | undefined
     >
 
-    const result: Array<{ question: string; answer: string }> = []
+    const result: Array<{ questionId: string; question: string; answer: string }> = []
 
     // 按優先順序取得一句話
     const priorityKeys = [
@@ -69,6 +71,7 @@ function getDisplayOneLiners(
       const data = parsed[key]
       if (data?.answer && data.answer.trim() && data.visibility === 'public') {
         result.push({
+          questionId: key,
           question: ONE_LINER_QUESTIONS[key] || key,
           answer: data.answer.length > 30 ? data.answer.slice(0, 30) + '...' : data.answer,
         })
@@ -82,6 +85,7 @@ function getDisplayOneLiners(
       if (prioritySet.has(key)) continue
       if (data?.answer && data.answer.trim() && data.visibility === 'public') {
         result.push({
+          questionId: key,
           question: ONE_LINER_QUESTIONS[key] || key,
           answer: data.answer.length > 30 ? data.answer.slice(0, 30) + '...' : data.answer,
         })
@@ -101,9 +105,15 @@ interface BiographyCardProps {
 
 export function BiographyCard({ person }: BiographyCardProps) {
   const t = useTranslations('BiographyPage')
+  const { getOneLinerText } = useBiographyQuestionText()
+  const { tagLabel } = useBiographyTagText()
   // 優先使用 basic_info_data 中的資料
   const basicInfo = parseBasicInfoData(person.basic_info_data)
-  const displayName = getDisplayNameForVisibility(person.visibility, basicInfo?.name || person.name)
+  const displayName = getDisplayNameForVisibility(
+    person.visibility,
+    basicInfo?.name || person.name,
+    t('anonymousName')
+  )
   const title = basicInfo?.title || person.title
 
   // 取得展示標籤（最多 3 個）
@@ -129,7 +139,7 @@ export function BiographyCard({ person }: BiographyCardProps) {
           <div className="relative aspect-3/1 w-full overflow-hidden bg-linear-to-br from-[#EBEAEA] to-[#DBD8D8]">
             <Image
               src={coverUrl}
-              alt={`${displayName} 封面`}
+              alt={t('biographyCoverAlt', { name: displayName })}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 33vw"
@@ -180,7 +190,9 @@ export function BiographyCard({ person }: BiographyCardProps) {
               <div className="mt-3 space-y-1.5">
                 {displayOneLiners.map((item, index) => (
                   <div key={index} className="text-xs">
-                    <span className="text-[#8E8C8C]">{item.question}：</span>
+                    <span className="text-[#8E8C8C]">
+                      {getOneLinerText(item.questionId, item.question)}：
+                    </span>
                     <span className="text-[#3F3D3D]">{item.answer}</span>
                   </div>
                 ))}
@@ -200,7 +212,7 @@ export function BiographyCard({ person }: BiographyCardProps) {
                     }`}
                   >
                     {tag.isCustom && <Sparkles size={10} className="text-brand-accent" />}
-                    {tag.label}
+                    {tagLabel(tag.id, tag.label)}
                   </span>
                 ))}
               </div>

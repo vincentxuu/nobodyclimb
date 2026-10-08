@@ -16,76 +16,92 @@ import {
   UserCircle,
 } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useCallback } from 'react'
 import { RankBadge } from '@/components/rank/RankBadge'
 import { AvatarWithFallback } from '@/components/ui/avatar-with-fallback'
 import { useMyQuota } from '@/lib/api/ai'
 import { useAuthStore } from '@/store/authStore'
 
+type SidebarLabelKey =
+  | 'biography'
+  | 'recommendations'
+  | 'aiMemory'
+  | 'goals'
+  | 'training'
+  | 'bucketList'
+  | 'ascents'
+  | 'stats'
+  | 'articles'
+  | 'photos'
+  | 'bookmarks'
+  | 'settings'
+
 interface MenuItem {
-  name: string
+  // 訊息檔 ProfileSections.sidebar 底下的 key
+  labelKey: SidebarLabelKey
   href: string
   icon: React.ComponentType<React.SVGProps<SVGSVGElement> & { size?: number | string }>
 }
 
 const menuItems: MenuItem[] = [
   {
-    name: '我的人物誌',
+    labelKey: 'biography',
     href: '/profile',
     icon: UserCircle,
   },
   {
-    name: 'AI 推薦',
+    labelKey: 'recommendations',
     href: '/profile/recommendations',
     icon: Sparkles,
   },
   {
-    name: 'AI 記憶',
+    labelKey: 'aiMemory',
     href: '/profile/ai-memory',
     icon: Brain,
   },
   {
-    name: '攀岩目標',
+    labelKey: 'goals',
     href: '/profile/goals',
     icon: Flag,
   },
   {
-    name: 'AI 教練',
+    labelKey: 'training',
     href: '/profile/training',
     icon: Dumbbell,
   },
   {
-    name: '人生清單',
+    labelKey: 'bucketList',
     href: '/profile/bucket-list',
     icon: Target,
   },
   {
-    name: '攀爬紀錄',
+    labelKey: 'ascents',
     href: '/profile/ascents',
     icon: MountainSnow,
   },
   {
-    name: '我的成就',
+    labelKey: 'stats',
     href: '/profile/stats',
     icon: BarChart3,
   },
   {
-    name: '我的文章',
+    labelKey: 'articles',
     href: '/profile/articles',
     icon: FileText,
   },
   {
-    name: '我的照片',
+    labelKey: 'photos',
     href: '/profile/photos',
     icon: ImageIcon,
   },
   {
-    name: '收藏文章',
+    labelKey: 'bookmarks',
     href: '/profile/bookmarks',
     icon: Bookmark,
   },
   {
-    name: '帳號設定',
+    labelKey: 'settings',
     href: '/profile/settings',
     icon: Settings,
   },
@@ -93,6 +109,7 @@ const menuItems: MenuItem[] = [
 
 const ProfileSidebar = () => {
   const router = useRouter()
+  const t = useTranslations('ProfileSections')
   const pathname = usePathname()
   const user = useAuthStore((state) => state.user)
   const { data: quota } = useMyQuota()
@@ -108,7 +125,7 @@ const ProfileSidebar = () => {
   )
 
   // 取得顯示名稱（優先使用 displayName，其次 username）
-  const displayName = user?.displayName || user?.username || '用戶'
+  const displayName = user?.displayName || user?.username || t('sidebar.defaultUser')
   const email = user?.email || ''
   const avatarUrl = user?.avatar
 
@@ -154,7 +171,9 @@ const ProfileSidebar = () => {
               }`}
             >
               <item.icon className="h-5 w-5" />
-              <span className="text-[16px] font-medium tracking-[0.02em]">{item.name}</span>
+              <span className="text-[16px] font-medium tracking-[0.02em]">
+                {t(`sidebar.${item.labelKey}`)}
+              </span>
             </div>
           )
         })}

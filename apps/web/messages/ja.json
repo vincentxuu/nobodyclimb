@@ -1698,9 +1698,18 @@
   "GamesPage": {
     "title": "クライミングシステム練習",
     "subtitle": "ロープシステムの操作を練習し、安全なクライミング技術を学ぶ",
-    "learnMode": { "title": "学習モード", "description": "不正解の場合は詳細な解説を表示" },
-    "examMode": { "title": "システム試験", "comingSoon": "近日公開" },
-    "certificationMode": { "title": "認定バッジ", "comingSoon": "近日公開" },
+    "learnMode": {
+      "title": "学習モード",
+      "description": "不正解の場合は詳細な解説を表示"
+    },
+    "examMode": {
+      "title": "システム試験",
+      "comingSoon": "近日公開"
+    },
+    "certificationMode": {
+      "title": "認定バッジ",
+      "comingSoon": "近日公開"
+    },
     "disclaimer": "問題はIFSC・AACなどの権威ある資料に基づいています。実際の操作はプロのインストラクターの指導のもとで行ってください。本システムは学習目的のみです。"
   },
   "SharePage": {
@@ -1858,5 +1867,2512 @@
       "私はどんなタイプのルートが好き？",
       "私のクライミングスタイルに合った次の挑戦をおすすめして"
     ]
+  },
+  "SharedUI": {
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "processing": "処理中...",
+    "loading": "読み込み中...",
+    "redirecting": "リダイレクト中...",
+    "loadMore": "もっと見る",
+    "noMore": "すべて表示しました",
+    "uploadFailed": "アップロードに失敗しました",
+    "addPhotos": "写真を追加（最大{max}枚）",
+    "addMorePhotos": "さらに追加（{count}/{max}）",
+    "collapseBreadcrumb": "パンくずリストを折りたたむ",
+    "expandBreadcrumb": "パンくずリストを展開",
+    "breadcrumbLabel": "ナビ",
+    "backToTop": "ページトップへ戻る",
+    "emptyTitle": "データがありません",
+    "scrollToBottom": "一番下へスクロール",
+    "placeholderImage": "岩場の写真",
+    "searchPlaceholder": "検索...",
+    "tagPlaceholder": "入力して Enter で追加",
+    "climbingExperience": "クライミング歴",
+    "unsavedTitle": "未保存の変更",
+    "unsavedMessage": "保存されていない変更があります。このページを離れますか？",
+    "leave": "ページを離れる",
+    "cropTitle": "画像を切り抜く",
+    "cropPreviewAlt": "切り抜きプレビュー",
+    "cropHint": "選択枠をドラッグまたはサイズ変更して切り抜いてください",
+    "cropConfirm": "切り抜く",
+    "welcomeToastTitle": "NobodyClimb へようこそ！",
+    "welcomeToastDescription": "人物誌を作成して、クライマー仲間に自分を知ってもらいましょう！",
+    "defaultUserName": "あなた",
+    "biographyNotLoaded": "人物誌のデータがまだ読み込まれていません。しばらくしてからもう一度お試しください",
+    "userAvatarAlt": "ユーザーアバター",
+    "defaultUser": "ユーザー",
+    "goHome": "ホームへ移動",
+    "search": "検索",
+    "searchKeywordPlaceholder": "キーワードを入力"
+  },
+  "ShareInvitation": {
+    "close": "閉じる",
+    "title": "あなたのクライミングストーリーをシェアしませんか？",
+    "description": "クライマー一人ひとりに、それぞれのストーリーがあります。匿名でもシェアできます",
+    "startShare": "シェアを始める",
+    "loginToShare": "ログインしてシェア",
+    "viewedCount": "これまでに{count}件のクライマーのストーリーを見ました"
+  },
+  "ShareButton": {
+    "copiedTitle": "リンクをコピーしました",
+    "copiedDescription": "共有リンクをクリップボードにコピーしました",
+    "copyFailedTitle": "コピーに失敗しました",
+    "copyFailedDescription": "リンクをコピーできませんでした。手動でコピーしてください",
+    "nativeShare": "シェア...",
+    "copied": "コピーしました",
+    "copyLink": "リンクをコピー",
+    "shareToFacebook": "Facebook でシェア",
+    "shareToX": "X (Twitter) でシェア",
+    "shareToLine": "LINE でシェア"
+  },
+  "NotificationCenter": {
+    "title": "通知",
+    "markAllRead": "すべて既読にする",
+    "close": "通知を閉じる",
+    "empty": "通知はまだありません",
+    "startedFollowing": "あなたをフォローしました",
+    "markAsRead": "既読にする",
+    "delete": "削除",
+    "deleteNotification": "通知を削除",
+    "loadMore": "さらに読み込む"
+  },
+  "ClaimContent": {
+    "claimFailed": "ストーリーの引き継ぎに失敗しました",
+    "mergeFailed": "統合に失敗しました",
+    "title": "以前シェアしたストーリーが見つかりました！",
+    "subtitle": "このストーリーをアカウントに紐づけますか？",
+    "storyCount": "ストーリー{count}件",
+    "keepAnonymous": "匿名のまま表示する",
+    "keepAnonymousHint": "他のユーザーには「{name}」のみが表示され、アカウント情報は表示されません",
+    "claim": "このストーリーを引き継ぐ",
+    "skip": "自分のものではないのでスキップ",
+    "mergeTitle": "すでに人物誌があります",
+    "mergeSubtitle": "匿名ストーリーの内容を既存の人物誌に統合しますか？",
+    "merge": "自分の人物誌に統合する",
+    "keepSeparate": "統合せず、別々のままにする"
+  },
+  "ErrorPage": {
+    "title": "エラーが発生しました",
+    "description": "申し訳ありません。ページで問題が発生しました。再読み込みするか、しばらくしてからもう一度お試しください。",
+    "retry": "再試行",
+    "reload": "ページを再読み込み"
+  },
+  "Weather": {
+    "today": "今日",
+    "tomorrow": "明日",
+    "morning": "朝",
+    "evening": "夜",
+    "forecastLabel": "{day} {period}",
+    "unknown": "不明",
+    "fetchFailed": "天気情報を取得できませんでした",
+    "serviceUnavailable": "天気サービスに接続できませんでした",
+    "loading": "天気情報を読み込み中...",
+    "forecastTitle": "7日間の天気予報"
+  },
+  "Quiz": {
+    "homeAria": "ホームへ",
+    "landing": {
+      "badge": "全24問 · 3〜5分",
+      "title": "あなたはどんな<em>クライマー</em>？",
+      "description": "あなたのクライミングスタイルを診断して、ぴったりのトレーニング方法とパートナーを見つけましょう",
+      "start": "診断をはじめる",
+      "note": "ログイン不要 · 完全無料"
+    },
+    "axisLabels": {
+      "body": "フィジカルスタイル",
+      "motive": "モチベーション",
+      "mind": "メンタル"
+    },
+    "likert": {
+      "1": "まったく当てはまらない",
+      "2": "あまり当てはまらない",
+      "3": "どちらともいえない",
+      "4": "やや当てはまる",
+      "5": "とても当てはまる"
+    },
+    "prevQuestion": "前の質問",
+    "result": {
+      "taglineQuote": "「{tagline}」",
+      "radarTitle": "パーソナリティレーダー",
+      "radarAxes": {
+        "body": "パワー/テクニック",
+        "motive": "目標/自由",
+        "mind": "大胆/堅実"
+      },
+      "gritIndex": "グリット指数",
+      "flowIndex": "フロー指数",
+      "profileTitle": "パーソナリティの特徴",
+      "flowState": "Flow ベストな状態",
+      "clutchState": "Clutch 勝負どころ",
+      "strengths": "強み",
+      "blindSpots": "弱点",
+      "trainingTitle": "あなた専用のトレーニングプラン",
+      "weekHeading": "Week {week}：{theme}",
+      "dayHeading": "Day {day}：{title}",
+      "minutes": "{count}分",
+      "goTraining": "トレーニングプランへ",
+      "loginUnlock": "ログインしてトレーニングプランをすべて見る",
+      "compatTitle": "相性診断",
+      "bestPartner": "ベストパートナー",
+      "worstMatch": "最大の天敵",
+      "share": "結果をシェア",
+      "retake": "もう一度診断",
+      "join": "NobodyClimb に参加",
+      "tryYourself": "あなたも診断してみる →"
+    },
+    "share": {
+      "title": "私は「{name}」— NobodyClimb クライミング性格診断",
+      "modalTitle": "結果をシェアする",
+      "toSocial": "SNS でシェア",
+      "copied": "コピーしました！",
+      "copyLink": "リンクをコピー",
+      "generating": "画像を生成中..."
+    },
+    "collection": {
+      "title": "8つのクライミングタイプ",
+      "subtitle": "それぞれのタイプの特徴とスタイルを見てみましょう"
+    },
+    "training": {
+      "redirecting": "ログインページへ移動中...",
+      "notAvailable": "このタイプのトレーニングプランはまだ公開されていません",
+      "completedCount": "{completed} / {total} 日完了",
+      "headerTitle": "{name} トレーニングプラン",
+      "daysUnit": "日",
+      "guideTitle": "トレーニングプランをはじめよう",
+      "guideBody": "このプランは<strong>{name}</strong>タイプのために作られました。コンセプトは「自分と逆のタイプを鍛える」こと。普段あまり使わない要素を伸ばして、オールラウンドなクライマーを目指します。",
+      "statWeeks": "4週間",
+      "statWeeksLabel": "プラン全体",
+      "statDays": "12日",
+      "statDaysLabel": "トレーニング日数",
+      "statDuration": "20〜45分",
+      "statDurationLabel": "1日あたり",
+      "graduatedTitle": "トレーニングプラン達成！",
+      "graduatedDesc": "{name}の4週間トレーニングプランを完走しました。おめでとうございます！",
+      "viewNotes": "メモを見る",
+      "addNotes": "メモを追加",
+      "notesPlaceholder": "今日のトレーニングの感想をメモ...",
+      "savingNotes": "保存中...",
+      "saveNotes": "メモを保存"
+    },
+    "questions": {
+      "body-l1": "足場をじっくり探すより、パワーで一気に引き上げるほうが好きだ",
+      "motive-l1": "明確なグレード目標を立て、達成に向けて努力する",
+      "mind-l1": "フォールするかもしれない難しいムーブにも挑戦したい",
+      "body-r1": "フットホールドの位置や乗り方をじっくり研究する",
+      "motive-r1": "登るのは過程を楽しむためで、グレードはあまり気にしない",
+      "mind-r1": "登り始める前に、ルート全体をオブザベーションする",
+      "body-l2": "バランスの練習より筋力トレーニングのほうが効率的だと思う",
+      "motive-l2": "目標のルートを完登すると、大きな達成感がある",
+      "mind-l2": "準備が万全でなくても、新しいルートに挑むのが好きだ",
+      "body-r2": "力任せよりも、良いテクニックのほうが難所を突破できると思う",
+      "motive-r2": "さまざまなスタイルのルートを試すのが好きだ",
+      "mind-r2": "やさしいルートから始めて、少しずつ難度を上げていくのが好みだ",
+      "body-l3": "ダイナミックなムーブが出てくるとワクワクする",
+      "motive-l3": "あるグレードを突破するために、特定のムーブを繰り返し練習する",
+      "mind-l3": "フォールはクライミングの一部で、怖がる必要はないと思う",
+      "body-r3": "体の使い方やポジションを工夫して、力を温存するのが好きだ",
+      "motive-r3": "同じルートを繰り返し打ち込むより、新しいルートを開拓したい",
+      "mind-r3": "一手一手が安定していることを確かめてから、次へ進む",
+      "body-l4": "遠いリーチやランジが必要なルートが好みだ",
+      "motive-l4": "自分の登攀記録や成長の推移をチェックするのが好きだ",
+      "mind-l4": "初めてのルートでは、長く観察するよりまず取り付いてみる",
+      "body-r4": "繊細なフットワークが求められる垂壁やスラブのルートのほうが楽しい",
+      "motive-r4": "クライミングの一番の魅力は、仲間と過ごす時間だと思う",
+      "mind-r4": "リスクを冒すより、十分に準備することのほうが大切だと思う"
+    },
+    "personalities": {
+      "PGB": {
+        "name": "クラッシャー",
+        "tagline": "パワーでねじ伏せ、決意で突破する",
+        "description": "あなたは生まれながらのパワー系クライマー。どんな課題にも真正面からぶつかっていきます。明確な目標があなたを前へと突き動かし、大胆なメンタルが限界ムーブへの挑戦を後押しします。壁の上のあなたは、まるで岩を砕くマシン。誰にも止められません。",
+        "strengths": [
+          "高いフィジカルと瞬発力",
+          "目標が明確で、簡単には諦めない",
+          "高難度ルートにも果敢に挑む"
+        ],
+        "blindSpots": [
+          "テクニックやリズムの大切さを見落としがち",
+          "目標にこだわりすぎるとケガをしやすい"
+        ],
+        "flowState": "全力を出し切り、筋肉と岩の対話を感じているとき",
+        "clutchState": "核心部では瞬発力で勝負をかける"
+      },
+      "PGS": {
+        "name": "鍛冶師",
+        "tagline": "一歩ずつ着実に、実力を鍛え上げる",
+        "description": "強さは時間をかけて鍛えるものだと、あなたは信じています。目標志向のあなたは長期的なトレーニング計画を立て、堅実なメンタルで少しずつ実力を積み上げていきます。結果を急ぐことはありませんが、その一歩一歩は確かです。",
+        "strengths": ["規律あるトレーニング習慣", "安定した成長曲線", "優れたコンディション管理"],
+        "blindSpots": [
+          "慎重すぎて、ブレイクスルーのタイミングを逃すことがある",
+          "計画が固すぎて柔軟性に欠ける"
+        ],
+        "flowState": "いつものトレーニングのリズムの中で、力の伸びを感じているとき",
+        "clutchState": "積み重ねてきた実力で、難所を安定して抜ける"
+      },
+      "PFB": {
+        "name": "ワイルドファイア",
+        "tagline": "情熱を燃やし、自由に登る",
+        "description": "あなたは野火のようにエネルギッシュで、予測不能。パワー系の登りを好みながらも目標に縛られず、大胆なメンタルでどんなスタイルにも挑戦します。クライミングそのものを楽しんでいて、スコアやグレードは気にしません。",
+        "strengths": [
+          "あふれるクライミングへの情熱",
+          "さまざまなスタイルに挑戦する姿勢",
+          "失敗を恐れない勇気"
+        ],
+        "blindSpots": ["体系的なトレーニングが不足しがち", "ひとつの方向を深く突き詰めるのが苦手"],
+        "flowState": "新しいルートで、体の自由さとパワーを感じているとき",
+        "clutchState": "直感と度胸で、未知の難所を突破する"
+      },
+      "PFS": {
+        "name": "アンカー",
+        "tagline": "アンカーのように揺るがず、過程を楽しむ",
+        "description": "あなたはクライミング界の「不動の存在」。パワー系のフィジカルに、自由に探求するモチベーションと堅実なメンタルが組み合わさり、どんな環境でも安定していられます。近道を求めず、一本一本の登りの過程を楽しみます。",
+        "strengths": [
+          "感情が安定していて、プレッシャーに左右されにくい",
+          "しっかりした基礎体力",
+          "途切れることなく登り続ける習慣"
+        ],
+        "blindSpots": [
+          "成長の方向性がはっきりしないことがある",
+          "居心地が良すぎて、コンフォートゾーンから出たがらない"
+        ],
+        "flowState": "通い慣れた岩場で、力強さと静けさが溶け合うのを感じているとき",
+        "clutchState": "安定したメンタルと体力で、難所をじっくり攻略する"
+      },
+      "TGB": {
+        "name": "スナイパー",
+        "tagline": "狙いを定め、一撃で仕留める",
+        "description": "あなたはテクニック系クライマーの中のスナイパー。明確な目標を持って狙ったルートの攻略に集中し、大胆なメンタルで限界ムーブにも挑みます。あなたが目指すのは、最も精確なテクニックで最難の課題を落とすことです。",
+        "strengths": ["優れたムーブ読みの力", "目標ルートへの集中力", "ここぞという場面での実行力"],
+        "blindSpots": [
+          "目標以外のルートには根気が続かないことがある",
+          "効率を求めすぎて、体験そのものをおろそかにしがち"
+        ],
+        "flowState": "完璧にテクニックが決まり、精確さの快感を味わっているとき",
+        "clutchState": "的確なムーブ読みで、核心部を一発で抜ける"
+      },
+      "TGS": {
+        "name": "解読者",
+        "tagline": "壁を読み解き、体系的に上達する",
+        "description": "あなたは暗号解読者のように、一本一本のルートを分析します。テクニック系のスタイルに、目標志向のモチベーションと堅実なメンタルが加わり、課題を分解して戦略を立て、体系的に攻略するのが得意です。",
+        "strengths": ["卓越したルート読みの力", "体系立てたトレーニング方法", "冷静な問題解決力"],
+        "blindSpots": ["分析しすぎて迷ってしまうことがある", "即興で対応する柔軟さに欠ける"],
+        "flowState": "ルートというパズルを解いている最中にフローに入る",
+        "clutchState": "冷静な分析で最適解を見つけ出す"
+      },
+      "TFB": {
+        "name": "放浪者",
+        "tagline": "テクニックを相棒に、各地を渡り歩く",
+        "description": "あなたはクライミング界のノマド。磨き抜かれたテクニックでどんな岩質やスタイルにも適応し、自由に探求するモチベーションに導かれて各地の岩場を巡ります。大胆なメンタルで、未知を恐れません。どの壁も、新しい冒険です。",
+        "strengths": [
+          "適応力が高く、どんな岩質でも登れる",
+          "豊富なクライミング経験と見識",
+          "探索する楽しさを味わえる"
+        ],
+        "blindSpots": [
+          "ひとつの分野でトップレベルに達しにくい",
+          "長期的なトレーニングの継続性に欠ける"
+        ],
+        "flowState": "初めての岩場で、体と岩の対話を見つけているとき",
+        "clutchState": "豊富な経験を頼りに、未知の難所へ即興で対応する"
+      },
+      "TFS": {
+        "name": "禅者",
+        "tagline": "心を静めて登り、岩とひとつになる",
+        "description": "あなたはクライミング界の修行者。テクニック系のスタイルに、自由に探求するモチベーションと堅実なメンタルを併せ持ち、求めるのはグレードや成績ではなく、登りの中で心と体がひとつになる境地です。",
+        "strengths": [
+          "優れた心身の協調性",
+          "外からのプレッシャーに左右されない安定感",
+          "クライミングを深く味わう感受性"
+        ],
+        "blindSpots": ["限界を破ろうとする意欲に欠けることがある", "競技的な側面への関心が薄い"],
+        "flowState": "登りながら、呼吸とムーブと岩がひとつになるのを感じているとき",
+        "clutchState": "深い呼吸と集中力で、内なる安定を見つける"
+      }
+    }
+  },
+  "Metadata": {
+    "site": {
+      "alternateNames": ["NobodyClimb 台湾クライミング", "台湾クライミングコミュニティ"],
+      "description": "台湾のクライミングコミュニティプラットフォーム。龍洞、墾丁、関子嶺、徳芙蘭などの外岩やクライミングジムを探索でき、ルート情報、グレード、クライミング動画を掲載しています。初心者から上級者まで、気の合うクライミング仲間が見つかります。",
+      "keywords": "クライミング,龍洞,墾丁,関子嶺,徳芙蘭,台湾クライミング,外岩,クライミングルート,岩場"
+    },
+    "about": {
+      "title": "NobodyClimb について",
+      "description": "NobodyClimb（小人物攀岩）は台湾のクライミングコミュニティプラットフォームです。クライミングの普及、コミュニティづくり、そしてクライマー一人ひとりのストーリーの記録に取り組んでいます。",
+      "keywords": "NobodyClimb,小人物攀岩,台湾クライミングコミュニティ,クライミングプラットフォーム",
+      "ogDescription": "すべての Nobody に、自分だけのクライミングストーリーがある。"
+    },
+    "biography": {
+      "title": "人物誌",
+      "description": "台湾のクライミングコミュニティで活動するクライマーたちを紹介。それぞれのストーリーや経験に触れ、気の合うクライミング仲間を見つけましょう。",
+      "keywords": "クライマー,クライミングコミュニティ,クライミングストーリー,クライミング仲間",
+      "ogDescription": "台湾のクライミングコミュニティのクライマーたちと、そのストーリーを紹介します。"
+    },
+    "gallery": {
+      "title": "ギャラリー",
+      "description": "クライミング写真のギャラリー。壁の上のクライマーたちの決定的瞬間を切り取り、クライミングの力強さと美しさを伝えます。",
+      "keywords": "クライミング写真,クライミングフォト,外岩の写真,ボルダリング写真",
+      "ogDescription": "クライミング写真のギャラリー。壁の上の決定的瞬間を記録しています。"
+    },
+    "blog": {
+      "title": "ブログ",
+      "description": "テクニック解説、体験談、ギアレビュー、コンペ情報など、クライミングに関する記事を掲載。スキルと知識のレベルアップに役立ちます。",
+      "keywords": "クライミングブログ,クライミングテクニック,クライミング講座,クライミング体験談,クライミングギア,ボルダリングのコツ",
+      "ogDescription": "テクニック解説、体験談、ギアレビュー、コンペ情報など、クライミングに関する記事。"
+    },
+    "videos": {
+      "title": "クライミング動画",
+      "description": "テクニック解説、コンペ中継、外岩の記録映像など、厳選したクライミング動画を掲載。世界トップクライマーの圧巻のパフォーマンスをご覧ください。",
+      "keywords": "クライミング動画,クライミング講座動画,ボルダリング動画,クライミングコンペ,Adam Ondra,Janja Garnbret",
+      "ogDescription": "厳選したクライミング動画で、世界トップクライマーのパフォーマンスと解説をチェック。"
+    },
+    "gym": {
+      "title": "クライミングジム",
+      "description": "台湾のクライミングジムを網羅的に紹介。ボルダリングジムからロープクライミングのジムまで、住所、営業時間、設備、料金などの詳細情報を掲載しています。",
+      "keywords": "クライミングジム,ボルダリングジム,インドアクライミング,台北 クライミングジム,台中 クライミングジム,高雄 クライミングジム",
+      "ogDescription": "台湾のクライミングジムを網羅的に紹介。近くのジムを見つけましょう。"
+    },
+    "ropeSystem": {
+      "title": "クライミングシステム練習",
+      "description": "インタラクティブなゲームでクライミングのロープシステムを学べます。自主学習にも、団体での講習・認定にも活用できます。",
+      "keywords": "クライミング,ロープシステム,ビレイ,リード,トップロープ,懸垂下降,アンカー",
+      "ogDescription": "インタラクティブなゲームでクライミングのロープシステムを学べます。"
+    },
+    "chat": {
+      "title": "AI クライミングアシスタント",
+      "description": "AI クライミングアシスタントと会話して、おすすめルートやトレーニングのアドバイス、クライミングの知識を得られます"
+    },
+    "quizLanding": {
+      "title": "あなたはどんなクライマー？ — {siteName} クライミング性格診断",
+      "description": "全24問のクライミング性格診断。3〜5分であなたのクライミングスタイルがわかります。あなたはクラッシャー、スナイパー、放浪者、それとも禅者？今すぐ診断して、あなたのタイプを見つけましょう！",
+      "ogDescription": "全24問のクライミング性格診断。3〜5分であなたのクライミングスタイルがわかります。あなたはクラッシャー、スナイパー、放浪者、それとも禅者？"
+    },
+    "quizCollection": {
+      "title": "8つのクライミングタイプ — {siteName} クライミング性格診断",
+      "description": "クラッシャー、鍛冶師、ワイルドファイア、アンカー、スナイパー、解読者、放浪者、禅者 — 8つのクライミングタイプを見てみましょう",
+      "ogDescription": "8つのクライミングタイプから、あなたのスタイルを見つけましょう"
+    },
+    "quizResult": {
+      "notFound": "結果が見つかりません",
+      "title": "私は「{name}」{nameEn} — {siteName} クライミング性格診断",
+      "description": "{tagline}。{excerpt}..."
+    },
+    "quizTraining": {
+      "notFound": "トレーニングプランが見つかりません",
+      "title": "{name} トレーニングプラン — {siteName}",
+      "description": "{name}タイプのための4週間クライミングトレーニングプラン。「自分と逆のタイプを鍛える」をコンセプトに、オールラウンドなクライマーを目指します。"
+    }
+  },
+  "AboutPage": {
+    "logoAlt": "NobodyClimb",
+    "logoMarkAlt": "NobodyClimb ロゴ",
+    "heroTagline": "すべての Nobody に、自分だけのクライミングストーリーがある",
+    "story": {
+      "title": "はじまりのストーリー",
+      "p1": "「NobodyClimb（小人物攀岩）」は、ひとりの Nobody のクライミングへの愛から生まれました。",
+      "p2": "クライミングの道では、私たちは誰もが「小さな存在」です。ジムに通い始めたばかりの初心者でも、各地の岩場を渡り歩いてきたベテランでも、誰にでも自分だけのストーリーがあり、葛藤があり、ブレイクスルーがあります。",
+      "p3": "私たちは、すべてのクライマーが情報を見つけ、ストーリーを分かち合い、つながりを築けるプラットフォームをつくりたいと考えています。ここでは、すべての Nobody にスポットライトが当たるべきだからです。"
+    },
+    "mission": {
+      "title": "私たちのミッション",
+      "promote": {
+        "title": "クライミングを広める",
+        "description": "充実した岩場情報とガイドで始めるハードルを下げ、より多くの人がクライミングを知り、好きになるきっかけをつくります。"
+      },
+      "community": {
+        "title": "コミュニティをつくる",
+        "description": "台湾各地のクライマーをつなぎ、交流と共有の場をつくって、ともに成長していきます。"
+      },
+      "stories": {
+        "title": "ストーリーを記録する",
+        "description": "人物誌とブログを通じて、クライマー一人ひとりの大切な思い出とかけがえのない経験を記録します。"
+      }
+    },
+    "features": {
+      "title": "プラットフォームの機能",
+      "subtitle": "初心者から上級者まで、クライミングライフに必要なリソースをすべて揃えています",
+      "crag": {
+        "title": "岩場を探す",
+        "description": "台湾各地の岩場の詳細情報とルートデータ"
+      },
+      "biography": {
+        "title": "人物誌",
+        "description": "クライマーたちのストーリーと歩み"
+      },
+      "videos": {
+        "title": "クライミング動画",
+        "description": "厳選したクライミングの解説動画と記録映像"
+      },
+      "gallery": {
+        "title": "ギャラリー",
+        "description": "クライミングの決定的瞬間"
+      },
+      "blog": {
+        "title": "ブログ",
+        "description": "クライミングの知識、体験談、攻略ガイド"
+      },
+      "gym": {
+        "title": "ジム情報",
+        "description": "台湾全土のクライミングジム完全ガイド"
+      }
+    },
+    "stats": {
+      "gyms": "ジム",
+      "crags": "岩場",
+      "routes": "ルート",
+      "biographies": "人物誌",
+      "posts": "記事",
+      "videos": "動画"
+    },
+    "cta": {
+      "title": "Nobody の一員になろう",
+      "description": "コミュニティに参加して、クライマー仲間と一緒に分かち合い、学び、成長しましょう",
+      "button": "今すぐ参加"
+    }
+  },
+  "VideosFilter": {
+    "categories": {
+      "all": "すべて",
+      "outdoorLead": "外岩ルート",
+      "outdoorBoulder": "外岩ボルダー",
+      "indoorLead": "インドア ルート",
+      "indoorBoulder": "インドア ボルダリング",
+      "competition": "コンペ",
+      "tutorial": "ハウツー",
+      "training": "トレーニング",
+      "documentary": "ドキュメンタリー",
+      "gearReview": "ギアレビュー",
+      "challenge": "チャレンジ企画",
+      "interview": "インタビュー",
+      "outdoorClimbing": "外岩クライミング",
+      "indoorClimbing": "インドアクライミング",
+      "competitionClimbing": "競技クライミング",
+      "bouldering": "ボルダリング"
+    },
+    "channelPlaceholder": "チャンネルを選択",
+    "allChannels": "すべてのチャンネル",
+    "durationPlaceholder": "再生時間を選択",
+    "duration": {
+      "all": "すべての長さ",
+      "short": "短編（5分未満）",
+      "medium": "中編（5〜20分）",
+      "long": "長編（20分超）"
+    },
+    "popularityPlaceholder": "人気度",
+    "popularity": {
+      "all": "すべて",
+      "viral": "100万回再生以上",
+      "popular": "人気",
+      "normal": "標準",
+      "niche": "ニッチ"
+    },
+    "featured": "おすすめ",
+    "closeVideo": "動画を閉じる",
+    "viewCount": "{count} 回視聴",
+    "watchOnYoutube": "YouTube で見る"
+  },
+  "BlogCategories": {
+    "beginner": "初心者ガイド",
+    "news": "ニュース",
+    "gear": "ギア",
+    "skills": "テクニック",
+    "training": "トレーニング",
+    "routes": "ルート攻略",
+    "crags": "岩場レポート",
+    "gyms": "ジムレポート",
+    "travel": "クライミングトリップ",
+    "competition": "コンペ情報",
+    "events": "イベント情報",
+    "community": "コミュニティ情報",
+    "injury": "ケガの予防とケア"
+  },
+  "GalleryUI": {
+    "upload": {
+      "title": "写真をアップロード",
+      "invalidType": "JPG、PNG、WebP 形式の画像をアップロードしてください",
+      "compressFailed": "画像「{name}」の圧縮に失敗しました",
+      "maxFiles": "アップロードできる写真は最大 {max} 枚です",
+      "noFiles": "アップロードする画像を選択してください",
+      "imageUploadFailed": "画像のアップロードに失敗しました",
+      "photoSaveFailed": "写真情報の保存に失敗しました",
+      "uploadFailed": "アップロードに失敗しました",
+      "partialSuccess": "{success} 枚のアップロードに成功、{failed} 枚が失敗しました",
+      "allFailed": "すべての写真のアップロードに失敗しました。しばらくしてからもう一度お試しください",
+      "dropHint": "写真をここにドラッグするか、クリックして選択",
+      "formatHint": "JPG、PNG、WebP に対応（500KB を超える画像は自動で圧縮、最大 {max} 枚）",
+      "processing": "画像を処理中...（{current}/{total}）",
+      "selectedCount": "{count} 枚の写真を選択中",
+      "compressedCount": "（{count} 枚を圧縮済み）",
+      "clearAll": "すべてクリア",
+      "originalSize": "元のサイズ: {size}KB",
+      "uploadingProgress": "{uploading} 枚の写真をアップロード中...（{done}/{total} 完了）",
+      "captionLabel": "説明（任意・すべての写真に適用）",
+      "captionPlaceholder": "写真の説明を入力...",
+      "locationLabel": "撮影場所（任意・すべての写真に適用）",
+      "country": "国",
+      "city": "都市",
+      "spot": "スポット",
+      "submitProcessing": "処理中...",
+      "submitUploading": "アップロード中...",
+      "submitCount": "{count} 枚の写真をアップロード",
+      "submit": "写真をアップロード"
+    },
+    "edit": {
+      "title": "写真情報を編集",
+      "updateFailed": "更新に失敗しました。しばらくしてからもう一度お試しください",
+      "photoAlt": "写真",
+      "captionLabel": "説明",
+      "captionPlaceholder": "写真の説明を入力...",
+      "locationLabel": "撮影場所",
+      "country": "国",
+      "city": "都市",
+      "spot": "スポット",
+      "cancel": "キャンセル",
+      "saving": "保存中...",
+      "save": "変更を保存"
+    },
+    "popup": {
+      "uploadDate": "アップロード日:"
+    }
+  },
+  "UploadPage": {
+    "loginTitle": "まずログインしてください",
+    "loginDesc": "ログインすると、ギャラリーに写真をアップロードできます",
+    "goLogin": "ログインへ",
+    "successTitle": "アップロード完了！",
+    "successDesc": "{count} 枚の写真をギャラリーにアップロードしました",
+    "uploadMore": "続けてアップロード",
+    "goGallery": "ギャラリーへ",
+    "subtitle": "あなたのクライミング写真をコミュニティでシェアしましょう"
+  },
+  "StoryDetail": {
+    "invalidType": "無効なストーリータイプです",
+    "notFound": "このストーリーは見つかりません",
+    "loadError": "ストーリーの読み込み中にエラーが発生しました",
+    "likeFailed": "いいねに失敗しました",
+    "commentFailed": "コメントの投稿に失敗しました",
+    "deleteCommentUnsupported": "このタイプではコメントを削除できません",
+    "browseMore": "ほかのストーリーを見る",
+    "home": "ホーム",
+    "stories": "ストーリー",
+    "backToList": "ストーリー一覧へ戻る",
+    "wordCount": "{count} 文字",
+    "viewStory": "ストーリーを見る",
+    "viewAuthorStory": "{name} さんのストーリーをすべて見る",
+    "moreFrom": "{name} さんのほかのストーリー",
+    "readMore": "続きを読む"
+  },
+  "RopeGame": {
+    "defaultTitle": "クライミングシステム練習",
+    "questionCount": "全{count}問",
+    "difficulty": {
+      "1": "入門",
+      "2": "中級",
+      "3": "上級"
+    },
+    "parents": {
+      "sport": "スポートクライミング",
+      "trad": "トラッドクライミング"
+    },
+    "categories": {
+      "sport-belay": {
+        "name": "ビレイの基本",
+        "description": "正しいビレイ技術と安全の考え方を学びます"
+      },
+      "sport-lead": {
+        "name": "リードクライミング",
+        "description": "リードクライミングのロープワークとクリップ技術を身につけます"
+      },
+      "sport-toprope": {
+        "name": "トップロープのセット",
+        "description": "トップロープシステムのセット方法と安全確認を学びます"
+      },
+      "sport-rappel": {
+        "name": "懸垂下降システム",
+        "description": "下降器の操作と安全手順を身につけます"
+      },
+      "trad-anchor": {
+        "name": "アンカー構築",
+        "description": "複数の支点を使ったアンカー構築の原則を学びます"
+      },
+      "trad-protection": {
+        "name": "プロテクション",
+        "description": "各種プロテクションのセット技術を身につけます"
+      },
+      "trad-multipitch": {
+        "name": "マルチピッチシステム",
+        "description": "マルチピッチクライミングのロープワークを学びます"
+      },
+      "trad-rescue": {
+        "name": "セルフレスキュー",
+        "description": "基本的なセルフレスキュー技術を身につけます"
+      }
+    },
+    "categoryNotFound": "このカテゴリーは見つかりません",
+    "checkUrl": "URL が正しいかご確認ください",
+    "loadingQuestions": "問題を読み込み中...",
+    "exit": "終了",
+    "nextQuestion": "次の問題 →",
+    "continue": "続ける →",
+    "correct": "正解！",
+    "incorrect": "不正解",
+    "correctAnswer": "正解",
+    "explanation": "解説",
+    "hint": "ヒント",
+    "references": "参考資料",
+    "scenario": "シチュエーション",
+    "question": "問題",
+    "questionImageAlt": "問題の画像",
+    "orderingHint": "ステップをドラッグして正しい順番に並べ、「順番を確定」をクリックしてください。",
+    "confirmOrder": "順番を確定",
+    "gameOver": "ゲームオーバー",
+    "completed": "練習完了！",
+    "score": "スコア",
+    "accuracy": "正答率",
+    "maxCombo": "最大コンボ",
+    "time": "タイム",
+    "playAgain": "もう一度プレイ",
+    "backHome": "ホームへ戻る",
+    "belayStation": "ビレイステーション",
+    "soundOff": "効果音をオフにする",
+    "soundOn": "効果音をオンにする"
+  },
+  "RouteStory": {
+    "formTitle": "ルートのストーリーをシェア",
+    "routeRequired": "ルートを選択してください",
+    "contentRequired": "内容を入力してください",
+    "titleLabel": "タイトル（任意）",
+    "titlePlaceholder": "例：このルート名の由来",
+    "contentLabel": "ストーリー *",
+    "contentPlaceholder": "このルートの名前の由来や歴史、特別な体験をシェアしましょう...",
+    "cancel": "キャンセル",
+    "publishing": "投稿中...",
+    "publish": "投稿",
+    "featured": "おすすめ",
+    "photoAlt": "写真 {index}",
+    "video": "動画",
+    "post": "投稿",
+    "helpful": "参考になった",
+    "noLikes": "まだ「いいね」はありません"
+  },
+  "InstagramEmbed": {
+    "invalidUrl": "無効な Instagram の URL です",
+    "checkUrl": "URL の形式が正しいかご確認ください",
+    "loading": "Instagram の投稿を読み込み中...",
+    "loadFailed": "Instagram の投稿を読み込めませんでした",
+    "viewOnInstagram": "Instagram で見る →",
+    "viewPost": "この投稿を Instagram で見る"
+  },
+  "AnonymousShare": {
+    "answeredCount": "回答済み（{count}）",
+    "startHere": "まずはこの質問から",
+    "coreStoriesTitle": "コアストーリー",
+    "coreStoriesSubtitle": "じっくり語る",
+    "oneLinersTitle": "ひとこと",
+    "oneLinersSubtitle": "さくっと回答",
+    "moreStoriesTitle": "もっとストーリー",
+    "moreStoriesSubtitle": "任意",
+    "writeMore": "もっと書きたい",
+    "storyPlaceholder": "あなたのストーリーをシェア...",
+    "answerPlaceholder": "回答を入力...",
+    "eligibilityTitle": "もう少しほかの人のストーリーを見てみましょう",
+    "eligibilityDesc": "ほかのクライマーのストーリーをもう少し見ると、シェアを始められます",
+    "viewedCount": "{count} 件のストーリーを閲覧済み",
+    "exploreStories": "クライマーのストーリーを見る",
+    "alreadySignedInTitle": "すでにログインしています",
+    "alreadySignedInDesc": "マイページからストーリーを直接編集できます",
+    "goEdit": "ストーリーを編集する",
+    "sharedTitle": "ストーリーをシェアしました！",
+    "sharedDesc": "あなたのストーリーは匿名で公開されました",
+    "totalStories": "全 {count} 件のストーリー",
+    "claimTitle": "あとでこのストーリーを自分のものにしたいときは？",
+    "claimDesc": "同じ端末・同じブラウザでログインすると、自動的にアカウントに紐づけられます",
+    "viewMyStory": "自分のストーリーを見る",
+    "keepExploring": "ほかのストーリーを見る",
+    "back": "戻る",
+    "save": "保存",
+    "charsNeeded": "あと {count} 文字必要です",
+    "readyToSave": "保存できます",
+    "charCount": "{count} 文字"
+  },
+  "RankBadge": {
+    "tiers": {
+      "foothill": {
+        "display": "麓",
+        "description": "山のふもとに立つ、クライミングの旅の出発点"
+      },
+      "wall": {
+        "display": "壁",
+        "description": "壁と向き合い、本当のクライミングが始まる"
+      },
+      "ridge": {
+        "display": "稜",
+        "description": "稜線に立ち、谷と空を見渡す"
+      },
+      "summit": {
+        "display": "頂",
+        "description": "頂に立ち、クライミングが魂の一部になっている"
+      },
+      "admin": {
+        "display": "管理者",
+        "description": "管理者"
+      }
+    },
+    "levelLabel": "ランク：{rank}",
+    "levelUpHint": "クライミング日誌を充実させるとランクが上がります"
+  },
+  "Editor": {
+    "loading": "エディターを読み込み中...",
+    "contentPlaceholder": "記事の本文を入力してください...",
+    "tagPlaceholder": "タグを入力して Enter",
+    "tagSuggestions": [
+      "テクニック",
+      "ギアレビュー",
+      "トレーニング記録",
+      "コンペ記録",
+      "岩場レポート",
+      "ボルダリング",
+      "リードクライミング"
+    ],
+    "quickAdd": "クイック追加：",
+    "tagLimit": "タグは最大 {max} 個まで（現在 {count} 個）",
+    "invalidImageType": "JPG、PNG、WebP、GIF 形式の画像をアップロードしてください",
+    "imageProcessFailed": "画像の処理に失敗しました",
+    "coverPreviewAlt": "カバー画像のプレビュー",
+    "changeImage": "画像を変更",
+    "dropHint": "画像をここにドラッグするか、クリックしてアップロード"
+  },
+  "AiTool": {
+    "status": {
+      "running": "実行中",
+      "pending": "待機中",
+      "done": "完了"
+    }
+  },
+  "Ascent": {
+    "types": {
+      "redpoint": {
+        "label": "レッドポイント",
+        "description": "トライを重ねたうえでノーテンションで完登"
+      },
+      "flash": {
+        "label": "フラッシュ",
+        "description": "事前に情報を得たうえで一撃で完登"
+      },
+      "onsight": {
+        "label": "オンサイト",
+        "description": "事前情報なしで一撃で完登"
+      },
+      "attempt": {
+        "label": "トライ",
+        "description": "未完登"
+      },
+      "toprope": {
+        "label": "トップロープ",
+        "description": "トップロープで登攀"
+      },
+      "lead": {
+        "label": "リード",
+        "description": "リードで登攀"
+      },
+      "seconding": {
+        "label": "フォロー",
+        "description": "フォローで登攀"
+      },
+      "repeat": {
+        "label": "リピート",
+        "description": "再登"
+      }
+    },
+    "card": {
+      "attempts": "{count} トライ",
+      "perceivedGrade": "体感：{grade}",
+      "photoAlt": "写真 {index}",
+      "youtubeAlt": "YouTube 動画",
+      "instagramPost": "Instagram の投稿"
+    },
+    "form": {
+      "title": "登攀を記録",
+      "type": "登り方",
+      "date": "登った日",
+      "attempts": "トライ回数",
+      "rating": "おすすめ度（任意）",
+      "perceivedGrade": "体感グレード（任意）",
+      "perceivedGradePlaceholder": "例：表示グレードよりやや難しい",
+      "notes": "メモ（任意）",
+      "notesPlaceholder": "今回登った感想を記録しましょう...",
+      "photos": "写真（任意）",
+      "mediaLinks": "メディアリンク（任意）",
+      "youtubePlaceholder": "YouTube 動画のリンク",
+      "instagramPlaceholder": "Instagram 投稿のリンク",
+      "cancel": "キャンセル",
+      "saving": "保存中...",
+      "save": "保存"
+    },
+    "dialog": {
+      "selectCrag": "岩場を選択",
+      "selectArea": "エリアを選択（{name}）",
+      "selectSector": "サブエリアを選択（{name}）",
+      "selectRoute": "ルートを選択（{name}）",
+      "routeSearchPlaceholder": "ルート名やグレードで直接検索...",
+      "noRoutes": "該当するルートが見つかりません",
+      "orStepByStep": "または順番に選択",
+      "searchCrag": "岩場を検索...",
+      "noCrags": "該当する岩場が見つかりません",
+      "routeCount": "{count} ルート",
+      "orSelectArea": "またはエリアを選択",
+      "searchArea": "エリアを検索...",
+      "noAreas": "該当するエリアが見つかりません",
+      "orSelectSector": "またはサブエリアを選択",
+      "searchSector": "サブエリアを検索...",
+      "showAllRoutes": "すべてのルートを表示",
+      "showAllRoutesDesc": "サブエリアで絞り込まず、{count} ルートを表示します",
+      "noSectors": "該当するサブエリアが見つかりません",
+      "searchRoute": "ルートを検索..."
+    }
+  },
+  "Badges": {
+    "categories": {
+      "story": "ストーリー",
+      "goal": "目標管理",
+      "social": "コミュニティ",
+      "footprint": "クライミングの足跡"
+    },
+    "items": {
+      "story_beginner": {
+        "name": "はじめの一歩",
+        "description": "最初のストーリーを書く"
+      },
+      "story_writer": {
+        "name": "ストーリーの達人",
+        "description": "じっくり語るストーリーを 5 つ書く"
+      },
+      "inspirator": {
+        "name": "インスパイアラー",
+        "description": "ストーリーが 10 人から「励まされた」と評価される"
+      },
+      "trending": {
+        "name": "人気ストーリー",
+        "description": "1 つのストーリーで「いいね」を 50 件獲得する"
+      },
+      "goal_setter": {
+        "name": "目標設定者",
+        "description": "最初の目標を設定する"
+      },
+      "achiever": {
+        "name": "目標達成",
+        "description": "最初の目標を達成する"
+      },
+      "consistent": {
+        "name": "継続は力なり",
+        "description": "目標を 3 つ達成する"
+      },
+      "supportive": {
+        "name": "応援団長",
+        "description": "「いいね」を 50 回送る"
+      },
+      "conversationalist": {
+        "name": "おしゃべり上手",
+        "description": "コメントを 20 件投稿する"
+      },
+      "explorer": {
+        "name": "好奇心旺盛",
+        "description": "クライマーのプロフィールを 20 件読む"
+      },
+      "traveler": {
+        "name": "クライミングトラベラー",
+        "description": "クライミングスポットを 5 か所記録する"
+      },
+      "international": {
+        "name": "海外クライマー",
+        "description": "海外のクライミングスポットを 3 か所記録する"
+      }
+    }
+  },
+  "BiographyMisc": {
+    "commentLoginPrompt": "コメントするには<login>ログイン</login>してください",
+    "listSeparator": "、",
+    "yearSpan": "{count}年間",
+    "shareTitle": "{name}さんのクライマープロフィール - NobodyClimb",
+    "shareDescription": "{name}さんのクライミングストーリーを見てみましょう",
+    "coverPhotoAlt": "{name}さんのカバー写真",
+    "personalityTitle": "クライミングパーソナリティ",
+    "personalityStrengths": "強み",
+    "personalityBlindSpots": "弱点",
+    "personalityBestState": "ベストな状態",
+    "readMore": "続きを読む",
+    "collapse": "閉じる",
+    "loadBiographyFailed": "プロフィールの読み込みに失敗しました",
+    "saveFailed": "保存に失敗しました",
+    "saveFailedRetry": "保存に失敗しました。しばらくしてからもう一度お試しください",
+    "saveTimeout": "保存がタイムアウトしました。しばらくしてからもう一度お試しください",
+    "autoSaveTimeout": "保存がタイムアウトしたため、自動リトライを一時停止しました。しばらくしてからもう一度お試しください",
+    "publishFailed": "公開に失敗しました",
+    "loginToEdit": "プロフィールを編集するにはログインしてください",
+    "reload": "再読み込み",
+    "uploadSuccess": "アップロードしました",
+    "avatarUpdated": "アイコンを更新しました",
+    "coverUpdated": "カバー画像を更新しました",
+    "uploadFailed": "アップロードに失敗しました",
+    "retryLater": "しばらくしてからもう一度お試しください",
+    "defaultUserName": "あなた",
+    "promptExampleDefault": "素敵なクライミングストーリーです…",
+    "promptExamples": {
+      "memorable_moment": "龍洞の夕日の中で完登したとき、オレンジ色の光に包まれて、これまでの練習がすべて報われたと感じました。",
+      "biggest_challenge": "指の腱鞘炎で半年間休んだことがあります。その間に忍耐を学び、登れる一日一日をより大切に思うようになりました。",
+      "funny_moment": "登っている途中でパンツが破れてしまい、仕方なくそのまま最後まで登りきりました。降りてから、後ろの人たちがこっそり笑っていたことに気づきました。",
+      "fear_management": "フォールが怖いときは、深呼吸を3回して「ロープが止めてくれる」と自分に言い聞かせ、次のムーブに集中します。",
+      "favorite_spot": "いちばんのおすすめは台湾北部の原岩（T-UP）です。セットが面白くて雰囲気も良く、ボルダリングを好きになったきっかけの場所です。",
+      "climbing_mentor": "コーチがいつも「ゆっくりやるほうが、結局は早い」と言っていました。この言葉が、クライミングに限らず、せっかちな私を変えてくれました。",
+      "life_outside_climbing": "クライミング以外では写真も好きです。よくカメラを持って岩場に行き、仲間たちの真剣な表情を撮っています。"
+    },
+    "storyCategoryMeta": {
+      "growth": {
+        "label": "成長の軌跡",
+        "description": "あなたのクライミングの歩み"
+      },
+      "psychology": {
+        "label": "メンタル",
+        "description": "クライミング中の心の動き"
+      },
+      "community": {
+        "label": "仲間とのつながり",
+        "description": "クライミング仲間とのエピソード"
+      },
+      "practical": {
+        "label": "実践的な経験",
+        "description": "ギア、トレーニング、テクニック"
+      },
+      "dreams": {
+        "label": "願いと目標",
+        "description": "これからのクライミング計画"
+      },
+      "life": {
+        "label": "人生とのつながり",
+        "description": "クライミングと暮らし"
+      }
+    },
+    "routeTypes": {
+      "bouldering": "ボルダリング",
+      "sport": "スポートクライミング",
+      "topRope": "トップロープ",
+      "speed": "スピード",
+      "trad": "トラッド",
+      "slab": "スラブ",
+      "vertical": "垂壁",
+      "overhang": "強傾斜",
+      "roof": "ルーフ",
+      "crack": "クラック",
+      "arete": "カンテ",
+      "face": "フェイス",
+      "chimney": "チムニー",
+      "dynamic": "ダイナミック",
+      "parkour": "パルクール系",
+      "coordination": "コーディネーション",
+      "static": "スタティック",
+      "technical": "テクニカル",
+      "power": "パワー系",
+      "endurance": "持久系"
+    }
+  },
+  "BiographyStories": {
+    "categories": {
+      "growth": {
+        "name": "成長とブレイクスルー",
+        "description": "クライミング人生の大切な瞬間を記録しましょう"
+      },
+      "psychology": {
+        "name": "メンタルと哲学",
+        "description": "クライミングがもたらした内面の変化を探ります"
+      },
+      "community": {
+        "name": "コミュニティとつながり",
+        "description": "クライミング仲間とのエピソードをシェアしましょう"
+      },
+      "practical": {
+        "name": "実践的なシェア",
+        "description": "役立つ経験やテクニックを伝えましょう"
+      },
+      "dreams": {
+        "name": "夢と探求",
+        "description": "クライミングの夢を描きましょう"
+      },
+      "life": {
+        "name": "暮らしとクライミング",
+        "description": "クライミング以外のあなた"
+      }
+    },
+    "questions": {
+      "climbing_origin": {
+        "title": "クライミングとの出会い",
+        "subtitle": "初めてクライミングに触れたときのことを教えてください。続けたいと思ったきっかけは？",
+        "placeholder": "あの日、初めてジムに足を踏み入れて…"
+      },
+      "climbing_meaning": {
+        "title": "あなたにとってクライミングとは",
+        "subtitle": "クライミングは生活の中でどんな存在ですか？何をもたらしてくれましたか？",
+        "placeholder": "私にとってクライミングとは…"
+      },
+      "advice_to_self": {
+        "title": "クライミングを始めた頃の自分へ",
+        "subtitle": "もしスタート地点に戻れるなら、自分に何と声をかけますか？",
+        "placeholder": "あの頃に戻れるなら、こう伝えたいです…"
+      },
+      "memorable_moment": {
+        "title": "いちばん忘れられないクライミング",
+        "subtitle": "ある一瞬でも、ひとつのクライミング全体でも構いません。いちばん心が動いた部分を中心に",
+        "placeholder": "あのクライミングは一生忘れられません…"
+      },
+      "biggest_challenge": {
+        "title": "最大の壁と、その乗り越え方",
+        "subtitle": "具体的な壁（ケガ、停滞期、恐怖心など）と、どう向き合ったかを教えてください",
+        "placeholder": "これまでで最大の壁は…"
+      },
+      "breakthrough_story": {
+        "title": "最大のブレイクスルー",
+        "subtitle": "グレード更新、メンタル面、技術面など",
+        "placeholder": "あのブレイクスルーで気づいたのは…"
+      },
+      "first_outdoor": {
+        "title": "初めての外岩",
+        "subtitle": "インドアから外岩に出たときの経験、感じたこと、得たもの",
+        "placeholder": "初めての外岩で覚えているのは…"
+      },
+      "first_grade": {
+        "title": "あるグレードを初めて完登したときの気持ち",
+        "subtitle": "自分にとって意味のあるグレード（5.11a、V4 など）を選んで、その過程をシェアしてください",
+        "placeholder": "あのグレードを初めて完登したとき…"
+      },
+      "frustrating_climb": {
+        "title": "いちばん悔しかったクライミング",
+        "subtitle": "失敗、敗退、特に苦しかった経験と、どう向き合ったか",
+        "placeholder": "あの悔しさから学んだのは…"
+      },
+      "fear_management": {
+        "title": "クライミングの恐怖をどう乗り越えるか",
+        "subtitle": "フォール、高さ、失敗への恐怖を克服する具体的な方法をシェアしてください",
+        "placeholder": "怖いと感じたとき、私は…"
+      },
+      "climbing_lesson": {
+        "title": "クライミングが教えてくれた一番大切なこと",
+        "subtitle": "失敗、継続、集中、信頼などについての気づき",
+        "placeholder": "クライミングが教えてくれた一番大切なことは…"
+      },
+      "failure_perspective": {
+        "title": "クライミングで変わった失敗の捉え方",
+        "subtitle": "クライミングの経験が、失敗との向き合い方にどう影響したか",
+        "placeholder": "クライミングで失敗の捉え方が変わりました…"
+      },
+      "flow_moment": {
+        "title": "壁の上でのフロー体験",
+        "subtitle": "完全に集中し、我を忘れて登った体験を教えてください",
+        "placeholder": "あのフローの感覚は…"
+      },
+      "life_balance": {
+        "title": "クライミングと生活のバランス",
+        "subtitle": "仕事、家庭、クライミングのバランスをどう取っているか",
+        "placeholder": "生活とクライミングのバランスの取り方は…"
+      },
+      "unexpected_gain": {
+        "title": "クライミングがくれた思いがけない収穫",
+        "subtitle": "予想していなかったけれど、クライミングを通じて得られたもの",
+        "placeholder": "クライミングがこんなものまでくれるとは…"
+      },
+      "climbing_mentor": {
+        "title": "クライミング人生の恩人",
+        "subtitle": "コーチ、仲間、家族、あるいは動画の中のクライマーでも",
+        "placeholder": "私のクライミング人生には、ある人がいて…"
+      },
+      "climbing_partner": {
+        "title": "お気に入りのパートナーとのエピソード",
+        "subtitle": "特別なクライミング仲間と、その人とのエピソードをシェアしてください",
+        "placeholder": "パートナーと私は…"
+      },
+      "funny_moment": {
+        "title": "クライミング中のいちばん恥ずかしい・笑える瞬間",
+        "subtitle": "みんなが笑顔になる、気軽で楽しいエピソード",
+        "placeholder": "ものすごく恥ずかしかったのは…"
+      },
+      "favorite_spot": {
+        "title": "いちばんおすすめのクライミングスポットとその理由",
+        "subtitle": "ジムでも外岩でも構いません。おすすめの理由を教えてください",
+        "placeholder": "いちばんおすすめのスポットは…"
+      },
+      "advice_to_group": {
+        "title": "ある人たちに伝えたいこと",
+        "subtitle": "女性、初心者、シニア、子どもなど、特定の人たちへのアドバイス",
+        "placeholder": "…の皆さんに伝えたいのは…"
+      },
+      "climbing_space": {
+        "title": "いちばん忘れられないジムやクライミングスペース",
+        "subtitle": "あなたにとって特別な意味を持つクライミングの場所",
+        "placeholder": "私にとっていちばん特別な場所は…"
+      },
+      "injury_recovery": {
+        "title": "ケガの経験と、そこから学んだこと",
+        "subtitle": "具体的なケガの経験、回復の過程、そこから得た気づきを教えてください",
+        "placeholder": "あのケガから学んだのは…"
+      },
+      "memorable_route": {
+        "title": "いちばんシェアしたいクライミング経験",
+        "subtitle": "あるルートや外岩での一日について、過程、テクニック、感想をシェアしてください",
+        "placeholder": "このルートでいちばん伝えたいのは…"
+      },
+      "training_method": {
+        "title": "あなたのトレーニング方法",
+        "subtitle": "トレーニングの内容、頻度、気づきをシェアしてください",
+        "placeholder": "私のトレーニング方法は…"
+      },
+      "effective_practice": {
+        "title": "いちばん効果があった練習方法",
+        "subtitle": "上達につながった、特に効果的な練習",
+        "placeholder": "この練習方法は私に特に効きました…"
+      },
+      "technique_tip": {
+        "title": "とても役に立ったテクニック",
+        "subtitle": "あるテクニックについての気づきやコツ（足使い、重心など）",
+        "placeholder": "このテクニックにはとても助けられました…"
+      },
+      "gear_choice": {
+        "title": "ギア選びについて",
+        "subtitle": "シューズ、チョークバッグ、ビレイデバイスなどのギア選びの経験",
+        "placeholder": "ギア選びについての私の経験は…"
+      },
+      "dream_climb": {
+        "title": "夢のクライミング",
+        "subtitle": "国内でも海外でも構いません。その場所やルートに惹かれる理由を教えてください",
+        "placeholder": "私の夢のクライミングは…"
+      },
+      "climbing_trip": {
+        "title": "特別なクライミングトリップ",
+        "subtitle": "国内外のクライミングトリップでの経験と得たもの",
+        "placeholder": "あのクライミングトリップは…"
+      },
+      "bucket_list_story": {
+        "title": "バケットリストの目標を達成したときの話",
+        "subtitle": "達成までの過程を詳しく教えてください（バケットリストの達成ストーリーを補う内容でも構いません）",
+        "placeholder": "この目標を達成したとき…"
+      },
+      "climbing_goal": {
+        "title": "今いちばん達成したいクライミングの目標",
+        "subtitle": "今取り組んでいる目標とその進み具合",
+        "placeholder": "今いちばん達成したい目標は…"
+      },
+      "climbing_style": {
+        "title": "いちばん惹かれるクライミングスタイル",
+        "subtitle": "ボルダリング、リード、クラック、ルーフなど。なぜ惹かれるのか",
+        "placeholder": "いちばん惹かれるスタイルは…"
+      },
+      "climbing_inspiration": {
+        "title": "刺激を受けたクライマーや映像",
+        "subtitle": "あるクライマー、映像、本から受けた刺激",
+        "placeholder": "いちばん刺激を受けたのは…"
+      },
+      "life_outside_climbing": {
+        "title": "クライミング以外で夢中になっていること",
+        "subtitle": "情熱を注いでいるほかの趣味や活動",
+        "placeholder": "クライミング以外では、こんなことも好きです…"
+      }
+    }
+  },
+  "BiographyTags": {
+    "dimensions": {
+      "sys_style_cult": {
+        "name": "スタイル教",
+        "description": "あなたは何教の信者ですか？"
+      },
+      "sys_injury_badge": {
+        "name": "ケガの勲章",
+        "description": "クライマーとしての戦歴"
+      },
+      "sys_shoe_faction": {
+        "name": "シューズ派閥",
+        "description": "あなたのシューズ信仰"
+      },
+      "sys_time_type": {
+        "name": "登る時間帯",
+        "description": "いつ登りますか？"
+      },
+      "sys_lifestyle": {
+        "name": "ライフスタイル",
+        "description": "クライミングと生活のバランス"
+      },
+      "sys_climbing_music": {
+        "name": "クライミングBGM",
+        "description": "登るとき何を聴きますか？"
+      },
+      "sys_failure_response": {
+        "name": "失敗との向き合い方",
+        "description": "登れないとき、どうしますか？"
+      },
+      "sys_social_type": {
+        "name": "ソーシャルタイプ",
+        "description": "ジムや岩場での人付き合い"
+      },
+      "sys_chalk_habit": {
+        "name": "チョークの習慣",
+        "description": "チョークとの付き合い方"
+      },
+      "sys_training_approach": {
+        "name": "トレーニング方針",
+        "description": "どうやって強くなりますか？"
+      },
+      "sys_local_identity": {
+        "name": "ホームエリア",
+        "description": "あなたのホームグラウンド"
+      }
+    },
+    "options": {
+      "sys_style_cult_crack": {
+        "label": "#クラック教",
+        "description": "ジャムが決まる快感は何にも代えがたい"
+      },
+      "sys_style_cult_slab": {
+        "label": "#スラブ教",
+        "description": "バランスこそ芸術"
+      },
+      "sys_style_cult_overhang": {
+        "label": "#強傾斜教",
+        "description": "かぶっていないと登る気がしない"
+      },
+      "sys_style_cult_dyno": {
+        "label": "#ランジ教",
+        "description": "飛べるなら飛びます"
+      },
+      "sys_style_cult_crimp": {
+        "label": "#カチ教",
+        "description": "カチは小さいほど愛おしい"
+      },
+      "sys_style_cult_jug": {
+        "label": "#ガバ教",
+        "description": "ガバこそ我が信仰"
+      },
+      "sys_style_cult_all": {
+        "label": "#なんでも登る教",
+        "description": "好き嫌いはありません"
+      },
+      "sys_injury_badge_a2": {
+        "label": "#A2プーリーサバイバー",
+        "description": "指のプーリー（腱鞘）損傷"
+      },
+      "sys_injury_badge_trigger_finger": {
+        "label": "#ばね指経験者",
+        "description": "腱鞘炎"
+      },
+      "sys_injury_badge_tfcc": {
+        "label": "#手首TFCC",
+        "description": "三角線維軟骨複合体損傷"
+      },
+      "sys_injury_badge_tennis_elbow": {
+        "label": "#テニス肘",
+        "description": "上腕骨外側上顆炎"
+      },
+      "sys_injury_badge_golf_elbow": {
+        "label": "#ゴルフ肘",
+        "description": "上腕骨内側上顆炎"
+      },
+      "sys_injury_badge_impingement": {
+        "label": "#肩インピンジメント",
+        "description": "肩インピンジメント症候群"
+      },
+      "sys_injury_badge_rotator_cuff": {
+        "label": "#腱板断裂",
+        "description": "肩の腱板損傷"
+      },
+      "sys_injury_badge_back": {
+        "label": "#腰痛持ち",
+        "description": "腰椎まわりのトラブル"
+      },
+      "sys_injury_badge_knee": {
+        "label": "#膝に水",
+        "description": "膝関節のトラブル"
+      },
+      "sys_injury_badge_ankle": {
+        "label": "#足首ねんざ",
+        "description": "着地でのケガ"
+      },
+      "sys_injury_badge_neck": {
+        "label": "#首ガチガチ",
+        "description": "頸椎の不調"
+      },
+      "sys_injury_badge_skin": {
+        "label": "#指皮の勲章",
+        "description": "指皮がめくれた・裂けた"
+      },
+      "sys_injury_badge_none": {
+        "label": "#今のところ無傷",
+        "description": "この状態を大切に"
+      },
+      "sys_injury_badge_rehab": {
+        "label": "#永遠にリハビリ中",
+        "description": "レストもトレーニングのうち"
+      },
+      "sys_shoe_faction_lasportiva": {
+        "label": "#LaSportiva党",
+        "description": "ソリューションは信仰です"
+      },
+      "sys_shoe_faction_scarpa": {
+        "label": "#Scarpa派",
+        "description": "インスティンクトを履いたら戻れない"
+      },
+      "sys_shoe_faction_evolv": {
+        "label": "#Evolv教",
+        "description": "アメリカンデザインが足に合う"
+      },
+      "sys_shoe_faction_unparallel": {
+        "label": "#UnParallel新勢力",
+        "description": "マイナーだけど履きやすい"
+      },
+      "sys_shoe_faction_many": {
+        "label": "#シューズは多いほどいい",
+        "description": "課題ごとに履き分けます"
+      },
+      "sys_shoe_faction_one": {
+        "label": "#一足を履きつぶす",
+        "description": "性能より愛着"
+      },
+      "sys_shoe_faction_rental": {
+        "label": "#レンタルシューズでも登れる",
+        "description": "大事なのはシューズじゃない"
+      },
+      "sys_time_type_morning": {
+        "label": "#朝活クライマー",
+        "description": "朝のガラガラのジムで気持ちよく登る"
+      },
+      "sys_time_type_night": {
+        "label": "#夜型クライマー",
+        "description": "仕事終わりのジムタイム"
+      },
+      "sys_time_type_weekend": {
+        "label": "#週末クライマー",
+        "description": "平日は仕事、週末に全力"
+      },
+      "sys_time_type_lunch": {
+        "label": "#昼休みクライマー",
+        "description": "お昼にこっそりひと登り"
+      },
+      "sys_time_type_whenever": {
+        "label": "#空いたら登る",
+        "description": "不定期でもチャンスは逃さない"
+      },
+      "sys_time_type_fulltime": {
+        "label": "#フルタイムクライマー",
+        "description": "毎日がクライミングデー"
+      },
+      "sys_lifestyle_dirtbag": {
+        "label": "#ダートバッグ魂",
+        "description": "登るためなら車中泊も平気"
+      },
+      "sys_lifestyle_workbag": {
+        "label": "#ワークバッグ",
+        "description": "働いているけれど心は壁の上"
+      },
+      "sys_lifestyle_weekend": {
+        "label": "#週末エスケープ",
+        "description": "平日は社畜、週末は野生児"
+      },
+      "sys_lifestyle_gym": {
+        "label": "#ジムの住人",
+        "description": "インドアだけで十分満足"
+      },
+      "sys_lifestyle_travel": {
+        "label": "#クライミングトリップ派",
+        "description": "どこへ行っても岩場を探す"
+      },
+      "sys_lifestyle_local": {
+        "label": "#近場で済ませる",
+        "description": "家から近いジムが一番"
+      },
+      "sys_climbing_music_none": {
+        "label": "#無音派",
+        "description": "ムーブに集中したい"
+      },
+      "sys_climbing_music_electronic": {
+        "label": "#テクノ",
+        "description": "ビートが体を動かす"
+      },
+      "sys_climbing_music_hiphop": {
+        "label": "#ヒップホップ",
+        "description": "Wu-Tang が力をくれる"
+      },
+      "sys_climbing_music_rock": {
+        "label": "#ロック・メタル",
+        "description": "パワーの源"
+      },
+      "sys_climbing_music_lofi": {
+        "label": "#Lo-fiでリラックス",
+        "description": "チルなほうがよく登れる"
+      },
+      "sys_climbing_music_podcast": {
+        "label": "#ポッドキャスト派",
+        "description": "聴きながら登ります"
+      },
+      "sys_climbing_music_gym": {
+        "label": "#ジムのBGMで十分",
+        "description": "特にこだわりなし"
+      },
+      "sys_failure_response_retry": {
+        "label": "#もう一便",
+        "description": "今日こそ落とす"
+      },
+      "sys_failure_response_rest": {
+        "label": "#レストしてまた明日",
+        "description": "無理はしない"
+      },
+      "sys_failure_response_switch": {
+        "label": "#別の課題へ",
+        "description": "これは自分向きじゃない"
+      },
+      "sys_failure_response_watch": {
+        "label": "#人の登りを見る",
+        "description": "こっそりベータを盗む"
+      },
+      "sys_failure_response_video": {
+        "label": "#動画で分析",
+        "description": "理論派"
+      },
+      "sys_failure_response_ask": {
+        "label": "#人に聞く",
+        "description": "強い人に教えてもらう"
+      },
+      "sys_social_type_solo": {
+        "label": "#ソロクライマー",
+        "description": "ひとりでも登れます"
+      },
+      "sys_social_type_partner": {
+        "label": "#固定パートナーあり",
+        "description": "いつもの相棒がいます"
+      },
+      "sys_social_type_organizer": {
+        "label": "#セッション幹事",
+        "description": "大勢でワイワイが好き"
+      },
+      "sys_social_type_shy": {
+        "label": "#人見知りだけど友達がほしい",
+        "description": "そっと様子見中"
+      },
+      "sys_social_type_talkative": {
+        "label": "#おしゃべり",
+        "description": "登りながらよくしゃべる"
+      },
+      "sys_social_type_quiet": {
+        "label": "#静かに集中派",
+        "description": "あまり話しません"
+      },
+      "sys_chalk_habit_heavy": {
+        "label": "#チョーク盛り盛り",
+        "description": "遠慮なくつけます"
+      },
+      "sys_chalk_habit_moderate": {
+        "label": "#ほどほどに",
+        "description": "環境にやさしく"
+      },
+      "sys_chalk_habit_liquid": {
+        "label": "#液体チョーク派",
+        "description": "粉が舞いにくい"
+      },
+      "sys_chalk_habit_minimal": {
+        "label": "#ほぼノーチョーク",
+        "description": "あまり手汗をかかない"
+      },
+      "sys_chalk_habit_stalling": {
+        "label": "#チョークアップは時間稼ぎ",
+        "description": "実は核心から逃げているだけ"
+      },
+      "sys_training_approach_climb": {
+        "label": "#とにかく登る",
+        "description": "登れば登るほど強くなる"
+      },
+      "sys_training_approach_hangboard": {
+        "label": "#フィンガーボード信者",
+        "description": "ぶら下がるのが日課"
+      },
+      "sys_training_approach_campus": {
+        "label": "#キャンパスボード派",
+        "description": "パワーこそ正義"
+      },
+      "sys_training_approach_core": {
+        "label": "#体幹トレーニングマニア",
+        "description": "体の張りが大事"
+      },
+      "sys_training_approach_zen": {
+        "label": "#ゆるく上達",
+        "description": "登れればそれでよし"
+      },
+      "sys_training_approach_planned": {
+        "label": "#計画的トレーニング",
+        "description": "ピリオダイゼーション・記録・分析"
+      },
+      "sys_training_approach_youtube": {
+        "label": "#YouTube研究員",
+        "description": "登るより動画を見ている時間のほうが長い"
+      },
+      "sys_local_identity_longdong": {
+        "label": "#龍洞信者",
+        "description": "週末は必ず巡礼"
+      },
+      "sys_local_identity_limestone": {
+        "label": "#石灰岩ラバー",
+        "description": "自然の岩の魅力"
+      },
+      "sys_local_identity_indoor": {
+        "label": "#インドア専門",
+        "description": "エアコンとマットがある"
+      },
+      "sys_local_identity_anywhere": {
+        "label": "#どこでも登る",
+        "description": "場所は選びません"
+      },
+      "sys_local_identity_gym": {
+        "label": "#ジムの常連",
+        "description": "ホームジムを表示する動的タグ"
+      }
+    },
+    "templates": {
+      "sys_local_identity_gym": "#{value}の常連"
+    }
+  },
+  "BucketListForm": {
+    "editGoalTitle": "目標を編集",
+    "addGoalTitle": "目標を追加",
+    "titleLabel": "目標のタイトル *",
+    "titlePlaceholder": "例：龍洞の校門口を完登する",
+    "categoryLabel": "カテゴリー",
+    "categoryPlaceholder": "カテゴリーを選択",
+    "descriptionLabel": "詳細",
+    "descriptionPlaceholder": "達成したい目標について書いてください...",
+    "detailsTitle": "目標の詳細（任意）",
+    "targetGradeLabel": "目標グレード",
+    "targetGradePlaceholder": "例：5.12a / V6",
+    "targetLocationLabel": "目標の場所",
+    "targetLocationPlaceholder": "例：龍洞",
+    "targetDateLabel": "達成予定日",
+    "progressTitle": "進捗の記録",
+    "progressHint": "オンにすると目標の進捗を記録できます",
+    "progressModeLabel": "記録方法",
+    "modeManualTitle": "パーセント",
+    "modeManualDesc": "進捗率を手動で調整します",
+    "modeMilestoneTitle": "マイルストーン",
+    "modeMilestoneDesc": "目標を複数の段階に分けて設定します",
+    "milestoneDefaultTitle": "マイルストーン {number}",
+    "milestoneFinalTitle": "目標達成",
+    "currentProgress": "現在の進捗：{progress}%",
+    "milestonesLabel": "マイルストーンの設定",
+    "milestoneTitlePlaceholder": "マイルストーン名",
+    "addMilestone": "マイルストーンを追加",
+    "publicLabel": "目標を公開",
+    "publicHint": "ほかのユーザーがこの目標を見られるようになります",
+    "fixErrors": "次のエラーを修正してください：",
+    "cancel": "キャンセル",
+    "saving": "保存中...",
+    "saveChanges": "変更を保存",
+    "quickAddPlaceholder": "目標名を入力...",
+    "quickAdding": "追加中...",
+    "quickAdd": "追加",
+    "invalidYoutubeUrl": "有効な YouTube 動画の URL を入力してください",
+    "invalidInstagramUrl": "有効な Instagram 投稿の URL を入力してください",
+    "completionCongrats": "目標達成おめでとうございます！",
+    "optional": "（任意）",
+    "completionStoryLabel": "達成ストーリー",
+    "completionStoryHint": "目標を達成するまでの過程や感じたことをシェアして、ほかのクライマーの参考にしてもらいましょう",
+    "completionStoryPlaceholder": "例：ずっと登りたかったルートを、この週末ついに完登できました！準備にまる3か月かかって...",
+    "psychologicalLabel": "メンタル面",
+    "psychologicalHint": "この目標に取り組む中で、気持ちの面でどんな変化や成長がありましたか？",
+    "psychologicalPlaceholder": "例：最初の2回は失敗して落ち込みましたが、コーチに「それが普通、大事なのはトライのたびに学ぶこと」と言われて...",
+    "technicalLabel": "技術面",
+    "technicalHint": "技術面でシェアできる気づきはありますか？（ムーブ、ルートの読み、ギア選びなど）",
+    "technicalPlaceholder": "例：このルートの核心は3ピン目あたりで、サイドプルとハイステップの組み合わせが必要です。プロテクションのセットにも注意が必要で...",
+    "mediaLabel": "関連メディア（任意）",
+    "youtubeTitle": "YouTube 動画",
+    "youtubePlaceholder": "YouTube 動画の URL を貼り付け",
+    "instagramTitle": "Instagram 投稿",
+    "instagramPlaceholder": "Instagram 投稿の URL を貼り付け",
+    "photoComingSoon": "写真のアップロード機能は近日公開予定です",
+    "fillLater": "あとで入力",
+    "completeAndSave": "達成して保存",
+    "activeWithCount": "挑戦中（{count}）",
+    "completedWithCount": "達成済み（{count}）",
+    "completedOn": "達成日：{date}",
+    "viewCompletionStory": "達成ストーリーを見る",
+    "collapse": "閉じる",
+    "completedBadge": "達成済み",
+    "markComplete": "達成にする",
+    "edit": "編集",
+    "delete": "削除",
+    "emptyDefault": "まだ目標がありません",
+    "progressLabel": "進捗",
+    "breadcrumbHome": "ホーム",
+    "breadcrumbBiography": "プロフィール"
+  },
+  "Countries": {
+    "TW": "台湾",
+    "TH": "タイ",
+    "VN": "ベトナム",
+    "CN": "中国",
+    "JP": "日本",
+    "KR": "韓国",
+    "US": "アメリカ",
+    "ES": "スペイン",
+    "FR": "フランス",
+    "IT": "イタリア",
+    "GR": "ギリシャ",
+    "TR": "トルコ",
+    "MY": "マレーシア",
+    "ID": "インドネシア",
+    "PH": "フィリピン",
+    "AU": "オーストラリア",
+    "NZ": "ニュージーランド",
+    "GB": "イギリス",
+    "DE": "ドイツ",
+    "CH": "スイス",
+    "OTHER": "その他"
+  },
+  "LibMisc": {
+    "trainingProgressUpdateFailed": "更新に失敗しました",
+    "trainingProgressUpdateFailedDesc": "トレーニングの進捗を更新できませんでした。しばらくしてからもう一度お試しください。",
+    "imageErrors": {
+      "unsupportedFormat": "対応していないファイル形式です。JPEG、PNG、WebP、GIF のみ利用できます。",
+      "gifTooLarge": "GIF ファイルは 500KB 以下にしてください。",
+      "canvasUnavailable": "画像を処理できませんでした。別のブラウザでもう一度お試しください。",
+      "compressFailed": "画像の圧縮に失敗しました。",
+      "loadFailed": "画像の読み込みに失敗しました。"
+    },
+    "storyPromptPlaceholder": "あなたのストーリーを聞かせてください..."
+  },
+  "Onboarding": {
+    "choice": {
+      "skipAria": "スキップ",
+      "badge": "かんたん自己紹介",
+      "answeredCount": "これまでに {count} 人がこの質問に回答しています",
+      "optionCount": "{count} 人",
+      "otherPlaceholder": "始めたきっかけを教えてください...",
+      "submitting": "送信中...",
+      "submit": "送信",
+      "skipForNow": "今はスキップして、あとで回答する",
+      "sameAsYou": "あなたと同じ回答の人が <highlight>{count}</highlight> 人います",
+      "continue": "次へ",
+      "done": "完了",
+      "followUpBadge": "ひとことで大丈夫です",
+      "followUpHint": "任意です。あなたのストーリーをもっと知ってもらいましょう",
+      "followUpPlaceholder": "あなたのストーリーを入力...",
+      "skip": "スキップ",
+      "completed": "完了しました！"
+    },
+    "guided": {
+      "encouragement1": "いいですね！続けましょう",
+      "encouragement2": "素敵な回答です！",
+      "encouragement3": "お見事！もう一問いきましょう",
+      "encouragement4": "完璧です！その調子です",
+      "encouragement5": "ナイス！この調子で続けましょう",
+      "defaultTitle": "もっと多くの人に知ってもらいましょう",
+      "defaultSubtitle": "いくつかの簡単な質問に答えて、プロフィールを充実させましょう",
+      "laterAria": "あとで入力する",
+      "badge": "クイック設定",
+      "progress": "{total} 問中 {current} 問目",
+      "answerPlaceholder": "回答を入力...",
+      "prev": "前の質問",
+      "skipQuestion": "この質問をスキップ",
+      "finish": "完了",
+      "next": "次の質問",
+      "laterLink": "あとで入力して、先にサイトを見てみる"
+    },
+    "emptyStates": {
+      "biography": {
+        "noStories": {
+          "title": "あなたのストーリーをシェアしませんか",
+          "description": "クライマーにはそれぞれの歩みがあります。あなたのストーリーをシェアして、もっと多くの人に知ってもらいましょう。",
+          "actionLabel": "ストーリーを書く"
+        },
+        "noOneLiners": {
+          "title": "ひとことで自己紹介",
+          "description": "短い自己紹介があると、ほかのクライマーにすぐ覚えてもらえます。",
+          "actionLabel": "ひとことを書く"
+        },
+        "noTags": {
+          "title": "クライミングタグを選びましょう",
+          "description": "好きなクライミングの種類やスタイルをみんなに伝えましょう。",
+          "actionLabel": "タグを選ぶ"
+        },
+        "noAvatar": {
+          "title": "写真をアップロード",
+          "description": "ほかのクライマーに覚えてもらいましょう。クライミング中の一枚がいちばんあなたらしさを伝えます！",
+          "actionLabel": "写真をアップロード"
+        }
+      },
+      "social": {
+        "noFollowing": {
+          "title": "ほかのクライマーを探してみましょう",
+          "description": "気になるクライマーをフォローして、最新の活動をチェックしましょう。",
+          "actionLabel": "クライマーを探す"
+        },
+        "noLikes": {
+          "title": "気に入った投稿に「いいね」を",
+          "description": "ほかのクライマーのストーリーを読んで、気に入ったものに「いいね」を送りましょう！",
+          "actionLabel": "ストーリーを見る"
+        },
+        "noComments": {
+          "title": "コメントを残してみましょう",
+          "description": "ほかのクライマーと交流して、経験やアドバイスをシェアしましょう。",
+          "actionLabel": "コンテンツを見る"
+        }
+      },
+      "bookmarks": {
+        "noBookmarks": {
+          "title": "気になるコンテンツを保存",
+          "description": "気になるストーリー、ルート、岩場をブックマークしておくと、あとから見返せます。",
+          "actionLabel": "コンテンツを探す"
+        }
+      },
+      "generic": {
+        "noContent": {
+          "title": "まだコンテンツがありません",
+          "description": "いろいろ見て回るか、最初のコンテンツを作成してみましょう！",
+          "actionLabel": "探してみる"
+        }
+      }
+    }
+  },
+  "ProfileDashboard": {
+    "title": "マイプロフィール",
+    "subtitle": "カードをクリックすると各セクションを編集できます",
+    "cards": {
+      "avatar": {
+        "title": "アイコンとカバー",
+        "description": "プロフィール用の写真"
+      },
+      "basic": {
+        "title": "基本情報",
+        "description": "ニックネーム、ひとこと紹介"
+      },
+      "climbing": {
+        "title": "クライミング情報",
+        "description": "クライミング歴、よく行く場所、好み"
+      },
+      "social": {
+        "title": "SNSリンク",
+        "description": "Instagram、YouTube"
+      },
+      "coreStories": {
+        "title": "コアストーリー",
+        "description": "クライミングとの出会い、クライミングの意味"
+      },
+      "advancedStories": {
+        "title": "ショートストーリー",
+        "description": "クライミングのエピソードや成長の軌跡を記録します"
+      },
+      "footprints": {
+        "title": "クライミングの足跡",
+        "description": "訪れたクライミングスポットを記録します"
+      },
+      "ascents": {
+        "title": "完登記録",
+        "description": "完登記録の確認と管理"
+      },
+      "settings": {
+        "title": "公開設定",
+        "description": "プロフィールを公開するかどうか"
+      }
+    },
+    "panels": {
+      "avatar": "プロフィール用の写真を設定します",
+      "basic": "ニックネームと自己紹介を編集します",
+      "climbing": "クライミングに関する情報を編集します",
+      "social": "SNSアカウントを連携します",
+      "coreStories": "あなたとクライミングのストーリーを共有しましょう",
+      "advancedStories": "クライミングのエピソードをさらに記録します",
+      "footprints": "訪れたクライミングスポットを記録します",
+      "settings": "プロフィールの公開状態を設定します"
+    },
+    "categories": {
+      "growth": "成長とブレイクスルー",
+      "psychology": "メンタルと哲学",
+      "community": "コミュニティ",
+      "practical": "実践ノウハウ",
+      "dreams": "夢と探求",
+      "life": "ライフスタイル"
+    },
+    "preview": {
+      "avatarSet": "✓ アイコン設定済み",
+      "avatarUnset": "○ アイコン未設定",
+      "coverSet": "✓ カバー設定済み",
+      "coverUnset": "○ カバー未設定",
+      "nameUnset": "未設定",
+      "startYear": "{year}年にクライミングを開始",
+      "youtubeLinked": "YouTube 連携済み",
+      "public": "● 公開",
+      "private": "○ 非公開"
+    },
+    "toast": {
+      "avatarUploadSuccess": "アイコンをアップロードしました",
+      "avatarUploadFailed": "アイコンのアップロードに失敗しました",
+      "coverUploadSuccess": "カバー写真をアップロードしました",
+      "coverUploadFailed": "カバー写真のアップロードに失敗しました",
+      "uploadFailed": "アップロードに失敗しました",
+      "retryLater": "しばらくしてからもう一度お試しください",
+      "storySaved": "ストーリーを保存しました",
+      "saveFailed": "保存に失敗しました",
+      "saveSuccess": "保存しました",
+      "saveSuccessDesc": "プロフィールを更新しました"
+    },
+    "actions": {
+      "cancel": "キャンセル",
+      "save": "保存",
+      "saving": "保存中..."
+    }
+  },
+  "ProfileEditor": {
+    "common": {
+      "back": "戻る",
+      "cancel": "キャンセル",
+      "save": "保存",
+      "saving": "保存中...",
+      "saved": "保存しました",
+      "saveFailed": "保存に失敗しました",
+      "uploadFailed": "アップロードに失敗しました",
+      "imageUploadSuccess": "画像をアップロードしました",
+      "avatarAlt": "アイコン",
+      "coverAlt": "カバー",
+      "igPlaceholder": "Instagram のユーザー名",
+      "startYearPlaceholder": "例：2020",
+      "locationsPlaceholder": "例：紅石クライミングジム、龍洞",
+      "publicDesc": "ほかの人があなたのプロフィールを見ることができます"
+    },
+    "sections": {
+      "avatar": "アイコンとカバー",
+      "basic": "基本情報",
+      "climbing": "クライミング情報",
+      "social": "SNSリンク",
+      "coreStories": "コアストーリー",
+      "advancedStories": "ショートストーリー",
+      "footprints": "クライミングの足跡",
+      "settings": "公開設定"
+    },
+    "selector": {
+      "title": "編集方法を選ぶ",
+      "subtitle": "3 種類の編集スタイルをご用意しています。自分に合ったものを選んでください",
+      "bestForLabel": "こんな方に：",
+      "tryThis": "このバージョンを試す",
+      "recommended": "おすすめ",
+      "compareTitle": "機能比較",
+      "featureHeader": "機能",
+      "versionLabel": "バージョン {version}",
+      "featureLivePreview": "リアルタイムプレビュー",
+      "featureAutoSave": "自動保存",
+      "featureProgress": "進捗の確認",
+      "featureQuickSwitch": "セクションの素早い切り替え",
+      "featureBeginner": "初めての方にやさしい",
+      "featureMobile": "モバイルでの使いやすさ",
+      "hint": "編集方法はいつでも切り替えられます。入力した内容はすべて保持されます",
+      "options": {
+        "A": {
+          "title": "バージョン A：タブ式編集",
+          "subtitle": "従来のフォーム形式",
+          "description": "サイドのナビゲーションで、1 つのページ内でセクションを切り替えながら編集します。複数の項目をまとめて編集したい方に向いています。",
+          "pro1": "ひと目でわかるナビゲーション",
+          "pro2": "セクションを素早く切り替え",
+          "pro3": "まとめて編集するのに最適",
+          "bestFor": "すべての情報をまとめて編集したい方"
+        },
+        "B": {
+          "title": "バージョン B：インライン編集",
+          "subtitle": "見たまま編集",
+          "description": "プレビュー画面を直接クリックして編集でき、変更がすぐに反映されます。Notion のような編集体験です。",
+          "pro1": "直感的に編集できる",
+          "pro2": "変更をすぐにプレビュー",
+          "pro3": "自動保存",
+          "bestFor": "特定の項目をさっと修正したい方"
+        },
+        "C": {
+          "title": "バージョン C：ガイド付きウィザード",
+          "subtitle": "ステップごとに設定",
+          "description": "ステップごとに案内するので、一度に 1 つのことに集中できます。進み具合もはっきりわかります。",
+          "pro1": "迷わず進められる",
+          "pro2": "進捗がわかりやすい",
+          "pro3": "初めての方に最適",
+          "bestFor": "初めて設定する方、案内に沿って進めたい方"
+        }
+      }
+    },
+    "versionA": {
+      "title": "プロフィールを編集",
+      "subtitle": "クライミングプロフィールを充実させましょう",
+      "saveChanges": "変更を保存",
+      "unsavedChanges": "保存されていない変更があります",
+      "avatarUploadSuccess": "アイコンをアップロードしました",
+      "coverUploadSuccess": "カバーをアップロードしました",
+      "storySaved": "ストーリーを保存しました",
+      "saveSuccess": "保存しました",
+      "saveSuccessDesc": "プロフィールを更新しました",
+      "retryLater": "しばらくしてからもう一度お試しください",
+      "tabDesc": {
+        "avatar": "プロフィール用の写真",
+        "basic": "ニックネーム、ひとこと紹介",
+        "climbing": "クライミング歴、よく行く場所",
+        "social": "Instagram、YouTube",
+        "coreStories": "クライミングとの出会い",
+        "advancedStories": "その他のクライミングエピソード",
+        "footprints": "訪れた場所",
+        "settings": "プライバシー設定"
+      }
+    },
+    "versionB": {
+      "editFieldAria": "編集：{field}",
+      "editStoryAria": "「{title}」を編集",
+      "savingShort": "保存中",
+      "filledAria": "入力済み",
+      "unfilledAria": "未入力",
+      "uploading": "アップロード中...",
+      "change": "変更",
+      "add": "追加",
+      "changeCover": "カバーを変更",
+      "addCover": "カバーを追加",
+      "changeAvatar": "アイコンを変更",
+      "uploadAvatar": "アイコンをアップロード",
+      "namePlaceholder": "ニックネームを入力",
+      "titlePlaceholder": "ひとことで自分を表すと...",
+      "startYearLabel": "クライミングを始めた年",
+      "locationsLabel": "よく行くジム・岩場",
+      "goToInstagram": "Instagram を開く",
+      "youtubeLabel": "YouTube チャンネル",
+      "youtubePlaceholder": "YouTube チャンネルのリンク",
+      "myStories": "マイストーリー",
+      "filled": "入力済み",
+      "unfilled": "未入力",
+      "all": "すべて",
+      "storyProgressAria": "ストーリーの入力状況",
+      "storyFilterAria": "ストーリーの絞り込み",
+      "showMore": "もっと見る（残り {count} 問）",
+      "showMoreAria": "ストーリーをもっと見る（残り {count} 問）",
+      "emptyFilled": "まだストーリーが入力されていません",
+      "emptyUnfilled": "すべてのストーリーを入力しました！",
+      "privateDesc": "自分だけが見ることができます",
+      "publicToggleAria": "公開設定の切り替え",
+      "setPublic": "公開に設定しました",
+      "setPrivate": "非公開に設定しました",
+      "updateFailed": "更新に失敗しました",
+      "backToSelector": "選択画面に戻る"
+    },
+    "versionC": {
+      "completeTitle": "設定が完了しました！",
+      "completeDesc": "プロフィールの準備が整いました",
+      "clickToUpload": "クリックしてアップロード",
+      "avatarHint1": "あなたらしい写真を 1 枚選んでください",
+      "avatarHint2": "正方形の画像がおすすめです",
+      "nameLabel": "ニックネームを教えてください",
+      "namePlaceholder": "例：イワ、ロック",
+      "titleLabel": "ひとことで自分を表すと？",
+      "titlePlaceholder": "例：週末ボルダラー",
+      "titleHint": "名前の下に表示されます",
+      "startYearLabel": "クライミングを始めたのは何年ですか？",
+      "locationsLabel": "普段はどこで登っていますか？",
+      "locationsHint": "複数ある場合はカンマで区切って入力できます",
+      "instagramLabel": "Instagram アカウント",
+      "youtubeLabel": "YouTube チャンネル（任意）",
+      "youtubePlaceholder": "YouTube チャンネルのリンク",
+      "originLabel": "クライミングとの出会い",
+      "originPlaceholder": "クライミングを始めたきっかけを教えてください...",
+      "meaningLabel": "あなたにとってクライミングとは？",
+      "meaningPlaceholder": "クライミングは生活の中でどんな存在ですか...",
+      "public": "公開",
+      "private": "非公開",
+      "privateDesc": "自分だけが見ることができます",
+      "privacyHint": "この設定はいつでも変更できます",
+      "prevStep": "前へ",
+      "skip": "スキップ",
+      "finish": "設定を完了",
+      "nextStep": "次へ",
+      "steps": {
+        "avatar": {
+          "title": "アイコンを設定",
+          "subtitle": "みんなに自分を知ってもらいましょう"
+        },
+        "basic": {
+          "title": "自己紹介",
+          "subtitle": "ニックネームとプロフィール"
+        },
+        "climbing": {
+          "title": "あなたのクライミング歴",
+          "subtitle": "これまでの経験を教えてください"
+        },
+        "social": {
+          "title": "SNSアカウントを連携",
+          "subtitle": "クライミング仲間に見つけてもらいましょう"
+        },
+        "story": {
+          "title": "ストーリーを共有",
+          "subtitle": "クライミングとの出会い"
+        },
+        "privacy": {
+          "title": "プライバシー設定",
+          "subtitle": "誰に公開するかを選びます"
+        }
+      }
+    }
+  },
+  "ProfileEvolution": {
+    "pageTitle": "クライミング性格の変化",
+    "pageSubtitle": "あなたのクライミング性格が時間とともにどう変わってきたかを振り返れます",
+    "calculateNow": "今すぐ計算",
+    "timelineTitle": "変化の履歴",
+    "toastEvolved": "性格タイプが {type} に変化しました",
+    "toastUnchanged": "性格タイプに変化はありませんでした",
+    "toastRateLimited": "手動での計算は1日1回までです。明日もう一度お試しください",
+    "toastCalculateFailed": "計算に失敗しました。しばらくしてからもう一度お試しください",
+    "bannerEvolved": "クライミング性格が変化しました！<b>{from}</b> から <b>{to}</b> へ",
+    "bannerCalculated": "クライミング性格の計算が完了しました：<b>{to}</b>",
+    "bannerViewDetails": "タップして詳細を見る",
+    "triggerQuiz": "診断",
+    "triggerBehavior": "行動",
+    "triggerCron": "自動",
+    "timelineEmpty": "まだ変化の記録がありません",
+    "timelineEmptyHint": "診断を受けるか登攀記録がたまると、性格の変化が自動で計算されます",
+    "initialType": "最初のタイプ",
+    "consecutiveCount": "{count} 回連続",
+    "axisPower": "パワー",
+    "axisGoal": "目標",
+    "axisBold": "大胆さ",
+    "spectrumTitle": "クライミングスペクトラム",
+    "spectrumEmpty": "まだデータが足りません",
+    "spectrumEmptyHint": "クライミングスペクトラムの計算には登攀記録が必要です",
+    "spectrumRedpointSide": "じっくり型（レッドポイント）",
+    "spectrumOnsightSide": "即興型（オンサイト）",
+    "growthDirection": "成長の方向：",
+    "onsightMax": "オンサイト最高グレード",
+    "redpointMax": "レッドポイント最高グレード"
+  },
+  "ProfileGallery": {
+    "photoAlt": "クライミング写真",
+    "deleteImage": "画像を削除",
+    "dragToSort": "ドラッグして並べ替え",
+    "captionPlaceholder": "キャプションを入力...",
+    "addCaption": "クリックしてキャプションを追加...",
+    "crop": {
+      "title": "画像をトリミング",
+      "previewAlt": "トリミングのプレビュー",
+      "reset": "リセット",
+      "cancel": "キャンセル",
+      "confirm": "トリミングを確定"
+    },
+    "uploader": {
+      "invalidType": "JPG、PNG、WebP 形式の画像をアップロードしてください",
+      "compressing": "圧縮中...",
+      "uploading": "アップロード中...",
+      "processing": "処理中...",
+      "compressFailed": "画像の圧縮に失敗しました",
+      "uploadFailed": "アップロードに失敗しました。しばらくしてからもう一度お試しください",
+      "dropHint": "ここに画像をドラッグするか、<highlight>クリックしてアップロード</highlight>",
+      "limitReached": "画像の上限枚数に達しました",
+      "cannotUpload": "アップロードできません",
+      "remaining": "あと {remaining} 枚アップロードできます（最大 {max} 枚）",
+      "cropSupported": "トリミング対応"
+    },
+    "layout": {
+      "label": "レイアウト：",
+      "single": "1 列",
+      "double": "2 列",
+      "grid": "グリッド"
+    },
+    "section": {
+      "emptyHint": "右上の「プロフィールを編集」ボタンから、クライミング写真をアップロードできます",
+      "reorderHint": "画像をドラッグして順番を変更できます"
+    }
+  },
+  "ProfileGoals": {
+    "navLabel": "クライミング目標",
+    "pageTitle": "クライミング目標",
+    "pageSubtitle": "目標を設定して、クライミングの進捗を記録しましょう",
+    "addGoal": "目標を追加",
+    "typeLabel": "目標の種類",
+    "titleLabel": "目標名",
+    "targetLabel": "目標値",
+    "dateLabel": "目標日（任意）",
+    "creating": "作成中...",
+    "createGoal": "目標を作成",
+    "emptyTitle": "まだ目標がありません",
+    "emptyHint": "AI アシスタントにクライミングの目標を伝えるか、上の「目標を追加」ボタンから設定してみましょう！",
+    "achievedWithCount": "達成済み（{count}）",
+    "achievedBadge": "達成済み",
+    "achieveDialogTitle": "目標を達成",
+    "achieveDialogMessage": "この目標を達成済みにしますか？",
+    "achieveDialogConfirm": "達成",
+    "deleteDialogTitle": "目標を削除",
+    "deleteDialogMessage": "この目標を削除しますか？この操作は元に戻せません。",
+    "delete": "削除",
+    "markAchieved": "達成済みにする",
+    "targetValue": "目標：{target}",
+    "currentValue": "現在：{value}",
+    "deadline": "期限：{date}",
+    "achievedAgo": "達成：{time}",
+    "createdAgo": "作成：{time}",
+    "toastCreated": "目標を作成しました",
+    "toastCreateFailed": "作成に失敗しました。しばらくしてからもう一度お試しください",
+    "toastAchieved": "目標達成おめでとうございます！",
+    "toastDeleted": "目標を削除しました",
+    "types": {
+      "grade": {
+        "label": "グレード目標",
+        "titlePlaceholder": "例：5.12a に挑戦",
+        "targetPlaceholder": "例：5.12a"
+      },
+      "route": {
+        "label": "ルート目標",
+        "titlePlaceholder": "例：「飛簷」に挑戦",
+        "targetPlaceholder": "例：飛簷"
+      },
+      "volume": {
+        "label": "月間の回数",
+        "titlePlaceholder": "例：月に10回登る",
+        "targetPlaceholder": "例：10"
+      },
+      "custom": {
+        "label": "カスタム目標",
+        "titlePlaceholder": "例：50本完登に挑戦",
+        "targetPlaceholder": "例：50本完登"
+      }
+    }
+  },
+  "ProfilePagesMisc": {
+    "aiMemoryEmptyHint": "AI アシスタントと会話すると、あなたのクライミングの好みや習慣を自動で覚えます。お気に入りの岩場や目標グレードを伝えてみましょう！",
+    "aiMemoryFilterAll": "すべて {count}",
+    "aiMemoryFilterPreference": "好み {count}",
+    "aiMemoryFilterBehavior": "行動 {count}",
+    "aiMemoryFilterFact": "事実 {count}",
+    "aiMemoryFilterEmpty": "このカテゴリーにはメモリがありません",
+    "photoAlt": "写真"
+  },
+  "ProfileSections": {
+    "pageTitle": "マイプロフィール",
+    "actions": {
+      "edit": "プロフィールを編集",
+      "cancel": "キャンセル",
+      "saving": "保存中...",
+      "save": "保存する",
+      "collapse": "閉じる"
+    },
+    "toast": {
+      "avatarUploaded": "アイコンをアップロードしました",
+      "avatarUploadFailed": "アイコンのアップロードに失敗しました",
+      "coverUploaded": "カバー写真をアップロードしました",
+      "coverUploadFailed": "カバー写真のアップロードに失敗しました",
+      "uploadFailed": "アップロードに失敗しました",
+      "retryLater": "しばらくしてからもう一度お試しください",
+      "storySaved": "ストーリーを保存しました",
+      "allStoriesSaved": "すべてのストーリーを保存しました",
+      "saveFailed": "保存に失敗しました",
+      "saveSuccess": "保存しました",
+      "saveSuccessDesc": "プロフィールを更新しました"
+    },
+    "avatar": {
+      "unsupportedFormat": "対応していないファイル形式です",
+      "unsupportedFormatDesc": "JPG、PNG、WebP、GIF 形式の画像をアップロードしてください",
+      "avatarTitle": "プロフィールのアイコン",
+      "avatarAlt": "アイコン",
+      "deleteAvatar": "アイコンを削除",
+      "uploading": "アップロード中...",
+      "changeAvatar": "アイコンを変更",
+      "uploadAvatar": "アイコンをアップロード",
+      "coverTitle": "プロフィールのカバー写真",
+      "coverAlt": "カバー写真",
+      "deleteCover": "カバー写真を削除",
+      "coverEmpty": "カバー写真はまだ設定されていません",
+      "changeCover": "カバーを変更",
+      "uploadCover": "カバーをアップロード",
+      "emptyHint": "右上の「プロフィールを編集」ボタンから、アイコンとカバー写真をアップロードできます"
+    },
+    "basicInfo": {
+      "nickname": "ニックネーム",
+      "tagline": "ひとことで自己紹介",
+      "taglinePlaceholder": "例：ボルダリング好き",
+      "notSet": "未設定"
+    },
+    "climbingInfo": {
+      "startYear": "クライミングを始めた年",
+      "selectYear": "年を選択してください",
+      "locations": "よく登る場所",
+      "locationsHint": "入力して Enter で追加",
+      "locationsPlaceholder": "場所の名前を入力し、Enter で追加",
+      "routeTypes": "好きなルートのタイプ",
+      "routeTypesHint": "複数選択可"
+    },
+    "routeTypes": {
+      "categories": {
+        "climbing": "クライミングの種類",
+        "terrain": "壁の形状",
+        "movement": "ムーブのスタイル"
+      },
+      "options": {
+        "bouldering": "ボルダリング",
+        "sport": "スポートクライミング",
+        "topRope": "トップロープ",
+        "speed": "スピードクライミング",
+        "trad": "トラッド",
+        "slab": "スラブ",
+        "vertical": "垂壁",
+        "overhang": "オーバーハング",
+        "roof": "ルーフ",
+        "crack": "クラック",
+        "arete": "カンテ",
+        "face": "フェイス",
+        "chimney": "チムニー",
+        "dynamic": "ダイナミック",
+        "parkour": "パルクール系",
+        "coordination": "コーディネーション",
+        "static": "スタティック",
+        "technical": "テクニカル",
+        "power": "パワー",
+        "endurance": "持久力"
+      }
+    },
+    "social": {
+      "title": "SNS リンク",
+      "subtitle": "SNS アカウントを追加すると、ほかのクライマーがあなたをフォローできます",
+      "notSet": "未設定",
+      "youtubeChannel": "YouTube チャンネル",
+      "youtubePlaceholder": "チャンネル ID または URL"
+    },
+    "experience": {
+      "originLabel": "クライミングとの出会い",
+      "originHint": "初めてクライミングに触れたときのことを教えてください。続けたいと思ったきっかけは何でしたか？",
+      "originPlaceholder": "例：2022 年の秋、友人に連れられてジムへ。初めてのトライで、一手一手に集中する感覚のとりこになりました...",
+      "meaningLabel": "あなたにとってクライミングとは",
+      "meaningHint": "クライミングは生活の中でどんな存在ですか？何をもたらしてくれますか？",
+      "meaningPlaceholder": "例：クライミングは最高のストレス解消法です。壁に向かっている間は仕事の悩みをすっかり忘れられます...",
+      "adviceLabel": "クライミングを始めた頃の自分へ",
+      "adviceHint": "スタート地点に戻れるなら、自分に何と声をかけますか？",
+      "advicePlaceholder": "例：グレードを急いで上げなくて大丈夫。一本一本を楽しんで、ケガをしたらしっかり休みましょう...",
+      "bucketListTitle": "クライミングのバケットリスト",
+      "bucketListDesc": "目標を立て、進み具合を記録し、達成のストーリーを残しましょう"
+    },
+    "stories": {
+      "title": "ショートストーリー",
+      "subtitle": "クライミングのストーリーと成長の軌跡を記録しましょう",
+      "expandEdit": "開いて編集",
+      "progress": "達成度",
+      "expandHint": "「開いて編集」を押して、クライミングのストーリーを書き始めましょう"
+    },
+    "footprints": {
+      "title": "クライミングの足跡",
+      "subtitle": "これまでに訪れた岩場やジム、遠征の記録を残しましょう",
+      "loadFailed": "読み込みに失敗しました",
+      "loadError": "クライミングの足跡を読み込めませんでした",
+      "created": "{count} 件追加",
+      "updated": "{count} 件更新",
+      "deleted": "{count} 件削除",
+      "separator": "、",
+      "updatedTitle": "クライミングの足跡を更新しました",
+      "updateFailed": "更新に失敗しました",
+      "unknownCountry": "不明",
+      "retry": "再試行",
+      "summary": "{countries} か国 · {locations} か所",
+      "empty": "クライミングの足跡はまだありません"
+    },
+    "publicSetting": {
+      "label": "プロフィールを公開する"
+    },
+    "personality": {
+      "strengths": "強み",
+      "blindSpots": "弱点",
+      "bestState": "ベストな状態",
+      "cta": "クライミングタイプを診断する"
+    },
+    "mobileNav": {
+      "goals": "目標"
+    },
+    "sidebar": {
+      "biography": "マイプロフィール",
+      "recommendations": "AI おすすめ",
+      "aiMemory": "AI メモリ",
+      "goals": "クライミング目標",
+      "training": "AI コーチ",
+      "bucketList": "バケットリスト",
+      "ascents": "登攀記録",
+      "stats": "実績",
+      "articles": "マイ記事",
+      "photos": "マイ写真",
+      "bookmarks": "ブックマーク",
+      "settings": "アカウント設定",
+      "defaultUser": "ユーザー"
+    }
+  },
+  "ProfileSetup": {
+    "routeTypeCategories": {
+      "climbing": "クライミングの種類",
+      "terrain": "壁の形状",
+      "movement": "ムーブのスタイル"
+    },
+    "routeTypes": {
+      "bouldering": "ボルダリング",
+      "sport": "スポーツクライミング",
+      "toprope": "トップロープ",
+      "speed": "スピードクライミング",
+      "trad": "トラッドクライミング",
+      "slab": "スラブ",
+      "vertical": "垂壁",
+      "overhang": "前傾壁",
+      "roof": "ルーフ",
+      "crack": "クラック",
+      "dynamic": "ダイナミック",
+      "static": "スタティック",
+      "technical": "テクニカル",
+      "power": "パワー系",
+      "endurance": "持久系"
+    },
+    "guidedCategories": {
+      "fun": "クライミングの楽しさ",
+      "goals": "目標とチャレンジ",
+      "growth": "成長と学び"
+    }
+  },
+  "ProfileTraining": {
+    "navLabel": "AI コーチ",
+    "pageTitle": "AI コーチ",
+    "pageSubtitle": "あなたのクライミング記録をもとに、パーソナライズされたトレーニング分析とアドバイスを提供します",
+    "loadFailed": "コーチ分析を読み込めませんでした",
+    "loadFailedHint": "ログイン済みで登攀記録があることを確認するか、しばらくしてからもう一度お試しください",
+    "overviewStats": "完登 {ascents} 本 · 岩場 {crags} か所",
+    "trainingSchool": "トレーニングスタイル：{school}",
+    "weaknessTitle": "弱点の分析とアドバイス",
+    "levelTitle": "レベル別トレーニングのアドバイス",
+    "daysPerWeek": "週 {min}〜{max} 日",
+    "focusAreas": "重点項目",
+    "avoid": "避けること",
+    "recommendedExercises": "おすすめのトレーニング",
+    "colExercise": "トレーニング",
+    "colReps": "回数／時間",
+    "colSets": "セット数",
+    "colFrequency": "頻度",
+    "sets": "{count} セット",
+    "setsRange": "{min}〜{max} セット",
+    "perWeek": "週 {count} 回",
+    "perWeekRange": "週 {min}〜{max} 回",
+    "progressTitle": "トレーニングの進捗",
+    "progressSummary": "トレーニング日 {completed}/{total} 日完了",
+    "lastCompleted": "最新の完了：第 {week} 週 {day} 日目",
+    "goalsTitle": "進行中の目標",
+    "goalTarget": "目標：{target}",
+    "goalCurrent": "現在：{value}",
+    "statusActive": "進行中",
+    "manageGoals": "目標を管理",
+    "quizCtaTitle": "クライミング性格診断はもう受けましたか？",
+    "quizCtaDesc": "診断を受けると、あなたのタイプとそれに合ったトレーニングスタイルをもとに、コーチがより的確なアドバイスをします",
+    "quizCtaButton": "診断を始める"
+  },
+  "Validation": {
+    "invalidYoutubeVideoId": "YouTube 動画の ID が正しくありません",
+    "invalidInstagramShortcode": "Instagram のショートコードが正しくありません",
+    "invalidDateFormat": "日付は YYYY-MM-DD 形式で入力してください",
+    "milestoneTitleRequired": "マイルストーン名を入力してください",
+    "bucketListTitleRequired": "目標名を入力してください",
+    "bucketListTitleTooLong": "目標名は100文字以内で入力してください",
+    "bucketListDescriptionTooLong": "説明は1000文字以内で入力してください",
+    "bucketListTargetGradeTooLong": "目標グレードは50文字以内で入力してください",
+    "bucketListTargetLocationTooLong": "目標の場所は100文字以内で入力してください",
+    "progressModeRequired": "進捗の記録方法を選択してください",
+    "milestoneRequired": "マイルストーンモードではマイルストーンが1つ以上必要です",
+    "completionStoryTooLong": "達成ストーリーは5000文字以内で入力してください",
+    "psychologicalInsightsTooLong": "メンタル面の気づきは2000文字以内で入力してください",
+    "technicalInsightsTooLong": "技術面の気づきは2000文字以内で入力してください",
+    "invalidPhotoUrl": "写真の URL が正しくありません",
+    "progressTooSmall": "進捗は0以上で入力してください",
+    "progressTooLarge": "進捗は100以下で入力してください",
+    "milestoneNoteTooLong": "メモは500文字以内で入力してください",
+    "commentRequired": "コメントを入力してください",
+    "commentTooLong": "コメントは500文字以内で入力してください"
+  },
+  "CragData": {
+    "rockSzelengSandstone": "四稜砂岩",
+    "rockCoralLimestone": "サンゴ礁石灰岩",
+    "rockQuartziteSandstone": "石英質砂岩",
+    "climbSport": "スポート",
+    "climbTrad": "トラッド",
+    "climbBoulder": "ボルダー",
+    "climbMixed": "ミックス",
+    "typeSeparator": "、",
+    "listSeparator": "、",
+    "amenityParking": "駐車場",
+    "amenityRestroom": "トイレ",
+    "amenityPublicRestroom": "公衆トイレ",
+    "amenityBeach": "ビーチ",
+    "amenitySnorkeling": "シュノーケリング",
+    "amenityConvenienceStore": "コンビニ",
+    "amenitySevenEleven": "セブン-イレブン",
+    "amenityRestaurant": "レストラン",
+    "amenityGuesthouse": "民宿",
+    "amenityMudHotSpring": "泥温泉",
+    "amenityNearbyHotSpring": "近くに温泉",
+    "amenityStream": "渓流",
+    "amenityGuesthousesSailRock": "船帆石周辺の民宿",
+    "amenityRestaurantsKentingStreet": "墾丁大街のレストラン",
+    "amenityHengchunTown": "恆春鎮は生活施設が充実",
+    "seasonSpring": "春",
+    "seasonSummer": "夏",
+    "seasonAutumn": "秋",
+    "seasonWinter": "冬",
+    "transportDrive": "車",
+    "transportPublic": "公共交通機関",
+    "transportHsrBus": "高鉄＋バス",
+    "transportMrt": "MRT",
+    "transportBus": "バス",
+    "transportWalk": "徒歩",
+    "transportTypeSuffix": "：",
+    "coverAriaLabel": "{name}の岩場 - {rockType}の岩壁",
+    "coverAriaRockFallback": "屋外クライミング",
+    "mapIframeTitle": "{name}の岩場の位置マップ"
+  },
+  "CragFaq": {
+    "title": "{name}のよくある質問",
+    "howToGetQ": "{name}へクライミングに行くにはどうすればよいですか？",
+    "howToGetLocation": "{name}は{location}にあります。",
+    "howToGetApproach": "徒歩で約{approach}かかります。",
+    "howToGetParking": "駐車場情報：{parking}",
+    "beginnerQ": "{name}はクライミング初心者に向いていますか？",
+    "beginnerA": "{name}には{routes}本のルートがあり、グレードの範囲は{difficulty}です。{beginner, select, yes {初心者向けの易しいルートもあります。} other {基礎的なクライミング経験を積んでから訪れることをおすすめします。}}",
+    "seasonQ": "{name}のクライミングのベストシーズンはいつですか？",
+    "seasonA": "{name}のクライミングに最も適した季節は{seasons}です。雨季や極端な天候は避けて訪れることをおすすめします。",
+    "rockQ": "{name}の岩質は何ですか？",
+    "rockA": "{name}の岩質は{rockType}、クライミングのタイプは{type}です。",
+    "rockHeight": "岩壁の高さは約{height}です。",
+    "gearQ": "{name}でのクライミングにはどんな装備が必要ですか？",
+    "gearA": "{name}でのクライミングには、クライミングシューズ、ハーネス、ビレイデバイス、ヘルメット{gear, select, trad {、ナッツやカムなどのトラッド用ギア} other {、クイックドロー}}の携行をおすすめします。十分な水と日焼け対策用品も持参するとよいでしょう。",
+    "liveVideoName": "{name}ライブ映像",
+    "liveVideoDescription": "{name}の岩場周辺のライブ映像です。現地の天気を確認できます",
+    "propCragType": "岩場タイプ",
+    "propRockType": "岩質",
+    "propRouteCount": "ルート数",
+    "propDifficulty": "グレードの範囲",
+    "propHeight": "岩壁の高さ",
+    "propApproach": "アプローチ時間",
+    "sport": "クライミング",
+    "metaDescription": "{name}の岩場は{location}にあり、{routes}本のルート（グレード{difficulty}）があります。岩質は{rockType}です。詳しいルート情報、アクセス、ベストシーズンを掲載しています。",
+    "metaTitleWithRoutes": "{name}クライミング | {routes}本のルート・{difficulty}",
+    "metaTitle": "{name}クライミング | {suffix}",
+    "keywordClimbing": "{name} クライミング",
+    "keywordRoutes": "{name} クライミング ルート",
+    "keywordTaiwan": "台湾 クライミング",
+    "keywordOutdoor": "屋外クライミング"
+  },
+  "GymData": {
+    "facilityBouldering": "ボルダリングエリア",
+    "facilityLead": "リードクライミング",
+    "facilityTopRope": "トップロープ",
+    "facilitySpeed": "スピードクライミング",
+    "facilityTraining": "トレーニングエリア",
+    "facilityRest": "休憩エリア",
+    "facilityShower": "シャワー",
+    "facilityLockers": "ロッカー",
+    "typeBouldering": "ボルダリング",
+    "typeLead": "ロープクライミング",
+    "typeMixed": "ロープクライミング＆ボルダリング",
+    "metaNotFound": "ジムが見つかりません",
+    "metaNotFoundDesc": "お探しのジムは存在しません",
+    "metaDescription": "{name}は{address}にあり、{type}を楽しめます。",
+    "keywordGym": "クライミングジム",
+    "keywordIndoor": "インドアクライミング"
+  },
+  "TrafficCameras": {
+    "imageFallbackView": "クリックして 1968 で見る",
+    "imageFallbackSelect": "クリックして選択"
   }
 }

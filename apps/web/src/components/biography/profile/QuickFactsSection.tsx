@@ -14,8 +14,15 @@ import {
 import { useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 import { getTagOptionById } from '@/lib/constants/biography-tags'
-import { BiographyV2, GradeTarget, renderDynamicTag } from '@/lib/types/biography-v2'
+import { useBiographyTagText } from '@/lib/hooks/useBiographyTagText'
+import {
+  BiographyV2,
+  GradeTarget,
+  renderDynamicTag,
+  type TagOption,
+} from '@/lib/types/biography-v2'
 import { cn } from '@/lib/utils'
+import { useRouteTypeLabel } from '../shared/useRouteTypeLabel'
 
 interface QuickFactsSectionProps {
   person: BiographyV2 | null
@@ -29,6 +36,9 @@ interface QuickFactsSectionProps {
  */
 export function QuickFactsSection({ person, mobileTagLimit = 8 }: QuickFactsSectionProps) {
   const t = useTranslations('BiographyPage')
+  const { tagLabel, tagTemplate } = useBiographyTagText()
+  const tm = useTranslations('BiographyMisc')
+  const routeTypeLabel = useRouteTypeLabel()
   const [showAllTags, setShowAllTags] = useState(false)
 
   // 計算攀岩年資
@@ -45,7 +55,7 @@ export function QuickFactsSection({ person, mobileTagLimit = 8 }: QuickFactsSect
   }, [person?.frequent_locations])
 
   // 將選中的標籤整理為扁平列表，自訂標籤優先顯示
-  const selectedTags = useMemo(() => {
+  const selectedOptions = useMemo(() => {
     if (!person?.tags || person.tags.length === 0) return []
 
     // 建立自訂標籤查找表
@@ -85,48 +95,29 @@ export function QuickFactsSection({ person, mobileTagLimit = 8 }: QuickFactsSect
 
     const customTags: Array<{
       id: string
-      label: string
+      option: TagOption
       isCustom: boolean
     }> = []
     const systemTags: Array<{
       id: string
-      label: string
+      option: TagOption
       isCustom: boolean
     }> = []
 
     for (const tagSelection of person.tags) {
-      const option = findTagOption(tagSelection.tag_id)
+      const option: TagOption | undefined = findTagOption(tagSelection.tag_id)
 
       if (option) {
-        // 處理動態標籤
-        if (option.is_dynamic) {
-          const renderedLabels = renderDynamicTag(option, person)
-          if (Array.isArray(renderedLabels)) {
-            for (const label of renderedLabels) {
-              systemTags.push({
-                id: `${tagSelection.tag_id}_${label}`,
-                label,
-                isCustom: false,
-              })
-            }
-          } else {
-            systemTags.push({
-              id: tagSelection.tag_id,
-              label: renderedLabels,
-              isCustom: false,
-            })
-          }
+        const tag = {
+          id: tagSelection.tag_id,
+          option,
+          // 動態標籤一律視為系統標籤
+          isCustom: option.is_dynamic ? false : isCustomTag(tagSelection),
+        }
+        if (tag.isCustom) {
+          customTags.push(tag)
         } else {
-          const tag = {
-            id: tagSelection.tag_id,
-            label: option.label,
-            isCustom: isCustomTag(tagSelection),
-          }
-          if (tag.isCustom) {
-            customTags.push(tag)
-          } else {
-            systemTags.push(tag)
-          }
+          systemTags.push(tag)
         }
       }
     }
@@ -134,6 +125,23 @@ export function QuickFactsSection({ person, mobileTagLimit = 8 }: QuickFactsSect
     // 自訂標籤優先，然後是系統標籤
     return [...customTags, ...systemTags]
   }, [person])
+
+  // 依語系取得顯示文字（id 不變，只換 label／動態模板）
+  const selectedTags = selectedOptions.flatMap(({ id, option, isCustom }) => {
+    const label = tagLabel(option.id, option.label)
+    if (!option.is_dynamic || !person) return [{ id, label, isCustom }]
+    const rendered = renderDynamicTag(
+      {
+        ...option,
+        label,
+        template: option.template ? tagTemplate(option.id, option.template) : option.template,
+      },
+      person
+    )
+    return Array.isArray(rendered)
+      ? rendered.map((text) => ({ id: `${id}_${text}`, label: text, isCustom: false }))
+      : [{ id, label: rendered, isCustom: false }]
+  })
 
   // Ape Index 計算
   const apeIndex = useMemo(() => {
@@ -163,7 +171,8 @@ export function QuickFactsSection({ person, mobileTagLimit = 8 }: QuickFactsSect
     {
       icon: <MapPin className="h-6 w-6 text-gray-600" />,
       label: t('frequentLocationsLabel'),
-      value: locations.length > 0 ? locations.join('、') : t('frequentLocationsDefault'),
+      value:
+        locations.length > 0 ? locations.join(tm('listSeparator')) : t('frequentLocationsDefault'),
       isEmpty: locations.length === 0,
     },
     {
@@ -171,7 +180,7 @@ export function QuickFactsSection({ person, mobileTagLimit = 8 }: QuickFactsSect
       label: t('favoriteTypes'),
       value:
         person.favorite_route_types && person.favorite_route_types.length > 0
-          ? person.favorite_route_types.join('、')
+          ? person.favorite_route_types.map(routeTypeLabel).join(tm('listSeparator'))
           : t('favoriteTypesDefault'),
       isEmpty: !person.favorite_route_types || person.favorite_route_types.length === 0,
     },

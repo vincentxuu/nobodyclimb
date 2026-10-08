@@ -5,6 +5,7 @@ import { Calendar, ChevronDown, ChevronUp, Loader2, MapPin } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { climbingLocationService } from '@/lib/api/services'
+import { useCountryName } from '@/lib/hooks/useCountryName'
 import { ClimbingLocationRecord } from '@/lib/types'
 import type { BiographyV2 } from '@/lib/types/biography-v2'
 import { cn } from '@/lib/utils'
@@ -35,6 +36,7 @@ function TimelineLocationItem({
   isLast: boolean
 }) {
   const t = useTranslations('BiographyPage')
+  const countryName = useCountryName()
   const [isExpanded, setIsExpanded] = useState(false)
   const hasNotes = location.notes && location.notes.trim().length > 0
   const notesLength = location.notes?.length || 0
@@ -68,7 +70,7 @@ function TimelineLocationItem({
               <h4 className="font-semibold text-[#1B1A1A] transition-colors group-hover:text-[#3F3D3D]">
                 {location.location}
               </h4>
-              <p className="text-sm text-[#6D6C6C]">{location.country}</p>
+              <p className="text-sm text-[#6D6C6C]">{countryName(location.country)}</p>
             </div>
           </div>
         </div>
@@ -203,6 +205,7 @@ function StatsSummary({
  */
 export function BiographyFootprints({ biography, className }: BiographyFootprintsProps) {
   const t = useTranslations('BiographyPage')
+  const tm = useTranslations('BiographyMisc')
   const [locations, setLocations] = useState<ClimbingLocationRecord[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -284,7 +287,7 @@ export function BiographyFootprints({ biography, className }: BiographyFootprint
     years.length > 0
       ? years.length === 1
         ? `${Math.min(...years)}`
-        : `${Math.max(...years) - Math.min(...years) + 1} 年`
+        : tm('yearSpan', { count: Math.max(...years) - Math.min(...years) + 1 })
       : '-'
 
   return (

@@ -1,10 +1,24 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
+import { buildHreflangAlternates } from '@/lib/i18n-metadata'
 import { ChatClient } from './ChatClient'
 
-export const metadata: Metadata = {
-  title: 'AI 攀岩助手',
-  description: '與 AI 攀岩助手對話，取得路線推薦、訓練建議和攀岩知識',
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'Metadata.chat' })
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    alternates: {
+      languages: buildHreflangAlternates('/chat'),
+    },
+  }
 }
 
 export default function ChatPage() {

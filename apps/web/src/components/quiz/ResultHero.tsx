@@ -1,10 +1,13 @@
 'use client'
 
-import type { PersonalityType } from '@nobodyclimb/types'
 import { motion } from 'framer-motion'
 import { Mountain } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import type { LocalizedPersonality } from '@/lib/quiz/personality-i18n'
 
-export function ResultHero({ personality }: { personality: PersonalityType }) {
+export function ResultHero({ personality }: { personality: LocalizedPersonality }) {
+  const t = useTranslations('Quiz.result')
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -26,11 +29,13 @@ export function ResultHero({ personality }: { personality: PersonalityType }) {
         {personality.code}
       </div>
 
-      <h1 className="mb-1 text-3xl font-bold text-gray-900 md:text-4xl">{personality.nameZh}</h1>
-      <p className="mb-4 text-lg text-gray-500">{personality.nameEn}</p>
+      <h1 className="mb-1 text-3xl font-bold text-gray-900 md:text-4xl">{personality.name}</h1>
+      {personality.name !== personality.nameEn && (
+        <p className="mb-4 text-lg text-gray-500">{personality.nameEn}</p>
+      )}
 
       <p className="text-lg italic text-gray-600" style={{ color: personality.color }}>
-        「{personality.tagline}」
+        {t('taglineQuote', { tagline: personality.tagline })}
       </p>
     </motion.div>
   )

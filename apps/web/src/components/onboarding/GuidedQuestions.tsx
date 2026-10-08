@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, ChevronLeft, ChevronRight, Sparkles, X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -23,21 +24,23 @@ interface GuidedQuestionsProps {
   subtitle?: string
 }
 
-const ENCOURAGEMENTS = [
-  '太棒了！讓我們繼續',
-  '很好的回答！',
-  '精彩！再來一題',
-  '完美！你做得很好',
-  '讚！保持下去',
-]
+// 鼓勵文字的訊息 key（Onboarding.guided 之下）
+const ENCOURAGEMENT_KEYS = [
+  'encouragement1',
+  'encouragement2',
+  'encouragement3',
+  'encouragement4',
+  'encouragement5',
+] as const
 
 export function GuidedQuestions({
   questions,
   onComplete,
   onSkip,
-  title = '讓更多人認識你',
-  subtitle = '回答幾個簡單的問題，讓你的人物誌更加完整',
+  title,
+  subtitle,
 }: GuidedQuestionsProps) {
+  const t = useTranslations('Onboarding.guided')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [showEncouragement, setShowEncouragement] = useState(false)
@@ -65,8 +68,8 @@ export function GuidedQuestions({
 
     // 顯示鼓勵文字
     if (answers[currentQuestion.id]?.trim()) {
-      const randomEncouragement = ENCOURAGEMENTS[Math.floor(Math.random() * ENCOURAGEMENTS.length)]
-      setEncouragementText(randomEncouragement)
+      const randomKey = ENCOURAGEMENT_KEYS[Math.floor(Math.random() * ENCOURAGEMENT_KEYS.length)]
+      setEncouragementText(t(randomKey))
       setShowEncouragement(true)
       setTimeout(() => {
         setShowEncouragement(false)
@@ -75,7 +78,7 @@ export function GuidedQuestions({
     } else {
       setCurrentIndex((prev) => prev + 1)
     }
-  }, [isLastQuestion, answers, currentQuestion?.id, onComplete])
+  }, [isLastQuestion, answers, currentQuestion?.id, onComplete, t])
 
   const handlePrev = useCallback(() => {
     if (currentIndex > 0) {
@@ -99,7 +102,7 @@ export function GuidedQuestions({
       <button
         onClick={onSkip}
         className="absolute right-4 top-4 rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
-        aria-label="稍後再填"
+        aria-label={t('laterAria')}
       >
         <X size={20} />
       </button>
@@ -108,18 +111,16 @@ export function GuidedQuestions({
       <div className="mb-8 text-center">
         <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-sm text-primary">
           <Sparkles size={14} />
-          <span>快速設定</span>
+          <span>{t('badge')}</span>
         </div>
-        <h2 className="text-2xl font-bold text-[#1B1A1A]">{title}</h2>
-        <p className="mt-2 text-[#6D6C6C]">{subtitle}</p>
+        <h2 className="text-2xl font-bold text-[#1B1A1A]">{title ?? t('defaultTitle')}</h2>
+        <p className="mt-2 text-[#6D6C6C]">{subtitle ?? t('defaultSubtitle')}</p>
       </div>
 
       {/* 進度條 */}
       <div className="mb-8">
         <div className="mb-2 flex justify-between text-sm text-[#8E8C8C]">
-          <span>
-            第 {currentIndex + 1} 題，共 {questions.length} 題
-          </span>
+          <span>{t('progress', { current: currentIndex + 1, total: questions.length })}</span>
           <span>{Math.round(progress)}%</span>
         </div>
         <div className="h-2 overflow-hidden rounded-full bg-gray-200">
@@ -174,7 +175,7 @@ export function GuidedQuestions({
               <textarea
                 value={answers[currentQuestion.id] || ''}
                 onChange={(e) => handleAnswerChange(e.target.value)}
-                placeholder={currentQuestion.placeholder || '輸入你的回答...'}
+                placeholder={currentQuestion.placeholder || t('answerPlaceholder')}
                 className="min-h-[150px] w-full resize-none rounded-lg border border-gray-200 bg-white p-4 text-[#1B1A1A] placeholder:text-gray-400 focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
                 autoFocus
               />
@@ -183,7 +184,7 @@ export function GuidedQuestions({
                 type="text"
                 value={answers[currentQuestion.id] || ''}
                 onChange={(e) => handleAnswerChange(e.target.value)}
-                placeholder={currentQuestion.placeholder || '輸入你的回答...'}
+                placeholder={currentQuestion.placeholder || t('answerPlaceholder')}
                 className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-[#1B1A1A] placeholder:text-gray-400 focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
                 autoFocus
               />
@@ -199,7 +200,7 @@ export function GuidedQuestions({
             {currentIndex > 0 && (
               <Button variant="ghost" onClick={handlePrev} className="gap-1 text-[#6D6C6C]">
                 <ChevronLeft size={18} />
-                上一題
+                {t('prev')}
               </Button>
             )}
           </div>
@@ -210,7 +211,7 @@ export function GuidedQuestions({
               onClick={handleSkipQuestion}
               className="text-[#8E8C8C] hover:text-[#6D6C6C]"
             >
-              跳過此題
+              {t('skipQuestion')}
             </Button>
             <Button
               onClick={handleNext}
@@ -221,7 +222,7 @@ export function GuidedQuestions({
                   : 'bg-gray-200 text-[#6D6C6C]'
               )}
             >
-              {isLastQuestion ? '完成' : '下一題'}
+              {isLastQuestion ? t('finish') : t('next')}
               {!isLastQuestion && <ChevronRight size={18} />}
             </Button>
           </div>
@@ -234,7 +235,7 @@ export function GuidedQuestions({
           onClick={onSkip}
           className="text-sm text-[#8E8C8C] underline-offset-2 hover:text-[#6D6C6C] hover:underline"
         >
-          稍後再填，先去逛逛
+          {t('laterLink')}
         </button>
       </div>
     </div>

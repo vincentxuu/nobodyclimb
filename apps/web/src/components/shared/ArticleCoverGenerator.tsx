@@ -17,7 +17,8 @@ import {
   Trophy,
   Users,
 } from 'lucide-react'
-import { getCategoryLabel, PostCategory } from '@/lib/types'
+import { usePostCategoryLabel } from '@/components/blog/use-post-category-label'
+import { PostCategory } from '@/lib/types'
 
 /**
  * 背景圖案類型
@@ -168,6 +169,7 @@ export function ArticleCoverGenerator({
   showTitle = true,
   aspectRatio = 'video',
 }: ArticleCoverGeneratorProps) {
+  const getCategoryLabel = usePostCategoryLabel()
   const theme = getCategoryTheme(category)
   const categoryLabel = category ? getCategoryLabel(category as PostCategory) : ''
   const IconComponent = theme.Icon

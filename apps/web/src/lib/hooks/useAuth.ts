@@ -42,7 +42,8 @@ export function useAuth() {
       } catch (error) {
         return {
           success: false,
-          error: error instanceof Error ? error.message : '登入失敗',
+          // 非 Error 時不帶訊息，由呼叫端以目前語系的預設文字顯示
+          error: error instanceof Error ? error.message : undefined,
         }
       }
     },
@@ -62,7 +63,8 @@ export function useAuth() {
       } catch (error) {
         return {
           success: false,
-          error: error instanceof Error ? error.message : 'Google 登入失敗',
+          // 非 Error 時不帶訊息，由呼叫端以目前語系的預設文字顯示
+          error: error instanceof Error ? error.message : undefined,
         }
       }
     },

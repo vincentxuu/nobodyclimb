@@ -27,6 +27,7 @@ import {
   User,
   X,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -34,6 +35,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
 import { biographyService } from '@/lib/api/services'
 import { ALL_STORY_QUESTIONS, StoryQuestion } from '@/lib/constants/biography-stories'
+import { useBiographyStoryText } from '@/lib/hooks/useBiographyStoryText'
 import { useIsMobile } from '@/lib/hooks/useIsMobile'
 import ClimbingFootprintsSection from '../ClimbingFootprintsSection'
 import { getStoryFieldValue, mapFieldToApi, updateProfileField, updateStoryField } from '../mappers'
@@ -76,6 +78,8 @@ const EditableText = React.memo(function EditableText({
   onSave,
   onTempValueChange,
 }: EditableTextProps) {
+  const t = useTranslations('ProfileEditor')
+
   if (isEditing) {
     return (
       <div className="flex items-start gap-2">
@@ -112,7 +116,7 @@ const EditableText = React.memo(function EditableText({
             className="h-8 w-8 hover:bg-brand-accent/20"
             onClick={() => onSave(field, tempValue)}
             disabled={isSaving}
-            aria-label="儲存"
+            aria-label={t('common.save')}
           >
             {isSaving ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -125,7 +129,7 @@ const EditableText = React.memo(function EditableText({
             variant="ghost"
             className="h-8 w-8"
             onClick={onCancel}
-            aria-label="取消"
+            aria-label={t('common.cancel')}
           >
             <X className="h-4 w-4 text-gray-400" />
           </Button>
@@ -138,7 +142,7 @@ const EditableText = React.memo(function EditableText({
     <button
       onClick={() => onStartEdit(field, value)}
       className={`group flex w-full items-center gap-2 rounded-lg px-2 py-1 text-left transition-colors hover:bg-brand-light ${className}`}
-      aria-label={`編輯${placeholder}`}
+      aria-label={t('versionB.editFieldAria', { field: placeholder })}
     >
       <span className={value ? 'text-brand-dark' : 'text-subtle'}>{value || placeholder}</span>
       <Pencil className="h-3.5 w-3.5 text-subtle opacity-30 transition-opacity group-hover:opacity-100" />
@@ -175,29 +179,34 @@ const StoryCard = React.memo(function StoryCard({
   onSave,
   onTempValueChange,
 }: StoryCardProps) {
+  const t = useTranslations('ProfileEditor')
+  const { questionTitle, questionPlaceholder } = useBiographyStoryText()
+  // 以 field 查目前語系的題目文字（field 為資料欄位名，不翻譯）
+  const title = questionTitle(question.field, question.title)
+  const placeholder = questionPlaceholder(question.field, question.placeholder)
   const isFilled = value && value.trim().length > 0
 
   if (isEditing) {
     return (
       <div className="rounded-lg border border-brand-dark bg-white p-4">
         <div className="mb-3 flex items-center justify-between">
-          <h4 className="font-medium text-brand-dark">{question.title}</h4>
+          <h4 className="font-medium text-brand-dark">{title}</h4>
         </div>
         <Textarea
           ref={inputRef}
           value={tempValue}
           onChange={(e) => onTempValueChange(e.target.value)}
-          placeholder={question.placeholder}
+          placeholder={placeholder}
           className="mb-3 min-h-[120px] border-brand-dark focus:ring-brand-accent"
           onKeyDown={(e) => {
             if (e.key === 'Escape') onCancel()
           }}
           autoFocus
-          aria-label={question.title}
+          aria-label={title}
         />
         <div className="flex justify-end gap-2">
           <Button size="sm" variant="outline" onClick={onCancel} className="border-subtle">
-            取消
+            {t('common.cancel')}
           </Button>
           <Button
             size="sm"
@@ -208,10 +217,10 @@ const StoryCard = React.memo(function StoryCard({
             {isSaving ? (
               <>
                 <Loader2 className="mr-1 h-3 w-3 animate-spin" />
-                儲存中
+                {t('versionB.savingShort')}
               </>
             ) : (
-              '儲存'
+              t('common.save')
             )}
           </Button>
         </div>
@@ -223,26 +232,29 @@ const StoryCard = React.memo(function StoryCard({
     <button
       onClick={() => onStartEdit(question.field, value)}
       className="group w-full rounded-lg border border-subtle bg-white p-4 text-left transition-all hover:border-brand-dark hover:shadow-xs"
-      aria-label={`編輯「${question.title}」`}
+      aria-label={t('versionB.editStoryAria', { title })}
     >
       <div className="mb-2 flex items-center justify-between">
-        <h4 className="font-medium text-brand-dark">{question.title}</h4>
+        <h4 className="font-medium text-brand-dark">{title}</h4>
         <div className="flex items-center gap-2">
           {isFilled ? (
             <span
               className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-accent"
-              aria-label="已填寫"
+              aria-label={t('versionB.filledAria')}
             >
               <Check className="h-3 w-3 text-brand-dark" />
             </span>
           ) : (
-            <span className="h-5 w-5 rounded-full border-2 border-subtle" aria-label="未填寫" />
+            <span
+              className="h-5 w-5 rounded-full border-2 border-subtle"
+              aria-label={t('versionB.unfilledAria')}
+            />
           )}
           <Pencil className="h-4 w-4 text-subtle opacity-30 transition-opacity group-hover:opacity-100" />
         </div>
       </div>
       <p className={`text-sm ${isFilled ? 'text-text-subtle line-clamp-2' : 'text-subtle'}`}>
-        {isFilled ? value : question.placeholder}
+        {isFilled ? value : placeholder}
       </p>
     </button>
   )
@@ -269,6 +281,8 @@ const ImageUploadButton = React.memo(function ImageUploadButton({
   onUpload,
   className = '',
 }: ImageUploadButtonProps) {
+  const t = useTranslations('ProfileEditor.versionB')
+
   return (
     <>
       <input
@@ -296,7 +310,7 @@ const ImageUploadButton = React.memo(function ImageUploadButton({
         ) : (
           <Camera className="h-4 w-4" />
         )}
-        {isUploading ? '上傳中...' : hasImage ? '更換' : '新增'}
+        {isUploading ? t('uploading') : hasImage ? t('change') : t('add')}
       </button>
     </>
   )
@@ -314,6 +328,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
   const { profileData, setProfileData } = useProfile()
   const isMobile = useIsMobile()
   const { toast } = useToast()
+  const t = useTranslations('ProfileEditor')
 
   // 編輯狀態
   const [editingField, setEditingField] = useState<string | null>(null)
@@ -406,19 +421,19 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
         const apiData = mapFieldToApi(field, value, profileData)
         await biographyService.updateMyBiography(apiData)
 
-        toast({ title: '已儲存' })
+        toast({ title: t('common.saved') })
         setEditingField(null)
         setTempValue('')
       } catch (error) {
         console.error('儲存失敗:', error)
         // 回滾
         setProfileData(previousData)
-        toast({ title: '儲存失敗', variant: 'destructive' })
+        toast({ title: t('common.saveFailed'), variant: 'destructive' })
       } finally {
         setIsSaving(false)
       }
     },
-    [profileData, setProfileData, toast]
+    [profileData, setProfileData, toast, t]
   )
 
   /** 儲存故事欄位 */
@@ -433,19 +448,19 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
 
         // API 使用原始欄位名
         await biographyService.updateMyBiography({ [field]: value })
-        toast({ title: '已儲存' })
+        toast({ title: t('common.saved') })
         setEditingField(null)
         setTempValue('')
       } catch (error) {
         console.error('儲存失敗:', error)
         // 回滾
         setProfileData(previousData)
-        toast({ title: '儲存失敗', variant: 'destructive' })
+        toast({ title: t('common.saveFailed'), variant: 'destructive' })
       } finally {
         setIsSaving(false)
       }
     },
-    [profileData, setProfileData, toast]
+    [profileData, setProfileData, toast, t]
   )
 
   /** 處理圖片上傳 */
@@ -464,16 +479,16 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
 
           const apiField = field === 'avatarUrl' ? 'avatar_url' : 'cover_image'
           await biographyService.updateMyBiography({ [apiField]: response.data.url })
-          toast({ title: '圖片上傳成功' })
+          toast({ title: t('common.imageUploadSuccess') })
         }
       } catch (error) {
         console.error('上傳失敗:', error)
-        toast({ title: '上傳失敗', variant: 'destructive' })
+        toast({ title: t('common.uploadFailed'), variant: 'destructive' })
       } finally {
         setUploading(false)
       }
     },
-    [setProfileData, toast]
+    [setProfileData, toast, t]
   )
 
   /** 切換公開設定 */
@@ -486,13 +501,13 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
 
     try {
       await biographyService.updateMyBiography({ is_public: newValue ? 1 : 0 })
-      toast({ title: newValue ? '已設為公開' : '已設為私人' })
+      toast({ title: newValue ? t('versionB.setPublic') : t('versionB.setPrivate') })
     } catch {
       // 回滾
       setProfileData((prev) => ({ ...prev, isPublic: previousValue }))
-      toast({ title: '更新失敗', variant: 'destructive' })
+      toast({ title: t('versionB.updateFailed'), variant: 'destructive' })
     }
-  }, [profileData.isPublic, setProfileData, toast])
+  }, [profileData.isPublic, setProfileData, toast, t])
 
   // ============================================================================
   // 渲染
@@ -506,7 +521,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
           {profileData.coverImageUrl && (
             <img
               src={profileData.coverImageUrl}
-              alt="封面"
+              alt={t('common.coverAlt')}
               className="h-full w-full object-cover"
             />
           )}
@@ -515,7 +530,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
               inputRef={coverInputRef}
               isUploading={isUploadingCover}
               hasImage={!!profileData.coverImageUrl}
-              label={profileData.coverImageUrl ? '更換封面' : '新增封面'}
+              label={profileData.coverImageUrl ? t('versionB.changeCover') : t('versionB.addCover')}
               onUpload={(file) => handleImageUpload(file, 'coverImageUrl')}
             />
           </div>
@@ -528,14 +543,14 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
               <>
                 <img
                   src={profileData.avatarUrl}
-                  alt="頭像"
+                  alt={t('common.avatarAlt')}
                   className="h-full w-full object-cover"
                 />
                 <div
                   className="absolute inset-0 flex cursor-pointer items-center justify-center bg-brand-dark/50 opacity-0 transition-opacity group-hover:opacity-100"
                   onClick={() => avatarInputRef.current?.click()}
                   role="button"
-                  aria-label="更換頭像"
+                  aria-label={t('versionB.changeAvatar')}
                 >
                   {isUploadingAvatar ? (
                     <Loader2 className="h-6 w-6 animate-spin text-white" />
@@ -549,7 +564,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
                 className="flex h-full w-full cursor-pointer items-center justify-center"
                 onClick={() => avatarInputRef.current?.click()}
                 role="button"
-                aria-label="上傳頭像"
+                aria-label={t('versionB.uploadAvatar')}
               >
                 {isUploadingAvatar ? (
                   <Loader2 className="h-12 w-12 animate-spin text-subtle" />
@@ -570,7 +585,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
                   e.target.value = ''
                 }
               }}
-              aria-label="上傳頭像"
+              aria-label={t('versionB.uploadAvatar')}
             />
           </div>
         </div>
@@ -584,7 +599,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
             <EditableText
               field="name"
               value={profileData.name}
-              placeholder="輸入你的暱稱"
+              placeholder={t('versionB.namePlaceholder')}
               className="text-2xl font-bold"
               isEditing={editingField === 'name'}
               tempValue={tempValue}
@@ -599,7 +614,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
           <EditableText
             field="title"
             value={profileData.title}
-            placeholder="用一句話形容自己..."
+            placeholder={t('versionB.titlePlaceholder')}
             className="text-text-subtle"
             isEditing={editingField === 'title'}
             tempValue={tempValue}
@@ -616,16 +631,18 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
         <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-xs">
           <div className="mb-4 flex items-center gap-2">
             <Gauge className="h-5 w-5 text-brand-dark" />
-            <h2 className="font-semibold text-brand-dark">攀岩資訊</h2>
+            <h2 className="font-semibold text-brand-dark">{t('sections.climbing')}</h2>
           </div>
 
           <div className="space-y-4">
             <div>
-              <label className="mb-1 block text-sm text-text-subtle">開始攀岩的年份</label>
+              <label className="mb-1 block text-sm text-text-subtle">
+                {t('versionB.startYearLabel')}
+              </label>
               <EditableText
                 field="startYear"
                 value={profileData.startYear}
-                placeholder="例如：2020"
+                placeholder={t('common.startYearPlaceholder')}
                 isEditing={editingField === 'startYear'}
                 tempValue={tempValue}
                 isSaving={isSaving}
@@ -637,11 +654,13 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
               />
             </div>
             <div>
-              <label className="mb-1 block text-sm text-text-subtle">常去的岩館/岩場</label>
+              <label className="mb-1 block text-sm text-text-subtle">
+                {t('versionB.locationsLabel')}
+              </label>
               <EditableText
                 field="frequentGyms"
                 value={profileData.frequentGyms}
-                placeholder="例如：紅石攀岩館、龍洞"
+                placeholder={t('common.locationsPlaceholder')}
                 isEditing={editingField === 'frequentGyms'}
                 tempValue={tempValue}
                 isSaving={isSaving}
@@ -659,7 +678,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
         <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-xs">
           <div className="mb-4 flex items-center gap-2">
             <Link2 className="h-5 w-5 text-brand-dark" />
-            <h2 className="font-semibold text-brand-dark">社群連結</h2>
+            <h2 className="font-semibold text-brand-dark">{t('sections.social')}</h2>
           </div>
 
           <div className="space-y-4">
@@ -670,7 +689,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
                 <EditableText
                   field="socialLinks.instagram"
                   value={profileData.socialLinks.instagram || ''}
-                  placeholder="你的 IG 帳號"
+                  placeholder={t('common.igPlaceholder')}
                   className="flex-1"
                   isEditing={editingField === 'socialLinks.instagram'}
                   tempValue={tempValue}
@@ -687,7 +706,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-subtle hover:text-brand-dark"
-                    aria-label="前往 Instagram"
+                    aria-label={t('versionB.goToInstagram')}
                   >
                     <ExternalLink className="h-4 w-4" />
                   </a>
@@ -695,11 +714,13 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
               </div>
             </div>
             <div>
-              <label className="mb-1 block text-sm text-text-subtle">YouTube 頻道</label>
+              <label className="mb-1 block text-sm text-text-subtle">
+                {t('versionB.youtubeLabel')}
+              </label>
               <EditableText
                 field="socialLinks.youtube_channel"
                 value={profileData.socialLinks.youtube_channel || ''}
-                placeholder="你的 YouTube 頻道連結"
+                placeholder={t('versionB.youtubePlaceholder')}
                 isEditing={editingField === 'socialLinks.youtube_channel'}
                 tempValue={tempValue}
                 isSaving={isSaving}
@@ -717,7 +738,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
         <section className="mb-8 rounded-lg border border-subtle bg-white p-6 shadow-xs">
           <div className="mb-4 flex items-center gap-2">
             <MapPin className="h-5 w-5 text-brand-dark" />
-            <h2 className="font-semibold text-brand-dark">攀岩足跡</h2>
+            <h2 className="font-semibold text-brand-dark">{t('sections.footprints')}</h2>
           </div>
           <ClimbingFootprintsSection isEditing={true} isMobile={isMobile} />
         </section>
@@ -727,10 +748,10 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
           <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <BookOpen className="h-5 w-5 text-brand-dark" />
-              <h2 className="font-semibold text-brand-dark">我的故事</h2>
+              <h2 className="font-semibold text-brand-dark">{t('versionB.myStories')}</h2>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <span className="text-text-subtle">已填</span>
+              <span className="text-text-subtle">{t('versionB.filled')}</span>
               <span className="font-medium text-brand-dark">
                 {filledCount}/{ALL_STORY_QUESTIONS.length}
               </span>
@@ -744,7 +765,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
             aria-valuenow={filledCount}
             aria-valuemin={0}
             aria-valuemax={ALL_STORY_QUESTIONS.length}
-            aria-label="故事完成進度"
+            aria-label={t('versionB.storyProgressAria')}
           >
             <div
               className="h-full bg-brand-accent transition-all duration-300"
@@ -753,13 +774,17 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
           </div>
 
           {/* 篩選標籤 */}
-          <div className="mb-4 flex gap-2" role="tablist" aria-label="故事篩選">
+          <div
+            className="mb-4 flex gap-2"
+            role="tablist"
+            aria-label={t('versionB.storyFilterAria')}
+          >
             {[
-              { key: 'all' as const, label: '全部', count: ALL_STORY_QUESTIONS.length },
-              { key: 'filled' as const, label: '已填', count: filledCount },
+              { key: 'all' as const, label: t('versionB.all'), count: ALL_STORY_QUESTIONS.length },
+              { key: 'filled' as const, label: t('versionB.filled'), count: filledCount },
               {
                 key: 'unfilled' as const,
-                label: '未填',
+                label: t('versionB.unfilled'),
                 count: ALL_STORY_QUESTIONS.length - filledCount,
               },
             ].map((filter) => (
@@ -815,9 +840,9 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
             <button
               onClick={() => setVisibleStoryCount((prev) => prev + 3)}
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-subtle py-3 text-sm font-medium text-brand-dark transition-colors hover:bg-brand-light"
-              aria-label={`顯示更多故事，還有 ${remainingCount} 題`}
+              aria-label={t('versionB.showMoreAria', { count: remainingCount })}
             >
-              顯示更多 ({remainingCount} 題)
+              {t('versionB.showMore', { count: remainingCount })}
               <ChevronDown className="h-4 w-4" />
             </button>
           )}
@@ -825,7 +850,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
           {/* 無結果提示 */}
           {filteredStories.length === 0 && (
             <div className="py-8 text-center text-text-subtle">
-              {storyFilter === 'filled' ? '還沒有填寫任何故事' : '所有故事都已填寫！'}
+              {storyFilter === 'filled' ? t('versionB.emptyFilled') : t('versionB.emptyUnfilled')}
             </div>
           )}
         </section>
@@ -836,9 +861,9 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
             <div className="flex min-w-0 flex-1 items-center gap-2">
               <Globe className="h-5 w-5 shrink-0 text-brand-dark" />
               <div className="min-w-0">
-                <h2 className="font-semibold text-brand-dark">公開設定</h2>
+                <h2 className="font-semibold text-brand-dark">{t('sections.settings')}</h2>
                 <p className="text-sm text-text-subtle">
-                  {profileData.isPublic ? '其他人可以看到你的人物誌' : '只有你可以看到'}
+                  {profileData.isPublic ? t('common.publicDesc') : t('versionB.privateDesc')}
                 </p>
               </div>
             </div>
@@ -849,7 +874,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
               }`}
               role="switch"
               aria-checked={profileData.isPublic}
-              aria-label="公開設定開關"
+              aria-label={t('versionB.publicToggleAria')}
             >
               <span
                 className={`absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white shadow-xs transition-transform ${
@@ -869,7 +894,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
             className="w-full border-brand-dark text-brand-dark"
             onClick={onBack}
           >
-            返回
+            {t('common.back')}
           </Button>
         </div>
       )}
@@ -882,7 +907,7 @@ export default function ProfileEditorVersionB({ onBack }: ProfileEditorVersionBP
             onClick={onBack}
             className="border-brand-dark text-brand-dark shadow-lg hover:bg-brand-light"
           >
-            返回選擇
+            {t('versionB.backToSelector')}
           </Button>
         </div>
       )}

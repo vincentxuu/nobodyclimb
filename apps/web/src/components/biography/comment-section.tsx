@@ -2,15 +2,15 @@
 
 import { AxiosError } from 'axios'
 import { formatDistanceToNow } from 'date-fns'
-import { zhTW } from 'date-fns/locale'
 import { Loader2, MessageCircle, Send, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
 import { bucketListService } from '@/lib/api/services'
+import { getDateFnsLocale } from '@/lib/date-locale'
 import { BucketListComment } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/authStore'
@@ -32,6 +32,7 @@ export function CommentSection({ itemId, initialCount = 0, className }: CommentS
   const router = useRouter()
   const { toast } = useToast()
   const t = useTranslations('BiographyPage')
+  const locale = useLocale()
 
   const loadComments = useCallback(async () => {
     setIsLoading(true)
@@ -113,7 +114,7 @@ export function CommentSection({ itemId, initialCount = 0, className }: CommentS
     try {
       return formatDistanceToNow(new Date(dateString), {
         addSuffix: true,
-        locale: zhTW,
+        locale: getDateFnsLocale(locale),
       })
     } catch {
       return dateString

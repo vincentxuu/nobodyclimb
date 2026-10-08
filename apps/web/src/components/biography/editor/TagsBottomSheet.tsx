@@ -21,6 +21,7 @@ import {
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useBiographyTagText } from '@/lib/hooks/useBiographyTagText'
 import type { TagDimension } from '@/lib/types/biography-v2'
 import { cn } from '@/lib/utils'
 import { TagCard } from '../shared/TagChip'
@@ -78,6 +79,7 @@ export function TagsBottomSheet({
   className,
 }: TagsBottomSheetProps) {
   const t = useTranslations('BiographyEditor')
+  const { dimensionName, dimensionDescription } = useBiographyTagText()
   const [isAnimating, setIsAnimating] = useState(false)
   const [expandedDimensions, setExpandedDimensions] = useState<Set<string>>(new Set())
   const [dragY, setDragY] = useState(0)
@@ -300,7 +302,9 @@ export function TagsBottomSheet({
                         <Tag size={18} className="text-[#3F3D3D]" />
                       )
                     })()}
-                    <span className="font-medium text-[#1B1A1A] text-sm">{dimension.name}</span>
+                    <span className="font-medium text-[#1B1A1A] text-sm">
+                      {dimensionName(dimension.id, dimension.name)}
+                    </span>
                     {selectedCount > 0 && (
                       <span className="text-xs text-brand-dark font-medium">({selectedCount})</span>
                     )}
@@ -344,7 +348,8 @@ export function TagsBottomSheet({
                       {dimension.selection_mode === 'multiple'
                         ? t('tagsCanMultiselect')
                         : t('tagsSingleSelect')}
-                      {dimension.description && ` · ${dimension.description}`}
+                      {dimension.description &&
+                        ` · ${dimensionDescription(dimension.id, dimension.description)}`}
                     </p>
                   </div>
                 )}

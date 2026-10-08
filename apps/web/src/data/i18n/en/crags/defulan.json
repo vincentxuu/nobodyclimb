@@ -1,0 +1,142 @@
+{
+  "crag": {
+    "description": {
+      "zh": "德芙蘭岩場位於台中和平區，是台灣中部重要的石灰岩攀岩場地。岩場擁有多個攀登區域，包含運動攀登和傳統攀登路線。這裡的岩壁提供了從5.6到5.12+的各種挑戰，有些區域岩質不穩定常有落石，攀登及確保時請戴岩盔。",
+      "text": "Defulan is located in Heping District, Taichung City, and is an important limestone climbing area in central Taiwan. The crag features multiple climbing areas including sport and traditional routes. The walls offer challenges from 5.6 to 5.12+. Some areas have unstable rock with occasional rockfall - please wear a helmet when climbing and belaying."
+    },
+    "approach": {
+      "zh": "15-30分鐘徒步",
+      "text": "15-30 minutes hiking"
+    },
+    "parking": {
+      "zh": "路邊停車，空間有限",
+      "text": "Roadside parking, limited space"
+    }
+  },
+  "transportation": [
+    {
+      "zh": "從台中市區沿台8線往谷關方向，約1.5小時車程",
+      "text": "From Taichung city center, take Provincial Highway 8 towards Guguan, about 1.5 hours drive"
+    }
+  ],
+  "areas": {
+    "final-frontier": {
+      "description": {
+        "zh": "德芙蘭重要的攀登區域，有運動攀登和傳統攀登路線。",
+        "text": "An important climbing area at Defulan with both sport and traditional routes."
+      }
+    },
+    "frontier-left": {
+      "description": {
+        "zh": "路線中間的小平台有許多落葉以及小石頭，請保持溫柔的動作以免傷及下面的朋友，確保的夥伴也要隨時注意上方的狀況。建議配戴岩盔。",
+        "text": "The small platform in the middle of the routes has many fallen leaves and small rocks. Please be gentle to avoid injuring belayers below. Helmet recommended."
+      }
+    },
+    "frontier-right": {
+      "description": {
+        "zh": "邊境右側區域，包含運動攀登和傳統攀登路線。",
+        "text": "Right side of Frontier area with sport and traditional routes."
+      }
+    },
+    "loftier": {
+      "description": {
+        "zh": "較高的攀登區域，有多條長路線，最長可達40米。",
+        "text": "Higher climbing area with many long routes, up to 40 meters."
+      }
+    },
+    "racketeer": {
+      "description": {
+        "zh": "金三角區域，有多條傳統攀登和運動攀登路線。",
+        "text": "Racketeer area with multiple trad and sport routes."
+      }
+    }
+  },
+  "routes": {
+    "DF-FF-002": {
+      "description": {
+        "zh": "沿著斜裂隙往右上翻上平台，開始進入關卡，需要很穩定的腳部控制才能一次爬完。",
+        "text": "Follow the diagonal crack up and right and pull onto the ledge, where the crux section begins; very steady foot control is needed to climb it in one go."
+      }
+    },
+    "DF-FF-003": {
+      "description": {
+        "zh": "起攀有三個版本：左側斜裂隙，中間直上，或右側右手借花果山十三太保。倒數第四bolt處有個極困難的抱石問題，整條路線充滿驚喜。",
+        "text": "There are three versions of the start: the diagonal crack on the left, straight up the middle, or on the right borrowing 花果山十三太保 with the right hand. There is an extremely hard boulder problem at the fourth-to-last bolt; the whole route is full of surprises."
+      }
+    },
+    "DF-FF-005": {
+      "description": {
+        "zh": "由吹彈可破的裂隙起攀，攀爬沿途沒有明顯的連續裂隙，但都可以找到位置放支點，有趣的支點判斷練習路線。",
+        "text": "Start from the crack of 吹彈可破. There is no obvious continuous crack along the way, but you can always find placements for protection; a fun route for practicing gear-placement judgment."
+      }
+    },
+    "DF-FF-006": {
+      "description": {
+        "zh": "起攀有兩個版本：左側寬裂隙以及右側外傾手指裂隙，往右上接到斜裂隙掛到第二個bolt，後續為大點大動作路線。",
+        "text": "There are two versions of the start: the wide crack on the left and the overhanging finger crack on the right. Go up and right to join the diagonal crack and clip the second bolt; after that it is a route of big holds and big moves."
+      }
+    },
+    "DF-FF-007": {
+      "description": {
+        "zh": "寬縫路線，如果不用左壁，可以練習到疊手技巧。請別爬，落石多。",
+        "text": "A wide crack (offwidth) route; if you do not use the left wall, you can practice hand-stacking technique. Please do not climb it; there is a lot of rockfall."
+      },
+      "protection": {
+        "zh": "至少#5, #6各一",
+        "text": "At least one each of #5 and #6"
+      },
+      "tips": {
+        "zh": "請別爬，落石多",
+        "text": "Please do not climb it; there is a lot of rockfall."
+      }
+    },
+    "DF-FL-006": {
+      "description": {
+        "zh": "前三顆跟手槍皮特共用，在倒數第二bolt往左橫渡接上裂隙，最後三米極困難。",
+        "text": "The first three bolts are shared with 手槍皮特. At the second-to-last bolt, traverse left to join the crack; the last three meters are extremely hard."
+      }
+    },
+    "DF-FL-008": {
+      "protection": {
+        "zh": "需#4, #5",
+        "text": "#4 and #5 required"
+      }
+    },
+    "DF-FL-010": {
+      "protection": {
+        "zh": "需小號cam, nut",
+        "text": "Small cams and nuts required"
+      }
+    },
+    "DF-FL-011": {
+      "protection": {
+        "zh": "需小號cam, nut",
+        "text": "Small cams and nuts required"
+      }
+    },
+    "DF-FL-012": {
+      "protection": {
+        "zh": "需小號cam, nut",
+        "text": "Small cams and nuts required"
+      }
+    },
+    "DF-FR-005": {
+      "description": {
+        "zh": "不使用左側的創世紀裂隙，爬岩面。Main left crack (of Genesis) is off, climb middle face.",
+        "text": "Does not use the 創世紀 (Genesis) crack on the left; climb the face. Main left crack (of Genesis) is off, climb middle face."
+      }
+    },
+    "DF-FR-006": {
+      "description": {
+        "zh": "左線5.11，右線5.10+。",
+        "text": "The left line is 5.11; the right line is 5.10+."
+      }
+    },
+    "DF-LO-007": {
+      "description": {
+        "zh": "從細小困難裂隙起攀，接上精彩的15米裂隙。",
+        "text": "Start on a thin, difficult crack, then join a superb 15 m crack."
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useCallback, useMemo } from 'react'
 import {
   Select,
@@ -11,7 +12,12 @@ import {
 import { stringToTags, TagInput, tagsToString } from '@/components/ui/tag-input'
 import ProfileFormField from './ProfileFormField'
 import ProfileTextDisplay from './ProfileTextDisplay'
-import { RouteTypeSelector, routeTypesToString, stringToRouteTypes } from './RouteTypeSelector'
+import {
+  RouteTypeSelector,
+  routeTypesToString,
+  stringToRouteTypes,
+  useRouteTypeLabel,
+} from './RouteTypeSelector'
 
 // 產生年份選項
 const currentYear = new Date().getFullYear()
@@ -35,6 +41,8 @@ export default function ClimbingInfoSection({
   isMobile,
   onChange,
 }: ClimbingInfoSectionProps) {
+  const t = useTranslations('ProfileSections')
+  const getRouteTypeLabel = useRouteTypeLabel()
   // 將字串轉換為標籤陣列
   const locationTags = useMemo(() => stringToTags(frequentGyms), [frequentGyms])
   const routeTypes = useMemo(() => stringToRouteTypes(favoriteRouteType), [favoriteRouteType])
@@ -57,11 +65,11 @@ export default function ClimbingInfoSection({
 
   return (
     <div className="space-y-4">
-      <ProfileFormField label="哪一年開始攀岩" isMobile={isMobile}>
+      <ProfileFormField label={t('climbingInfo.startYear')} isMobile={isMobile}>
         {isEditing ? (
           <Select value={startYear} onValueChange={(value) => onChange('startYear', value)}>
             <SelectTrigger className="h-10 border-[#B6B3B3] text-sm md:text-base">
-              <SelectValue placeholder="請選擇年份" />
+              <SelectValue placeholder={t('climbingInfo.selectYear')} />
             </SelectTrigger>
             <SelectContent>
               {years.map((year) => (
@@ -77,15 +85,15 @@ export default function ClimbingInfoSection({
       </ProfileFormField>
 
       <ProfileFormField
-        label="平常出沒的地方"
-        hint={isEditing ? '輸入後按 Enter 新增' : undefined}
+        label={t('climbingInfo.locations')}
+        hint={isEditing ? t('climbingInfo.locationsHint') : undefined}
         isMobile={isMobile}
       >
         {isEditing ? (
           <TagInput
             value={locationTags}
             onChange={handleLocationChange}
-            placeholder="輸入地點名稱，按 Enter 新增"
+            placeholder={t('climbingInfo.locationsPlaceholder')}
           />
         ) : (
           <ProfileTextDisplay text={frequentGyms} isMobile={isMobile} asTags />
@@ -93,14 +101,19 @@ export default function ClimbingInfoSection({
       </ProfileFormField>
 
       <ProfileFormField
-        label="喜歡的路線型態"
-        hint={isEditing ? '可複選' : undefined}
+        label={t('climbingInfo.routeTypes')}
+        hint={isEditing ? t('climbingInfo.routeTypesHint') : undefined}
         isMobile={isMobile}
       >
         {isEditing ? (
           <RouteTypeSelector value={routeTypes} onChange={handleRouteTypeChange} />
         ) : (
-          <ProfileTextDisplay text={favoriteRouteType} isMobile={isMobile} asTags />
+          <ProfileTextDisplay
+            text={favoriteRouteType}
+            isMobile={isMobile}
+            asTags
+            formatTag={getRouteTypeLabel}
+          />
         )}
       </ProfileFormField>
     </div>

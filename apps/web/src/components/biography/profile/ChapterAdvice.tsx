@@ -2,9 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { Loader2, Lock } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 import { biographyContentService } from '@/lib/api/services'
+import { toIntlLocale } from '@/lib/date-locale'
 import {
   useAdviceToSelfStory,
   useCoreStoryCommentMutation,
@@ -25,6 +26,7 @@ interface ChapterAdviceProps {
  */
 export function ChapterAdvice({ biographyId, personName, updatedAt }: ChapterAdviceProps) {
   const t = useTranslations('BiographyPage')
+  const locale = useLocale()
   const { story, isLoading } = useAdviceToSelfStory(biographyId)
   const likeMutation = useCoreStoryLikeMutation(biographyId)
   const commentMutation = useCoreStoryCommentMutation(biographyId, story?.id)
@@ -56,7 +58,7 @@ export function ChapterAdvice({ biographyId, personName, updatedAt }: ChapterAdv
     if (!dateStr) return null
 
     try {
-      return new Date(dateStr).toLocaleDateString('zh-TW', {
+      return new Date(dateStr).toLocaleDateString(toIntlLocale(locale), {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
@@ -64,7 +66,7 @@ export function ChapterAdvice({ biographyId, personName, updatedAt }: ChapterAdv
     } catch {
       return null
     }
-  }, [story?.updated_at, updatedAt])
+  }, [story?.updated_at, updatedAt, locale])
 
   if (isLoading) {
     return (

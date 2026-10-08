@@ -4,10 +4,12 @@ import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
+import { usePostCategoryLabel } from '@/components/blog/use-post-category-label'
 import { postService } from '@/lib/api/services'
-import { BackendPost, getCategoryLabel } from '@/lib/types'
+import { toIntlLocale } from '@/lib/date-locale'
+import { BackendPost } from '@/lib/types'
 import { generateSummary } from '@/lib/utils/article'
 
 /**
@@ -16,6 +18,8 @@ import { generateSummary } from '@/lib/utils/article'
  */
 export function HeroArticle() {
   const t = useTranslations('HomePage')
+  const getCategoryLabel = usePostCategoryLabel()
+  const locale = useLocale()
   const [articles, setArticles] = useState<BackendPost[]>([])
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
@@ -146,8 +150,8 @@ export function HeroArticle() {
                   </span>
                   <span className="text-sm text-white/80">
                     {article.published_at
-                      ? new Date(article.published_at).toLocaleDateString('zh-TW')
-                      : new Date(article.created_at).toLocaleDateString('zh-TW')}
+                      ? new Date(article.published_at).toLocaleDateString(toIntlLocale(locale))
+                      : new Date(article.created_at).toLocaleDateString(toIntlLocale(locale))}
                   </span>
                 </div>
 

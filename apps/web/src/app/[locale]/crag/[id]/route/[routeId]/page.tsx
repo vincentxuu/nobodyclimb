@@ -3,6 +3,7 @@ import { assembleRouteDetailData } from '@/lib/adapters/crag-adapter'
 import { fetchCragAreas, fetchCragById, fetchCragRouteById } from '@/lib/api/server-fetch'
 import { OG_IMAGE, SITE_NAME, SITE_URL } from '@/lib/constants'
 import type { RouteDetailData } from '@/lib/crag-data'
+import { loadCragOverlays, localizeRouteDetail } from '@/lib/data-i18n'
 import RouteDetailClient from './RouteDetailClient'
 import RouteDetailFallback from './RouteDetailFallback'
 
@@ -12,16 +13,23 @@ export const dynamic = 'force-dynamic'
 /**
  * 從 API 取得路線詳情資料（Server Component 用）
  */
-async function getRouteData(cragId: string, routeId: string): Promise<RouteDetailData | null> {
-  const [apiCrag, apiRoute, apiAreas] = await Promise.all([
+async function getRouteData(
+  cragId: string,
+  routeId: string,
+  locale: string
+): Promise<RouteDetailData | null> {
+  const [apiCrag, apiRoute, apiAreas, overlays] = await Promise.all([
     fetchCragById(cragId),
     fetchCragRouteById(cragId, routeId),
     fetchCragAreas(cragId),
+    loadCragOverlays(locale, cragId),
   ])
 
   if (!apiCrag || !apiRoute) return null
 
-  return assembleRouteDetailData(apiCrag, [apiRoute], apiAreas, routeId)
+  const data = assembleRouteDetailData(apiCrag, [apiRoute], apiAreas, routeId)
+  // 路線說明、保護裝備、攻略依語系取值（日文 → 英文 → 中文）
+  return data ? { ...data, route: localizeRouteDetail(data.route, overlays) } : null
 }
 
 // 生成 TouristAttraction JSON-LD 結構化數據
@@ -142,10 +150,10 @@ function generateBreadcrumbJsonLd(data: RouteDetailData) {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string; routeId: string }>
+  params: Promise<{ id: string; routeId: string; locale: string }>
 }): Promise<Metadata> {
-  const { id, routeId } = await params
-  const data = await getRouteData(id, routeId)
+  const { id, routeId, locale } = await params
+  const data = await getRouteData(id, routeId, locale)
 
   if (!data) {
     return {
@@ -205,10 +213,10 @@ export async function generateMetadata({
 export default async function RouteDetailPage({
   params,
 }: {
-  params: Promise<{ id: string; routeId: string }>
+  params: Promise<{ id: string; routeId: string; locale: string }>
 }) {
-  const { id, routeId } = await params
-  const data = await getRouteData(id, routeId)
+  const { id, routeId, locale } = await params
+  const data = await getRouteData(id, routeId, locale)
 
   // 當 server-side fetch 失敗時（Cloudflare Worker 間 HTTP 請求限制），
   // 使用 client-side fallback 在瀏覽器端取得資料

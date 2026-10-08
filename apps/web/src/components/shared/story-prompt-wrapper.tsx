@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import StoryPromptModal from '@/components/biography/story-prompt-modal'
 import { biographyService, storyPromptService } from '@/lib/api/services'
@@ -12,6 +13,7 @@ import { useUIStore } from '@/store/uiStore'
  * 在 layout 中渲染，負責管理故事推薦彈窗的顯示邏輯
  */
 export function StoryPromptWrapper() {
+  const t = useTranslations('SharedUI')
   const { status, user } = useAuthStore()
   const { isStoryPromptOpen, closeStoryPrompt } = useUIStore()
   const [biography, setBiography] = useState<Biography | null>(null)
@@ -54,7 +56,7 @@ export function StoryPromptWrapper() {
   const handleSave = useCallback(
     async (questionId: string, storyValue: string) => {
       if (!biography) {
-        throw new Error('尚未載入人物誌資料，請稍後再試')
+        throw new Error(t('biographyNotLoaded'))
       }
 
       // 更新人物誌資料（暫時仍使用舊的 field-based API，未來可改用 biography_stories）
@@ -68,7 +70,7 @@ export function StoryPromptWrapper() {
       // 更新本地狀態
       setBiography((prev) => (prev ? { ...prev, [questionId]: storyValue } : null))
     },
-    [biography]
+    [biography, t]
   )
 
   // 跳過
@@ -95,7 +97,7 @@ export function StoryPromptWrapper() {
   return (
     <StoryPromptModal
       biography={biography as unknown as Record<string, unknown>}
-      userName={user?.displayName || user?.username || '你'}
+      userName={user?.displayName || user?.username || t('defaultUserName')}
       isOpen={isStoryPromptOpen}
       onClose={handleClose}
       onSave={handleSave}

@@ -9,6 +9,7 @@ import {
   WrenchIcon,
   XCircleIcon,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import type { ComponentProps, ReactNode } from 'react'
 import { isValidElement } from 'react'
 import { Badge } from '@/components/ui/badge'
@@ -41,11 +42,18 @@ export type ToolHeaderProps = {
 const statusLabels: Record<ToolPart['state'], string> = {
   'approval-requested': 'Awaiting Approval',
   'approval-responded': 'Responded',
-  'input-available': '執行中',
-  'input-streaming': '等待中',
-  'output-available': '完成',
+  'input-available': 'Running',
+  'input-streaming': 'Pending',
+  'output-available': 'Completed',
   'output-denied': 'Denied',
   'output-error': 'Error',
+}
+
+// 會在介面上出現的狀態改由訊息檔（AiTool.status）提供譯文；其餘沿用 vendored 的英文標籤
+const localizedStatusKeys: Partial<Record<ToolPart['state'], 'running' | 'pending' | 'done'>> = {
+  'input-available': 'running',
+  'input-streaming': 'pending',
+  'output-available': 'done',
 }
 
 const statusIcons: Record<ToolPart['state'], ReactNode> = {
@@ -58,12 +66,19 @@ const statusIcons: Record<ToolPart['state'], ReactNode> = {
   'output-error': <XCircleIcon className="size-4 text-red-600" />,
 }
 
-export const getStatusBadge = (status: ToolPart['state']) => (
-  <Badge className="gap-1.5 rounded-full text-xs" variant="secondary">
-    {statusIcons[status]}
-    {statusLabels[status]}
-  </Badge>
-)
+const StatusBadge = ({ status }: { status: ToolPart['state'] }) => {
+  const t = useTranslations('AiTool.status')
+  const key = localizedStatusKeys[status]
+
+  return (
+    <Badge className="gap-1.5 rounded-full text-xs" variant="secondary">
+      {statusIcons[status]}
+      {key ? t(key) : statusLabels[status]}
+    </Badge>
+  )
+}
+
+export const getStatusBadge = (status: ToolPart['state']) => <StatusBadge status={status} />
 
 export const ToolHeader = ({
   className,

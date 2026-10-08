@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import React, { useCallback, useRef, useState } from 'react'
 import ReactCrop, { type Crop, centerCrop, makeAspectCrop, type PixelCrop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
@@ -93,12 +94,13 @@ export default function ImageCropper({
   imageSrc,
   onCropComplete,
   aspectRatio = 1,
-  title = '裁切圖片',
+  title,
   outputSize = 400,
   outputHeight,
 }: ImageCropperProps) {
   // 計算輸出高度：優先使用 outputHeight，否則根據 aspectRatio 計算
   const finalOutputHeight = outputHeight ?? Math.round(outputSize / aspectRatio)
+  const t = useTranslations('SharedUI')
   const [crop, setCrop] = useState<Crop>()
   const [percentCrop, setPercentCrop] = useState<Crop>()
   const [isProcessing, setIsProcessing] = useState(false)
@@ -186,7 +188,7 @@ export default function ImageCropper({
         </button>
 
         {/* Title */}
-        <h2 className="mb-4 text-xl font-medium text-[#1B1A1A]">{title}</h2>
+        <h2 className="mb-4 text-xl font-medium text-[#1B1A1A]">{title ?? t('cropTitle')}</h2>
 
         {/* Cropper */}
         <div className="flex justify-center py-4">
@@ -204,14 +206,14 @@ export default function ImageCropper({
             <img
               ref={imgRef}
               src={imageSrc}
-              alt="裁切預覽"
+              alt={t('cropPreviewAlt')}
               onLoad={onImageLoad}
               className="max-h-[400px] w-auto"
             />
           </ReactCrop>
         </div>
 
-        <p className="mb-4 text-center text-sm text-[#8E8C8C]">拖曳或調整選取框來裁切圖片</p>
+        <p className="mb-4 text-center text-sm text-[#8E8C8C]">{t('cropHint')}</p>
 
         {/* Actions */}
         <div className="flex justify-end gap-3">
@@ -221,7 +223,7 @@ export default function ImageCropper({
             disabled={isProcessing}
             className="border-[#B6B3B3] text-[#3F3D3D] hover:bg-[#F5F5F5]"
           >
-            取消
+            {t('cancel')}
           </Button>
           <Button
             onClick={handleConfirm}
@@ -231,10 +233,10 @@ export default function ImageCropper({
             {isProcessing ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                處理中...
+                {t('processing')}
               </>
             ) : (
-              '確認裁切'
+              t('cropConfirm')
             )}
           </Button>
         </div>

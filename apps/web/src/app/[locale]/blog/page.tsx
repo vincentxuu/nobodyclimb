@@ -3,15 +3,17 @@
 import { FileText, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Suspense, useCallback, useEffect, useState } from 'react'
+import { usePostCategoryLabel } from '@/components/blog/use-post-category-label'
 import { ArticleCoverGenerator } from '@/components/shared/ArticleCoverGenerator'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
 import { SearchInput } from '@/components/ui/search-input'
 import { Link } from '@/i18n/navigation'
 import { postService } from '@/lib/api/services'
-import { getCategoryLabel, POST_CATEGORIES, PostCategory } from '@/lib/types'
+import { toIntlLocale } from '@/lib/date-locale'
+import { POST_CATEGORIES, PostCategory } from '@/lib/types'
 import { normalizeNewlines } from '@/lib/utils'
 import { generateSummary } from '@/lib/utils/article'
 import { Article } from '@/mocks/articles'
@@ -116,6 +118,8 @@ const ArticleCardSkeleton = () => (
 
 function BlogContent() {
   const t = useTranslations('BlogPage')
+  const locale = useLocale()
+  const getCategoryLabel = usePostCategoryLabel()
   const router = useRouter()
   const searchParams = useSearchParams()
   const categoryParam = searchParams.get('category') as PostCategory | null
@@ -170,8 +174,8 @@ function BlogContent() {
           category: getCategoryLabel(post.category) || t('uncategorized'),
           categoryValue: post.category || undefined,
           date: post.published_at
-            ? new Date(post.published_at).toLocaleDateString('zh-TW')
-            : new Date(post.created_at).toLocaleDateString('zh-TW'),
+            ? new Date(post.published_at).toLocaleDateString(toIntlLocale(locale))
+            : new Date(post.created_at).toLocaleDateString(toIntlLocale(locale)),
           description: post.excerpt ? normalizeNewlines(post.excerpt) : undefined,
           imageUrl: post.cover_image || '',
           isFeature: post.is_featured === 1,
@@ -220,7 +224,7 @@ function BlogContent() {
   // 分類按鈕列表（含「所有文章」）
   const categoryButtons: { value: PostCategory | null; label: string }[] = [
     { value: null, label: t('allArticles') },
-    ...POST_CATEGORIES,
+    ...POST_CATEGORIES.map(({ value }) => ({ value, label: getCategoryLabel(value) })),
   ]
 
   // 過濾文章

@@ -53,6 +53,7 @@ export default function UserMenu() {
   const [activeTab, setActiveTab] = useState<'explore' | 'personal'>('personal')
   const t = useTranslations('UserMenu')
   const tNav = useTranslations('Navbar')
+  const tShared = useTranslations('SharedUI')
   const tAuth = useTranslations('AuthPage')
 
   const avatarStyle = user?.avatarStyle
@@ -97,10 +98,10 @@ export default function UserMenu() {
               <button className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full transition-opacity duration-200 hover:opacity-80 md:h-8 md:w-8 lg:h-10 lg:w-10">
                 <AvatarWithFallback
                   src={user?.avatar}
-                  alt="用戶頭像"
+                  alt={tShared('userAvatarAlt')}
                   size="w-7 h-7 md:w-8 md:h-8 lg:w-10 lg:h-10"
                   fallback={
-                    <div role="img" aria-label="用戶頭像">
+                    <div role="img" aria-label={tShared('userAvatarAlt')}>
                       {generateAvatarElement(avatarStyle, 'w-7 h-7 md:w-8 md:h-8 lg:w-10 lg:h-10')}
                     </div>
                   }

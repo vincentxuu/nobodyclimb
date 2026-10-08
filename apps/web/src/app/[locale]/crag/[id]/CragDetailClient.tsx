@@ -18,6 +18,12 @@ import { useToast } from '@/components/ui/use-toast'
 import { useCragAreas, useCragDetail, useCragRoutes } from '@/hooks/api/useCrags'
 import { Link } from '@/i18n/navigation'
 import { RATE_LIMIT_TOAST } from '@/lib/constants'
+import {
+  amenityLabel,
+  climbingTypesLabel,
+  rockTypeLabel,
+  transportTypeLabel,
+} from '@/lib/data-i18n/enum-labels'
 import { useRouteFilter } from '@/lib/hooks/useRouteFilter'
 import { routeLoadingManager } from '@/lib/route-loading-manager'
 
@@ -26,6 +32,7 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
   const router = useRouter()
   const { toast } = useToast()
   const t = useTranslations('CragPage')
+  const tData = useTranslations('CragData')
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   // 使用 API hooks 獲取資料
@@ -119,6 +126,9 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
     )
   }
 
+  // 資料值（中文）保留給封面產生器比對，顯示用另外取當前語系的標籤
+  const rockTypeText = currentCrag.rockType ? rockTypeLabel(tData, currentCrag.rockType) : ''
+
   const breadcrumbItems = [
     { label: t('breadcrumbHome'), href: '/' },
     { label: t('breadcrumbCrag'), href: '/crag' },
@@ -202,12 +212,15 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
                 <div
                   className="relative w-full overflow-hidden rounded-lg"
                   role="img"
-                  aria-label={`${currentCrag.name}攀岩岩場 - ${currentCrag.rockType || '戶外攀岩'}岩壁`}
+                  aria-label={tData('coverAriaLabel', {
+                    name: currentCrag.name,
+                    rockType: rockTypeText || tData('coverAriaRockFallback'),
+                  })}
                 >
                   <CragCoverGenerator
                     rockType={currentCrag.rockType}
                     name={currentCrag.name}
-                    typeLabel={currentCrag.rockType}
+                    typeLabel={rockTypeText}
                     aspectRatio="wide"
                   />
                 </div>
@@ -253,13 +266,13 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
                     {currentCrag.type && (
                       <div className="flex">
                         <span className="w-28 shrink-0 text-gray-500">{t('cragType')}</span>
-                        <span>{currentCrag.type}</span>
+                        <span>{climbingTypesLabel(tData, currentCrag.type)}</span>
                       </div>
                     )}
                     {currentCrag.rockType && (
                       <div className="flex">
                         <span className="w-28 shrink-0 text-gray-500">{t('rockType')}</span>
-                        <span>{currentCrag.rockType}</span>
+                        <span>{rockTypeText}</span>
                       </div>
                     )}
                     <div className="flex">
@@ -296,7 +309,10 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
                   <div className="mt-4 space-y-3">
                     {currentCrag.transportation.map((item, index) => (
                       <div key={index} className="flex">
-                        <span className="w-20 shrink-0 text-gray-500">{item.type}：</span>
+                        <span className="w-20 shrink-0 text-gray-500">
+                          {transportTypeLabel(tData, item.type)}
+                          {tData('transportTypeSuffix')}
+                        </span>
                         <span className="flex-1">{item.description}</span>
                       </div>
                     ))}
@@ -339,7 +355,7 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
                         allowFullScreen
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
-                        title={`${currentCrag.name}攀岩岩場位置地圖`}
+                        title={tData('mapIframeTitle', { name: currentCrag.name })}
                       />
                     </div>
                   </div>
@@ -363,7 +379,7 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
                         key={index}
                         className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700"
                       >
-                        {item}
+                        {amenityLabel(tData, item)}
                       </span>
                     ))}
                   </div>
