@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { assembleRouteDetailData } from '@/lib/adapters/crag-adapter'
 import { fetchCragAreas, fetchCragById, fetchCragRouteById } from '@/lib/api/server-fetch'
 import { OG_IMAGE, SITE_NAME, SITE_URL } from '@/lib/constants'
@@ -9,6 +10,8 @@ import RouteDetailFallback from './RouteDetailFallback'
 
 // 強制動態渲染，確保在 runtime 取得正確的 API URL
 export const dynamic = 'force-dynamic'
+
+type CragTranslator = Awaited<ReturnType<typeof getTranslations<'CragPage'>>>
 
 /**
  * 從 API 取得路線詳情資料（Server Component 用）
@@ -33,7 +36,7 @@ async function getRouteData(
 }
 
 // 生成 TouristAttraction JSON-LD 結構化數據
-function generateRouteJsonLd(data: RouteDetailData) {
+function generateRouteJsonLd(data: RouteDetailData, t: CragTranslator) {
   const { route, crag, area } = data
 
   return {
@@ -43,7 +46,8 @@ function generateRouteJsonLd(data: RouteDetailData) {
     name: route.name,
     alternateName: route.englishName !== route.name ? route.englishName : undefined,
     description:
-      route.description || `${route.name} 是位於${crag.name}的攀岩路線，難度 ${route.grade}`,
+      route.description ||
+      t('jsonLdRouteDesc', { name: route.name, crag: crag.name, grade: route.grade }),
     url: `${SITE_URL}/crag/${crag.id}/route/${route.id}`,
     image: route.images?.[0] || `${SITE_URL}${OG_IMAGE}`,
     containedInPlace: {
@@ -59,32 +63,32 @@ function generateRouteJsonLd(data: RouteDetailData) {
     additionalProperty: [
       {
         '@type': 'PropertyValue',
-        name: '難度',
+        name: t('jsonLdGrade'),
         value: route.grade,
       },
       route.length && {
         '@type': 'PropertyValue',
-        name: '長度',
+        name: t('routeLength'),
         value: route.length,
       },
       {
         '@type': 'PropertyValue',
-        name: '類型',
+        name: t('jsonLdType'),
         value: route.typeEn,
       },
       route.boltCount > 0 && {
         '@type': 'PropertyValue',
-        name: 'Bolt 數量',
+        name: t('routeBoltCount'),
         value: route.boltCount,
       },
       route.firstAscent && {
         '@type': 'PropertyValue',
-        name: '首攀者',
+        name: t('routeFirstAscent'),
         value: route.firstAscent,
       },
       area && {
         '@type': 'PropertyValue',
-        name: '區域',
+        name: t('jsonLdArea'),
         value: area.name,
       },
     ].filter(Boolean),
@@ -94,19 +98,19 @@ function generateRouteJsonLd(data: RouteDetailData) {
 }
 
 // 生成 BreadcrumbList JSON-LD
-function generateBreadcrumbJsonLd(data: RouteDetailData) {
+function generateBreadcrumbJsonLd(data: RouteDetailData, t: CragTranslator) {
   const { route, crag, area } = data
   const items = [
     {
       '@type': 'ListItem',
       position: 1,
-      name: '首頁',
+      name: t('breadcrumbHome'),
       item: SITE_URL,
     },
     {
       '@type': 'ListItem',
       position: 2,
-      name: '岩場',
+      name: t('breadcrumbCrag'),
       item: `${SITE_URL}/crag`,
     },
     {
@@ -153,12 +157,15 @@ export async function generateMetadata({
   params: Promise<{ id: string; routeId: string; locale: string }>
 }): Promise<Metadata> {
   const { id, routeId, locale } = await params
-  const data = await getRouteData(id, routeId, locale)
+  const [data, t] = await Promise.all([
+    getRouteData(id, routeId, locale),
+    getTranslations({ locale, namespace: 'CragPage' }),
+  ])
 
   if (!data) {
     return {
-      title: '找不到路線',
-      description: '您要找的攀岩路線不存在',
+      title: t('metadataRouteNotFound'),
+      description: t('metadataRouteNotFoundDesc'),
     }
   }
 
@@ -166,7 +173,16 @@ export async function generateMetadata({
   const title = `${route.name} (${route.grade}) - ${crag.name}`
   const description =
     route.description?.substring(0, 160) ||
-    `${route.name} 是位於${crag.name}${area ? `${area.name}區` : ''}的${route.typeEn}路線，難度 ${route.grade}${route.length ? `，長度 ${route.length}` : ''}。`
+    t('metadataRouteFallbackDesc', {
+      name: route.name,
+      crag: crag.name,
+      hasArea: area ? 'yes' : 'no',
+      area: area?.name ?? '',
+      type: route.typeEn,
+      grade: route.grade,
+      hasLength: route.length ? 'yes' : 'no',
+      length: route.length ?? '',
+    })
 
   const imageUrl = route.images?.[0] || `${SITE_URL}${OG_IMAGE}`
 
@@ -180,9 +196,9 @@ export async function generateMetadata({
       crag.name,
       crag.nameEn,
       area?.name,
-      '攀岩路線',
+      t('metaKeywordRoute'),
       route.typeEn,
-      '戶外攀岩',
+      t('metaKeyword1'),
     ].filter(Boolean) as string[],
     openGraph: {
       title: `${title} | ${SITE_NAME}`,
@@ -224,20 +240,22 @@ export default async function RouteDetailPage({
     return <RouteDetailFallback cragId={id} routeId={routeId} />
   }
 
+  const t = await getTranslations({ locale, namespace: 'CragPage' })
+
   return (
     <>
       {/* TouristAttraction JSON-LD 結構化數據 */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(generateRouteJsonLd(data)),
+          __html: JSON.stringify(generateRouteJsonLd(data, t)),
         }}
       />
       {/* BreadcrumbList JSON-LD 結構化數據 */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(generateBreadcrumbJsonLd(data)),
+          __html: JSON.stringify(generateBreadcrumbJsonLd(data, t)),
         }}
       />
       <RouteDetailClient data={data} />

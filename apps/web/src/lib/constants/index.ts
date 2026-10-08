@@ -107,15 +107,6 @@ export const LOCALE_DATE_FORMATS: Record<string, { date: string; dateTime: strin
 }
 
 /**
- * Toast 提示訊息常數
- */
-export const RATE_LIMIT_TOAST = {
-  title: '請稍候',
-  description: '點擊太快了，請稍後再試',
-  variant: 'default' as const,
-}
-
-/**
  * API 相關常數
  */
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.nobodyclimb.cc/api/v1'

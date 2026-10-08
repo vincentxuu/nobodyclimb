@@ -374,7 +374,42 @@
     "metaNotFoundDesc": "The crag you're looking for doesn't exist",
     "metaTitleSuffix": "Outdoor Climbing Crag",
     "metaKeyword1": "outdoor climbing",
-    "metaKeyword2": "crag"
+    "metaKeyword2": "crag",
+    "rateLimitTitle": "Please wait",
+    "rateLimitDescription": "You are clicking too fast. Please try again in a moment.",
+    "metadataAreaFallbackDesc": "{area} is a climbing area at {crag} with {count, plural, one {# route} other {# routes}}.",
+    "metadataRouteFallbackDesc": "{name} is a {type} route at {crag}{hasArea, select, yes { ({area})} other {}}, graded {grade}{hasLength, select, yes {, {length} long} other {}}.",
+    "metaKeywordArea": "climbing area",
+    "metaKeywordRoute": "climbing route",
+    "jsonLdRouteDesc": "{name} is a climbing route at {crag}, graded {grade}",
+    "jsonLdGrade": "Grade",
+    "jsonLdType": "Type",
+    "jsonLdArea": "Area",
+    "itemListName": "Outdoor Climbing Crags in Taiwan",
+    "itemListDescription": "The main outdoor climbing destinations in Taiwan, including popular crags such as Longdong, Kenting, Guanziling, and Defulan",
+    "layoutKeywords": "Taiwan crags,outdoor climbing,climbing,Longdong climbing,Longdong,Kenting climbing,Kenting,Guanziling climbing,Guanziling,Defulan climbing,Defulan,Shoushan,climbing destinations,sport climbing,trad climbing,Taiwan climbing routes",
+    "featured": {
+      "longdong": {
+        "name": "Longdong",
+        "description": "Taiwan's largest natural crag with more than 600 climbing routes, located in Gongliao District, New Taipei City"
+      },
+      "kenting": {
+        "name": "Kenting",
+        "description": "Southern Taiwan's signature coral-reef limestone sport climbing crag, located in Hengchun Township, Pingtung County"
+      },
+      "guanziling": {
+        "name": "Guanziling",
+        "description": "A well-known limestone climbing area in Tainan, famous for its unique mud hot springs and quality rock"
+      },
+      "defulan": {
+        "name": "Defulan",
+        "description": "A quartz sandstone crag in Heping District, Taichung, with a mix of sport and trad routes"
+      },
+      "shoushan": {
+        "name": "Shoushan (Dapao Rock)",
+        "description": "A natural crag on Shoushan in Kaohsiung, well suited to beginners trying outdoor climbing"
+      }
+    }
   },
   "GymPage": {
     "pageTitle": "Climbing Gyms",
@@ -770,7 +805,10 @@
     "metaDefaultDesc": "Meet {name}, a passionate rock climber.",
     "metaKeyword1": "climber",
     "metaKeyword2": "biography",
-    "metaKeyword3": "climbing community"
+    "metaKeyword3": "climbing community",
+    "guestCtaTitle": "Have a climbing story of your own?",
+    "guestCtaDesc": "Write your own climber biography.",
+    "guestCtaAction": "Sign up now"
   },
   "GalleryPage": {
     "title": "Gallery",
@@ -2480,7 +2518,12 @@
     "viewStory": "View story",
     "viewAuthorStory": "View {name}'s full story",
     "moreFrom": "More stories from {name}",
-    "readMore": "Read more"
+    "readMore": "Read more",
+    "dateToday": "Today",
+    "dateYesterday": "Yesterday",
+    "dateDaysAgo": "{count, plural, one {# day} other {# days}} ago",
+    "dateWeeksAgo": "{count, plural, one {# week} other {# weeks}} ago",
+    "dateMonthsAgo": "{count, plural, one {# month} other {# months}} ago"
   },
   "RopeGame": {
     "defaultTitle": "Climbing Systems Practice",

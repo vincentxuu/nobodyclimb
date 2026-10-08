@@ -374,7 +374,42 @@
     "metaNotFoundDesc": "您要找的岩場不存在",
     "metaTitleSuffix": "戶外攀岩岩場",
     "metaKeyword1": "戶外攀岩",
-    "metaKeyword2": "岩場"
+    "metaKeyword2": "岩場",
+    "rateLimitTitle": "請稍候",
+    "rateLimitDescription": "點擊太快了，請稍後再試",
+    "metadataAreaFallbackDesc": "{area}是{crag}的攀岩區域，共有 {count} 條路線。",
+    "metadataRouteFallbackDesc": "{name} 是位於{crag}{hasArea, select, yes {{area}區} other {}}的{type}路線，難度 {grade}{hasLength, select, yes {，長度 {length}} other {}}。",
+    "metaKeywordArea": "攀岩區域",
+    "metaKeywordRoute": "攀岩路線",
+    "jsonLdRouteDesc": "{name} 是位於{crag}的攀岩路線，難度 {grade}",
+    "jsonLdGrade": "難度",
+    "jsonLdType": "類型",
+    "jsonLdArea": "區域",
+    "itemListName": "台灣戶外攀岩岩場",
+    "itemListDescription": "台灣主要戶外攀岩地點，包含龍洞、墾丁、關子嶺、德芙蘭等熱門岩場",
+    "layoutKeywords": "台灣岩場,戶外攀岩,攀岩,龍洞攀岩,龍洞,墾丁攀岩,墾丁,關子嶺攀岩,關子嶺,德芙蘭攀岩,德芙蘭,大砲岩,攀岩地點,運動攀登,傳統攀登,台灣攀岩路線",
+    "featured": {
+      "longdong": {
+        "name": "龍洞",
+        "description": "台灣最大天然岩場，超過 600 條攀岩路線，位於新北市貢寮區"
+      },
+      "kenting": {
+        "name": "墾丁",
+        "description": "南台灣代表性珊瑚礁石灰岩運動攀登岩場，位於屏東縣恆春鎮"
+      },
+      "guanziling": {
+        "name": "關子嶺",
+        "description": "台南知名石灰岩攀岩場地，以獨特泥漿溫泉和優質岩壁聞名"
+      },
+      "defulan": {
+        "name": "德芙蘭",
+        "description": "台中和平區石英質砂岩岩場，混合運動攀登與傳統攀登路線"
+      },
+      "shoushan": {
+        "name": "大砲岩",
+        "description": "高雄壽山天然岩場，適合初學者體驗戶外攀岩"
+      }
+    }
   },
   "GymPage": {
     "pageTitle": "岩館介紹",
@@ -770,7 +805,10 @@
     "metaDefaultDesc": "認識 {name}，一位熱愛攀岩的攀岩愛好者。",
     "metaKeyword1": "攀岩人物",
     "metaKeyword2": "人物誌",
-    "metaKeyword3": "攀岩社群"
+    "metaKeyword3": "攀岩社群",
+    "guestCtaTitle": "你也有攀岩故事嗎？",
+    "guestCtaDesc": "來寫寫你的小人物誌吧",
+    "guestCtaAction": "立即註冊加入"
   },
   "GalleryPage": {
     "title": "相片牆",
@@ -2427,7 +2465,12 @@
     "viewStory": "查看故事",
     "viewAuthorStory": "查看 {name} 的完整故事",
     "moreFrom": "來自 {name} 的更多故事",
-    "readMore": "閱讀全文"
+    "readMore": "閱讀全文",
+    "dateToday": "今天",
+    "dateYesterday": "昨天",
+    "dateDaysAgo": "{count} 天前",
+    "dateWeeksAgo": "{count} 週前",
+    "dateMonthsAgo": "{count} 個月前"
   },
   "RopeGame": {
     "defaultTitle": "攀岩系統練習",
