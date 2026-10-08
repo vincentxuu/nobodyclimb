@@ -67,17 +67,21 @@ function isValidStoryType(type: string): type is StoryType {
 }
 
 // 格式化日期
-function formatDate(dateString: string | undefined, locale: string): string {
+function formatDate(
+  dateString: string | undefined,
+  locale: string,
+  t: ReturnType<typeof useTranslations<'StoryDetail'>>
+): string {
   if (!dateString) return ''
   const date = new Date(dateString)
   const now = new Date()
   const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24))
 
-  if (diffInDays === 0) return '今天'
-  if (diffInDays === 1) return '昨天'
-  if (diffInDays < 7) return `${diffInDays} 天前`
-  if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} 週前`
-  if (diffInDays < 365) return `${Math.floor(diffInDays / 30)} 個月前`
+  if (diffInDays === 0) return t('dateToday')
+  if (diffInDays === 1) return t('dateYesterday')
+  if (diffInDays < 7) return t('dateDaysAgo', { count: diffInDays })
+  if (diffInDays < 30) return t('dateWeeksAgo', { count: Math.floor(diffInDays / 7) })
+  if (diffInDays < 365) return t('dateMonthsAgo', { count: Math.floor(diffInDays / 30) })
 
   return date.toLocaleDateString(toIntlLocale(locale), {
     year: 'numeric',
@@ -411,7 +415,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
               {story.created_at && (
                 <span className="inline-flex items-center gap-1 text-xs text-[#8E8C8C]">
                   <Calendar size={12} />
-                  <span>{formatDate(story.created_at, locale)}</span>
+                  <span>{formatDate(story.created_at, locale, t)}</span>
                 </span>
               )}
 

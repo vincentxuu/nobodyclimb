@@ -17,7 +17,6 @@ import { CollapsibleBreadcrumb } from '@/components/ui/collapsible-breadcrumb'
 import { useToast } from '@/components/ui/use-toast'
 import { useCragAreas, useCragDetail, useCragRoutes } from '@/hooks/api/useCrags'
 import { Link } from '@/i18n/navigation'
-import { RATE_LIMIT_TOAST } from '@/lib/constants'
 import {
   amenityLabel,
   climbingTypesLabel,
@@ -92,7 +91,11 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
 
       if (!routeLoadingManager.canLoadRoute(routeId)) {
         console.warn('Route loading rate limited:', routeId)
-        toast(RATE_LIMIT_TOAST)
+        toast({
+          title: t('rateLimitTitle'),
+          description: t('rateLimitDescription'),
+          variant: 'default',
+        })
         return
       }
 
@@ -100,7 +103,7 @@ export default function CragDetailClient({ params }: { params: Promise<{ id: str
       const queryString = buildFilterQueryString()
       router.push(`/crag/${id}/route/${routeId}${queryString}`)
     },
-    [id, router, buildFilterQueryString, toast]
+    [id, router, buildFilterQueryString, toast, t]
   )
 
   const handleDrawerItemClick = useCallback(() => {

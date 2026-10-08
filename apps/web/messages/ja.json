@@ -374,7 +374,42 @@
     "metaNotFoundDesc": "お探しの岩場は存在しません",
     "metaTitleSuffix": "屋外クライミングエリア",
     "metaKeyword1": "屋外クライミング",
-    "metaKeyword2": "岩場"
+    "metaKeyword2": "岩場",
+    "rateLimitTitle": "お待ちください",
+    "rateLimitDescription": "クリックが速すぎます。少し待ってからもう一度お試しください。",
+    "metadataAreaFallbackDesc": "{area}は{crag}のクライミングエリアで、全{count}本のルートがあります。",
+    "metadataRouteFallbackDesc": "{name}は{crag}{hasArea, select, yes {の{area}エリア} other {}}にある{type}ルートです。グレードは{grade}{hasLength, select, yes {、長さは{length}} other {}}。",
+    "metaKeywordArea": "クライミングエリア",
+    "metaKeywordRoute": "クライミングルート",
+    "jsonLdRouteDesc": "{name}は{crag}にあるクライミングルートです。グレードは{grade}",
+    "jsonLdGrade": "グレード",
+    "jsonLdType": "タイプ",
+    "jsonLdArea": "エリア",
+    "itemListName": "台湾のアウトドアクライミングエリア",
+    "itemListDescription": "龍洞、墾丁、關子嶺、德芙蘭などの人気の岩場を含む、台湾の主なアウトドアクライミングスポット",
+    "layoutKeywords": "台湾の岩場,外岩,クライミング,龍洞クライミング,龍洞,墾丁クライミング,墾丁,關子嶺クライミング,關子嶺,德芙蘭クライミング,德芙蘭,大砲岩,クライミングスポット,スポートクライミング,トラッドクライミング,台湾クライミングルート",
+    "featured": {
+      "longdong": {
+        "name": "龍洞",
+        "description": "600本を超えるルートを擁する台湾最大の天然の岩場。新北市貢寮区に位置"
+      },
+      "kenting": {
+        "name": "墾丁",
+        "description": "南台湾を代表するサンゴ礁石灰岩のスポートクライミングエリア。屏東県恒春鎮に位置"
+      },
+      "guanziling": {
+        "name": "關子嶺",
+        "description": "台南で知られる石灰岩のクライミングエリア。珍しい泥温泉と良質な岩壁で有名"
+      },
+      "defulan": {
+        "name": "德芙蘭",
+        "description": "台中市和平区にある石英質砂岩の岩場。スポートとトラッドのルートが混在"
+      },
+      "shoushan": {
+        "name": "大砲岩",
+        "description": "高雄・寿山にある天然の岩場。外岩を初めて体験する初心者に最適"
+      }
+    }
   },
   "GymPage": {
     "pageTitle": "クライミングジム紹介",
@@ -770,7 +805,10 @@
     "metaDefaultDesc": "{name}さんのプロフィール。クライミングを愛するクライマーです。",
     "metaKeyword1": "クライマー",
     "metaKeyword2": "プロフィール",
-    "metaKeyword3": "クライミングコミュニティ"
+    "metaKeyword3": "クライミングコミュニティ",
+    "guestCtaTitle": "あなたにもクライミングの物語がありますか？",
+    "guestCtaDesc": "あなたの人物誌を書いてみませんか",
+    "guestCtaAction": "今すぐ登録"
   },
   "GalleryPage": {
     "title": "ギャラリー",
@@ -2462,7 +2500,12 @@
     "viewStory": "ストーリーを見る",
     "viewAuthorStory": "{name} さんのストーリーをすべて見る",
     "moreFrom": "{name} さんのほかのストーリー",
-    "readMore": "続きを読む"
+    "readMore": "続きを読む",
+    "dateToday": "今日",
+    "dateYesterday": "昨日",
+    "dateDaysAgo": "{count} 日前",
+    "dateWeeksAgo": "{count} 週間前",
+    "dateMonthsAgo": "{count} か月前"
   },
   "RopeGame": {
     "defaultTitle": "クライミングシステム練習",

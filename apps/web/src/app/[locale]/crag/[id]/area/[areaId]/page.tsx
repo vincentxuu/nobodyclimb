@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { fetchCragAreas, fetchCragById } from '@/lib/api/server-fetch'
 import { OG_IMAGE, SITE_NAME, SITE_URL } from '@/lib/constants'
 import { loadCragOverlays, localizeAreaDescription } from '@/lib/data-i18n'
@@ -14,21 +15,22 @@ export async function generateMetadata({
   params: Promise<{ id: string; areaId: string; locale: string }>
 }): Promise<Metadata> {
   const { id, areaId, locale } = await params
+  const t = await getTranslations({ locale, namespace: 'CragPage' })
 
   const [apiCrag, apiAreas] = await Promise.all([fetchCragById(id), fetchCragAreas(id)])
 
   if (!apiCrag) {
     return {
-      title: '找不到岩場',
-      description: '您要找的岩場不存在',
+      title: t('metadataNotFound'),
+      description: t('metadataNotFoundDesc'),
     }
   }
 
   const area = apiAreas.find((a) => a.id === areaId)
   if (!area) {
     return {
-      title: '找不到區域',
-      description: '您要找的區域不存在',
+      title: t('metadataAreaNotFound'),
+      description: t('metadataAreaNotFoundDesc'),
     }
   }
 
@@ -43,14 +45,22 @@ export async function generateMetadata({
   )
   const description = areaDescription
     ? areaDescription.substring(0, 160)
-    : `${area.name}是${apiCrag.name}的攀岩區域，共有 ${area.route_count} 條路線。`
+    : t('metadataAreaFallbackDesc', {
+        area: area.name,
+        crag: apiCrag.name,
+        count: area.route_count,
+      })
 
   return {
     title: area.name,
     description,
-    keywords: [area.name, area.name_en, apiCrag.name, '攀岩區域', '岩場'].filter(
-      Boolean
-    ) as string[],
+    keywords: [
+      area.name,
+      area.name_en,
+      apiCrag.name,
+      t('metaKeywordArea'),
+      t('metaKeyword2'),
+    ].filter(Boolean) as string[],
     openGraph: {
       title: `${title} | ${SITE_NAME}`,
       description,
