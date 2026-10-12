@@ -2,14 +2,14 @@
   "schema_version": 1,
   "article_id": "44a849fc8c33070654fbaf80c966bd2d",
   "source_sha256": "d2664071209c30ef9a39e25b8feb3b6d85ed7d0bde1dc6a764ab120403a52028",
-  "evidence_sha256": "13c8676dd14b8390064964f24fe86103f3b3f1ae81b4ceadfb70a27fae8155f0",
+  "evidence_sha256": "a296c2a5eab5e0069e7b8668ec64b58b46d9967c04f20c51931041100b7620a3",
   "reviewed_at": "2026-10-12T06:59:32Z",
   "reviewer": "Claude 獨立審稿 subagent（未參與寫稿與本次台帳修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "本次重審實際核對：(1) git diff 確認本篇原稿無變更，台帳只有兩處變更：正文段落 6 由 confirmed 改為 unverifiable＋disposition=qualified 並改寫 reason；limitations 刪除「尚待未參與寫稿者獨立審查。」。(2) 段落 6 全段是編輯的行程示例（前一晚住伊豆、早上只去一個岩區、條件不合改海岸散步或室內），台帳兩筆來源的 evidence 只記載岩區點在、季節、嚮導集合與近鄰住宿、海邊殘置器材劣化等背景，沒有一項支持這個行程安排本身，改標 unverifiable 比 confirmed 貼切。(3) qualification「This is an editorial planning example, not a verified guiding package」逐字存在於本篇原稿段落 6，內容直接說明該段是編輯示例、不是已驗證的方案，符合本輪「說明建議性質」的標準。三語取句長度不同（日文取整句）係句構所致，處理一致。(4) 新 reason 與 evidence 對照屬實；TOMMY 頁確有提到近鄰住宿，reason 說的是來源不支持「前一晚住伊豆」這項安排，不是來源沒提住宿。(5) 刪除 limitations 那句恰當，獨立審查已完成，該句已過期。(6) 以 curl 抽查 ROCKTOPO areas/9 與 TOMMY pg257（皆 HTTP 200）：靜岡縣、安山岩、シーズン 1/2/3/4/12 月、パープルシャドウ 5.8、ピーターパン 5.10b、マルチ／フェイス／クラック／ボルダー分列；伊東市富戸至赤沢以クラック為中心的岩區點在、伊豆高原駅集合、伊豆高原／城ケ崎海岸／富戸駅周邊住宿、海沿い殘置劣化與カラビナ腐食，均與正文相符。(7) 台帳 source_sha256 等於原稿實際 SHA-256。沿用先前結論、這次未重新查證：「部分路線採混合保護」一句（抽查頁面可見 NP 標示與ボルトルート分列，未逐條確認混合保護）。未做：車次與門到門時間、當日海況潮汐、各岩區入口與個別路線器材、實地勘查。"
+      "notes": "本次重審實際核對：(1) git diff 確認本篇原稿無變更，台帳只有兩處變更：正文段落 6 由 confirmed 改為 unverifiable＋disposition=qualified 並改寫 reason；limitations 刪除「尚待未參與寫稿者獨立審查。」。(2) 段落 6 全段是編輯的行程示例（前一晚住伊豆、早上只去一個岩區、條件不合改海岸散步或室內），台帳兩筆來源的 evidence 只記載岩區點在、季節、嚮導集合與近鄰住宿、海邊殘置器材劣化等背景，沒有一項支持這個行程安排本身，改標 unverifiable 比 confirmed 貼切。(3) qualification「This is an editorial planning example, not a verified guiding package」逐字存在於本篇原稿段落 6，內容直接說明該段是編輯示例、不是已驗證的方案，符合本輪「說明建議性質」的標準。三語取句長度不同（日文取整句）係句構所致，處理一致。(4) 新 reason 與 evidence 對照屬實；TOMMY 頁確有提到近鄰住宿，reason 說的是來源不支持「前一晚住伊豆」這項安排，不是來源沒提住宿。(5) 刪除 limitations 那句恰當，獨立審查已完成，該句已過期。(6) 以 curl 抽查 ROCKTOPO areas/9 與 TOMMY pg257（皆 HTTP 200）：靜岡縣、安山岩、シーズン 1/2/3/4/12 月、パープルシャドウ 5.8、ピーターパン 5.10b、マルチ／フェイス／クラック／ボルダー分列；伊東市富戸至赤沢以クラック為中心的岩區點在、伊豆高原駅集合、伊豆高原／城ケ崎海岸／富戸駅周邊住宿、海沿い殘置劣化與カラビナ腐食，均與正文相符。(7) 台帳 source_sha256 等於原稿實際 SHA-256。沿用先前結論、這次未重新查證：「部分路線採混合保護」一句（抽查頁面可見 NP 標示與ボルトルート分列，未逐條確認混合保護）。未做：車次與門到門時間、當日海況潮汐、各岩區入口與個別路線器材、實地勘查。（2026-10-12 補記：台帳其後僅經 Biome 重新排版，limitations 陣列由多行併為單行；另一位獨立審稿者以程式比對確認 JSON 內容與原核准版本完全相同後更新 evidence_sha256，未重做內容審查。）"
     },
     "translation": {
       "passed": true,

@@ -319,7 +319,5 @@
     "/tmp/nobodyclimb-seoul-tokyo-article/C/x2.json",
     "/tmp/nobodyclimb-seoul-tokyo-article/C/y1.json"
   ],
-  "limitations": [
-    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。"
-  ]
+  "limitations": ["未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。"]
 }

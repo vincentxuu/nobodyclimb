@@ -2,14 +2,14 @@
   "schema_version": 1,
   "article_id": "0a0d30a5b4a4f89339e7d3b2a993db9e",
   "source_sha256": "2f929523c2a032b2799536075e417903d97e7700db91296ce6560170e95e3318",
-  "evidence_sha256": "ea4f23e79c8b36c75c1929e0d56cda8074026c743c1ad00cd3a18c073ac9be02",
+  "evidence_sha256": "e9ab04665556c5526b3e8d13a637ac1104fe2b686fe25ed269839826a9fc7c6d",
   "reviewed_at": "2026-10-12T06:59:58Z",
   "reviewer": "Claude 獨立審稿 subagent（claude-opus-5-5；未參與寫稿與本次台帳修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "本次第二輪重審（2026-10-12）。第一輪我對「正文段落 7」改標 unverifiable 的版本判 changes_requested（qualification 只說明本文不是入場許可、固定點檢查紀錄或 topo 替代，不符本輪統一標準）；其後該筆改標已整筆還原。本輪以 git diff 確認：原稿未動；台帳相對 HEAD 只剩刪除 limitations 的「尚待未參與寫稿者獨立審查。」（+1/−2 行），段落 7 回到 confirmed 與原 reason，claims、sources、links 與 HEAD 相同。刪除該句恰當（寫於獨立審查之前），保留的「未驗當日岩況/服務或交通」與正文相符。台帳 source_sha256 等於原稿實際 SHA-256；段落 4、5、6 三筆 unverifiable 的 qualification 逐字存在於原稿。來源事實方面，第一輪已以 curl 抽查 ROCKTOPO areas/92（中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a、任侠道5.13a；弓状エリア存在）與 JFA access/10079（2024年12月，広場エリア「青い瞳のセリーヌ」1ピン目ボルト抜け），與正文相符；本輪未再重取。未重新查證：CLIMBING-net、JFA access/6829、小鹿野協會入山頁兩輪皆未重取，沿用台帳紀錄；會員/登記/開放條件、bolt 修復狀態、公共交通與林道停車未驗（正文已明示）；未實地到場。保留事項：段落 7 主體是編輯的行程建議與改期判準，來源只支持背景事實，confirmed 高估了對建議本身的證據；此為 HEAD 既有狀態、非本輪引入，列為未解 advisory（見 findings）。"
+      "notes": "本次第二輪重審（2026-10-12）。第一輪我對「正文段落 7」改標 unverifiable 的版本判 changes_requested（qualification 只說明本文不是入場許可、固定點檢查紀錄或 topo 替代，不符本輪統一標準）；其後該筆改標已整筆還原。本輪以 git diff 確認：原稿未動；台帳相對 HEAD 只剩刪除 limitations 的「尚待未參與寫稿者獨立審查。」（+1/−2 行），段落 7 回到 confirmed 與原 reason，claims、sources、links 與 HEAD 相同。刪除該句恰當（寫於獨立審查之前），保留的「未驗當日岩況/服務或交通」與正文相符。台帳 source_sha256 等於原稿實際 SHA-256；段落 4、5、6 三筆 unverifiable 的 qualification 逐字存在於原稿。來源事實方面，第一輪已以 curl 抽查 ROCKTOPO areas/92（中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a、任侠道5.13a；弓状エリア存在）與 JFA access/10079（2024年12月，広場エリア「青い瞳のセリーヌ」1ピン目ボルト抜け），與正文相符；本輪未再重取。未重新查證：CLIMBING-net、JFA access/6829、小鹿野協會入山頁兩輪皆未重取，沿用台帳紀錄；會員/登記/開放條件、bolt 修復狀態、公共交通與林道停車未驗（正文已明示）；未實地到場。保留事項：段落 7 主體是編輯的行程建議與改期判準，來源只支持背景事實，confirmed 高估了對建議本身的證據；此為 HEAD 既有狀態、非本輪引入，列為未解 advisory（見 findings）。（2026-10-12 補記：台帳其後僅經 Biome 重新排版，limitations 陣列由多行併為單行；另一位獨立審稿者以程式比對確認 JSON 內容與原核准版本完全相同後更新 evidence_sha256，未重做內容審查。）"
     },
     "translation": {
       "passed": true,

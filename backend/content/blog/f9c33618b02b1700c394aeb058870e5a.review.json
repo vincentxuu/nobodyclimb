@@ -2,14 +2,14 @@
   "schema_version": 1,
   "article_id": "f9c33618b02b1700c394aeb058870e5a",
   "source_sha256": "798da824a9d6f9b48132c9680eb72e6639ccffb21c59660a9b6a0b95f2aaaf2a",
-  "evidence_sha256": "8c0cd8f4e3e60b15286ba56ccc92c240c8171f17c1e28c00f6b386961e544d01",
+  "evidence_sha256": "c3d3019d1ded9b3451393071567a3a12f5264737a15156d7723179fdb509da3a",
   "reviewed_at": "2026-10-12T06:57:19Z",
   "reviewer": "Claude 獨立審稿 subagent（未參與寫稿與本次台帳修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "本次重審（台帳改標後）：以 git diff 確認台帳只有兩處變動——「正文段落 6」由 confirmed 改為 unverifiable／qualified，以及刪除 limitations 的「尚待未參與寫稿者獨立審查。」；原稿未變，台帳 source_sha256 與原稿實際 SHA-256 相符。段落 6 全段是住宿、只排南壁、預留回程與設定停止時間的行程建議，三筆來源的 evidence 只載大仁、南壁與上部ワイルドボアゴージ、bolt 與多繩距、季節與接近時間、火山之根，沒有任何一筆支持住宿或排程建議本身，改標 unverifiable 比 confirmed 貼切，新 reason 對來源支持範圍的描述屬實。qualification「These are editorial suggestions, not NobodyClimb's firsthand ascent report」逐字存在於原稿段落 6 末句（出現 1 次），直接說明該段是編輯建議且非第一手攀登紀錄，符合本輪標準。本次另以 curl 重新取得三個來源頁並核對：CLIMBING-net 載季節9月下旬~6月上旬、凝灰岩、リード（ボルト）與マルチピッチ、大仁駅徒歩25分到登山道入口、南壁再10分、ワイルドボアゴージ另走ハイキングコース；ROCKTOPO 載静岡県、凝灰岩、シーズン1/2/3/11/12月、バトルランナー（最高グレード5.10a）、ストーンフリー（5.10c）、ミウラー（5.11a）、マルチ與リード（フェイス）分列；伊豆半島ジオパーク載城山為隆起露出地表的「火山の根」。三頁皆回 200，與正文數字一致。未驗：現行停車與收費、全面開放狀態、指定日交通與岩況、固定點實況；台帳 research_artifacts 所列 /tmp 檔案本次未開啟。"
+      "notes": "本次重審（台帳改標後）：以 git diff 確認台帳只有兩處變動——「正文段落 6」由 confirmed 改為 unverifiable／qualified，以及刪除 limitations 的「尚待未參與寫稿者獨立審查。」；原稿未變，台帳 source_sha256 與原稿實際 SHA-256 相符。段落 6 全段是住宿、只排南壁、預留回程與設定停止時間的行程建議，三筆來源的 evidence 只載大仁、南壁與上部ワイルドボアゴージ、bolt 與多繩距、季節與接近時間、火山之根，沒有任何一筆支持住宿或排程建議本身，改標 unverifiable 比 confirmed 貼切，新 reason 對來源支持範圍的描述屬實。qualification「These are editorial suggestions, not NobodyClimb's firsthand ascent report」逐字存在於原稿段落 6 末句（出現 1 次），直接說明該段是編輯建議且非第一手攀登紀錄，符合本輪標準。本次另以 curl 重新取得三個來源頁並核對：CLIMBING-net 載季節9月下旬~6月上旬、凝灰岩、リード（ボルト）與マルチピッチ、大仁駅徒歩25分到登山道入口、南壁再10分、ワイルドボアゴージ另走ハイキングコース；ROCKTOPO 載静岡県、凝灰岩、シーズン1/2/3/11/12月、バトルランナー（最高グレード5.10a）、ストーンフリー（5.10c）、ミウラー（5.11a）、マルチ與リード（フェイス）分列；伊豆半島ジオパーク載城山為隆起露出地表的「火山の根」。三頁皆回 200，與正文數字一致。未驗：現行停車與收費、全面開放狀態、指定日交通與岩況、固定點實況；台帳 research_artifacts 所列 /tmp 檔案本次未開啟。（2026-10-12 補記：台帳其後僅經 Biome 重新排版，limitations 陣列由多行併為單行；另一位獨立審稿者以程式比對確認 JSON 內容與原核准版本完全相同後更新 evidence_sha256，未重做內容審查。）"
     },
     "translation": {
       "passed": true,
