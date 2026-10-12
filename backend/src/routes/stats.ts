@@ -78,7 +78,7 @@ statsRoutes.get(
         (SELECT COUNT(*) FROM routes) as routes_count,
         (SELECT COUNT(*) FROM biographies WHERE visibility = 'public') as biographies_count,
         (SELECT COUNT(*) FROM videos) as videos_count,
-        (SELECT COUNT(*) FROM posts WHERE status = 'published') as posts_count,
+        (SELECT COUNT(*) FROM posts WHERE status = 'published' AND (lang IS NULL OR lang = 'zh')) as posts_count,
         (SELECT COUNT(*) FROM gyms) as gyms_count
     `
 

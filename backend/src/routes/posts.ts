@@ -1,10 +1,11 @@
 import { Hono } from 'hono'
-import { describeRoute } from 'hono-openapi'
+import { describeRoute, validator } from 'hono-openapi'
 import { authMiddleware, optionalAuthMiddleware } from '../middleware/auth'
-import { PostLang, PostRepository } from '../repositories/post-repository'
+import { PostRepository } from '../repositories/post-repository'
 import { PostService } from '../services/post-service'
 import { Env, Post } from '../types'
 import { generateId, parsePagination } from '../utils/id'
+import { postLangQuerySchema, resolvePostLang } from '../utils/post-lang'
 import { createLikeNotificationWithAggregation, createNotification } from './notifications'
 
 export const postsRoutes = new Hono<{ Bindings: Env }>()
@@ -15,15 +16,6 @@ export const postsRoutes = new Hono<{ Bindings: Env }>()
 function initService(c: any): PostService {
   const repository = new PostRepository(c.env.DB)
   return new PostService(repository, c.env.DB, c.env.CACHE, c.env.R2_PUBLIC_URL)
-}
-
-/**
- * 解析列表的語系參數。未帶或無法辨識時視為 zh，讓尚未傳語系的舊版 client
- * 不會看到其他語言的文章；lang=all 表示不篩選。
- */
-function parseLang(value: string | undefined): PostLang | undefined {
-  if (value === 'all') return undefined
-  return value === 'en' || value === 'ja' ? value : 'zh'
 }
 
 // ============================================
@@ -42,13 +34,14 @@ postsRoutes.get(
       200: { description: '成功取得文章列表' },
     },
   }),
+  validator('query', postLangQuerySchema),
   async (c) => {
     const { page, limit } = parsePagination(c.req.query('page'), c.req.query('limit'))
     const status = c.req.query('status') || 'published'
     const tag = c.req.query('tag')
     const category = c.req.query('category')
     const featured = c.req.query('featured') === 'true' ? true : undefined
-    const lang = parseLang(c.req.query('lang'))
+    const lang = resolvePostLang(c.req.valid('query').lang)
 
     const service = initService(c)
     const result = await service.getList({
@@ -107,11 +100,12 @@ postsRoutes.get(
       200: { description: '成功取得精選文章列表' },
     },
   }),
+  validator('query', postLangQuerySchema),
   async (c) => {
     const limit = parseInt(c.req.query('limit') || '6', 10)
 
     const service = initService(c)
-    const posts = await service.getFeatured(limit, parseLang(c.req.query('lang')))
+    const posts = await service.getFeatured(limit, resolvePostLang(c.req.valid('query').lang))
 
     return c.json({
       success: true,
@@ -126,14 +120,15 @@ postsRoutes.get(
   describeRoute({
     tags: ['Posts'],
     summary: '取得所有標籤',
-    description: '取得文章的所有標籤列表',
+    description: '取得文章的所有標籤列表與文章數；lang 規則同文章列表',
     responses: {
       200: { description: '成功取得標籤列表' },
     },
   }),
+  validator('query', postLangQuerySchema),
   async (c) => {
     const service = initService(c)
-    const tags = await service.getAllTags()
+    const tags = await service.getAllTags(resolvePostLang(c.req.valid('query').lang))
 
     return c.json({
       success: true,
@@ -153,11 +148,12 @@ postsRoutes.get(
       200: { description: '成功取得熱門文章列表' },
     },
   }),
+  validator('query', postLangQuerySchema),
   async (c) => {
     const limit = parseInt(c.req.query('limit') || '5', 10)
 
     const service = initService(c)
-    const posts = await service.getPopular(limit, parseLang(c.req.query('lang')))
+    const posts = await service.getPopular(limit, resolvePostLang(c.req.valid('query').lang))
 
     return c.json({
       success: true,

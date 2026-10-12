@@ -1,5 +1,6 @@
 import { D1Database } from '@cloudflare/workers-types'
 import { Post } from '../types'
+import { PostLang, postLangClause } from '../utils/post-lang'
 
 /**
  * Post 列表項目（用於列表顯示）
@@ -24,10 +25,7 @@ export interface PostQueryOptions {
   lang?: PostLang
 }
 
-export type PostLang = 'zh' | 'en' | 'ja'
-
-// 未標語系（lang IS NULL）的文章不分語系顯示；有標語系的只在對應語系出現。
-const LANG_CLAUSE = '(p.lang IS NULL OR p.lang = ?)'
+const LANG_CLAUSE = postLangClause('p')
 
 /**
  * Post Repository - 資料存取層
@@ -473,16 +471,17 @@ export class PostRepository {
   /**
    * 獲取所有 tags（帶計數）
    */
-  async getAllTags(): Promise<Array<{ tag: string; count: number }>> {
+  async getAllTags(lang?: PostLang): Promise<Array<{ tag: string; count: number }>> {
     const result = await this.db
       .prepare(
         `SELECT tag, COUNT(*) as count
        FROM post_tags pt
        JOIN posts p ON pt.post_id = p.id
-       WHERE p.status = 'published'
+       WHERE p.status = 'published'${lang ? ` AND ${LANG_CLAUSE}` : ''}
        GROUP BY tag
        ORDER BY count DESC`
       )
+      .bind(...(lang ? [lang] : []))
       .all<{ tag: string; count: number }>()
 
     return result.results || []

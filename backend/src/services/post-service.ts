@@ -1,12 +1,8 @@
 import { D1Database, KVNamespace, R2Bucket } from '@cloudflare/workers-types'
 import { z } from 'zod'
-import {
-  PostLang,
-  PostListItem,
-  PostQueryOptions,
-  PostRepository,
-} from '../repositories/post-repository'
+import { PostListItem, PostQueryOptions, PostRepository } from '../repositories/post-repository'
 import { Post } from '../types'
+import { PostLang } from '../utils/post-lang'
 import { deleteR2Images, extractR2ImagesFromContent } from '../utils/storage'
 import { trackAndUpdateViewCount } from '../utils/viewTracker'
 
@@ -199,8 +195,8 @@ export class PostService {
   /**
    * 取得所有 tags
    */
-  async getAllTags(): Promise<Array<{ tag: string; count: number }>> {
-    return await this.repository.getAllTags()
+  async getAllTags(lang?: PostLang): Promise<Array<{ tag: string; count: number }>> {
+    return await this.repository.getAllTags(lang)
   }
 
   /**

@@ -63,6 +63,8 @@ export interface BackendPost {
   status: 'draft' | 'published' | 'archived'
   is_featured: number
   view_count: number
+  /** 正文語系；未標語系（使用者自行發表）為 null */
+  lang?: 'zh' | 'en' | 'ja' | null
   published_at: string | null
   created_at: string
   updated_at: string
