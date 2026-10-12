@@ -23,7 +23,7 @@ translations: {zh: "中文文章ID", en: "英文文章ID", ja: "日文文章ID"}
 
 create 的 ID 用專案 `generateId()` 等價的 16-byte 隨機 hex，例如 `node -e "process.stdout.write(require('node:crypto').randomBytes(16).toString('hex'))"`；不要用 slug 當 ID。上述佔位字只作說明，不能交付。slug 唯一，公開文章詳情連結依實際 `/blog/<id>` 驗。
 
-必填：id、slug、title、excerpt、category、tags（非空字串陣列，不重複）、cover_image（安全 URL 或 null）、status（published）、is_featured（數字 0/1）、author_username（nobodyclimb）、operation（create/update）、lang、translation_group、translations。多語必填欄位為 lang（zh/en/ja）、translation_group（中文文章 ID）、translations（三語實際 ID 對照）；沒有 published_at/date/locale frontmatter 欄位；新文章首次發布日期由 migration 設定，賽事日期寫正文。作者在 migration 查實際唯一 active NobodyClimb 帳號，不猜 author_id。
+必填：id、slug、title、excerpt、category、tags（非空字串陣列，不重複）、cover_image（安全 URL 或 null）、status（published）、is_featured（數字 0/1）、author_username（nobodyclimb）、operation（create/update）、lang、translation_group、translations。多語必填欄位為 lang（zh/en/ja）、translation_group（中文文章 ID）、translations（三語實際 ID 對照）；沒有 published_at/date/locale frontmatter 欄位；新文章首次發布日期由首次同步入庫時設定，賽事日期寫正文。`author_username` 是品牌別名；同步腳本以固定的品牌帳號 `users.id` 對應，不依賴線上 username。
 
 ## 更新 baseline
 
@@ -51,6 +51,6 @@ pnpm blog:baseline <saved-public-api-response.json> --output backend/content/blo
 
 本站沿用現有 DB 的三篇文章，不新增 locale 表、不改 API/renderer。lang/group/mapping 用原稿與 checker 維護，DB 無文章語系欄位；目前列表不按文章語系篩選，三篇會混列。公開 locale 路由是三篇互連，不宣稱已实现本文語系切換資料模型。
 
-新增三份 migrations 按下一個可用編號順序生成，同一 PR。更新同步三語原稿/來源/報告，每篇取自己 baseline；只有实际內容變更的稿生成新 update migration，沒變的 sibling 保留原 migration。已存在 legacy 單篇文章要先補其餘兩篇，再建立完整對照；新增譯稿 operation=create，既有文 operation=update。各語正文與資料的改動依實際 baseline 判斷，不能為了湊三份 update 無變更稿。
+三份原稿放同一 PR。更新同步三語原稿/來源/報告；沒有實際內容變更的 sibling 不改。baseline 只在第一次把 legacy 文章納入原稿管理時需要，每篇取自己的 baseline。已存在 legacy 單篇文章要先補其餘兩篇，再建立完整對照；新增譯稿 operation=create，既有文 operation=update。各語正文與資料的改動依實際 baseline 判斷，不能為了湊三份 update 無變更稿。
 
 正文从 H2 開始，文章標題只在 frontmatter title；不得保留模板 H1、說明或 `<>` 提示。raw HTML 不接受，使用普通 Markdown 由工具生成支援的 HTML。

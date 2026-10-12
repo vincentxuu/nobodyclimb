@@ -3,7 +3,7 @@ import { spawnSync } from 'node:child_process'
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import test from 'node:test'
-import { loadArticle, migration, newId, root } from './article-lib.mjs'
+import { brandAuthorIds, loadArticle, newId, root, syncSql } from './article-lib.mjs'
 
 const id = 'a'.repeat(32)
 function source(
@@ -35,33 +35,62 @@ function database(sql, setup = '', expectedError = false) {
   const schema = readFileSync(resolve(root, 'backend/src/db/schema.sql'), 'utf8').split(
     '-- ============================================\n-- Climbing Gyms'
   )[0]
-  const python = `import sqlite3,json,sys\nc=sqlite3.connect(':memory:')\nc.executescript(sys.argv[1])\nc.executescript(sys.argv[2])\ntry:\n c.executescript('BEGIN;\\n'+sys.argv[3]+'\\nCOMMIT;')\n print(json.dumps({'ok':True,'posts':c.execute('select id,author_id,title,published_at,view_count from posts').fetchall(),'tags':c.execute('select * from post_tags').fetchall()}))\nexcept sqlite3.Error as e:\n print(json.dumps({'ok':False,'error':str(e),'posts':c.execute('select id,author_id,title,published_at,view_count from posts').fetchall(),'tags':c.execute('select * from post_tags').fetchall()}))`
+  const python = `import sqlite3,json,sys\nc=sqlite3.connect(':memory:')\nc.executescript(sys.argv[1])\nc.executescript(sys.argv[2])\ntry:\n c.executescript('BEGIN;\\n'+sys.argv[3]+'\\nCOMMIT;')\n print(json.dumps({'ok':True,'posts':c.execute('select id,author_id,title,published_at,view_count,updated_at from posts').fetchall(),'tags':c.execute('select * from post_tags').fetchall()}))\nexcept sqlite3.Error as e:\n print(json.dumps({'ok':False,'error':str(e),'posts':c.execute('select id,author_id,title,published_at,view_count,updated_at from posts').fetchall(),'tags':c.execute('select * from post_tags').fetchall()}))`
   const result = spawnSync('python3', ['-c', python, schema, setup, sql], { encoding: 'utf8' })
   assert.equal(result.status, 0, result.stderr)
   const data = JSON.parse(result.stdout)
   assert.equal(data.ok, !expectedError, JSON.stringify(data))
   return data
 }
-const author =
-  "INSERT INTO users(id,email,username,is_active) VALUES ('staff','staff@local','nobodyclimb',1);"
-test('create 使用 crypto hex、SQL escape 與 tags', () => {
+const authorId = brandAuthorIds.nobodyclimb
+// 線上品牌帳號的 username 帶後綴，同步必須只靠 id 對應。
+const author = `INSERT INTO users(id,email,username,is_active) VALUES ('${authorId}','staff@local','nobodyclimb_5f9aa938',1);`
+const sync = (...articles) => syncSql(articles)
+test('新增使用 crypto hex、SQL escape、tags 與品牌帳號 id', () => {
   assert.match(newId(), /^[a-f0-9]{32}$/)
-  const article = loadArticle(source())
-  const data = database(migration(article), author)
+  const data = database(sync(loadArticle(source())), author)
+  assert.equal(data.posts[0][1], authorId)
   assert.equal(data.posts[0][2], "攀岩 ' 指南")
   assert.deepEqual(data.tags, [[id, '賽事']])
 })
-test('拒絕 missing/inactive author 與重複文章，不留下 partial writes', () => {
-  const sql = migration(loadArticle(source()))
+test('拒絕 missing/inactive author，不留下 partial writes', () => {
+  const sql = sync(loadArticle(source()))
   assert.equal(database(sql, '', true).posts.length, 0)
-  assert.equal(
-    database(sql, author.replace("'nobodyclimb',1", "'nobodyclimb',0"), true).posts.length,
-    0
+  assert.equal(database(sql, author.replace(',1);', ',0);'), true).posts.length, 0)
+  const existing = `${author}${sql}UPDATE users SET is_active=0;`
+  assert.equal(database(sql, existing, true).posts.length, 1)
+})
+test('重跑不改動資料；內容變更才更新並保留日期與瀏覽數', () => {
+  const sql = sync(loadArticle(source()))
+  const stamped = `${author}${sql}UPDATE posts SET published_at='2020-01-01',updated_at='2020-01-01',view_count=42;`
+  const same = database(sql, stamped)
+  assert.equal(same.posts[0][5], '2020-01-01')
+  const changed = database(
+    sync(loadArticle(source({ title: '更新標題', tags: ['技巧'] }))),
+    `${stamped}UPDATE posts SET title='線上編輯';`
   )
-  const setup = `${author}${sql}`
-  const duplicate = database(sql, setup, true)
-  assert.equal(duplicate.posts.length, 1)
-  assert.equal(duplicate.tags.length, 1)
+  assert.equal(changed.posts[0][2], '更新標題')
+  assert.equal(changed.posts[0][3], '2020-01-01')
+  assert.equal(changed.posts[0][4], 42)
+  assert.notEqual(changed.posts[0][5], '2020-01-01')
+  assert.deepEqual(changed.tags, [[id, '技巧']])
+})
+test('既有文章保留 slug，並補上缺少的首次發表日期', () => {
+  const sql = sync(loadArticle(source()))
+  const legacy = `${author}INSERT INTO posts(id,author_id,title,slug,content,published_at,updated_at) VALUES ('${id}','${authorId}','舊','legacy-slug','舊',NULL,'2020-01-01');`
+  const python = `import sqlite3,sys\nc=sqlite3.connect(':memory:')\nc.executescript(sys.argv[1])\nc.executescript(sys.argv[2])\nc.executescript(sys.argv[3])\nprint(c.execute('select slug, published_at is not null from posts').fetchall())`
+  const schema = readFileSync(resolve(root, 'backend/src/db/schema.sql'), 'utf8').split(
+    '-- ============================================\n-- Climbing Gyms'
+  )[0]
+  const result = spawnSync('python3', ['-c', python, schema, legacy, sql], { encoding: 'utf8' })
+  assert.equal(result.status, 0, result.stderr)
+  assert.equal(result.stdout.trim(), "[('legacy-slug', 1)]")
+})
+test('同批原稿 id/slug 重複或 slug 已被其他文章佔用時失敗', () => {
+  const article = loadArticle(source())
+  assert.throws(() => sync(article, article), /重複/)
+  const taken = `${author}INSERT INTO posts(id,author_id,title,slug,content) VALUES ('other','${authorId}','他','climbing-guide','x');`
+  assert.equal(database(sync(article), taken, true).posts.length, 1)
 })
 test('拒絕危險 HTML、URL、placeholder、unsupported 和 YAML duplicate keys', () => {
   for (const body of [
@@ -93,14 +122,13 @@ test('表格及引語保持安全 HTML', () => {
   assert.match(article.html, /<table>/)
   assert.match(article.html, /&amp;/)
 })
-test('更新完整 baseline 比較、missing/conflict fail、日期互動保留', () => {
+test('update 必須有相對 baseline 的讀者可見變更', () => {
   const dir = mkdtempSync(resolve(root, 'backend/content/blog/test-'))
   try {
     const old = loadArticle(source())
-    const create = migration(old)
     const baseline = {
       id,
-      author_id: 'staff',
+      author_id: authorId,
       slug: 'climbing-guide',
       title: "攀岩 ' 指南",
       excerpt: '認識攀岩規則。',
@@ -127,55 +155,30 @@ test('更新完整 baseline 比較、missing/conflict fail、日期互動保留'
       resolve(dir, 'source.md')
     )
     assert.equal(tagsOnly.meta.title, baseline.title)
-
-    const updated = loadArticle(
-      source({ operation: 'update', baseline: 'baseline.json', title: '更新標題', tags: ['技巧'] }),
-      resolve(dir, 'source.md')
-    )
-    const setup = `${author}${create}UPDATE posts SET published_at='2020-01-01',updated_at='2020-01-01',view_count=42;`
-    const data = database(migration(updated), setup)
-    assert.equal(data.posts[0][2], '更新標題')
-    assert.equal(data.posts[0][3], '2020-01-01')
-    assert.equal(data.posts[0][4], 42)
-    assert.deepEqual(data.tags, [[id, '技巧']])
-    assert.equal(database(migration(updated), author, true).posts.length, 0)
-    const conflict = database(
-      migration(updated),
-      `${setup}UPDATE posts SET title='線上編輯';`,
-      true
-    )
-    assert.equal(conflict.posts[0][2], '線上編輯')
-    assert.deepEqual(conflict.tags, [[id, '賽事']])
-    database(migration(updated), `${setup}INSERT INTO post_tags VALUES ('${id}','額外');`, true)
-    database(migration(updated), `${setup}UPDATE posts SET author_id='other';`, true)
   } finally {
     rmSync(dir, { recursive: true, force: true })
   }
 })
 mkdirSync(resolve(root, 'backend/content/blog'), { recursive: true })
 
-test('CLI 原稿位置、不可覆蓋、next 編號與 parity', () => {
+test('CLI 只接受位於內容目錄的原稿檢查', () => {
   const articleId = newId()
   const path = resolve(root, 'backend/content/blog', `${articleId}.md`)
+  const outside = resolve(root, 'backend/content', `${articleId}.md`)
   writeFileSync(path, source({ id: articleId }))
+  writeFileSync(outside, source({ id: articleId }))
   const cli = (args) =>
     spawnSync(process.execPath, [resolve(root, 'scripts/blog/article.mjs'), ...args], {
       encoding: 'utf8',
     })
-  const temporary = resolve(root, 'backend/content/blog', `${articleId}.sql`)
   try {
     assert.equal(cli(['check', path]).status, 0)
-    writeFileSync(temporary, migration(loadArticle(readFileSync(path, 'utf8'))))
-    assert.equal(cli(['check', path, '--migration', temporary]).status, 0)
-    writeFileSync(temporary, '-- stale')
-    assert.equal(cli(['check', path, '--migration', temporary]).status, 1)
-    assert.equal(cli(['generate', path, '--output', '../escaped.sql']).status, 1)
-    assert.equal(cli(['generate', path, '--output', 'backend/migrations/0000_test.sql']).status, 1)
-    assert.equal(cli(['check', path, '--unknown', temporary]).status, 1)
-    assert.equal(cli(['check', path, '--migration']).status, 1)
+    assert.equal(cli(['check', outside]).status, 1)
+    assert.equal(cli(['check', path, '--migration', path]).status, 1)
+    assert.equal(cli(['generate', path]).status, 1)
   } finally {
     rmSync(path, { force: true })
-    rmSync(temporary, { force: true })
+    rmSync(outside, { force: true })
   }
 })
 
