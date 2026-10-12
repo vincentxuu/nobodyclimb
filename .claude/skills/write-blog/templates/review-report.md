@@ -30,7 +30,7 @@
 ## 機械檢查
 
 - 命令、退出碼、目標資料/環境：
-- article/migration、本地 D1、lint/typecheck：
+- article checker、本地 D1 同步、lint/typecheck：
 - 未執行與原因；尚未 PR／CI／部署／讀者頁驗收：
 
 ## 未驗範圍

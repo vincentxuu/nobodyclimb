@@ -27,7 +27,7 @@
     "blog:test": "node --test scripts/blog/*.test.mjs",
     "blog:baseline": "node scripts/blog/capture-baseline.mjs",
     "blog:validate-local": "node scripts/blog/validate-local.mjs",
-    "blog:check-local": "node scripts/blog/check-local.mjs",
+    "blog:sync": "node scripts/blog/sync.mjs",
     "blog:translations": "node scripts/blog/translation-manifest.mjs --write",
     "android": "expo run:android",
     "ios": "expo run:ios",

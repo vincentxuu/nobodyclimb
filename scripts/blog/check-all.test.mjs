@@ -8,7 +8,7 @@ import {
   checkReview,
   checkTranslations,
   contentHash,
-  discoverPublicationPairs,
+  discoverSources,
 } from './check-all.mjs'
 
 const evidence = () => ({
@@ -67,25 +67,21 @@ test('來源台帳要求原文讀取、正確身分與無認證 URL', () => {
   )
 })
 
-test('原稿必須配對 migration，歷史版本選最新且不接受遺失原稿', () => {
+test('列出原稿並拒絕以 migration 入庫的文章', () => {
   const root = mkdtempSync(join(tmpdir(), 'blog-check-'))
   try {
+    assert.deepEqual(discoverSources(root), [])
     mkdirSync(join(root, 'backend/content/blog'), { recursive: true })
     mkdirSync(join(root, 'backend/migrations'), { recursive: true })
-    assert.deepEqual(discoverPublicationPairs(root), [])
     writeFileSync(join(root, 'backend/content/blog/article.md'), '正文')
-    assert.throws(() => discoverPublicationPairs(root), /缺少/)
-    const header = '-- blog-source: backend/content/blog/article.md\n'
-    writeFileSync(join(root, 'backend/migrations/0001_create.sql'), header)
-    writeFileSync(join(root, 'backend/migrations/0002_update.sql'), header)
-    const pairs = discoverPublicationPairs(root)
-    assert.equal(pairs.length, 1)
-    assert.equal(pairs[0].migration, join(root, 'backend/migrations/0002_update.sql'))
+    writeFileSync(join(root, 'backend/content/blog/article.review.md'), '報告')
+    writeFileSync(join(root, 'backend/migrations/0001_schema.sql'), 'CREATE TABLE t (id TEXT);')
+    assert.deepEqual(discoverSources(root), [join(root, 'backend/content/blog/article.md')])
     writeFileSync(
-      join(root, 'backend/migrations/0003_other.sql'),
-      '-- blog-source: backend/content/blog/missing.md\n'
+      join(root, 'backend/migrations/0002_article.sql'),
+      '-- blog-source: backend/content/blog/article.md\n'
     )
-    assert.throws(() => discoverPublicationPairs(root), /不存在/)
+    assert.throws(() => discoverSources(root), /不得以 migration 入庫/)
   } finally {
     rmSync(root, { recursive: true, force: true })
   }

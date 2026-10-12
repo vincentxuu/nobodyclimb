@@ -2,13 +2,14 @@
 import { readFileSync, realpathSync, writeFileSync } from 'node:fs'
 import { basename, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { baselineFields, root, validateBaseline } from './article-lib.mjs'
+import { baselineFields, brandAuthorIds, root, validateBaseline } from './article-lib.mjs'
 
 export function captureBaseline(response) {
   if (response?.success !== true || !response.data || typeof response.data !== 'object')
     throw new Error('必須為 success=true 的公開文章 API 回應')
   const post = response.data
-  if (post.username !== 'nobodyclimb') throw new Error('公開回應必須確認 username=nobodyclimb')
+  if (post.author_id !== brandAuthorIds.nobodyclimb)
+    throw new Error('公開回應的 author_id 必須為 NobodyClimb 品牌帳號')
   const baseline = Object.fromEntries([...baselineFields, 'tags'].map((key) => [key, post[key]]))
   validateBaseline(baseline)
   if (

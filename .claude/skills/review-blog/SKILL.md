@@ -9,7 +9,7 @@ description: 審查 NobodyClimb 文章的 metadata、模板覆蓋、來源/連�
 
 分層檢查：
 
-- 機械：`node scripts/blog/article.mjs check <draft> [--migration <path>]`；metadata、placeholder、HTML 保留內容與原稿/SQL 一致性，SQL 有正確 create/update 與作者策略。
+- 機械：`node scripts/blog/article.mjs check <draft>`；metadata、placeholder 與 HTML 保留內容；`backend/migrations` 不得出現文章 migration。
 - 事實：讀 verify 報告，檢查未驗/衝突主張及 metadata 衍生內容是否超出證據；需要時執行 [verify-blog](../verify-blog/SKILL.md)，不拿 checker green 作 confirmed。
 - 覆蓋：前三段主題/讀者/用途；核心構成、先備知識、具體例子、限制與下一步是否足以回答讀者問題。每個比較對象覆蓋相等嗎？來源缺項是否被悄悄省略？真缺內容就指出，不能因現有句子全對就判完整。
 - 連結/媒體：重要主張原位有精準來源、文末清單、站內真實 ID、錨點/重導、圖片來源/使用依據/alt、字幕與原音證據範圍。403/429/timeout 列待確認，200 不代表支持主張。

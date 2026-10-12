@@ -4,7 +4,7 @@
 
 ## 來源與驗證
 
-- 原稿、來源台帳、審稿報告、baseline（更新）、生成 migration：
+- 原稿、來源台帳、審稿報告、baseline（legacy 文章首次納入）：
 - 主要來源、版本/季別與查核日期：
 - article checker／本地 D1 行為／專案 lint/typecheck 結果：
 - 未核實主張、來源取得與頁面驗收缺口：

@@ -6,6 +6,7 @@ import { basename, dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { marked } from 'marked'
 import { parseDocument } from 'yaml'
+import { listSources } from './article-lib.mjs'
 import { checkTranslationManifest } from './translation-manifest.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
@@ -228,44 +229,22 @@ export function checkTranslations(records) {
   }
 }
 
-export function discoverPublicationPairs(workspaceRoot) {
-  const content = join(workspaceRoot, 'backend/content/blog')
+// 文章由部署時的同步腳本入庫；migration 只放資料庫結構，不得再夾帶文章。
+export function discoverSources(workspaceRoot) {
   const migrations = join(workspaceRoot, 'backend/migrations')
-  const drafts = existsSync(content)
-    ? readdirSync(content)
-        .filter((name) => name.endsWith('.md') && !name.endsWith('.review.md'))
-        .sort()
-    : []
-  const latest = new Map()
-  const migrationNames = readdirSync(migrations)
-    .filter((name) => /^\d{4}_.*\.sql$/.test(name))
-    .sort()
-  for (const name of migrationNames) {
-    const path = join(migrations, name)
-    const sql = readFileSync(path, 'utf8')
-    const headers = [...sql.matchAll(/^-- blog-source: (.+)$/gm)]
+  for (const name of existsSync(migrations) ? readdirSync(migrations).sort() : [])
     if (
-      headers.length &&
-      migrationNames.filter((other) => other.slice(0, 4) === name.slice(0, 4)).length !== 1
+      name.endsWith('.sql') &&
+      /^-- blog-source:/m.test(readFileSync(join(migrations, name), 'utf8'))
     )
-      fail(`${name}：文章 migration 編號重複，請重新編號`)
-    for (const [, source] of headers) {
-      if (!/^backend\/content\/blog\/[a-zA-Z0-9_-]+\.md$/.test(source))
-        fail(`無效 blog-source：${name}`)
-      if (!existsSync(join(workspaceRoot, source))) fail(`${name}：原稿不存在 ${source}`)
-      latest.set(basename(source), path)
-    }
-  }
-  return drafts.map((name) => {
-    if (!latest.has(name)) fail(`${name}：缺少生成的 publication migration`)
-    return { source: join(content, name), migration: latest.get(name) }
-  })
+      fail(`${name}：文章不得以 migration 入庫，請刪除並改由同步腳本處理`)
+  return listSources(workspaceRoot)
 }
 
 export function checkAll(workspaceRoot = root) {
-  const pairs = discoverPublicationPairs(workspaceRoot)
+  const sources = discoverSources(workspaceRoot)
   const translations = []
-  for (const { source, migration } of pairs) {
+  for (const source of sources) {
     const id = basename(source, '.md')
     const stem = source.slice(0, -3)
     const sourceBytes = readFileSync(source)
@@ -296,7 +275,7 @@ export function checkAll(workspaceRoot = root) {
     translations.push({ meta, body: match[2] })
     const result = spawnSync(
       process.execPath,
-      [join(root, 'scripts/blog/article.mjs'), 'check', source, '--migration', migration],
+      [join(root, 'scripts/blog/article.mjs'), 'check', source],
       { cwd: workspaceRoot, encoding: 'utf8' }
     )
     if (result.error || result.status !== 0)
@@ -304,14 +283,14 @@ export function checkAll(workspaceRoot = root) {
   }
   checkTranslations(translations)
   checkTranslationManifest(workspaceRoot)
-  return pairs.length
+  return sources.length
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
     const count = checkAll()
     process.stdout.write(
-      `Blog Content：${count} 篇原稿、來源台帳、綁定原稿/台帳的審稿核准與最新 migration 一致性檢查通過。事實與公開頁需另驗。\n`
+      `Blog Content：${count} 篇原稿、來源台帳、綁定原稿/台帳的審稿核准檢查通過。事實與公開頁需另驗。\n`
     )
   } catch (error) {
     console.error(error.message)
