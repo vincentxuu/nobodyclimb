@@ -9,6 +9,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  blog-content:
+    name: Blog Content
+    permissions:
+      contents: read
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm blog:test
+      - run: pnpm blog:check
+      - run: pnpm blog:check-local
+        env:
+          BLOG_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+
   lint:
     name: Lint
     runs-on: ubuntu-latest

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "article_id": "<article-id>",
+  "source_sha256": "<sha256 of complete draft bytes>",
+  "evidence_sha256": "<sha256 of complete sources.json bytes>",
+  "reviewed_at": "2026-10-11T00:00:00Z",
+  "reviewer": "<實際審稿人或agent識別>",
+  "decision": "changes_requested",
+  "sections": {
+    "factual": {
+      "passed": false,
+      "notes": "尚未完成 factual 審查，完成後填實際證據與範圍"
+    },
+    "translation": {
+      "passed": false,
+      "notes": "尚未完成 translation 審查，完成後填實際證據與範圍"
+    },
+    "editorial": {
+      "passed": false,
+      "notes": "尚未完成 editorial 審查，完成後填實際證據與範圍"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": false,
+      "notes": "模板尚未審查，替換為實際問題與處理結果"
+    }
+  ]
+}
