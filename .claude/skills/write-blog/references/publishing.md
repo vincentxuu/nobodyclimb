@@ -8,7 +8,7 @@ node scripts/blog/article.mjs check backend/content/blog/<id>.md
 
 三語各有獨立原稿、來源與報告。執行 `node scripts/blog/check-all.mjs` 檢查全部原稿、group 與證據結構；`backend/migrations` 內出現文章 migration 會失敗。
 
-入庫由部署時的同步腳本完成：`deploy-api.yml` 在結構 migration 後執行 `scripts/blog/sync.mjs` 產生的 SQL。缺少的文章新增並設定首次發表日期；內容不同的文章更新，保留 `published_at`、`created_at` 與瀏覽數；內容相同則不動。作者以品牌帳號的 `users.id` 對應，不依賴 username。由原稿管理的文章以 repo 為準，後台直接修改會在下次部署被覆蓋；要改就改原稿。
+入庫由部署時的同步腳本完成：`deploy-api.yml` 在結構 migration 後執行 `scripts/blog/sync.mjs` 產生的 SQL。缺少的文章新增並設定首次發表日期；內容不同的文章更新，保留 `published_at`、`created_at` 與瀏覽數；內容相同則不動。slug 只在新增時寫入，之後不可改；只改 tags 不會刷新 `updated_at`。同步只在 push 內含文章或 `scripts/blog/**` 變動時執行。作者以品牌帳號的 `users.id` 對應，不依賴 username。由原稿管理的文章以 repo 為準，後台直接修改會在下次部署被覆蓋；要改就改原稿。
 
 Checker 驗格式、支援 HTML 與 placeholder；來源支持力、外連可達性、圖片權利及內容覆蓋由 verify/review 驗，不能把 checker green 稱事實全對。不能拿沒有實質變更湊三語更新。不要寫正式遠端 DB。
 

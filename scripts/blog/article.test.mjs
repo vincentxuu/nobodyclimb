@@ -75,6 +75,17 @@ test('重跑不改動資料；內容變更才更新並保留日期與瀏覽數',
   assert.notEqual(changed.posts[0][5], '2020-01-01')
   assert.deepEqual(changed.tags, [[id, '技巧']])
 })
+test('既有文章保留 slug，並補上缺少的首次發表日期', () => {
+  const sql = sync(loadArticle(source()))
+  const legacy = `${author}INSERT INTO posts(id,author_id,title,slug,content,published_at,updated_at) VALUES ('${id}','${authorId}','舊','legacy-slug','舊',NULL,'2020-01-01');`
+  const python = `import sqlite3,sys\nc=sqlite3.connect(':memory:')\nc.executescript(sys.argv[1])\nc.executescript(sys.argv[2])\nc.executescript(sys.argv[3])\nprint(c.execute('select slug, published_at is not null from posts').fetchall())`
+  const schema = readFileSync(resolve(root, 'backend/src/db/schema.sql'), 'utf8').split(
+    '-- ============================================\n-- Climbing Gyms'
+  )[0]
+  const result = spawnSync('python3', ['-c', python, schema, legacy, sql], { encoding: 'utf8' })
+  assert.equal(result.status, 0, result.stderr)
+  assert.equal(result.stdout.trim(), "[('legacy-slug', 1)]")
+})
 test('同批原稿 id/slug 重複或 slug 已被其他文章佔用時失敗', () => {
   const article = loadArticle(source())
   assert.throws(() => sync(article, article), /重複/)

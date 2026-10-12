@@ -26,6 +26,11 @@ on:
           - preview
           - production
 
+# 同一分支依序部署，避免較舊的執行較晚完成而覆蓋較新的文章內容。
+concurrency:
+  group: deploy-api-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   lint-and-typecheck:
     name: Lint & Type Check
@@ -197,8 +202,16 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
       # 文章以 repo 原稿為準：新增缺少的文章、更新內容不同的文章，重跑不會改動資料。
+      # 遠端檔案匯入期間 D1 暫時無法服務查詢，所以只在文章或同步腳本有變動時執行；
+      # 手動觸發一律執行，同步失敗後可用它補跑。
       - name: Sync blog articles
         run: |
+          if [ "$EVENT_NAME" == "push" ] && [ -n "$BEFORE" ] \
+            && git fetch --quiet --depth=1 origin "$BEFORE" 2>/dev/null \
+            && git diff --quiet "$BEFORE" HEAD -- backend/content/blog scripts/blog; then
+            echo "文章與同步腳本沒有變動，略過同步"
+            exit 0
+          fi
           node scripts/blog/sync.mjs --output "$RUNNER_TEMP/blog-sync.sql"
           if [ ! -s "$RUNNER_TEMP/blog-sync.sql" ]; then
             exit 0
@@ -209,8 +222,26 @@ jobs:
             database=nobodyclimb-db-preview
           fi
           cd backend
-          npx wrangler d1 execute "$database" --remote --config wrangler.toml --env "$ENVIRONMENT" --file "$RUNNER_TEMP/blog-sync.sql" --yes
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "Attempt $attempt of $max_attempts..."
+            if npx wrangler d1 execute "$database" --remote --config wrangler.toml --env "$ENVIRONMENT" --file "$RUNNER_TEMP/blog-sync.sql" --yes; then
+              echo "✅ Blog articles synced"
+              exit 0
+            fi
+            if [ $attempt -lt $max_attempts ]; then
+              echo "⚠️ Sync failed, waiting 10 seconds before retry..."
+              sleep 10
+            fi
+            attempt=$((attempt + 1))
+          done
+          echo "❌ Sync failed after $max_attempts attempts"
+          echo "若錯誤為 NOT NULL constraint failed: posts.author_id，代表品牌帳號不存在或已停用"
+          exit 1
         env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
           ENVIRONMENT: ${{ steps.env.outputs.environment }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 

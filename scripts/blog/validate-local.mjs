@@ -4,15 +4,45 @@ import { spawnSync } from 'node:child_process'
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { resolve } from 'node:path'
-import { brandAuthorIds, loadSources, root, sqlValue, syncSql } from './article-lib.mjs'
+import {
+  brandAuthorIds,
+  loadArticle,
+  loadSources,
+  root,
+  sqlValue,
+  syncSql,
+} from './article-lib.mjs'
+
+const fixtureId = 'f'.repeat(32)
+const fixture = `---
+id: "${fixtureId}"
+slug: "local-sync-fixture"
+title: "本地同步範例：引號 ' 與分號 ;"
+excerpt: "僅供本地 D1 同步驗證，不會入庫。"
+category: "competition"
+tags: ["範例", "同步"]
+cover_image: null
+status: "published"
+is_featured: 0
+author_username: "nobodyclimb"
+operation: "create"
+lang: "zh"
+translation_group: "${fixtureId}"
+translations: {"zh": "${fixtureId}", "en": "${'e'.repeat(32)}", "ja": "${'d'.repeat(32)}"}
+---
+## 範例
+
+內文含 -- 註解樣式與 [來源](https://www.ifsc-climbing.org/) 連結。
+`
 
 let temporary
 try {
   if (process.argv.length > 2) throw new Error('用法：validate-local.mjs')
-  const articles = loadSources()
-  if (!articles.length) {
-    process.stdout.write('沒有文章原稿，略過本地 D1 同步驗證。\n')
-  } else {
+  const sources = loadSources()
+  // 沒有原稿時仍以範例文章驗證同步行為，避免閘門在空目錄下形同略過。
+  const articles = sources.length ? sources : [loadArticle(fixture)]
+  if (!sources.length) process.stdout.write('沒有文章原稿，改以內建範例文章驗證。\n')
+  {
     temporary = mkdtempSync(resolve(tmpdir(), 'nobodyclimb-blog-local-'))
     const config = resolve(temporary, 'wrangler.json')
     writeFileSync(

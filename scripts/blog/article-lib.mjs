@@ -196,17 +196,16 @@ export function loadArticle(source, sourcePath) {
 }
 // 品牌帳號以 users.id 對應；各環境的 username 不保證與原稿別名相同。
 export const brandAuthorIds = { nobodyclimb: '5f9aa93810d7b05267c9e56fab68593b' }
-const synced = ['slug', ...editable]
 // D1 單一 statement 上限為 100,000 bytes。
 const statementLimit = 100000
-// 可重複執行：新文章新增；既有文章只在內容不同時更新，保留首次發表日期與互動數。
+// 可重複執行：新文章新增；既有文章只在內容不同時更新，保留 slug、首次發表日期與互動數。
 export function syncStatements({ meta, html }) {
   const q = sqlValue
   const authorId = brandAuthorIds[meta.author_username]
   if (!authorId) fail(`${meta.id}：未知作者別名 ${meta.author_username}`)
   const values = { ...meta, content: html }
   const statements = [
-    `INSERT INTO posts (id, author_id, ${synced.join(', ')}, published_at, created_at, updated_at) VALUES (${q(meta.id)}, (SELECT id FROM users WHERE id = ${q(authorId)} AND is_active = 1), ${synced.map((key) => q(values[key])).join(', ')}, datetime('now'), datetime('now'), datetime('now')) ON CONFLICT(id) DO UPDATE SET ${synced.map((key) => `${key} = excluded.${key}`).join(', ')}, updated_at = datetime('now') WHERE ${synced.map((key) => `posts.${key} IS NOT excluded.${key}`).join(' OR ')};`,
+    `INSERT INTO posts (id, author_id, slug, ${editable.join(', ')}, published_at, created_at, updated_at) VALUES (${q(meta.id)}, (SELECT id FROM users WHERE id = ${q(authorId)} AND is_active = 1), ${q(meta.slug)}, ${editable.map((key) => q(values[key])).join(', ')}, datetime('now'), datetime('now'), datetime('now')) ON CONFLICT(id) DO UPDATE SET ${editable.map((key) => `${key} = excluded.${key}`).join(', ')}, published_at = COALESCE(posts.published_at, excluded.published_at), updated_at = datetime('now') WHERE ${editable.map((key) => `posts.${key} IS NOT excluded.${key}`).join(' OR ')} OR posts.published_at IS NULL;`,
     `DELETE FROM post_tags WHERE post_id = ${q(meta.id)} AND tag NOT IN (${meta.tags.map(q).join(', ')});`,
     `INSERT OR IGNORE INTO post_tags (post_id, tag) VALUES ${meta.tags.map((tag) => `(${q(meta.id)}, ${q(tag)})`).join(', ')};`,
   ]

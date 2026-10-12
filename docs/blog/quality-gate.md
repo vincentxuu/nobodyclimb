@@ -7,10 +7,12 @@
 - `pnpm blog:test`：文章工具與閘門行為測試。
 - `pnpm blog:translations`：從三語原稿生成 SEO 對照 manifest。
 - `pnpm blog:check`：原稿、來源台帳、審稿核准與三語對照；`backend/migrations` 出現帶 `-- blog-source:` 的文章 migration 一律失敗。
-- `pnpm blog:validate-local`：用隔離本地 D1 對全部原稿跑一次同步，驗證新增、重跑無變動、更新保留首次發表日期與瀏覽數、缺作者失敗。
+- `pnpm blog:validate-local`：用隔離本地 D1 對全部原稿跑一次同步，驗證新增、重跑無變動、更新保留首次發表日期與瀏覽數、缺作者失敗；沒有原稿時改用內建範例文章。
 - `pnpm blog:sync --output <sync.sql>`：產生可重複執行的同步 SQL，供檢視或部署使用；產物不納入版控。
 
 文章不走 migration 入庫。`deploy-api.yml` 在結構 migration 之後執行同步：缺少的文章新增，內容不同的文章更新，其餘不動。由原稿管理的文章以 repo 為準，在後台直接修改會於下次部署被覆蓋。
+
+同步只在 push 內含 `backend/content/blog/**` 或 `scripts/blog/**` 變動時執行，因為遠端檔案匯入期間 D1 暫時無法服務查詢；同步失敗後，重跑該 job 或手動觸發 workflow 補跑。slug 在文章建立後不再同步，改原稿的 slug 不會改動資料庫。只改 tags 不會刷新 `updated_at`。
 
 原稿和台帳以完整檔案 SHA-256 綁定審稿核准。改內容後重新查證／審稿，不能只換 hash。審稿須由未參與寫稿的 reviewer 完成；機器只能驗證審查宣告，不能認證 reviewer 的獨立性。
 
