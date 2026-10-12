@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS posts (
   status TEXT DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived')),
   is_featured INTEGER DEFAULT 0,
   view_count INTEGER DEFAULT 0,
+  lang TEXT CHECK (lang IN ('zh', 'en', 'ja')),
   published_at TEXT,
   created_at TEXT DEFAULT (datetime('now')),
   updated_at TEXT DEFAULT (datetime('now')),

@@ -119,7 +119,7 @@ export default function BlogDetailClient() {
   // 獲取熱門文章
   const fetchPopularArticles = useCallback(async () => {
     try {
-      const response = await postService.getPopularPosts(4)
+      const response = await postService.getPopularPosts(4, locale)
       if (response.success && response.data) {
         setPopularArticles(response.data)
       }

@@ -30,7 +30,7 @@ export function HeroArticle() {
   useEffect(() => {
     const fetchFeaturedArticles = async () => {
       try {
-        const response = await postService.getFeaturedPosts()
+        const response = await postService.getFeaturedPosts(locale)
         if (response.success && response.data && response.data.length > 0) {
           setArticles(response.data)
         } else {

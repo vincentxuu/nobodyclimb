@@ -162,7 +162,7 @@ function BlogContent() {
     }
 
     try {
-      const response = await postService.getPosts(pageNum, 9)
+      const response = await postService.getPosts(pageNum, 9, undefined, locale)
       if (response.success && response.data) {
         // 後端返回 { success, data: [...], pagination }
         const { data: postsData, pagination: paginationData } = response
