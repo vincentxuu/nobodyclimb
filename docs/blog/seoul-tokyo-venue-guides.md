@@ -1,6 +1,6 @@
 # 首爾與東京攀岩場地文章索引
 
-28 個場地各自是一篇可獨立閱讀的指南，繁中、英文、日文各有完整原稿、來源台帳、獨立審稿報告與 SQL migration。東京選題包含從東京旅行安排的近郊候選，不代表所有場地位於東京都，也不保證所有行程適合單日往返。
+28 個場地各自是一篇可獨立閱讀的指南，繁中、英文、日文各有完整原稿、來源台帳與獨立審稿報告。東京選題包含從東京旅行安排的近郊候選，不代表所有場地位於東京都，也不保證所有行程適合單日往返。
 
 原稿查核日期為 2026-10-12。規劃筆記 `2027-04-首爾東京攀岩行程.md` 與 `tokyo-crag-guide-shinjuku-daytrip-v4.md` 只作選題線索，未作現行費用、許可或品牌親訪證據；未轉載個人完整行程。各篇來源台帳保留實際網頁來源、取得範圍與尚未確認條件。
 
@@ -45,4 +45,4 @@ The Climb 延南店與已歇業的舊弘大店分開。B-PUMP 兩家分店的費
 
 ## 發布
 
-作者使用 `nobodyclimb`，以 feature branch PR 交付。合併 `develop` 由既有流程入庫至 preview；正式站由 `main` 的流程處理。PR 與本地檢查不代表文章已正式上線。三語目前為三篇 DB 文章，列表會混列。每篇附 `sources.json`、`review.md`、`review.json`；SQL 編號 0082–0165，公開文章路徑使用 ID，非 slug。
+作者使用 `nobodyclimb`，以 feature branch PR 交付。合併 `develop` 時由 `deploy-api` 同步入庫至 preview；正式站由 `main` 的流程處理。PR 與本地檢查不代表文章已正式上線。三語目前為三篇 DB 文章，列表會混列。每篇附 `sources.json`、`review.md`、`review.json`；不另附 SQL migration，公開文章路徑使用 ID，非 slug。
