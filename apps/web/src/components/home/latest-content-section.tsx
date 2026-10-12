@@ -17,6 +17,8 @@ import { generateSummary } from '@/lib/utils/article'
 // 緩存配置
 // 各語系看到的文章不同，快取依語系分開
 const cacheKey = (locale: string) => `nobodyclimb_home_articles_${locale}`
+// 改為依語系分開之前的快取 key，讀取時順手清掉
+const LEGACY_CACHE_KEY = 'nobodyclimb_home_articles'
 const CACHE_TTL = 5 * 60 * 1000 // 5 分鐘
 
 interface ArticleItem {
@@ -43,6 +45,7 @@ function getCachedArticles(locale: string): ArticleItem[] | null {
   if (typeof window === 'undefined') return null
 
   try {
+    localStorage.removeItem(LEGACY_CACHE_KEY)
     const cached = localStorage.getItem(cacheKey(locale))
     if (!cached) return null
 
@@ -155,53 +158,56 @@ export function LatestContentSection() {
   const [articles, setArticles] = useState<ArticleItem[]>([])
   const [loading, setLoading] = useState(true)
 
-  const fetchArticles = useCallback(async (useCache: boolean = true) => {
-    // 優先使用緩存數據（stale-while-revalidate 模式）
-    if (useCache) {
-      const cached = getCachedArticles(locale)
-      if (cached && cached.length > 0) {
-        setArticles(cached)
-        setLoading(false)
+  const fetchArticles = useCallback(
+    async (useCache: boolean = true) => {
+      // 優先使用緩存數據（stale-while-revalidate 模式）
+      if (useCache) {
+        const cached = getCachedArticles(locale)
+        if (cached && cached.length > 0) {
+          setArticles(cached)
+          setLoading(false)
 
-        // 如果緩存未過期，不需要重新請求
-        if (!isCacheExpired(locale)) {
-          return
+          // 如果緩存未過期，不需要重新請求
+          if (!isCacheExpired(locale)) {
+            return
+          }
+          // 緩存過期，在背景靜默更新
         }
-        // 緩存過期，在背景靜默更新
       }
-    }
 
-    try {
-      const postsRes = await postService.getPosts(1, 4, undefined, locale)
+      try {
+        const postsRes = await postService.getPosts(1, 4, undefined, locale)
 
-      if (postsRes.success && postsRes.data) {
-        const items: ArticleItem[] = postsRes.data.map((post: BackendPost) => ({
-          id: post.id,
-          title: post.title,
-          thumbnail: post.cover_image,
-          excerpt: post.excerpt || generateSummary(post.content, undefined, 80),
-          date: post.published_at
-            ? new Date(post.published_at).toLocaleDateString(toIntlLocale(locale))
-            : new Date(post.created_at).toLocaleDateString(toIntlLocale(locale)),
-          link: `/blog/${post.id}`,
-          category: getCategoryLabel(post.category) || undefined,
-          categoryValue: post.category as PostCategory,
-          author: post.display_name || post.username || undefined,
-        }))
-        setArticles(items)
-        cacheArticles(locale, items)
+        if (postsRes.success && postsRes.data) {
+          const items: ArticleItem[] = postsRes.data.map((post: BackendPost) => ({
+            id: post.id,
+            title: post.title,
+            thumbnail: post.cover_image,
+            excerpt: post.excerpt || generateSummary(post.content, undefined, 80),
+            date: post.published_at
+              ? new Date(post.published_at).toLocaleDateString(toIntlLocale(locale))
+              : new Date(post.created_at).toLocaleDateString(toIntlLocale(locale)),
+            link: `/blog/${post.id}`,
+            category: getCategoryLabel(post.category) || undefined,
+            categoryValue: post.category as PostCategory,
+            author: post.display_name || post.username || undefined,
+          }))
+          setArticles(items)
+          cacheArticles(locale, items)
+        }
+      } catch (err) {
+        console.error('Failed to fetch articles:', err)
+        // 如果有緩存數據，使用緩存數據
+        const cached = getCachedArticles(locale)
+        if (cached && cached.length > 0) {
+          setArticles(cached)
+        }
+      } finally {
+        setLoading(false)
       }
-    } catch (err) {
-      console.error('Failed to fetch articles:', err)
-      // 如果有緩存數據，使用緩存數據
-      const cached = getCachedArticles(locale)
-      if (cached && cached.length > 0) {
-        setArticles(cached)
-      }
-    } finally {
-      setLoading(false)
-    }
-  }, [])
+    },
+    [locale]
+  )
 
   useEffect(() => {
     fetchArticles()

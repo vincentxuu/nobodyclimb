@@ -45,7 +45,7 @@ export function HeroArticle() {
     }
 
     fetchFeaturedArticles()
-  }, [])
+  }, [locale])
 
   // 輪播控制
   const nextSlide = useCallback(() => {

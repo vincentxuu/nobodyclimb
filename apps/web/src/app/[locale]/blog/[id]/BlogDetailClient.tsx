@@ -126,7 +126,7 @@ export default function BlogDetailClient() {
     } catch (err) {
       console.error('Failed to fetch popular articles:', err)
     }
-  }, [])
+  }, [locale])
 
   // 獲取相關文章
   const fetchRelatedArticles = useCallback(async () => {

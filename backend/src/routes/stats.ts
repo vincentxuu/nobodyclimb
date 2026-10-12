@@ -7,6 +7,8 @@ const statsRoutes = new Hono<{ Bindings: Env }>()
 
 // 全站統計資料快取 key
 const STATS_CACHE_KEY = 'site:stats:v1'
+// 文章數以主題計：三語文章只算中文版，未標語系（使用者自行發表）的文章照算。
+const POST_TOPIC_CLAUSE = "(lang IS NULL OR lang = 'zh')"
 const STATS_CACHE_TTL = 600 // 10 分鐘
 
 /**
@@ -78,7 +80,7 @@ statsRoutes.get(
         (SELECT COUNT(*) FROM routes) as routes_count,
         (SELECT COUNT(*) FROM biographies WHERE visibility = 'public') as biographies_count,
         (SELECT COUNT(*) FROM videos) as videos_count,
-        (SELECT COUNT(*) FROM posts WHERE status = 'published' AND (lang IS NULL OR lang = 'zh')) as posts_count,
+        (SELECT COUNT(*) FROM posts WHERE status = 'published' AND ${POST_TOPIC_CLAUSE}) as posts_count,
         (SELECT COUNT(*) FROM gyms) as gyms_count
     `
 
@@ -399,7 +401,7 @@ statsRoutes.get(
       // 用戶活動分佈（基於不同動作）
       const activityBreakdown = await c.env.DB.prepare(`
       SELECT
-        (SELECT COUNT(*) FROM posts WHERE created_at >= datetime('now', '-7 days')) as posts_week,
+        (SELECT COUNT(*) FROM posts WHERE created_at >= datetime('now', '-7 days') AND ${POST_TOPIC_CLAUSE}) as posts_week,
         (SELECT COUNT(*) FROM bucket_list_items WHERE created_at >= datetime('now', '-7 days')) as goals_week,
         (SELECT COUNT(*) FROM bucket_list_likes WHERE created_at >= datetime('now', '-7 days')) as likes_week,
         (SELECT COUNT(*) FROM bucket_list_comments WHERE created_at >= datetime('now', '-7 days')) as comments_week,
@@ -506,10 +508,10 @@ statsRoutes.get(
       // 內容基礎統計
       const contentStats = await c.env.DB.prepare(`
       SELECT
-        (SELECT COUNT(*) FROM posts) as total_posts,
-        (SELECT COUNT(*) FROM posts WHERE status = 'published') as published_posts,
-        (SELECT COUNT(*) FROM posts WHERE status = 'draft') as draft_posts,
-        (SELECT COUNT(*) FROM posts WHERE created_at >= datetime('now', '-7 days')) as posts_week,
+        (SELECT COUNT(*) FROM posts WHERE ${POST_TOPIC_CLAUSE}) as total_posts,
+        (SELECT COUNT(*) FROM posts WHERE status = 'published' AND ${POST_TOPIC_CLAUSE}) as published_posts,
+        (SELECT COUNT(*) FROM posts WHERE status = 'draft' AND ${POST_TOPIC_CLAUSE}) as draft_posts,
+        (SELECT COUNT(*) FROM posts WHERE created_at >= datetime('now', '-7 days') AND ${POST_TOPIC_CLAUSE}) as posts_week,
         (SELECT COUNT(*) FROM biographies) as total_biographies,
         (SELECT COUNT(*) FROM biographies WHERE visibility = 'public') as public_biographies,
         (SELECT COUNT(*) FROM biographies WHERE created_at >= datetime('now', '-7 days')) as biographies_week,
@@ -535,7 +537,7 @@ statsRoutes.get(
         date(created_at) as date,
         COUNT(*) as count
       FROM posts
-      WHERE created_at >= datetime('now', '-30 days')
+      WHERE created_at >= datetime('now', '-30 days') AND ${POST_TOPIC_CLAUSE}
       GROUP BY date(created_at)
       ORDER BY date ASC
     `).all<{ date: string; count: number }>()
@@ -605,7 +607,7 @@ statsRoutes.get(
         category,
         COUNT(*) as count
       FROM posts
-      WHERE status = 'published'
+      WHERE status = 'published' AND ${POST_TOPIC_CLAUSE}
       GROUP BY category
       ORDER BY count DESC
     `).all<{ category: string; count: number }>()
