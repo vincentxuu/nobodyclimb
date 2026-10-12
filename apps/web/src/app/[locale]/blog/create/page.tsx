@@ -4,6 +4,7 @@ import { ArrowLeft, Eye, Save, Send } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { usePostCategoryLabel } from '@/components/blog/use-post-category-label'
 import { ImageUploader, RichTextEditor, TagSelector } from '@/components/editor'
 import { ProtectedRoute } from '@/components/shared/protected-route'
 import { Button } from '@/components/ui/button'
@@ -16,7 +17,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { postService } from '@/lib/api/services'
-import { getCategoryLabel, POST_CATEGORIES, PostCategory } from '@/lib/types'
+import { POST_CATEGORIES, PostCategory } from '@/lib/types'
 import { generateSummary } from '@/lib/utils/article'
 import { sanitizeHtml } from '@/lib/utils/sanitize'
 
@@ -24,6 +25,7 @@ type ArticleStatus = 'draft' | 'published'
 
 function CreateBlogPageContent() {
   const t = useTranslations('BlogPage')
+  const getCategoryLabel = usePostCategoryLabel()
   const router = useRouter()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -276,7 +278,7 @@ function CreateBlogPageContent() {
                 <SelectContent>
                   {POST_CATEGORIES.map((option) => (
                     <SelectItem key={option.value} value={option.value}>
-                      {option.label}
+                      {getCategoryLabel(option.value)}
                     </SelectItem>
                   ))}
                 </SelectContent>

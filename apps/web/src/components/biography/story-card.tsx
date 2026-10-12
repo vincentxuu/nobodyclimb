@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { BookOpen } from 'lucide-react'
 import { StoryQuestion } from '@/lib/constants/biography-stories'
+import { useBiographyStoryText } from '@/lib/hooks/useBiographyStoryText'
 import { cn } from '@/lib/utils'
 import { getCategoryInfo, getStoryIcon } from '@/lib/utils/biography-ui'
 
@@ -27,8 +28,10 @@ export function StoryCard({
   className,
   delay = 0,
 }: StoryCardProps) {
+  const { questionTitle, questionSubtitle, categoryName } = useBiographyStoryText()
   const Icon = getStoryIcon(question.icon)
   const categoryInfo = getCategoryInfo(question.category)
+  const title = questionTitle(question.field, question.title)
 
   if (variant === 'compact') {
     return (
@@ -43,7 +46,7 @@ export function StoryCard({
       >
         <div className="mb-2 flex items-center gap-2">
           <Icon className={cn('h-4 w-4', categoryInfo?.color || 'text-gray-500')} />
-          <h4 className="text-sm font-medium text-gray-900">{question.title}</h4>
+          <h4 className="text-sm font-medium text-gray-900">{title}</h4>
         </div>
         <p className="line-clamp-3 text-sm text-gray-600">{content}</p>
       </motion.div>
@@ -72,7 +75,7 @@ export function StoryCard({
                   'bg-white shadow-xs'
                 )}
               >
-                {categoryInfo.name}
+                {categoryName(categoryInfo.id, categoryInfo.name)}
               </span>
             </div>
           </div>
@@ -90,8 +93,10 @@ export function StoryCard({
               <Icon className={cn('h-5 w-5', categoryInfo?.color || 'text-gray-500')} />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">{question.title}</h3>
-              <p className="mt-1 text-sm text-gray-500">{question.subtitle}</p>
+              <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+              <p className="mt-1 text-sm text-gray-500">
+                {questionSubtitle(question.field, question.subtitle)}
+              </p>
             </div>
           </div>
 
@@ -125,12 +130,12 @@ export function StoryCard({
               'bg-gray-50'
             )}
           >
-            {categoryInfo.name}
+            {categoryName(categoryInfo.id, categoryInfo.name)}
           </span>
         )}
         <div className="flex items-center gap-2">
           <Icon className={cn('h-5 w-5', categoryInfo?.color || 'text-gray-500')} />
-          <h3 className="text-lg font-medium text-gray-900">{question.title}</h3>
+          <h3 className="text-lg font-medium text-gray-900">{title}</h3>
         </div>
       </div>
 
@@ -209,6 +214,7 @@ export function StoryCategorySection({
   variant = 'default',
   className,
 }: StoryCategorySectionProps) {
+  const { categoryName, categoryDescription } = useBiographyStoryText()
   const categoryInfo = getCategoryInfo(categoryId)
   const CategoryIcon = categoryInfo ? getStoryIcon(categoryInfo.icon) : BookOpen
 
@@ -224,8 +230,12 @@ export function StoryCategorySection({
           <CategoryIcon className={cn('h-5 w-5', categoryInfo?.color || 'text-gray-500')} />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">{categoryInfo?.name}</h3>
-          <p className="text-sm text-gray-500">{categoryInfo?.description}</p>
+          <h3 className="text-lg font-semibold text-gray-900">
+            {categoryInfo && categoryName(categoryInfo.id, categoryInfo.name)}
+          </h3>
+          <p className="text-sm text-gray-500">
+            {categoryInfo && categoryDescription(categoryInfo.id, categoryInfo.description)}
+          </p>
         </div>
       </div>
 

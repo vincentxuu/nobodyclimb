@@ -46,6 +46,7 @@ const ITEMS_PER_PAGE = 10
 
 export default function AscentsPage() {
   const t = useTranslations('ProfilePage')
+  const tAscent = useTranslations('Ascent')
   const queryClient = useQueryClient()
   const { toast } = useToast()
   const { getMyAscents, getMyStats, createAscent, updateAscent, deleteAscent } = useAscents()
@@ -279,7 +280,7 @@ export default function AscentsPage() {
                 <SelectItem value="all">{t('allTypes')}</SelectItem>
                 {(Object.keys(ASCENT_TYPE_DISPLAY) as AscentType[]).map((type) => (
                   <SelectItem key={type} value={type}>
-                    {ASCENT_TYPE_DISPLAY[type].label}
+                    {tAscent(`types.${type}.label`)}
                   </SelectItem>
                 ))}
               </SelectContent>

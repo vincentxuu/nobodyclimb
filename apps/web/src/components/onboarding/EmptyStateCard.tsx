@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import { ReactNode } from 'react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -17,65 +18,48 @@ interface EmptyStateCardProps {
   variant?: 'default' | 'encouragement' | 'minimal'
 }
 
-// 針對不同場景的鼓勵文案
+// 針對不同場景的鼓勵文案。
+// 值是訊息檔 `Onboarding.emptyStates` 之下的 key，顯示文字請用 useEmptyStateMessage() 取得。
 export const EMPTY_STATE_MESSAGES = {
   // 人物誌相關
   biography: {
-    noStories: {
-      title: '你的故事值得被分享',
-      description: '每位攀岩者都有獨特的經歷，分享你的故事，讓更多人認識你。',
-      actionLabel: '開始寫故事',
-    },
-    noOneLiners: {
-      title: '用一句話介紹自己',
-      description: '簡短的自我介紹，讓其他岩友快速認識你。',
-      actionLabel: '填寫一句話',
-    },
-    noTags: {
-      title: '選擇你的攀岩標籤',
-      description: '讓大家知道你喜歡的攀岩類型和風格。',
-      actionLabel: '選擇標籤',
-    },
-    noAvatar: {
-      title: '上傳一張照片',
-      description: '讓其他岩友認識你，一張攀岩照片最能代表你！',
-      actionLabel: '上傳照片',
-    },
+    noStories: 'biography.noStories',
+    noOneLiners: 'biography.noOneLiners',
+    noTags: 'biography.noTags',
+    noAvatar: 'biography.noAvatar',
   },
   // 社群相關
   social: {
-    noFollowing: {
-      title: '探索更多小人物',
-      description: '追蹤你感興趣的攀岩者，獲取他們的最新動態。',
-      actionLabel: '探索人物誌',
-    },
-    noLikes: {
-      title: '為喜歡的內容按讚',
-      description: '瀏覽其他岩友的故事，為你喜歡的內容點個讚吧！',
-      actionLabel: '瀏覽故事',
-    },
-    noComments: {
-      title: '留下你的想法',
-      description: '與其他岩友互動，分享你的經驗和建議。',
-      actionLabel: '瀏覽內容',
-    },
+    noFollowing: 'social.noFollowing',
+    noLikes: 'social.noLikes',
+    noComments: 'social.noComments',
   },
   // 書籤相關
   bookmarks: {
-    noBookmarks: {
-      title: '收藏你喜歡的內容',
-      description: '將感興趣的故事、路線或岩場加入收藏，方便之後查看。',
-      actionLabel: '探索內容',
-    },
+    noBookmarks: 'bookmarks.noBookmarks',
   },
   // 通用
   generic: {
-    noContent: {
-      title: '這裡還沒有內容',
-      description: '開始探索或創建你的第一個內容吧！',
-      actionLabel: '開始探索',
-    },
+    noContent: 'generic.noContent',
   },
+} as const
+
+type EmptyStateGroups = typeof EMPTY_STATE_MESSAGES
+export type EmptyStateMessageKey = {
+  [G in keyof EmptyStateGroups]: EmptyStateGroups[G][keyof EmptyStateGroups[G]]
+}[keyof EmptyStateGroups]
+
+/**
+ * 依目前語系取得空狀態文案，可直接展開給 EmptyStateCard：
+ * `<EmptyStateCard {...useEmptyStateMessage(EMPTY_STATE_MESSAGES.biography.noStories)} />`
+ */
+export function useEmptyStateMessage(key: EmptyStateMessageKey) {
+  const t = useTranslations('Onboarding.emptyStates')
+  return {
+    title: t(`${key}.title`),
+    description: t(`${key}.description`),
+    actionLabel: t(`${key}.actionLabel`),
+  }
 }
 
 export function EmptyStateCard({

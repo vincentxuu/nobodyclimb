@@ -2,12 +2,14 @@
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 /**
  * Logo 組件
  * 顯示網站 Logo，並支援點擊回到首頁
  */
 export default function Logo() {
+  const t = useTranslations('SharedUI')
   const router = useRouter()
 
   return (
@@ -16,7 +18,7 @@ export default function Logo() {
         className="flex cursor-pointer items-center"
         onClick={() => router.push('/')}
         role="button"
-        aria-label="前往首頁"
+        aria-label={t('goHome')}
       >
         <Image
           src="/logo/Nobodylimb-black.svg"

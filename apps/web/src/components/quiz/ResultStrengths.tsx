@@ -3,8 +3,11 @@
 import type { PersonalityType } from '@nobodyclimb/types'
 import { motion } from 'framer-motion'
 import { AlertTriangle, Sparkles } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export function ResultStrengths({ personality }: { personality: PersonalityType }) {
+  const t = useTranslations('Quiz.result')
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -16,7 +19,7 @@ export function ResultStrengths({ personality }: { personality: PersonalityType 
         <div>
           <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-900">
             <Sparkles className="h-5 w-5 text-amber-500" />
-            優勢
+            {t('strengths')}
           </h2>
           <ul className="space-y-2">
             {personality.strengths.map((s, i) => (
@@ -29,7 +32,7 @@ export function ResultStrengths({ personality }: { personality: PersonalityType 
         <div>
           <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-900">
             <AlertTriangle className="h-5 w-5 text-orange-500" />
-            盲點
+            {t('blindSpots')}
           </h2>
           <ul className="space-y-2">
             {personality.blindSpots.map((b, i) => (

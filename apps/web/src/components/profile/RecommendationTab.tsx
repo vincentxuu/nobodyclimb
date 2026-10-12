@@ -1,7 +1,7 @@
 'use client'
 
 import { ChevronDown, ChevronUp, RefreshCw, Sparkles } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 import { MarkdownContent } from '@/components/ai/ChatMessage'
 import { SourceCard } from '@/components/ai/SourceCard'
@@ -9,6 +9,7 @@ import ProfilePageTitle from '@/components/profile/ProfilePageTitle'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import { type Recommendation, useRecommendations, useTriggerRecommendation } from '@/lib/api/ai'
+import { toIntlLocale } from '@/lib/date-locale'
 
 const ITEMS_PER_PAGE = 10
 
@@ -20,11 +21,12 @@ function RecommendationCard({
   defaultExpanded?: boolean
 }) {
   const t = useTranslations('ProfilePage')
+  const locale = useLocale()
   const [expanded, setExpanded] = useState(defaultExpanded)
   const { answer, sources, context_ascents } = recommendation.recommendation
   const triggeredLabel =
     recommendation.triggered_by === 'ascent' ? t('triggeredByAscent') : t('triggeredManual')
-  const date = new Date(recommendation.created_at).toLocaleDateString('zh-TW')
+  const date = new Date(recommendation.created_at).toLocaleDateString(toIntlLocale(locale))
 
   return (
     <div className="rounded-lg border border-border bg-card overflow-hidden">

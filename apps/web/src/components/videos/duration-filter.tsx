@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import {
   Select,
@@ -15,6 +16,8 @@ interface DurationFilterProps {
 }
 
 const DurationFilter: React.FC<DurationFilterProps> = ({ selectedDuration, onDurationChange }) => {
+  const t = useTranslations('VideosFilter')
+
   return (
     <div className="w-full md:w-48">
       <Select
@@ -22,12 +25,12 @@ const DurationFilter: React.FC<DurationFilterProps> = ({ selectedDuration, onDur
         onValueChange={(value) => onDurationChange(value as VideoDuration | 'all')}
       >
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="選擇時長" />
+          <SelectValue placeholder={t('durationPlaceholder')} />
         </SelectTrigger>
         <SelectContent>
           {VIDEO_DURATION_OPTIONS.map((option) => (
             <SelectItem key={option.value} value={option.value}>
-              {option.label}
+              {t(`duration.${option.value}`)}
             </SelectItem>
           ))}
         </SelectContent>

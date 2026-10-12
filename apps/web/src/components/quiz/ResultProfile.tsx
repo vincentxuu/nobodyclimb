@@ -2,6 +2,7 @@
 
 import type { PersonalityType } from '@nobodyclimb/types'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import type { DecodedScores } from '@/lib/quiz/decode-scores'
 
 interface Props {
@@ -10,8 +11,9 @@ interface Props {
 }
 
 export function ResultProfile({ personality, scores }: Props) {
+  const t = useTranslations('Quiz.result')
   const isGoalType = personality.code[1] === 'G'
-  const indexLabel = isGoalType ? '恆毅力指數' : '心流指數'
+  const indexLabel = isGoalType ? t('gritIndex') : t('flowIndex')
   const defaultIndex = isGoalType ? 75 : 68
   const indexValue = scores ? (isGoalType ? scores.gritIndex : scores.flowIndex) : defaultIndex
 
@@ -32,7 +34,7 @@ export function ResultProfile({ personality, scores }: Props) {
         </div>
       </div>
 
-      <h2 className="mb-3 text-lg font-semibold text-gray-900">性格描述</h2>
+      <h2 className="mb-3 text-lg font-semibold text-gray-900">{t('profileTitle')}</h2>
       <div className="space-y-3 text-base leading-relaxed text-gray-600">
         {personality.description
           .split('\n')
@@ -44,11 +46,11 @@ export function ResultProfile({ personality, scores }: Props) {
 
       <div className="mt-6 grid grid-cols-2 gap-4">
         <div className="rounded-xl bg-emerald-50 p-4">
-          <div className="mb-1 text-xs font-medium text-emerald-600">Flow 最佳狀態</div>
+          <div className="mb-1 text-xs font-medium text-emerald-600">{t('flowState')}</div>
           <p className="text-sm text-gray-700">{personality.flowState}</p>
         </div>
         <div className="rounded-xl bg-amber-50 p-4">
-          <div className="mb-1 text-xs font-medium text-amber-600">Clutch 關鍵時刻</div>
+          <div className="mb-1 text-xs font-medium text-amber-600">{t('clutchState')}</div>
           <p className="text-sm text-gray-700">{personality.clutchState}</p>
         </div>
       </div>

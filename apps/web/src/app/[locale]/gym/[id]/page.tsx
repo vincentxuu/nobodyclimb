@@ -1,13 +1,26 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { adaptGymToDetail } from '@/lib/adapters/gym-adapter'
 import { fetchGymById } from '@/lib/api/server-fetch'
 import { OG_IMAGE, SITE_NAME, SITE_URL } from '@/lib/constants'
+import { loadGymOverlays, localizeGymDetail } from '@/lib/data-i18n'
+import { facilityLabel, gymTypeLabel } from '@/lib/data-i18n/enum-labels'
 import type { GymDetailData } from '@/lib/gym-data'
 import { buildHreflangAlternates, buildOgLocale } from '@/lib/i18n-metadata'
 import GymDetailClient from './GymDetailClient'
 
+type GymDataT = Awaited<ReturnType<typeof getTranslations<'GymData'>>>
+
+/**
+ * 取得當前語系的岩館資料：說明類欄位走對照檔（日文 → 英文 → 中文）
+ */
+async function getLocalizedGym(id: string, locale: string): Promise<GymDetailData | null> {
+  const [apiGym, overlays] = await Promise.all([fetchGymById(id), loadGymOverlays(locale)])
+  return apiGym ? localizeGymDetail(adaptGymToDetail(apiGym), overlays) : null
+}
+
 // 生成 LocalBusiness JSON-LD 結構化數據
-function generateGymJsonLd(gym: GymDetailData, id: string) {
+function generateGymJsonLd(gym: GymDetailData, id: string, tData: GymDataT) {
   // 格式化營業時間為 schema.org 格式
   const openingHoursSpec = []
   const dayMap: Record<string, string> = {
@@ -75,7 +88,7 @@ function generateGymJsonLd(gym: GymDetailData, id: string) {
         : undefined,
     amenityFeature: gym.facilities.map((facility) => ({
       '@type': 'LocationFeatureSpecification',
-      name: facility,
+      name: facilityLabel(tData, facility),
       value: true,
     })),
     sameAs: [gym.contact.facebookUrl, gym.contact.instagramUrl, gym.contact.website].filter(
@@ -91,28 +104,36 @@ export async function generateMetadata({
   params: Promise<{ id: string; locale: string }>
 }): Promise<Metadata> {
   const { id, locale } = await params
-  const apiGym = await fetchGymById(id)
-  const gym = apiGym ? adaptGymToDetail(apiGym) : null
+  const [gym, tData] = await Promise.all([
+    getLocalizedGym(id, locale),
+    getTranslations({ locale, namespace: 'GymData' }),
+  ])
 
   if (!gym) {
     return {
-      title: '找不到岩館',
-      description: '您要找的岩館不存在',
+      title: tData('metaNotFound'),
+      description: tData('metaNotFoundDesc'),
     }
   }
 
-  const title = `${gym.name} - ${gym.typeLabel}`
+  const typeLabel = gymTypeLabel(tData, gym.type)
+  const title = `${gym.name} - ${typeLabel}`
   const description =
     gym.description?.substring(0, 160) ||
-    `${gym.name}位於${gym.location.address}，提供${gym.typeLabel}服務。`
+    tData('metaDescription', { name: gym.name, address: gym.location.address, type: typeLabel })
   const ogLocale = buildOgLocale(locale)
 
   return {
     title: gym.name,
     description,
-    keywords: [gym.name, gym.nameEn, '攀岩館', gym.typeLabel, gym.location.city, '室內攀岩'].filter(
-      Boolean
-    ),
+    keywords: [
+      gym.name,
+      gym.nameEn,
+      tData('keywordGym'),
+      typeLabel,
+      gym.location.city,
+      tData('keywordIndoor'),
+    ].filter(Boolean),
     openGraph: {
       title: `${title} | ${SITE_NAME}`,
       description,
@@ -142,10 +163,16 @@ export async function generateMetadata({
   }
 }
 
-export default async function GymDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
-  const apiGym = await fetchGymById(id)
-  const gym = apiGym ? adaptGymToDetail(apiGym) : null
+export default async function GymDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string; locale: string }>
+}) {
+  const { id, locale } = await params
+  const [gym, tData] = await Promise.all([
+    getLocalizedGym(id, locale),
+    getTranslations({ locale, namespace: 'GymData' }),
+  ])
 
   return (
     <>
@@ -154,7 +181,7 @@ export default async function GymDetailPage({ params }: { params: Promise<{ id: 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(generateGymJsonLd(gym, id)),
+            __html: JSON.stringify(generateGymJsonLd(gym, id, tData)),
           }}
         />
       )}

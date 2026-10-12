@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "article_id": "<article-id>",
+  "checked_at": "2026-10-11T00:00:00Z",
+  "claims": [
+    {
+      "location": "正文 H2／段落，或 title/excerpt/alt",
+      "claim": "替換為實際可驗主張",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://example.com/replace-with-source",
+          "title": "原始來源頁名",
+          "publisher": "官方/作者名稱",
+          "source_date": null,
+          "accessed_at": "2026-10-11T00:00:00Z",
+          "read_scope": "partial",
+          "evidence": "頁碼／段落／核對內容；不得冒充全文",
+          "tool": "實際使用工具與fallback路徑"
+        }
+      ],
+      "reason": "模板尚未查核；寫稿時替換。未核實主張不可作肯定事實發布。"
+    }
+  ],
+  "media": [
+    {
+      "url": "https://example.com/replace-with-image",
+      "purpose": "cover/body/diagram",
+      "alt": "描述核心資訊；本文省略裝飾图",
+      "source_url": "https://example.com/replace-with-source",
+      "usage_basis": "替換為已確認使用依據"
+    }
+  ],
+  "source_sha256": "<64 lowercase hex sha256 of complete draft bytes>",
+  "links": [
+    {
+      "url": "https://example.com/replace-with-source",
+      "checked_at": "2026-10-11T00:00:00Z",
+      "tool": "實際使用工具",
+      "status": "uncertain",
+      "status_code": null,
+      "reason": "模板未查核；公開頁可達性及錨點需實際核對"
+    }
+  ]
+}

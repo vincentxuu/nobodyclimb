@@ -1,3 +1,5 @@
+> ⚠️ 過時：本專案 backend 為 Hono + Cloudflare D1，請以 backend/src 與 project-rules 為準
+
 # Django 基礎教學 - 給 Node.js 開發者
 
 > 這份檔案是為熟悉 Node.js 但不熟悉 Django 的開發者準備的快速入門指南。

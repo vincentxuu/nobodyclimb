@@ -25,6 +25,7 @@ import {
   Sparkles,
   User,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import React, { useCallback, useMemo, useState } from 'react'
 import { AdvancedStoryEditor } from '@/components/biography/advanced-story-editor'
 import { Button } from '@/components/ui/button'
@@ -56,59 +57,31 @@ type TabType =
 interface TabConfig {
   id: TabType
   icon: React.ReactNode
-  title: string
-  description: string
+  /** 訊息檔 key：標題讀 `sections.<key>`，說明讀 `versionA.tabDesc.<key>` */
+  messageKey:
+    | 'avatar'
+    | 'basic'
+    | 'climbing'
+    | 'social'
+    | 'coreStories'
+    | 'advancedStories'
+    | 'footprints'
+    | 'settings'
 }
 
 const TABS: TabConfig[] = [
-  {
-    id: 'avatar',
-    icon: <ImageIcon className="h-4 w-4" />,
-    title: '頭像與封面',
-    description: '個人形象照片',
-  },
-  {
-    id: 'basic',
-    icon: <User className="h-4 w-4" />,
-    title: '基本資料',
-    description: '暱稱、一句話介紹',
-  },
-  {
-    id: 'climbing',
-    icon: <Gauge className="h-4 w-4" />,
-    title: '攀岩資訊',
-    description: '年資、常去的地方',
-  },
-  {
-    id: 'social',
-    icon: <Link2 className="h-4 w-4" />,
-    title: '社群連結',
-    description: 'Instagram、YouTube',
-  },
-  {
-    id: 'core-stories',
-    icon: <BookOpen className="h-4 w-4" />,
-    title: '核心故事',
-    description: '與攀岩的相遇',
-  },
+  { id: 'avatar', icon: <ImageIcon className="h-4 w-4" />, messageKey: 'avatar' },
+  { id: 'basic', icon: <User className="h-4 w-4" />, messageKey: 'basic' },
+  { id: 'climbing', icon: <Gauge className="h-4 w-4" />, messageKey: 'climbing' },
+  { id: 'social', icon: <Link2 className="h-4 w-4" />, messageKey: 'social' },
+  { id: 'core-stories', icon: <BookOpen className="h-4 w-4" />, messageKey: 'coreStories' },
   {
     id: 'advanced-stories',
     icon: <Sparkles className="h-4 w-4" />,
-    title: '小故事',
-    description: '更多攀岩故事',
+    messageKey: 'advancedStories',
   },
-  {
-    id: 'footprints',
-    icon: <MapPin className="h-4 w-4" />,
-    title: '攀岩足跡',
-    description: '去過的地點',
-  },
-  {
-    id: 'settings',
-    icon: <Globe className="h-4 w-4" />,
-    title: '公開設定',
-    description: '隱私設定',
-  },
+  { id: 'footprints', icon: <MapPin className="h-4 w-4" />, messageKey: 'footprints' },
+  { id: 'settings', icon: <Globe className="h-4 w-4" />, messageKey: 'settings' },
 ]
 
 interface ProfileEditorVersionAProps {
@@ -119,6 +92,7 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
   const { profileData, setProfileData } = useProfile()
   const isMobile = useIsMobile()
   const { toast } = useToast()
+  const t = useTranslations('ProfileEditor')
   const [activeTab, setActiveTab] = useState<TabType>('avatar')
   const [isSaving, setIsSaving] = useState(false)
   const [hasChanges, setHasChanges] = useState(false)
@@ -176,11 +150,16 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
           [field]: uploadedUrl,
         }))
         setHasChanges(true)
-        toast({ title: field === 'avatarUrl' ? '頭像上傳成功' : '封面上傳成功' })
+        toast({
+          title:
+            field === 'avatarUrl'
+              ? t('versionA.avatarUploadSuccess')
+              : t('versionA.coverUploadSuccess'),
+        })
       }
     } catch (error) {
       console.error('上傳失敗:', error)
-      toast({ title: '上傳失敗', variant: 'destructive' })
+      toast({ title: t('common.uploadFailed'), variant: 'destructive' })
     }
   }
 
@@ -197,12 +176,12 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
 
       try {
         await biographyService.updateMyBiography({ [field]: value })
-        toast({ title: '故事已儲存' })
+        toast({ title: t('versionA.storySaved') })
       } catch {
-        toast({ title: '儲存失敗', variant: 'destructive' })
+        toast({ title: t('common.saveFailed'), variant: 'destructive' })
       }
     },
-    [setProfileData, toast]
+    [setProfileData, toast, t]
   )
 
   // 全部儲存
@@ -214,14 +193,18 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
       const response = await biographyService.updateMyBiography(biographyData)
 
       if (response.success) {
-        toast({ title: '儲存成功', description: '您的個人資料已成功更新' })
+        toast({ title: t('versionA.saveSuccess'), description: t('versionA.saveSuccessDesc') })
         setHasChanges(false)
       } else {
-        throw new Error(response.error || '儲存失敗')
+        throw new Error(response.error || t('common.saveFailed'))
       }
     } catch (error) {
       console.error('儲存失敗:', error)
-      toast({ title: '儲存失敗', description: '請稍後再試', variant: 'destructive' })
+      toast({
+        title: t('common.saveFailed'),
+        description: t('versionA.retryLater'),
+        variant: 'destructive',
+      })
     } finally {
       setIsSaving(false)
     }
@@ -329,10 +312,10 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
                   <ChevronLeft className="h-5 w-5" />
                 </button>
               )}
-              <h1 className="text-lg font-semibold">編輯人物誌</h1>
+              <h1 className="text-lg font-semibold">{t('versionA.title')}</h1>
             </div>
             <Button size="sm" onClick={handleSaveAll} disabled={isSaving || !hasChanges}>
-              {isSaving ? '儲存中...' : '儲存'}
+              {isSaving ? t('common.saving') : t('common.save')}
             </Button>
           </div>
 
@@ -348,7 +331,7 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
                   }`}
                 >
                   {tab.icon}
-                  {tab.title}
+                  {t(`sections.${tab.messageKey}`)}
                   {getTabCompletion(tab.id) && <Check className="h-3 w-3 text-green-400" />}
                 </button>
               ))}
@@ -387,12 +370,12 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
               className="mb-6 flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700"
             >
               <ChevronLeft className="h-4 w-4" />
-              返回
+              {t('common.back')}
             </button>
           )}
 
-          <h1 className="mb-1 text-xl font-semibold text-gray-900">編輯人物誌</h1>
-          <p className="mb-6 text-sm text-gray-500">完善你的攀岩檔案</p>
+          <h1 className="mb-1 text-xl font-semibold text-gray-900">{t('versionA.title')}</h1>
+          <p className="mb-6 text-sm text-gray-500">{t('versionA.subtitle')}</p>
 
           {/* 導航列表 */}
           <nav className="space-y-1">
@@ -415,14 +398,16 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium">{tab.title}</span>
+                    <span className="text-sm font-medium">{t(`sections.${tab.messageKey}`)}</span>
                     {getTabCompletion(tab.id) ? (
                       <Check className="h-3.5 w-3.5 text-green-500" />
                     ) : (
                       <Circle className="h-3 w-3 text-gray-300" />
                     )}
                   </div>
-                  <p className="truncate text-xs text-gray-400">{tab.description}</p>
+                  <p className="truncate text-xs text-gray-400">
+                    {t(`versionA.tabDesc.${tab.messageKey}`)}
+                  </p>
                 </div>
               </button>
             ))}
@@ -432,10 +417,16 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
           <div className="mt-8 border-t pt-6">
             <Button className="w-full" onClick={handleSaveAll} disabled={isSaving || !hasChanges}>
               <Save className="mr-2 h-4 w-4" />
-              {isSaving ? '儲存中...' : hasChanges ? '儲存變更' : '已儲存'}
+              {isSaving
+                ? t('common.saving')
+                : hasChanges
+                  ? t('versionA.saveChanges')
+                  : t('common.saved')}
             </Button>
             {hasChanges && (
-              <p className="mt-2 text-center text-xs text-amber-600">有未儲存的變更</p>
+              <p className="mt-2 text-center text-xs text-amber-600">
+                {t('versionA.unsavedChanges')}
+              </p>
             )}
           </div>
         </div>
@@ -454,8 +445,12 @@ export default function ProfileEditorVersionA({ onBack }: ProfileEditorVersionAP
               className="rounded-lg bg-white p-6 shadow-xs"
             >
               <div className="mb-6">
-                <h2 className="text-lg font-semibold text-gray-900">{activeTabConfig?.title}</h2>
-                <p className="text-sm text-gray-500">{activeTabConfig?.description}</p>
+                <h2 className="text-lg font-semibold text-gray-900">
+                  {activeTabConfig && t(`sections.${activeTabConfig.messageKey}`)}
+                </h2>
+                <p className="text-sm text-gray-500">
+                  {activeTabConfig && t(`versionA.tabDesc.${activeTabConfig.messageKey}`)}
+                </p>
               </div>
               {renderTabContent()}
             </motion.div>

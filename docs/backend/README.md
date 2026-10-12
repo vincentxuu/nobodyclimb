@@ -1,3 +1,5 @@
+> ⚠️ 過時：本專案 backend 為 Hono + Cloudflare D1，請以 backend/src 與 project-rules 為準
+
 # NobodyClimb 後端 API 開發指南
 
 > 完整的 Django REST Framework 後端實作文檔，專為 Node.js 開發者設計

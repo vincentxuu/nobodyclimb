@@ -20,6 +20,7 @@ import { useTranslations } from 'next-intl'
 import { useMemo, useRef, useState } from 'react'
 import type { SocialLinks } from '@/lib/types/biography-v2'
 import { cn } from '@/lib/utils'
+import { useRouteTypeLabel } from '../shared/useRouteTypeLabel'
 
 interface BasicInfoSectionProps {
   /** 用戶名稱 */
@@ -95,6 +96,7 @@ export function BasicInfoSection({
   className,
 }: BasicInfoSectionProps) {
   const t = useTranslations('BiographyEditor')
+  const routeTypeLabel = useRouteTypeLabel()
   const avatarInputRef = useRef<HTMLInputElement>(null)
   const coverInputRef = useRef<HTMLInputElement>(null)
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null)
@@ -506,7 +508,7 @@ export function BasicInfoSection({
                             : 'bg-white text-[#3F3D3D] border-[#B6B3B3] hover:border-brand-dark hover:bg-[#F5F5F5]'
                         )}
                       >
-                        {option.label}
+                        {routeTypeLabel(option.value)}
                       </button>
                     )
                   })}

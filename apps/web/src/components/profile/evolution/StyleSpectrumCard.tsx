@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Compass, Mountain, Target } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import type { StyleSpectrumData } from '@/lib/api/evolution'
 
 interface StyleSpectrumCardProps {
@@ -10,6 +11,8 @@ interface StyleSpectrumCardProps {
 }
 
 export default function StyleSpectrumCard({ data, isLoading }: StyleSpectrumCardProps) {
+  const t = useTranslations('ProfileEvolution')
+
   if (isLoading) {
     return (
       <div className="animate-pulse rounded-lg bg-white p-6">
@@ -26,12 +29,12 @@ export default function StyleSpectrumCard({ data, isLoading }: StyleSpectrumCard
       <div className="rounded-lg bg-white p-6">
         <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-[#1B1A1A]">
           <Compass className="h-5 w-5 text-emerald-600" />
-          攀岩光譜
+          {t('spectrumTitle')}
         </h2>
         <div className="rounded-lg border border-dashed border-gray-200 py-8 text-center">
           <Compass className="mx-auto mb-2 h-8 w-8 text-gray-300" />
-          <p className="text-sm text-gray-400">尚未有足夠數據</p>
-          <p className="mt-1 text-xs text-gray-300">需要攀登紀錄才能計算你的攀岩光譜</p>
+          <p className="text-sm text-gray-400">{t('spectrumEmpty')}</p>
+          <p className="mt-1 text-xs text-gray-300">{t('spectrumEmptyHint')}</p>
         </div>
       </div>
     )
@@ -50,7 +53,7 @@ export default function StyleSpectrumCard({ data, isLoading }: StyleSpectrumCard
     >
       <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-[#1B1A1A]">
         <Compass className="h-5 w-5 text-emerald-600" />
-        攀岩光譜
+        {t('spectrumTitle')}
       </h2>
 
       {/* Position Name */}
@@ -62,8 +65,8 @@ export default function StyleSpectrumCard({ data, isLoading }: StyleSpectrumCard
       {/* Spectrum Bar */}
       <div className="mb-4">
         <div className="mb-1 flex justify-between text-xs text-gray-400">
-          <span>深耕型 (Redpoint)</span>
-          <span>即興型 (Onsight)</span>
+          <span>{t('spectrumRedpointSide')}</span>
+          <span>{t('spectrumOnsightSide')}</span>
         </div>
         <div className="relative h-3 w-full overflow-hidden rounded-full bg-linear-to-r from-indigo-400 via-emerald-400 to-amber-400">
           {/* Marker */}
@@ -84,7 +87,7 @@ export default function StyleSpectrumCard({ data, isLoading }: StyleSpectrumCard
       {/* Growth Direction */}
       <div className="mb-4 rounded-lg bg-emerald-50 px-4 py-3">
         <p className="text-sm text-emerald-700">
-          <span className="font-medium">成長方向：</span>
+          <span className="font-medium">{t('growthDirection')}</span>
           {position.growthDirection}
         </p>
       </div>
@@ -94,14 +97,14 @@ export default function StyleSpectrumCard({ data, isLoading }: StyleSpectrumCard
         <div className="rounded-lg bg-gray-50 p-3">
           <div className="mb-1 flex items-center gap-1.5 text-xs text-gray-500">
             <Target className="h-3.5 w-3.5" />
-            Onsight 最高
+            {t('onsightMax')}
           </div>
           <p className="text-lg font-semibold text-[#1B1A1A]">{onsight_max_grade || '--'}</p>
         </div>
         <div className="rounded-lg bg-gray-50 p-3">
           <div className="mb-1 flex items-center gap-1.5 text-xs text-gray-500">
             <Mountain className="h-3.5 w-3.5" />
-            Redpoint 最高
+            {t('redpointMax')}
           </div>
           <p className="text-lg font-semibold text-[#1B1A1A]">{redpoint_max_grade || '--'}</p>
         </div>

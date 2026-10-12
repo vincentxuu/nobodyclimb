@@ -2,19 +2,29 @@
 
 import { getTrainingPlan } from '@nobodyclimb/constants'
 import type { PersonalityType } from '@nobodyclimb/types'
+import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from '@/i18n/navigation'
 import { ROUTES } from '@/lib/constants'
 import { useAuth } from '@/lib/hooks/useAuth'
 import { useTrainingProgress } from '@/lib/hooks/useTrainingProgress'
 import { useUpdateProgress } from '@/lib/hooks/useUpdateProgress'
+import { useLocalizedPersonality } from '@/lib/quiz/personality-i18n'
+import { useTrainingText } from '@/lib/quiz/training-i18n'
 import { DayCard } from './DayCard'
 import { GraduationBadge } from './GraduationBadge'
 import { StartGuide } from './StartGuide'
 import { TrainingHeader } from './TrainingHeader'
 import { WeekTabs } from './WeekTabs'
 
-export function TrainingPageClient({ personality }: { personality: PersonalityType }) {
+export function TrainingPageClient({
+  personality: rawPersonality,
+}: {
+  personality: PersonalityType
+}) {
+  const t = useTranslations('Quiz')
+  const tt = useTrainingText()
+  const personality = useLocalizedPersonality(rawPersonality)
   const { isSignedIn, isLoading: authLoading } = useAuth()
   const router = useRouter()
   const plan = getTrainingPlan(personality.code)
@@ -54,7 +64,7 @@ export function TrainingPageClient({ personality }: { personality: PersonalityTy
   if (!isSignedIn) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <p className="text-gray-500">正在導向登入頁面...</p>
+        <p className="text-gray-500">{t('training.redirecting')}</p>
       </div>
     )
   }
@@ -62,7 +72,7 @@ export function TrainingPageClient({ personality }: { personality: PersonalityTy
   if (!plan) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12 text-center">
-        <p className="text-gray-500">此型態的訓練計畫尚未開放</p>
+        <p className="text-gray-500">{t('training.notAvailable')}</p>
       </div>
     )
   }
@@ -76,7 +86,7 @@ export function TrainingPageClient({ personality }: { personality: PersonalityTy
       <GraduationBadge
         isGraduated={isGraduated}
         accentColor={personality.color}
-        personalityName={personality.nameZh}
+        personalityName={personality.name}
       />
 
       {completedDays === 0 && !progressLoading && <StartGuide personality={personality} />}
@@ -98,7 +108,10 @@ export function TrainingPageClient({ personality }: { personality: PersonalityTy
           {activeWeekData && (
             <div className="space-y-4">
               <h2 className="text-lg font-semibold text-gray-800">
-                Week {activeWeekData.weekNumber}：{activeWeekData.theme}
+                {t('result.weekHeading', {
+                  week: activeWeekData.weekNumber,
+                  theme: tt(activeWeekData.theme),
+                })}
               </h2>
               {activeWeekData.days.map((day) => (
                 <DayCard
@@ -116,7 +129,9 @@ export function TrainingPageClient({ personality }: { personality: PersonalityTy
             </div>
           )}
 
-          <p className="mt-6 text-center text-sm text-gray-400">已完成 {completedDays} / 12 天</p>
+          <p className="mt-6 text-center text-sm text-gray-400">
+            {t('training.completedCount', { completed: completedDays, total: 12 })}
+          </p>
         </>
       )}
     </div>

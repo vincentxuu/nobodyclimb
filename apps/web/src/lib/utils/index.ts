@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+import { toIntlLocale } from '../date-locale'
 
 /**
  * 合併 Tailwind CSS 的類名
@@ -13,10 +14,11 @@ export function cn(...inputs: ClassValue[]): string {
 /**
  * 格式化日期
  * @param {Date} date - 日期物件
+ * @param {string} locale - next-intl 語系（zh / en / ja），預設 zh
  * @returns {string} 格式化後的日期字串
  */
-export function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat('zh-TW', {
+export function formatDate(date: Date, locale = 'zh'): string {
+  return new Intl.DateTimeFormat(toIntlLocale(locale), {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

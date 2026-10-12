@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { ArrowLeft, Loader2, MapPin, Mountain, Route as RouteIcon } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 import { GradeDistributionChart } from '@/components/crag/grade-distribution-chart'
 import { CragRouteSection } from '@/components/crag/route-section'
@@ -20,6 +20,7 @@ interface AreaDetailClientProps {
 
 export default function AreaDetailClient({ cragId, areaId }: AreaDetailClientProps) {
   const t = useTranslations('CragPage')
+  const locale = useLocale()
   // 從 API 獲取資料
   const { data: cragDetail, isLoading: isCragLoading } = useCragDetail(cragId)
   const { data: fullAreas = [], isLoading: isAreasLoading } = useCragFullAreas(cragId)
@@ -252,7 +253,8 @@ export default function AreaDetailClient({ cragId, areaId }: AreaDetailClientPro
             <p className="leading-relaxed text-gray-700">
               {area.description || t('noAreaDescription')}
             </p>
-            {area.descriptionEn && (
+            {/* 中文頁維持原樣：英文說明當副標；其他語系的說明已依語系取值，不再重複顯示 */}
+            {locale === 'zh' && area.descriptionEn && (
               <p className="mt-3 leading-relaxed text-gray-500">{area.descriptionEn}</p>
             )}
           </div>

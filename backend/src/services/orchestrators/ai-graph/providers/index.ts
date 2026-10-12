@@ -39,6 +39,9 @@ export function createProvider(name: ProviderName, env: Env): AIProvider {
   }
 }
 
+/** 不支援 embed 的 provider，embedding 時改用 Cloudflare */
+const NO_EMBEDDING_PROVIDERS = new Set<string>(['anthropic', 'github'])
+
 /** 建立主 LLM provider + embedding provider（自動 fallback） */
 export function createProviders(
   config: ProviderConfig,
@@ -52,8 +55,8 @@ export function createProviders(
   const embName = config.embeddingProvider ?? config.llmProvider
   try {
     const ep = createProvider(embName, env)
-    // anthropic doesn't support embedding — fallback to cloudflare
-    embedding = ep.name === 'anthropic' ? new CloudflareProvider(env.AI) : ep
+    // anthropic / github 不支援 embedding — fallback 到 cloudflare
+    embedding = NO_EMBEDDING_PROVIDERS.has(ep.name) ? new CloudflareProvider(env.AI) : ep
   } catch (err) {
     // embedding provider creation failed (e.g., missing API key for non-cloudflare provider)
     // fall back to Cloudflare embedding to keep the request alive

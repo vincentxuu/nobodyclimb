@@ -1,3 +1,5 @@
+> ⚠️ 過時：本專案 backend 為 Hono + Cloudflare D1，請以 backend/src 與 project-rules 為準
+
 # API 實作指南
 
 > 詳細的 Django REST Framework API 實作步驟

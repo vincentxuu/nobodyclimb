@@ -68,7 +68,7 @@ description: nobodyclimb 專案憲法 — 不變量、禁令、事實表、任�
   services：`apps/web/src/lib/api/services.ts`；adapters：`apps/web/src/lib/adapters/`；
   stores：`apps/web/src/store/`；UI 元件：`apps/web/src/components/ui/`（CVA + Radix + `cn()`）
 - Mobile 畫面：`apps/mobile/app/`（Expo Router，檔案即路由）；hooks：`apps/mobile/src/lib/hooks/`；
-  UI 元件：`apps/mobile/src/components/ui/`（純 RN StyleSheet，非 Tamagui）
+  UI 元件：`apps/mobile/src/components/ui/`（以 RN StyleSheet 為主，非 Tamagui；但 `app/` 部分頁面如 `auth/*` 仍用 Tamagui）
 - 共用 packages：`packages/{types,schemas,constants,utils,hooks,api-client}`，
   一律 barrel export（`src/index.ts`）
 - 設計 tokens（web+mobile 共用）：`packages/constants/src/theme.ts`

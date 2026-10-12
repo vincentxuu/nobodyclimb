@@ -3,6 +3,7 @@
 import { getPersonalityColor, getPersonalityType } from '@nobodyclimb/constants'
 import type { PersonalityTypeCode } from '@nobodyclimb/types'
 import { ChevronDown, ChevronUp, Flame, Wind } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
@@ -19,6 +20,7 @@ export function PersonalityBadge({
   flowIndex,
   className,
 }: PersonalityBadgeProps) {
+  const t = useTranslations('ProfileSections')
   const [isExpanded, setIsExpanded] = useState(false)
   const typeInfo = getPersonalityType(personalityType as PersonalityTypeCode)
   const color = getPersonalityColor(personalityType as PersonalityTypeCode)
@@ -80,7 +82,7 @@ export function PersonalityBadge({
           </div>
           <p className="mb-3 text-sm italic text-gray-600">「{typeInfo.tagline}」</p>
           <div className="mb-2">
-            <span className="text-xs font-medium text-gray-500">優勢</span>
+            <span className="text-xs font-medium text-gray-500">{t('personality.strengths')}</span>
             <div className="mt-1 flex flex-wrap gap-1">
               {typeInfo.strengths.map((s) => (
                 <span
@@ -94,7 +96,7 @@ export function PersonalityBadge({
             </div>
           </div>
           <div className="mb-2">
-            <span className="text-xs font-medium text-gray-500">盲點</span>
+            <span className="text-xs font-medium text-gray-500">{t('personality.blindSpots')}</span>
             <div className="mt-1 flex flex-wrap gap-1">
               {typeInfo.blindSpots.map((w) => (
                 <span
@@ -107,7 +109,7 @@ export function PersonalityBadge({
             </div>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-xs font-medium text-gray-500">最佳狀態</span>
+            <span className="text-xs font-medium text-gray-500">{t('personality.bestState')}</span>
             {typeInfo.flowState ? (
               <span className="inline-flex items-center gap-1 rounded-full bg-cyan-50 px-2 py-0.5 text-xs font-medium text-cyan-700">
                 <Wind className="h-3 w-3" />

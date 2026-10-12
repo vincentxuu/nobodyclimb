@@ -13,11 +13,12 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { bucketListService } from '@/lib/api/services'
+import { toIntlLocale } from '@/lib/date-locale'
 import { BUCKET_LIST_CATEGORIES, BucketListItem } from '@/lib/types'
 
 interface RecentCompletedStoriesProps {
@@ -33,6 +34,8 @@ interface CompletedItem extends BucketListItem {
 
 export function RecentCompletedStories({ searchTerm, filter }: RecentCompletedStoriesProps) {
   const t = useTranslations('BiographyPage')
+  const locale = useLocale()
+  const tCategory = useTranslations('BucketListPage')
   const [items, setItems] = useState<CompletedItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -97,11 +100,13 @@ export function RecentCompletedStories({ searchTerm, filter }: RecentCompletedSt
     if (diffMins < 60) return t('minutesAgo', { count: diffMins })
     if (diffHours < 24) return t('hoursAgo', { count: diffHours })
     if (diffDays < 7) return t('daysAgo', { count: diffDays })
-    return date.toLocaleDateString('zh-TW')
+    return date.toLocaleDateString(toIntlLocale(locale))
   }
 
   const getCategoryLabel = (category: string) => {
-    return BUCKET_LIST_CATEGORIES.find((c) => c.value === category)?.label || category
+    // 分類值是存檔用的 id，只在顯示時依語系查既有的 BucketListPage.categoryLabels
+    const known = BUCKET_LIST_CATEGORIES.find((c) => c.value === category)
+    return known ? tCategory(`categoryLabels.${known.value}`) : category
   }
 
   if (loading) {

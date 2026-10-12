@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useMobileNav } from './MobileNavContext'
 
 interface MenuItem {
@@ -10,23 +11,25 @@ interface MenuItem {
   href: string
 }
 
-const menuItems: MenuItem[] = [
-  { name: '人物誌', href: '/profile' },
-  { name: '推薦', href: '/profile/recommendations' },
-  { name: 'AI 記憶', href: '/profile/ai-memory' },
-  { name: '目標', href: '/profile/goals' },
-  { name: '清單', href: '/profile/bucket-list' },
-  { name: '攀爬紀錄', href: '/profile/ascents' },
-  { name: '成就', href: '/profile/stats' },
-  { name: '文章', href: '/profile/articles' },
-  { name: '照片', href: '/profile/photos' },
-  { name: '收藏', href: '/profile/bookmarks' },
-  { name: '設定', href: '/profile/settings' },
-]
-
 export default function MobileNavigationBar() {
   const pathname = usePathname()
   const { isMobile } = useMobileNav()
+  const t = useTranslations('ProfileSections')
+  const tNav = useTranslations('ProfilePage')
+
+  const menuItems: MenuItem[] = [
+    { name: tNav('navBiography'), href: '/profile' },
+    { name: tNav('navRecommendations'), href: '/profile/recommendations' },
+    { name: tNav('navAiMemory'), href: '/profile/ai-memory' },
+    { name: t('mobileNav.goals'), href: '/profile/goals' },
+    { name: tNav('navBucketList'), href: '/profile/bucket-list' },
+    { name: tNav('navAscents'), href: '/profile/ascents' },
+    { name: tNav('navStats'), href: '/profile/stats' },
+    { name: tNav('navArticles'), href: '/profile/articles' },
+    { name: tNav('navPhotos'), href: '/profile/photos' },
+    { name: tNav('navBookmarks'), href: '/profile/bookmarks' },
+    { name: tNav('navSettings'), href: '/profile/settings' },
+  ]
 
   if (!isMobile) {
     return null

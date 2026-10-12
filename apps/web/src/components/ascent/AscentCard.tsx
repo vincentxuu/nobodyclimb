@@ -1,7 +1,6 @@
 'use client'
 
 import { format } from 'date-fns'
-import { zhTW } from 'date-fns/locale'
 import {
   ArrowUp,
   Calendar,
@@ -17,11 +16,12 @@ import {
   Users,
   Zap,
 } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
+import { getDateFnsLocale } from '@/lib/date-locale'
 import { ASCENT_TYPE_DISPLAY, UserRouteAscent } from '@/lib/types/ascent'
 import { cn } from '@/lib/utils'
 
@@ -68,7 +68,9 @@ export function AscentCard({
   showUser = true,
   className,
 }: AscentCardProps) {
+  const t = useTranslations('Ascent')
   const typeInfo = ASCENT_TYPE_DISPLAY[ascent.ascent_type]
+  const locale = useLocale()
   const Icon = ICON_MAP[typeInfo.icon as keyof typeof ICON_MAP]
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set())
 
@@ -103,7 +105,7 @@ export function AscentCard({
               )}
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Calendar className="h-3 w-3" />
-                {format(new Date(ascent.ascent_date), 'PPP', { locale: zhTW })}
+                {format(new Date(ascent.ascent_date), 'PPP', { locale: getDateFnsLocale(locale) })}
               </div>
             </div>
 
@@ -131,18 +133,18 @@ export function AscentCard({
                 )}
               >
                 <Icon className={cn('h-3 w-3', typeInfo.color)} />
-                <span>{typeInfo.label}</span>
+                <span>{t(`types.${ascent.ascent_type}.label`)}</span>
               </div>
 
               {ascent.attempts_count > 1 && (
                 <span className="text-xs text-muted-foreground">
-                  {ascent.attempts_count} 次嘗試
+                  {t('card.attempts', { count: ascent.attempts_count })}
                 </span>
               )}
 
               {ascent.perceived_grade && (
                 <span className="text-xs text-muted-foreground">
-                  感受：{ascent.perceived_grade}
+                  {t('card.perceivedGrade', { grade: ascent.perceived_grade })}
                 </span>
               )}
             </div>
@@ -183,7 +185,7 @@ export function AscentCard({
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
                         src={photo}
-                        alt={`照片 ${index + 1}`}
+                        alt={t('card.photoAlt', { index: index + 1 })}
                         className="h-full w-full object-cover"
                         onError={() => handleImageError(index)}
                       />
@@ -210,7 +212,7 @@ export function AscentCard({
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`https://i.ytimg.com/vi/${youtubeVideoId}/mqdefault.jpg`}
-                    alt="YouTube 影片"
+                    alt={t('card.youtubeAlt')}
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -231,7 +233,7 @@ export function AscentCard({
                 className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-linear-to-r from-purple-500 via-pink-500 to-orange-500 px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 transition-opacity"
               >
                 <Instagram className="h-3.5 w-3.5" />
-                <span>Instagram 貼文</span>
+                <span>{t('card.instagramPost')}</span>
               </a>
             )}
           </div>

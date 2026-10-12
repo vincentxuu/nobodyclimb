@@ -12,6 +12,7 @@ import {
   STORY_CATEGORIES,
   StoryQuestion,
 } from '@/lib/constants/biography-stories'
+import { useBiographyStoryText } from '@/lib/hooks/useBiographyStoryText'
 import { cn } from '@/lib/utils'
 import { CATEGORY_ICONS, getStoryIcon } from '@/lib/utils/biography-ui'
 
@@ -80,6 +81,7 @@ function FilledStoryCard({
 }) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const t = useTranslations('BiographyEditor')
+  const { questionTitle, questionSubtitle, questionPlaceholder } = useBiographyStoryText()
   const Icon = getStoryIcon(question.icon)
 
   return (
@@ -101,8 +103,12 @@ function FilledStoryCard({
           <Icon className="h-5 w-5 text-brand-dark" />
         </div>
         <div className="flex-1">
-          <h4 className="mb-1 font-semibold text-brand-dark">{question.title}</h4>
-          <p className="text-xs text-text-subtle">{question.subtitle}</p>
+          <h4 className="mb-1 font-semibold text-brand-dark">
+            {questionTitle(question.field, question.title)}
+          </h4>
+          <p className="text-xs text-text-subtle">
+            {questionSubtitle(question.field, question.subtitle)}
+          </p>
         </div>
       </div>
 
@@ -120,7 +126,7 @@ function FilledStoryCard({
               <Textarea
                 value={editValue}
                 onChange={(e) => onEditValueChange(e.target.value)}
-                placeholder={question.placeholder}
+                placeholder={questionPlaceholder(question.field, question.placeholder)}
                 className="mb-3 min-h-[120px] resize-none border-brand-light focus:border-brand-accent"
                 autoFocus
               />
@@ -167,6 +173,7 @@ function EmptyStoryCard({
 }) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const t = useTranslations('BiographyEditor')
+  const { questionTitle, questionSubtitle } = useBiographyStoryText()
   const Icon = getStoryIcon(question.icon)
 
   return (
@@ -184,8 +191,12 @@ function EmptyStoryCard({
           <Icon className="h-5 w-5 text-gray-400" />
         </div>
         <div className="flex-1">
-          <h4 className="mb-1 font-medium text-gray-700">{question.title}</h4>
-          <p className="text-xs text-text-subtle">{question.subtitle}</p>
+          <h4 className="mb-1 font-medium text-gray-700">
+            {questionTitle(question.field, question.title)}
+          </h4>
+          <p className="text-xs text-text-subtle">
+            {questionSubtitle(question.field, question.subtitle)}
+          </p>
         </div>
       </div>
       <p className="mt-4 text-center text-sm text-gray-500">{t('advancedStoryClickToFill')}</p>
@@ -266,6 +277,7 @@ function UnfilledStoriesSection({
  * 分類標題組件
  */
 function CategoryHeader({ categoryId, count }: { categoryId: string; count: number }) {
+  const { categoryName } = useBiographyStoryText()
   const category = STORY_CATEGORIES.find((c) => c.id === categoryId)
   const Icon = category ? CATEGORY_ICONS[category.id] : null
 
@@ -274,7 +286,9 @@ function CategoryHeader({ categoryId, count }: { categoryId: string; count: numb
   return (
     <div className="mb-4 flex items-center gap-3">
       {Icon && <Icon className="h-5 w-5 text-brand-dark" />}
-      <h3 className="text-base font-semibold text-brand-dark">{category.name}</h3>
+      <h3 className="text-base font-semibold text-brand-dark">
+        {categoryName(category.id, category.name)}
+      </h3>
       <span className="text-sm text-text-subtle">({count})</span>
     </div>
   )

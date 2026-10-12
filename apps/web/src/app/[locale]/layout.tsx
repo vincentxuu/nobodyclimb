@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
+import { getMessages, getTranslations } from 'next-intl/server'
 import React from 'react'
 import { ChatWidget } from '@/components/ai'
 import { Footer } from '@/components/layout/footer'
@@ -15,18 +15,18 @@ import { ProgressBar } from '@/components/shared/progress-bar'
 import { ShareInvitation } from '@/components/shared/share-invitation'
 import { StoryPromptWrapper } from '@/components/shared/story-prompt-wrapper'
 import { routing } from '@/i18n/routing'
-import { SITE_DESCRIPTION, SITE_LOGO, SITE_NAME, SITE_URL } from '@/lib/constants'
+import { SITE_LOGO, SITE_NAME, SITE_URL } from '@/lib/constants'
 
-// JSON-LD 結構化數據 - 幫助搜尋引擎理解網站內容
-const jsonLd = {
+// JSON-LD 結構化數據 - 幫助搜尋引擎理解網站內容（文字欄位依語系輸出）
+const buildJsonLd = (site: { alternateName: string[]; description: string; keywords: string }) => ({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: SITE_NAME,
-  alternateName: ['NobodyClimb 台灣攀岩', '台灣攀岩社群'],
-  description: SITE_DESCRIPTION,
+  alternateName: site.alternateName,
+  description: site.description,
   url: SITE_URL,
   inLanguage: ['zh-TW', 'en', 'ja'],
-  keywords: '攀岩,龍洞,墾丁,關子嶺,德芙蘭,台灣攀岩,戶外攀岩,攀岩路線,岩場',
+  keywords: site.keywords,
   potentialAction: {
     '@type': 'SearchAction',
     target: {
@@ -45,7 +45,7 @@ const jsonLd = {
     },
     sameAs: [],
   },
-}
+})
 
 // locale → html lang 屬性對應
 const localeLangMap: Record<string, string> = {
@@ -68,6 +68,12 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   const messages = await getMessages()
+  const tSite = await getTranslations({ locale, namespace: 'Metadata.site' })
+  const jsonLd = buildJsonLd({
+    alternateName: tSite.raw('alternateNames') as string[],
+    description: tSite('description'),
+    keywords: tSite('keywords'),
+  })
   const htmlLang = localeLangMap[locale] ?? 'zh-TW'
 
   return (

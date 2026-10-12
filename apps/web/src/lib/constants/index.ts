@@ -97,12 +97,13 @@ export const DATE_FORMAT = 'yyyy年MM月dd日'
 export const DATE_TIME_FORMAT = 'yyyy年MM月dd日 HH:mm'
 
 /**
- * Toast 提示訊息常數
+ * 各語系的時間格式（date-fns pattern）
+ * zh 沿用上方既有格式；未列出的語系退回 zh
  */
-export const RATE_LIMIT_TOAST = {
-  title: '請稍候',
-  description: '點擊太快了，請稍後再試',
-  variant: 'default' as const,
+export const LOCALE_DATE_FORMATS: Record<string, { date: string; dateTime: string }> = {
+  zh: { date: DATE_FORMAT, dateTime: DATE_TIME_FORMAT },
+  en: { date: 'MMM d, yyyy', dateTime: 'MMM d, yyyy HH:mm' },
+  ja: { date: 'yyyy年M月d日', dateTime: 'yyyy年M月d日 HH:mm' },
 }
 
 /**

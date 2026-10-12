@@ -55,6 +55,7 @@ git clone https://github.com/vincentxuu/nobodyclimb.git
 cd nobodyclimb
 pnpm install
 cp .env.local.example .env.local
+cp backend/.dev.vars.example backend/.dev.vars   # 後端 secrets（JWT_SECRET 等）
 pnpm dev          # 啟動所有服務
 ```
 

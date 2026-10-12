@@ -1,0 +1,630 @@
+{
+  "gyms": {
+    "tup-zhonghe": {
+      "description": {
+        "zh": "原岩攀岩館中和店是台灣最大的室內攀岩館之一，提供專業的上攀服務。場地設施完善，有專業教練團隊提供各種課程。",
+        "text": "T-UP Climbing Gym Zhonghe is one of Taiwan's largest indoor climbing gyms, offering professional lead climbing services."
+      },
+      "notes": {
+        "zh": "上攀需具備確保證照或完成場館基礎課程。",
+        "text": "Rope climbing requires a belay certification or completion of the gym's basic course."
+      },
+      "mrt": {
+        "zh": "環狀線捷運中原站步行約5分鐘",
+        "text": "About a 5-minute walk from Zhongyuan Station on the MRT Circular Line"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "tup-wanhua": {
+      "description": {
+        "zh": "原岩攀岩館萬華店是專業的抱石館，提供多樣化的抱石路線。",
+        "text": "T-UP Climbing Gym Wanhua is a professional bouldering gym offering diverse routes."
+      },
+      "mrt": {
+        "zh": "捷運龍山寺站步行約8分鐘",
+        "text": "About an 8-minute walk from MRT Longshan Temple Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "tup-a19": {
+      "description": {
+        "zh": "原岩攀岩館A19店位於環球購物中心內，提供抱石與上攀服務，交通便利。",
+        "text": "T-UP Climbing Gym A19 is located in Global Mall, offering both bouldering and lead climbing."
+      },
+      "train": {
+        "zh": "高鐵桃園站A19出口直達",
+        "text": "Directly connected to Exit A19 of HSR Taoyuan Station"
+      },
+      "parking": {
+        "zh": "環球購物中心停車場",
+        "text": "Global Mall parking lot"
+      }
+    },
+    "tup-nangang": {
+      "description": {
+        "zh": "原岩攀岩館南港店提供專業抱石服務。",
+        "text": "T-UP Climbing Gym Nangang offers professional bouldering services."
+      },
+      "mrt": {
+        "zh": "捷運南港站步行約10分鐘",
+        "text": "About a 10-minute walk from MRT Nangang Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "tup-xindian": {
+      "description": {
+        "zh": "原岩攀岩館新店店位於裕隆城，提供抱石與上攀服務。",
+        "text": "T-UP Climbing Gym Xindian is located in Yulon City, offering both bouldering and lead climbing."
+      },
+      "mrt": {
+        "zh": "捷運七張站步行約10分鐘",
+        "text": "About a 10-minute walk from MRT Qizhang Station"
+      },
+      "parking": {
+        "zh": "裕隆城停車場",
+        "text": "Yulon City parking lot"
+      }
+    },
+    "tup-mingde": {
+      "description": {
+        "zh": "原岩攀岩館明德店提供專業抱石服務。",
+        "text": "T-UP Climbing Gym Mingde offers professional bouldering services."
+      },
+      "mrt": {
+        "zh": "捷運明德站步行約5分鐘",
+        "text": "About a 5-minute walk from MRT Mingde Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "megastone": {
+      "description": {
+        "zh": "MegaSTONE 是北台灣知名的抱石攀岩館，提供多樣化的抱石路線和專業的攀岩教學課程。",
+        "text": "MegaSTONE is a well-known bouldering gym in Northern Taiwan."
+      },
+      "notes": {
+        "zh": "星光票為當日結束營業前兩小時入場",
+        "text": "The twilight ticket is for entry in the two hours before closing on the day."
+      },
+      "mrt": {
+        "zh": "捷運頭前庄站四號出口步行2分鐘",
+        "text": "A 2-minute walk from Exit 4 of MRT Touqianzhuang Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "civic-boulder": {
+      "description": {
+        "zh": "市民抱石攀岩館是台北市南港區最受歡迎的抱石館之一。",
+        "text": "Civic Bouldergym Taipei is one of the most popular bouldering gyms in Nangang District."
+      },
+      "pricingNotes": {
+        "zh": "平日17:00前入場$350",
+        "text": "$350 for entry before 17:00 on weekdays"
+      },
+      "mrt": {
+        "zh": "捷運南港展覽館站步行約10分鐘",
+        "text": "About a 10-minute walk from MRT Nangang Exhibition Center Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "kirin": {
+      "description": {
+        "zh": "奇岩攀岩館提供平價的抱石體驗。",
+        "text": "Kirin Climbing Gym offers affordable bouldering experience."
+      },
+      "pricingNotes": {
+        "zh": "平日離峰(18:00前)$220",
+        "text": "Weekday off-peak (before 18:00) $220"
+      },
+      "mrt": {
+        "zh": "捷運南港展覽館站步行約5分鐘",
+        "text": "About a 5-minute walk from MRT Nangang Exhibition Center Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "little-rock-tianmu": {
+      "description": {
+        "zh": "小岩館天母店是溫馨的社區型抱石館。",
+        "text": "The Little Rock Tianmu is a cozy community bouldering gym."
+      },
+      "mrt": {
+        "zh": "捷運芝山站轉公車",
+        "text": "Transfer to a bus from MRT Zhishan Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "redrock-shilin": {
+      "description": {
+        "zh": "紅石攀岩士林店提供平價的抱石體驗。",
+        "text": "RedRock Climbing Shilin offers affordable bouldering experience."
+      },
+      "mrt": {
+        "zh": "捷運士林站步行約10分鐘",
+        "text": "About a 10-minute walk from MRT Shilin Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "redrock-hsinchu": {
+      "description": {
+        "zh": "紅石攀岩新竹店提供平價的抱石體驗。",
+        "text": "RedRock Climbing Hsinchu offers affordable bouldering experience."
+      },
+      "train": {
+        "zh": "新竹火車站步行約15分鐘",
+        "text": "About a 15-minute walk from Hsinchu Railway Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "corner-huashan": {
+      "description": {
+        "zh": "角攀岩館華山店位於華山文創園區附近。",
+        "text": "CORNER Bouldering Gym Huashan is located near Huashan Creative Park."
+      },
+      "pricingNotes": {
+        "zh": "平日上午$250、平日下午$300、平日晚上$350",
+        "text": "Weekday morning $250, weekday afternoon $300, weekday evening $350"
+      },
+      "mrt": {
+        "zh": "捷運忠孝新生站步行約5分鐘",
+        "text": "About a 5-minute walk from MRT Zhongxiao Xinsheng Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "corner-zhongshan": {
+      "description": {
+        "zh": "角攀岩館中山店位於中山北路。",
+        "text": "CORNER Bouldering Gym Zhongshan is located on Zhongshan N. Rd."
+      },
+      "mrt": {
+        "zh": "捷運中山站步行約5分鐘",
+        "text": "About a 5-minute walk from MRT Zhongshan Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "neihu-sport-center": {
+      "description": {
+        "zh": "內湖運動中心攀岩館提供平價的攀岩服務。",
+        "text": "Neihu Sports Center offers affordable climbing services."
+      },
+      "pricingNotes": {
+        "zh": "抱石區$50/hr",
+        "text": "Bouldering area $50/hr"
+      },
+      "mrt": {
+        "zh": "捷運港墘站步行約10分鐘",
+        "text": "About a 10-minute walk from MRT Gangqian Station"
+      },
+      "parking": {
+        "zh": "運動中心停車場",
+        "text": "Sports center parking lot"
+      }
+    },
+    "titorock-yonghe": {
+      "description": {
+        "zh": "趣攀岩永和運動中心提供抱石與上攀服務。",
+        "text": "TitoRock Yonghe offers bouldering and lead climbing."
+      },
+      "notes": {
+        "zh": "平日17:00-18:00休息",
+        "text": "Closed for a break 17:00-18:00 on weekdays"
+      },
+      "pricingNotes": {
+        "zh": "計時制：尖峰$80/hr、離峰$50/hr",
+        "text": "Charged by the hour: peak $80/hr, off-peak $50/hr"
+      },
+      "mrt": {
+        "zh": "捷運頂溪站步行約10分鐘",
+        "text": "About a 10-minute walk from MRT Dingxi Station"
+      },
+      "parking": {
+        "zh": "運動中心停車場",
+        "text": "Sports center parking lot"
+      }
+    },
+    "camp4-beitou": {
+      "description": {
+        "zh": "Camp4攀岩館北投運動中心提供上攀服務。",
+        "text": "Camp4 Climbing Gym Beitou offers lead climbing."
+      },
+      "mrt": {
+        "zh": "捷運石牌站步行約10分鐘",
+        "text": "About a 10-minute walk from MRT Shipai Station"
+      },
+      "parking": {
+        "zh": "運動中心停車場",
+        "text": "Sports center parking lot"
+      }
+    },
+    "double8-dihua": {
+      "description": {
+        "zh": "double 8 岩究所位於大稻埕，採預約制入場。",
+        "text": "Double 8 Climbing Lab is located in Dadaocheng, reservation required."
+      },
+      "notes": {
+        "zh": "採預約制入場",
+        "text": "Entry by reservation only"
+      },
+      "mrt": {
+        "zh": "捷運大橋頭站步行約10分鐘",
+        "text": "About a 10-minute walk from MRT Daqiaotou Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "double8-y17": {
+      "description": {
+        "zh": "double 8-Y17 岩究所位於青少年發展處，採預約制入場。",
+        "text": "Double 8 Y17 is located at Youth Development Center, reservation required."
+      },
+      "notes": {
+        "zh": "採預約制入場，平日17:00-18:00休息，假日12:00-13:00休息",
+        "text": "Entry by reservation only; closed for a break 17:00-18:00 on weekdays and 12:00-13:00 on weekends and holidays"
+      },
+      "mrt": {
+        "zh": "捷運善導寺站步行約3分鐘",
+        "text": "About a 3-minute walk from MRT Shandao Temple Station"
+      },
+      "parking": {
+        "zh": "地下停車場",
+        "text": "Underground parking lot"
+      }
+    },
+    "passion-taoyuan": {
+      "description": {
+        "zh": "爬森攀岩館提供抱石與上攀服務。",
+        "text": "Passion Climbing Gym offers bouldering and lead climbing."
+      },
+      "notes": {
+        "zh": "當月壽星可免費入場一次",
+        "text": "Those with a birthday in the current month get one free entry"
+      },
+      "train": {
+        "zh": "桃園火車站轉公車約15分鐘",
+        "text": "About 15 minutes by bus from Taoyuan Railway Station"
+      },
+      "parking": {
+        "zh": "附近有停車場",
+        "text": "Parking available nearby"
+      }
+    },
+    "thousand-hands": {
+      "description": {
+        "zh": "千手抱石提供專業的抱石服務。",
+        "text": "Thousand Hands offers professional bouldering services."
+      },
+      "pricingNotes": {
+        "zh": "平日16:00前入場$280",
+        "text": "$280 for entry before 16:00 on weekdays"
+      },
+      "train": {
+        "zh": "桃園火車站轉公車約10分鐘",
+        "text": "About 10 minutes by bus from Taoyuan Railway Station"
+      },
+      "parking": {
+        "zh": "附近有停車場",
+        "text": "Parking available nearby"
+      }
+    },
+    "iclimb-chenggong": {
+      "description": {
+        "zh": "iClimb風城攀岩館成功館提供抱石與上攀服務。",
+        "text": "iClimb Hsinchu Chenggong offers bouldering and lead climbing."
+      },
+      "pricingNotes": {
+        "zh": "首次需入會費$150",
+        "text": "A $150 membership fee is required on the first visit"
+      },
+      "train": {
+        "zh": "高鐵新竹站轉公車約15分鐘",
+        "text": "About 15 minutes by bus from HSR Hsinchu Station"
+      },
+      "parking": {
+        "zh": "附設停車場",
+        "text": "On-site parking lot"
+      }
+    },
+    "iclimb-shengli": {
+      "description": {
+        "zh": "iClimb風城攀岩館勝利館提供抱石服務。",
+        "text": "iClimb Hsinchu Shengli offers bouldering services."
+      },
+      "pricingNotes": {
+        "zh": "離峰票(平日18:00前、假日19:00後)$299，首次需入會費$150",
+        "text": "Off-peak ticket (before 18:00 on weekdays, after 19:00 on weekends and holidays) $299; a $150 membership fee is required on the first visit"
+      },
+      "train": {
+        "zh": "高鐵新竹站轉公車約10分鐘",
+        "text": "About 10 minutes by bus from HSR Hsinchu Station"
+      },
+      "parking": {
+        "zh": "附設停車場",
+        "text": "On-site parking lot"
+      }
+    },
+    "babo-papak": {
+      "description": {
+        "zh": "BABO PAPAK攀岩登山訓練館提供抱石服務。",
+        "text": "BABO PAPAK offers bouldering services."
+      },
+      "pricingNotes": {
+        "zh": "平日離峰票(13:30-18:00)$250",
+        "text": "Weekday off-peak ticket (13:30-18:00) $250"
+      },
+      "train": {
+        "zh": "新竹火車站步行約10分鐘",
+        "text": "About a 10-minute walk from Hsinchu Railway Station"
+      },
+      "parking": {
+        "zh": "附近有停車場",
+        "text": "Parking available nearby"
+      }
+    },
+    "flow-boulder": {
+      "description": {
+        "zh": "心流抱石館(原小岩館內湖店)提供抱石服務。",
+        "text": "Flow Bouldering Gym (formerly Little Rock Neihu) offers bouldering services."
+      },
+      "notes": {
+        "zh": "2023.04.29開幕",
+        "text": "Opened 2023.04.29"
+      },
+      "mrt": {
+        "zh": "捷運港墘站步行約10分鐘",
+        "text": "About a 10-minute walk from MRT Gangqian Station"
+      },
+      "parking": {
+        "zh": "附近有收費停車場",
+        "text": "Paid parking available nearby"
+      }
+    },
+    "dapro-taichung": {
+      "description": {
+        "zh": "Dapro室內攀岩場是台中地區最大的攀岩館，提供抱石與上攀服務。",
+        "text": "Dapro Indoor Climbing is the largest climbing gym in Taichung."
+      },
+      "pricingNotes": {
+        "zh": "採會員制(入會費$300)",
+        "text": "Membership system (membership fee $300)"
+      },
+      "bus": {
+        "zh": "可搭乘公車至永春東七路站",
+        "text": "Accessible by bus to the Yongchun East 7th Road stop"
+      },
+      "parking": {
+        "zh": "附設停車場",
+        "text": "On-site parking lot"
+      }
+    },
+    "vb-taichung": {
+      "description": {
+        "zh": "攀吶進化館提供平價的抱石服務。",
+        "text": "VB Climbing Gym offers affordable bouldering services."
+      },
+      "train": {
+        "zh": "台中火車站轉公車約15分鐘",
+        "text": "About 15 minutes by bus from Taichung Railway Station"
+      },
+      "parking": {
+        "zh": "附近有停車場",
+        "text": "Parking available nearby"
+      }
+    },
+    "bplus-huanzhong": {
+      "description": {
+        "zh": "B-plus攀岩館提供平價的抱石服務。",
+        "text": "B-plus Climbing Gym offers affordable bouldering services."
+      },
+      "bus": {
+        "zh": "可搭乘公車至環中路站",
+        "text": "Accessible by bus to the Huanzhong Road stop"
+      },
+      "parking": {
+        "zh": "附近有停車場",
+        "text": "Parking available nearby"
+      }
+    },
+    "bplus-taiyuan": {
+      "description": {
+        "zh": "B-plus攀岩館太原店於2023年4月開幕。",
+        "text": "B-plus Climbing Gym Taiyuan opened in April 2023."
+      },
+      "notes": {
+        "zh": "2023.04.01開幕",
+        "text": "Opened 2023.04.01"
+      },
+      "bus": {
+        "zh": "可搭乘公車至建和路站",
+        "text": "Accessible by bus to the Jianhe Road stop"
+      },
+      "parking": {
+        "zh": "附近有停車場",
+        "text": "Parking available nearby"
+      }
+    },
+    "shabby-factory": {
+      "description": {
+        "zh": "破舊工廠提供抱石與上攀服務。",
+        "text": "Shabby Factory offers bouldering and lead climbing."
+      },
+      "train": {
+        "zh": "員林火車站步行約15分鐘",
+        "text": "About a 15-minute walk from Yuanlin Railway Station"
+      },
+      "parking": {
+        "zh": "附設停車場",
+        "text": "On-site parking lot"
+      }
+    },
+    "highfun-tainan": {
+      "description": {
+        "zh": "High Fun嗨翻綜合體能館提供抱石服務。",
+        "text": "High Fun Gym offers bouldering services."
+      },
+      "train": {
+        "zh": "台南火車站轉公車約15分鐘",
+        "text": "About 15 minutes by bus from Tainan Railway Station"
+      },
+      "parking": {
+        "zh": "附近有停車場",
+        "text": "Parking available nearby"
+      }
+    },
+    "bckh-kaohsiung": {
+      "description": {
+        "zh": "抱石基地提供專業的抱石服務。",
+        "text": "BCKH Bouldering Base offers professional bouldering services."
+      },
+      "mrt": {
+        "zh": "高雄捷運巨蛋站步行約15分鐘",
+        "text": "About a 15-minute walk from Kaohsiung MRT Kaohsiung Arena Station"
+      },
+      "parking": {
+        "zh": "附近有停車場",
+        "text": "Parking available nearby"
+      }
+    },
+    "boulder-space-zuoying": {
+      "description": {
+        "zh": "圓石空間攀岩館左營店位於環球百貨內，提供抱石與上攀服務。",
+        "text": "Boulder Space Zuoying is located in Global Mall, offering bouldering and lead climbing."
+      },
+      "train": {
+        "zh": "高鐵左營站直達",
+        "text": "Directly connected to HSR Zuoying Station"
+      },
+      "parking": {
+        "zh": "環球百貨停車場",
+        "text": "Global Mall parking lot"
+      }
+    },
+    "btopia-kaohsiung": {
+      "description": {
+        "zh": "B-TOPIA攀岩館提供抱石服務。",
+        "text": "B-TOPIA Climbing Gym offers bouldering services."
+      },
+      "mrt": {
+        "zh": "高雄捷運草衙站步行約10分鐘",
+        "text": "About a 10-minute walk from Kaohsiung MRT Caoya Station"
+      },
+      "parking": {
+        "zh": "附近有停車場",
+        "text": "Parking available nearby"
+      }
+    },
+    "jiutao-yilan": {
+      "description": {
+        "zh": "久淘攀岩館宜大殿是宜蘭地區的專業攀岩館。",
+        "text": "Jiutao Climbing Gym Yilan is a professional climbing facility in Yilan."
+      },
+      "train": {
+        "zh": "宜蘭火車站步行約15分鐘",
+        "text": "About a 15-minute walk from Yilan Railway Station"
+      },
+      "parking": {
+        "zh": "附近有停車位",
+        "text": "Parking spaces available nearby"
+      }
+    },
+    "wuyan-yilan": {
+      "description": {
+        "zh": "舞岩抱石攀岩館提供抱石服務。",
+        "text": "Wuyan Bouldering Gym offers bouldering services."
+      },
+      "train": {
+        "zh": "羅東火車站轉計程車約15分鐘",
+        "text": "About 15 minutes by taxi from Luodong Railway Station"
+      },
+      "parking": {
+        "zh": "附設停車場",
+        "text": "On-site parking lot"
+      }
+    },
+    "xiaowo-hualien": {
+      "description": {
+        "zh": "小窩活動共享空間提供抱石與上攀服務。",
+        "text": "Xiaowo Activity Space offers bouldering and lead climbing."
+      },
+      "notes": {
+        "zh": "其餘時段5人以上可預約",
+        "text": "Other time slots can be booked for groups of 5 or more"
+      },
+      "train": {
+        "zh": "花蓮火車站轉計程車約10分鐘",
+        "text": "About 10 minutes by taxi from Hualien Railway Station"
+      },
+      "parking": {
+        "zh": "附近有停車位",
+        "text": "Parking spaces available nearby"
+      }
+    },
+    "hejiang-taitung": {
+      "description": {
+        "zh": "禾匠攀岩是台東地區的攀岩館，採預約制。",
+        "text": "Hejiang Climbing is a climbing gym in Taitung, reservation required."
+      },
+      "notes": {
+        "zh": "預約制",
+        "text": "By reservation only"
+      },
+      "train": {
+        "zh": "台東火車站轉計程車約10分鐘",
+        "text": "About 10 minutes by taxi from Taitung Railway Station"
+      },
+      "parking": {
+        "zh": "附近有停車位",
+        "text": "Parking spaces available nearby"
+      }
+    },
+    "highfun-rende": {
+      "description": {
+        "zh": "嗨翻攀岩館仁德店是嗨翻綜合體能館的分店，提供上攀和抱石服務。",
+        "text": "High Fun Rende is a branch of High Fun Gym, offering lead climbing and bouldering services."
+      },
+      "notes": {
+        "zh": "星期三公休",
+        "text": "Closed on Wednesdays"
+      },
+      "parking": {
+        "zh": "附近有停車位",
+        "text": "Parking spaces available nearby"
+      }
+    }
+  }
+}

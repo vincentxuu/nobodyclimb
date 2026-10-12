@@ -21,6 +21,7 @@ import {
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { useBiographyTagText } from '@/lib/hooks/useBiographyTagText'
 import type { TagDimension } from '@/lib/types/biography-v2'
 import { cn } from '@/lib/utils'
 import { TagCard } from './TagChip'
@@ -72,6 +73,7 @@ export function TagSelector({
   className,
 }: TagSelectorProps) {
   const t = useTranslations('BiographyPage')
+  const { dimensionName, dimensionDescription } = useBiographyTagText()
   const [isExpanded, setIsExpanded] = useState(defaultExpanded)
   const isMultiSelect = dimension.selection_mode === 'multiple'
 
@@ -114,7 +116,9 @@ export function TagSelector({
               <Tag size={20} className="text-[#3F3D3D]" />
             )
           })()}
-          <span className="font-medium text-[#1B1A1A]">{dimension.name}</span>
+          <span className="font-medium text-[#1B1A1A]">
+            {dimensionName(dimension.id, dimension.name)}
+          </span>
           <span className="text-xs text-[#6D6C6C] px-2 py-0.5 bg-[#EBEAEA] rounded-full">
             {isMultiSelect ? t('multiSelect') : t('singleSelect')}
           </span>
@@ -136,7 +140,9 @@ export function TagSelector({
       {isExpanded && (
         <div className="p-4 space-y-3">
           {dimension.description && (
-            <p className="text-sm text-[#6D6C6C] mb-4">{dimension.description}</p>
+            <p className="text-sm text-[#6D6C6C] mb-4">
+              {dimensionDescription(dimension.id, dimension.description)}
+            </p>
           )}
 
           {/* Tags Grid */}

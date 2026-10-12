@@ -32,10 +32,12 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
 import { userService } from '@/lib/api/services'
+import { useImageErrorMessage } from '@/lib/hooks/useImageErrorMessage'
 import { BiographyInput } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { generateUniqueId } from '@/lib/utils/biography-ui'
 import { processImage, validateImageType } from '@/lib/utils/image'
+import { useRouteTypeLabel } from './shared/useRouteTypeLabel'
 
 /**
  * 帶 ID 的列表項目
@@ -96,6 +98,8 @@ export function BiographyWizard({
   className,
 }: BiographyWizardProps) {
   const t = useTranslations('BiographyEditor')
+  const imageErrorMessage = useImageErrorMessage()
+  const routeTypeLabel = useRouteTypeLabel()
   const { toast } = useToast()
   const [currentStep, setCurrentStep] = useState<WizardStep>(1)
   const [formData, setFormData] = useState<Partial<BiographyInput>>(initialData)
@@ -180,7 +184,7 @@ export function BiographyWizard({
         }
       } catch (error) {
         console.error('Failed to upload avatar:', error)
-        const message = error instanceof Error ? error.message : t('wizardAvatarUploadErrorDesc')
+        const message = imageErrorMessage(error, t('wizardAvatarUploadErrorDesc'))
         toast({
           title: t('wizardAvatarUploadFailed'),
           description: message,
@@ -532,7 +536,7 @@ export function BiographyWizard({
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         )}
                       >
-                        {method}
+                        {routeTypeLabel(method)}
                       </button>
                     ))}
                   </div>
@@ -556,7 +560,7 @@ export function BiographyWizard({
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         )}
                       >
-                        {type}
+                        {routeTypeLabel(type)}
                       </button>
                     ))}
                   </div>
@@ -580,7 +584,7 @@ export function BiographyWizard({
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         )}
                       >
-                        {style}
+                        {routeTypeLabel(style)}
                       </button>
                     ))}
                   </div>

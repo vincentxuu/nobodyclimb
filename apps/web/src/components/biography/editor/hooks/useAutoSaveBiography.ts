@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDebouncedCallback } from '@/lib/hooks/useDebouncedCallback'
 import type { BiographyV2 } from '@/lib/types/biography-v2'
@@ -26,6 +27,7 @@ export function useAutoSaveBiography({
   setSaved,
   setError,
 }: UseAutoSaveBiographyOptions) {
+  const tm = useTranslations('BiographyMisc')
   // 本地草稿
   const [localBiography, setLocalBiography] = useState(biography)
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
@@ -124,11 +126,11 @@ export function useAutoSaveBiography({
           }
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : '儲存失敗'
+        const message = err instanceof Error ? err.message : tm('saveFailed')
         const isTimeoutError = message.toLowerCase().includes('timeout')
 
         if (isMountedRef.current) {
-          setError(isTimeoutError ? '儲存逾時，已暫停自動重試，請稍後再試' : message)
+          setError(isTimeoutError ? tm('autoSaveTimeout') : message)
         }
 
         // 自動重試（最多 3 次）

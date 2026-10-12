@@ -1,4 +1,5 @@
 import { ArrowRightCircle } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import * as React from 'react'
 import { cn } from '@/lib/utils'
 
@@ -77,22 +78,26 @@ const CardTitle = React.forwardRef<HTMLDivElement, CardTitleProps>(
       ...props
     },
     ref
-  ) => (
-    <div ref={ref} className={cn('mb-3 flex items-center justify-between', className)} {...props}>
-      <div className="space-y-1">
-        <h3 className="text-2xl font-medium leading-tight text-[#1B1A1A]">{title}</h3>
-        {experience && (
-          <div className="flex items-center gap-2 text-sm text-[#535353]">
-            <span>攀岩資歷</span>
-            <div className="h-4 w-0.5 bg-[#FAF40A]"></div>
-            <span>{experience}</span>
-          </div>
-        )}
-      </div>
+  ) => {
+    const t = useTranslations('SharedUI')
 
-      {showArrow && <ArrowRightCircle size={22} className="text-[#1B1A1A]" />}
-    </div>
-  )
+    return (
+      <div ref={ref} className={cn('mb-3 flex items-center justify-between', className)} {...props}>
+        <div className="space-y-1">
+          <h3 className="text-2xl font-medium leading-tight text-[#1B1A1A]">{title}</h3>
+          {experience && (
+            <div className="flex items-center gap-2 text-sm text-[#535353]">
+              <span>{t('climbingExperience')}</span>
+              <div className="h-4 w-0.5 bg-[#FAF40A]"></div>
+              <span>{experience}</span>
+            </div>
+          )}
+        </div>
+
+        {showArrow && <ArrowRightCircle size={22} className="text-[#1B1A1A]" />}
+      </div>
+    )
+  }
 )
 CardTitle.displayName = 'CardTitle'
 

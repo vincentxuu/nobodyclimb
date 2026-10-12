@@ -4,11 +4,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Sparkles, X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import React, { useState } from 'react'
 import { evolutionApi } from '@/lib/api/evolution'
 import { useEvolutionNotification } from '@/lib/hooks/useEvolutionNotification'
 
 export default function EvolutionNotificationBanner() {
+  const t = useTranslations('ProfileEvolution')
   const router = useRouter()
   const queryClient = useQueryClient()
   const [dismissed, setDismissed] = useState(false)
@@ -55,21 +57,19 @@ export default function EvolutionNotificationBanner() {
             </div>
             <div>
               <p className="text-sm font-medium text-emerald-800">
-                {evolution?.from_type ? (
-                  <>
-                    你的攀岩人格已演化！從{' '}
-                    <span className="font-semibold">{evolution.from_type}</span> 變為{' '}
-                    <span className="font-semibold">{evolution.to_type}</span>
-                  </>
-                ) : (
-                  <>
-                    你的攀岩人格已計算完成：
-                    <span className="font-semibold">{evolution?.to_type}</span>
-                  </>
-                )}
+                {evolution?.from_type
+                  ? t.rich('bannerEvolved', {
+                      from: evolution.from_type,
+                      to: evolution.to_type,
+                      b: (chunks) => <span className="font-semibold">{chunks}</span>,
+                    })
+                  : t.rich('bannerCalculated', {
+                      to: evolution?.to_type ?? '',
+                      b: (chunks) => <span className="font-semibold">{chunks}</span>,
+                    })}
               </p>
               <p className="mt-0.5 flex items-center gap-1 text-xs text-emerald-600">
-                點擊查看演化詳情 <ArrowRight className="h-3 w-3" />
+                {t('bannerViewDetails')} <ArrowRight className="h-3 w-3" />
               </p>
             </div>
           </div>

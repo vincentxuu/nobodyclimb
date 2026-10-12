@@ -12,6 +12,7 @@ import {
   Sparkles,
   X,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 import { useQuestions } from '@/lib/hooks/useQuestions'
 import type { Question, StoryInput } from './questions'
@@ -37,11 +38,15 @@ function AnsweredStories({
   onSelectQuestion: (_question: Question) => void
   onRemoveStory: (_questionId: string) => void
 }) {
+  const t = useTranslations('AnonymousShare')
+
   if (stories.length === 0) return null
 
   return (
     <section className="mb-8">
-      <h2 className="mb-3 text-sm font-medium text-gray-500">已填寫 ({stories.length})</h2>
+      <h2 className="mb-3 text-sm font-medium text-gray-500">
+        {t('answeredCount', { count: stories.length })}
+      </h2>
       <div className="space-y-2">
         {stories.map((story) => {
           const q = allQuestions.find((q) => q.id === story.question_id)
@@ -162,6 +167,7 @@ function QuestionSection({
  * 預設顯示一題，點擊展開更多
  */
 export function QuestionList({ stories, onSelectQuestion, onRemoveStory }: QuestionListProps) {
+  const t = useTranslations('AnonymousShare')
   const [showMore, setShowMore] = useState(false)
   const { data: questionsData, isLoading } = useQuestions()
   const answeredIds = new Set(stories.map((s) => s.question_id))
@@ -169,8 +175,11 @@ export function QuestionList({ stories, onSelectQuestion, onRemoveStory }: Quest
   // 從 API 資料轉換問題格式
   const questions = useMemo(() => {
     if (!questionsData) return null
-    return convertApiQuestionsToQuestions(questionsData)
-  }, [questionsData])
+    return convertApiQuestionsToQuestions(questionsData, {
+      story: t('storyPlaceholder'),
+      answer: t('answerPlaceholder'),
+    })
+  }, [questionsData, t])
 
   // 載入中狀態
   if (isLoading || !questions) {
@@ -202,7 +211,7 @@ export function QuestionList({ stories, onSelectQuestion, onRemoveStory }: Quest
       {!shouldShowMore && defaultQuestion && !isDefaultAnswered && (
         <section className="mb-6">
           <div className="mb-3">
-            <h2 className="text-sm font-medium text-gray-700">從這題開始</h2>
+            <h2 className="text-sm font-medium text-gray-700">{t('startHere')}</h2>
           </div>
           <QuestionButton
             question={defaultQuestion}
@@ -217,8 +226,8 @@ export function QuestionList({ stories, onSelectQuestion, onRemoveStory }: Quest
         <>
           {/* 核心故事 */}
           <QuestionSection
-            title="核心故事"
-            subtitle="深度分享"
+            title={t('coreStoriesTitle')}
+            subtitle={t('coreStoriesSubtitle')}
             icon={<BookOpen className="h-4 w-4 text-[#ffe70c]" />}
             questions={questions.coreStories}
             answeredIds={answeredIds}
@@ -228,8 +237,8 @@ export function QuestionList({ stories, onSelectQuestion, onRemoveStory }: Quest
 
           {/* 一句話 */}
           <QuestionSection
-            title="一句話"
-            subtitle="快速回答"
+            title={t('oneLinersTitle')}
+            subtitle={t('oneLinersSubtitle')}
             icon={<MessageCircle className="h-4 w-4 text-[#1B1A1A]" />}
             questions={questions.oneLiners}
             answeredIds={answeredIds}
@@ -239,8 +248,8 @@ export function QuestionList({ stories, onSelectQuestion, onRemoveStory }: Quest
 
           {/* 深度故事 */}
           <QuestionSection
-            title="更多故事"
-            subtitle="選填"
+            title={t('moreStoriesTitle')}
+            subtitle={t('moreStoriesSubtitle')}
             icon={<Sparkles className="h-4 w-4 text-[#ffe70c]" />}
             questions={questions.stories}
             answeredIds={answeredIds}
@@ -257,7 +266,7 @@ export function QuestionList({ stories, onSelectQuestion, onRemoveStory }: Quest
           className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-gray-300 py-4 text-sm text-gray-500 transition-colors hover:border-gray-400 hover:text-gray-700"
         >
           <ChevronDown className="h-4 w-4" />
-          想寫更多
+          {t('writeMore')}
         </button>
       )}
     </>

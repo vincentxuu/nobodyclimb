@@ -2,6 +2,7 @@ import { getPersonalityType, PERSONALITY_TYPES } from '@nobodyclimb/constants'
 import type { PersonalityTypeCode } from '@nobodyclimb/types'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 import { TrainingPageClient } from '@/components/quiz/training/TrainingPageClient'
 import { SITE_NAME } from '@/lib/constants'
 
@@ -13,21 +14,25 @@ export function generateStaticParams() {
 }
 
 type Props = {
-  params: Promise<{ type: string }>
+  params: Promise<{ locale: string; type: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { type } = await params
+  const { locale, type } = await params
   const code = type.toUpperCase() as PersonalityTypeCode
   const personality = getPersonalityType(code)
+  const t = await getTranslations({ locale, namespace: 'Metadata.quizTraining' })
 
   if (!personality) {
-    return { title: '找不到訓練計畫' }
+    return { title: t('notFound') }
   }
 
+  const tPersonality = await getTranslations({ locale, namespace: 'Quiz.personalities' })
+  const name = tPersonality(`${code}.name`)
+
   return {
-    title: `${personality.nameZh} 訓練計畫 — ${SITE_NAME}`,
-    description: `${personality.nameZh}的 4 週攀岩訓練計畫，透過「訓練你的反面」核心理念，成為更全面的攀岩者。`,
+    title: t('title', { name, siteName: SITE_NAME }),
+    description: t('description', { name }),
   }
 }
 

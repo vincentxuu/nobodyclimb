@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Check, Image as ImageIcon, Instagram, Plus, X, Youtube } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
@@ -9,6 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { type BucketListCompleteSchema, bucketListCompleteSchema } from '@/lib/schemas/bucket-list'
+import { useValidationMessage } from '@/lib/schemas/useValidationMessage'
 import type { BucketListItem } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
@@ -31,6 +33,8 @@ export function BucketListCompletionForm({
   isLoading = false,
   className,
 }: BucketListCompletionFormProps) {
+  const t = useTranslations('BucketListForm')
+  const tv = useValidationMessage()
   const {
     register,
     handleSubmit,
@@ -66,7 +70,7 @@ export function BucketListCompletionForm({
     // 從 URL 提取影片 ID
     const videoId = extractYoutubeVideoId(newYoutubeUrl)
     if (!videoId) {
-      alert('請輸入有效的 YouTube 影片網址')
+      alert(t('invalidYoutubeUrl'))
       return
     }
 
@@ -96,7 +100,7 @@ export function BucketListCompletionForm({
     // 從 URL 提取 shortcode
     const shortcode = extractInstagramShortcode(newInstagramUrl)
     if (!shortcode) {
-      alert('請輸入有效的 Instagram 貼文網址')
+      alert(t('invalidInstagramUrl'))
       return
     }
 
@@ -125,7 +129,7 @@ export function BucketListCompletionForm({
           <Check className="h-6 w-6 text-[#1B1A1A]" />
         </div>
         <div>
-          <h3 className="font-medium text-[#1B1A1A]">恭喜完成目標！</h3>
+          <h3 className="font-medium text-[#1B1A1A]">{t('completionCongrats')}</h3>
           <p className="text-sm text-gray-600">{item.title}</p>
         </div>
       </div>
@@ -133,72 +137,66 @@ export function BucketListCompletionForm({
       {/* 完成故事 */}
       <div>
         <Label htmlFor="completion_story">
-          完成故事
-          <span className="ml-1 text-sm font-normal text-gray-500">（選填）</span>
+          {t('completionStoryLabel')}
+          <span className="ml-1 text-sm font-normal text-gray-500">{t('optional')}</span>
         </Label>
-        <p className="mb-2 text-sm text-gray-500">
-          分享你完成這個目標的過程和心得，讓其他岩友也能從中學習
-        </p>
+        <p className="mb-2 text-sm text-gray-500">{t('completionStoryHint')}</p>
         <Textarea
           id="completion_story"
-          placeholder="例如：終於在這個週末完成了這條期待已久的路線！花了整整三個月準備..."
+          placeholder={t('completionStoryPlaceholder')}
           {...register('completion_story')}
           className="min-h-[150px]"
         />
         {errors.completion_story && (
-          <p className="mt-1 text-sm text-red-500">{errors.completion_story.message}</p>
+          <p className="mt-1 text-sm text-red-500">{tv(errors.completion_story.message)}</p>
         )}
       </div>
 
       {/* 心理層面心得 */}
       <div>
         <Label htmlFor="psychological_insights">
-          💭 心理層面
-          <span className="ml-1 text-sm font-normal text-gray-500">（選填）</span>
+          💭 {t('psychologicalLabel')}
+          <span className="ml-1 text-sm font-normal text-gray-500">{t('optional')}</span>
         </Label>
-        <p className="mb-2 text-sm text-gray-500">
-          在完成這個目標的過程中，你在心理上有什麼感受或成長？
-        </p>
+        <p className="mb-2 text-sm text-gray-500">{t('psychologicalHint')}</p>
         <Textarea
           id="psychological_insights"
-          placeholder="例如：前兩次失敗讓我很沮喪，但教練說這是正常的，重要的是從每次嘗試中學習..."
+          placeholder={t('psychologicalPlaceholder')}
           {...register('psychological_insights')}
           className="min-h-[100px]"
         />
         {errors.psychological_insights && (
-          <p className="mt-1 text-sm text-red-500">{errors.psychological_insights.message}</p>
+          <p className="mt-1 text-sm text-red-500">{tv(errors.psychological_insights.message)}</p>
         )}
       </div>
 
       {/* 技術層面心得 */}
       <div>
         <Label htmlFor="technical_insights">
-          🧗 技術層面
-          <span className="ml-1 text-sm font-normal text-gray-500">（選填）</span>
+          🧗 {t('technicalLabel')}
+          <span className="ml-1 text-sm font-normal text-gray-500">{t('optional')}</span>
         </Label>
-        <p className="mb-2 text-sm text-gray-500">
-          有什麼技術上的心得可以分享？（如動作技巧、路線解析、裝備選擇等）
-        </p>
+        <p className="mb-2 text-sm text-gray-500">{t('technicalHint')}</p>
         <Textarea
           id="technical_insights"
-          placeholder="例如：這條路線的 crux 在第三段，需要用側拉配合高舉腳，放保護點要特別注意..."
+          placeholder={t('technicalPlaceholder')}
           {...register('technical_insights')}
           className="min-h-[100px]"
         />
         {errors.technical_insights && (
-          <p className="mt-1 text-sm text-red-500">{errors.technical_insights.message}</p>
+          <p className="mt-1 text-sm text-red-500">{tv(errors.technical_insights.message)}</p>
         )}
       </div>
 
       {/* 媒體附件 */}
       <div className="space-y-4">
-        <Label>相關媒體（選填）</Label>
+        <Label>{t('mediaLabel')}</Label>
 
         {/* YouTube 影片 */}
         <div className="rounded-lg border p-4">
           <div className="flex items-center gap-2 text-sm font-medium text-[#1B1A1A]">
             <Youtube className="h-4 w-4 text-red-500" />
-            YouTube 影片
+            {t('youtubeTitle')}
           </div>
 
           {/* 已新增的影片 */}
@@ -227,7 +225,7 @@ export function BucketListCompletionForm({
             <Input
               value={newYoutubeUrl}
               onChange={(e) => setNewYoutubeUrl(e.target.value)}
-              placeholder="貼上 YouTube 影片網址"
+              placeholder={t('youtubePlaceholder')}
               className="flex-1"
             />
             <Button type="button" variant="secondary" size="sm" onClick={addYoutubeVideo}>
@@ -240,7 +238,7 @@ export function BucketListCompletionForm({
         <div className="rounded-lg border p-4">
           <div className="flex items-center gap-2 text-sm font-medium text-[#1B1A1A]">
             <Instagram className="h-4 w-4 text-pink-500" />
-            Instagram 貼文
+            {t('instagramTitle')}
           </div>
 
           {/* 已新增的貼文 */}
@@ -269,7 +267,7 @@ export function BucketListCompletionForm({
             <Input
               value={newInstagramUrl}
               onChange={(e) => setNewInstagramUrl(e.target.value)}
-              placeholder="貼上 Instagram 貼文網址"
+              placeholder={t('instagramPlaceholder')}
               className="flex-1"
             />
             <Button type="button" variant="secondary" size="sm" onClick={addInstagramPost}>
@@ -281,17 +279,17 @@ export function BucketListCompletionForm({
         {/* 照片上傳提示 */}
         <div className="rounded-lg border border-dashed p-4 text-center text-gray-500">
           <ImageIcon className="mx-auto h-8 w-8 text-gray-400" />
-          <p className="mt-2 text-sm">照片上傳功能即將推出</p>
+          <p className="mt-2 text-sm">{t('photoComingSoon')}</p>
         </div>
       </div>
 
       {/* 按鈕 */}
       <div className="flex justify-end gap-3 border-t pt-4">
         <Button type="button" variant="ghost" onClick={onCancel} disabled={isLoading}>
-          稍後再填
+          {t('fillLater')}
         </Button>
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? '儲存中...' : '完成並儲存'}
+          {isLoading ? t('saving') : t('completeAndSave')}
         </Button>
       </div>
     </form>

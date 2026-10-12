@@ -22,6 +22,13 @@
     "typecheck": "pnpm -r --if-present run typecheck",
     "format": "biome format --write .",
     "format:check": "biome format .",
+    "blog:article": "node scripts/blog/article.mjs",
+    "blog:check": "node scripts/blog/check-all.mjs",
+    "blog:test": "node --test scripts/blog/*.test.mjs",
+    "blog:baseline": "node scripts/blog/capture-baseline.mjs",
+    "blog:validate-local": "node scripts/blog/validate-local.mjs",
+    "blog:check-local": "node scripts/blog/check-local.mjs",
+    "blog:translations": "node scripts/blog/translation-manifest.mjs --write",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "prepare": "husky"
@@ -30,8 +37,10 @@
     "@biomejs/biome": "^2.4.9",
     "husky": "^9.1.7",
     "lint-staged": "^17.5.1",
+    "marked": "16.4.2",
     "turbo": "^2.3.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "yaml": "2.9.1"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,css}": "biome check --fix --no-errors-on-unmatched"

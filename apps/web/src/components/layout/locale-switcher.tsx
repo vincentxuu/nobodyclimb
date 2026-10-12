@@ -41,7 +41,8 @@ export function LocaleSwitcher() {
           <span className="hidden sm:inline">{localeLabels[locale]}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[100px]">
+      {/* z-index 需高於 navbar 的 z-[999]，否則選單頂端會被 header 蓋住 */}
+      <DropdownMenuContent align="end" className="z-[1000] min-w-[100px]">
         {routing.locales.map((loc) => (
           <DropdownMenuItem
             key={loc}

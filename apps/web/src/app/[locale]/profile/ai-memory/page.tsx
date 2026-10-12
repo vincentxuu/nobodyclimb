@@ -2,9 +2,8 @@
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { formatDistanceToNow } from 'date-fns'
-import { zhTW } from 'date-fns/locale'
 import { Brain, Trash2 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 import ProfilePageLayout from '@/components/profile/layout/ProfilePageLayout'
 import ProfilePageTitle from '@/components/profile/ProfilePageTitle'
@@ -14,6 +13,7 @@ import { ConfirmDialog } from '@/components/ui/confirm-dialog'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import { useToast } from '@/components/ui/use-toast'
 import apiClient from '@/lib/api/client'
+import { getDateFnsLocale } from '@/lib/date-locale'
 
 interface UserMemory {
   id: string
@@ -46,6 +46,8 @@ const MEMORY_KEY_LABEL_KEYS: Record<string, string> = {
 
 export default function AiMemoryPage() {
   const t = useTranslations('ProfilePage')
+  const locale = useLocale()
+  const tMisc = useTranslations('ProfilePagesMisc')
   const queryClient = useQueryClient()
   const { toast } = useToast()
   const [deletingId, setDeletingId] = useState<string | null>(null)
@@ -104,7 +106,7 @@ export default function AiMemoryPage() {
             <Brain className="mx-auto mb-3 h-8 w-8 text-gray-300" />
             <p className="text-sm text-gray-400">{t('aiMemoryEmpty')}</p>
             <p className="mx-auto mt-2 max-w-xs text-xs text-gray-300">
-              和 AI 助理聊天時，它會自動記住你的攀岩偏好和習慣。試試告訴它你喜歡的岩場或目標難度！
+              {tMisc('aiMemoryEmptyHint')}
             </p>
           </div>
         ) : (
@@ -113,11 +115,17 @@ export default function AiMemoryPage() {
             <div className="mb-4 flex flex-wrap items-center gap-2">
               {(
                 [
-                  { key: 'all', label: `全部 ${memories.length}` },
-                  { key: 'preference', label: `偏好 ${stats.preference}` },
-                  { key: 'behavior', label: `行為 ${stats.behavior}` },
-                  { key: 'fact', label: `事實 ${stats.fact}` },
-                ] as const
+                  { key: 'all', label: tMisc('aiMemoryFilterAll', { count: memories.length }) },
+                  {
+                    key: 'preference',
+                    label: tMisc('aiMemoryFilterPreference', { count: stats.preference }),
+                  },
+                  {
+                    key: 'behavior',
+                    label: tMisc('aiMemoryFilterBehavior', { count: stats.behavior }),
+                  },
+                  { key: 'fact', label: tMisc('aiMemoryFilterFact', { count: stats.fact }) },
+                ] satisfies { key: 'all' | 'preference' | 'behavior' | 'fact'; label: string }[]
               ).map(({ key, label }) => (
                 <button
                   key={key}
@@ -135,7 +143,7 @@ export default function AiMemoryPage() {
 
             {filteredMemories.length === 0 ? (
               <div className="rounded-lg border border-dashed border-gray-200 py-8 text-center">
-                <p className="text-sm text-gray-400">此分類沒有記憶</p>
+                <p className="text-sm text-gray-400">{tMisc('aiMemoryFilterEmpty')}</p>
               </div>
             ) : (
               <ul className="space-y-3">
@@ -168,7 +176,7 @@ export default function AiMemoryPage() {
                         {t('memoryUpdated', {
                           time: formatDistanceToNow(new Date(memory.updated_at), {
                             addSuffix: true,
-                            locale: zhTW,
+                            locale: getDateFnsLocale(locale),
                           }),
                         })}
                       </p>

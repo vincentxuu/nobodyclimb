@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import * as React from 'react'
 import { cn } from '@/lib/utils'
 
@@ -9,6 +10,7 @@ interface MessageScrollerProps extends React.ComponentProps<'div'> {
 
 const MessageScroller = React.forwardRef<HTMLDivElement, MessageScrollerProps>(
   ({ className, autoScroll = true, children, ...props }, ref) => {
+    const t = useTranslations('SharedUI')
     const innerRef = React.useRef<HTMLDivElement>(null)
     const [isAtBottom, setIsAtBottom] = React.useState(true)
 
@@ -43,7 +45,7 @@ const MessageScroller = React.forwardRef<HTMLDivElement, MessageScrollerProps>(
             onClick={scrollToBottom}
             className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border bg-background px-3 py-1.5 text-xs shadow-md transition-colors hover:bg-accent"
           >
-            ↓ 捲動到底部
+            ↓ {t('scrollToBottom')}
           </button>
         )}
       </div>

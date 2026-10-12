@@ -100,7 +100,8 @@ export function useContentClaim(): ContentClaimApi {
           }
         }
 
-        return { success: false, error: '認領失敗' }
+        // 不帶訊息，由呼叫端以目前語系的預設文字顯示
+        return { success: false }
       } catch (error: any) {
         if (error.response?.status === 409) {
           // 用戶已有人物誌
@@ -112,7 +113,7 @@ export function useContentClaim(): ContentClaimApi {
         }
         return {
           success: false,
-          error: error.response?.data?.error || '認領失敗',
+          error: error.response?.data?.error,
         }
       }
     },
@@ -140,11 +141,11 @@ export function useContentClaim(): ContentClaimApi {
         }
       }
 
-      return { success: false, error: '合併失敗' }
+      return { success: false }
     } catch (error: any) {
       return {
         success: false,
-        error: error.response?.data?.error || '合併失敗',
+        error: error.response?.data?.error,
       }
     }
   }, [])

@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import {
   Select,
@@ -19,14 +20,16 @@ const ChannelFilter: React.FC<ChannelFilterProps> = ({
   selectedChannel,
   onChannelChange,
 }) => {
+  const t = useTranslations('VideosFilter')
+
   return (
     <div className="w-full md:w-64">
       <Select value={selectedChannel} onValueChange={onChannelChange}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="選擇頻道" />
+          <SelectValue placeholder={t('channelPlaceholder')} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">全部頻道</SelectItem>
+          <SelectItem value="all">{t('allChannels')}</SelectItem>
           {channels.map((channel) => (
             <SelectItem key={channel} value={channel}>
               {channel}

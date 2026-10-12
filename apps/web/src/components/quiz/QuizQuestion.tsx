@@ -3,20 +3,21 @@
 import type { QuizQuestion as QuizQuestionType } from '@nobodyclimb/types'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
-const AXIS_COLORS: Record<string, { bg: string; accent: string; label: string }> = {
-  body: { bg: 'from-red-50/60 to-orange-50/40', accent: '#E84545', label: '身體風格' },
-  motive: { bg: 'from-amber-50/60 to-yellow-50/40', accent: '#F7B731', label: '攀爬動機' },
-  mind: { bg: 'from-emerald-50/60 to-teal-50/40', accent: '#27AE60', label: '心理模式' },
+const AXIS_COLORS: Record<string, { bg: string; accent: string }> = {
+  body: { bg: 'from-red-50/60 to-orange-50/40', accent: '#E84545' },
+  motive: { bg: 'from-amber-50/60 to-yellow-50/40', accent: '#F7B731' },
+  mind: { bg: 'from-emerald-50/60 to-teal-50/40', accent: '#27AE60' },
 }
 
 const LIKERT_OPTIONS = [
-  { value: 1, label: '非常不同意', emoji: '😐' },
-  { value: 2, label: '不同意', emoji: '🤔' },
-  { value: 3, label: '普通', emoji: '😶' },
-  { value: 4, label: '同意', emoji: '😊' },
-  { value: 5, label: '非常同意', emoji: '🔥' },
-]
+  { value: 1, emoji: '😐' },
+  { value: 2, emoji: '🤔' },
+  { value: 3, emoji: '😶' },
+  { value: 4, emoji: '😊' },
+  { value: 5, emoji: '🔥' },
+] as const
 
 interface Props {
   question: QuizQuestionType
@@ -27,7 +28,11 @@ interface Props {
 }
 
 export function QuizQuestion({ question, selectedValue, onAnswer, onPrev, questionIndex }: Props) {
+  const t = useTranslations('Quiz')
   const axisStyle = AXIS_COLORS[question.axis] || AXIS_COLORS.body
+  // 題目文字以題目 id 對應訊息檔；查不到時回退為 constants 內的繁中原文
+  const questionKey = `questions.${question.id}` as Parameters<typeof t>[0]
+  const questionText = t.has(questionKey) ? t(questionKey) : question.textZh
 
   return (
     <AnimatePresence mode="wait">
@@ -47,12 +52,12 @@ export function QuizQuestion({ question, selectedValue, onAnswer, onPrev, questi
               className="inline-block h-1.5 w-1.5 rounded-full"
               style={{ backgroundColor: axisStyle.accent }}
             />
-            {axisStyle.label}
+            {t(`axisLabels.${question.axis}`)}
           </span>
         </div>
 
         <p className="mb-8 text-center text-xl font-semibold leading-relaxed text-gray-900 md:text-2xl">
-          {question.textZh}
+          {questionText}
         </p>
 
         <div className="space-y-2.5">
@@ -76,7 +81,7 @@ export function QuizQuestion({ question, selectedValue, onAnswer, onPrev, questi
                 }
               >
                 <span className="text-lg">{option.emoji}</span>
-                <span>{option.label}</span>
+                <span>{t(`likert.${option.value}`)}</span>
               </motion.button>
             )
           })}
@@ -89,7 +94,7 @@ export function QuizQuestion({ question, selectedValue, onAnswer, onPrev, questi
             className="mt-8 flex items-center gap-1 text-sm text-gray-400 transition-colors hover:text-gray-600"
           >
             <ChevronLeft className="h-4 w-4" />
-            上一題
+            {t('prevQuestion')}
           </motion.button>
         )}
       </motion.div>

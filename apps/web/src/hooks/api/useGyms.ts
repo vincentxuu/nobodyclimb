@@ -3,6 +3,7 @@
  */
 
 import { useQuery } from '@tanstack/react-query'
+import { useLocale } from 'next-intl'
 import {
   adaptGymToDetail,
   adaptGymToListItem,
@@ -11,6 +12,7 @@ import {
   getRelatedGymsFromList,
 } from '@/lib/adapters/gym-adapter'
 import { gymService } from '@/lib/api/services'
+import { loadGymOverlays, localizeGymDetail } from '@/lib/data-i18n'
 import type { GymDetailData, GymListItem } from '@/lib/gym-data'
 
 // 快取時間常數
@@ -74,13 +76,14 @@ export function useFeaturedGyms() {
  * 獲取岩館詳情
  */
 export function useGymDetail(id: string) {
+  const locale = useLocale()
   return useQuery({
-    queryKey: ['gym', id],
+    queryKey: ['gym', id, locale],
     queryFn: async (): Promise<GymDetailData | null> => {
       const response = await gymService.getGymById(id)
       const apiGym = response.data
       if (!apiGym) return null
-      return adaptGymToDetail(apiGym)
+      return localizeGymDetail(adaptGymToDetail(apiGym), await loadGymOverlays(locale))
     },
     enabled: !!id,
     staleTime: STALE_TIME,
@@ -92,13 +95,14 @@ export function useGymDetail(id: string) {
  * 獲取岩館詳情（通過 Slug）
  */
 export function useGymDetailBySlug(slug: string) {
+  const locale = useLocale()
   return useQuery({
-    queryKey: ['gym', 'slug', slug],
+    queryKey: ['gym', 'slug', slug, locale],
     queryFn: async (): Promise<GymDetailData | null> => {
       const response = await gymService.getGymBySlug(slug)
       const apiGym = response.data
       if (!apiGym) return null
-      return adaptGymToDetail(apiGym)
+      return localizeGymDetail(adaptGymToDetail(apiGym), await loadGymOverlays(locale))
     },
     enabled: !!slug,
     staleTime: STALE_TIME,

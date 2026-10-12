@@ -1,8 +1,9 @@
 'use client'
 
 import { Calendar, CheckCircle, ChevronDown, ChevronUp, Circle, MapPin, Target } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { toIntlLocale } from '@/lib/date-locale'
 import { BucketListItem } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { CommentSection } from './comment-section'
@@ -29,6 +30,7 @@ const categoryColors: Record<string, string> = {
 
 export function BucketListCard({ item, isOwner = false, className }: BucketListCardProps) {
   const t = useTranslations('BiographyEditor')
+  const locale = useLocale()
   const [isExpanded, setIsExpanded] = useState(false)
 
   const categoryLabels: Record<string, string> = {
@@ -47,7 +49,7 @@ export function BucketListCard({ item, isOwner = false, className }: BucketListC
   const formatDate = (dateString: string | null) => {
     if (!dateString) return null
     try {
-      return new Date(dateString).toLocaleDateString('zh-TW', {
+      return new Date(dateString).toLocaleDateString(toIntlLocale(locale), {
         year: 'numeric',
         month: 'short',
         day: 'numeric',

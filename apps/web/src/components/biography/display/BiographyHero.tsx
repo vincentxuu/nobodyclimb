@@ -95,6 +95,7 @@ export function BiographyHero({
   className,
 }: BiographyHeroProps) {
   const t = useTranslations('BiographyPage')
+  const tm = useTranslations('BiographyMisc')
   // 使用 prop 覆蓋或從 visibility 判斷
   const isAnonymous = isAnonymousProp ?? biography.visibility === 'anonymous'
 
@@ -286,8 +287,8 @@ export function BiographyHero({
 
                 {/* 分享 */}
                 <ShareButton
-                  title={`${biography.name} 的攀岩人物誌 - NobodyClimb`}
-                  description={biography.title || `來看看 ${biography.name} 的攀岩故事`}
+                  title={tm('shareTitle', { name: biography.name })}
+                  description={biography.title || tm('shareDescription', { name: biography.name })}
                   className="text-[#6D6C6C] hover:text-[#3F3D3D]"
                 />
               </div>

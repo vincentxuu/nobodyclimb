@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import { ImageLayout } from '../types'
 
@@ -10,10 +11,9 @@ interface LayoutSelectorProps {
   disabled?: boolean
 }
 
-const layouts: { value: ImageLayout; label: string; icon: React.ReactNode }[] = [
+const layouts: { value: ImageLayout; icon: React.ReactNode }[] = [
   {
     value: 'single',
-    label: '單列',
     icon: (
       <div className="flex flex-col gap-0.5">
         <div className="h-2 w-6 rounded-sm bg-current" />
@@ -23,7 +23,6 @@ const layouts: { value: ImageLayout; label: string; icon: React.ReactNode }[] = 
   },
   {
     value: 'double',
-    label: '兩欄',
     icon: (
       <div className="flex gap-0.5">
         <div className="h-4 w-3 rounded-sm bg-current" />
@@ -33,7 +32,6 @@ const layouts: { value: ImageLayout; label: string; icon: React.ReactNode }[] = 
   },
   {
     value: 'grid',
-    label: '網格',
     icon: (
       <div className="grid grid-cols-3 gap-0.5">
         <div className="h-2 w-2 rounded-sm bg-current" />
@@ -48,9 +46,10 @@ const layouts: { value: ImageLayout; label: string; icon: React.ReactNode }[] = 
 ]
 
 export default function LayoutSelector({ value, onChange, disabled = false }: LayoutSelectorProps) {
+  const t = useTranslations('ProfileGallery')
   return (
     <div className="flex items-center gap-2">
-      <span className="text-sm text-gray-600">排版：</span>
+      <span className="text-sm text-gray-600">{t('layout.label')}</span>
       <div className="flex gap-1">
         {layouts.map((layout) => (
           <button
@@ -67,11 +66,11 @@ export default function LayoutSelector({ value, onChange, disabled = false }: La
                     : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
               }
             `}
-            aria-label={layout.label}
-            title={layout.label}
+            aria-label={t(`layout.${layout.value}`)}
+            title={t(`layout.${layout.value}`)}
           >
             {layout.icon}
-            <span className="text-xs">{layout.label}</span>
+            <span className="text-xs">{t(`layout.${layout.value}`)}</span>
           </button>
         ))}
       </div>

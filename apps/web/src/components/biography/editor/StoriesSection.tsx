@@ -38,40 +38,14 @@ interface StoriesSectionProps {
   className?: string
 }
 
-const categoryMeta: Record<
-  StoryCategory,
-  { label: string; icon: LucideIcon; description: string }
-> = {
-  growth: {
-    label: '成長軌跡',
-    icon: TrendingUp,
-    description: '你的攀岩旅程',
-  },
-  psychology: {
-    label: '心理層面',
-    icon: Brain,
-    description: '攀岩中的心理感受',
-  },
-  community: {
-    label: '社群連結',
-    icon: Users,
-    description: '與岩友的故事',
-  },
-  practical: {
-    label: '實用經驗',
-    icon: Wrench,
-    description: '裝備、訓練、技巧',
-  },
-  dreams: {
-    label: '願望與目標',
-    icon: Compass,
-    description: '未來的攀岩計畫',
-  },
-  life: {
-    label: '人生連結',
-    icon: Palette,
-    description: '攀岩與生活',
-  },
+// 分類的顯示文字在訊息檔 `BiographyMisc.storyCategoryMeta.<category>`
+const categoryMeta: Record<StoryCategory, { icon: LucideIcon }> = {
+  growth: { icon: TrendingUp },
+  psychology: { icon: Brain },
+  community: { icon: Users },
+  practical: { icon: Wrench },
+  dreams: { icon: Compass },
+  life: { icon: Palette },
 }
 
 /**
@@ -88,6 +62,7 @@ export function StoriesSection({
   className,
 }: StoriesSectionProps) {
   const t = useTranslations('BiographyEditor')
+  const tm = useTranslations('BiographyMisc')
   const [randomRecommendVisible, setRandomRecommendVisible] = useState(showRandomRecommend)
   // 預設所有分類都是收合的
   const [expandedCategories, setExpandedCategories] = useState<Set<StoryCategory>>(new Set())
@@ -189,8 +164,12 @@ export function StoriesSection({
                     />
                     <meta.icon size={20} className="text-[#3F3D3D]" />
                     <div className="text-left">
-                      <span className="font-medium text-[#1B1A1A]">{meta.label}</span>
-                      <p className="text-xs text-[#6D6C6C]">{meta.description}</p>
+                      <span className="font-medium text-[#1B1A1A]">
+                        {tm(`storyCategoryMeta.${category}.label`)}
+                      </span>
+                      <p className="text-xs text-[#6D6C6C]">
+                        {tm(`storyCategoryMeta.${category}.description`)}
+                      </p>
                     </div>
                   </div>
                   <span

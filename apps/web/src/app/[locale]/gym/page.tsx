@@ -9,10 +9,13 @@ import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { PageHeader } from '@/components/ui/page-header'
 import { useGyms } from '@/hooks/api/useGyms'
 import { Link } from '@/i18n/navigation'
+import { gymTypeLabel } from '@/lib/data-i18n/enum-labels'
 import type { GymListItem } from '@/lib/gym-data'
 
 // 岩館卡片組件（使用 CSS 動畫）
 function GymCard({ gym }: { gym: GymListItem }) {
+  const tData = useTranslations('GymData')
+  const typeLabel = gymTypeLabel(tData, gym.type)
   return (
     <div className="overflow-hidden rounded-lg bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
       <Link href={`/gym/${gym.id}`}>
@@ -20,7 +23,7 @@ function GymCard({ gym }: { gym: GymListItem }) {
           <GymCoverGenerator
             type={gym.type}
             name={gym.name}
-            typeLabel={gym.typeLabel}
+            typeLabel={typeLabel}
             aspectRatio="card"
             className="h-full w-full"
           />
@@ -39,9 +42,7 @@ function GymCard({ gym }: { gym: GymListItem }) {
           </div>
 
           <div className="flex items-center justify-between">
-            <span className="rounded bg-gray-100 px-2 py-1 text-xs text-gray-600">
-              {gym.typeLabel}
-            </span>
+            <span className="rounded bg-gray-100 px-2 py-1 text-xs text-gray-600">{typeLabel}</span>
             {gym.rating > 0 && (
               <span className="flex items-center gap-1 text-sm text-yellow-500">
                 <Star size={14} fill="currentColor" />

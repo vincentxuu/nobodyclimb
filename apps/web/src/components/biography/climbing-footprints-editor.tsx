@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { useCountryName } from '@/lib/hooks/useCountryName'
 import { ClimbingLocation } from '@/lib/types'
 import { COMMON_COUNTRIES, getCountryFlag } from '@/lib/utils/country'
 
@@ -22,6 +23,7 @@ export function ClimbingFootprintsEditor({
   disabled = false,
 }: ClimbingFootprintsEditorProps) {
   const t = useTranslations('BiographyEditor')
+  const countryName = useCountryName()
   const [showAddForm, setShowAddForm] = useState(false)
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const [formData, setFormData] = useState<ClimbingLocation>({
@@ -218,7 +220,7 @@ export function ClimbingFootprintsEditor({
                 >
                   {COMMON_COUNTRIES.map((country) => (
                     <option key={country} value={country}>
-                      {getCountryFlag(country)} {country}
+                      {getCountryFlag(country)} {countryName(country)}
                     </option>
                   ))}
                 </select>

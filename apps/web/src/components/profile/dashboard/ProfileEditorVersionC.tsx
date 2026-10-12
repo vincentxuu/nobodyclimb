@@ -25,6 +25,7 @@ import {
   Sparkles,
   User,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -51,6 +52,7 @@ interface ProfileEditorVersionCProps {
 export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEditorVersionCProps) {
   const { profileData, setProfileData } = useProfile()
   const { toast } = useToast()
+  const t = useTranslations('ProfileEditor')
   const [currentStep, setCurrentStep] = useState(0)
   const [isSaving, setIsSaving] = useState(false)
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set())
@@ -84,11 +86,11 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
           ...prev,
           [field]: uploadedUrl,
         }))
-        toast({ title: '圖片上傳成功' })
+        toast({ title: t('common.imageUploadSuccess') })
       }
     } catch (error) {
       console.error('上傳失敗:', error)
-      toast({ title: '上傳失敗', variant: 'destructive' })
+      toast({ title: t('common.uploadFailed'), variant: 'destructive' })
     }
   }
 
@@ -104,14 +106,14 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
 
       if (currentStep < steps.length - 1) {
         setCurrentStep(currentStep + 1)
-        toast({ title: '已儲存' })
+        toast({ title: t('common.saved') })
       } else {
-        toast({ title: '設定完成！', description: '你的人物誌已準備就緒' })
+        toast({ title: t('versionC.completeTitle'), description: t('versionC.completeDesc') })
         onComplete?.()
       }
     } catch (error) {
       console.error('儲存失敗:', error)
-      toast({ title: '儲存失敗', variant: 'destructive' })
+      toast({ title: t('common.saveFailed'), variant: 'destructive' })
     } finally {
       setIsSaving(false)
     }
@@ -135,7 +137,11 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
       >
         {profileData.avatarUrl ? (
           <>
-            <img src={profileData.avatarUrl} alt="頭像" className="h-full w-full object-cover" />
+            <img
+              src={profileData.avatarUrl}
+              alt={t('common.avatarAlt')}
+              className="h-full w-full object-cover"
+            />
             <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
               <Camera className="h-8 w-8 text-white" />
             </div>
@@ -143,14 +149,14 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center text-gray-400">
             <Camera className="mb-2 h-10 w-10" />
-            <span className="text-sm">點擊上傳</span>
+            <span className="text-sm">{t('versionC.clickToUpload')}</span>
           </div>
         )}
       </div>
       <p className="text-center text-sm text-gray-500">
-        選擇一張能代表你的照片
+        {t('versionC.avatarHint1')}
         <br />
-        建議使用正方形圖片
+        {t('versionC.avatarHint2')}
       </p>
     </div>
   )
@@ -159,22 +165,26 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
   const BasicInfoStep = () => (
     <div className="space-y-6">
       <div>
-        <label className="mb-2 block text-sm font-medium text-gray-700">你的暱稱是什麼？</label>
+        <label className="mb-2 block text-sm font-medium text-gray-700">
+          {t('versionC.nameLabel')}
+        </label>
         <Input
           value={profileData.name}
           onChange={(e) => handleChange('name', e.target.value)}
-          placeholder="例如：小岩、岩手"
+          placeholder={t('versionC.namePlaceholder')}
           className="text-lg"
         />
       </div>
       <div>
-        <label className="mb-2 block text-sm font-medium text-gray-700">用一句話形容自己</label>
+        <label className="mb-2 block text-sm font-medium text-gray-700">
+          {t('versionC.titleLabel')}
+        </label>
         <Input
           value={profileData.title}
           onChange={(e) => handleChange('title', e.target.value)}
-          placeholder="例如：週末抱石愛好者"
+          placeholder={t('versionC.titlePlaceholder')}
         />
-        <p className="mt-1 text-xs text-gray-400">這會顯示在你的名字下方</p>
+        <p className="mt-1 text-xs text-gray-400">{t('versionC.titleHint')}</p>
       </div>
     </div>
   )
@@ -184,25 +194,27 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
     <div className="space-y-6">
       <div>
         <label className="mb-2 block text-sm font-medium text-gray-700">
-          你是哪一年開始攀岩的？
+          {t('versionC.startYearLabel')}
         </label>
         <Input
           type="number"
           value={profileData.startYear}
           onChange={(e) => handleChange('startYear', e.target.value)}
-          placeholder="例如：2020"
+          placeholder={t('common.startYearPlaceholder')}
           min={1990}
           max={new Date().getFullYear()}
         />
       </div>
       <div>
-        <label className="mb-2 block text-sm font-medium text-gray-700">平常都在哪裡攀岩？</label>
+        <label className="mb-2 block text-sm font-medium text-gray-700">
+          {t('versionC.locationsLabel')}
+        </label>
         <Input
           value={profileData.frequentGyms}
           onChange={(e) => handleChange('frequentGyms', e.target.value)}
-          placeholder="例如：紅石攀岩館、龍洞"
+          placeholder={t('common.locationsPlaceholder')}
         />
-        <p className="mt-1 text-xs text-gray-400">可以填寫多個地點，用逗號分隔</p>
+        <p className="mt-1 text-xs text-gray-400">{t('versionC.locationsHint')}</p>
       </div>
     </div>
   )
@@ -211,22 +223,26 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
   const SocialLinksStep = () => (
     <div className="space-y-6">
       <div>
-        <label className="mb-2 block text-sm font-medium text-gray-700">你的 Instagram</label>
+        <label className="mb-2 block text-sm font-medium text-gray-700">
+          {t('versionC.instagramLabel')}
+        </label>
         <div className="flex items-center gap-2">
           <span className="text-gray-400">@</span>
           <Input
             value={profileData.socialLinks.instagram || ''}
             onChange={(e) => handleChange('socialLinks.instagram', e.target.value)}
-            placeholder="你的 IG 帳號"
+            placeholder={t('common.igPlaceholder')}
           />
         </div>
       </div>
       <div>
-        <label className="mb-2 block text-sm font-medium text-gray-700">YouTube 頻道（選填）</label>
+        <label className="mb-2 block text-sm font-medium text-gray-700">
+          {t('versionC.youtubeLabel')}
+        </label>
         <Input
           value={profileData.socialLinks.youtube_channel || ''}
           onChange={(e) => handleChange('socialLinks.youtube_channel', e.target.value)}
-          placeholder="YouTube 頻道連結"
+          placeholder={t('versionC.youtubePlaceholder')}
         />
       </div>
     </div>
@@ -236,20 +252,24 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
   const StoryStep = () => (
     <div className="space-y-6">
       <div>
-        <label className="mb-2 block text-sm font-medium text-gray-700">你與攀岩的相遇</label>
+        <label className="mb-2 block text-sm font-medium text-gray-700">
+          {t('versionC.originLabel')}
+        </label>
         <Textarea
           value={profileData.climbingReason}
           onChange={(e) => handleChange('climbingReason', e.target.value)}
-          placeholder="分享你是如何開始攀岩的..."
+          placeholder={t('versionC.originPlaceholder')}
           className="min-h-[120px]"
         />
       </div>
       <div>
-        <label className="mb-2 block text-sm font-medium text-gray-700">攀岩對你來說是什麼？</label>
+        <label className="mb-2 block text-sm font-medium text-gray-700">
+          {t('versionC.meaningLabel')}
+        </label>
         <Textarea
           value={profileData.climbingMeaning}
           onChange={(e) => handleChange('climbingMeaning', e.target.value)}
-          placeholder="攀岩在你的生活中扮演什麼角色..."
+          placeholder={t('versionC.meaningPlaceholder')}
           className="min-h-[120px]"
         />
       </div>
@@ -272,8 +292,8 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
             <Globe
               className={`mb-2 h-6 w-6 ${profileData.isPublic ? 'text-green-600' : 'text-gray-400'}`}
             />
-            <div className="font-medium">公開</div>
-            <p className="mt-1 text-sm text-gray-500">其他人可以看到你的人物誌</p>
+            <div className="font-medium">{t('versionC.public')}</div>
+            <p className="mt-1 text-sm text-gray-500">{t('common.publicDesc')}</p>
           </button>
           <button
             onClick={() => handleChange('isPublic', false)}
@@ -286,12 +306,12 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
             <User
               className={`mb-2 h-6 w-6 ${!profileData.isPublic ? 'text-blue-600' : 'text-gray-400'}`}
             />
-            <div className="font-medium">私人</div>
-            <p className="mt-1 text-sm text-gray-500">只有你自己可以看到</p>
+            <div className="font-medium">{t('versionC.private')}</div>
+            <p className="mt-1 text-sm text-gray-500">{t('versionC.privateDesc')}</p>
           </button>
         </div>
       </div>
-      <p className="text-center text-sm text-gray-500">你可以隨時在設定中更改這個選項</p>
+      <p className="text-center text-sm text-gray-500">{t('versionC.privacyHint')}</p>
     </div>
   )
 
@@ -299,43 +319,43 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
     {
       id: 'avatar',
       icon: <ImageIcon className="h-6 w-6" />,
-      title: '設定你的頭像',
-      subtitle: '讓大家認識你',
+      title: t('versionC.steps.avatar.title'),
+      subtitle: t('versionC.steps.avatar.subtitle'),
       component: <AvatarStep />,
     },
     {
       id: 'basic',
       icon: <User className="h-6 w-6" />,
-      title: '介紹一下自己',
-      subtitle: '你的暱稱和簡介',
+      title: t('versionC.steps.basic.title'),
+      subtitle: t('versionC.steps.basic.subtitle'),
       component: <BasicInfoStep />,
     },
     {
       id: 'climbing',
       icon: <Gauge className="h-6 w-6" />,
-      title: '你的攀岩旅程',
-      subtitle: '分享你的攀岩經歷',
+      title: t('versionC.steps.climbing.title'),
+      subtitle: t('versionC.steps.climbing.subtitle'),
       component: <ClimbingInfoStep />,
     },
     {
       id: 'social',
       icon: <Link2 className="h-6 w-6" />,
-      title: '連結社群帳號',
-      subtitle: '讓岩友能找到你',
+      title: t('versionC.steps.social.title'),
+      subtitle: t('versionC.steps.social.subtitle'),
       component: <SocialLinksStep />,
     },
     {
       id: 'story',
       icon: <BookOpen className="h-6 w-6" />,
-      title: '分享你的故事',
-      subtitle: '與攀岩的相遇',
+      title: t('versionC.steps.story.title'),
+      subtitle: t('versionC.steps.story.subtitle'),
       component: <StoryStep />,
     },
     {
       id: 'privacy',
       icon: <Globe className="h-6 w-6" />,
-      title: '隱私設定',
-      subtitle: '選擇誰可以看到',
+      title: t('versionC.steps.privacy.title'),
+      subtitle: t('versionC.steps.privacy.subtitle'),
       component: <PrivacyStep />,
     },
   ]
@@ -368,7 +388,7 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
             className="flex items-center gap-1 text-sm text-gray-500"
           >
             <ChevronLeft className="h-4 w-4" />
-            {currentStep > 0 ? '上一步' : '返回'}
+            {currentStep > 0 ? t('versionC.prevStep') : t('common.back')}
           </button>
 
           <div className="text-sm text-gray-400">
@@ -383,7 +403,7 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
             }}
             className="flex items-center gap-1 text-sm text-gray-500"
           >
-            跳過
+            {t('versionC.skip')}
             <SkipForward className="h-4 w-4" />
           </button>
         </div>
@@ -442,15 +462,15 @@ export default function ProfileEditorVersionC({ onBack, onComplete }: ProfileEdi
         <div className="mx-auto max-w-md">
           <Button className="w-full" size="lg" onClick={saveAndNext} disabled={isSaving}>
             {isSaving ? (
-              '儲存中...'
+              t('common.saving')
             ) : currentStep === steps.length - 1 ? (
               <>
                 <Sparkles className="mr-2 h-4 w-4" />
-                完成設定
+                {t('versionC.finish')}
               </>
             ) : (
               <>
-                下一步
+                {t('versionC.nextStep')}
                 <ChevronRight className="ml-2 h-4 w-4" />
               </>
             )}

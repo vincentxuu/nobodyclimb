@@ -9,11 +9,13 @@ import { PageHeader } from '@/components/ui/page-header'
 import { useCrags } from '@/hooks/api/useCrags'
 import { Link } from '@/i18n/navigation'
 import type { CragListItem } from '@/lib/crag-data'
+import { rockTypeLabel, seasonLabel } from '@/lib/data-i18n/enum-labels'
 import { CragMap } from './crag-map'
 
 // 岩場卡片組件
 function CragCard({ crag }: { crag: CragListItem }) {
   const t = useTranslations('CragPage')
+  const tData = useTranslations('CragData')
   return (
     <div className="group overflow-hidden rounded-lg bg-white shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
       <Link href={`/crag/${crag.id}`} className="block h-full">
@@ -27,7 +29,7 @@ function CragCard({ crag }: { crag: CragListItem }) {
             className="absolute inset-0"
           />
           <div className="absolute left-2 top-2 rounded bg-[#1B1A1A]/80 px-1.5 py-0.5 text-[10px] font-medium text-white">
-            {crag.type}
+            {rockTypeLabel(tData, crag.type)}
           </div>
         </div>
 
@@ -62,7 +64,7 @@ function CragCard({ crag }: { crag: CragListItem }) {
                     key={season}
                     className="rounded bg-[#F5F5F5] px-1.5 py-0.5 text-[10px] text-[#6D6C6C]"
                   >
-                    {season}
+                    {seasonLabel(tData, season)}
                   </span>
                 ))}
               </div>

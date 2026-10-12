@@ -1,6 +1,7 @@
 'use client'
 
 import { ArrowUp, CircleDot, Eye, Repeat, Sword, Target, Users, Zap } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { ASCENT_TYPE_DISPLAY, AscentType } from '@/lib/types/ascent'
 import { cn } from '@/lib/utils'
 
@@ -22,6 +23,7 @@ interface AscentTypeSelectProps {
 }
 
 export function AscentTypeSelect({ value, onChange, className }: AscentTypeSelectProps) {
+  const t = useTranslations('Ascent.types')
   const types = Object.entries(ASCENT_TYPE_DISPLAY) as [
     AscentType,
     (typeof ASCENT_TYPE_DISPLAY)[AscentType],
@@ -37,6 +39,7 @@ export function AscentTypeSelect({ value, onChange, className }: AscentTypeSelec
           <button
             key={type}
             type="button"
+            title={t(`${type}.description`)}
             onClick={() => onChange(type)}
             className={cn(
               'flex flex-col items-center gap-1 rounded-lg border p-3 transition-all',
@@ -46,7 +49,7 @@ export function AscentTypeSelect({ value, onChange, className }: AscentTypeSelec
             )}
           >
             <Icon className={cn('h-5 w-5', isSelected ? 'text-emerald-600' : info.color)} />
-            <span className="text-xs font-medium">{info.label}</span>
+            <span className="text-xs font-medium">{t(`${type}.label`)}</span>
           </button>
         )
       })}

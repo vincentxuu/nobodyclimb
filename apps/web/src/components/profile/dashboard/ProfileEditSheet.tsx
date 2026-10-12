@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import { AdvancedStoryEditor } from '@/components/biography/advanced-story-editor'
 import { Button } from '@/components/ui/button'
@@ -20,17 +21,17 @@ import SocialLinksSection from '../SocialLinksSection'
 import { ProfileData, SocialLinks } from '../types'
 import { EditPanelType } from './ProfileDashboard'
 
-// 面板配置
-const PANEL_CONFIG: Record<Exclude<EditPanelType, null>, { title: string; description: string }> = {
-  avatar: { title: '頭像與封面', description: '設定你的個人形象照片' },
-  basic: { title: '基本資料', description: '編輯暱稱和自我介紹' },
-  climbing: { title: '攀岩資訊', description: '編輯攀岩相關資訊' },
-  social: { title: '社群連結', description: '連結你的社群帳號' },
-  'core-stories': { title: '核心故事', description: '分享你與攀岩的故事' },
-  'advanced-stories': { title: '小故事', description: '記錄更多攀岩故事' },
-  footprints: { title: '攀岩足跡', description: '記錄去過的攀岩地點' },
-  settings: { title: '公開設定', description: '設定人物誌的公開狀態' },
-}
+// 面板 id → 訊息檔 key（標題讀 `cards.<key>.title`，說明讀 `panels.<key>`）
+const PANEL_MESSAGE_KEYS = {
+  avatar: 'avatar',
+  basic: 'basic',
+  climbing: 'climbing',
+  social: 'social',
+  'core-stories': 'coreStories',
+  'advanced-stories': 'advancedStories',
+  footprints: 'footprints',
+  settings: 'settings',
+} as const satisfies Record<Exclude<EditPanelType, null>, string>
 
 interface ProfileEditSheetProps {
   activePanel: EditPanelType
@@ -59,6 +60,7 @@ export function ProfileEditSheet({
   onCoverImageDelete,
   onAdvancedStorySave,
 }: ProfileEditSheetProps) {
+  const t = useTranslations('ProfileDashboard')
   const [isSaving, setIsSaving] = React.useState(false)
 
   const handleSave = async () => {
@@ -72,7 +74,10 @@ export function ProfileEditSheet({
     }
   }
 
-  const config = activePanel ? PANEL_CONFIG[activePanel] : null
+  const panelKey = activePanel ? PANEL_MESSAGE_KEYS[activePanel] : null
+  const config = panelKey
+    ? { title: t(`cards.${panelKey}.title`), description: t(`panels.${panelKey}`) }
+    : null
 
   // 小故事不需要儲存按鈕（即時儲存）
   const showSaveButton = activePanel !== 'advanced-stories' && activePanel !== 'footprints'
@@ -188,10 +193,10 @@ export function ProfileEditSheet({
             {showSaveButton && (
               <div className="flex shrink-0 gap-3 border-t pt-4">
                 <Button variant="outline" onClick={onClose} className="flex-1">
-                  取消
+                  {t('actions.cancel')}
                 </Button>
                 <Button onClick={handleSave} disabled={isSaving} className="flex-1">
-                  {isSaving ? '儲存中...' : '儲存'}
+                  {isSaving ? t('actions.saving') : t('actions.save')}
                 </Button>
               </div>
             )}

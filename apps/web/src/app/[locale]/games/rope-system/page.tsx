@@ -16,6 +16,7 @@ const ParentCategoryIcons = {
 export default function RopeSystemHomePage() {
   const t = useTranslations('GamesPage')
   const tCommon = useTranslations('Common')
+  const tGame = useTranslations('RopeGame')
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
       {/* 頂部導航 */}
@@ -94,7 +95,7 @@ export default function RopeSystemHomePage() {
               return <IconComponent className="h-6 w-6 text-[#1B1A1A]" />
             })()}
             <div>
-              <h2 className="text-xl font-bold text-[#1B1A1A]">{PARENT_CATEGORIES.sport.name}</h2>
+              <h2 className="text-xl font-bold text-[#1B1A1A]">{tGame('parents.sport')}</h2>
               <p className="text-sm text-[#535353]">{PARENT_CATEGORIES.sport.description}</p>
             </div>
           </div>
@@ -124,7 +125,7 @@ export default function RopeSystemHomePage() {
               return <IconComponent className="h-6 w-6 text-[#1B1A1A]" />
             })()}
             <div>
-              <h2 className="text-xl font-bold text-[#1B1A1A]">{PARENT_CATEGORIES.trad.name}</h2>
+              <h2 className="text-xl font-bold text-[#1B1A1A]">{tGame('parents.trad')}</h2>
               <p className="text-sm text-[#535353]">{PARENT_CATEGORIES.trad.description}</p>
             </div>
           </div>

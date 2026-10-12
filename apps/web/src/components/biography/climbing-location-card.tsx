@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Calendar, MapPin, Users } from 'lucide-react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import { useCountryName } from '@/lib/hooks/useCountryName'
 import { ClimbingLocation, LocationStat } from '@/lib/types'
 import { getCountryFlag } from '@/lib/utils/country'
 
@@ -16,6 +17,7 @@ interface ClimbingLocationCardProps {
  * 個人攀岩足跡卡片（用於人物誌頁面）
  */
 export function ClimbingLocationCard({ location, index = 0 }: ClimbingLocationCardProps) {
+  const countryName = useCountryName()
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -28,7 +30,7 @@ export function ClimbingLocationCard({ location, index = 0 }: ClimbingLocationCa
           <span className="text-2xl">{getCountryFlag(location.country)}</span>
           <div>
             <h4 className="font-medium text-gray-900">{location.location}</h4>
-            <p className="text-sm text-gray-500">{location.country}</p>
+            <p className="text-sm text-gray-500">{countryName(location.country)}</p>
           </div>
         </div>
         {location.visit_year && (
@@ -111,6 +113,7 @@ interface LocationExploreCardProps {
  */
 export function LocationExploreCard({ location, index = 0 }: LocationExploreCardProps) {
   const t = useTranslations('BiographyPage')
+  const countryName = useCountryName()
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -126,7 +129,7 @@ export function LocationExploreCard({ location, index = 0 }: LocationExploreCard
               <h4 className="font-medium text-gray-900 group-hover:text-emerald-600">
                 {location.location}
               </h4>
-              <p className="text-sm text-gray-500">{location.country}</p>
+              <p className="text-sm text-gray-500">{countryName(location.country)}</p>
             </div>
           </div>
           <div className="flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-1 text-sm text-emerald-600">
@@ -198,6 +201,7 @@ export function CountryCard({
   isSelected = false,
 }: CountryCardProps) {
   const t = useTranslations('BiographyPage')
+  const countryName = useCountryName()
   return (
     <button
       onClick={onClick}
@@ -209,7 +213,7 @@ export function CountryCard({
     >
       <span className="text-xl">{getCountryFlag(country)}</span>
       <div>
-        <span className="block text-sm font-medium">{country}</span>
+        <span className="block text-sm font-medium">{countryName(country)}</span>
         <span className="text-xs text-gray-500">
           {t('locationAndVisitorCount', { locations: locationCount, visitors: visitorCount })}
         </span>

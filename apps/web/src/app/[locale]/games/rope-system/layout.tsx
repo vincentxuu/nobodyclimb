@@ -1,13 +1,19 @@
 import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: '攀岩系統練習 | NobodyClimb',
-  description: '透過互動式遊戲學習攀岩繩索系統操作，適用於自主學習與單位教學認證。',
-  keywords: ['攀岩', '繩索系統', '確保', '先鋒', '頂繩', '垂降', '固定點'],
-}
+import { buildSectionMetadata } from '@/lib/section-metadata'
 
 interface RopeSystemLayoutProps {
   children: React.ReactNode
+}
+
+type MetadataProps = {
+  params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: MetadataProps): Promise<Metadata> {
+  const { locale } = await params
+  return buildSectionMetadata(locale, 'ropeSystem', '/games/rope-system', {
+    titleWithSiteName: true,
+  })
 }
 
 export default function RopeSystemLayout({ children }: RopeSystemLayoutProps) {

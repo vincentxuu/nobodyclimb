@@ -1,6 +1,7 @@
 'use client'
 
 import { Sparkles } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/lib/utils'
 
@@ -9,6 +10,7 @@ interface PersonalityCTAProps {
 }
 
 export function PersonalityCTA({ className }: PersonalityCTAProps) {
+  const t = useTranslations('ProfileSections')
   return (
     <Link
       href="/quiz"
@@ -18,7 +20,7 @@ export function PersonalityCTA({ className }: PersonalityCTAProps) {
       )}
     >
       <Sparkles className="h-3.5 w-3.5" />
-      <span>測測你的攀岩人格</span>
+      <span>{t('personality.cta')}</span>
     </Link>
   )
 }

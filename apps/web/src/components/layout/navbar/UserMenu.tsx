@@ -53,6 +53,7 @@ export default function UserMenu() {
   const [activeTab, setActiveTab] = useState<'explore' | 'personal'>('personal')
   const t = useTranslations('UserMenu')
   const tNav = useTranslations('Navbar')
+  const tShared = useTranslations('SharedUI')
   const tAuth = useTranslations('AuthPage')
 
   const avatarStyle = user?.avatarStyle
@@ -75,7 +76,8 @@ export default function UserMenu() {
                 </span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-[160px] rounded-lg border border-[#EBEAEA] bg-white p-2 shadow-md">
+            {/* z-index 需高於 navbar 的 z-[999]，否則選單頂端會被 header 蓋住 */}
+            <DropdownMenuContent className="z-[1000] w-[160px] rounded-lg border border-[#EBEAEA] bg-white p-2 shadow-md">
               <DropdownMenuItem
                 className={createMenuItemClass}
                 onClick={() => router.push('/blog/create')}
@@ -96,10 +98,10 @@ export default function UserMenu() {
               <button className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full transition-opacity duration-200 hover:opacity-80 md:h-8 md:w-8 lg:h-10 lg:w-10">
                 <AvatarWithFallback
                   src={user?.avatar}
-                  alt="用戶頭像"
+                  alt={tShared('userAvatarAlt')}
                   size="w-7 h-7 md:w-8 md:h-8 lg:w-10 lg:h-10"
                   fallback={
-                    <div role="img" aria-label="用戶頭像">
+                    <div role="img" aria-label={tShared('userAvatarAlt')}>
                       {generateAvatarElement(avatarStyle, 'w-7 h-7 md:w-8 md:h-8 lg:w-10 lg:h-10')}
                     </div>
                   }
@@ -108,7 +110,7 @@ export default function UserMenu() {
             </DropdownMenuTrigger>
             <DropdownMenuContent
               sideOffset={8}
-              className="w-[240px] overflow-visible rounded-lg border border-[#EBEAEA] bg-white p-2 shadow-md"
+              className="z-[1000] w-[240px] overflow-visible rounded-lg border border-[#EBEAEA] bg-white p-2 shadow-md"
             >
               <div className="mb-2 grid grid-cols-2 rounded-lg bg-[#F5F5F5] p-1">
                 <button

@@ -8,6 +8,8 @@ import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { biographyService } from '@/lib/api/services'
+import { useBiographyQuestionText } from '@/lib/hooks/useBiographyQuestions'
+import { useBiographyTagText } from '@/lib/hooks/useBiographyTagText'
 import { Biography } from '@/lib/types'
 import { getDisplayNameForVisibility, getDisplayTags } from '@/lib/utils/biography'
 import {
@@ -28,7 +30,7 @@ interface ClimberCardProps {
 function getDisplayOneLiners(
   oneLinersJson: string | null | undefined,
   maxCount = 3
-): Array<{ question: string; answer: string }> {
+): Array<{ questionId: string; question: string; answer: string }> {
   if (!oneLinersJson) return []
 
   try {
@@ -37,7 +39,7 @@ function getDisplayOneLiners(
       { answer: string; visibility?: string } | undefined
     >
 
-    const result: Array<{ question: string; answer: string }> = []
+    const result: Array<{ questionId: string; question: string; answer: string }> = []
 
     // 按優先順序取得一句話
     const priorityKeys = [
@@ -55,6 +57,7 @@ function getDisplayOneLiners(
       const data = parsed[key]
       if (data?.answer && data.answer.trim() && data.visibility === 'public') {
         result.push({
+          questionId: key,
           question: ONE_LINER_QUESTIONS[key] || key,
           answer: data.answer.length > 30 ? data.answer.slice(0, 30) + '...' : data.answer,
         })
@@ -68,6 +71,7 @@ function getDisplayOneLiners(
       if (prioritySet.has(key)) continue
       if (data?.answer && data.answer.trim() && data.visibility === 'public') {
         result.push({
+          questionId: key,
           question: ONE_LINER_QUESTIONS[key] || key,
           answer: data.answer.length > 30 ? data.answer.slice(0, 30) + '...' : data.answer,
         })
@@ -93,9 +97,16 @@ function BiographyGrid({ biographies }: { biographies: Biography[] }) {
 
 function ClimberCard({ person }: ClimberCardProps) {
   const t = useTranslations('HomePage')
+  const { getOneLinerText } = useBiographyQuestionText()
+  const { tagLabel } = useBiographyTagText()
   // 取得展示標籤（最多 3 個）
   const displayTags = getDisplayTags(person.tags_data, 3)
-  const displayName = getDisplayNameForVisibility(person.visibility, person.name)
+  const tBio = useTranslations('BiographyPage')
+  const displayName = getDisplayNameForVisibility(
+    person.visibility,
+    person.name,
+    tBio('anonymousName')
+  )
 
   // 取得展示的一句話（最多 3 個）
   const displayOneLiners = getDisplayOneLiners(person.one_liners_data, 3)
@@ -170,7 +181,9 @@ function ClimberCard({ person }: ClimberCardProps) {
               <div className="mt-3 space-y-1.5">
                 {displayOneLiners.map((item, index) => (
                   <div key={index} className="text-xs">
-                    <span className="text-[#8E8C8C]">{item.question}：</span>
+                    <span className="text-[#8E8C8C]">
+                      {getOneLinerText(item.questionId, item.question)}：
+                    </span>
                     <span className="text-[#3F3D3D]">{item.answer}</span>
                   </div>
                 ))}
@@ -190,7 +203,7 @@ function ClimberCard({ person }: ClimberCardProps) {
                     }`}
                   >
                     {tag.isCustom && <Sparkles size={10} className="text-brand-accent" />}
-                    {tag.label}
+                    {tagLabel(tag.id, tag.label)}
                   </span>
                 ))}
               </div>

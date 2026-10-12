@@ -2,11 +2,13 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, ChevronRight } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { AdvancedStoryEditor } from '@/components/biography/advanced-story-editor'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { calculateStoryProgress, STORY_CATEGORIES } from '@/lib/constants/biography-stories'
+import { useBiographyStoryText } from '@/lib/hooks/useBiographyStoryText'
 import { CATEGORY_ICONS } from '@/lib/utils/biography-ui'
 
 interface AdvancedStoriesSectionProps {
@@ -25,15 +27,17 @@ export default function AdvancedStoriesSection({
 }: AdvancedStoriesSectionProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const progress = calculateStoryProgress(biography)
+  const t = useTranslations('ProfileSections')
+  const { categoryName } = useBiographyStoryText()
 
   return (
     <div className="space-y-4">
       {/* Section Title */}
       <div>
         <Label className={`font-medium text-strong ${isMobile ? 'text-sm' : 'text-base'}`}>
-          小故事
+          {t('stories.title')}
         </Label>
-        <p className="mt-1 text-xs text-gray-500">記錄你的攀岩故事與成長歷程</p>
+        <p className="mt-1 text-xs text-gray-500">{t('stories.subtitle')}</p>
       </div>
       {/* Progress Info */}
       <div className="flex items-center justify-between">
@@ -47,7 +51,7 @@ export default function AdvancedStoriesSection({
             onClick={() => setIsExpanded(!isExpanded)}
             className="text-sm text-gray-600"
           >
-            {isExpanded ? '收起' : '展開編輯'}
+            {isExpanded ? t('actions.collapse') : t('stories.expandEdit')}
             <ChevronRight
               className={`ml-1 h-4 w-4 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
             />
@@ -59,7 +63,7 @@ export default function AdvancedStoriesSection({
       {!isExpanded && (
         <div className="rounded-lg border border-gray-100 bg-gray-50/50 p-4">
           <div className="mb-3 flex items-center justify-between">
-            <span className="text-sm text-gray-600">完成進度</span>
+            <span className="text-sm text-gray-600">{t('stories.progress')}</span>
             <span className="text-sm font-medium text-gray-900">{progress.percentage}%</span>
           </div>
           {/* Progress Bar */}
@@ -89,7 +93,9 @@ export default function AdvancedStoriesSection({
                     <Icon className={`h-4 w-4 ${category.color}`} />
                   )}
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-xs font-medium text-gray-700">{category.name}</p>
+                    <p className="truncate text-xs font-medium text-gray-700">
+                      {categoryName(category.id, category.name)}
+                    </p>
                     <p className="text-xs text-gray-500">
                       {categoryProgress.completed}/{categoryProgress.total}
                     </p>
@@ -99,9 +105,7 @@ export default function AdvancedStoriesSection({
             })}
           </div>
           {isEditing && (
-            <p className="mt-3 text-center text-xs text-gray-500">
-              點擊「展開編輯」開始填寫你的攀岩故事
-            </p>
+            <p className="mt-3 text-center text-xs text-gray-500">{t('stories.expandHint')}</p>
           )}
         </div>
       )}

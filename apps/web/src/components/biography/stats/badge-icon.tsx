@@ -1,6 +1,7 @@
 'use client'
 
 import { BADGE_COLORS, type BadgeDefinition, getBadgeById } from '@/lib/constants/badges'
+import { useBadgeText } from '@/lib/hooks/useBadgeText'
 import { cn } from '@/lib/utils'
 
 interface BadgeIconProps {
@@ -32,6 +33,7 @@ export function BadgeIcon({
   showTooltip = false,
   className,
 }: BadgeIconProps) {
+  const { badgeName, badgeDescription } = useBadgeText()
   const badgeData = typeof badge === 'string' ? getBadgeById(badge) : badge
 
   if (!badgeData) {
@@ -50,7 +52,11 @@ export function BadgeIcon({
         unlocked ? '' : 'opacity-60',
         className
       )}
-      title={showTooltip ? `${badgeData.name}: ${badgeData.description}` : undefined}
+      title={
+        showTooltip
+          ? `${badgeName(badgeData.id, badgeData.name)}: ${badgeDescription(badgeData.id, badgeData.description)}`
+          : undefined
+      }
     >
       <Icon className={cn(iconSizeClasses[size], colors.icon)} />
       {!unlocked && (

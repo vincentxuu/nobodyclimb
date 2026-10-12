@@ -1,19 +1,21 @@
 'use client'
 
-import type { PersonalityType } from '@nobodyclimb/types'
 import { RefreshCw, Share2, UserPlus } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { Link } from '@/i18n/navigation'
 import type { DecodedScores } from '@/lib/quiz/decode-scores'
+import type { LocalizedPersonality } from '@/lib/quiz/personality-i18n'
 import { ShareModal } from './ShareModal'
 
 interface Props {
-  personality: PersonalityType
+  personality: LocalizedPersonality
   scores: DecodedScores | null
   hasPersonalScores: boolean
 }
 
 export function ResultActions({ personality, scores, hasPersonalScores }: Props) {
+  const t = useTranslations('Quiz.result')
   const [shareOpen, setShareOpen] = useState(false)
 
   return (
@@ -24,7 +26,7 @@ export function ResultActions({ personality, scores, hasPersonalScores }: Props)
         style={{ backgroundColor: personality.color }}
       >
         <Share2 className="h-5 w-5" />
-        分享結果
+        {t('share')}
       </button>
 
       <div className="grid grid-cols-2 gap-3">
@@ -33,14 +35,14 @@ export function ResultActions({ personality, scores, hasPersonalScores }: Props)
           className="flex items-center justify-center gap-2 rounded-full border-2 border-gray-200 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
         >
           <RefreshCw className="h-4 w-4" />
-          重新測驗
+          {t('retake')}
         </Link>
         <Link
           href="/auth/register"
           className="flex items-center justify-center gap-2 rounded-full bg-gray-900 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800"
         >
           <UserPlus className="h-4 w-4" />
-          加入 NobodyClimb
+          {t('join')}
         </Link>
       </div>
 
@@ -50,7 +52,7 @@ export function ResultActions({ personality, scores, hasPersonalScores }: Props)
             href="/quiz/test"
             className="text-sm font-medium text-gray-500 underline transition-colors hover:text-gray-700"
           >
-            測測你自己 →
+            {t('tryYourself')}
           </Link>
         </div>
       )}

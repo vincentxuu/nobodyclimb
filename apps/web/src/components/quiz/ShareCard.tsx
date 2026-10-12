@@ -2,9 +2,17 @@
 
 import type { PersonalityType } from '@nobodyclimb/types'
 import type { DecodedScores } from '@/lib/quiz/decode-scores'
+import type { LocalizedPersonality } from '@/lib/quiz/personality-i18n'
 import { drawRadar } from './ResultRadar'
 
 export type ShareCardSize = 'square' | 'story' | 'og'
+
+/** 圖卡上已翻譯好的文字（canvas 繪製無法使用 hook，由呼叫端傳入） */
+export interface ShareCardLabels {
+  indexLabel: string
+  tagline: string
+  axisLabels: readonly [string, string, string]
+}
 
 const SIZES: Record<ShareCardSize, { width: number; height: number; label: string }> = {
   square: { width: 1080, height: 1080, label: 'IG/FB Post (1:1)' },
@@ -20,9 +28,10 @@ function getDefaultPercents(code: string): [number, number, number] {
 }
 
 export async function generateShareCard(
-  personality: PersonalityType,
+  personality: LocalizedPersonality,
   scores: DecodedScores | null,
-  size: ShareCardSize
+  size: ShareCardSize,
+  labels: ShareCardLabels
 ): Promise<Blob> {
   const { width, height } = SIZES[size]
   const canvas = document.createElement('canvas')
@@ -57,7 +66,7 @@ export async function generateShareCard(
   const percents: [number, number, number] = scores
     ? [scores.bodyPercent, scores.motivePercent, scores.mindPercent]
     : defaults
-  drawRadar(radarCtx, radarSize, radarSize, percents, personality.color)
+  drawRadar(radarCtx, radarSize, radarSize, percents, personality.color, labels.axisLabels)
 
   if (isOg) {
     ctx.drawImage(radarCanvas, width - radarSize - 40, (height - radarSize) / 2)
@@ -76,30 +85,31 @@ export async function generateShareCard(
   const codeY = isOg ? height * 0.25 : height * 0.1
   ctx.fillText(personality.code, textX, codeY)
 
-  // Chinese name
+  // Localized name
   ctx.font = `700 ${48 * scale}px "Noto Sans TC", sans-serif`
   ctx.fillStyle = '#1f2937'
-  ctx.fillText(personality.nameZh, textX, codeY + 56 * scale)
+  ctx.fillText(personality.name, textX, codeY + 56 * scale)
 
-  // English name
-  ctx.font = `500 ${24 * scale}px "Noto Sans TC", sans-serif`
-  ctx.fillStyle = '#6b7280'
-  ctx.fillText(personality.nameEn, textX, codeY + 90 * scale)
+  // English name（與顯示名稱相同時不重複繪製）
+  if (personality.name !== personality.nameEn) {
+    ctx.font = `500 ${24 * scale}px "Noto Sans TC", sans-serif`
+    ctx.fillStyle = '#6b7280'
+    ctx.fillText(personality.nameEn, textX, codeY + 90 * scale)
+  }
 
   // Tagline
   ctx.font = `italic ${20 * scale}px "Noto Sans TC", sans-serif`
   ctx.fillStyle = personality.color
-  ctx.fillText(`「${personality.tagline}」`, textX, codeY + 130 * scale)
+  ctx.fillText(labels.tagline, textX, codeY + 130 * scale)
 
   // Grit/Flow index
   const isGoal = personality.code[1] === 'G'
-  const indexLabel = isGoal ? '恆毅力指數' : '心流指數'
   const indexValue = scores ? (isGoal ? scores.gritIndex : scores.flowIndex) : 72
 
   const indexY = isOg ? height * 0.75 : height * 0.75
   ctx.font = `500 ${18 * scale}px "Noto Sans TC", sans-serif`
   ctx.fillStyle = '#6b7280'
-  ctx.fillText(`${indexLabel}: ${Math.round(indexValue)}`, textX, indexY)
+  ctx.fillText(`${labels.indexLabel}: ${Math.round(indexValue)}`, textX, indexY)
 
   // URL
   ctx.font = `400 ${16 * scale}px "Noto Sans TC", sans-serif`

@@ -1,6 +1,7 @@
 'use client'
 
 import { Plus, X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { KeyboardEvent, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -17,10 +18,13 @@ interface TagSelectorProps {
 export function TagSelector({
   tags,
   onChange,
-  placeholder = '輸入標籤後按 Enter',
+  placeholder,
   maxTags = 5,
-  suggestions = ['攀岩技巧', '裝備評測', '訓練心得', '比賽紀錄', '岩場分享', '抱石', '先鋒攀登'],
+  suggestions: suggestionsProp,
 }: TagSelectorProps) {
+  const t = useTranslations('Editor')
+  // 未指定建議標籤時，使用當前語系的預設清單
+  const suggestions = suggestionsProp ?? (t.raw('tagSuggestions') as string[])
   const [inputValue, setInputValue] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
 
@@ -85,7 +89,7 @@ export function TagSelector({
               onKeyDown={handleKeyDown}
               onFocus={() => setShowSuggestions(true)}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-              placeholder={placeholder}
+              placeholder={placeholder ?? t('tagPlaceholder')}
               className="flex-1"
             />
             <Button
@@ -120,7 +124,7 @@ export function TagSelector({
       {/* 快速選擇 */}
       {tags.length < maxTags && (
         <div className="flex flex-wrap gap-2">
-          <span className="text-sm text-gray-500">快速添加：</span>
+          <span className="text-sm text-gray-500">{t('quickAdd')}</span>
           {suggestions
             .filter((s) => !tags.includes(s))
             .slice(0, 4)
@@ -138,9 +142,7 @@ export function TagSelector({
       )}
 
       {/* 提示訊息 */}
-      <p className="text-xs text-gray-400">
-        最多可添加 {maxTags} 個標籤，已添加 {tags.length} 個
-      </p>
+      <p className="text-xs text-gray-400">{t('tagLimit', { max: maxTags, count: tags.length })}</p>
     </div>
   )
 }

@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { bucketListService } from '@/lib/api/services'
+import { useCountryName } from '@/lib/hooks/useCountryName'
 import { isSvgUrl } from '@/lib/utils/image'
 
 interface LocationData {
@@ -30,6 +31,7 @@ interface BucketListLocation {
 
 export function LocationExplorer() {
   const t = useTranslations('BiographyPage')
+  const countryName = useCountryName()
   const [taiwanLocations, setTaiwanLocations] = useState<LocationData[]>([])
   const [overseasLocations, setOverseasLocations] = useState<LocationData[]>([])
   const [bucketListLocations, setBucketListLocations] = useState<BucketListLocation[]>([])
@@ -79,7 +81,7 @@ export function LocationExplorer() {
       <Card className="h-full cursor-pointer transition-shadow duration-300 hover:shadow-md">
         <CardContent className="p-4">
           <h4 className="mb-2 font-semibold text-[#1B1A1A]">{loc.location}</h4>
-          <p className="mb-3 text-sm text-gray-500">{loc.country}</p>
+          <p className="mb-3 text-sm text-gray-500">{countryName(loc.country)}</p>
           <div className="flex items-center gap-1 text-sm text-gray-600">
             <Users className="h-4 w-4" />
             <span>{t('visitorsCount', { count: loc.visitors.length })}</span>

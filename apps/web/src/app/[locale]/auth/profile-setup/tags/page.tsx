@@ -9,6 +9,7 @@ import { useToast } from '@/components/ui/use-toast'
 import { biographyService } from '@/lib/api/services'
 import { SYSTEM_TAG_DIMENSION_LIST, SYSTEM_TAG_DIMENSIONS } from '@/lib/constants/biography-tags'
 import { useAuth } from '@/lib/hooks/useAuth'
+import { useBiographyTagText } from '@/lib/hooks/useBiographyTagText'
 
 // 註冊流程精選的標籤維度（3 個）
 const REGISTRATION_TAG_DIMENSIONS: string[] = [
@@ -55,6 +56,7 @@ const iconMap: Record<string, LucideIcon> = {
 export default function TagsPage() {
   const router = useRouter()
   const t = useTranslations('Auth')
+  const { dimensionName, dimensionDescription, tagLabel } = useBiographyTagText()
   const { status, isLoading } = useAuth()
   const { toast } = useToast()
 
@@ -232,7 +234,9 @@ export default function TagsPage() {
                     <div className="flex items-center gap-3">
                       {IconComponent && <IconComponent size={20} className="text-primary" />}
                       {!IconComponent && <Tag size={20} className="text-primary" />}
-                      <span className="font-medium text-gray-900">{dimension.name}</span>
+                      <span className="font-medium text-gray-900">
+                        {dimensionName(dimension.id, dimension.name)}
+                      </span>
                       {selectedCount > 0 && (
                         <span className="text-xs text-primary font-medium bg-primary/10 px-2 py-0.5 rounded-full">
                           {selectedCount}
@@ -252,7 +256,7 @@ export default function TagsPage() {
                   {isExpanded && (
                     <div className="p-4 space-y-3 bg-white">
                       <p className="text-sm text-gray-500">
-                        {dimension.description}
+                        {dimensionDescription(dimension.id, dimension.description)}
                         {dimension.selection_mode === 'multiple'
                           ? ` ${t('multiSelectParens')}`
                           : ` ${t('singleSelectParens')}`}
@@ -274,7 +278,7 @@ export default function TagsPage() {
                               )}
                             >
                               {isSelected && <Check size={14} className="inline mr-1" />}
-                              {option.label}
+                              {tagLabel(option.id, option.label)}
                             </button>
                           )
                         })}

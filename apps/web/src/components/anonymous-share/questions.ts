@@ -22,7 +22,11 @@ export interface StoryInput {
 /**
  * 從 API 資料轉換為 Question 格式
  */
-export function convertApiQuestionsToQuestions(data: QuestionsData): {
+export function convertApiQuestionsToQuestions(
+  data: QuestionsData,
+  // 題目沒有自訂 placeholder 時使用的預設文字（由呼叫端依語系提供）
+  fallbackPlaceholders: { story: string; answer: string }
+): {
   coreStories: Question[]
   oneLiners: Question[]
   stories: Question[]
@@ -38,7 +42,7 @@ export function convertApiQuestionsToQuestions(data: QuestionsData): {
     id: q.id,
     title: q.title,
     subtitle: q.subtitle || undefined,
-    placeholder: q.placeholder || '分享你的故事...',
+    placeholder: q.placeholder || fallbackPlaceholders.story,
     type: 'core_story' as const,
   }))
 
@@ -46,7 +50,7 @@ export function convertApiQuestionsToQuestions(data: QuestionsData): {
     id: q.id,
     title: q.question,
     subtitle: q.format_hint || undefined,
-    placeholder: q.placeholder || '輸入你的回答...',
+    placeholder: q.placeholder || fallbackPlaceholders.answer,
     type: 'one_liner' as const,
   }))
 
@@ -54,7 +58,7 @@ export function convertApiQuestionsToQuestions(data: QuestionsData): {
     id: q.id,
     title: q.title,
     subtitle: q.subtitle || undefined,
-    placeholder: q.placeholder || '分享你的故事...',
+    placeholder: q.placeholder || fallbackPlaceholders.story,
     type: 'story' as const,
     category: q.category_id,
     categoryName: categoryNames[q.category_id] || undefined,

@@ -1,4 +1,4 @@
-import type { AiLocale, AiQuota } from '@nobodyclimb/types'
+import type { AiLocale, AiQuota, PaginationInfo } from '@nobodyclimb/types'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import apiClient from './client'
 
@@ -31,6 +31,10 @@ export interface AIAskRequest {
   no_cache?: boolean
   /** 介面語言，後端據此決定回答語言 */
   locale?: AiLocale
+  /** 帶了就由後端寫入 user / assistant 訊息並更新 session 標題（前端不可再呼叫 saveMessage） */
+  session_id?: string
+  /** 搭配 session_id：不新增 user 訊息，以新回答取代該 session 最後一則 assistant 訊息 */
+  regenerate?: boolean
 }
 
 export interface AIAskResponse {
@@ -105,9 +109,18 @@ export interface ChatMessage {
   session_id?: string
   role: 'user' | 'assistant'
   content: string
-  suggested_questions?: string[]
+  /** 後端可能回 JSON 字串或陣列，解析見 lib/chat/messages.ts 的 mapStoredMessages */
+  suggested_questions?: string[] | string | null
+  sources?: AISource[] | null
+  /** 'stopped' = 使用者中斷生成，content 為中斷前的部分內容 */
+  status?: string | null
   query_id?: string
   created_at: number
+}
+
+export interface ChatSessionsPage {
+  sessions: ChatSession[]
+  pagination: PaginationInfo
 }
 
 export interface SaveMessageRequest {
@@ -141,44 +154,115 @@ export interface AIStreamProgressEvent {
   duration_ms?: number
 }
 
+// 機器可讀錯誤碼：後端 HTTP 錯誤 / SSE error 事件的 code，另加前端自訂的 network、unknown
+// 顯示文字由元件以 Chat.errors.<code> 翻譯，這一層不放任何語系字串
+export const AI_ERROR_CODES = [
+  'rate_limited',
+  'quota_exceeded',
+  'token_quota_exceeded',
+  'invalid_input',
+  'session_not_found',
+  'timeout',
+  'circuit_open',
+  'internal',
+  'network',
+  'unknown',
+] as const
+
+export type AIErrorCode = (typeof AI_ERROR_CODES)[number]
+
+// 429 回應的 data（配額耗盡時後端附帶的配額現況）
+export interface AIQuotaErrorData {
+  tier?: string
+  tier_display?: string
+  daily_limit?: number
+  daily_used?: number
+  resets_at?: string
+}
+
+export interface AIRequestError {
+  code: AIErrorCode
+  status?: number
+  data?: AIQuotaErrorData
+}
+
+// 後端 400 的 code 是 PascalCase 的 InvalidInput，這裡統一成 snake_case；不認得的一律 unknown
+export function normalizeAIErrorCode(raw: unknown): AIErrorCode {
+  if (raw === 'InvalidInput') return 'invalid_input'
+  return (AI_ERROR_CODES as readonly unknown[]).includes(raw) ? (raw as AIErrorCode) : 'unknown'
+}
+
+// HTTP 錯誤回應 { success:false, error:<code>, message, data? } → 結構化錯誤
+export function parseAIErrorResponse(status: number | undefined, body: unknown): AIRequestError {
+  const json = (body && typeof body === 'object' ? body : {}) as { error?: unknown; data?: unknown }
+  let code = normalizeAIErrorCode(json.error)
+  // 舊後端的 429 可能沒帶 code，視為次數配額用盡（原本的行為）
+  if (code === 'unknown' && status === 429) code = 'quota_exceeded'
+  const data =
+    json.data && typeof json.data === 'object' ? (json.data as AIQuotaErrorData) : undefined
+  return { code, status, ...(data ? { data } : {}) }
+}
+
+// 非串流（axios）錯誤 → 結構化錯誤；沒有 response 代表連不上或逾時
+export function toAIRequestError(error: unknown): AIRequestError {
+  const response = (error as { response?: { status?: number; data?: unknown } } | null)?.response
+  if (!response) return { code: 'network' }
+  return parseAIErrorResponse(response.status, response.data)
+}
+
+function isAbortError(err: unknown): boolean {
+  return err instanceof Error && err.name === 'AbortError'
+}
+
 // SSE 串流問答：使用 fetch + ReadableStream 接收，支援 AbortController 取消
+// 使用者主動取消（abort）時靜默結束，不呼叫 onDone / onError
 export async function askAIStream(
   request: AIAskRequest,
   onToken: (_token: string) => void,
   onDone: (_event: AIStreamDoneEvent) => void,
-  onError: (_message: string) => void,
+  onError: (_error: AIRequestError) => void,
   signal?: AbortSignal,
-  onProgress?: (_event: AIStreamProgressEvent) => void
+  onProgress?: (_event: AIStreamProgressEvent) => void,
+  // 後端作廢先前推送的 token（agent 該輪改為呼叫工具、或 LLM 呼叫重試）：呼叫端要清空已累積的文字
+  onReset?: () => void
 ): Promise<void> {
   const { API_BASE_URL } = await import('../constants')
   const { getAccessToken } = await import('@nobodyclimb/api-client/web')
   const token = getAccessToken()
 
-  const response = await fetch(`${API_BASE_URL}/ai/ask?stream=true`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-    body: JSON.stringify(request),
-    signal,
-  })
+  let response: Response
+  try {
+    response = await fetch(`${API_BASE_URL}/ai/ask?stream=true`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify(request),
+      signal,
+    })
+  } catch (err) {
+    if (!isAbortError(err)) onError({ code: 'network' })
+    return
+  }
 
   if (!response.ok || !response.body) {
-    // 嘗試讀取後端回傳的錯誤訊息（如 guardrails 攔截、配額耗盡等）
+    // 讀取後端回傳的錯誤碼（如 guardrails 攔截、配額耗盡等）
+    let body: unknown
     try {
-      const errJson = (await response.json()) as { message?: string; error?: string }
-      const errMsg = errJson.message ?? '抱歉，AI 服務暫時無法使用，請稍後再試。'
-      onError(errMsg)
+      body = await response.json()
     } catch {
-      onError('抱歉，AI 服務暫時無法使用，請稍後再試。')
+      body = undefined
     }
+    onError(parseAIErrorResponse(response.status, body))
     return
   }
 
   const reader = response.body.getReader()
   const decoder = new TextDecoder()
   let buffer = ''
+  // 是否已收到 done / error：串流沒有結尾事件就斷線時要補一個 network 錯誤，避免訊息卡在串流中
+  let settled = false
 
   try {
     while (true) {
@@ -204,10 +288,11 @@ export async function askAIStream(
             output?: string
             is_error?: boolean
             duration_ms?: number
-          } & Partial<AIStreamDoneEvent> & { message?: string }
+          } & Partial<AIStreamDoneEvent> & { code?: string }
           if (event.type === 'token' && event.token !== undefined) {
             onToken(event.token)
           } else if (event.type === 'done') {
+            settled = true
             onDone(event as AIStreamDoneEvent)
           } else if (event.type === 'progress' && onProgress) {
             onProgress({
@@ -220,30 +305,32 @@ export async function askAIStream(
               is_error: event.is_error,
               duration_ms: event.duration_ms,
             })
+          } else if (event.type === 'token_reset') {
+            onReset?.()
           } else if (event.type === 'error') {
-            onError(event.message ?? '抱歉，AI 服務暫時無法使用，請稍後再試。')
+            settled = true
+            onError({ code: normalizeAIErrorCode(event.code) })
           }
         } catch {
           // 忽略無法解析的行
         }
       }
     }
+    if (!settled && !signal?.aborted) onError({ code: 'network' })
   } catch (err) {
     // AbortError 是用戶主動取消，靜默結束；其他錯誤呼叫 onError
-    if (err instanceof Error && err.name !== 'AbortError') {
-      onError('⚠ 生成中斷，請重試')
-    }
+    if (!settled && !isAbortError(err)) onError({ code: 'network' })
   } finally {
     reader.releaseLock()
   }
 }
 
-export async function askAI(request: AIAskRequest): Promise<AIAskResponse> {
+export async function askAI(request: AIAskRequest, signal?: AbortSignal): Promise<AIAskResponse> {
   // AI 推理包含 embedding + 向量搜尋 + 多次 LLM，最多需要 60 秒
   const response = await apiClient.post<{ success: boolean; data: AIAskResponse }>(
     '/ai/ask',
     request,
-    { timeout: 60000 }
+    { timeout: 60000, signal }
   )
   return response.data.data
 }
@@ -281,7 +368,7 @@ export async function checkAIHealth(): Promise<AIHealthResponse> {
 
 export function useAskAI() {
   return useMutation({
-    mutationFn: askAI,
+    mutationFn: (request: AIAskRequest) => askAI(request),
   })
 }
 
@@ -330,6 +417,26 @@ export async function getChatSessions(): Promise<ChatSession[]> {
   return response.data.data
 }
 
+// 分頁版：GET /ai/sessions?page=&limit=，回傳 pagination 信封
+export async function getChatSessionsPage(page = 1, limit = 20): Promise<ChatSessionsPage> {
+  const response = await apiClient.get<{
+    success: boolean
+    data: ChatSession[]
+    pagination?: PaginationInfo
+  }>('/ai/sessions', { params: { page, limit } })
+  const sessions = response.data.data
+  return {
+    sessions,
+    // 舊後端不回 pagination：視為只有這一頁
+    pagination: response.data.pagination ?? {
+      page,
+      limit,
+      total: sessions.length,
+      total_pages: 1,
+    },
+  }
+}
+
 export async function getChatMessages(sessionId: string): Promise<ChatMessage[]> {
   const response = await apiClient.get<{ success: boolean; data: ChatMessage[] }>(
     `/ai/sessions/${sessionId}/messages`
@@ -341,6 +448,7 @@ export async function deleteChatSession(sessionId: string): Promise<void> {
   await apiClient.delete(`/ai/sessions/${sessionId}`)
 }
 
+// 注意：/ai/ask 帶 session_id 時訊息由後端寫入，聊天流程不可再呼叫這支（會重複寫入）
 export async function saveMessage(
   sessionId: string,
   message: SaveMessageRequest

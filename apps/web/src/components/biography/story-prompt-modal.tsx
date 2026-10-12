@@ -2,10 +2,11 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { BarChart, ChevronRight, Info, Loader2, MessageCircle, Users, X } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useMessages, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
+import { useBiographyQuestionText } from '@/lib/hooks/useBiographyQuestions'
 import {
   calculatePromptProgress,
   convertToPromptQuestions,
@@ -119,7 +120,7 @@ interface StoryPromptModalProps {
  */
 export function StoryPromptModal({
   biography,
-  userName = '你',
+  userName,
   isOpen,
   onClose,
   onSave,
@@ -129,6 +130,15 @@ export function StoryPromptModal({
   initialField,
 }: StoryPromptModalProps) {
   const t = useTranslations('BiographyEditor')
+  const tm = useTranslations('BiographyMisc')
+  const tLib = useTranslations('LibMisc')
+  const { getStoryTitle, getCategoryName } = useBiographyQuestionText()
+  // 範例答案以題目 id 為 key，直接讀訊息物件（題目 id 來自 API，未必每題都有範例）
+  const promptExamples = (
+    (useMessages() as Record<string, unknown>).BiographyMisc as
+      | { promptExamples?: Record<string, string> }
+      | undefined
+  )?.promptExamples
   const [currentQuestion, setCurrentQuestion] = useState<PromptStoryQuestion | null>(null)
   const [value, setValue] = useState('')
   const [isSaving, setIsSaving] = useState(false)
@@ -149,7 +159,7 @@ export function StoryPromptModal({
     if (!questionsData) return {}
     const names: Record<string, string> = {}
     questionsData.categories.forEach((cat) => {
-      names[cat.id] = cat.name
+      names[cat.id] = getCategoryName(cat.id, cat.name)
     })
     return names
   }, [questionsData])
@@ -265,7 +275,7 @@ export function StoryPromptModal({
             <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">
-                  {t('storyPromptWelcome', { name: userName })}
+                  {t('storyPromptWelcome', { name: userName ?? tm('defaultUserName') })}
                 </h2>
                 <p className="text-sm text-gray-500">{t('storyPromptSubtitle')}</p>
               </div>
@@ -291,7 +301,9 @@ export function StoryPromptModal({
                     <Icon className={cn('h-4 w-4', categoryInfo?.color || 'text-gray-500')} />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-sm font-medium text-gray-900">{currentQuestion.title}</h3>
+                    <h3 className="text-sm font-medium text-gray-900">
+                      {getStoryTitle(currentQuestion.field, currentQuestion.title)}
+                    </h3>
                     <p className="mt-0.5 text-xs text-gray-500">{currentQuestion.subtitle}</p>
                   </div>
                 </div>
@@ -300,7 +312,7 @@ export function StoryPromptModal({
                 <Textarea
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
-                  placeholder={currentQuestion.placeholder}
+                  placeholder={currentQuestion.placeholder || tLib('storyPromptPlaceholder')}
                   className="min-h-[100px] resize-none border-gray-200 bg-white text-sm"
                   autoFocus
                 />
@@ -366,7 +378,7 @@ export function StoryPromptModal({
                   className="mb-4 rounded-lg bg-gray-50 p-4"
                 >
                   <p className="text-sm italic text-gray-500">
-                    「{getExampleAnswer(currentQuestion.field)}」
+                    「{promptExamples?.[currentQuestion.field] ?? tm('promptExampleDefault')}」
                   </p>
                   <p className="mt-2 text-right text-xs text-gray-400">
                     — {t('storyPromptExampleAuthor')}
@@ -395,25 +407,6 @@ export function StoryPromptModal({
       )}
     </AnimatePresence>
   )
-}
-
-/**
- * 取得範例答案（靜態，可以之後從 API 取得）
- */
-function getExampleAnswer(field: string): string {
-  const examples: Record<string, string> = {
-    memorable_moment:
-      '那次在龍洞的夕陽下完攀，整個人被橘紅色的光芒包圍，那一刻覺得所有的練習都值得了。',
-    biggest_challenge: '曾經因為指腱炎休息了半年，那段時間學會了耐心，也更珍惜能夠攀爬的每一天。',
-    funny_moment:
-      '有一次爬到一半褲子破掉，只好硬著頭皮爬完整條路線，下來後才發現後面的人都在偷笑。',
-    fear_management: '每次害怕墜落時，我會深呼吸三次，告訴自己繩子會接住我，然後專注在下一個動作。',
-    favorite_spot: '最推薦北部的原岩，定線有創意，氣氛也很好，是我開始愛上抱石的地方。',
-    climbing_mentor: '我的教練總是說「慢慢來，比較快」，這句話改變了我急躁的個性，不只在攀岩上。',
-    life_outside_climbing: '除了攀岩，我也很喜歡攝影。常常帶著相機去岩場，記錄岩友們專注的表情。',
-  }
-
-  return examples[field] || '這是一段很棒的攀岩故事...'
 }
 
 /**

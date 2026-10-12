@@ -26,6 +26,7 @@ type TabValue = 'all' | 'active' | 'completed' | 'archived'
 
 export default function BucketListPage() {
   const t = useTranslations('ProfilePage')
+  const tCategory = useTranslations('BucketListPage.categoryLabels')
   const queryClient = useQueryClient()
   const { toast } = useToast()
 
@@ -301,7 +302,7 @@ export default function BucketListPage() {
                   <option value="all">{t('allCategories')}</option>
                   {BUCKET_LIST_CATEGORIES.map((cat) => (
                     <option key={cat.value} value={cat.value}>
-                      {cat.label}
+                      {tCategory(cat.value)}
                     </option>
                   ))}
                 </select>

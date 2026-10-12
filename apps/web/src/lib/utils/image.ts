@@ -44,6 +44,31 @@ export function isSvgUrl(url: string): boolean {
 }
 
 /**
+ * 圖片處理錯誤代碼，對應訊息檔 `LibMisc.imageErrors.*`
+ */
+export type ImageErrorCode =
+  | 'unsupportedFormat'
+  | 'gifTooLarge'
+  | 'canvasUnavailable'
+  | 'compressFailed'
+  | 'loadFailed'
+
+/**
+ * 圖片處理錯誤。
+ * `message` 維持繁中（供 log 與未接 i18n 的呼叫端），
+ * 要顯示給使用者時請用 `useImageErrorMessage()` 依 `code` 取得目前語系的文字。
+ */
+export class ImageProcessError extends Error {
+  readonly code: ImageErrorCode
+
+  constructor(code: ImageErrorCode, message: string) {
+    super(message)
+    this.name = 'ImageProcessError'
+    this.code = code
+  }
+}
+
+/**
  * 驗證圖片檔案類型
  */
 export function validateImageType(file: File): boolean {
@@ -66,13 +91,16 @@ export async function compressImage(
 ): Promise<File> {
   // 驗證檔案類型
   if (!validateImageType(file)) {
-    throw new Error('不支援的檔案格式，僅支援 JPEG、PNG、WebP、GIF')
+    throw new ImageProcessError(
+      'unsupportedFormat',
+      '不支援的檔案格式，僅支援 JPEG、PNG、WebP、GIF'
+    )
   }
 
   // GIF 不壓縮（會失去動畫）
   if (file.type === 'image/gif') {
     if (file.size > maxSize) {
-      throw new Error('GIF 檔案大小不能超過 500KB')
+      throw new ImageProcessError('gifTooLarge', 'GIF 檔案大小不能超過 500KB')
     }
     return file
   }
@@ -88,7 +116,7 @@ export async function compressImage(
     const ctx = canvas.getContext('2d')
 
     if (!ctx) {
-      reject(new Error('無法建立 canvas context'))
+      reject(new ImageProcessError('canvasUnavailable', '無法建立 canvas context'))
       return
     }
 
@@ -113,7 +141,7 @@ export async function compressImage(
         canvas.toBlob(
           (blob) => {
             if (!blob) {
-              reject(new Error('圖片壓縮失敗'))
+              reject(new ImageProcessError('compressFailed', '圖片壓縮失敗'))
               return
             }
 
@@ -139,7 +167,7 @@ export async function compressImage(
     }
 
     img.onerror = () => {
-      reject(new Error('圖片載入失敗'))
+      reject(new ImageProcessError('loadFailed', '圖片載入失敗'))
     }
 
     img.src = URL.createObjectURL(file)
@@ -153,7 +181,10 @@ export async function compressImage(
  */
 export async function processImage(file: File): Promise<File> {
   if (!validateImageType(file)) {
-    throw new Error('不支援的檔案格式，僅支援 JPEG、PNG、WebP、GIF')
+    throw new ImageProcessError(
+      'unsupportedFormat',
+      '不支援的檔案格式，僅支援 JPEG、PNG、WebP、GIF'
+    )
   }
 
   return compressImage(file)

@@ -11,7 +11,6 @@ import BackToTop from '@/components/ui/back-to-top'
 import { CollapsibleBreadcrumb } from '@/components/ui/collapsible-breadcrumb'
 import { useToast } from '@/components/ui/use-toast'
 import { Link } from '@/i18n/navigation'
-import { RATE_LIMIT_TOAST } from '@/lib/constants'
 import type { RouteDetailData } from '@/lib/crag-data'
 import { routeLoadingManager } from '@/lib/route-loading-manager'
 
@@ -39,7 +38,11 @@ export default function RouteDetailClient({ data }: RouteDetailClientProps) {
 
     if (!routeLoadingManager.canLoadRoute(routeId)) {
       console.warn('Related route loading rate limited:', routeId)
-      toast(RATE_LIMIT_TOAST)
+      toast({
+        title: t('rateLimitTitle'),
+        description: t('rateLimitDescription'),
+        variant: 'default',
+      })
       return
     }
 

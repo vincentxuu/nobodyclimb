@@ -9,6 +9,7 @@ import {
   STORY_CATEGORIES,
   StoryCategory,
 } from '@/lib/constants/biography-stories'
+import { useBiographyStoryText } from '@/lib/hooks/useBiographyStoryText'
 import { cn } from '@/lib/utils'
 import { CATEGORY_ICONS } from '@/lib/utils/biography-ui'
 
@@ -32,6 +33,7 @@ export function StoryProgress({
   className,
 }: StoryProgressProps) {
   const t = useTranslations('BiographyPage')
+  const { categoryName } = useBiographyStoryText()
   const progress = calculateStoryProgress(biography)
 
   if (variant === 'compact') {
@@ -126,7 +128,9 @@ export function StoryProgress({
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="mb-1 flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-900">{category.name}</span>
+                    <span className="text-sm font-medium text-gray-900">
+                      {categoryName(category.id, category.name)}
+                    </span>
                     <span className="text-xs text-gray-500">
                       {categoryProgress.completed}/{categoryProgress.total}
                     </span>
@@ -201,7 +205,7 @@ export function StoryProgress({
                     ? 'bg-gray-100 text-gray-700'
                     : 'bg-gray-50 text-gray-400'
               )}
-              title={`${category.name}: ${categoryProgress.completed}/${categoryProgress.total}`}
+              title={`${categoryName(category.id, category.name)}: ${categoryProgress.completed}/${categoryProgress.total}`}
             >
               <Icon className="h-3.5 w-3.5" />
               <span className="text-xs font-medium">
@@ -273,6 +277,7 @@ interface CategoryQuickStatsProps {
  * 以圖標形式顯示各分類的完成狀態
  */
 export function CategoryQuickStats({ biography, className }: CategoryQuickStatsProps) {
+  const { categoryName } = useBiographyStoryText()
   const progress = calculateStoryProgress(biography)
 
   return (
@@ -290,7 +295,7 @@ export function CategoryQuickStats({ biography, className }: CategoryQuickStatsP
               'flex h-6 w-6 items-center justify-center rounded-full',
               isComplete ? 'bg-brand-accent/20' : hasProgress ? 'bg-yellow-50' : 'bg-gray-50'
             )}
-            title={`${category.name}: ${categoryProgress.completed}/${categoryProgress.total}`}
+            title={`${categoryName(category.id, category.name)}: ${categoryProgress.completed}/${categoryProgress.total}`}
           >
             {isComplete ? (
               <CheckCircle className="h-3.5 w-3.5 text-brand-accent" />

@@ -3,6 +3,7 @@
 import { Loader2, Tag, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
+import { useBiographyTagText } from '@/lib/hooks/useBiographyTagText'
 import type { ContentSource, TagDimension, TagOption } from '@/lib/types/biography-v2'
 import { cn } from '@/lib/utils'
 
@@ -38,6 +39,7 @@ export function AddCustomTagModal({
   className,
 }: AddCustomTagModalProps) {
   const t = useTranslations('BiographyEditor')
+  const { dimensionName } = useBiographyTagText()
   const [label, setLabel] = useState('')
   const [description, setDescription] = useState('')
   const [dimensionId, setDimensionId] = useState(defaultDimensionId || '')
@@ -144,7 +146,7 @@ export function AddCustomTagModal({
             >
               {dimensions.map((dim) => (
                 <option key={dim.id} value={dim.id}>
-                  {dim.emoji} {dim.name}
+                  {dim.emoji} {dimensionName(dim.id, dim.name)}
                 </option>
               ))}
             </select>

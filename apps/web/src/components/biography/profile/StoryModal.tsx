@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import { STORY_CATEGORIES, StoryCategory } from '@/lib/constants/biography-stories'
+import { useBiographyStoryText } from '@/lib/hooks/useBiographyStoryText'
 import { cn, normalizeNewlines } from '@/lib/utils'
 
 interface StoryModalProps {
@@ -29,8 +30,9 @@ const CATEGORY_COLORS: Record<StoryCategory, { bg: string; text: string }> = {
  * 故事詳情 Modal
  */
 export function StoryModal({ story, open, onClose }: StoryModalProps) {
+  const { categoryName } = useBiographyStoryText()
   const getCategoryName = (categoryId: StoryCategory) => {
-    return STORY_CATEGORIES.find((c) => c.id === categoryId)?.name || ''
+    return categoryName(categoryId, STORY_CATEGORIES.find((c) => c.id === categoryId)?.name || '')
   }
 
   return (

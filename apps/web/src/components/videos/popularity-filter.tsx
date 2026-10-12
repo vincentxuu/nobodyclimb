@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import {
   Select,
@@ -18,6 +19,8 @@ const PopularityFilter: React.FC<PopularityFilterProps> = ({
   selectedPopularity,
   onPopularityChange,
 }) => {
+  const t = useTranslations('VideosFilter')
+
   return (
     <div className="w-full md:w-40">
       <Select
@@ -25,12 +28,12 @@ const PopularityFilter: React.FC<PopularityFilterProps> = ({
         onValueChange={(value) => onPopularityChange(value as VideoPopularity | 'all')}
       >
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="熱門程度" />
+          <SelectValue placeholder={t('popularityPlaceholder')} />
         </SelectTrigger>
         <SelectContent>
           {VIDEO_POPULARITY_OPTIONS.map((option) => (
             <SelectItem key={option.value} value={option.value}>
-              {option.label}
+              {t(`popularity.${option.value}`)}
             </SelectItem>
           ))}
         </SelectContent>

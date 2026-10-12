@@ -1,6 +1,7 @@
 'use client'
 
 import { FileText, Image, MapPin, Search, Target, User, Video } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Empty, EmptyAction, EmptyDescription, EmptyIcon, EmptyTitle } from '@/components/ui/empty'
@@ -29,13 +30,15 @@ const iconMap = {
 
 export function EmptyState({
   icon = 'file',
-  title = '沒有資料',
+  title,
   description,
   actionText,
   onAction,
   action,
   className,
 }: EmptyStateProps) {
+  const t = useTranslations('SharedUI')
+
   const renderIcon = () => {
     if (React.isValidElement(icon)) {
       return icon
@@ -47,7 +50,7 @@ export function EmptyState({
   return (
     <Empty className={className}>
       <EmptyIcon>{renderIcon()}</EmptyIcon>
-      <EmptyTitle>{title}</EmptyTitle>
+      <EmptyTitle>{title ?? t('emptyTitle')}</EmptyTitle>
       {description && <EmptyDescription>{description}</EmptyDescription>}
       {action ? (
         <EmptyAction>{action}</EmptyAction>

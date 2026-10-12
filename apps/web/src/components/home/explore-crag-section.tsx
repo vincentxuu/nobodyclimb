@@ -10,6 +10,7 @@ import { CragCoverGenerator } from '@/components/shared/CragCoverGenerator'
 import { Button } from '@/components/ui/button'
 import { type FeaturedRouteItem, useCrags, useFeaturedRoutes } from '@/hooks/api/useCrags'
 import type { CragListItem } from '@/lib/crag-data'
+import { rockTypeLabel } from '@/lib/data-i18n/enum-labels'
 
 // 台灣地圖上的岩場標記位置（百分比，基於 taiwan.svg 437x555）
 const cragMapPositions: Record<string, { top: string; left: string }> = {
@@ -23,6 +24,7 @@ const cragMapPositions: Record<string, { top: string; left: string }> = {
 // 岩場卡片組件（水平滑動版）
 function CragCard({ crag, index }: { crag: CragListItem; index: number }) {
   const t = useTranslations('HomePage')
+  const tData = useTranslations('CragData')
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -46,7 +48,7 @@ function CragCard({ crag, index }: { crag: CragListItem; index: number }) {
           />
           {/* 岩石類型標籤 */}
           <div className="absolute left-2 top-2 rounded bg-[#1B1A1A]/80 px-1.5 py-0.5 text-[10px] font-medium text-white">
-            {crag.type}
+            {rockTypeLabel(tData, crag.type)}
           </div>
         </div>
 

@@ -12,62 +12,56 @@ export type AscentType =
   | 'repeat' // 重複完攀
 
 /**
- * 攀爬類型顯示資訊
+ * 攀爬類型顯示資訊（圖示與顏色）
+ *
+ * 顯示文字依語系查訊息檔：`Ascent.types.<type>.label`／`Ascent.types.<type>.description`。
+ * 這裡的 `label` 是沒有翻譯情境時的英文後備值。
  */
 export const ASCENT_TYPE_DISPLAY: Record<
   AscentType,
   {
     label: string
-    description: string
     icon: string
     color: string
   }
 > = {
   redpoint: {
     label: 'Redpoint',
-    description: '經過練習後一次完攀',
     icon: 'CircleDot',
     color: 'text-red-500',
   },
   flash: {
     label: 'Flash',
-    description: '第一次嘗試且看過他人攀爬',
     icon: 'Zap',
     color: 'text-yellow-500',
   },
   onsight: {
     label: 'Onsight',
-    description: '第一次嘗試且未看過任何資訊',
     icon: 'Eye',
     color: 'text-emerald-500',
   },
   attempt: {
     label: 'Attempt',
-    description: '未完攀',
     icon: 'Target',
     color: 'text-gray-500',
   },
   toprope: {
     label: 'Top Rope',
-    description: '上方確保攀登',
     icon: 'ArrowUp',
     color: 'text-blue-500',
   },
   lead: {
     label: 'Lead',
-    description: '先鋒攀登',
     icon: 'Sword',
     color: 'text-purple-500',
   },
   seconding: {
     label: 'Second',
-    description: '跟攀',
     icon: 'Users',
     color: 'text-cyan-500',
   },
   repeat: {
     label: 'Repeat',
-    description: '重複完攀',
     icon: 'Repeat',
     color: 'text-indigo-500',
   },

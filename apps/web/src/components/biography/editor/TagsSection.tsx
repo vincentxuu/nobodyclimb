@@ -2,6 +2,7 @@
 
 import { ChevronRight, Tag } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { useBiographyTagText } from '@/lib/hooks/useBiographyTagText'
 import type { TagDimension } from '@/lib/types/biography-v2'
 import { cn } from '@/lib/utils'
 import { TagSelectorGroup } from '../shared/TagSelector'
@@ -41,6 +42,7 @@ export function TagsSection({
   className,
 }: TagsSectionProps) {
   const t = useTranslations('BiographyEditor')
+  const { tagLabel } = useBiographyTagText()
   // 計算已選標籤總數
   const totalSelected = Object.values(selections).reduce((sum, ids) => sum + ids.length, 0)
 
@@ -48,7 +50,10 @@ export function TagsSection({
   const selectedTagLabels = dimensions
     .flatMap((dim) =>
       (selections[dim.id] || [])
-        .map((tagId) => dim.options.find((o) => o.id === tagId)?.label)
+        .map((tagId) => {
+          const option = dim.options.find((o) => o.id === tagId)
+          return option ? tagLabel(option.id, option.label) : undefined
+        })
         .filter(Boolean)
     )
     .slice(0, 6) // 最多顯示 6 個

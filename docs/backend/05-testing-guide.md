@@ -1,3 +1,5 @@
+> ⚠️ 過時：本專案 backend 為 Hono + Cloudflare D1，請以 backend/src 與 project-rules 為準
+
 # Django REST Framework 測試指南
 
 > 使用 pytest 為 Django API 編寫高品質測試

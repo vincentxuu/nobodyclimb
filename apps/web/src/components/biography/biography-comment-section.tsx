@@ -2,15 +2,15 @@
 
 import { AxiosError } from 'axios'
 import { formatDistanceToNow } from 'date-fns'
-import { zhTW } from 'date-fns/locale'
 import { Loader2, MessageCircle, Send, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/components/ui/use-toast'
 import { biographyService } from '@/lib/api/services'
+import { getDateFnsLocale } from '@/lib/date-locale'
 import { cn } from '@/lib/utils'
 import { useAuthStore } from '@/store/authStore'
 
@@ -55,6 +55,8 @@ export function BiographyCommentSection({
   const router = useRouter()
   const { toast } = useToast()
   const t = useTranslations('BiographyPage')
+  const locale = useLocale()
+  const tm = useTranslations('BiographyMisc')
 
   const loadComments = useCallback(async () => {
     setIsLoading(true)
@@ -158,7 +160,7 @@ export function BiographyCommentSection({
     try {
       return formatDistanceToNow(new Date(dateString), {
         addSuffix: true,
-        locale: zhTW,
+        locale: getDateFnsLocale(locale),
       })
     } catch {
       return dateString
@@ -309,13 +311,16 @@ export function BiographyCommentSection({
 
             {status !== 'signIn' && (
               <p className="text-sm text-gray-500">
-                <button
-                  onClick={() => router.push('/auth/login')}
-                  className="text-brand-600 hover:underline"
-                >
-                  登入
-                </button>{' '}
-                後才能留言
+                {tm.rich('commentLoginPrompt', {
+                  login: (chunks) => (
+                    <button
+                      onClick={() => router.push('/auth/login')}
+                      className="text-brand-600 hover:underline"
+                    >
+                      {chunks}
+                    </button>
+                  ),
+                })}
               </p>
             )}
 

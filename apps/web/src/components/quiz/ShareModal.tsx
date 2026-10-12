@@ -1,24 +1,28 @@
 'use client'
 
-import type { PersonalityType } from '@nobodyclimb/types'
 import { Check, Copy, Download, ImageIcon, X } from 'lucide-react'
-import { useCallback, useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { useCallback, useMemo, useState } from 'react'
 import type { DecodedScores } from '@/lib/quiz/decode-scores'
+import type { LocalizedPersonality } from '@/lib/quiz/personality-i18n'
 import {
   generateShareCard,
   getShareCardFilename,
   SHARE_CARD_SIZES,
+  type ShareCardLabels,
   type ShareCardSize,
 } from './ShareCard'
 
 interface Props {
   open: boolean
   onClose: () => void
-  personality: PersonalityType
+  personality: LocalizedPersonality
   scores: DecodedScores | null
 }
 
 export function ShareModal({ open, onClose, personality, scores }: Props) {
+  const t = useTranslations('Quiz.share')
+  const tResult = useTranslations('Quiz.result')
   const [generating, setGenerating] = useState(false)
   const [copied, setCopied] = useState(false)
 
@@ -27,11 +31,25 @@ export function ShareModal({ open, onClose, personality, scores }: Props) {
       ? window.location.href
       : `https://nobodyclimb.cc/quiz/result/${personality.code.toLowerCase()}`
 
+  // 圖卡上的文字（畫在 canvas 上，需事先翻好傳入）
+  const cardLabels = useMemo<ShareCardLabels>(
+    () => ({
+      indexLabel: personality.code[1] === 'G' ? tResult('gritIndex') : tResult('flowIndex'),
+      tagline: tResult('taglineQuote', { tagline: personality.tagline }),
+      axisLabels: [
+        tResult('radarAxes.body'),
+        tResult('radarAxes.motive'),
+        tResult('radarAxes.mind'),
+      ],
+    }),
+    [personality.code, personality.tagline, tResult]
+  )
+
   const handleDownload = useCallback(
     async (size: ShareCardSize) => {
       setGenerating(true)
       try {
-        const blob = await generateShareCard(personality, scores, size)
+        const blob = await generateShareCard(personality, scores, size, cardLabels)
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')
         a.href = url
@@ -42,17 +60,17 @@ export function ShareModal({ open, onClose, personality, scores }: Props) {
         setGenerating(false)
       }
     },
-    [personality, scores]
+    [personality, scores, cardLabels]
   )
 
   const handleWebShare = useCallback(async () => {
     if (!navigator.share) return
     setGenerating(true)
     try {
-      const blob = await generateShareCard(personality, scores, 'story')
+      const blob = await generateShareCard(personality, scores, 'story', cardLabels)
       const file = new File([blob], getShareCardFilename(personality), { type: 'image/png' })
       await navigator.share({
-        title: `我是${personality.nameZh} — NobodyClimb 攀岩人格測驗`,
+        title: t('title', { name: personality.name }),
         text: personality.tagline,
         url: resultUrl,
         files: [file],
@@ -62,7 +80,7 @@ export function ShareModal({ open, onClose, personality, scores }: Props) {
     } finally {
       setGenerating(false)
     }
-  }, [personality, scores, resultUrl])
+  }, [personality, scores, resultUrl, cardLabels, t])
 
   const handleCopyLink = useCallback(async () => {
     await navigator.clipboard.writeText(resultUrl)
@@ -79,7 +97,7 @@ export function ShareModal({ open, onClose, personality, scores }: Props) {
       <div className="fixed inset-0 bg-black/40" onClick={onClose} />
       <div className="relative w-full max-w-md rounded-t-2xl bg-white p-6 sm:rounded-2xl">
         <div className="mb-5 flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-900">分享你的結果</h3>
+          <h3 className="text-lg font-semibold text-gray-900">{t('modalTitle')}</h3>
           <button
             onClick={onClose}
             className="rounded-full p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
@@ -96,7 +114,7 @@ export function ShareModal({ open, onClose, personality, scores }: Props) {
               className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition-colors hover:bg-gray-50 disabled:opacity-50"
             >
               <ImageIcon className="h-5 w-5 text-purple-500" />
-              <span className="text-sm font-medium">分享到社群</span>
+              <span className="text-sm font-medium">{t('toSocial')}</span>
             </button>
           )}
 
@@ -151,12 +169,12 @@ export function ShareModal({ open, onClose, personality, scores }: Props) {
             ) : (
               <Copy className="h-5 w-5 text-gray-500" />
             )}
-            <span className="text-sm font-medium">{copied ? '已複製！' : '複製連結'}</span>
+            <span className="text-sm font-medium">{copied ? t('copied') : t('copyLink')}</span>
           </button>
         </div>
 
         {generating && (
-          <div className="mt-3 text-center text-xs text-gray-400">正在生成圖卡...</div>
+          <div className="mt-3 text-center text-xs text-gray-400">{t('generating')}</div>
         )}
       </div>
     </div>

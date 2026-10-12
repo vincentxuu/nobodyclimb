@@ -2,6 +2,7 @@
 
 import type { PersonalityTypeCode, TrainingProgressRecord } from '@nobodyclimb/types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 import { useToast } from '@/components/ui/use-toast'
 import { trainingService } from '@/lib/api/training'
 import type { ApiResponse } from '@/lib/types'
@@ -11,6 +12,7 @@ type ProgressCache = ApiResponse<TrainingProgressRecord[]>
 export function useUpdateProgress(type: PersonalityTypeCode) {
   const queryClient = useQueryClient()
   const { toast } = useToast()
+  const t = useTranslations('LibMisc')
 
   return useMutation({
     mutationFn: trainingService.updateTrainingProgress,
@@ -60,8 +62,8 @@ export function useUpdateProgress(type: PersonalityTypeCode) {
       }
       toast({
         variant: 'destructive',
-        title: '更新失敗',
-        description: '訓練進度更新失敗，請稍後再試',
+        title: t('trainingProgressUpdateFailed'),
+        description: t('trainingProgressUpdateFailedDesc'),
       })
     },
     onSettled: () => {

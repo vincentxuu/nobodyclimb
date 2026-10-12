@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import { buildBlogAlternates, getBlogContentLocale } from '@/lib/blog-i18n-metadata'
 import { OG_IMAGE, SITE_LOGO, SITE_NAME, SITE_URL } from '@/lib/constants'
-import { buildHreflangAlternates, buildOgLocale } from '@/lib/i18n-metadata'
+import { buildOgLocale } from '@/lib/i18n-metadata'
 import BlogDetailClient from './BlogDetailClient'
 
 // 強制動態渲染，避免快取問題
@@ -106,9 +107,10 @@ function generateArticleJsonLd(post: PostMetadata, id: string) {
     dateModified: post.updated_at || post.published_at,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${SITE_URL}/blog/${id}`,
+      '@id': buildBlogAlternates(id).canonical,
     },
     keywords: post.tags?.join(', '),
+    inLanguage: getBlogContentLocale(id),
   }
 }
 
@@ -137,7 +139,9 @@ export async function generateMetadata({
   const description = post.excerpt || `${title} - ${t('metaDescSuffix')}`
   const image = post.cover_image || OG_IMAGE
   const authorName = post.display_name || post.username
-  const ogLocale = buildOgLocale(locale)
+  const contentLocale = getBlogContentLocale(id)
+  const ogLocale = buildOgLocale(contentLocale || locale)
+  const alternates = buildBlogAlternates(id)
 
   return {
     title,
@@ -148,7 +152,7 @@ export async function generateMetadata({
       title: `${title} | ${SITE_NAME}`,
       description,
       type: 'article',
-      url: `${SITE_URL}/blog/${id}`,
+      url: alternates.canonical,
       images: [
         {
           url: image.startsWith('http') ? image : `${SITE_URL}${image}`,
@@ -161,7 +165,7 @@ export async function generateMetadata({
       modifiedTime: post.updated_at || undefined,
       tags: post.tags,
       locale: ogLocale.locale,
-      alternateLocale: ogLocale.alternateLocale,
+      alternateLocale: contentLocale ? ogLocale.alternateLocale : undefined,
     },
     twitter: {
       card: 'summary_large_image',
@@ -169,10 +173,7 @@ export async function generateMetadata({
       description,
       images: [image.startsWith('http') ? image : `${SITE_URL}${image}`],
     },
-    alternates: {
-      canonical: `${SITE_URL}/blog/${id}`,
-      languages: buildHreflangAlternates(`/blog/${id}`),
-    },
+    alternates,
   }
 }
 

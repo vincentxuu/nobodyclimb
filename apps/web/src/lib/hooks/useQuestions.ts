@@ -257,7 +257,8 @@ export function convertToPromptQuestions(data: QuestionsData): PromptStoryQuesti
     category: q.category_id,
     title: q.title,
     subtitle: q.subtitle || '',
-    placeholder: q.placeholder || '分享你的故事...',
+    // 無 placeholder 時留空，由顯示端（story-prompt-modal）補上目前語系的預設文字
+    placeholder: q.placeholder || '',
     icon: 'MessageCircle',
   }))
 }

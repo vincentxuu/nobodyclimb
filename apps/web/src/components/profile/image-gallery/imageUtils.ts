@@ -22,7 +22,7 @@ export async function compressImage(file: File): Promise<File> {
     return compressedFile
   } catch (error) {
     console.error('圖片壓縮失敗:', error)
-    throw new Error('圖片壓縮失敗')
+    throw new Error('Image compression failed')
   }
 }
 

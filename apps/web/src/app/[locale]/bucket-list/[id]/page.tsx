@@ -18,7 +18,7 @@ import {
   Trophy,
   Youtube,
 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import React, { use } from 'react'
 import { ContentActions } from '@/components/biography/display/ContentActions'
 import { ProgressBar, ProgressTracker } from '@/components/bucket-list'
@@ -27,6 +27,7 @@ import { Button } from '@/components/ui/button'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import { Link } from '@/i18n/navigation'
 import { biographyService, bucketListService, type ContentComment } from '@/lib/api/services'
+import { toIntlLocale } from '@/lib/date-locale'
 import type { BucketListCategory, BucketListComment } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
@@ -38,7 +39,11 @@ function renderFormattedText(text: string): React.ReactNode {
   )
 }
 
-function formatDate(dateString: string | undefined, t: ReturnType<typeof useTranslations>): string {
+function formatDate(
+  dateString: string | undefined,
+  t: ReturnType<typeof useTranslations>,
+  locale: string
+): string {
   if (!dateString) return ''
   const date = new Date(dateString)
   const now = new Date()
@@ -50,7 +55,11 @@ function formatDate(dateString: string | undefined, t: ReturnType<typeof useTran
   if (diffInDays < 30) return t('dateWeeksAgo', { weeks: Math.floor(diffInDays / 7) })
   if (diffInDays < 365) return t('dateMonthsAgo', { months: Math.floor(diffInDays / 30) })
 
-  return date.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })
+  return date.toLocaleDateString(toIntlLocale(locale), {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 }
 
 function getCategoryConfig(
@@ -110,7 +119,9 @@ export default function BucketListDetailPage({ params }: BucketListDetailPagePro
   const { id } = use(params)
   const queryClient = useQueryClient()
   const t = useTranslations('BucketListPage')
+  const locale = useLocale()
   const tCommon = useTranslations('Common')
+  const tForm = useTranslations('BucketListForm')
   const [isLiked, setIsLiked] = React.useState(false)
   const [likeCount, setLikeCount] = React.useState(0)
 
@@ -256,8 +267,8 @@ export default function BucketListDetailPage({ params }: BucketListDetailPagePro
         <div className="mb-4 md:mb-8">
           <Breadcrumb
             items={[
-              { label: '首頁', href: '/' },
-              { label: '人物誌', href: '/biography' },
+              { label: tForm('breadcrumbHome'), href: '/' },
+              { label: tForm('breadcrumbBiography'), href: '/biography' },
               ...(biography
                 ? [
                     {
@@ -326,7 +337,7 @@ export default function BucketListDetailPage({ params }: BucketListDetailPagePro
               {item.created_at && (
                 <span className="inline-flex items-center gap-1 text-xs text-text-subtle">
                   <Calendar size={12} />
-                  <span>{formatDate(item.created_at, t)}</span>
+                  <span>{formatDate(item.created_at, t, locale)}</span>
                 </span>
               )}
             </div>
@@ -354,7 +365,8 @@ export default function BucketListDetailPage({ params }: BucketListDetailPagePro
               {isCompleted && item.completed_at && (
                 <span className="inline-flex items-center gap-1 text-brand-dark">
                   <Check className="h-4 w-4" />
-                  {t('completedAt')} {new Date(item.completed_at).toLocaleDateString('zh-TW')}
+                  {t('completedAt')}{' '}
+                  {new Date(item.completed_at).toLocaleDateString(toIntlLocale(locale))}
                 </span>
               )}
               {biography && (

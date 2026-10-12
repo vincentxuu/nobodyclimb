@@ -1,0 +1,510 @@
+{
+  "crag": {
+    "description": {
+      "zh": "壽山岩場位於高雄市鼓山區，是台灣南部最大的天然攀岩場地之一。岩場以珊瑚礁石灰岩為主，岩質獨特，手點和腳點豐富。由於靠近市區，交通便利，是高雄地區攀岩者的首選場地。壽山也是獼猴的棲息地，攀登時常可見到猴群活動。壽山岩場主要分為三大區域：千光寺區（包含外牆、通道、平台上下、南面、天橋下、絕情谷等）、一線天區（早年稱為迴圈谷，擁有30年以上歷史）、以及由加拿大岩友開發的大峽谷區。三個區域提供從5.6到5.13a的多樣化路線，共有107條路線，適合各程度攀岩者。",
+      "text": "Shoushan is located in Gushan District, Kaohsiung City, and is one of the largest natural climbing areas in southern Taiwan. The crag features coral reef limestone with unique rock quality offering abundant hand and footholds. Due to its proximity to the city and convenient transportation, it is the preferred climbing destination for Kaohsiung area climbers. Shoushan is also home to macaques, and you may encounter monkey troops while climbing. The crag consists of three main areas: Qianguang Temple section (including Outside Wall, Passage, Platform Upper/Lower, South Face, Under Bridge, and Heartless Valley), Skyline section (formerly called Loop Valley, with over 30 years of history), and Grand Canyon section (developed by Canadian climbers). These three areas offer 107 diverse routes from 5.6 to 5.13a, suitable for climbers of all levels."
+    },
+    "approach": {
+      "zh": "5-10分鐘徒步",
+      "text": "5-10 minutes hiking"
+    },
+    "parking": {
+      "zh": "千光路路邊停車",
+      "text": "Roadside parking on Qianguang Road"
+    },
+    "liveVideoTitle": {
+      "zh": "壽山即時影像",
+      "text": "Shoushan live camera"
+    },
+    "liveVideoDescription": {
+      "zh": "壽山情人觀景台即時影像，可了解當地天氣狀況",
+      "text": "Live footage from the Shoushan Lovers' Lookout, useful for checking local weather conditions"
+    }
+  },
+  "transportation": [
+    {
+      "zh": "搭乘高雄捷運橘線至鹽埕埔站，轉乘公車56號至壽山",
+      "text": "Take Kaohsiung MRT Orange Line to Yanchengpu Station, transfer to bus 56 to Shoushan"
+    },
+    {
+      "zh": "搭乘公車56號至壽山動物園站下車",
+      "text": "Take bus 56 to Shoushan Zoo stop"
+    },
+    {
+      "zh": "從高雄市區沿鼓山路往壽山方向，約15分鐘車程",
+      "text": "From Kaohsiung city center, follow Gushan Road towards Shoushan, about 15 minutes drive"
+    }
+  ],
+  "areas": {
+    "outside-wall": {
+      "description": {
+        "zh": "高手區，有多條經典高難度路線，包含壽山岩面的經典路線Y2K出差。",
+        "text": "Advanced area with many classic high-difficulty routes, including the iconic Y2K Business Trip route."
+      }
+    },
+    "passage": {
+      "description": {
+        "zh": "位於通往水泥平台的路徑旁，岩面是破碎面，落石較多，下雨後請避免攀爬。",
+        "text": "Located beside the path to the cement platform. The rock surface is fractured with more rockfall risk. Avoid climbing after rain."
+      }
+    },
+    "platform-upper": {
+      "description": {
+        "zh": "水泥平台上的北面岩壁，有多條經典中高難度路線，包含阿雪路線、越嶺獵狐等。",
+        "text": "North-facing wall on the cement platform with many classic intermediate to advanced routes including A-Xue Route and Fox Hunt."
+      }
+    },
+    "platform-lower": {
+      "description": {
+        "zh": "水泥平台下方的岩壁，有超級賽亞人、策馬入林等經典路線。",
+        "text": "Rock wall below the cement platform, featuring classic routes like Super Saiyan and Galloping into the Forest."
+      }
+    },
+    "south-face": {
+      "description": {
+        "zh": "新手區，位於水泥平台右手邊，難度較低，適合初學者練習先鋒攀登。",
+        "text": "Beginner area on the right side of the cement platform, lower difficulty routes suitable for lead climbing practice."
+      }
+    },
+    "under-bridge": {
+      "description": {
+        "zh": "位於千光路往千光寺廁所的步道旁天橋階梯下。",
+        "text": "Located under the bridge stairs beside the path from Qianguang Road to Qianguang Temple restroom."
+      }
+    },
+    "heartless-valley": {
+      "description": {
+        "zh": "千光寺區域內的進階岩場，有多條高難度路線，難度從5.9到5.12d。",
+        "text": "Advanced climbing area within Qianguang Temple section, featuring multiple high-difficulty routes from 5.9 to 5.12d."
+      }
+    },
+    "skyline": {
+      "description": {
+        "zh": "由龍泉寺登山口出發步行約45分鐘即可抵達，早年開發時稱為「迴圈谷」，擁有30年以上歷史的古老岩場。大部份的高度約12到15米，總共18條路線。難度分佈從5.6到5.12c都有，能同時滿足新手與高手。",
+        "text": "About 45 minutes walk from Longquan Temple trailhead. Originally called 'Loop Valley', this historic climbing area has over 30 years of history. Most routes are 12-15m high, totaling 18 routes. Difficulty ranges from 5.6 to 5.12c, suitable for both beginners and advanced climbers."
+      }
+    },
+    "grand-canyon": {
+      "description": {
+        "zh": "由龍泉寺登山口出發步行約40分鐘即可抵達，由加拿大岩友所開發的運動攀登岩場，分為上下兩區，上半區6條高度約12米，下半區8條高度約15米，總共14條路線。難度分佈從5.10b到5.12d，大多數難度在5.11c以上，對於初學者來說比較難親近的岩場。",
+        "text": "About 40 minutes walk from Longquan Temple trailhead. Developed by Canadian climbers, this sport climbing area has two sections: upper section with 6 routes (12m high) and lower section with 8 routes (15m high), totaling 14 routes. Difficulty ranges from 5.10b to 5.12d, with most routes at 5.11c or above, making it more suitable for experienced climbers."
+      }
+    }
+  },
+  "routes": {
+    "SS-OUTSIDE-WALL-001": {
+      "description": {
+        "zh": "2012使用glue-in抗酸鹼不繡鋼螺桿，外加不繡鋼耳片",
+        "text": "In 2012, glue-in acid- and alkali-resistant stainless steel threaded rods were used, with stainless steel hangers added."
+      }
+    },
+    "SS-OUTSIDE-WALL-003": {
+      "description": {
+        "zh": "Project路線",
+        "text": "Project route."
+      }
+    },
+    "SS-OUTSIDE-WALL-004": {
+      "description": {
+        "zh": "前兩個bolts與土地公相同，2014-02使用不繡鋼glue-in bolts",
+        "text": "The first two bolts are the same as 土地公. Stainless steel glue-in bolts were used in 2014-02."
+      }
+    },
+    "SS-OUTSIDE-WALL-005": {
+      "description": {
+        "zh": "下半部與土地公完全相同，上半部直上是後來才打bolts的，整體難度比土地公高一點點",
+        "text": "The lower half is exactly the same as 土地公; the direct upper half was bolted later, and the overall difficulty is slightly higher than 土地公."
+      }
+    },
+    "SS-OUTSIDE-WALL-006": {
+      "description": {
+        "zh": "起攀處是最難的一段，有一個V5的指力難關，腳點不太好，對於身高高的人有明顯優勢。通過難關後向右攀爬與Pump路線共同上半部，考驗耐力",
+        "text": "The start is the hardest section, with a V5 finger-strength crux. The footholds are not very good, and tall climbers have a clear advantage. After the crux, climb right to share the upper half with the Pump route; a test of endurance."
+      }
+    },
+    "SS-OUTSIDE-WALL-007": {
+      "description": {
+        "zh": "蠻費前臂體力外傾的路線，常常會爬到讓人雙臂充血，後來Top Anchors加高了2公尺使得爬起來更累人了",
+        "text": "An overhanging route that is quite taxing on the forearms; it often leaves both arms pumped. The top anchors were later raised by 2 meters, making it even more tiring."
+      }
+    },
+    "SS-OUTSIDE-WALL-008": {
+      "description": {
+        "zh": "起攀與Pump共用兩個bolt，上半部有一個V5的難關，倒拉去Dyno一個很遠的指洞需要爆發力。身高高的人有明顯的優勢",
+        "text": "The start shares two bolts with Pump. The upper half has a V5 crux: a dyno from an undercling to a distant finger pocket that requires explosive power. Tall climbers have a clear advantage."
+      }
+    },
+    "SS-OUTSIDE-WALL-011": {
+      "description": {
+        "zh": "由安心亞路線起攀兩個bolts後往右斜上橫渡到土地婆後直上",
+        "text": "Start on the 安心亞 route for two bolts, then traverse diagonally up and right to 土地婆 and climb straight up."
+      }
+    },
+    "SS-OUTSIDE-WALL-012": {
+      "description": {
+        "zh": "由安心亞路線起攀兩個bolts後往右斜上橫渡一直到Pump路線後直上",
+        "text": "Start on the 安心亞 route for two bolts, then traverse diagonally up and right all the way to the Pump route and climb straight up."
+      }
+    },
+    "SS-OUTSIDE-WALL-013": {
+      "description": {
+        "zh": "由安心亞路線起攀，往右橫渡一直到Y2K完攀",
+        "text": "Start on the 安心亞 route and traverse right all the way to finish on Y2K."
+      }
+    },
+    "SS-OUTSIDE-WALL-014": {
+      "description": {
+        "zh": "串連Y2K的下半部與出差第二天的上半部，使整條路線難度平均分佈，成為壽山岩面的經典路線。有兩個V5的難關，需要有耐力之外還要有爆發力",
+        "text": "Links the lower half of Y2K with the upper half of 出差第二天, giving evenly distributed difficulty over the whole route and making it a classic of the Shoushan faces. There are two V5 cruxes; it requires explosive power in addition to endurance."
+      }
+    },
+    "SS-PASSAGE-001": {
+      "description": {
+        "zh": "2013/02使用不繡鋼glue-in bolt",
+        "text": "Stainless steel glue-in bolts were used in 2013/02."
+      }
+    },
+    "SS-PASSAGE-002": {
+      "description": {
+        "zh": "看起來很簡單，把手點是很多而且點還蠻大的，但是因為外傾的關係，爬起來還挺累的",
+        "text": "It looks easy, with many jugs and fairly large holds, but because it overhangs it is quite tiring to climb."
+      }
+    },
+    "SS-PASSAGE-003": {
+      "description": {
+        "zh": "2014/02使用不繡鋼glue-in bolt",
+        "text": "Stainless steel glue-in bolts were used in 2014/02."
+      }
+    },
+    "SS-PASSAGE-004": {
+      "description": {
+        "zh": "2014/02使用不繡鋼glue-in bolt",
+        "text": "Stainless steel glue-in bolts were used in 2014/02."
+      }
+    },
+    "SS-PLATFORM-UPPER-007": {
+      "description": {
+        "zh": "與鹹酥雞路線共用所有的Bolts，下半部與鹹酥雞完全相同，上半部只能夠使用岩面上的點，左側的側拉岩點不可使用",
+        "text": "Shares all bolts with the 鹹酥雞 route. The lower half is exactly the same as 鹹酥雞; on the upper half only the holds on the face may be used, and the sidepull holds on the left are off."
+      }
+    },
+    "SS-PLATFORM-UPPER-009": {
+      "description": {
+        "zh": "與阿雪路線共用Top Anchor",
+        "text": "Shares the top anchor with 阿雪路線."
+      }
+    },
+    "SS-PLATFORM-UPPER-010": {
+      "description": {
+        "zh": "又稱為北京猿人，整條路線難度很平均，對於攀岩者的指力、腳踩點的信心、平衡感、身體姿勢、體力的要求很全面，堪稱是進入高手之林的必經路線",
+        "text": "Also known as 北京猿人. The difficulty is very even throughout, placing all-round demands on finger strength, trust in footholds, balance, body positioning and stamina; it can be called a must-do route on the way to becoming an advanced climber."
+      }
+    },
+    "SS-PLATFORM-UPPER-011": {
+      "description": {
+        "zh": "路線中途有一個大石洞，攀岩者可以躲在其中休息，起攀對高個子比較有利。很容易在第二個快扣處墜落，確保時要特別小心",
+        "text": "There is a large hole partway up the route where the climber can tuck in and rest. The start favors tall climbers. It is easy to fall at the second quickdraw, so take particular care when belaying."
+      }
+    },
+    "SS-PLATFORM-UPPER-012": {
+      "description": {
+        "zh": "屬於典型的Open Hand抓法。手點、腳點都已經被磨得很光滑了，不可使用山頂洞人的把手點才會有7a+的難度。難關只集中在路線的下半部，上半部相較之下比較簡單。2014/02 rebolts使用不繡鋼glue-in bolts",
+        "text": "A typical open-hand route. The handholds and footholds have already been polished very smooth. It is only 7a+ if you do not use the jugs of 山頂洞人. The crux is concentrated in the lower half; the upper half is easier by comparison. Rebolted in 2014/02 with stainless steel glue-in bolts."
+      }
+    },
+    "SS-PLATFORM-UPPER-013": {
+      "description": {
+        "zh": "難關在於起攀處，對於個子小的人會覺得更困難，需要好的指力。很容易在第二個快扣處墜落，確保時要特別小心",
+        "text": "The crux is at the start; shorter climbers will find it harder, and good finger strength is required. It is easy to fall at the second quickdraw, so take particular care when belaying."
+      }
+    },
+    "SS-PLATFORM-UPPER-014": {
+      "description": {
+        "zh": "從蛹夢起攀，之後接龍門的上半部",
+        "text": "Start on 蛹夢, then link into the upper half of 龍門."
+      }
+    },
+    "SS-PLATFORM-UPPER-015": {
+      "description": {
+        "zh": "只有起攀最難！是一個V5的抱石問題，需要很好的指力。上半部雖然也有打bolts但是很容易，與下半部的難度不太相稱",
+        "text": "Only the start is hard! It is a V5 boulder problem requiring very good finger strength. The upper half is also bolted but is very easy and does not really match the difficulty of the lower half."
+      }
+    },
+    "SS-PLATFORM-LOWER-001": {
+      "description": {
+        "zh": "事情就是發生在首攀者剛看完電影穿Prada的惡魔之後。大裂隙需要用到layback技巧",
+        "text": "It happened just after the first ascensionist had watched the movie The Devil Wears Prada. The large crack requires layback technique."
+      }
+    },
+    "SS-PLATFORM-LOWER-002": {
+      "description": {
+        "zh": "不規則的指裂隙，手指要能忍受疼痛，並不是採取典型的指裂隙爬法",
+        "text": "An irregular finger crack; your fingers must be able to tolerate pain, and it is not climbed with typical finger-crack technique."
+      }
+    },
+    "SS-PLATFORM-LOWER-006": {
+      "description": {
+        "zh": "路線上有一個半月型的把手點，倒拉去抓一個有點遠的手點",
+        "text": "There is a half-moon-shaped jug on the route; undercling it to reach a somewhat distant handhold."
+      }
+    },
+    "SS-PLATFORM-LOWER-007": {
+      "description": {
+        "zh": "原本路線比較短，後來平台打掉之後路線變長了，難度也增加了。下半部比較難，把手點比較小，上半部把手點比較大",
+        "text": "The route was originally shorter; after the platform was demolished it became longer and harder. The lower half is harder with smaller holds; the upper half has larger holds."
+      }
+    },
+    "SS-PLATFORM-LOWER-008": {
+      "description": {
+        "zh": "路線難度非常的平均，每一步都不容易。有一點外傾、全程的把手點都不大，對於指力、平衡、踩點都算是考驗，通過這種考驗之後就變身成為超級賽亞人了，進入高手之林",
+        "text": "The difficulty is extremely even and no move is easy. It overhangs slightly and the holds are small throughout, testing finger strength, balance and footwork; once you pass this test you transform into a 超級賽亞人 and join the ranks of advanced climbers."
+      }
+    },
+    "SS-PLATFORM-LOWER-015": {
+      "description": {
+        "zh": "2014/02使用不繡鋼glue-in bolts",
+        "text": "Stainless steel glue-in bolts were used in 2014/02."
+      }
+    },
+    "SS-SOUTH-FACE-002": {
+      "description": {
+        "zh": "用來做先鋒攀登練習的路線",
+        "text": "A route used for practicing lead climbing."
+      }
+    },
+    "SS-SOUTH-FACE-005": {
+      "description": {
+        "zh": "起攀是外傾的懸岩",
+        "text": "The start is an overhang."
+      }
+    },
+    "SS-HEARTLESS-VALLEY-001": {
+      "description": {
+        "zh": "為紀念某位對這區岩壁投入努力的開發者",
+        "text": "In memory of a developer who put great effort into the walls of this area."
+      }
+    },
+    "SS-HEARTLESS-VALLEY-006": {
+      "description": {
+        "zh": "整條路線難度平均，最難的一步在掛上TopAnchor前，這使得這條路線更難完成",
+        "text": "The difficulty is even throughout; the hardest move comes just before clipping the top anchor, which makes this route harder to complete."
+      }
+    },
+    "SS-HEARTLESS-VALLEY-007": {
+      "description": {
+        "zh": "整條路線難度平均、外傾",
+        "text": "Even difficulty throughout; overhanging."
+      }
+    },
+    "SS-HEARTLESS-VALLEY-008": {
+      "description": {
+        "zh": "整條路線難度平均、外傾。由於最下方的岩壁不穩定，前兩個Bolts跟險角共用。若不偏左使用8號路線的腳點，難度會是6c+。若有用到則大約是6c",
+        "text": "Even difficulty throughout; overhanging. Because the rock at the very bottom is unstable, the first two bolts are shared with 險角. If you do not move left to use the footholds of route no. 8, the grade is 6c+; if you do use them it is about 6c."
+      }
+    },
+    "SS-HEARTLESS-VALLEY-009": {
+      "description": {
+        "zh": "前三個bolts的墜落有撞到背後岩壁的危險，要先TopRope練習後再試",
+        "text": "A fall in the first three bolts carries the danger of hitting the rock wall behind you; practice on top-rope first before attempting it."
+      }
+    },
+    "SS-HEARTLESS-VALLEY-013": {
+      "description": {
+        "zh": "煙囪爬法",
+        "text": "Chimney technique."
+      }
+    },
+    "SS-SKYLINE-001": {
+      "description": {
+        "zh": "入口轉進來的第一條路線，難關集中在前三個bolts，大約是一段V2抱石，後半段偏向耐力",
+        "text": "The first route after turning in from the entrance. The crux is concentrated in the first three bolts, roughly a V2 boulder problem; the second half is more about endurance."
+      }
+    },
+    "SS-SKYLINE-002": {
+      "description": {
+        "zh": "樹幹右邊的路線，原本的路線是繼續往右上攀爬三個bolts接到Ay caramba的top anchor，但舊的耳片已失效，且難關集中前半段，故現在的路線終點與Crazy pills的相同",
+        "text": "The route to the right of the tree trunk. The original route continued up and right for three more bolts to the top anchor of Ay caramba, but the old hangers are no longer functional and the crux is concentrated in the first half, so the route now finishes at the same point as Crazy pills."
+      }
+    },
+    "SS-SKYLINE-003": {
+      "description": {
+        "zh": "右邊路線，難關集中在第三個bolt到top，不能抓或踩到左邊的樹",
+        "text": "The right-hand route. The crux is concentrated between the third bolt and the top; you may not grab or step on the tree on the left."
+      }
+    },
+    "SS-SKYLINE-004": {
+      "description": {
+        "zh": "中間路線，前半段相對簡單很多，難關集中在第五個bolt到top之間，不能抓或踩到右邊的樹，注意這一段先鋒墜落距離會很遠",
+        "text": "The middle route. The first half is much easier by comparison; the crux is concentrated between the fifth bolt and the top. You may not grab or step on the tree on the right. Note that lead falls on this section will be very long."
+      }
+    },
+    "SS-SKYLINE-005": {
+      "description": {
+        "zh": "左邊路線，手點大多不錯考驗耐力，避免去左邊的錯距裂隙，有兩個舊的耳片通常不使用",
+        "text": "The left-hand route. Most of the holds are good and it tests endurance. Avoid going to the offset crack on the left. There are two old hangers that are normally not used."
+      }
+    },
+    "SS-SKYLINE-006": {
+      "description": {
+        "zh": "右1路線，考驗指力與平衡的路線，難關分別在第二及最後一個bolts處。右邊的岩角不得使用，上方anchor與Skyline awesome共用",
+        "text": "Route no. 1 from the right. It tests finger strength and balance, with cruxes at the second and the last bolts respectively. The arête on the right may not be used. The top anchor is shared with Skyline awesome."
+      }
+    },
+    "SS-SKYLINE-007": {
+      "description": {
+        "zh": "右2路線，考驗踩腳功力、指力及deadpoint技巧，整體難度非常平均的經典路線",
+        "text": "Route no. 2 from the right. It tests footwork, finger strength and deadpoint technique; a classic route with very even difficulty overall."
+      }
+    },
+    "SS-SKYLINE-008": {
+      "description": {
+        "zh": "中間路線，前三個Bolts大約是一段V5指力難關，最後接到Ay caramba的top anchor",
+        "text": "The middle route. The first three bolts are roughly a V5 finger-strength crux; it finishes at the top anchor of Ay caramba."
+      }
+    },
+    "SS-SKYLINE-009": {
+      "description": {
+        "zh": "左2路線，半月型地形起攀，第四及五bolts左邊有舊的耳片已不能使用，到橫裂隙之後往右上攀爬至top anchor",
+        "text": "Route no. 2 from the left. Start on the half-moon-shaped feature. There are old hangers to the left of the fourth and fifth bolts that can no longer be used. After reaching the horizontal crack, climb up and right to the top anchor."
+      }
+    },
+    "SS-SKYLINE-010": {
+      "description": {
+        "zh": "左1路線，前半段偏向力量、後半段平衡的路線，上方兩個Bolts各有一個D環用以徹退",
+        "text": "Route no. 1 from the left. The first half is powerful and the second half is about balance. The upper two bolts each have a D-ring for retreating."
+      }
+    },
+    "SS-SKYLINE-011": {
+      "description": {
+        "zh": "輕微內傾和大手點的路線，適合新手練習",
+        "text": "A slightly slabby route with large handholds; suitable for beginners to practice on."
+      }
+    },
+    "SS-SKYLINE-012": {
+      "description": {
+        "zh": "Naturally sculpted左邊的路線，適合新手練習",
+        "text": "The route to the left of Naturally sculpted; suitable for beginners to practice on."
+      }
+    },
+    "SS-SKYLINE-013": {
+      "description": {
+        "zh": "右1路線，沿著樹幹起攀小心不要掉到下方洞裡",
+        "text": "Route no. 1 from the right. Start along the tree trunk; be careful not to fall into the hole below."
+      }
+    },
+    "SS-SKYLINE-014": {
+      "description": {
+        "zh": "右2路線，前半段偏向銳利手點的指力，最後轉變成大手點大角度考驗爆發力，上方anchor與Who's your daddy共用",
+        "text": "Route no. 2 from the right. The first half is fingery on sharp holds, and it finally changes to big holds on steep terrain that test explosive power. The top anchor is shared with Who's your daddy."
+      }
+    },
+    "SS-SKYLINE-015": {
+      "description": {
+        "zh": "左2路線，手點銳利但不小，適合新手練習外傾面的攀爬技巧",
+        "text": "Route no. 2 from the left. The holds are sharp but not small; suitable for beginners to practice technique on overhanging faces."
+      }
+    },
+    "SS-SKYLINE-016": {
+      "description": {
+        "zh": "左1路線，前半段與Steebun 1很像，難關在最後一個bolt處，上方anchor與Steebun 1共用",
+        "text": "Route no. 1 from the left. The first half is very similar to Steebun 1; the crux is at the last bolt. The top anchor is shared with Steebun 1."
+      }
+    },
+    "SS-SKYLINE-017": {
+      "description": {
+        "zh": "位於一線天最底部的路線，起攀須注意不要掉到右邊的洞裡",
+        "text": "The route at the very bottom of 一線天. At the start, take care not to fall into the hole on the right."
+      }
+    },
+    "SS-SKYLINE-018": {
+      "description": {
+        "zh": "第一個bolt偏高且動作比較困難建議新手預先掛好快扣再攀登，不可使用右邊的直裂隙",
+        "text": "The first bolt is rather high and the moves are fairly difficult; beginners are advised to pre-hang the quickdraw before climbing. The vertical crack on the right may not be used."
+      }
+    },
+    "SS-GRAND-CANYON-001": {
+      "description": {
+        "zh": "前半部與Walk the Plank共用，第三個bolt以後往左上，然後就會接到本路線難關，大約是一段指力V4，手點銳利如其名",
+        "text": "The first half is shared with Walk the Plank. After the third bolt, go up and left to reach this route's crux, roughly a fingery V4; the holds are as sharp as the name suggests."
+      }
+    },
+    "SS-GRAND-CANYON-002": {
+      "description": {
+        "zh": "前半部與Cutlass共用，第三個bolt以後往右上，整條路線難度平均沒有特別難的部份，完攀前腳點光滑極小",
+        "text": "The first half is shared with Cutlass. After the third bolt, go up and right. The difficulty is even throughout with no particularly hard section; just before the finish the footholds are polished and tiny."
+      }
+    },
+    "SS-GRAND-CANYON-003": {
+      "description": {
+        "zh": "雖然級數定很低但其實不好爬的路線，中間須先往右橫渡一些再繞回左上方，上方anchor與Walk the Plank共用",
+        "text": "Although graded low, it is actually not an easy route to climb. Midway you must first traverse right a little and then work back up and left. The top anchor is shared with Walk the Plank."
+      }
+    },
+    "SS-GRAND-CANYON-004": {
+      "description": {
+        "zh": "大峽谷最困難的路線，難關集中在起攀前三個bolts，大約是一個V6的抱石問題，相當考驗指力與身體控制，後半段難度相對簡單許多",
+        "text": "The hardest route at 大峽谷. The crux is concentrated in the first three bolts from the start, roughly a V6 boulder problem that seriously tests finger strength and body control; the second half is much easier by comparison."
+      }
+    },
+    "SS-GRAND-CANYON-005": {
+      "description": {
+        "zh": "起攀要做一個Dyno的動作，需要強大的爆發力！翻上去掛完第二個bolt後，路線風格變成摩擦點的細膩平衡，融合兩種不同型態有趣的路線。建議最後一顆bolt用加長快扣避免磨繩，與Bunghole共用anchor",
+        "text": "The start requires a dyno and a lot of explosive power! After pulling over and clipping the second bolt, the style changes to delicate balance on friction holds; an interesting route combining two different styles. An extended quickdraw is recommended on the last bolt to avoid rope abrasion. Shares the anchor with Bunghole."
+      }
+    },
+    "SS-GRAND-CANYON-006": {
+      "description": {
+        "zh": "大峽谷經典的路線，型態與其它路線不同，共有兩個難關在第二及第五個bolt處。前兩個bolt墜落會有撞到後方石頭的風險，需格外小心",
+        "text": "A classic route at 大峽谷, different in character from the other routes. There are two cruxes, at the second and fifth bolts. A fall in the first two bolts carries the risk of hitting the rock behind; take extra care."
+      }
+    },
+    "SS-GRAND-CANYON-007": {
+      "description": {
+        "zh": "小手點與小腳點的指力路線，有些點易碎，確保要特別注意。第四個bolt的地方左右各有一顆bolt，必須爬在兩個bolt之間，上方anchor與Big butts on Saturday night共用。前兩個bolt墜落會有撞到後方石頭的風險，需格外小心",
+        "text": "A fingery route with small handholds and small footholds. Some holds are fragile, so pay particular attention when belaying. At the fourth bolt there is a bolt on each side, and you must climb between the two bolts. The top anchor is shared with Big butts on Saturday night. A fall in the first two bolts carries the risk of hitting the rock behind; take extra care."
+      }
+    },
+    "SS-GRAND-CANYON-008": {
+      "description": {
+        "zh": "路線名稱源自於某天開發者帶了一位穿短褲的朋友來攀爬時發生的糗事，前兩個bolts直上後往右上到第四個bolt邊有一顆球型的手點後直上，球型點為界限以右是Balls in的手點，攀爬本路線不得使用",
+        "text": "The route name comes from an embarrassing incident one day when the developer brought along a friend wearing shorts to climb. Climb straight up the first two bolts, then go up and right to a ball-shaped hold beside the fourth bolt, then straight up. The ball-shaped hold is the boundary: holds to its right belong to Balls in and may not be used on this route."
+      }
+    },
+    "SS-GRAND-CANYON-009": {
+      "description": {
+        "zh": "考驗爆發力、指力耐力、平衡、腳點處理及心理素質的路線，前半段手點相對好一點但是若搞錯手順會倍感困難，第三個bolt左上的球型手點開始連續難關，球型點以左的點是Balls out的手點，攀爬本路線不得使用。最後三個bolts的距離很遠，確保者要非常小心，上方anchor與Balls out共用",
+        "text": "A route that tests explosive power, finger endurance, balance, footwork and mental strength. The holds in the first half are relatively good, but getting the sequence wrong makes it feel much harder. The sustained crux begins at the ball-shaped hold up and left of the third bolt. Holds to the left of the ball-shaped hold belong to Balls out and may not be used on this route. The last three bolts are very far apart, so the belayer must be extremely careful. The top anchor is shared with Balls out."
+      }
+    },
+    "SS-GRAND-CANYON-010": {
+      "description": {
+        "zh": "起攀就是一個大約V4的難關，有很高的墜地風險建議預掛第一個bolt再攀爬。第四個bolt之後稍微往右橫渡，最後完攀前還有一個大難關。被一位曾經在臺灣5年的馬來西亞岩友評為全臺灣最棒的路線，即便他回國後依然思念、希望有天能夠再來爬一次這條路線",
+        "text": "The start is immediately a crux of about V4 with a high risk of a ground fall; pre-clipping the first bolt before climbing is recommended. After the fourth bolt, traverse slightly right, and there is another big crux just before the finish. Rated the best route in all of Taiwan by a Malaysian climber who once spent five years in Taiwan; even after returning home he still misses it and hopes to come back and climb it again someday."
+      }
+    },
+    "SS-GRAND-CANYON-011": {
+      "description": {
+        "zh": "結合了前三分之二Grace的難關與Desperado的最後難關，整體上比Desperado更加困難。第四個bolt以後往左上橫渡，上方anchor與Desperado共用",
+        "text": "Combines the cruxes of the first two-thirds of Grace with the final crux of Desperado; overall harder than Desperado. After the fourth bolt, traverse up and left. The top anchor is shared with Desperado."
+      }
+    },
+    "SS-GRAND-CANYON-012": {
+      "description": {
+        "zh": "十分精彩的指力型平衡路線，起攀前三個bolts大約是一段V4難關，過後有一個休息點再馬上接續第二個難關，第四個bolt以後往右上，整條路線的難度很平均",
+        "text": "A superb fingery balance route. The first three bolts from the start are roughly a V4 crux, followed by a rest and then immediately a second crux. After the fourth bolt, go up and right. The difficulty is very even throughout."
+      }
+    },
+    "SS-GRAND-CANYON-013": {
+      "description": {
+        "zh": "起攀第一個bolt是一段外傾抱石，翻上去第二個bolt後路線變成平衡型態，最後難關是一條斜裂隙，避免轉折太多建議加長快扣，上方anchor與Grace共用",
+        "text": "The start to the first bolt is an overhanging boulder problem; after pulling over to the second bolt the route becomes balancy. The final crux is a diagonal crack. Extended quickdraws are recommended to avoid too much rope drag from the bends. The top anchor is shared with Grace."
+      }
+    },
+    "SS-GRAND-CANYON-014": {
+      "description": {
+        "zh": "難關結合摩擦點與指洞，考驗身體控制能力和平衡的移動技巧，不容易on sight的路線",
+        "text": "The crux combines friction holds and finger pockets, testing body control and balanced movement; not an easy route to on-sight."
+      }
+    }
+  }
+}

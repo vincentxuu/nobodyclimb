@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import { biographyService } from '@/lib/api/services'
@@ -25,6 +26,7 @@ export function useImageCropper({
   onFlushSave,
 }: UseImageCropperOptions) {
   const { toast } = useToast()
+  const tm = useTranslations('BiographyMisc')
 
   const [showCropper, setShowCropper] = useState(false)
   const [cropperImageSrc, setCropperImageSrc] = useState<string>('')
@@ -76,17 +78,17 @@ export function useImageCropper({
           // 立即執行儲存，避免使用者重新整理時遺失圖片
           onFlushSave?.()
           toast({
-            title: '上傳成功',
-            description: cropType === 'avatar' ? '頭像已更新' : '封面圖片已更新',
+            title: tm('uploadSuccess'),
+            description: cropType === 'avatar' ? tm('avatarUpdated') : tm('coverUpdated'),
           })
         } else {
-          throw new Error('上傳失敗')
+          throw new Error(tm('uploadFailed'))
         }
       } catch (err) {
         console.error('圖片上傳失敗:', err)
         toast({
-          title: '上傳失敗',
-          description: err instanceof Error ? err.message : '請稍後再試',
+          title: tm('uploadFailed'),
+          description: err instanceof Error ? err.message : tm('retryLater'),
           variant: 'destructive',
         })
       } finally {

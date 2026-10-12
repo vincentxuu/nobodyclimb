@@ -2,7 +2,7 @@
 
 import { Bookmark, Loader2 } from 'lucide-react'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import ProfilePageLayout from '@/components/profile/layout/ProfilePageLayout'
 import ProfilePageTitle from '@/components/profile/ProfilePageTitle'
@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
 import { Link } from '@/i18n/navigation'
 import { postService, userService } from '@/lib/api/services'
+import { toIntlLocale } from '@/lib/date-locale'
 import { useIsMobile } from '@/lib/hooks/useIsMobile'
 import { BackendPost } from '@/lib/types'
 
@@ -50,14 +51,15 @@ interface BookmarkCardProps {
 
 const BookmarkCard = ({ article, onRemoveBookmark, isRemoving, isMobile }: BookmarkCardProps) => {
   const t = useTranslations('ProfilePage')
+  const locale = useLocale()
   // 格式化日期
   const formattedDate = article.published_at
-    ? new Date(article.published_at).toLocaleDateString('zh-TW', {
+    ? new Date(article.published_at).toLocaleDateString(toIntlLocale(locale), {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
       })
-    : new Date(article.created_at).toLocaleDateString('zh-TW', {
+    : new Date(article.created_at).toLocaleDateString(toIntlLocale(locale), {
         year: 'numeric',
         month: 'long',
         day: 'numeric',

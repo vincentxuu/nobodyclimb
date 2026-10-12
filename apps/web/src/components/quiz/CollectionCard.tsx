@@ -2,9 +2,14 @@
 
 import type { PersonalityType } from '@nobodyclimb/types'
 import { Mountain } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+import { useLocalizedPersonality } from '@/lib/quiz/personality-i18n'
 
-export function CollectionCard({ personality }: { personality: PersonalityType }) {
+export function CollectionCard({ personality: rawPersonality }: { personality: PersonalityType }) {
+  const t = useTranslations('Quiz.result')
+  const personality = useLocalizedPersonality(rawPersonality)
+
   return (
     <Link
       href={`/quiz/result/${personality.code.toLowerCase()}`}
@@ -24,10 +29,14 @@ export function CollectionCard({ personality }: { personality: PersonalityType }
         {personality.code}
       </div>
       <h2 className="mb-0.5 text-lg font-bold text-gray-900 group-hover:underline">
-        {personality.nameZh}
+        {personality.name}
       </h2>
-      <p className="mb-2 text-sm text-gray-500">{personality.nameEn}</p>
-      <p className="text-sm italic text-gray-400">「{personality.tagline}」</p>
+      {personality.name !== personality.nameEn && (
+        <p className="mb-2 text-sm text-gray-500">{personality.nameEn}</p>
+      )}
+      <p className="text-sm italic text-gray-400">
+        {t('taglineQuote', { tagline: personality.tagline })}
+      </p>
     </Link>
   )
 }

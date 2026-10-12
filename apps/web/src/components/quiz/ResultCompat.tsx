@@ -4,13 +4,20 @@ import { getPersonalityType } from '@nobodyclimb/constants'
 import type { PersonalityType } from '@nobodyclimb/types'
 import { motion } from 'framer-motion'
 import { Heart, Mountain, Swords } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+import { usePersonalityLocalizer } from '@/lib/quiz/personality-i18n'
 
 export function ResultCompat({ personality }: { personality: PersonalityType }) {
-  const partner = getPersonalityType(personality.bestPartner)
-  const rival = getPersonalityType(personality.worstMatch)
+  const t = useTranslations('Quiz.result')
+  const localize = usePersonalityLocalizer()
+  const rawPartner = getPersonalityType(personality.bestPartner)
+  const rawRival = getPersonalityType(personality.worstMatch)
 
-  if (!partner || !rival) return null
+  if (!rawPartner || !rawRival) return null
+
+  const partner = localize(rawPartner)
+  const rival = localize(rawRival)
 
   return (
     <motion.div
@@ -19,7 +26,7 @@ export function ResultCompat({ personality }: { personality: PersonalityType }) 
       transition={{ duration: 0.5, delay: 0.6 }}
       className="mb-10"
     >
-      <h2 className="mb-4 text-lg font-semibold text-gray-900">相性分析</h2>
+      <h2 className="mb-4 text-lg font-semibold text-gray-900">{t('compatTitle')}</h2>
 
       <div className="grid gap-4 md:grid-cols-2">
         <Link
@@ -28,7 +35,7 @@ export function ResultCompat({ personality }: { personality: PersonalityType }) 
         >
           <div className="mb-3 flex items-center gap-2">
             <Heart className="h-5 w-5 text-emerald-500" />
-            <span className="text-sm font-medium text-emerald-700">最佳拍檔</span>
+            <span className="text-sm font-medium text-emerald-700">{t('bestPartner')}</span>
           </div>
           <div className="flex items-center gap-3">
             <div
@@ -39,9 +46,11 @@ export function ResultCompat({ personality }: { personality: PersonalityType }) 
             </div>
             <div>
               <div className="font-semibold text-gray-900 group-hover:underline">
-                {partner.nameZh}
+                {partner.name}
               </div>
-              <div className="text-sm text-gray-500">{partner.nameEn}</div>
+              {partner.name !== partner.nameEn && (
+                <div className="text-sm text-gray-500">{partner.nameEn}</div>
+              )}
             </div>
           </div>
         </Link>
@@ -52,7 +61,7 @@ export function ResultCompat({ personality }: { personality: PersonalityType }) 
         >
           <div className="mb-3 flex items-center gap-2">
             <Swords className="h-5 w-5 text-orange-500" />
-            <span className="text-sm font-medium text-orange-700">最大剋星</span>
+            <span className="text-sm font-medium text-orange-700">{t('worstMatch')}</span>
           </div>
           <div className="flex items-center gap-3">
             <div
@@ -62,10 +71,10 @@ export function ResultCompat({ personality }: { personality: PersonalityType }) 
               <Mountain className="h-6 w-6" style={{ color: rival.color }} />
             </div>
             <div>
-              <div className="font-semibold text-gray-900 group-hover:underline">
-                {rival.nameZh}
-              </div>
-              <div className="text-sm text-gray-500">{rival.nameEn}</div>
+              <div className="font-semibold text-gray-900 group-hover:underline">{rival.name}</div>
+              {rival.name !== rival.nameEn && (
+                <div className="text-sm text-gray-500">{rival.nameEn}</div>
+              )}
             </div>
           </div>
         </Link>
