@@ -6,6 +6,7 @@ on:
     paths:
       - 'backend/**'
       - 'packages/**'
+      - 'scripts/blog/**'
       - 'pnpm-lock.yaml'
       - '.github/workflows/deploy-api.yml'
   pull_request:
@@ -193,6 +194,24 @@ jobs:
             attempt=$((attempt + 1))
           done
         env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      # 文章以 repo 原稿為準：新增缺少的文章、更新內容不同的文章，重跑不會改動資料。
+      - name: Sync blog articles
+        run: |
+          node scripts/blog/sync.mjs --output "$RUNNER_TEMP/blog-sync.sql"
+          if [ ! -s "$RUNNER_TEMP/blog-sync.sql" ]; then
+            exit 0
+          fi
+          if [ "$ENVIRONMENT" == "production" ]; then
+            database=nobodyclimb-db
+          else
+            database=nobodyclimb-db-preview
+          fi
+          cd backend
+          npx wrangler d1 execute "$database" --remote --config wrangler.toml --env "$ENVIRONMENT" --file "$RUNNER_TEMP/blog-sync.sql" --yes
+        env:
+          ENVIRONMENT: ${{ steps.env.outputs.environment }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
   rag-evaluation:

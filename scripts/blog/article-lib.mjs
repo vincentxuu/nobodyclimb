@@ -1,6 +1,6 @@
 import { createHash, randomBytes } from 'node:crypto'
-import { readdirSync, readFileSync, realpathSync } from 'node:fs'
-import { basename, dirname, relative, resolve } from 'node:path'
+import { existsSync, readdirSync, readFileSync, realpathSync } from 'node:fs'
+import { dirname, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { marked } from 'marked'
 import { parseDocument } from 'yaml'
@@ -194,54 +194,56 @@ export function loadArticle(source, sourcePath) {
   } else if ('baseline' in meta) fail('create 不得提供 baseline')
   return { meta, html, baseline, hash: createHash('sha256').update(source).digest('hex') }
 }
-export function migration(article) {
-  const { meta, html, baseline, hash } = article
+// 品牌帳號以 users.id 對應；各環境的 username 不保證與原稿別名相同。
+export const brandAuthorIds = { nobodyclimb: '5f9aa93810d7b05267c9e56fab68593b' }
+const synced = ['slug', ...editable]
+// D1 單一 statement 上限為 100,000 bytes。
+const statementLimit = 100000
+// 可重複執行：新文章新增；既有文章只在內容不同時更新，保留首次發表日期與互動數。
+export function syncStatements({ meta, html }) {
   const q = sqlValue
-  const author = "(SELECT id FROM users WHERE username = 'nobodyclimb' AND is_active = 1)"
-  const guards = [
-    "(SELECT count(*) FROM users WHERE username = 'nobodyclimb') = 1",
-    "(SELECT count(*) FROM users WHERE username = 'nobodyclimb' AND is_active = 1) = 1",
-  ]
-  if (baseline) {
-    guards.push(
-      `EXISTS (SELECT 1 FROM posts WHERE ${fields.map((key) => `${key} IS ${q(baseline[key])}`).join(' AND ')} AND author_id = ${author})`
-    )
-    guards.push(
-      `(SELECT count(*) FROM post_tags WHERE post_id = ${q(meta.id)}) = ${baseline.tags.length}`
-    )
-    for (const tag of baseline.tags)
-      guards.push(
-        `EXISTS (SELECT 1 FROM post_tags WHERE post_id = ${q(meta.id)} AND tag = ${q(tag)})`
-      )
-  } else
-    guards.push(
-      `NOT EXISTS (SELECT 1 FROM posts WHERE id = ${q(meta.id)} OR slug = ${q(meta.slug)})`
-    )
-  const lines = [
-    `-- 自動生成；請修改 Markdown 原稿再重新生成。`,
-    `-- blog-source: backend/content/blog/${meta.id}.md`,
-    `-- source-sha256: ${hash}`,
-    `-- D1 migration runner 必須在單一交易中執行此檔。`,
-    'CREATE TABLE _blog_article_guard (ok INTEGER NOT NULL CHECK (ok = 1));',
-    ...guards.map(
-      (guard) =>
-        `INSERT OR ROLLBACK INTO _blog_article_guard (ok) VALUES (CASE WHEN ${guard} THEN 1 ELSE 0 END);`
-    ),
-  ]
+  const authorId = brandAuthorIds[meta.author_username]
+  if (!authorId) fail(`${meta.id}：未知作者別名 ${meta.author_username}`)
   const values = { ...meta, content: html }
-  if (baseline)
-    lines.push(
-      `UPDATE posts SET ${editable.map((key) => `${key} = ${q(values[key])}`).join(', ')}, updated_at = datetime('now') WHERE id = ${q(meta.id)};`,
-      `DELETE FROM post_tags WHERE post_id = ${q(meta.id)};`
-    )
-  else
-    lines.push(
-      `INSERT INTO posts (id, author_id, slug, ${editable.join(', ')}, published_at, created_at, updated_at) VALUES (${q(meta.id)}, ${author}, ${q(meta.slug)}, ${editable.map((key) => q(values[key])).join(', ')}, datetime('now'), datetime('now'), datetime('now'));`
-    )
-  for (const tag of meta.tags)
-    lines.push(`INSERT INTO post_tags (post_id, tag) VALUES (${q(meta.id)}, ${q(tag)});`)
-  lines.push('DROP TABLE _blog_article_guard;', '')
-  return lines.join('\n')
+  const statements = [
+    `INSERT INTO posts (id, author_id, ${synced.join(', ')}, published_at, created_at, updated_at) VALUES (${q(meta.id)}, (SELECT id FROM users WHERE id = ${q(authorId)} AND is_active = 1), ${synced.map((key) => q(values[key])).join(', ')}, datetime('now'), datetime('now'), datetime('now')) ON CONFLICT(id) DO UPDATE SET ${synced.map((key) => `${key} = excluded.${key}`).join(', ')}, updated_at = datetime('now') WHERE ${synced.map((key) => `posts.${key} IS NOT excluded.${key}`).join(' OR ')};`,
+    `DELETE FROM post_tags WHERE post_id = ${q(meta.id)} AND tag NOT IN (${meta.tags.map(q).join(', ')});`,
+    `INSERT OR IGNORE INTO post_tags (post_id, tag) VALUES ${meta.tags.map((tag) => `(${q(meta.id)}, ${q(tag)})`).join(', ')};`,
+  ]
+  for (const statement of statements)
+    if (Buffer.byteLength(statement) > statementLimit)
+      fail(`${meta.id}：單一 SQL statement 超過 D1 的 ${statementLimit} bytes 上限`)
+  return statements
+}
+export function syncSql(articles) {
+  const ids = articles.map(({ meta }) => meta.id)
+  const slugs = articles.map(({ meta }) => meta.slug)
+  if (new Set(ids).size !== ids.length || new Set(slugs).size !== slugs.length)
+    fail('原稿 id 或 slug 重複')
+  return [
+    '-- 自動生成，不納入版控；請修改 Markdown 原稿後重新同步。',
+    ...articles.flatMap((article) => [
+      `-- blog-source: backend/content/blog/${article.meta.id}.md (${article.hash})`,
+      ...syncStatements(article),
+    ]),
+    '',
+  ].join('\n')
+}
+export function listSources(workspaceRoot = root) {
+  const directory = resolve(workspaceRoot, 'backend/content/blog')
+  return existsSync(directory)
+    ? readdirSync(directory)
+        .filter((name) => name.endsWith('.md') && !name.endsWith('.review.md'))
+        .sort()
+        .map((name) => resolve(directory, name))
+    : []
+}
+export function loadSources() {
+  return listSources().map((path) => {
+    const article = loadArticle(readFileSync(path, 'utf8'), path)
+    validateSourcePath(path, article.meta.id)
+    return article
+  })
 }
 export function validateSourcePath(path, id) {
   if (
@@ -249,19 +251,4 @@ export function validateSourcePath(path, id) {
     realpathSync(path) !== resolve(root, 'backend/content/blog', `${id}.md`)
   )
     fail('原稿必須為 backend/content/blog/<id>.md，不接受 symlink 或其他位置')
-}
-export function validateOutput(path) {
-  const directory = resolve(root, 'backend/migrations')
-  if (
-    dirname(path) !== directory ||
-    realpathSync(dirname(path)) !== directory ||
-    !/^\d{4}_[a-z0-9_]+\.sql$/.test(basename(path))
-  )
-    fail('output 必須為 backend/migrations/NNNN_name.sql')
-  const numbers = readdirSync(directory)
-    .filter((name) => /^\d{4}_.*\.sql$/.test(name))
-    .map((name) => Number(name.slice(0, 4)))
-  const next = Math.max(0, ...numbers) + 1
-  if (Number(basename(path).slice(0, 4)) !== next)
-    fail(`migration 編號必須為 ${String(next).padStart(4, '0')}（依最高既有編號，包含歷史重號）`)
 }

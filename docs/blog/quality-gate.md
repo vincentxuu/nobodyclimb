@@ -6,9 +6,11 @@
 
 - `pnpm blog:test`：文章工具與閘門行為測試。
 - `pnpm blog:translations`：從三語原稿生成 SEO 對照 manifest。
-- `pnpm blog:check`：原稿、來源台帳、審稿核准、三語對照和最新 SQL 一致性。
-- `pnpm blog:validate-local <source.md> --migration <sql>`：未 commit 原稿的隔離本地 D1 驗證。
-- `pnpm blog:check-local --base <完整 SHA>`：只驗證該 base 到 HEAD 已提交範圍內新增的文章 migrations；不包含未 commit 變更。CI 使用 PR base SHA，歷史文章 migration 的修改、刪除或移除來源標記一律失敗。
+- `pnpm blog:check`：原稿、來源台帳、審稿核准與三語對照；`backend/migrations` 出現帶 `-- blog-source:` 的文章 migration 一律失敗。
+- `pnpm blog:validate-local`：用隔離本地 D1 對全部原稿跑一次同步，驗證新增、重跑無變動、更新保留首次發表日期與瀏覽數、缺作者失敗。
+- `pnpm blog:sync --output <sync.sql>`：產生可重複執行的同步 SQL，供檢視或部署使用；產物不納入版控。
+
+文章不走 migration 入庫。`deploy-api.yml` 在結構 migration 之後執行同步：缺少的文章新增，內容不同的文章更新，其餘不動。由原稿管理的文章以 repo 為準，在後台直接修改會於下次部署被覆蓋。
 
 原稿和台帳以完整檔案 SHA-256 綁定審稿核准。改內容後重新查證／審稿，不能只換 hash。審稿須由未參與寫稿的 reviewer 完成；機器只能驗證審查宣告，不能認證 reviewer 的獨立性。
 
@@ -25,4 +27,4 @@
 3. 用故意失敗的測試 PR 驗證不能 merge，再恢復正確產物。不得只因設定成功就宣稱限制生效。
 4. 若將來啟用 merge queue，workflow 加 `merge_group` 並提供正確 base SHA；目前 runner 以 pull_request 為適用事件。
 
-merge 後分別確認 migrations、API/web 部署、三語公開頁、canonical/hreflang、作者與日期。manifest 是版本庫對照，不能證明文章已在線上；詳情 API 刷新 post-meta KV 後再驗 SEO。
+merge 後分別確認 migrations、文章同步、API/web 部署、三語公開頁、canonical/hreflang、作者與日期。manifest 是版本庫對照，不能證明文章已在線上；詳情 API 刷新 post-meta KV 後再驗 SEO。

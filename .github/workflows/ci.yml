@@ -27,9 +27,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm blog:test
       - run: pnpm blog:check
-      - run: pnpm blog:check-local
-        env:
-          BLOG_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      - run: pnpm blog:validate-local
 
   lint:
     name: Lint

@@ -26,6 +26,6 @@
 
 ## 全面參考的適配邊界
 
-借用 QuidProQuo 的 post/post-update/post-review/post-verify/post-polish/post-translate/media-to-post、模板、來源規範與 checker 判準，適配成本站 DB 原稿→migration→PR 流程。沒有搬 Astro 欄位、課程合約、強制雙語、glossary、系列 registry 或播放器語法。
+借用 QuidProQuo 的 post/post-update/post-review/post-verify/post-polish/post-translate/media-to-post、模板、來源規範與 checker 判準，適配成本站 DB 原稿→PR→部署同步流程。沒有搬 Astro 欄位、課程合約、強制雙語、glossary、系列 registry 或播放器語法。
 
 設計採按需載入 references 與真實情境驗證，見 [Anthropic skill best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)。模板彈性與讀者用途參考 [Google helpful content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)；metadata 與 alt 同樣查證參考 [Google AI content guidance](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)。這些是本站編輯適配，不是 SEO 排名保證。
