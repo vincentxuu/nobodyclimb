@@ -8,6 +8,7 @@ import { marked } from 'marked'
 import { parseDocument } from 'yaml'
 import { listSources } from './article-lib.mjs'
 import { checkTranslationManifest } from './translation-manifest.mjs'
+import { findSimplified } from './zh-hant.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
 const fail = (message) => {
@@ -230,6 +231,18 @@ export function checkTranslations(records) {
 }
 
 // 文章由部署時的同步腳本入庫；migration 只放資料庫結構，不得再夾帶文章。
+// 中文稿不得混入簡體字形；日文專有名詞等例外列在 zh-hant-allow.json。
+export function checkTraditional(meta, body) {
+  if (meta.lang !== 'zh') return
+  const text = [meta.title, meta.excerpt, ...(meta.tags || []), body].filter(Boolean).join('\n')
+  const findings = findSimplified(text)
+  if (findings.length)
+    fail(
+      `${meta.id}：中文稿含簡體字形 ${findings
+        .map(({ char, suggestion, context }) => `「${char}」→「${suggestion}」（${context}）`)
+        .join('、')}；若為專有名詞請加入 scripts/blog/zh-hant-allow.json`
+    )
+}
 export function discoverSources(workspaceRoot) {
   const migrations = join(workspaceRoot, 'backend/migrations')
   for (const name of existsSync(migrations) ? readdirSync(migrations).sort() : [])
@@ -272,6 +285,7 @@ export function checkAll(workspaceRoot = root) {
       if (token.type === 'link' && publicUrl(token.href)) externalUrls.push(token.href)
     })
     checkEvidence(evidence, id, mediaUrls, sourceHash, externalUrls, sourceBytes.toString('utf8'))
+    checkTraditional(meta, match[2])
     translations.push({ meta, body: match[2] })
     const result = spawnSync(
       process.execPath,
