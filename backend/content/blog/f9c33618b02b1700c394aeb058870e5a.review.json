@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "f9c33618b02b1700c394aeb058870e5a",
+  "source_sha256": "798da824a9d6f9b48132c9680eb72e6639ccffb21c59660a9b6a0b95f2aaaf2a",
+  "evidence_sha256": "9732095e771b89c1abe4c34acc54b7909eba870a5e6fcd211749fb48614c8d48",
+  "reviewed_at": "2026-10-12T00:59:40.904824+00:00",
+  "reviewer": "Codex independent reviewer /root/commit_review (not article author)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "ROCKTOPO凝灰岩、11月至3月、Battle Runner最高5.10a/Stone Free5.10c/Miura5.11a，與CLIMBING-net南壁/上部、9月下旬至6月上旬及25+10分鐘逐項核對；官方geopark火山之根只作地景描述。 全面開放、現行停車及指定日交通未驗；接近估值未混用上部岩區，季節尺度差異明示。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "已逐段讀zh/en/ja全文，核對價格/日期/級數/地名/條件、否定與未知限制；不是只對hash或摘要，英文/日文表述自然，無新增保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "用途與能力門檻、目標、交通、在地規則、季節及下一步可獨立閱讀；沒有順序閱讀系列要求或虛构現場經驗。"
+    }
+  },
+  "findings": []
+}

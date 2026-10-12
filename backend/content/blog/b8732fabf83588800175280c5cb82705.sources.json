@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "article_id": "b8732fabf83588800175280c5cb82705",
+  "checked_at": "2026-10-12T00:52:07.867501+00:00",
+  "claims": [
+    {
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場地、攀登類型和決策用途；分類與標籤依室內抱石/戶外旅行主題。B-PUMP Ogikubo guide: a dedicated bouldering day and first-visit costs / Use Ogikubo's own official prices, rentals and hours to plan a focused bouldering session beside the station.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/bpump/",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店自身のACCESS、OPEN HOUR、PRICEを確認。上荻1-10-12東亜会館3F、JR駅徒歩1分。平日13-23、土日祝10-21。税込登録2200/他PUMP1100、通日2530、時間限定2310/1650、鞋220/粉110初回無料。2026年9月イベントによる壁制限と休館告知。古いRoutesカウンターは現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/bpump/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店の初訪問ページ。初回指導、靴下と動きやすい服、初回器材無料、18歳未満同意書。初回成人平日4510円/週末4730円の表示。平日の値は主頁通日2530+登録2200の4730円と不一致なので本文で両頁差異を明示し、請求額は要店確認。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "已對照場地來源及正文承諾；地理標籤東京攀岩指東京旅行延伸目的地，不把外縣岩場寫成位於東京。"
+    },
+    {
+      "location": "正文段落 1",
+      "claim": "[B-PUMP OGIKUBO's official page](https://pump-climbing.com/gym/bpump/) presents a dedicated bouldering gym at 1-10-12 Kamiogi, Suginami-ku, Tokyo, on the third floor of Ogikubo Toa Kaikan. It gives an approximately one-minute walk from JR Ogikubo Station. It fits a focused problem session during a Tokyo trip. It is not a rope-climbing option; revise a lead-training aim before planning this day.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/bpump/",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店自身のACCESS、OPEN HOUR、PRICEを確認。上荻1-10-12東亜会館3F、JR駅徒歩1分。平日13-23、土日祝10-21。税込登録2200/他PUMP1100、通日2530、時間限定2310/1650、鞋220/粉110初回無料。2026年9月イベントによる壁制限と休館告知。古いRoutesカウンターは現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/bpump/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店の初訪問ページ。初回指導、靴下と動きやすい服、初回器材無料、18歳未満同意書。初回成人平日4510円/週末4730円の表示。平日の値は主頁通日2530+登録2200の4730円と不一致なので本文で両頁差異を明示し、請求額は要店確認。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 2",
+      "claim": "September 2026 event notices on the official page mention date-specific limits on CIRCUIT WALL and COMPETITION WALL, as well as a full-day closure. They show that different walls and event use matter, but wall names do not establish daily difficulty or availability. First-time visitors should ask staff about current problems and landing rules, starting with movements and heights they can manage.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/bpump/",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店自身のACCESS、OPEN HOUR、PRICEを確認。上荻1-10-12東亜会館3F、JR駅徒歩1分。平日13-23、土日祝10-21。税込登録2200/他PUMP1100、通日2530、時間限定2310/1650、鞋220/粉110初回無料。2026年9月イベントによる壁制限と休館告知。古いRoutesカウンターは現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/bpump/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店の初訪問ページ。初回指導、靴下と動きやすい服、初回器材無料、18歳未満同意書。初回成人平日4510円/週末4730円の表示。平日の値は主頁通日2530+登録2200の4730円と不一致なので本文で両頁差異を明示し、請求額は要店確認。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "As read on October 12, 2026, Ogikubo lists Japan-local hours of 13:00–23:00 on weekdays and 10:00–21:00 on Saturdays, Sundays and public holidays. Adult full-day admission is ¥2,530 including tax on both weekdays and holidays. Weekday daytime use until 18:30 and evening use from 18:00 are ¥2,310; weekdays from 21:00 are ¥1,650. Holiday evening use from 18:00 is ¥2,310. Match the ticket to its time window rather than treating a short-session rate as full-day admission.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/bpump/",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店自身のACCESS、OPEN HOUR、PRICEを確認。上荻1-10-12東亜会館3F、JR駅徒歩1分。平日13-23、土日祝10-21。税込登録2200/他PUMP1100、通日2530、時間限定2310/1650、鞋220/粉110初回無料。2026年9月イベントによる壁制限と休館告知。古いRoutesカウンターは現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/bpump/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店の初訪問ページ。初回指導、靴下と動きやすい服、初回器材無料、18歳未満同意書。初回成人平日4510円/週末4730円の表示。平日の値は主頁通日2530+登録2200の4730円と不一致なので本文で両頁差異を明示し、請求額は要店確認。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "There is a discrepancy between official pages: [Ogikubo's first-visit page](https://pump-climbing.com/gym/bpump/discovery) lists a weekday first visit at ¥4,510 including tax, differing from the ¥4,730 sum of registration and full-day admission on the main page. The budget here uses the main page's component charges as a reference, not a promise of the amount charged. Confirm the applicable ticket and first-visit total directly with Ogikubo.",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/bpump/",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店自身のACCESS、OPEN HOUR、PRICEを確認。上荻1-10-12東亜会館3F、JR駅徒歩1分。平日13-23、土日祝10-21。税込登録2200/他PUMP1100、通日2530、時間限定2310/1650、鞋220/粉110初回無料。2026年9月イベントによる壁制限と休館告知。古いRoutesカウンターは現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/bpump/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店の初訪問ページ。初回指導、靴下と動きやすい服、初回器材無料、18歳未満同意書。初回成人平日4510円/週末4730円の表示。平日の値は主頁通日2530+登録2200の4730円と不一致なので本文で両頁差異を明示し、請求額は要店確認。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "There is a discrepancy between official pages: [Ogikubo's first-visit page](https://pump-climbing.com/gym/bpump/discovery) lists a weekday first visit at ¥4,510 including tax, differing from the ¥4,730 sum of registration and full-day admission on the main page. The budget here uses the main page's component charges as a reference, not a promise of the amount charged. Confirm the applicable ticket and first-visit total directly with Ogikubo."
+    },
+    {
+      "location": "正文段落 5",
+      "claim": "Initial registration is ¥2,200, or ¥1,100 for someone registered at another PUMP gym visiting Ogikubo for the first time. An adult first-visit full-day budget is therefore ¥4,730 with standard registration or ¥3,630 with the other-PUMP rate. These totals add registration and full-day admission, excluding other purchases. Explain your registration status at reception rather than assuming another branch's registration means no fee.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/bpump/",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店自身のACCESS、OPEN HOUR、PRICEを確認。上荻1-10-12東亜会館3F、JR駅徒歩1分。平日13-23、土日祝10-21。税込登録2200/他PUMP1100、通日2530、時間限定2310/1650、鞋220/粉110初回無料。2026年9月イベントによる壁制限と休館告知。古いRoutesカウンターは現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/bpump/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店の初訪問ページ。初回指導、靴下と動きやすい服、初回器材無料、18歳未満同意書。初回成人平日4510円/週末4730円の表示。平日の値は主頁通日2530+登録2200の4730円と不一致なので本文で両頁差異を明示し、請求額は要店確認。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 6",
+      "claim": "Ogikubo lists shoe rental at ¥220 and chalk rental at ¥110, both free on the first visit. This differs from Akihabara's official page; use the destination branch's information. Wear clothing suitable for movement, complete registration and orientation, and learn the grading, problem starts and finishes and fall-zone layout. Ask staff before standing somewhere you are unsure about.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/bpump/",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店自身のACCESS、OPEN HOUR、PRICEを確認。上荻1-10-12東亜会館3F、JR駅徒歩1分。平日13-23、土日祝10-21。税込登録2200/他PUMP1100、通日2530、時間限定2310/1650、鞋220/粉110初回無料。2026年9月イベントによる壁制限と休館告知。古いRoutesカウンターは現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/bpump/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店の初訪問ページ。初回指導、靴下と動きやすい服、初回器材無料、18歳未満同意書。初回成人平日4510円/週末4730円の表示。平日の値は主頁通日2530+登録2200の4730円と不一致なので本文で両頁差異を明示し、請求額は要店確認。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 7",
+      "claim": "This guide assumes an adult visiting independently. Conditions for minors, groups, coaching bookings and large-luggage storage have not been fully verified here. If any are essential to entry or your itinerary, confirm them with Ogikubo first. Listing prices does not complete registration or establish eligibility for every visitor.",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/bpump/",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店自身のACCESS、OPEN HOUR、PRICEを確認。上荻1-10-12東亜会館3F、JR駅徒歩1分。平日13-23、土日祝10-21。税込登録2200/他PUMP1100、通日2530、時間限定2310/1650、鞋220/粉110初回無料。2026年9月イベントによる壁制限と休館告知。古いRoutesカウンターは現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/bpump/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店の初訪問ページ。初回指導、靴下と動きやすい服、初回器材無料、18歳未満同意書。初回成人平日4510円/週末4730円の表示。平日の値は主頁通日2530+登録2200の4730円と不一致なので本文で両頁差異を明示し、請求額は要店確認。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "This guide assumes an adult visiting independently. Conditions for minors, groups, coaching bookings and large-luggage storage have not been fully verified here. If any are essential to entry or your itinerary, confirm them with Ogikubo first. Listing prices does not complete registration or establish eligibility for every visitor."
+    },
+    {
+      "location": "正文段落 8",
+      "claim": "Suggested example: arrive after opening, use easy problems to learn the setting style, then rotate between two or three types of movement with rests. If outdoor climbing follows the next day, set the finish time around recovery and travel rather than endless attempts. This is an editorial suggestion, not a measured conclusion about Ogikubo grades, training effects or crowds.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/bpump/",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店自身のACCESS、OPEN HOUR、PRICEを確認。上荻1-10-12東亜会館3F、JR駅徒歩1分。平日13-23、土日祝10-21。税込登録2200/他PUMP1100、通日2530、時間限定2310/1650、鞋220/粉110初回無料。2026年9月イベントによる壁制限と休館告知。古いRoutesカウンターは現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/bpump/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店の初訪問ページ。初回指導、靴下と動きやすい服、初回器材無料、18歳未満同意書。初回成人平日4510円/週末4730円の表示。平日の値は主頁通日2530+登録2200の4730円と不一致なので本文で両頁差異を明示し、請求額は要店確認。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 9",
+      "claim": "The information above is the official-page snapshot read on October 12, 2026; it does not guarantee the same fees or hours in April 2027. Recheck Ogikubo's current hours, setting and event restrictions, rather than relying on old problem counts or setting dates retained on the homepage. Available walls affect your plan; ask staff to help choose another area if events limit access.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/bpump/",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店自身のACCESS、OPEN HOUR、PRICEを確認。上荻1-10-12東亜会館3F、JR駅徒歩1分。平日13-23、土日祝10-21。税込登録2200/他PUMP1100、通日2530、時間限定2310/1650、鞋220/粉110初回無料。2026年9月イベントによる壁制限と休館告知。古いRoutesカウンターは現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/bpump/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP OGIKUBO 荻窪店",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "荻窪店の初訪問ページ。初回指導、靴下と動きやすい服、初回器材無料、18歳未満同意書。初回成人平日4510円/週末4730円の表示。平日の値は主頁通日2530+登録2200の4730円と不一致なので本文で両頁差異を明示し、請求額は要店確認。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    }
+  ],
+  "media": [],
+  "source_sha256": "6214235894e1bfe29b3513aa6baa946c014936f365ee5ea40c4b90e0ccd8f18d",
+  "links": [
+    {
+      "url": "https://pump-climbing.com/gym/bpump/",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://pump-climbing.com/gym/bpump/discovery",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_artifacts": [
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/f1.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/og.json"
+  ],
+  "limitations": [
+    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。",
+    "尚待未參與寫稿者獨立審查。"
+  ]
+}

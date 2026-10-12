@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "f593da3943f02c8541fd4365a2e857de",
+  "source_sha256": "a6e4978b66e3e147a1bf51f0aab46ce8e015aa8f84e2fcad5ec0bca0d5189ab5",
+  "evidence_sha256": "769e6a7d9b7c583d6308b13b93ab883d5543efe093741d5eaa28622e9a41b3d0",
+  "reviewed_at": "2026-10-12T00:59:35.606129+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "共同CLIMBING-net正文分開馬頭刈尾根つづら岩1.5h與瀑布側天狗岩30分、千足巴士線索、舊piton孔口/スリング與山崎ハング30m。ROCKTOPO只共同listing，未以nearby cards當本地線數。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語1.5小時與山崎30m對齊；東京住宿總時間、舊piton操作非安全保證、開放/步道/支點未驗均保留。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "正文獨立談山路成本與訓練適用者，沒要求依序閱讀其他文；共同來源的另一岩壁只用來避免接近時間混用。"
+    }
+  },
+  "findings": []
+}

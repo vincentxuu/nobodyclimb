@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { spawnSync } from 'node:child_process'
+import { spawn, spawnSync } from 'node:child_process'
 import { readdirSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
@@ -41,7 +41,29 @@ export function parseChanges(raw) {
   return changes
 }
 
-export function checkLocal(base) {
+// 每篇仍使用自己的臨時 D1；等待所有已開始的驗證完成，讓 finally 清理生效。
+export async function validateBatch(items, validate, concurrency = 4) {
+  if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 4)
+    throw new Error('本地 D1 同時驗證數必須為 1–4')
+  let cursor = 0
+  const failures = []
+  await Promise.all(
+    Array.from({ length: Math.min(concurrency, items.length) }, async () => {
+      while (cursor < items.length && failures.length === 0) {
+        const item = items[cursor++]
+        try {
+          await validate(item)
+        } catch (error) {
+          failures.push(new Error(`${item.path}：${error.message}`))
+        }
+      }
+    })
+  )
+  if (failures.length) throw new AggregateError(failures, failures.map((e) => e.message).join('\n'))
+  return items.length
+}
+
+export async function checkLocal(base) {
   if (!base || !/^[a-f0-9]{40}$/.test(base))
     throw new Error('請提供完整 Git base SHA：--base <40 位 SHA> 或 BLOG_BASE_SHA')
   function git(args) {
@@ -70,18 +92,28 @@ export function checkLocal(base) {
       .at(-1)
     if (item.path !== `backend/migrations/${latest}`)
       throw new Error(`只可驗證原稿最新 migration：${item.path}`)
-    const result = spawnSync(
-      process.execPath,
-      [
-        resolve(root, 'scripts/blog/validate-local.mjs'),
-        resolve(root, item.source),
-        '--migration',
-        resolve(root, item.path),
-      ],
-      { cwd: root, stdio: 'inherit' }
-    )
-    if (result.status !== 0) throw new Error(`本地 D1 驗證失敗：${item.path}`)
   }
+  await validateBatch(
+    selected,
+    (item) =>
+      new Promise((resolveDone, reject) => {
+        const child = spawn(
+          process.execPath,
+          [
+            resolve(root, 'scripts/blog/validate-local.mjs'),
+            resolve(root, item.source),
+            '--migration',
+            resolve(root, item.path),
+          ],
+          { cwd: root, stdio: 'inherit' }
+        )
+        child.once('error', reject)
+        child.once('close', (code, signal) => {
+          if (code === 0) resolveDone()
+          else reject(new Error(`本地 D1 驗證失敗 (${signal || code})`))
+        })
+      })
+  )
   process.stdout.write(
     `Git base 到 HEAD 共 ${selected.length} 個新增文章 migration，隔離 D1 驗證通過。\n`
   )
@@ -93,7 +125,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const args = process.argv.slice(2)
     if (args.length && (args.length !== 2 || args[0] !== '--base'))
       throw new Error('用法：check-local.mjs [--base <SHA>]')
-    checkLocal(args[1] || process.env.BLOG_BASE_SHA)
+    await checkLocal(args[1] || process.env.BLOG_BASE_SHA)
   } catch (error) {
     process.stderr.write(`${error.message}\n`)
     process.exitCode = 1

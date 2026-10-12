@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "article_id": "64fa975558f3a9f80501f6babd512ce8",
+  "source_sha256": "76368494406ae817d937ca07e6c97dbc012d3d6d0aa88316c96a80bdf29294e1",
+  "evidence_sha256": "3279c523f428f5e394d2a8fc108a021f1cd4f3bc95d638cd7b3996e30c5c4d29",
+  "reviewed_at": "2026-10-12T00:59:40.907128+00:00",
+  "reviewer": "Codex independent reviewer /root/commit_review (not article author)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "ROCKTOPO集塊岩、三類繩攀、月份4/5/6/7/9/10；出版社三岩面特色、4月至10月、車站2.5至3小時、浮石/繩索落石与頭盔提醒核對。官方鐵道河口湖巴士與車站登山是不同入口。 指定日巴士回程、山莊/道路/殘雪與個別繩長未驗；正文明确不沿用舊山屋/野外露營許可，非技術操作指南。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "已逐段讀zh/en/ja全文，核對價格/日期/級數/地名/條件、否定與未知限制；不是只對hash或摘要，英文/日文表述自然，無新增保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "用途與能力門檻、目標、交通、在地規則、季節及下一步可獨立閱讀；沒有順序閱讀系列要求或虛构現場經驗。正文混入簡體字已修成繁中，保留原有數字與日文地名。最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "正文混入簡體字已修成繁中，保留原有數字與日文地名。"
+    },
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+    }
+  ]
+}

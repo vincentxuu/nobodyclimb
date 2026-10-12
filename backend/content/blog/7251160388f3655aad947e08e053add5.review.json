@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "article_id": "7251160388f3655aad947e08e053add5",
+  "source_sha256": "a7e0a86b2b98f01d27cb4f7d4a91225d088c929ffcddfddc90f14c61a54d6b90",
+  "evidence_sha256": "f2a6909e664c9071d61e5ace90439e842c5ab6b386d6f6618c6546c0fab133d8",
+  "reviewed_at": "2026-10-12T00:59:40.909216+00:00",
+  "reviewer": "Codex independent reviewer /root/commit_review (not article author)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "官方主頁與discovery時間平日12–23/土祝11–21/日10–21；登錄2200/1100、通日2420、鞋330初免費、無粉租借、粉袋與液態粉、襪子、未成年同意条件核對。加總4620/3520正確。三語重複租借段刪除後全文回讀。 2026-10-12快照不保證2027四月費用/營業；團體、置物和教練空位未驗。沒有宣稱第一手人潮或訓練實測。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "已逐段讀zh/en/ja全文，核對價格/日期/級數/地名/條件、否定與未知限制；不是只對hash或摘要，英文/日文表述自然，無新增保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "用途與能力門檻、目標、交通、在地規則、季節及下一步可獨立閱讀；沒有順序閱讀系列要求或虛构現場經驗。已重讀修正版：移除三語連續重複租借段；保留鞋/粉/襪子/登錄，數字及來源不變。最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "已重讀修正版：移除三語連續重複租借段；保留鞋/粉/襪子/登錄，數字及來源不變。"
+    },
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+    }
+  ]
+}

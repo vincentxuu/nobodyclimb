@@ -1,0 +1,431 @@
+{
+  "schema_version": 1,
+  "article_id": "7604f1e91f67001a52849073701d8398",
+  "checked_at": "2026-10-12T00:52:59.652278+00:00",
+  "claims": [
+    {
+      "location": "title / excerpt",
+      "claim": "Gozen-iwa climbing guide: access rules before limestone routes / Plan a visit to Gozen-iwa around its managed access, outdoor leading requirements and limestone route information.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/198",
+          "title": "御前岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Area description: managed by the Okutama Climbing Committee after a previous climbing ban; check committee rules; new development is prohibited. Popular-route section lists ミートテック 5.10c, ハートブレイク 5.11a, 蒙古タンメン 5.12a. The area is in Tokyo.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://wind-scene.com/gozeniwa/",
+          "title": "はじめての御前岩クライミング｜アプローチや注意事項など",
+          "publisher": "みどりのゆめ",
+          "source_date": "2023-12-08T23:40:10+0900",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Dated 2023-12-08 personal visit report: Gozen-iwa is limestone in Okutama. The author reproduces center rules and notes that the parking vending machine had been removed by November 2023. This observation is historical and conflicts with the older payment method still on the management page; no present parking method is inferred. The visit report records an approach of under 15 minutes from the center-side parking; used only as a historical observation.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "http://caramba-02.sakura.ne.jp/okutama/area/",
+          "title": "エリア情報 | 奥多摩クライミングセンター",
+          "publisher": "奥多摩クライミングセンター",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Management page: intermediate/advanced area; stable outdoor leading at 5.11 or above and sufficient climbing/safety skills, generally also for belayers and spectators. First-time registration required for everyone; unregistered entry prohibited. Entry log each visit and departure time on exit; contribution listed as ¥500/person/visit. Parking payment description still mentions vending-machine drink, unlike 2023 report. Rules prohibit night entry, unauthorized guiding, development/extra bolts, tree cutting and removal of anchor/descent carabiners; rubbish must be carried out. Warns of rockfall, loose rock and imperfect bolts.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Title and excerpt reflect source-described venue setting and the concrete preparation questions answered in the body; no visit or opening guarantee is asserted."
+    },
+    {
+      "location": "Check the whole team's eligibility first",
+      "claim": "Gozen-iwa is a limestone climbing destination in Okutama, Tokyo. It suits experienced outdoor leaders who want a day focused on particular routes. Before choosing those routes, establish how your group can enter and whether every person meets the conditions. A partner who has only just started outdoor rope climbing changes the decision.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/198",
+          "title": "御前岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Area description: managed by the Okutama Climbing Committee after a previous climbing ban; check committee rules; new development is prohibited. Popular-route section lists ミートテック 5.10c, ハートブレイク 5.11a, 蒙古タンメン 5.12a. The area is in Tokyo.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://wind-scene.com/gozeniwa/",
+          "title": "はじめての御前岩クライミング｜アプローチや注意事項など",
+          "publisher": "みどりのゆめ",
+          "source_date": "2023-12-08T23:40:10+0900",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Dated 2023-12-08 personal visit report: Gozen-iwa is limestone in Okutama. The author reproduces center rules and notes that the parking vending machine had been removed by November 2023. This observation is historical and conflicts with the older payment method still on the management page; no present parking method is inferred. The visit report records an approach of under 15 minutes from the center-side parking; used only as a historical observation.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "http://caramba-02.sakura.ne.jp/okutama/area/",
+          "title": "エリア情報 | 奥多摩クライミングセンター",
+          "publisher": "奥多摩クライミングセンター",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Management page: intermediate/advanced area; stable outdoor leading at 5.11 or above and sufficient climbing/safety skills, generally also for belayers and spectators. First-time registration required for everyone; unregistered entry prohibited. Entry log each visit and departure time on exit; contribution listed as ¥500/person/visit. Parking payment description still mentions vending-machine drink, unlike 2023 report. Rules prohibit night entry, unauthorized guiding, development/extra bolts, tree cutting and removal of anchor/descent carabiners; rubbish must be carried out. Warns of rockfall, loose rock and imperfect bolts.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Check the whole team's eligibility first",
+      "claim": "The [Okutama Climbing Center rules](http://caramba-02.sakura.ne.jp/okutama/area/) describe an intermediate-to-advanced area. They require stable outdoor leading at 5.11 or above, along with sufficient climbing and safety skills. In principle, the same conditions apply to belayers and spectators. This is the manager's requirement, rather than a threshold NobodyClimb has inferred from the route list.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/198",
+          "title": "御前岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Area description: managed by the Okutama Climbing Committee after a previous climbing ban; check committee rules; new development is prohibited. Popular-route section lists ミートテック 5.10c, ハートブレイク 5.11a, 蒙古タンメン 5.12a. The area is in Tokyo.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://wind-scene.com/gozeniwa/",
+          "title": "はじめての御前岩クライミング｜アプローチや注意事項など",
+          "publisher": "みどりのゆめ",
+          "source_date": "2023-12-08T23:40:10+0900",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Dated 2023-12-08 personal visit report: Gozen-iwa is limestone in Okutama. The author reproduces center rules and notes that the parking vending machine had been removed by November 2023. This observation is historical and conflicts with the older payment method still on the management page; no present parking method is inferred. The visit report records an approach of under 15 minutes from the center-side parking; used only as a historical observation.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "http://caramba-02.sakura.ne.jp/okutama/area/",
+          "title": "エリア情報 | 奥多摩クライミングセンター",
+          "publisher": "奥多摩クライミングセンター",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Management page: intermediate/advanced area; stable outdoor leading at 5.11 or above and sufficient climbing/safety skills, generally also for belayers and spectators. First-time registration required for everyone; unregistered entry prohibited. Entry log each visit and departure time on exit; contribution listed as ¥500/person/visit. Parking payment description still mentions vending-machine drink, unlike 2023 report. Rules prohibit night entry, unauthorized guiding, development/extra bolts, tree cutting and removal of anchor/descent carabiners; rubbish must be carried out. Warns of rockfall, loose rock and imperfect bolts.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Registration and parking are separate tasks",
+      "claim": "Everyone entering for the first time must register; unregistered climbers may not enter. On each visit, complete the entry log and record your departure time when leaving. The management page lists a contribution of ¥500 per person per visit. Bring exact change and finish the formalities before approaching the crag. One registered friend does not cover the whole group.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/198",
+          "title": "御前岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Area description: managed by the Okutama Climbing Committee after a previous climbing ban; check committee rules; new development is prohibited. Popular-route section lists ミートテック 5.10c, ハートブレイク 5.11a, 蒙古タンメン 5.12a. The area is in Tokyo.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://wind-scene.com/gozeniwa/",
+          "title": "はじめての御前岩クライミング｜アプローチや注意事項など",
+          "publisher": "みどりのゆめ",
+          "source_date": "2023-12-08T23:40:10+0900",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Dated 2023-12-08 personal visit report: Gozen-iwa is limestone in Okutama. The author reproduces center rules and notes that the parking vending machine had been removed by November 2023. This observation is historical and conflicts with the older payment method still on the management page; no present parking method is inferred. The visit report records an approach of under 15 minutes from the center-side parking; used only as a historical observation.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "http://caramba-02.sakura.ne.jp/okutama/area/",
+          "title": "エリア情報 | 奥多摩クライミングセンター",
+          "publisher": "奥多摩クライミングセンター",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Management page: intermediate/advanced area; stable outdoor leading at 5.11 or above and sufficient climbing/safety skills, generally also for belayers and spectators. First-time registration required for everyone; unregistered entry prohibited. Entry log each visit and departure time on exit; contribution listed as ¥500/person/visit. Parking payment description still mentions vending-machine drink, unlike 2023 report. Rules prohibit night entry, unauthorized guiding, development/extra bolts, tree cutting and removal of anchor/descent carabiners; rubbish must be carried out. Warns of rockfall, loose rock and imperfect bolts.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Registration and parking are separate tasks",
+      "claim": "Parking has its own procedures. The management page still describes buying a specified drink, while a [2023 visit report](https://wind-scene.com/gozeniwa/) says the vending machine had been removed. The current method of paying the center parking fee was not verified in this research; confirm it with management before departure and follow the instructions on site. Allow time for these formalities instead of budgeting only for the walk.",
+      "verdict": "unverifiable",
+      "disposition": "qualified",
+      "qualification": "The current method of paying the center parking fee was not verified in this research; confirm it with management before departure and follow the instructions on site.",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/198",
+          "title": "御前岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Area description: managed by the Okutama Climbing Committee after a previous climbing ban; check committee rules; new development is prohibited. Popular-route section lists ミートテック 5.10c, ハートブレイク 5.11a, 蒙古タンメン 5.12a. The area is in Tokyo.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://wind-scene.com/gozeniwa/",
+          "title": "はじめての御前岩クライミング｜アプローチや注意事項など",
+          "publisher": "みどりのゆめ",
+          "source_date": "2023-12-08T23:40:10+0900",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Dated 2023-12-08 personal visit report: Gozen-iwa is limestone in Okutama. The author reproduces center rules and notes that the parking vending machine had been removed by November 2023. This observation is historical and conflicts with the older payment method still on the management page; no present parking method is inferred. The visit report records an approach of under 15 minutes from the center-side parking; used only as a historical observation.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "http://caramba-02.sakura.ne.jp/okutama/area/",
+          "title": "エリア情報 | 奥多摩クライミングセンター",
+          "publisher": "奥多摩クライミングセンター",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Management page: intermediate/advanced area; stable outdoor leading at 5.11 or above and sufficient climbing/safety skills, generally also for belayers and spectators. First-time registration required for everyone; unregistered entry prohibited. Entry log each visit and departure time on exit; contribution listed as ¥500/person/visit. Parking payment description still mentions vending-machine drink, unlike 2023 report. Rules prohibit night entry, unauthorized guiding, development/extra bolts, tree cutting and removal of anchor/descent carabiners; rubbish must be carried out. Warns of rockfall, loose rock and imperfect bolts.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "The retained paragraph explicitly names the current conditions not established by source retrieval; practical next steps are editorial advice, not confirmation of those conditions."
+    },
+    {
+      "location": "Registration and parking are separate tasks",
+      "claim": "As an approach reference, the 2023 report describes walking from the parking area beside the Okutama Climbing Center to the crag in under 15 minutes. This is that visit's observation, not a guarantee of current passage. From your Tokyo accommodation, identify the center and crag first, then confirm public transport, the designated approach and conditions with management instead of following a nearby fishing-site path blindly.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/198",
+          "title": "御前岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Area description: managed by the Okutama Climbing Committee after a previous climbing ban; check committee rules; new development is prohibited. Popular-route section lists ミートテック 5.10c, ハートブレイク 5.11a, 蒙古タンメン 5.12a. The area is in Tokyo.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://wind-scene.com/gozeniwa/",
+          "title": "はじめての御前岩クライミング｜アプローチや注意事項など",
+          "publisher": "みどりのゆめ",
+          "source_date": "2023-12-08T23:40:10+0900",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Dated 2023-12-08 personal visit report: Gozen-iwa is limestone in Okutama. The author reproduces center rules and notes that the parking vending machine had been removed by November 2023. This observation is historical and conflicts with the older payment method still on the management page; no present parking method is inferred. The visit report records an approach of under 15 minutes from the center-side parking; used only as a historical observation.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "http://caramba-02.sakura.ne.jp/okutama/area/",
+          "title": "エリア情報 | 奥多摩クライミングセンター",
+          "publisher": "奥多摩クライミングセンター",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Management page: intermediate/advanced area; stable outdoor leading at 5.11 or above and sufficient climbing/safety skills, generally also for belayers and spectators. First-time registration required for everyone; unregistered entry prohibited. Entry log each visit and departure time on exit; contribution listed as ¥500/person/visit. Parking payment description still mentions vending-machine drink, unlike 2023 report. Rules prohibit night entry, unauthorized guiding, development/extra bolts, tree cutting and removal of anchor/descent carabiners; rubbish must be carried out. Warns of rockfall, loose rock and imperfect bolts.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Use the route list for selection, not permission",
+      "claim": "[ROCKTOPO's Gozen-iwa page](https://www.rocktopo.net/areas/198) lists routes including ミートテック at 5.10c, ハートブレイク at 5.11a and 蒙古タンメン at 5.12a. These are database grades. An easier route does not waive the entry requirements, and a grade does not establish rope length, quickdraw count, rock stability or descent procedure.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/198",
+          "title": "御前岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Area description: managed by the Okutama Climbing Committee after a previous climbing ban; check committee rules; new development is prohibited. Popular-route section lists ミートテック 5.10c, ハートブレイク 5.11a, 蒙古タンメン 5.12a. The area is in Tokyo.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://wind-scene.com/gozeniwa/",
+          "title": "はじめての御前岩クライミング｜アプローチや注意事項など",
+          "publisher": "みどりのゆめ",
+          "source_date": "2023-12-08T23:40:10+0900",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Dated 2023-12-08 personal visit report: Gozen-iwa is limestone in Okutama. The author reproduces center rules and notes that the parking vending machine had been removed by November 2023. This observation is historical and conflicts with the older payment method still on the management page; no present parking method is inferred. The visit report records an approach of under 15 minutes from the center-side parking; used only as a historical observation.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "http://caramba-02.sakura.ne.jp/okutama/area/",
+          "title": "エリア情報 | 奥多摩クライミングセンター",
+          "publisher": "奥多摩クライミングセンター",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Management page: intermediate/advanced area; stable outdoor leading at 5.11 or above and sufficient climbing/safety skills, generally also for belayers and spectators. First-time registration required for everyone; unregistered entry prohibited. Entry log each visit and departure time on exit; contribution listed as ¥500/person/visit. Parking payment description still mentions vending-machine drink, unlike 2023 report. Rules prohibit night entry, unauthorized guiding, development/extra bolts, tree cutting and removal of anchor/descent carabiners; rubbish must be carried out. Warns of rockfall, loose rock and imperfect bolts.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Use the route list for selection, not permission",
+      "claim": "Choose a short list of objectives, then use an up-to-date topo to check lengths, descents and equipment with your partner. If one person wants a hard project, establish whether the other can provide appropriate belaying. Keep the day flexible enough to leave without climbing the intended line.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/198",
+          "title": "御前岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Area description: managed by the Okutama Climbing Committee after a previous climbing ban; check committee rules; new development is prohibited. Popular-route section lists ミートテック 5.10c, ハートブレイク 5.11a, 蒙古タンメン 5.12a. The area is in Tokyo.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://wind-scene.com/gozeniwa/",
+          "title": "はじめての御前岩クライミング｜アプローチや注意事項など",
+          "publisher": "みどりのゆめ",
+          "source_date": "2023-12-08T23:40:10+0900",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Dated 2023-12-08 personal visit report: Gozen-iwa is limestone in Okutama. The author reproduces center rules and notes that the parking vending machine had been removed by November 2023. This observation is historical and conflicts with the older payment method still on the management page; no present parking method is inferred. The visit report records an approach of under 15 minutes from the center-side parking; used only as a historical observation.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "http://caramba-02.sakura.ne.jp/okutama/area/",
+          "title": "エリア情報 | 奥多摩クライミングセンター",
+          "publisher": "奥多摩クライミングセンター",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Management page: intermediate/advanced area; stable outdoor leading at 5.11 or above and sufficient climbing/safety skills, generally also for belayers and spectators. First-time registration required for everyone; unregistered entry prohibited. Entry log each visit and departure time on exit; contribution listed as ¥500/person/visit. Parking payment description still mentions vending-machine drink, unlike 2023 report. Rules prohibit night entry, unauthorized guiding, development/extra bolts, tree cutting and removal of anchor/descent carabiners; rubbish must be carried out. Warns of rockfall, loose rock and imperfect bolts.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Make the rules part of the itinerary",
+      "claim": "Management prohibits night entry, unauthorized guiding, new-route development and additional bolts. It warns about rockfall and imperfect fixed protection. Its rules also cover taking rubbish home, avoiding tree cutting and leaving descent hardware in place. Give every member of the group the same rules to read.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/198",
+          "title": "御前岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Area description: managed by the Okutama Climbing Committee after a previous climbing ban; check committee rules; new development is prohibited. Popular-route section lists ミートテック 5.10c, ハートブレイク 5.11a, 蒙古タンメン 5.12a. The area is in Tokyo.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://wind-scene.com/gozeniwa/",
+          "title": "はじめての御前岩クライミング｜アプローチや注意事項など",
+          "publisher": "みどりのゆめ",
+          "source_date": "2023-12-08T23:40:10+0900",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Dated 2023-12-08 personal visit report: Gozen-iwa is limestone in Okutama. The author reproduces center rules and notes that the parking vending machine had been removed by November 2023. This observation is historical and conflicts with the older payment method still on the management page; no present parking method is inferred. The visit report records an approach of under 15 minutes from the center-side parking; used only as a historical observation.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "http://caramba-02.sakura.ne.jp/okutama/area/",
+          "title": "エリア情報 | 奥多摩クライミングセンター",
+          "publisher": "奥多摩クライミングセンター",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Management page: intermediate/advanced area; stable outdoor leading at 5.11 or above and sufficient climbing/safety skills, generally also for belayers and spectators. First-time registration required for everyone; unregistered entry prohibited. Entry log each visit and departure time on exit; contribution listed as ¥500/person/visit. Parking payment description still mentions vending-machine drink, unlike 2023 report. Rules prohibit night entry, unauthorized guiding, development/extra bolts, tree cutting and removal of anchor/descent carabiners; rubbish must be carried out. Warns of rockfall, loose rock and imperfect bolts.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Make the rules part of the itinerary",
+      "claim": "For a day from your Tokyo accommodation, confirm eligibility and management instructions first, transport second, and route objectives and equipment last. This guide did not inspect fixed protection on site and does not guarantee access on your travel date; check the approach and notices again before departure. If those conditions remain unclear, an indoor climbing day keeps the trip adaptable.",
+      "verdict": "unverifiable",
+      "disposition": "qualified",
+      "qualification": "This guide did not inspect fixed protection on site and does not guarantee access on your travel date; check the approach and notices again before departure.",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/198",
+          "title": "御前岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Area description: managed by the Okutama Climbing Committee after a previous climbing ban; check committee rules; new development is prohibited. Popular-route section lists ミートテック 5.10c, ハートブレイク 5.11a, 蒙古タンメン 5.12a. The area is in Tokyo.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://wind-scene.com/gozeniwa/",
+          "title": "はじめての御前岩クライミング｜アプローチや注意事項など",
+          "publisher": "みどりのゆめ",
+          "source_date": "2023-12-08T23:40:10+0900",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Dated 2023-12-08 personal visit report: Gozen-iwa is limestone in Okutama. The author reproduces center rules and notes that the parking vending machine had been removed by November 2023. This observation is historical and conflicts with the older payment method still on the management page; no present parking method is inferred. The visit report records an approach of under 15 minutes from the center-side parking; used only as a historical observation.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "http://caramba-02.sakura.ne.jp/okutama/area/",
+          "title": "エリア情報 | 奥多摩クライミングセンター",
+          "publisher": "奥多摩クライミングセンター",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Management page: intermediate/advanced area; stable outdoor leading at 5.11 or above and sufficient climbing/safety skills, generally also for belayers and spectators. First-time registration required for everyone; unregistered entry prohibited. Entry log each visit and departure time on exit; contribution listed as ¥500/person/visit. Parking payment description still mentions vending-machine drink, unlike 2023 report. Rules prohibit night entry, unauthorized guiding, development/extra bolts, tree cutting and removal of anchor/descent carabiners; rubbish must be carried out. Warns of rockfall, loose rock and imperfect bolts.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "The retained paragraph explicitly names the current conditions not established by source retrieval; practical next steps are editorial advice, not confirmation of those conditions."
+    }
+  ],
+  "media": [],
+  "source_sha256": "3c052e95c903be63ccd4a712932e0fae2ca273f1471f087d53925421f680cc49",
+  "links": [
+    {
+      "url": "https://www.rocktopo.net/areas/198",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    },
+    {
+      "url": "https://wind-scene.com/gozeniwa/",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    },
+    {
+      "url": "http://caramba-02.sakura.ne.jp/okutama/area/",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ]
+}

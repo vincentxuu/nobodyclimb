@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "article_id": "83848f20009ac20978478f9a18c5ffae",
+  "checked_at": "2026-10-12T00:52:07.867501+00:00",
+  "claims": [
+    {
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場地、攀登類型和決策用途；分類與標籤依室內抱石/戶外旅行主題。古賀志山クライミングガイド：不動滝のルート選びと利用範囲 / 宇都宮周辺の岩場で、登れるエリアと地主との約束を確認し、自分の力量に合う一日を組み立てる。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/80",
+          "title": "古賀志山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山のエリア説明：栃木県、左奥より左登攀禁止、通年表示、フェイス主体。競技会ルート5.9、ハートブレーカー5.10c、羚羊ハング5.11a。不動滝の各フェイス名称。全区の現在許可の証明ではない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/古賀志山/",
+          "title": "古賀志山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山出版社情報：宇都宮、チャート、bolt/multi/toprope限定を列挙。地主との約束は雌滝に入らず、伐採/神社放置/焚き火禁止、垃圾攜出、ヘルメット。南登山道駐車場から30分目安。公共交通は古い記述のため再利用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/information/9978/",
+          "title": "古賀志事故報告書",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-02-13T02:32:16+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA事故報告の概要と原因・対策を確認。2022年の不動滝で疑似リードとトップロープ回収時の確保混乱、下降前の確保確認不備を記録。本文は事故再現や手順指南をせず専門報告を案内。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "已對照場地來源及正文承諾；地理標籤東京攀岩指東京旅行延伸目的地，不把外縣岩場寫成位於東京。"
+    },
+    {
+      "location": "正文段落 1",
+      "claim": "古賀志山は栃木県宇都宮周辺の岩場です。[CLIMBING-netの紹介](https://www.climbing-net.com/iwaba_detail/古賀志山/)では岩質をチャートとし、ボルトルート、マルチピッチ、一部トップロープ限定を掲載しています。[ROCKTOPO](https://www.rocktopo.net/areas/80)の登録はフェイスのリードが中心です。力量に応じた目標はありますが、易しいルートがあることと、外岩のロープ経験なしで登れることは別です。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/80",
+          "title": "古賀志山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山のエリア説明：栃木県、左奥より左登攀禁止、通年表示、フェイス主体。競技会ルート5.9、ハートブレーカー5.10c、羚羊ハング5.11a。不動滝の各フェイス名称。全区の現在許可の証明ではない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/古賀志山/",
+          "title": "古賀志山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山出版社情報：宇都宮、チャート、bolt/multi/toprope限定を列挙。地主との約束は雌滝に入らず、伐採/神社放置/焚き火禁止、垃圾攜出、ヘルメット。南登山道駐車場から30分目安。公共交通は古い記述のため再利用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/information/9978/",
+          "title": "古賀志事故報告書",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-02-13T02:32:16+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA事故報告の概要と原因・対策を確認。2022年の不動滝で疑似リードとトップロープ回収時の確保混乱、下降前の確保確認不備を記録。本文は事故再現や手順指南をせず専門報告を案内。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 2",
+      "claim": "外岩のリード、確保、回収ができるチームなら、ルートを絞った一日にできます。ジム経験だけの人は岩場を知るガイドと行きましょう。東京旅行の登攀日が少ないなら、移動とアプローチに使う時間に全員が納得できるかを先に確認します。幅広いルートがあっても、誰もがすぐ適した目標を見つけられるとは限りません。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/80",
+          "title": "古賀志山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山のエリア説明：栃木県、左奥より左登攀禁止、通年表示、フェイス主体。競技会ルート5.9、ハートブレーカー5.10c、羚羊ハング5.11a。不動滝の各フェイス名称。全区の現在許可の証明ではない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/古賀志山/",
+          "title": "古賀志山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山出版社情報：宇都宮、チャート、bolt/multi/toprope限定を列挙。地主との約束は雌滝に入らず、伐採/神社放置/焚き火禁止、垃圾攜出、ヘルメット。南登山道駐車場から30分目安。公共交通は古い記述のため再利用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/information/9978/",
+          "title": "古賀志事故報告書",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-02-13T02:32:16+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA事故報告の概要と原因・対策を確認。2022年の不動滝で疑似リードとトップロープ回収時の確保混乱、下降前の確保確認不備を記録。本文は事故再現や手順指南をせず専門報告を案内。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "ROCKTOPOには不動滝正面・左フェイス、右フェイス、左奥フェイスなどの名称があり、競技会ルート5.9、ハートブレーカー5.10c、羚羊ハング5.11aが人気ルートとして挙がっています。現地と照合できるよう、日本語名を残してトポを探すとよいでしょう。掲載グレードは装備や安全の保証ではありません。ナチュラルプロテクション、回収、リードの可否はルートごとに確認します。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/80",
+          "title": "古賀志山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山のエリア説明：栃木県、左奥より左登攀禁止、通年表示、フェイス主体。競技会ルート5.9、ハートブレーカー5.10c、羚羊ハング5.11a。不動滝の各フェイス名称。全区の現在許可の証明ではない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/古賀志山/",
+          "title": "古賀志山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山出版社情報：宇都宮、チャート、bolt/multi/toprope限定を列挙。地主との約束は雌滝に入らず、伐採/神社放置/焚き火禁止、垃圾攜出、ヘルメット。南登山道駐車場から30分目安。公共交通は古い記述のため再利用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/information/9978/",
+          "title": "古賀志事故報告書",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-02-13T02:32:16+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA事故報告の概要と原因・対策を確認。2022年の不動滝で疑似リードとトップロープ回収時の確保混乱、下降前の確保確認不備を記録。本文は事故再現や手順指南をせず専門報告を案内。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "CLIMBING-netには、雌滝エリアに入らない、樹木を切らない、神社に私物を置かない、焚き火をしない、ゴミを持ち帰る、ヘルメットを着用するという約束が記されています。ROCKTOPOには左奥エリアより左は登攀禁止とあります。名称だけで同じ境界だと決めつけず、現行トポと掲示で場所を確認しましょう。分からなければ確認できた範囲に留まります。現在の全エリアの境界は、地主や管理主体には確認していません。",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/80",
+          "title": "古賀志山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山のエリア説明：栃木県、左奥より左登攀禁止、通年表示、フェイス主体。競技会ルート5.9、ハートブレーカー5.10c、羚羊ハング5.11a。不動滝の各フェイス名称。全区の現在許可の証明ではない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/古賀志山/",
+          "title": "古賀志山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山出版社情報：宇都宮、チャート、bolt/multi/toprope限定を列挙。地主との約束は雌滝に入らず、伐採/神社放置/焚き火禁止、垃圾攜出、ヘルメット。南登山道駐車場から30分目安。公共交通は古い記述のため再利用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/information/9978/",
+          "title": "古賀志事故報告書",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-02-13T02:32:16+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA事故報告の概要と原因・対策を確認。2022年の不動滝で疑似リードとトップロープ回収時の確保混乱、下降前の確保確認不備を記録。本文は事故再現や手順指南をせず専門報告を案内。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "CLIMBING-netには、雌滝エリアに入らない、樹木を切らない、神社に私物を置かない、焚き火をしない、ゴミを持ち帰る、ヘルメットを着用するという約束が記されています。ROCKTOPOには左奥エリアより左は登攀禁止とあります。名称だけで同じ境界だと決めつけず、現行トポと掲示で場所を確認しましょう。分からなければ確認できた範囲に留まります。現在の全エリアの境界は、地主や管理主体には確認していません。"
+    },
+    {
+      "location": "正文段落 5",
+      "claim": "出版社の案内は、古賀志山南登山道駐車場と約30分の歩行をアプローチの目安にしています。ただし公共交通の段落には古い施設名や廃止された便の情報があり、本稿では便や所要時間を引き継ぎません。宇都宮周辺の宿泊や確認できる送迎を用意し、現地を知る同行者と集合場所、帰りを決めてから列車を調べましょう。現在の送迎料金や駐車料金は未確認なので、予算には余裕を持たせます。",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/80",
+          "title": "古賀志山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山のエリア説明：栃木県、左奥より左登攀禁止、通年表示、フェイス主体。競技会ルート5.9、ハートブレーカー5.10c、羚羊ハング5.11a。不動滝の各フェイス名称。全区の現在許可の証明ではない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/古賀志山/",
+          "title": "古賀志山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山出版社情報：宇都宮、チャート、bolt/multi/toprope限定を列挙。地主との約束は雌滝に入らず、伐採/神社放置/焚き火禁止、垃圾攜出、ヘルメット。南登山道駐車場から30分目安。公共交通は古い記述のため再利用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/information/9978/",
+          "title": "古賀志事故報告書",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-02-13T02:32:16+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA事故報告の概要と原因・対策を確認。2022年の不動滝で疑似リードとトップロープ回収時の確保混乱、下降前の確保確認不備を記録。本文は事故再現や手順指南をせず専門報告を案内。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "出版社の案内は、古賀志山南登山道駐車場と約30分の歩行をアプローチの目安にしています。ただし公共交通の段落には古い施設名や廃止された便の情報があり、本稿では便や所要時間を引き継ぎません。宇都宮周辺の宿泊や確認できる送迎を用意し、現地を知る同行者と集合場所、帰りを決めてから列車を調べましょう。現在の送迎料金や駐車料金は未確認なので、予算には余裕を持たせます。"
+    },
+    {
+      "location": "正文段落 6",
+      "claim": "ROCKTOPOと出版社は通年の目安を示していますが、濡れた岩、雨後の状態、混雑は当日判断が必要です。計画例として、朝は不動滝の一つのエリアに絞り、ルートと支点を確認して、全員が参加できる少数の目標を選びます。慣れない回収作業に新しい練習を重ねないでください。[JFAの古賀志事故報告](https://freeclimb.jp/information/9978/)は、疑似リードとトップロープ回収に伴う確保の混乱を記録しています。ロープ経験者も訪問前に読んでおきたい資料です。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/80",
+          "title": "古賀志山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山のエリア説明：栃木県、左奥より左登攀禁止、通年表示、フェイス主体。競技会ルート5.9、ハートブレーカー5.10c、羚羊ハング5.11a。不動滝の各フェイス名称。全区の現在許可の証明ではない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/古賀志山/",
+          "title": "古賀志山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "古賀志山出版社情報：宇都宮、チャート、bolt/multi/toprope限定を列挙。地主との約束は雌滝に入らず、伐採/神社放置/焚き火禁止、垃圾攜出、ヘルメット。南登山道駐車場から30分目安。公共交通は古い記述のため再利用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/information/9978/",
+          "title": "古賀志事故報告書",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-02-13T02:32:16+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA事故報告の概要と原因・対策を確認。2022年の不動滝で疑似リードとトップロープ回収時の確保混乱、下降前の確保確認不備を記録。本文は事故再現や手順指南をせず専門報告を案内。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    }
+  ],
+  "media": [],
+  "source_sha256": "b74832866b08afe93698f452710794d49f6101ec08f7083bde61ee6fa15fec9e",
+  "links": [
+    {
+      "url": "https://www.rocktopo.net/areas/80",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/古賀志山/",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://freeclimb.jp/information/9978/",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_artifacts": [
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/r1.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/x0.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/y3.json"
+  ],
+  "limitations": [
+    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。",
+    "尚待未參與寫稿者獨立審查。"
+  ]
+}

@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "article_id": "8062be3f3deec2302597d0c88a01f1dd",
+  "checked_at": "2026-10-12T00:52:07.867501+00:00",
+  "claims": [
+    {
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場地、攀登類型和決策用途；分類與標籤依室內抱石/戶外旅行主題。御岳ボルダリングガイド：河原の岩、マット、ローカルルール / ロープの岩場とは別の計画として、課題、マット、遊歩道や駐車場のルールを確認する。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/108",
+          "title": "御岳ボルダー | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "御岳ボルダー基本情報：東京都、チャート、抱石。岩名忍者返しの岩/日影岩、人気マミ岩中央4級/忍者返し1級。4月季節表示、玉堂美術館上廁所前駐車は廁所利用のみ、夜間抱石禁止。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/kantou-area/4891/",
+          "title": "東京・御岳ボルダー",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-04-10T13:34:40+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA御岳本文：釣り/カヌー/観光と共有、道の占用・大声を避ける、粉刷除、night/fire/キャンプ外テント禁止。寒山寺/交流センター/苑地駐車、駅近マウンガのpad/brush/shoe租借を記録。當日庫存價未核實。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "已對照場地來源及正文承諾；地理標籤東京攀岩指東京旅行延伸目的地，不把外縣岩場寫成位於東京。"
+    },
+    {
+      "location": "正文段落 1",
+      "claim": "[ROCKTOPOの御岳ボルダー](https://www.rocktopo.net/areas/108)は東京都のチャートのボルダリングを掲載し、忍者返しの岩、日影岩などを紹介しています。周辺のロープの岩場をまとめたリードガイドではありません。ロープとヌンチャクだけを持つ旅で、抱石の予定がなければ、御岳は同じ種類の代替先ではありません。マットと外岩ボルダーの経験を別に考える必要があります。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/108",
+          "title": "御岳ボルダー | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "御岳ボルダー基本情報：東京都、チャート、抱石。岩名忍者返しの岩/日影岩、人気マミ岩中央4級/忍者返し1級。4月季節表示、玉堂美術館上廁所前駐車は廁所利用のみ、夜間抱石禁止。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/kantou-area/4891/",
+          "title": "東京・御岳ボルダー",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-04-10T13:34:40+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA御岳本文：釣り/カヌー/観光と共有、道の占用・大声を避ける、粉刷除、night/fire/キャンプ外テント禁止。寒山寺/交流センター/苑地駐車、駅近マウンガのpad/brush/shoe租借を記録。當日庫存價未核實。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 2",
+      "claim": "都市旅行に外岩ボルダーを加えたい人で、着地と墜落のリスクを判断できることが前提です。ジムだけの経験なら、御岳を知る人と行き、低くて着地を扱いやすい課題から始めましょう。室内グレードで河原の安全は判断できません。高さ、濡れた岩、地面の石、着地の広さを現地で確認し、マットが全ての高さを守ると考えないこと。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/108",
+          "title": "御岳ボルダー | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "御岳ボルダー基本情報：東京都、チャート、抱石。岩名忍者返しの岩/日影岩、人気マミ岩中央4級/忍者返し1級。4月季節表示、玉堂美術館上廁所前駐車は廁所利用のみ、夜間抱石禁止。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/kantou-area/4891/",
+          "title": "東京・御岳ボルダー",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-04-10T13:34:40+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA御岳本文：釣り/カヌー/観光と共有、道の占用・大声を避ける、粉刷除、night/fire/キャンプ外テント禁止。寒山寺/交流センター/苑地駐車、駅近マウンガのpad/brush/shoe租借を記録。當日庫存價未核實。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "ROCKTOPOはマミ岩中央4級、忍者返し1級を人気課題の手がかりとして挙げています。日本の級と掲載名称であり、完登できる保証ではありません。トポで岩、スタート、終了を確認し、現場で着地を見ます。写真と状況が違えば、名前を登るために無理をしないでください。初日は岩質に慣れ、扱える着地の課題を選ぶことが旅のペースにも合います。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/108",
+          "title": "御岳ボルダー | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "御岳ボルダー基本情報：東京都、チャート、抱石。岩名忍者返しの岩/日影岩、人気マミ岩中央4級/忍者返し1級。4月季節表示、玉堂美術館上廁所前駐車は廁所利用のみ、夜間抱石禁止。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/kantou-area/4891/",
+          "title": "東京・御岳ボルダー",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-04-10T13:34:40+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA御岳本文：釣り/カヌー/観光と共有、道の占用・大声を避ける、粉刷除、night/fire/キャンプ外テント禁止。寒山寺/交流センター/苑地駐車、駅近マウンガのpad/brush/shoe租借を記録。當日庫存價未核實。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "[JFAの御岳情報](https://freeclimb.jp/kantou-area/4891/)は御岳駅近くのマウンガで、マット、ブラシ、シューズのレンタルがあるとしています。これは予約先を探す手がかりで、当日の在庫、料金、営業時間は本稿では確認していません。マットを持参しないなら、予約、受け取りと返却の時間、岩までの運び方を先に確認しましょう。",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/108",
+          "title": "御岳ボルダー | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "御岳ボルダー基本情報：東京都、チャート、抱石。岩名忍者返しの岩/日影岩、人気マミ岩中央4級/忍者返し1級。4月季節表示、玉堂美術館上廁所前駐車は廁所利用のみ、夜間抱石禁止。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/kantou-area/4891/",
+          "title": "東京・御岳ボルダー",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-04-10T13:34:40+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA御岳本文：釣り/カヌー/観光と共有、道の占用・大声を避ける、粉刷除、night/fire/キャンプ外テント禁止。寒山寺/交流センター/苑地駐車、駅近マウンガのpad/brush/shoe租借を記録。當日庫存價未核實。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "[JFAの御岳情報](https://freeclimb.jp/kantou-area/4891/)は御岳駅近くのマウンガで、マット、ブラシ、シューズのレンタルがあるとしています。これは予約先を探す手がかりで、当日の在庫、料金、営業時間は本稿では確認していません。マットを持参しないなら、予約、受け取りと返却の時間、岩までの運び方を先に確認しましょう。"
+    },
+    {
+      "location": "正文段落 5",
+      "claim": "JFAは、釣り、カヌー、観光でも使われる場所として、通路を占領しない、大声を出さない、登った後にチョークを落とすよう求めています。ナイトボルダリング、焚き火、キャンプ場以外のテント泊は禁止です。マットや荷物は道を塞がず、移動するときは他の利用者を確認します。待っている同行者も遊歩道を占領しないようにしましょう。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/108",
+          "title": "御岳ボルダー | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "御岳ボルダー基本情報：東京都、チャート、抱石。岩名忍者返しの岩/日影岩、人気マミ岩中央4級/忍者返し1級。4月季節表示、玉堂美術館上廁所前駐車は廁所利用のみ、夜間抱石禁止。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/kantou-area/4891/",
+          "title": "東京・御岳ボルダー",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-04-10T13:34:40+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA御岳本文：釣り/カヌー/観光と共有、道の占用・大声を避ける、粉刷除、night/fire/キャンプ外テント禁止。寒山寺/交流センター/苑地駐車、駅近マウンガのpad/brush/shoe租借を記録。當日庫存價未核實。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 6",
+      "claim": "御岳駅周辺を計画の起点にして、選んだ岩への歩行と装備の受け取りを組みます。東京発の具体的な列車と総所要時間は未確認なので、訪問日の便を調べてください。車ならJFAが挙げる寒山寺、御岳交流センター、御岳苑地の駐車場を確認します。ROCKTOPOは玉堂美術館上のトイレ前駐車場を、トイレ利用以外の抱石駐車に使わないよう明示しています。空きがあるだけでは利用できません。",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/108",
+          "title": "御岳ボルダー | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "御岳ボルダー基本情報：東京都、チャート、抱石。岩名忍者返しの岩/日影岩、人気マミ岩中央4級/忍者返し1級。4月季節表示、玉堂美術館上廁所前駐車は廁所利用のみ、夜間抱石禁止。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/kantou-area/4891/",
+          "title": "東京・御岳ボルダー",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-04-10T13:34:40+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA御岳本文：釣り/カヌー/観光と共有、道の占用・大声を避ける、粉刷除、night/fire/キャンプ外テント禁止。寒山寺/交流センター/苑地駐車、駅近マウンガのpad/brush/shoe租借を記録。當日庫存價未核實。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "御岳駅周辺を計画の起点にして、選んだ岩への歩行と装備の受け取りを組みます。東京発の具体的な列車と総所要時間は未確認なので、訪問日の便を調べてください。車ならJFAが挙げる寒山寺、御岳交流センター、御岳苑地の駐車場を確認します。ROCKTOPOは玉堂美術館上のトイレ前駐車場を、トイレ利用以外の抱石駐車に使わないよう明示しています。空きがあるだけでは利用できません。"
+    },
+    {
+      "location": "正文段落 7",
+      "claim": "ROCKTOPOの季節目安には4月も含まれます。それでも雨、河原の通行、岩の乾きは確認し、特定日の水位や利用状況は本稿では確認していません。計画例は先にマットを受け取り、午前は一つのエリアを選び、登った後にブラッシングし、返却に間に合うよう早めに退出する形です。雨後の着地や道を判断できなければジムに変更します。これは日程案で、当日の状態の保証ではありません。",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/108",
+          "title": "御岳ボルダー | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "御岳ボルダー基本情報：東京都、チャート、抱石。岩名忍者返しの岩/日影岩、人気マミ岩中央4級/忍者返し1級。4月季節表示、玉堂美術館上廁所前駐車は廁所利用のみ、夜間抱石禁止。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/kantou-area/4891/",
+          "title": "東京・御岳ボルダー",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-04-10T13:34:40+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA御岳本文：釣り/カヌー/観光と共有、道の占用・大声を避ける、粉刷除、night/fire/キャンプ外テント禁止。寒山寺/交流センター/苑地駐車、駅近マウンガのpad/brush/shoe租借を記録。當日庫存價未核實。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "ROCKTOPOの季節目安には4月も含まれます。それでも雨、河原の通行、岩の乾きは確認し、特定日の水位や利用状況は本稿では確認していません。計画例は先にマットを受け取り、午前は一つのエリアを選び、登った後にブラッシングし、返却に間に合うよう早めに退出する形です。雨後の着地や道を判断できなければジムに変更します。これは日程案で、当日の状態の保証ではありません。"
+    }
+  ],
+  "media": [],
+  "source_sha256": "23396e97d9e58e4332c19ae51b65f945939db3016b512bae40639c3f2b1cc77c",
+  "links": [
+    {
+      "url": "https://www.rocktopo.net/areas/108",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://freeclimb.jp/kantou-area/4891/",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_artifacts": [
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/r4.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/r5.json"
+  ],
+  "limitations": [
+    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。",
+    "尚待未參與寫稿者獨立審查。"
+  ]
+}

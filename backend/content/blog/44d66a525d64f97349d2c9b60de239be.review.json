@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "article_id": "44d66a525d64f97349d2c9b60de239be",
+  "source_sha256": "78a8c79598ea673788a0fec99c51ef0f9ed2af56e974b7e09323c6fec46820f2",
+  "evidence_sha256": "efe625c56d239e2e124b7182467c7f24d92882c1d4fafd37561ab1720d91935a",
+  "reviewed_at": "2026-10-12T00:59:40.909572+00:00",
+  "reviewer": "Codex independent reviewer /root/commit_review (not article author)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "官方主頁時間13–23/10–21、登錄2200/1100、通日2530、短時2310/1650、鞋220粉110初免費核對，加總4730/3630。獨立Groundlane重取discovery確認平日4510/週末4730，三語有明示頁面差異及適用票種要店確認。 初訪實際請款與資格未向店家確認；正文將主頁合計標預算參考，非保證。未成年/團體/存放完整條件及2027營業未驗。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "已逐段讀zh/en/ja全文，核對價格/日期/級數/地名/條件、否定與未知限制；不是只對hash或摘要，英文/日文表述自然，無新增保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "用途與能力門檻、目標、交通、在地規則、季節及下一步可獨立閱讀；沒有順序閱讀系列要求或虛构現場經驗。正文混入簡體字已修成繁中，保留原有數字與日文地名。最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "正文混入簡體字已修成繁中，保留原有數字與日文地名。"
+    },
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+    }
+  ]
+}

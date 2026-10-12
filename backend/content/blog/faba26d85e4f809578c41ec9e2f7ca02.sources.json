@@ -1,0 +1,544 @@
+{
+  "schema_version": 1,
+  "article_id": "faba26d85e4f809578c41ec9e2f7ca02",
+  "checked_at": "2026-10-12T00:52:07.867501+00:00",
+  "claims": [
+    {
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場地、攀登類型和決策用途；分類與標籤依室內抱石/戶外旅行主題。二子山攀岩指南：高階石灰岩目標與必須先確認的入場條件 / 二子山包含先鋒與多繩距目標。區域規則、固定點公告及往返安排應先確認，再決定是否加入東京行程。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/92",
+          "title": "二子山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山の基本情報、ルート分布、人気ルート名称とグレードを確認。埼玉県、フェイス・裂隙・マルチ。中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a、任侠道5.13a。現時点の全区開放は証明しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/二子山/",
+          "title": "二子山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山出版社情報：小鹿野、石灰岩、東岳/西岳/祠/ローソク岩、bolt/multi。雨期・夏の染み出し、坂本側林道と国道299の接近記述。古い宿泊金額や総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10079/",
+          "title": "アクセス情報：埼玉県・二子山 - ボルト破損",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-12-05T00:55:56+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA2024年12月告知：広場エリア青い瞳のセリーヌ第一ボルト抜け報告。修復完了とは記していない。本文も修復未確認とする。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/6829/",
+          "title": "【注意喚起(エリア関連)：埼玉県・二子山】",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-03-08T19:23:00+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFAの二子トイレ注意：排泄/紙放置が閉鎖へ影響、最低限トイレ紙の持ち帰り。現行全ルールの代わりにしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.oganoclimbing.com/複製-会員向け特別案内日について",
+          "title": "二子山への入山について | 一般社団法人小鹿野クライミング協会",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "小鹿野協会の入山ページ本文は、訪問クライマーへ注意事項の再確認を求めるのみ。主規則は取得本文にない。完全なmembership/registration/accessは未確認と本文で限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "已對照場地來源及正文承諾；地理標籤東京攀岩指東京旅行延伸目的地，不把外縣岩場寫成位於東京。"
+    },
+    {
+      "location": "正文段落 1",
+      "claim": "埼玉縣小鹿野町的二子山，是以石灰岩先鋒及多繩距為特色的場地。[CLIMBING-net](https://www.climbing-net.com/iwaba_detail/二子山/)描述東岳、西岳、祠與ローソク岩等不同區域；[ROCKTOPO](https://www.rocktopo.net/areas/92)也將岩面、裂隙和多繩距分列。對旅行者來說，第一個決定應是「我要去的那一區，目前允許如何使用」，而不是先挑最有名的路線。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/92",
+          "title": "二子山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山の基本情報、ルート分布、人気ルート名称とグレードを確認。埼玉県、フェイス・裂隙・マルチ。中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a、任侠道5.13a。現時点の全区開放は証明しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/二子山/",
+          "title": "二子山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山出版社情報：小鹿野、石灰岩、東岳/西岳/祠/ローソク岩、bolt/multi。雨期・夏の染み出し、坂本側林道と国道299の接近記述。古い宿泊金額や総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10079/",
+          "title": "アクセス情報：埼玉県・二子山 - ボルト破損",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-12-05T00:55:56+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA2024年12月告知：広場エリア青い瞳のセリーヌ第一ボルト抜け報告。修復完了とは記していない。本文も修復未確認とする。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/6829/",
+          "title": "【注意喚起(エリア関連)：埼玉県・二子山】",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-03-08T19:23:00+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFAの二子トイレ注意：排泄/紙放置が閉鎖へ影響、最低限トイレ紙の持ち帰り。現行全ルールの代わりにしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.oganoclimbing.com/複製-会員向け特別案内日について",
+          "title": "二子山への入山について | 一般社団法人小鹿野クライミング協会",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "小鹿野協会の入山ページ本文は、訪問クライマーへ注意事項の再確認を求めるのみ。主規則は取得本文にない。完全なmembership/registration/accessは未確認と本文で限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 2",
+      "claim": "適合已有戶外先鋒能力、能依岩況調整目標的繩隊。出版社列出的壁面包含明顯仰角；若全隊只想輕鬆試幾條低級數線，應先看實際 topo 的可選量和接近投入。中央稜多繩距與祠、弓状的單繩距目標，需要不同的能力與時間規劃，不能只用同一個「二子山日歸」標籤處理。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/92",
+          "title": "二子山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山の基本情報、ルート分布、人気ルート名称とグレードを確認。埼玉県、フェイス・裂隙・マルチ。中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a、任侠道5.13a。現時点の全区開放は証明しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/二子山/",
+          "title": "二子山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山出版社情報：小鹿野、石灰岩、東岳/西岳/祠/ローソク岩、bolt/multi。雨期・夏の染み出し、坂本側林道と国道299の接近記述。古い宿泊金額や総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10079/",
+          "title": "アクセス情報：埼玉県・二子山 - ボルト破損",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-12-05T00:55:56+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA2024年12月告知：広場エリア青い瞳のセリーヌ第一ボルト抜け報告。修復完了とは記していない。本文も修復未確認とする。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/6829/",
+          "title": "【注意喚起(エリア関連)：埼玉県・二子山】",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-03-08T19:23:00+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFAの二子トイレ注意：排泄/紙放置が閉鎖へ影響、最低限トイレ紙の持ち帰り。現行全ルールの代わりにしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.oganoclimbing.com/複製-会員向け特別案内日について",
+          "title": "二子山への入山について | 一般社団法人小鹿野クライミング協会",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "小鹿野協会の入山ページ本文は、訪問クライマーへ注意事項の再確認を求めるのみ。主規則は取得本文にない。完全なmembership/registration/accessは未確認と本文で限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "ROCKTOPO列中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a與任侠道5.13a。本文只把它們作為不同目標的查找線索，不提供保護點或核心動作建議。若想挑戰高階目標，先選一條符合已知戶外能力的線，再安排熟悉岩區和保守暖身；不要把回程壓力帶進最後一把。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/92",
+          "title": "二子山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山の基本情報、ルート分布、人気ルート名称とグレードを確認。埼玉県、フェイス・裂隙・マルチ。中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a、任侠道5.13a。現時点の全区開放は証明しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/二子山/",
+          "title": "二子山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山出版社情報：小鹿野、石灰岩、東岳/西岳/祠/ローソク岩、bolt/multi。雨期・夏の染み出し、坂本側林道と国道299の接近記述。古い宿泊金額や総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10079/",
+          "title": "アクセス情報：埼玉県・二子山 - ボルト破損",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-12-05T00:55:56+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA2024年12月告知：広場エリア青い瞳のセリーヌ第一ボルト抜け報告。修復完了とは記していない。本文も修復未確認とする。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/6829/",
+          "title": "【注意喚起(エリア関連)：埼玉県・二子山】",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-03-08T19:23:00+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFAの二子トイレ注意：排泄/紙放置が閉鎖へ影響、最低限トイレ紙の持ち帰り。現行全ルールの代わりにしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.oganoclimbing.com/複製-会員向け特別案内日について",
+          "title": "二子山への入山について | 一般社団法人小鹿野クライミング協会",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "小鹿野協会の入山ページ本文は、訪問クライマーへ注意事項の再確認を求めるのみ。主規則は取得本文にない。完全なmembership/registration/accessは未確認と本文で限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "[小鹿野攀岩協會的入山頁](https://www.oganoclimbing.com/複製-会員向け特別案内日について)要求入山攀岩者重新確認其注意事項，但本次取得的可讀正文未包含完整規則。各岩區目前的會員、登記及開放條件，本篇未能完整核實，出發前應直接向協會確認；本文不宣稱二子山全區開放。若無法確認指定區的使用資格，就不應把它排成已確定的攀登日。",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/92",
+          "title": "二子山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山の基本情報、ルート分布、人気ルート名称とグレードを確認。埼玉県、フェイス・裂隙・マルチ。中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a、任侠道5.13a。現時点の全区開放は証明しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/二子山/",
+          "title": "二子山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山出版社情報：小鹿野、石灰岩、東岳/西岳/祠/ローソク岩、bolt/multi。雨期・夏の染み出し、坂本側林道と国道299の接近記述。古い宿泊金額や総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10079/",
+          "title": "アクセス情報：埼玉県・二子山 - ボルト破損",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-12-05T00:55:56+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA2024年12月告知：広場エリア青い瞳のセリーヌ第一ボルト抜け報告。修復完了とは記していない。本文も修復未確認とする。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/6829/",
+          "title": "【注意喚起(エリア関連)：埼玉県・二子山】",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-03-08T19:23:00+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFAの二子トイレ注意：排泄/紙放置が閉鎖へ影響、最低限トイレ紙の持ち帰り。現行全ルールの代わりにしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.oganoclimbing.com/複製-会員向け特別案内日について",
+          "title": "二子山への入山について | 一般社団法人小鹿野クライミング協会",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "小鹿野協会の入山ページ本文は、訪問クライマーへ注意事項の再確認を求めるのみ。主規則は取得本文にない。完全なmembership/registration/accessは未確認と本文で限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "[小鹿野攀岩協會的入山頁](https://www.oganoclimbing.com/複製-会員向け特別案内日について)要求入山攀岩者重新確認其注意事項，但本次取得的可讀正文未包含完整規則。各岩區目前的會員、登記及開放條件，本篇未能完整核實，出發前應直接向協會確認；本文不宣稱二子山全區開放。若無法確認指定區的使用資格，就不應把它排成已確定的攀登日。"
+    },
+    {
+      "location": "正文段落 5",
+      "claim": "[JFA於2024年12月的公告](https://freeclimb.jp/access/10079/)記錄広場區「青い瞳のセリーヌ」第一個 bolt 脫落。本篇未取得修復完成資訊，這是要追查的個別路線問題，不能推論其他線安全。另有[JFA的如廁提醒](https://freeclimb.jp/access/6829/)，要求至少把衛生紙帶走；實際安排仍應遵守最新在地規則，提前使用合法廁所並做好攜出準備。",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/92",
+          "title": "二子山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山の基本情報、ルート分布、人気ルート名称とグレードを確認。埼玉県、フェイス・裂隙・マルチ。中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a、任侠道5.13a。現時点の全区開放は証明しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/二子山/",
+          "title": "二子山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山出版社情報：小鹿野、石灰岩、東岳/西岳/祠/ローソク岩、bolt/multi。雨期・夏の染み出し、坂本側林道と国道299の接近記述。古い宿泊金額や総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10079/",
+          "title": "アクセス情報：埼玉県・二子山 - ボルト破損",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-12-05T00:55:56+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA2024年12月告知：広場エリア青い瞳のセリーヌ第一ボルト抜け報告。修復完了とは記していない。本文も修復未確認とする。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/6829/",
+          "title": "【注意喚起(エリア関連)：埼玉県・二子山】",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-03-08T19:23:00+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFAの二子トイレ注意：排泄/紙放置が閉鎖へ影響、最低限トイレ紙の持ち帰り。現行全ルールの代わりにしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.oganoclimbing.com/複製-会員向け特別案内日について",
+          "title": "二子山への入山について | 一般社団法人小鹿野クライミング協会",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "小鹿野協会の入山ページ本文は、訪問クライマーへ注意事項の再確認を求めるのみ。主規則は取得本文にない。完全なmembership/registration/accessは未確認と本文で限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "[JFA於2024年12月的公告](https://freeclimb.jp/access/10079/)記錄広場區「青い瞳のセリーヌ」第一個 bolt 脫落。本篇未取得修復完成資訊，這是要追查的個別路線問題，不能推論其他線安全。另有[JFA的如廁提醒](https://freeclimb.jp/access/6829/)，要求至少把衛生紙帶走；實際安排仍應遵守最新在地規則，提前使用合法廁所並做好攜出準備。"
+    },
+    {
+      "location": "正文段落 6",
+      "claim": "CLIMBING-net以坂本側林道、國道299號作接近線索，並提醒雨季和夏季滲水。精確公共交通銜接、當前林道與停車條件，本篇未核實。建議讓熟悉當地的同行者確認接送和最晚離場時間，或在附近住宿，減少當天移動壓力。四月也須看近期雨量，不能只看當天晴天就判斷岩場乾燥。",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/92",
+          "title": "二子山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山の基本情報、ルート分布、人気ルート名称とグレードを確認。埼玉県、フェイス・裂隙・マルチ。中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a、任侠道5.13a。現時点の全区開放は証明しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/二子山/",
+          "title": "二子山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山出版社情報：小鹿野、石灰岩、東岳/西岳/祠/ローソク岩、bolt/multi。雨期・夏の染み出し、坂本側林道と国道299の接近記述。古い宿泊金額や総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10079/",
+          "title": "アクセス情報：埼玉県・二子山 - ボルト破損",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-12-05T00:55:56+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA2024年12月告知：広場エリア青い瞳のセリーヌ第一ボルト抜け報告。修復完了とは記していない。本文も修復未確認とする。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/6829/",
+          "title": "【注意喚起(エリア関連)：埼玉県・二子山】",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-03-08T19:23:00+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFAの二子トイレ注意：排泄/紙放置が閉鎖へ影響、最低限トイレ紙の持ち帰り。現行全ルールの代わりにしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.oganoclimbing.com/複製-会員向け特別案内日について",
+          "title": "二子山への入山について | 一般社団法人小鹿野クライミング協会",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "小鹿野協会の入山ページ本文は、訪問クライマーへ注意事項の再確認を求めるのみ。主規則は取得本文にない。完全なmembership/registration/accessは未確認と本文で限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "CLIMBING-net以坂本側林道、國道299號作接近線索，並提醒雨季和夏季滲水。精確公共交通銜接、當前林道與停車條件，本篇未核實。建議讓熟悉當地的同行者確認接送和最晚離場時間，或在附近住宿，減少當天移動壓力。四月也須看近期雨量，不能只看當天晴天就判斷岩場乾燥。"
+    },
+    {
+      "location": "正文段落 7",
+      "claim": "建議示例：在使用資格與交通都確認後，只選一個可用區域、少量目標，先完成現場辨識再上攀。把濕壁、現場禁用告示、找不到可靠下降資訊，列為更改行程的理由。本文的功能是幫你判斷能否規劃二子山，並不是當日入場許可、固定點檢查紀錄或替代 topo。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/92",
+          "title": "二子山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山の基本情報、ルート分布、人気ルート名称とグレードを確認。埼玉県、フェイス・裂隙・マルチ。中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a、任侠道5.13a。現時点の全区開放は証明しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/二子山/",
+          "title": "二子山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "二子山出版社情報：小鹿野、石灰岩、東岳/西岳/祠/ローソク岩、bolt/multi。雨期・夏の染み出し、坂本側林道と国道299の接近記述。古い宿泊金額や総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10079/",
+          "title": "アクセス情報：埼玉県・二子山 - ボルト破損",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2024-12-05T00:55:56+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFA2024年12月告知：広場エリア青い瞳のセリーヌ第一ボルト抜け報告。修復完了とは記していない。本文も修復未確認とする。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://freeclimb.jp/access/6829/",
+          "title": "【注意喚起(エリア関連)：埼玉県・二子山】",
+          "publisher": "日本フリークライミング協会",
+          "source_date": "2022-03-08T19:23:00+09:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "JFAの二子トイレ注意：排泄/紙放置が閉鎖へ影響、最低限トイレ紙の持ち帰り。現行全ルールの代わりにしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.oganoclimbing.com/複製-会員向け特別案内日について",
+          "title": "二子山への入山について | 一般社団法人小鹿野クライミング協会",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "小鹿野協会の入山ページ本文は、訪問クライマーへ注意事項の再確認を求めるのみ。主規則は取得本文にない。完全なmembership/registration/accessは未確認と本文で限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    }
+  ],
+  "media": [],
+  "source_sha256": "c2872d2632e30192d044385c304e9aec3bd6404d054414808cf6e5b8c088a2e0",
+  "links": [
+    {
+      "url": "https://www.rocktopo.net/areas/92",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/二子山/",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://freeclimb.jp/access/10079/",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://freeclimb.jp/access/6829/",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://www.oganoclimbing.com/複製-会員向け特別案内日について",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_artifacts": [
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/r2.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/z0.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/r6.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/r7.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/y0.json"
+  ],
+  "limitations": [
+    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。",
+    "尚待未參與寫稿者獨立審查。"
+  ]
+}

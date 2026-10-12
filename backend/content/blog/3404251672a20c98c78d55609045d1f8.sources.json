@@ -1,0 +1,345 @@
+{
+  "schema_version": 1,
+  "article_id": "3404251672a20c98c78d55609045d1f8",
+  "checked_at": "2026-10-12T09:49:42+09:00",
+  "source_sha256": "adcd956db07093d432bea5d4f51f9b242d6dce56f3dc7390255f7c73712cd2ea",
+  "claims": [
+    {
+      "location": "frontmatter title/excerpt/category/tags",
+      "claim": "Kernel Rock climbing guide: planning a small limestone crag / Compare Kernel Rock's small limestone selection, Hinatawada approach and unconfirmed access arrangements.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/1797",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "カーネルロック岩質石灰岩，東京，2026-10-12讀取登錄フェイス7路線、偏涼月份季節欄。統計限資料庫快照。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/8264",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "主區プレイヤー5.9、セント・フローリア5.10a、ぶらり5.10c、カモン・エディ！5.11a；中央小ハング、片狀岩與口袋越仰角。Rose Town Tea Garden停車「とのこと」，不能確定店方同意。未提供全場通用繩長。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://beta-climbing.com/lesson/weekday_climbing_club",
+          "title": "BETA Climbing — lesson",
+          "publisher": "BETA Climbing",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "BETA外岩平日登攀部頁的「日向和田・カーネルロック」：東京都青梅市，JR日向和田步行約5分，7路線石灰岩，講習利用料500円與借用ローズ・タウン設施。限營運者的活動描述，不能推定獨立旅客當日許可、廁所自動可用或未來價格。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "場地、主題與正文承諾均以已讀來源為背景；分類與標籤是編輯選擇，不宣稱已開放或親身體驗。"
+    },
+    {
+      "location": "## A compact crag needs a clear objective paragraph 1",
+      "claim": "Kernel Rock, written カーネルロック locally, is a small natural crag in Tokyo. For a roped-climbing partnership on a city trip, its appeal is a focused shortlist rather than a large choice of climbs. Check that both partners have suitable objectives before allocating a day, especially if a mixed-ability group expects many alternatives.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/1797",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "カーネルロック岩質石灰岩，東京，2026-10-12讀取登錄フェイス7路線、偏涼月份季節欄。統計限資料庫快照。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/8264",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "主區プレイヤー5.9、セント・フローリア5.10a、ぶらり5.10c、カモン・エディ！5.11a；中央小ハング、片狀岩與口袋越仰角。Rose Town Tea Garden停車「とのこと」，不能確定店方同意。未提供全場通用繩長。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://beta-climbing.com/lesson/weekday_climbing_club",
+          "title": "BETA Climbing — lesson",
+          "publisher": "BETA Climbing",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "BETA外岩平日登攀部頁的「日向和田・カーネルロック」：東京都青梅市，JR日向和田步行約5分，7路線石灰岩，講習利用料500円與借用ローズ・タウン設施。限營運者的活動描述，不能推定獨立旅客當日許可、廁所自動可用或未來價格。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## A compact crag needs a clear objective paragraph 2",
+      "claim": "[ROCKTOPO's area page](https://www.rocktopo.net/areas/1797) lists limestone and, when read on 12 October 2026, seven face-climbing lead routes. That is a community database snapshot, not an official route inventory or confirmation that every recorded climb is available on your visit date.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/1797",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "カーネルロック岩質石灰岩，東京，2026-10-12讀取登錄フェイス7路線、偏涼月份季節欄。統計限資料庫快照。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## Match the wall shape to your objective paragraph 1",
+      "claim": "[The main-wall listing](https://www.rocktopo.net/rocks/8264) includes プレイヤー (5.9), セント・フローリア (5.10a), ぶらり (5.10c) and カモン・エディ！ (5.11a). Descriptions mention a small overhang on the central line and flakes and pockets through a more pronounced overhang on another. Keep the Japanese names when matching a proper topo to the wall.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/rocks/8264",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "主區プレイヤー5.9、セント・フローリア5.10a、ぶらり5.10c、カモン・エディ！5.11a；中央小ハング、片狀岩與口袋越仰角。Rose Town Tea Garden停車「とのこと」，不能確定店方同意。未提供全場通用繩長。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## Match the wall shape to your objective paragraph 2",
+      "claim": "A grade alone does not describe the movement: an overhanging start can ask something different from continuous vertical climbing within the same grade range. Shortlist an easier starting climb and a project. If a line is crowded or unsuitable, a small crag offers fewer alternatives, so keep the objective flexible.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/1797",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "カーネルロック岩質石灰岩，東京，2026-10-12讀取登錄フェイス7路線、偏涼月份季節欄。統計限資料庫快照。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/8264",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "主區プレイヤー5.9、セント・フローリア5.10a、ぶらり5.10c、カモン・エディ！5.11a；中央小ハング、片狀岩與口袋越仰角。Rose Town Tea Garden停車「とのこと」，不能確定店方同意。未提供全場通用繩長。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://beta-climbing.com/lesson/weekday_climbing_club",
+          "title": "BETA Climbing — lesson",
+          "publisher": "BETA Climbing",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "BETA外岩平日登攀部頁的「日向和田・カーネルロック」：東京都青梅市，JR日向和田步行約5分，7路線石灰岩，講習利用料500円與借用ローズ・タウン設施。限營運者的活動描述，不能推定獨立旅客當日許可、廁所自動可用或未來價格。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## Plan access without assuming parking permission paragraph 1",
+      "claim": "[BETA Climbing's outdoor activity page](https://beta-climbing.com/lesson/weekday_climbing_club) places the crag in Ome and describes roughly five minutes on foot from JR Hinatawada. This is an activity-planning reference, not independent visitor permission. The main-wall page says Rose Town Tea Garden parking is reportedly usable. That qualified note does not establish the business's consent or unrestricted visitor parking. Use the location to investigate rail travel, walking or a transfer, then confirm the entrance, approach and facility rules locally.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://beta-climbing.com/lesson/weekday_climbing_club",
+          "title": "BETA Climbing — lesson",
+          "publisher": "BETA Climbing",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "BETA外岩平日登攀部頁的「日向和田・カーネルロック」：東京都青梅市，JR日向和田步行約5分，7路線石灰岩，講習利用料500円與借用ローズ・タウン設施。限營運者的活動描述，不能推定獨立旅客當日許可、廁所自動可用或未來價格。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## Plan access without assuming parking permission paragraph 2",
+      "claim": "No management notice has been obtained for Kernel Rock, and entry, parking and fees have not been confirmed.",
+      "verdict": "unverifiable",
+      "sources": [],
+      "disposition": "qualified",
+      "qualification": "No management notice has been obtained for Kernel Rock, and entry, parking and fees have not been confirmed.",
+      "reason": "未取得能確認實際造訪日管理條件的現行來源；正文明示不確定並給出延期或向管理方確認的行動。"
+    },
+    {
+      "location": "## Plan access without assuming parking permission paragraph 2 — remainder",
+      "claim": "If you cannot reach someone who can confirm them, keep an alternative venue with clear access arrangements. Do not arrive expecting to cross business property or use an informal roadside space. The roughly five-minute figure is attributed only to that activity description; this guide has not verified an independent visitor’s approach or duration on the visit date, shop hours or parking fees.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/1797",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "カーネルロック岩質石灰岩，東京，2026-10-12讀取登錄フェイス7路線、偏涼月份季節欄。統計限資料庫快照。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/8264",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "主區プレイヤー5.9、セント・フローリア5.10a、ぶらり5.10c、カモン・エディ！5.11a；中央小ハング、片狀岩與口袋越仰角。Rose Town Tea Garden停車「とのこと」，不能確定店方同意。未提供全場通用繩長。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://beta-climbing.com/lesson/weekday_climbing_club",
+          "title": "BETA Climbing — lesson",
+          "publisher": "BETA Climbing",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "BETA外岩平日登攀部頁的「日向和田・カーネルロック」：東京都青梅市，JR日向和田步行約5分，7路線石灰岩，講習利用料500円與借用ローズ・タウン設施。限營運者的活動描述，不能推定獨立旅客當日許可、廁所自動可用或未來價格。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "本段其餘來源背景已核對；查公告、帶補給、保留替代與返程餘裕是品牌編輯的規劃建議，不冒充實測或管理方規定。"
+    },
+    {
+      "location": "## Let the chosen routes determine equipment paragraph 1",
+      "claim": "The database helps identify climbs, but the text obtained does not support a universal rope length or quickdraw count. Obtain a complete topo for your actual objectives, confirm route length, descent and protection requirements, and check the equipment with your partner before packing.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/1797",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "カーネルロック岩質石灰岩，東京，2026-10-12讀取登錄フェイス7路線、偏涼月份季節欄。統計限資料庫快照。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/8264",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "主區プレイヤー5.9、セント・フローリア5.10a、ぶらり5.10c、カモン・エディ！5.11a；中央小ハング、片狀岩與口袋越仰角。Rose Town Tea Garden停車「とのこと」，不能確定店方同意。未提供全場通用繩長。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://beta-climbing.com/lesson/weekday_climbing_club",
+          "title": "BETA Climbing — lesson",
+          "publisher": "BETA Climbing",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "BETA外岩平日登攀部頁的「日向和田・カーネルロック」：東京都青梅市，JR日向和田步行約5分，7路線石灰岩，講習利用料500円與借用ローズ・タウン設施。限營運者的活動描述，不能推定獨立旅客當日許可、廁所自動可用或未來價格。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## Let the chosen routes determine equipment paragraph 2",
+      "claim": "The season field favours cooler months; treat it as a planning clue rather than a forecast of dry rock. Keep the day flexible if the rock is wet, the approach unclear or use conditions differ from expectations. This compact venue makes most sense for climbers who have confirmed access and bring a small set of specific objectives.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/1797",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "カーネルロック岩質石灰岩，東京，2026-10-12讀取登錄フェイス7路線、偏涼月份季節欄。統計限資料庫快照。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/8264",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "主區プレイヤー5.9、セント・フローリア5.10a、ぶらり5.10c、カモン・エディ！5.11a；中央小ハング、片狀岩與口袋越仰角。Rose Town Tea Garden停車「とのこと」，不能確定店方同意。未提供全場通用繩長。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://beta-climbing.com/lesson/weekday_climbing_club",
+          "title": "BETA Climbing — lesson",
+          "publisher": "BETA Climbing",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "BETA外岩平日登攀部頁的「日向和田・カーネルロック」：東京都青梅市，JR日向和田步行約5分，7路線石灰岩，講習利用料500円與借用ローズ・タウン設施。限營運者的活動描述，不能推定獨立旅客當日許可、廁所自動可用或未來價格。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    }
+  ],
+  "media": [],
+  "links": [
+    {
+      "url": "https://www.rocktopo.net/areas/1797",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "https://www.rocktopo.net/rocks/8264",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "https://beta-climbing.com/lesson/weekday_climbing_club",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
+  "verification_notes": [
+    "No cover/body images; no media rights assumptions.",
+    "No self-approved reviews; independent factual/translation/editorial review required.",
+    "Future visit permission explicitly qualified.",
+    "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
+  ]
+}

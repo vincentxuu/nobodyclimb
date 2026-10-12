@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { parseChanges, selectMigrations } from './check-local.mjs'
+import { parseChanges, selectMigrations, validateBatch } from './check-local.mjs'
 
 const path = 'backend/migrations/0999_article.sql'
 const source = 'backend/content/blog/post_test.md'
@@ -74,4 +74,50 @@ test('解析 NUL 分隔狀態與路徑並拒絕非預期狀態', () => {
     { status: 'M', path: 'file.sql' },
   ])
   assert.throws(() => parseChanges('R100\0old\0new\0'), /不支援/)
+})
+
+test('批次限制同時四篇，且每篇只驗證一次', async () => {
+  let active = 0
+  let peak = 0
+  const seen = []
+  const items = Array.from({ length: 13 }, (_, i) => ({ path: String(i) }))
+  assert.equal(
+    await validateBatch(items, async (item) => {
+      active++
+      peak = Math.max(peak, active)
+      await new Promise((done) => setTimeout(done, 5))
+      seen.push(item.path)
+      active--
+    }),
+    13
+  )
+  assert.equal(peak, 4)
+  assert.deepEqual(seen.sort(), items.map((i) => i.path).sort())
+})
+
+test('失敗停止排新工作，仍等待已開始的清理完成', async () => {
+  const started = []
+  const cleaned = []
+  await assert.rejects(
+    validateBatch(
+      Array.from({ length: 10 }, (_, i) => ({ path: String(i) })),
+      async (item) => {
+        started.push(item.path)
+        try {
+          await new Promise((done) => setTimeout(done, item.path === '0' ? 1 : 15))
+          if (item.path === '0') throw new Error('預期失敗')
+        } finally {
+          cleaned.push(item.path)
+        }
+      }
+    ),
+    /0：預期失敗/
+  )
+  assert.equal(started.length, 4)
+  assert.deepEqual(cleaned.sort(), started.sort())
+  await assert.rejects(
+    validateBatch([], async () => {}, 5),
+    /1–4/
+  )
+  assert.equal(await validateBatch([], async () => {}), 0)
 })

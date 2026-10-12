@@ -1,0 +1,33 @@
+-- 自動生成；請修改 Markdown 原稿再重新生成。
+-- blog-source: backend/content/blog/ca9339e1ccb8ed108c5404f374ec48c9.md
+-- source-sha256: 909cf15d2db0e4d278985f80e1b2074a29958e202edfdcd3bad24750fe3a557e
+-- D1 migration runner 必須在單一交易中執行此檔。
+CREATE TABLE _blog_article_guard (ok INTEGER NOT NULL CHECK (ok = 1));
+INSERT OR ROLLBACK INTO _blog_article_guard (ok) VALUES (CASE WHEN (SELECT count(*) FROM users WHERE username = 'nobodyclimb') = 1 THEN 1 ELSE 0 END);
+INSERT OR ROLLBACK INTO _blog_article_guard (ok) VALUES (CASE WHEN (SELECT count(*) FROM users WHERE username = 'nobodyclimb' AND is_active = 1) = 1 THEN 1 ELSE 0 END);
+INSERT OR ROLLBACK INTO _blog_article_guard (ok) VALUES (CASE WHEN NOT EXISTS (SELECT 1 FROM posts WHERE id = 'ca9339e1ccb8ed108c5404f374ec48c9' OR slug = 'kitagawa-climbing-guide') THEN 1 ELSE 0 END);
+INSERT INTO posts (id, author_id, slug, title, excerpt, content, cover_image, category, status, is_featured, published_at, created_at, updated_at) VALUES ('ca9339e1ccb8ed108c5404f374ec48c9', (SELECT id FROM users WHERE username = 'nobodyclimb' AND is_active = 1), 'kitagawa-climbing-guide', '北川攀岩指南：西吾野步行進場，為仰角路線留一天', '北川大仰角的選線與下降問題、西吾野步行接近，以及地方付款與安靜使用要求。', '<h2>適合有仰角目標的繩索搭檔</h2>
+<p>北川位於埼玉縣飯能市，是可從西吾野步行接近的天然岩場。它適合已會戶外先鋒與確保、想在東京旅行中安排一日繩索攀登的搭檔；若全隊都需要很多簡單路線，先看難度分布，再決定是否符合期待。</p>
+<p><a href="https://www.climbing-net.com/iwaba_detail/%E5%8C%97%E5%B7%9D/">CLIMBING-net的介紹</a>以大仰角為特色，岩質列為燧石（チャート）。<a href="https://www.rocktopo.net/areas/95">ROCKTOPO</a>在2026年10月12日讀取時登錄19條面攀先鋒路線，包含5.10、5.11與5.12範圍。這是社群快照，不是現地開放清單；小岩場裡的少量低難度路線，也不等於新手團體可隨時找到空線。</p>
+<h2>先讀下降與回收，再看攀登等級</h2>
+<p>出版社對北川的提醒不只談攀登：仰角上方的結束點與用於回收的支點有不同用途，並記錄繩索摩擦、舊吊帶與支點老化的問題。這些文字可以提醒你在選線時問對問題，卻不能代替實際路線圖與現場判斷。</p>
+<p>在旅行前，把當天候選路線的攀登長度、結束位置、下降和器材回收方式一起確認。若不熟悉仰角路線的回收，不要只因等級在能力範圍內就直接上線；可以先找熟悉此地的同行者，或把目標換成能完整處理的路線。</p>
+<h2>用西吾野站當起點，保留步行餘裕</h2>
+<p>出版社的交通描述以西武線西吾野站為起點，經全昌寺至中組自治會館，再走會館旁的踏徑。頁面內有不同步行時間描述，因此用路徑安排而不保證固定分鐘數。鐵路加步行的方式，也避開當地小型停車空間的限制。</p>
+<p>帶好飲水、午餐與返程需要的東西，在出發前記下回程列車與下山截止時間。介紹頁特別記錄居民希望攀岩者在天黑前離開的要求；把最後一輪嘗試向前安排，讓收繩與步行能在光線充足時完成。</p>
+<h2>停車付款與安靜，是現地約定的一部分</h2>
+<p><a href="https://freeclimb.jp/access/10214/">JFA在2025年5月的公告</a>轉述居民提醒：有人沒有支付約定的每車500日圓，狹小停車場也需要有效率地停放。這是有日期的地方要求，不當成未來費率保證；開車前確認付款方法、現行金額與停車指示，滿位就改變計畫，不找路邊替代。</p>
+<p>出版社說明岩場也是地方信仰對象，攀登仰賴地主與居民理解。避免喊叫、火器、器材殘置與過度粉痕，見到居民可說明來意並問候。它不是付了停車費就可以忽略周邊生活的場地。</p>
+<p>目前未確認北川在實際造訪日的利用與停車條件。規劃春秋的行程可參考出版社的較佳季節描述，但最終仍要再查最新公告、雨況與現場指示。</p>
+<h2>參考資料</h2>
+<ul>
+<li><a href="https://www.rocktopo.net/areas/95">ROCKTOPO — 北川</a></li>
+<li><a href="https://www.climbing-net.com/iwaba_detail/%E5%8C%97%E5%B7%9D/">山と溪谷社 CLIMBING-net — 北川</a></li>
+<li><a href="https://freeclimb.jp/access/10214/">日本フリークライミング協会 JFA — 北川</a></li>
+</ul>
+<h2>其他語言</h2>
+<p><a href="/blog/ca9339e1ccb8ed108c5404f374ec48c9">繁體中文</a> · <a href="/en/blog/3bd5d63c9d8194fc6a547792b33ed6e7">English</a> · <a href="/ja/blog/539a55b775755912bb59b30b8edc855d">日本語</a></p>
+', NULL, 'travel', 'published', 0, datetime('now'), datetime('now'), datetime('now'));
+INSERT INTO post_tags (post_id, tag) VALUES ('ca9339e1ccb8ed108c5404f374ec48c9', '東京攀岩');
+INSERT INTO post_tags (post_id, tag) VALUES ('ca9339e1ccb8ed108c5404f374ec48c9', '岩場指南');
+DROP TABLE _blog_article_guard;

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "article_id": "a2ec5292794db159908646020424553b",
+  "source_sha256": "8145919f1cc86b3905ae9227f6d91dd6ec40648762e707f5adf22a604f9c6c7a",
+  "evidence_sha256": "651f1fa6272a8d7400eb89dc722bcaecc3b41fe36bee64513d92fdc32f51288c",
+  "reviewed_at": "2026-10-12T00:59:40.905372+00:00",
+  "reviewer": "Codex independent reviewer /root/commit_review (not article author)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "實讀CLIMBING-netチャート、top-rope限定、地主六項約定、30分鐘估值，ROCKTOPO左奥向左禁攀与三條級數5.9/5.10c/5.11a。JFA2022事故全文來源有模擬先鋒與top-rope回收/下降前確保混淆，修正中文疑似先鋒避免不確定語意。 當前全區邊界、接送/停車費未驗；不沿用出版社舊班次，不將兩組禁攀名稱當同一精確邊界。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "已逐段讀zh/en/ja全文，核對價格/日期/級數/地名/條件、否定與未知限制；不是只對hash或摘要，英文/日文表述自然，無新增保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "用途與能力門檻、目標、交通、在地規則、季節及下一步可獨立閱讀；沒有順序閱讀系列要求或虛构現場經驗。已重讀中文模擬先鋒用語，與日文疑似リード/英文mock leading同義。正文混入簡體字已修成繁中，保留原有數字與日文地名。最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "已重讀中文模擬先鋒用語，與日文疑似リード/英文mock leading同義。"
+    },
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "正文混入簡體字已修成繁中，保留原有數字與日文地名。"
+    },
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+    }
+  ]
+}

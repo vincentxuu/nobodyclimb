@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "8062be3f3deec2302597d0c88a01f1dd",
+  "source_sha256": "23396e97d9e58e4332c19ae51b65f945939db3016b512bae40639c3f2b1cc77c",
+  "evidence_sha256": "e9d0dc3b95ae53522ca29131964e93bbc2432e1fea25324f513e73e4224b1737",
+  "reviewed_at": "2026-10-12T00:59:40.908365+00:00",
+  "reviewer": "Codex independent reviewer /root/commit_review (not article author)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "ROCKTOPOチャート、忍者/日影、4級/1級、四月參考與廁所前停車限制；JFA河岸共享、不擋道、刷粉、夜間/生火/營地外帳篷禁止和租墊線索逐項核對。 Maunga當日庫存/價/時刻與水位/開放未驗；正文要求先確認租借、當日狀況，不以墊或室內級數保證安全。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "已逐段讀zh/en/ja全文，核對價格/日期/級數/地名/條件、否定與未知限制；不是只對hash或摘要，英文/日文表述自然，無新增保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "用途與能力門檻、目標、交通、在地規則、季節及下一步可獨立閱讀；沒有順序閱讀系列要求或虛构現場經驗。"
+    }
+  },
+  "findings": []
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "83848f20009ac20978478f9a18c5ffae",
+  "source_sha256": "b74832866b08afe93698f452710794d49f6101ec08f7083bde61ee6fa15fec9e",
+  "evidence_sha256": "8ccad830b1c51ec1215b619374a20d1e9e3de0893a882549363add4c96df0c17",
+  "reviewed_at": "2026-10-12T00:59:40.905932+00:00",
+  "reviewer": "Codex independent reviewer /root/commit_review (not article author)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "實讀CLIMBING-netチャート、top-rope限定、地主六項約定、30分鐘估值，ROCKTOPO左奥向左禁攀与三條級數5.9/5.10c/5.11a。JFA2022事故全文來源有模擬先鋒與top-rope回收/下降前確保混淆，修正中文疑似先鋒避免不確定語意。 當前全區邊界、接送/停車費未驗；不沿用出版社舊班次，不將兩組禁攀名稱當同一精確邊界。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "已逐段讀zh/en/ja全文，核對價格/日期/級數/地名/條件、否定與未知限制；不是只對hash或摘要，英文/日文表述自然，無新增保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "用途與能力門檻、目標、交通、在地規則、季節及下一步可獨立閱讀；沒有順序閱讀系列要求或虛构現場經驗。"
+    }
+  },
+  "findings": []
+}

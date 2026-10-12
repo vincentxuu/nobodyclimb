@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "7c531718bd0f487b7372ac297244329c",
+  "source_sha256": "3978da72449e71877b958f2d54123cfd082b0f10abc60de7e38c57bb94747705",
+  "evidence_sha256": "d9603fb12a93f2ce193810ff7e68bc167b4417814f0d78192ef409c5372204ae",
+  "reviewed_at": "2026-10-12T00:59:40.904270+00:00",
+  "reviewer": "Codex independent reviewer /root/commit_review (not article author)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "對照ROCKTOPO安山岩、12月至4月、Purple Shadow5.8/Peter Pan5.10b、裂隙/岩面/抱石/多繩距；實讀TOMMY集合、住宿、樹木與海岸殘置器材、NP/bolt混合段落，未將嚮導個人beta当作本站實測。 精確車次、各岩區當日入口/海況/落點與路線器材未驗；正文有清楚範圍和嚮導/現行topo下一步。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "已逐段讀zh/en/ja全文，核對價格/日期/級數/地名/條件、否定與未知限制；不是只對hash或摘要，英文/日文表述自然，無新增保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "用途與能力門檻、目標、交通、在地規則、季節及下一步可獨立閱讀；沒有順序閱讀系列要求或虛构現場經驗。"
+    }
+  },
+  "findings": []
+}

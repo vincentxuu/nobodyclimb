@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "article_id": "faba26d85e4f809578c41ec9e2f7ca02",
+  "source_sha256": "c2872d2632e30192d044385c304e9aec3bd6404d054414808cf6e5b8c088a2e0",
+  "evidence_sha256": "4fc8ab740db42f4fe60e9fba48df35f2ff5839a5d144a7352165db7604a4a810",
+  "reviewed_at": "2026-10-12T00:59:40.906246+00:00",
+  "reviewer": "Codex independent reviewer /root/commit_review (not article author)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "ROCKTOPO五條路線與最高級數逐項核對；CLIMBING-net石灰岩、東西岳/祠/ローソク、坂本林道/299及滲水；JFA第一bolt脫落和如廁公告實讀。獨立Groundlane重取協會頁，正文仍只有要求再讀規則。 主規則可能在非文字媒體，會員/登記/開放未完整核實；三語明確說不宣稱全區開放，未確認資格不得當確定攀登日。2024bolt修復未驗，不能推論其他線安全。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "已逐段讀zh/en/ja全文，核對價格/日期/級數/地名/條件、否定與未知限制；不是只對hash或摘要，英文/日文表述自然，無新增保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "用途與能力門檻、目標、交通、在地規則、季節及下一步可獨立閱讀；沒有順序閱讀系列要求或虛构現場經驗。正文混入簡體字已修成繁中，保留原有數字與日文地名。最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "正文混入簡體字已修成繁中，保留原有數字與日文地名。"
+    },
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+    }
+  ]
+}

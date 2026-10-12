@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "article_id": "42334c89066afb25b1b265431e5c4296",
+  "checked_at": "2026-10-12T00:52:59.652278+00:00",
+  "claims": [
+    {
+      "location": "title / excerpt",
+      "claim": "Tsuzura-iwa guide: a mountain approach and climbing day / Plan Tsuzura-iwa as a mountain training day with a long approach, suitable rope skills and a clear return plan.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
+          "title": "つづら岩、天狗岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview distinguishes Tsuzura-iwa on Mazukari ridge, a long-established training crag with roughly 1.5-hour approach, from waterfall-side Tengu-iwa with about 30-minute approach and free-route development. Access starting point is a bus from Musashi-Itsukaichi to Senzoku. Shared overview warns older piton openings may not fit carabiners and discusses slings; does not assign that condition to every line. Mentions 山崎ハングルート at about 30 m. No dated current re-equipping claim is made.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/101",
+          "title": "つづら岩、天狗岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Shared Tokyo area listing explicitly names つづら岩、天狗岩. Retrieved page gives no detailed per-route list usable to identify all lines; nearby-area cards are excluded as evidence about this destination.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Title and excerpt reflect source-described venue setting and the concrete preparation questions answered in the body; no visit or opening guarantee is asserted."
+    },
+    {
+      "location": "The climbing day starts on the trail",
+      "claim": "Tsuzura-iwa is a climbing crag on the Mazukari ridge in Tokyo. Consider it when you want loaded walking and rope work in the same day, with a mountain-training objective. If a trip leaves only one free day, first decide how much of it you want to spend walking and how much on the rock.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
+          "title": "つづら岩、天狗岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview distinguishes Tsuzura-iwa on Mazukari ridge, a long-established training crag with roughly 1.5-hour approach, from waterfall-side Tengu-iwa with about 30-minute approach and free-route development. Access starting point is a bus from Musashi-Itsukaichi to Senzoku. Shared overview warns older piton openings may not fit carabiners and discusses slings; does not assign that condition to every line. Mentions 山崎ハングルート at about 30 m. No dated current re-equipping claim is made.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/101",
+          "title": "つづら岩、天狗岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Shared Tokyo area listing explicitly names つづら岩、天狗岩. Retrieved page gives no detailed per-route list usable to identify all lines; nearby-area cards are excluded as evidence about this destination.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "The climbing day starts on the trail",
+      "claim": "[CLIMBING-net](https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/) describes a long-established training crag with an approach of approximately an hour and a half. This is an approach estimate, not the total journey from your Tokyo accommodation. Budget for a mountain outing rather than immediate climbing upon arrival.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
+          "title": "つづら岩、天狗岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview distinguishes Tsuzura-iwa on Mazukari ridge, a long-established training crag with roughly 1.5-hour approach, from waterfall-side Tengu-iwa with about 30-minute approach and free-route development. Access starting point is a bus from Musashi-Itsukaichi to Senzoku. Shared overview warns older piton openings may not fit carabiners and discusses slings; does not assign that condition to every line. Mentions 山崎ハングルート at about 30 m. No dated current re-equipping claim is made.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/101",
+          "title": "つづら岩、天狗岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Shared Tokyo area listing explicitly names つづら岩、天狗岩. Retrieved page gives no detailed per-route list usable to identify all lines; nearby-area cards are excluded as evidence about this destination.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "A shared listing does not mean one destination",
+      "claim": "Both [ROCKTOPO](https://www.rocktopo.net/areas/101) and the publisher list Tsuzura-iwa with Tengu-iwa. They are different walls: Tsuzura-iwa is on the ridge, while Tengu-iwa is beside a waterfall and has a different approach time. Tell partners which crag you intend to visit so that nobody plans around the shorter Tengu-iwa walk.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
+          "title": "つづら岩、天狗岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview distinguishes Tsuzura-iwa on Mazukari ridge, a long-established training crag with roughly 1.5-hour approach, from waterfall-side Tengu-iwa with about 30-minute approach and free-route development. Access starting point is a bus from Musashi-Itsukaichi to Senzoku. Shared overview warns older piton openings may not fit carabiners and discusses slings; does not assign that condition to every line. Mentions 山崎ハングルート at about 30 m. No dated current re-equipping claim is made.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/101",
+          "title": "つづら岩、天狗岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Shared Tokyo area listing explicitly names つづら岩、天狗岩. Retrieved page gives no detailed per-route list usable to identify all lines; nearby-area cards are excluded as evidence about this destination.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "A shared listing does not mean one destination",
+      "claim": "The publisher identifies a bus from Musashi-Itsukaichi to Senzoku as the access starting point. Check actual services, trails and the start of your climb separately. A bus stop name is not complete navigation. Save an offline map and topo, note the return service, and stop adding objectives once your turnaround time arrives.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
+          "title": "つづら岩、天狗岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview distinguishes Tsuzura-iwa on Mazukari ridge, a long-established training crag with roughly 1.5-hour approach, from waterfall-side Tengu-iwa with about 30-minute approach and free-route development. Access starting point is a bus from Musashi-Itsukaichi to Senzoku. Shared overview warns older piton openings may not fit carabiners and discusses slings; does not assign that condition to every line. Mentions 山崎ハングルート at about 30 m. No dated current re-equipping claim is made.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/101",
+          "title": "つづら岩、天狗岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Shared Tokyo area listing explicitly names つづら岩、天狗岩. Retrieved page gives no detailed per-route list usable to identify all lines; nearby-area cards are excluded as evidence about this destination.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Equipment cannot be inferred from the grade",
+      "claim": "The description notes that some older pitons have openings that do not accept a carabiner directly and discusses situations requiring slings. This is a clue about older-route equipment, not a guarantee that an anchor is sound or an instruction to copy a technique without assessing it. A competent person must evaluate protection and retreat options.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
+          "title": "つづら岩、天狗岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview distinguishes Tsuzura-iwa on Mazukari ridge, a long-established training crag with roughly 1.5-hour approach, from waterfall-side Tengu-iwa with about 30-minute approach and free-route development. Access starting point is a bus from Musashi-Itsukaichi to Senzoku. Shared overview warns older piton openings may not fit carabiners and discusses slings; does not assign that condition to every line. Mentions 山崎ハングルート at about 30 m. No dated current re-equipping claim is made.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/101",
+          "title": "つづら岩、天狗岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Shared Tokyo area listing explicitly names つづら岩、天狗岩. Retrieved page gives no detailed per-route list usable to identify all lines; nearby-area cards are excluded as evidence about this destination.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Equipment cannot be inferred from the grade",
+      "claim": "The same page mentions 山崎ハングルート with a scale of approximately 30 metres. It is an example of the crag's history and lines, rather than this guide's recommended route for a visitor. Select objectives for the whole team, then establish intermediate belays, anchors and descent. If your experience is limited to ground belaying, obtain the necessary skills or suitable instruction first.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
+          "title": "つづら岩、天狗岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview distinguishes Tsuzura-iwa on Mazukari ridge, a long-established training crag with roughly 1.5-hour approach, from waterfall-side Tengu-iwa with about 30-minute approach and free-route development. Access starting point is a bus from Musashi-Itsukaichi to Senzoku. Shared overview warns older piton openings may not fit carabiners and discusses slings; does not assign that condition to every line. Mentions 山崎ハングルート at about 30 m. No dated current re-equipping claim is made.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/101",
+          "title": "つづら岩、天狗岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Shared Tokyo area listing explicitly names つづら岩、天狗岩. Retrieved page gives no detailed per-route list usable to identify all lines; nearby-area cards are excluded as evidence about this destination.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Leave time for walking and retreat",
+      "claim": "As an editorial planning recommendation, allow room for equipment sorting, the loaded ascent, route finding, descent and the walk out. Carry water, food, rain protection, a headlamp and suitable walking footwear. A headlamp is a contingency, not a reason to climb until dark.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
+          "title": "つづら岩、天狗岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview distinguishes Tsuzura-iwa on Mazukari ridge, a long-established training crag with roughly 1.5-hour approach, from waterfall-side Tengu-iwa with about 30-minute approach and free-route development. Access starting point is a bus from Musashi-Itsukaichi to Senzoku. Shared overview warns older piton openings may not fit carabiners and discusses slings; does not assign that condition to every line. Mentions 山崎ハングルート at about 30 m. No dated current re-equipping claim is made.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/101",
+          "title": "つづら岩、天狗岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Shared Tokyo area listing explicitly names つづら岩、天狗岩. Retrieved page gives no detailed per-route list usable to identify all lines; nearby-area cards are excluded as evidence about this destination.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Leave time for walking and retreat",
+      "claim": "This guide did not verify current access, trail passability or fixed-protection condition at Tsuzura-iwa; obtain recent information before departure and follow notices on site. A lack of new website comments does not prove closure, while a database entry does not guarantee that an approach is passable.",
+      "verdict": "unverifiable",
+      "disposition": "qualified",
+      "qualification": "This guide did not verify current access, trail passability or fixed-protection condition at Tsuzura-iwa; obtain recent information before departure and follow notices on site.",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
+          "title": "つづら岩、天狗岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview distinguishes Tsuzura-iwa on Mazukari ridge, a long-established training crag with roughly 1.5-hour approach, from waterfall-side Tengu-iwa with about 30-minute approach and free-route development. Access starting point is a bus from Musashi-Itsukaichi to Senzoku. Shared overview warns older piton openings may not fit carabiners and discusses slings; does not assign that condition to every line. Mentions 山崎ハングルート at about 30 m. No dated current re-equipping claim is made.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/101",
+          "title": "つづら岩、天狗岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Shared Tokyo area listing explicitly names つづら岩、天狗岩. Retrieved page gives no detailed per-route list usable to identify all lines; nearby-area cards are excluded as evidence about this destination.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "The retained paragraph explicitly names the current conditions not established by source retrieval; practical next steps are editorial advice, not confirmation of those conditions."
+    },
+    {
+      "location": "Leave time for walking and retreat",
+      "claim": "Tsuzura-iwa is a candidate for a purposeful mountain-training day if the team can manage its route and retreat. If the goal is a few quick sport pitches near Tokyo, compare the approach cost with your available time before choosing this ridge crag.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
+          "title": "つづら岩、天狗岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview distinguishes Tsuzura-iwa on Mazukari ridge, a long-established training crag with roughly 1.5-hour approach, from waterfall-side Tengu-iwa with about 30-minute approach and free-route development. Access starting point is a bus from Musashi-Itsukaichi to Senzoku. Shared overview warns older piton openings may not fit carabiners and discusses slings; does not assign that condition to every line. Mentions 山崎ハングルート at about 30 m. No dated current re-equipping claim is made.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/101",
+          "title": "つづら岩、天狗岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Shared Tokyo area listing explicitly names つづら岩、天狗岩. Retrieved page gives no detailed per-route list usable to identify all lines; nearby-area cards are excluded as evidence about this destination.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    }
+  ],
+  "media": [],
+  "source_sha256": "73e3e4a493c156e2aea8d1ec2d0dac4db98ad3be3479680e0a87e67d767e26e5",
+  "links": [
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    },
+    {
+      "url": "https://www.rocktopo.net/areas/101",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ]
+}

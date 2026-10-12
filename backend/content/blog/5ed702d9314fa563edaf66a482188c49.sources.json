@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "article_id": "5ed702d9314fa563edaf66a482188c49",
+  "source_sha256": "7bcc3a04d9525dad56a63ec8a4e5107745fd794dfe0c4c5649e0b0eaf992a982",
+  "checked_at": "2026-10-12T00:52:13.807630+00:00",
+  "claims": [
+    {
+      "location": "title/excerpt/intro; 地址／Address／住所",
+      "claim": "B弘大店2026-05-17閉店；延南店楊花路186三樓LC TOWER、02-2088-5071；旧弘大125",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/branch/",
+          "title": "branch | theclimb",
+          "publisher": "The Climb",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "read_scope": "partial",
+          "evidence": "Branch footer explicitly dates Hongdae closure and lists separate Yeonnam address, floor and telephone; no first-hand visit claimed. Exa回傳於末段截斷；已讀支持Hongdae閉店與Yeonnam地址電話的段落，不宣稱整頁全文。",
+          "tool": "Exa MCP fetch after Groundlane bounded request failed"
+        }
+      ],
+      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+    },
+    {
+      "location": "營業時間／Hours／営業時間",
+      "claim": "延南店平日07–24、土日祝08–22；品牌介紹為抱石與換線；非當日全壁可用保證",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/english/",
+          "title": "Korea Climbing gym | theclimb",
+          "publisher": "The Climb",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "read_scope": "full",
+          "evidence": "English page Yeonnam block lists address and hours before THECLIMB Yeonnam heading, matching branch footer. Brand introduction discusses bouldering setting.",
+          "tool": "Groundlane web_fetch extract=full"
+        }
+      ],
+      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+    },
+    {
+      "location": "日票／Day pass／日帰り料金",
+      "claim": "公開共通價目日票22000、鞋3000、粉1000韓元；合計25000或26000；當日延南適用價格待櫃檯確認",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/english/",
+          "title": "Korea Climbing gym | theclimb",
+          "publisher": "The Climb",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "read_scope": "full",
+          "evidence": "English DAY PASS and GEAR RENTAL sections. 22000+3000=25000 and +1000=26000 exclude instruction/extras. Same page retains older closed-branch blocks; text limits budget status rather than guarantees charged price.",
+          "tool": "Groundlane web_fetch extract=full"
+        }
+      ],
+      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+    },
+    {
+      "location": "首次／申請限制",
+      "claim": "外籍登記與当期服務／岩壁名額適用條件尚未驗證",
+      "verdict": "unverifiable",
+      "sources": [],
+      "reason": "公開資料不足以確認特定旅客和指定日期的適用情況；正文明列先詢問再安排。",
+      "disposition": "qualified",
+      "qualification": "本文未確認外籍旅客的完整登記流程、課程語言與當日名額，須直接向延南店詢問。"
+    }
+  ],
+  "links": [
+    {
+      "url": "http://theclimb.co.kr/branch/",
+      "checked_at": "2026-10-12T00:52:13.807630+00:00",
+      "tool": "Exa MCP fetch after Groundlane bounded request failed",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa MCP 返回分店頁正文含目標地址與閉店公告；工具不提供HTTP狀態。"
+    },
+    {
+      "url": "http://theclimb.co.kr/english/",
+      "checked_at": "2026-10-12T00:52:13.807630+00:00",
+      "tool": "Groundlane web_fetch extract=full",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+    }
+  ],
+  "media": [],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ]
+}

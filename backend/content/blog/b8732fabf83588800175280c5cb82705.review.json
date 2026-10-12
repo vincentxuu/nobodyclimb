@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "b8732fabf83588800175280c5cb82705",
+  "source_sha256": "6214235894e1bfe29b3513aa6baa946c014936f365ee5ea40c4b90e0ccd8f18d",
+  "evidence_sha256": "662cf51ec6c1d36c3496516057a51928cb4ecc9f032d1f9ea75f59170af7d66b",
+  "reviewed_at": "2026-10-12T00:59:40.909875+00:00",
+  "reviewer": "Codex independent reviewer /root/commit_review (not article author)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "官方主頁時間13–23/10–21、登錄2200/1100、通日2530、短時2310/1650、鞋220粉110初免費核對，加總4730/3630。獨立Groundlane重取discovery確認平日4510/週末4730，三語有明示頁面差異及適用票種要店確認。 初訪實際請款與資格未向店家確認；正文將主頁合計標預算參考，非保證。未成年/團體/存放完整條件及2027營業未驗。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "已逐段讀zh/en/ja全文，核對價格/日期/級數/地名/條件、否定與未知限制；不是只對hash或摘要，英文/日文表述自然，無新增保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "用途與能力門檻、目標、交通、在地規則、季節及下一步可獨立閱讀；沒有順序閱讀系列要求或虛构現場經驗。"
+    }
+  },
+  "findings": []
+}
