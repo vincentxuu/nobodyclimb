@@ -12,7 +12,7 @@
 
 使用 [來源台帳](../templates/sources.json)，隨原稿版控。每條 claim 記 `location/claim/verdict/sources/reason`；其 sources 記 `url/title/publisher/source_date/accessed_at/read_scope/evidence/tool`。read_scope 用 full/partial/summary；summary 不能支持 confirmed。頂層記 article_id、source_sha256（完整原稿位元組的 SHA-256）、checked_at 與 media（url/purpose/alt/source_url/usage_basis）；checked_at/accessed_at 必須 ISO 8601 並帶時區，reason 必填非空。封面及正文媒體都要入台帳，記使用依據與查核日期。有季別/版本在 evidence 明示。
 
-狀態：`confirmed`（原文支持）、`outdated`（曾成立但已變）、`contradicted`（原文相反）、`misframed`（數字或原話對，但比較/推論錯）、`unverifiable`（證據不足）。發布 gate 阻擋 outdated/contradicted/misframed；先修正文並重新查證，不把已知錯誤當可發布紀錄。unverifiable 只有明示不確定時可保留：claim 加 `disposition: qualified`、`qualification` 非空，qualification 原句必須存在正文；獨立 reviewer 判斷措辭確實傳达不確定且不誤導，不以隨意一句話或 hash 過關。無法合理限定則移除主張。自己設計的計算另記算式、假設與單位，不假冒外部事實。
+狀態：`confirmed`（原文支持）、`outdated`（曾成立但已變）、`contradicted`（原文相反）、`misframed`（數字或原話對，但比較/推論錯）、`unverifiable`（證據不足）、`editorial`（段落主體是編輯的建議或行程安排，不是可查證的事實主張；來源只提供背景，reason 寫明來源支持哪些背景、哪些是編輯建議，不使用 disposition/qualification，也不為了台帳在正文另加聲明）。事實與建議混合的段落，事實部分仍須有來源並標 confirmed。發布 gate 阻擋 outdated/contradicted/misframed；先修正文並重新查證，不把已知錯誤當可發布紀錄。unverifiable 只有明示不確定時可保留：claim 加 `disposition: qualified`、`qualification` 非空，qualification 原句必須存在正文；獨立 reviewer 判斷措辭確實傳达不確定且不誤導，不以隨意一句話或 hash 過關。無法合理限定則移除主張。自己設計的計算另記算式、假設與單位，不假冒外部事實。
 
 官方協會/主辦單位/成績表與規則核實賽事；岩館/管理單位核實費用、開放與進入限制；廠商核實規格，不直接把廣告當獨立效能證據；原始研究及專業組織支援訓練與傷害主張；本人原訪談核對引語。來源數按權威、支持力與風險决定，不能硬湊兩份；同一公告的轉載算同一來源。安全、傷害、效能比較、研究推論或來源衝突要加驗適當專業來源與方法限制。
 

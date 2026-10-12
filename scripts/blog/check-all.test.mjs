@@ -225,3 +225,16 @@ test('已知錯誤主張不能發布，未驗主張必須在原稿明示限制',
     checkEvidence(uncertain, 'article', [], undefined, [], uncertain.claims[0].qualification)
   )
 })
+test('編輯建議段落標 editorial：不需來源支持，也不要求正文另寫限制句', () => {
+  const advice = evidence()
+  advice.claims[0].verdict = 'editorial'
+  assert.doesNotThrow(() => checkEvidence(advice, 'article', [], undefined, [], '任意正文'))
+  advice.claims[0].sources = []
+  advice.links = []
+  assert.doesNotThrow(() => checkEvidence(advice, 'article'))
+  advice.claims[0].reason = ''
+  assert.throws(() => checkEvidence(advice, 'article'), /claim 紀錄不完整/)
+  advice.claims[0].reason = '行程安排為編輯建議'
+  advice.claims[0].qualification = '這是編輯建議'
+  assert.throws(() => checkEvidence(advice, 'article'), /editorial/)
+})

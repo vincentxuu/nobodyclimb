@@ -54,7 +54,7 @@ export function checkEvidence(
       !nonempty(claim.location) ||
       !nonempty(claim.claim) ||
       !nonempty(claim.reason) ||
-      !['confirmed', 'outdated', 'contradicted', 'unverifiable', 'misframed'].includes(
+      !['confirmed', 'outdated', 'contradicted', 'unverifiable', 'misframed', 'editorial'].includes(
         claim.verdict
       ) ||
       !Array.isArray(claim.sources)
@@ -70,6 +70,10 @@ export function checkEvidence(
         !sourceText.includes(claim.qualification))
     )
       fail(`${id}：unverifiable 必須在原稿明示 qualification`)
+    // editorial：段落主體是編輯的建議或行程安排，不是可查證的事實主張。
+    // 來源只提供背景，不要求正文另寫限制句；與 unverifiable（事實未能查證、正文須明示）不同。
+    if (claim.verdict === 'editorial' && (claim.disposition || claim.qualification))
+      fail(`${id}：editorial 不使用 disposition／qualification`)
     if (claim.verdict === 'confirmed' && !claim.sources.length) fail(`${id}：confirmed 缺來源`)
     for (const source of claim.sources) {
       if (

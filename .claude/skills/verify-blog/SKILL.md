@@ -9,7 +9,7 @@ description: 查證 NobodyClimb 文章的賽制、成績、日期、訓練、安
 
 依 Groundlane-first 規則完整取得主要來源，核對人名、日期/季別、賽制、排名/紀錄、費用、裝備規格、研究限制、傷害/訓練建議與直接引語。數字示例重算單位、分母、假設；比較核對級別與測量條件。來源支持力與 URL 可達性分開判定；官方來源也可能版本不同或彼此衝突。
 
-用 [台帳模板](../write-blog/templates/sources.json) 記 source 与 claim，狀態用 `confirmed/outdated/contradicted/misframed/unverifiable`。取不到內容就留下未驗範圍，不以訓練記憶或搜尋摘要判 confirmed；歷史事實不是自動 outdated。圖片/影音記使用依據及取得範圍，不用文字字幕聲稱原音實測。
+用 [台帳模板](../write-blog/templates/sources.json) 記 source 与 claim，狀態用 `confirmed/outdated/contradicted/misframed/unverifiable/editorial`（editorial 只用於主體為編輯建議的段落，見 source-policy）。取不到內容就留下未驗範圍，不以訓練記憶或搜尋摘要判 confirmed；歷史事實不是自動 outdated。圖片/影音記使用依據及取得範圍，不用文字字幕聲稱原音實測。
 
 單獨查證只更新伴隨原稿的 `<id>.sources.json` 與 [審稿報告](../write-blog/templates/review-report.md)，列各判定、支持位置、建議修法、來源/方法與缺口，不 auto-fix 正文。完整新增/更新任務中交回主流程修正後再核對。
 
