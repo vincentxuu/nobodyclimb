@@ -202,7 +202,9 @@
     {
       "location": "讓步行與撤退都有餘裕",
       "claim": "以編輯規劃建議來說，這一天應留出裝備整理、負重上坡、路線辨認、下降與下山的空間。帶水、行動糧、雨具、頭燈與合適步行鞋，登山裝備不要被攀登裝備擠出揹包；頭燈是備援，不是延長攀登到天黑的理由。",
-      "verdict": "confirmed",
+      "verdict": "unverifiable",
+      "disposition": "qualified",
+      "qualification": "以編輯規劃建議來說",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -225,7 +227,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "本段為編輯的時間與裝備規劃建議，CLIMBING-net與ROCKTOPO來源只支持約一個半小時接近等背景事實，不支持時間分配與攜帶清單本身；正文已明示為編輯規劃建議。"
     },
     {
       "location": "讓步行與撤退都有餘裕",

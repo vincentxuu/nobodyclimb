@@ -2,34 +2,49 @@
   "schema_version": 1,
   "article_id": "846b2bf6c46598816c9c71352d76080c",
   "source_sha256": "b987157f9a67138035ae87c2d94d192c67b27fccfb5937543e1facdbe13b4f1f",
-  "evidence_sha256": "3684c8a41790458bc375d984418d8b22959d0933c97870878c52de9535754f04",
-  "reviewed_at": "2026-10-12T00:59:40.904535+00:00",
-  "reviewer": "Codex independent reviewer /root/commit_review (not article author)",
+  "evidence_sha256": "2a3ceb7d30ae0b3c4b9181c6e56aa569ffcff9af8d49ed49c3fefbdbf0a27b0e",
+  "reviewed_at": "2026-10-12T06:57:19Z",
+  "reviewer": "Claude 獨立審稿 subagent（未參與寫稿與本次台帳修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "ROCKTOPO凝灰岩、11月至3月、Battle Runner最高5.10a/Stone Free5.10c/Miura5.11a，與CLIMBING-net南壁/上部、9月下旬至6月上旬及25+10分鐘逐項核對；官方geopark火山之根只作地景描述。 全面開放、現行停車及指定日交通未驗；接近估值未混用上部岩區，季節尺度差異明示。"
+      "notes": "本次重審（台帳改標後）：以 git diff 確認台帳只有兩處變動——「正文段落 6」由 confirmed 改為 unverifiable／qualified，以及刪除 limitations 的「尚待未參與寫稿者獨立審查。」；原稿未變，台帳 source_sha256 與原稿實際 SHA-256 相符。段落 6 全段是住宿、只排南壁、預留回程與設定停止時間的行程建議，三筆來源的 evidence 只載大仁、南壁與上部ワイルドボアゴージ、bolt 與多繩距、季節與接近時間、火山之根，沒有任何一筆支持住宿或排程建議本身，改標 unverifiable 比 confirmed 貼切，新 reason 對來源支持範圍的描述屬實。qualification「這些是編輯規劃建議，並非本站親身攀登紀錄」逐字存在於原稿段落 6 末句（出現 1 次），直接說明該段是編輯建議且非第一手攀登紀錄，符合本輪標準。本次另以 curl 重新取得三個來源頁並核對：CLIMBING-net 載季節9月下旬~6月上旬、凝灰岩、リード（ボルト）與マルチピッチ、大仁駅徒歩25分到登山道入口、南壁再10分、ワイルドボアゴージ另走ハイキングコース；ROCKTOPO 載静岡県、凝灰岩、シーズン1/2/3/11/12月、バトルランナー（最高グレード5.10a）、ストーンフリー（5.10c）、ミウラー（5.11a）、マルチ與リード（フェイス）分列；伊豆半島ジオパーク載城山為隆起露出地表的「火山の根」。三頁皆回 200，與正文數字一致。未驗：現行停車與收費、全面開放狀態、指定日交通與岩況、固定點實況；台帳 research_artifacts 所列 /tmp 檔案本次未開啟。"
     },
     "translation": {
       "passed": true,
-      "notes": "已逐段讀zh/en/ja全文，核對價格/日期/級數/地名/條件、否定與未知限制；不是只對hash或摘要，英文/日文表述自然，無新增保證。"
+      "notes": "本次重新逐段對照 zh/en/ja 全文六段與 title/excerpt：級數 5.10a／5.10c／5.11a、25 分鐘加 10 分鐘、9月下旬至6月上旬與11月至3月、四月不保證、未向管理方核實停車／收費／開放、bolt 不等於固定點已檢查、不提供逐點 beta、段落 6 的非親身攀登聲明，三語數字、否定與限定一致，沒有任一語言新增保證。三語台帳對段落 6 的處理一致（同為 unverifiable／qualified、同一 reason、qualification 為各語原稿末句的對應句），limitations 的刪除也一致。措辭層級的小差異不影響事實：en 段落 6 寫 reserve time for walking and transfers 未明寫回程；ja 的 qualification 用單數「これは」；en 的 title/excerpt 以 slabs／sport／multipitch 與能力配對為框架，zh/ja 以南壁與上部岩區為框架。"
     },
     "editorial": {
       "passed": true,
-      "notes": "用途與能力門檻、目標、交通、在地規則、季節及下一步可獨立閱讀；沒有順序閱讀系列要求或虛构現場經驗。正文混入簡體字已修成繁中，保留原有數字與日文地名。最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+      "notes": "本次重新通讀全文：能力門檻、目標選擇、接近、季節、行程示例與下一步可獨立閱讀，來源事實與編輯建議有分開，未假冒現場經驗。刪除 limitations「尚待未參與寫稿者獨立審查。」恰當：該句描述的是獨立審查前的狀態，留著會與已完成的審稿核准矛盾；保留的「未驗當日岩況/服務或交通」仍成立。先前審稿記錄的簡體字修正，本次以閱讀方式重讀 zh 全文未再見到簡體字（未用工具機械掃描）。本次未重跑全站 pnpm blog:check，只跑單篇 zz-check-one。"
     }
   },
   "findings": [
     {
       "severity": "blocking",
       "resolved": true,
-      "notes": "正文混入簡體字已修成繁中，保留原有數字與日文地名。"
+      "notes": "（先前審稿者記錄，本次以閱讀重新確認）正文混入簡體字已修成繁中，保留原有數字與日文地名；本次重讀未再發現。"
     },
     {
       "severity": "blocking",
       "resolved": true,
-      "notes": "最終台帳claim/qualification與正文逐句核對，舊簡字與刪除段落/段號已同步；來源支持內容保留，不只重算hash。"
+      "notes": "（先前審稿者記錄）台帳 claim 與正文逐句同步。本次重新確認：七筆 claim 中六筆段落 claim 與原稿段落去除連結語法後逐字相同，qualification 皆逐字存在於原稿。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "本輪修改：「正文段落 6」改標 unverifiable／qualified 與刪除 limitations 過期句，經對照 git diff、原稿與來源 evidence 判定恰當，三語一致，無需修正。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "非本輪修改、不擋核准：「正文段落 4」的 qualification 是整段原文而非單一說明句；段落 1、3、5 夾有編輯建議（先上戶外課程或找嚮導、優先選單繩距、確認雨量與風）仍標 confirmed 並共用同一句樣板 reason。這幾段主體是來源事實，維持 confirmed 可接受，但 reason 沒有逐段說明哪些句子是建議。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "非本輪修改、不擋核准：title/excerpt claim 的說明文字帶有樣板語「分類與標籤依室內抱石/戶外旅行主題」，本篇與室內抱石無關；來源 publisher 欄為泛稱「場地來源出版者」。伊豆半島ジオパーク頁另寫大仁駅到城山登山口徒歩約20分，與正文引用的 CLIMBING-net 25分不同，正文已標明出處與估值性質，未構成錯誤。zh 標題用「運攀」，台灣讀者較常見「運動攀登」。"
     }
   ]
 }

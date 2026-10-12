@@ -234,7 +234,7 @@
     {
       "location": "正文段落 8",
       "claim": "Suggested example: arrive after opening, use easy problems to learn the setting style, then rotate between two or three types of movement with rests. If outdoor climbing follows the next day, set the finish time around recovery and travel rather than endless attempts. This is an editorial suggestion, not a measured conclusion about Ogikubo grades, training effects or crowds.",
-      "verdict": "confirmed",
+      "verdict": "unverifiable",
       "sources": [
         {
           "url": "https://pump-climbing.com/gym/bpump/",
@@ -257,7 +257,9 @@
           "tool": "Groundlane web_fetch"
         }
       ],
-      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+      "reason": "本段為編輯的課題日安排建議，官網來源只支持營業時間等背景事實，不支持入場時機、練習順序與休息安排等建議本身；正文已明示為編輯建議、非本站實測結論。",
+      "disposition": "qualified",
+      "qualification": "This is an editorial suggestion, not a measured conclusion about Ogikubo grades, training effects or crowds"
     },
     {
       "location": "正文段落 9",
@@ -325,7 +327,6 @@
     "/tmp/nobodyclimb-seoul-tokyo-article/C/og.json"
   ],
   "limitations": [
-    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。",
-    "尚待未參與寫稿者獨立審查。"
+    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。"
   ]
 }

@@ -202,7 +202,9 @@
     {
       "location": "Leave time for walking and retreat",
       "claim": "As an editorial planning recommendation, allow room for equipment sorting, the loaded ascent, route finding, descent and the walk out. Carry water, food, rain protection, a headlamp and suitable walking footwear. A headlamp is a contingency, not a reason to climb until dark.",
-      "verdict": "confirmed",
+      "verdict": "unverifiable",
+      "disposition": "qualified",
+      "qualification": "As an editorial planning recommendation",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -225,7 +227,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "本段為編輯的時間與裝備規劃建議，CLIMBING-net與ROCKTOPO來源只支持約一個半小時接近等背景事實，不支持時間分配與攜帶清單本身；正文已明示為編輯規劃建議。"
     },
     {
       "location": "Leave time for walking and retreat",

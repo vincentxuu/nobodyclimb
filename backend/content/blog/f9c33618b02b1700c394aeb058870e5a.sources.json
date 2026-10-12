@@ -236,7 +236,7 @@
     {
       "location": "正文段落 6",
       "claim": "Suggested example: stay in Ohito or nearby the previous night and dedicate the first day to the South Face, without adding upper sectors. Learn the terrain and descent before selecting a small number of objectives, and reserve time for walking and transfers. For multipitch, budget belay transitions, rope management and descent, with an explicit turnaround time. These are editorial suggestions, not NobodyClimb's firsthand ascent report.",
-      "verdict": "confirmed",
+      "verdict": "unverifiable",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/10",
@@ -269,7 +269,9 @@
           "tool": "Groundlane web_fetch"
         }
       ],
-      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+      "reason": "本段為編輯的行程建議，來源只支持大仁、南壁與上部岩區、多繩距等背景事實，不支持住宿與排程建議本身；正文已明示為編輯規劃建議、非本站親身攀登紀錄。",
+      "disposition": "qualified",
+      "qualification": "These are editorial suggestions, not NobodyClimb's firsthand ascent report"
     }
   ],
   "media": [],
@@ -318,7 +320,6 @@
     "/tmp/nobodyclimb-seoul-tokyo-article/C/y1.json"
   ],
   "limitations": [
-    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。",
-    "尚待未參與寫稿者獨立審查。"
+    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。"
   ]
 }

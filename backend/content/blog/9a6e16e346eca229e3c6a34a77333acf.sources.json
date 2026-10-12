@@ -145,7 +145,7 @@
     },
     {
       "location": "正文段落 5",
-      "claim": "秋葉原店列租鞋330日圓、初次免費，並明示目前不提供粉的租借。使用粉狀粉時須使用粉袋，液態粉可單獨使用。[初訪說明頁](https://pump-climbing.com/gym/akiba/discovery)也要求攜帶襪子和便於活動的衣物。需要粉的人應自行準備適用器材或先向店家詢問。抵達後先告知初訪與既有PUMP登錄狀態，完成店家的使用說明，再開始熱身。",
+      "claim": "秋葉原店列租鞋330日圓、初次免費，並明示目前不提供止滑粉租借。使用粉狀止滑粉時須搭配粉袋，液態止滑粉可單獨使用。[初訪說明頁](https://pump-climbing.com/gym/akiba/discovery)也要求攜帶襪子和便於活動的衣物。需要止滑粉的人應自行準備或先向店家詢問。抵達後先告知初訪與既有PUMP登錄狀態，完成店家的使用說明，再開始熱身。",
       "verdict": "confirmed",
       "sources": [
         {
@@ -261,7 +261,7 @@
     }
   ],
   "media": [],
-  "source_sha256": "9c5d013a457f0471cf8bd8d2a7e8d23d9697f0b904e801bc292326272036f277",
+  "source_sha256": "98f0eaae9e8f32c8845ec880673d88809d8d8c82823a3536df6c2d1514f8f1db",
   "links": [
     {
       "url": "https://pump-climbing.com/gym/akiba/",
@@ -297,7 +297,6 @@
     "/tmp/nobodyclimb-seoul-tokyo-article/C/ak.json"
   ],
   "limitations": [
-    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。",
-    "尚待未參與寫稿者獨立審查。"
+    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。"
   ]
 }

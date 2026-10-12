@@ -176,7 +176,7 @@
     {
       "location": "正文段落 6",
       "claim": "建議示例：前一晚住伊豆，早上只去一個已確認的岩區；把熟悉接近、檢查保護與一兩條保守目標作為主菜。若當日條件不合，改為海岸散步或室內攀登。這是編輯安排示例，不是已驗證的嚮導方案；本文也沒有代替任何一條路線的器材清單。",
-      "verdict": "confirmed",
+      "verdict": "unverifiable",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/9",
@@ -199,7 +199,9 @@
           "tool": "Groundlane web_fetch"
         }
       ],
-      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+      "reason": "本段為編輯的行程安排示例，ROCKTOPO與TOMMY來源只支持岩區分散、海岸條件與季節等背景事實，不支持住宿、單一岩區與替代活動的安排本身；正文已明示為編輯安排示例、非已驗證的嚮導方案。",
+      "disposition": "qualified",
+      "qualification": "這是編輯安排示例，不是已驗證的嚮導方案"
     }
   ],
   "media": [],
@@ -239,7 +241,6 @@
     "/tmp/nobodyclimb-seoul-tokyo-article/C/r8.json"
   ],
   "limitations": [
-    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。",
-    "尚待未參與寫稿者獨立審查。"
+    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。"
   ]
 }

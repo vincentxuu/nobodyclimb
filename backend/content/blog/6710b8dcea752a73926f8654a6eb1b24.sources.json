@@ -204,7 +204,7 @@
     {
       "location": "正文段落 7",
       "claim": "Suggested example: arrive on a weekday afternoon, learn the current grading on easy problems, choose a few interesting movements to work on and finish with energy for dinner. If an outdoor day follows, there is no need to exhaust yourself on every popular problem. This is an editorial plan, not a firsthand crowd assessment or a tested training outcome. If walls are being reset, ask staff to direct you to available areas.",
-      "verdict": "confirmed",
+      "verdict": "unverifiable",
       "sources": [
         {
           "url": "https://pump-climbing.com/gym/akiba/",
@@ -227,7 +227,9 @@
           "tool": "Groundlane web_fetch"
         }
       ],
-      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+      "reason": "本段為編輯的行程建議，官網來源只支持換線等背景事實，不支持建議本身；正文已明示為編輯安排、非本站實測。",
+      "disposition": "qualified",
+      "qualification": "This is an editorial plan, not a firsthand crowd assessment or a tested training outcome"
     },
     {
       "location": "正文段落 8",
@@ -295,7 +297,6 @@
     "/tmp/nobodyclimb-seoul-tokyo-article/C/ak.json"
   ],
   "limitations": [
-    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。",
-    "尚待未參與寫稿者獨立審查。"
+    "未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。"
   ]
 }
