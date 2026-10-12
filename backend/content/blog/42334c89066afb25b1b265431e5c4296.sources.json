@@ -202,9 +202,7 @@
     {
       "location": "Leave time for walking and retreat",
       "claim": "As an editorial planning recommendation, allow room for equipment sorting, the loaded ascent, route finding, descent and the walk out. Carry water, food, rain protection, a headlamp and suitable walking footwear. A headlamp is a contingency, not a reason to climb until dark.",
-      "verdict": "unverifiable",
-      "disposition": "qualified",
-      "qualification": "As an editorial planning recommendation",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -227,7 +225,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "本段為編輯的時間與裝備規劃建議，CLIMBING-net與ROCKTOPO來源只支持約一個半小時接近等背景事實，不支持時間分配與攜帶清單本身；正文已明示為編輯規劃建議。"
+      "reason": "This paragraph is editorial time-and-gear planning advice. CLIMBING-net supports only background facts (a long-established training crag on the ridge with a roughly 1.5-hour approach); ROCKTOPO supports only the shared つづら岩、天狗岩 area listing and gives no approach time. Neither source supports the time allocation or the packing list; it is an editorial planning recommendation, not a tested itinerary."
     },
     {
       "location": "Leave time for walking and retreat",
@@ -262,7 +260,7 @@
     {
       "location": "Leave time for walking and retreat",
       "claim": "Tsuzura-iwa is a candidate for a purposeful mountain-training day if the team can manage its route and retreat. If the goal is a few quick sport pitches near Tokyo, compare the approach cost with your available time before choosing this ridge crag.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -285,7 +283,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "This paragraph is an editorial decision recommendation. CLIMBING-net supports only background facts (a long-established training crag on the ridge with a roughly 1.5-hour approach) and ROCKTOPO supports only the shared area listing; neither supports the judgement of who should shortlist the crag or how to weigh the approach cost. It is an editorial suggestion, not an assessment from climbing there."
     }
   ],
   "media": [],

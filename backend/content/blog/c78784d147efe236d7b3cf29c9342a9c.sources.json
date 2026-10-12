@@ -174,7 +174,7 @@
     {
       "location": "Older routes require questions beyond the grade",
       "claim": "Determine the peak, intended anchor, descent method and equipment before committing. If you cannot assess or arrange the required anchor, go with someone who has the relevant competence or seek suitable instruction. Indoor grades and database route totals do not indicate your safety margin or how much you can climb in a day.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/氷川屏風岩/",
@@ -197,7 +197,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "CLIMBING-net supports only the background facts (A and C Peak sectors, some fragile rock, longer slings for C Peak anchors), and the ROCKTOPO user comments support only individual reports of pitons/ring bolts and a hard-to-find anchor. No source supports the recommended order of checks, the advice to bring a competent partner or instruction, or the warning against converting indoor grades; that is editorial advice, not a field-tested record."
     },
     {
       "location": "Interpret seasonal descriptions carefully",
@@ -232,7 +232,7 @@
     {
       "location": "Interpret seasonal descriptions carefully",
       "claim": "Prepare a short list of identifiable objectives and an alternative plan. Confirm sectors in the topo, carry water and equipment, and reserve time for the descent and train home. If the approach or rock is unsuitable, cancel the climbing. The variety of the terrain and the crag's history are part of its appeal, and careful interpretation belongs in the visit.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/氷川屏風岩/",
@@ -255,7 +255,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "CLIMBING-net supports only the background facts (approach from Okutama Station, bring water, sectors and development history). No source supports the suggested trip plan of a few objectives plus a backup, reserved descent and return time, or the cancel-if-unsuitable rule; that is an editorial planning suggestion, not a tested itinerary."
     }
   ],
   "media": [],

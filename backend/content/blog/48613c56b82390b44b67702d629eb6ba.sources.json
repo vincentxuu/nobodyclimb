@@ -62,7 +62,7 @@
     {
       "location": "正文段落 2",
       "claim": "It suits visitors who want outdoor bouldering during a city trip and can assess landings and fall consequences. Gym-only boulderers should find someone familiar with Mitake and start on low problems with manageable landings. Indoor grades do not establish the safety of river rocks. Check height, wet surfaces, stones and landing space on site; pads are not a guarantee at every height.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/108",
@@ -85,7 +85,7 @@
           "tool": "Groundlane web_fetch"
         }
       ],
-      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+      "reason": "來源支持背景事實：ROCKTOPO 將御岳列為戶外抱石岩區，JFA 記錄河岸為多方共用。來源未說明適合哪一類訪客，也未提供「找熟悉者帶隊、從低而落地易處理的課題開始」的入門方式；這些是編輯建議，非本站實測或安全保證。"
     },
     {
       "location": "正文段落 3",

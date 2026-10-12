@@ -2,23 +2,49 @@
   "schema_version": 1,
   "article_id": "9ae4f485fe4c3c2d7d7a866d9b511286",
   "source_sha256": "c452333bbd4aea39ed2938f69efb54f13e5e08181e47a371f882b27cde919950",
-  "evidence_sha256": "ef3c2302550bb0847c96bc50b9ffa917583593b48a913c55ecd8e3ae9c188e3a",
-  "reviewed_at": "2026-10-12T00:59:35.920019+00:00",
-  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "evidence_sha256": "d4797089c16a89d2e86699827fd34360c9926fd1004dfd58d8652d8400ad8424",
+  "reviewed_at": "2026-10-12T08:01:08+00:00",
+  "reviewer": "Claude 獨立審稿 subagent（ed-reviewer，R8；未參與寫稿與本次修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "共同來源支持瀑布側壁30分鐘、千足/武藏五日市、自由線開拓；相對詞近年無日期不轉成新近整修。沒有以共同ROCKTOPO列表虛造天狗逐線級數與設備。"
+      "notes": "第二次重審（台帳 reason 修正後）：以 git diff 與腳本確認三語台帳「哪些人可以把它保留在候選名單」第二筆 editorial 的 reason 結尾已改為「…are editorial advice, not a checklist tested on site.」，不再宣稱正文有限制句；另兩筆 editorial reason 分號後已改小寫。三筆 editorial reason 三語逐字相同，所述背景與第一次重審時重新取得的來源頁相符；原稿未再變動，claim 與 qualification 仍逐字存在於原稿，source_sha256 相符。本次沒有再重新抓取來源頁，沿用同日第一次重審的抓取結果。以下為第一次重審的查核紀錄，結論仍成立：本次實際做的核對：git diff 逐行看過本組三語的原稿與台帳變更；重讀三語原稿全文並逐段對照數字、限制與否定敘述；以腳本確認每筆 claim（標題／摘要合併列除外）逐字存在於原稿、unverifiable 的 qualification 逐字存在於原稿、台帳 source_sha256 等於原稿實際 SHA-256；用 curl（瀏覽器 User-Agent）重新取得 CLIMBING-net 與 ROCKTOPO 兩個來源頁（皆 HTTP 200）並對照正文事實。CLIMBING-net「つづら岩、天狗岩」頁支持：つづら岩在馬頭刈尾根上、接近 1 小時半；天狗岩是瀑布側壁、「近年」開拓自由攀登新線（無日期）、接近 30 分；舊路線常需把 sling 直接穿過 piton（鉤環放不進）；武藏五日市搭巴士於千足下車。ROCKTOPO areas/101 有此合併條目，頁面沒有逐線資料（頁面上的「ルート数」屬鄰近岩區卡片）。正文事實與來源相符；「檜原」不在來源頁文字內（千足位於檜原村，屬一般地理，台帳 evidence 未記載）。三筆 editorial 的主體確為行程安排與準備建議，沒有具體事實被降級；第一、二筆 reason 所述背景（千足巴士起點與約 30 分接近；瀑布側壁與自由線開拓、逐線資料有限）屬實。zh 原稿「隻畫」→「只畫」修正正確、語意未變，台帳 claim 已同步，source_sha256 與原稿相符。ja「與つづら岩接近尺度不同／先問清楚地點／不把天王岩當別名」一筆由 unverifiable 改回 confirmed：判定恰當——該段沒有「未能查證的事實」，原先把整段當 qualification 並不是在表達不確定；段內可查證的部分（つづら岩在尾根上、兩者接近尺度不同）有來源支持，其餘是建議與本文自身的範圍聲明，依規則「事實與建議混合的段落，事實部分標 confirmed」，與 zh／en 統一為 confirmed 合理。沒做的：未到現場、未向 JFA／管理方／釣場查詢現況、未查當日巴士時刻、未看 ROCKTOPO 需登入或圖片形式的 topo、未驗 PR／CI／部署與線上頁面；未執行 pnpm blog:check（依任務書只跑單篇檢查）。"
     },
     "translation": {
       "passed": true,
-      "notes": "三語30分鐘/つづら1.5小時、天王不同名、逐線級數長度支點下降未核實，以及舊piton警告非每條適用都一致。"
+      "notes": "本次重新逐段對照三語：30 分／つづら岩約 1 小時半、不是從東京市區 30 分、「近年」無日期不當成近期整修、ROCKTOPO 頁無逐線資料、各線級數長度固定點下降未核實、舊 piton 提醒不逐線適用、不把天王岩當別名，三語一致。zh 結尾「而不是與別座同名岩場的誤會」en／ja 省略，不影響事實。"
     },
     "editorial": {
       "passed": true,
-      "notes": "文章承諾辨認/候選判斷，證據不足範圍明示，沒有用低人氣或缺留言判封閉。zh「不是隻畫」用字可選改「只」，不影響語意。"
+      "notes": "本次重新確認：文章主線是辨認場地與資料缺口，未作開放或安全保證，也沒有為台帳在正文加免責聲明。前一輪「zh『不是隻畫』可選改『只』」已在本輪修正。"
     }
   },
-  "findings": []
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "（已解）第一次重審的必修問題：editorial 一筆的 reason 宣稱正文已標明為「不保證涵蓋現場狀況的建議」而正文並無此句，另有兩處分號後誤用大寫。台帳已於本輪修正，第二次重審確認三語皆已改正。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "前一輪 notes 提到 zh「不是隻畫」可改「只」：本輪已改為「只畫了つづら岩」，本次確認正確且台帳 claim 同步。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "ja 台帳「尾根上のつづら岩とは…」一筆由 unverifiable（qualification 取整段）改回 confirmed：本次判定恰當，理由見 factual notes。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "台帳其他可改善處（不擋核准）：(1) ja 台帳 unverifiable 一筆的 qualification 取了整段（含「入手最近的 topo…」「向熟悉者確認」兩句建議），zh／en 只取第一句限制句，建議 ja 也只取第一句「本記事では天狗岩の各ルートの現行グレード、長さ、固定支点、下降方法を確認しておらず、グレード別の推奨リストを提示しません。」。(2) 仍標 confirmed 的「先確定你找的是哪個天狗岩」第 2 段與「同頁有舊 piton…」一段後半是建議，屬事實與建議混合，維持 confirmed 可接受；其 reason 為通用樣板，且提到本文並不存在的「route grades」，建議日後改寫。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "用字（非本輪修改，需改原稿，故只列建議）：zh「尾根上的つづら岩」的「尾根」是日文詞，繁中應為「稜線」；「最近換線或整修」的「換線」語意不清，建議「重新架設固定點（rebolt）」。ja 稿有中文詞：「檜原での攀登日の候補」的「攀登日」、「天狗岩の逐線計画」的「逐線」，以及多處以「接近」代替「アプローチ」，建議改為日文慣用寫法。"
+    }
+  ]
 }

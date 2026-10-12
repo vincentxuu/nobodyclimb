@@ -175,7 +175,7 @@
     {
       "location": "## 湯河原站之後，查當日的幕山公園巴士 paragraph 2",
       "claim": "將回程截止時間留在手機與同行計畫裡，保留整理繩索、從岩區下到公園與候車的時間。開車者要按當期停車配置與現地指示使用，不把公園中的道路或觀光客車位當成全日攀登的自選區。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.yugawara.or.jp/sightseeing/893/",
@@ -198,7 +198,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+      "reason": "官方觀光頁支持JR湯河原站轉幕山公園行巴士、終點下車與約15分鐘的乘車參考，以及梅の宴期間有入園與停車收費；CLIMBING-net支持舊交通描述與官方不同、幕山公園禁露營。來源未提供回程截止時間、收繩與下撤候車所需時間，也未說明攀岩者的停車配置，這些是編輯的規劃建議。"
     },
     {
       "location": "## 梅季費用與禁入公告，要分開查 paragraph 1",
@@ -328,7 +328,6 @@
   "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
   "verification_notes": [
     "No cover/body images; no media rights assumptions.",
-    "No self-approved reviews; independent factual/translation/editorial review required.",
     "Future visit permission explicitly qualified.",
     "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
   ]

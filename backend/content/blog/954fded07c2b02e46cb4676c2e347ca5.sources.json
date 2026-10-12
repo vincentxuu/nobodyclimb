@@ -274,7 +274,7 @@
     {
       "location": "ルート表は選定用であり入山許可ではない",
       "claim": "候補を少数に絞り、最新のトポで長さ、下降方法、装備をパートナーと確認しましょう。一人が難しいルートに挑む場合も、相手が適切なビレイを提供できるかを先に確かめます。目的のルートを登らずに帰る選択肢も残しておきます。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/198",
@@ -307,7 +307,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "This paragraph is editorial advice on shortlisting routes, checking the topo, belaying and backing off. ROCKTOPO supports only the database route listings and grades; the management page supports the entry requirements and hazard warnings; the 2023 visit report supports only historical parking and approach observations. None of them supports the route-selection or retreat advice itself; it is editorial advice, not something verified on site."
     },
     {
       "location": "規則を旅程の中に組み込む",

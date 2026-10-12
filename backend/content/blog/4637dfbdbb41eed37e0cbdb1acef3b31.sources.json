@@ -274,7 +274,7 @@
     {
       "location": "路線表能回答什麼",
       "claim": "建議先選少量目標線，與同行者核對最新 topo 的長度、下降方式與所需裝備；一人想挑戰高難度時，也要先確認另一人能提供合適確保。不要把旅程排成必須完攀某條線的任務，抵達後若狀況不合適，仍應能撤回。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/198",
@@ -307,7 +307,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "This paragraph is editorial advice on shortlisting routes, checking the topo, belaying and backing off. ROCKTOPO supports only the database route listings and grades; the management page supports the entry requirements and hazard warnings; the 2023 visit report supports only historical parking and approach observations. None of them supports the route-selection or retreat advice itself; it is editorial advice, not something verified on site."
     },
     {
       "location": "管理規則就是行程的一部分",

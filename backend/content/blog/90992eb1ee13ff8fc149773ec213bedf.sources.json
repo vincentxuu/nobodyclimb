@@ -220,7 +220,7 @@
     {
       "location": "## 把補給與撤退時間安排在上牆之前 paragraph 2 — remainder",
       "claim": "訂好交通後，仍需再確認最新管理通知；路線資料庫上的登錄不能取代許可。與搭檔約定離開岩壁的時間，保留收繩、步行與候車餘裕，讓當天目標是完成幾次品質好的攀登，而不是為多一條路線壓縮返程。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/天王岩/",
@@ -243,7 +243,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "本段其餘來源背景已核對；查公告、帶補給、保留替代與返程餘裕是品牌編輯的規劃建議，不冒充實測或管理方規定。"
+      "reason": "來源（CLIMBING-net、ROCKTOPO）只支持背景事實：巴士站與指定山徑、釣場停車與廁所禁止擅用、舊火葬場路禁止通行；CLIMBING-net 另建議利用前先查看 JFA 等公告。「資料庫登錄不等於管理方許可」是編輯判斷，來源頁沒有這句。與搭檔約定離場時間、為收繩步行候車留餘裕、以少量攀登為當日目標，是編輯的規劃建議，來源未提供可核對的時間分配或行程，本站也未實測。"
     }
   ],
   "media": [],
@@ -280,7 +280,6 @@
   "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
   "verification_notes": [
     "No cover/body images; no media rights assumptions.",
-    "No self-approved reviews; independent factual/translation/editorial review required.",
     "Future visit permission explicitly qualified.",
     "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
   ]

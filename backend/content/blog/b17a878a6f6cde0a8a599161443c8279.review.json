@@ -2,29 +2,44 @@
   "schema_version": 1,
   "article_id": "b17a878a6f6cde0a8a599161443c8279",
   "source_sha256": "f1f7e99591d13fe7210b9c5fac96ae0ddaa12671fd38423e2565f294be700a6d",
-  "evidence_sha256": "3d1b6cae2bc805e2b225715f8839c5a5bcb50221cbc78c9207c43f4dee45a956",
-  "reviewed_at": "2026-10-12T00:59:37.848828+00:00",
-  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "evidence_sha256": "6aa1dfc05dfc254195e1ebbcf7e8a4a8b9c38d49cf3640eb82e949b5a57e238e",
+  "reviewed_at": "2026-10-12T07:55:46Z",
+  "reviewer": "Claude 獨立審稿 subagent（未參與寫稿與本次台帳重建）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "MountainProject全文description/gettingthere支持Dobongsan東北、granite/crack與Line1道峰山站；未沿用Ithink停車/共用60m rack。KNPS window/隊伍/SMS與cmsSeq28GPS16:00開始/下山結束逐項核對；來源未確認指定壁或外籍流程，正文明示。"
+      "notes": "本次以 curl -sL（桌面瀏覽器 User-Agent）於 2026-10-12T07:51Z 重新取得來源頁並轉純文字閱讀，逐筆對照台帳 12 筆 claim。KNPS 申請頁（permission/list.do）：3 日後至最多 30 日後可預約（當日至 2 日後不可）、每日上午 10 時新增一日、含本人 2 至 5 人（1 人不可）、僅收到最終確認簡訊者可使用岩壁、國立公園選項含「북한산」「북한산도봉」，均與正文及台帳 evidence 相符。KNPS 申請說明頁（cmsSeq=28）：使用當日入山時以簡訊連結確認開始、須在該國立公園範圍內且 GPS 開啟、當日 16 時前（原文「16시까지」，16 時後不可並自動記為부도）、下山時以簡訊連結確認完成，均相符；正文「16:00 前」的轉述可接受。KNPS 北漢山頁：「탐방전 [입산시간지정제] 및 [탐방로 통제현황] 정보를 꼭 확인 해 주세요.」相符。兩個申請頁均無「외국인」字樣，也無個別岩壁或名額，與 unverifiable 段的限制句相符。Mountain Project 仙人峰頁（原連結 slug 轉址到 seonin-bong，同一頁）：Description（道峰山、北漢山國立公園東北部、花崗岩、裂隙）、Gear（full rack of cams、wide gear、60m）、Getting There（1 號線 Dobongsan train station 도봉산역、1 號出口往西；停車費「I think 2 or 3,000 won」）、Shared By Chan Kim on Nov 2, 2020、Leopard 標示 Trad 6 pitches，均與台帳 evidence 相符。韓文維基「도봉역」：1 號線車站、前一站 113 도봉산（1.2 km）、後一站 115 방학、最後編輯 2026-03-07，相符；我嘗試另找營運單位來源佐證（Firecrawl、Jina 搜尋皆回 402），未取得，但此為穩定且低風險的站名事實，維基作輔助來源可接受。4 筆 unverifiable 的 qualification 均逐字存在於原稿且確實在說明未查證範圍。未做：未登入申請系統、未測岩壁與日期選擇畫面、未讀 Mountain Project 照片說明與留言、未驗 editorial_inputs 的本機檔案雜湊、未現場查證。"
     },
     "translation": {
       "passed": true,
-      "notes": "三語道峰山/Dobongsan vs Dobong区別、Line1、3–30/10:00/2–5/16:00、GPS園內/下山結束、無完整接近時間/商業guide資格未驗限定一致。"
+      "notes": "本次重新逐段對照 zh／en／ja 全文與三份台帳：1 號線道峰山站／道峰站之別、3 至 30 日、10:00、2 至 5 人、最終核准簡訊、園區內簡訊連結加 GPS、16:00 前、離山結束確認、未確認事項（接近路線與時間、指定岩壁名額、適用區域、外籍申請、商業帶領）與查核日 2026 年 10 月 12 日，三語一致。三份台帳結構相同（各 12 筆，location、verdict、來源 URL 逐筆一致，evidence 與 links 完全相同）；en／ja 台帳的 claim 為各自語言原文且逐字存在於原稿。小差異不影響事實：zh／ja 寫「最新 topo／トポ」，en 寫 current information；en「particularly rather than assuming」語句略拗口。"
     },
     "editorial": {
       "passed": true,
-      "notes": "獨立以仙人峰為主，不借仁壽篇完成內容；日期/隊伍/目標向公園詢問是明确下一步。必修申請當日確認、H2與來源清單修後完整重讀。"
+      "notes": "原稿本輪無變動（git diff 僅台帳）。3 筆 editorial（段落 8、9、10）主體確為裝備準備、找帶領者、排程的編輯建議，reason 所述背景與來源相符，未宣稱正文另有聲明，三語處理一致。仍標 confirmed 的段落 1、3、5、7 以事實為主體，標記恰當。段落 3「其描述是從車站往道峰山方向接近，並非一份最新逐轉彎導航」就大眾運輸段而言屬實，未構成錯誤，但該頁另有一段 2020 年個人敘述的步行接近走法（由停車場經석굴암方向到最左側路線），正文未提，見 advisory。zh 稿未見簡繁轉換錯字；「線路」（兩處）在台灣較常寫「路線」，屬用詞建議。"
     }
   },
   "findings": [
     {
       "severity": "blocking",
       "resolved": true,
-      "notes": "初稿H2起始與文末來源已補；KNPS園內GPS+SMS link16:00前開始及下山結束確認已補，三語及cmsSeq28raw重核。"
+      "notes": "先前審稿紀錄的必修（H2 起始、文末來源清單、KNPS 當日開始與結束確認）已在先前版本補齊；本次重讀三語原稿與 cmsSeq=28 原文後確認仍成立。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "段落 3：Mountain Project 的 Getting There 在自駕段另有一段相當細的步行接近敘述（2020 年個人經驗，經석굴암方向到最左側路線）。正文說該描述「並非一份最新逐轉彎導航」字面上屬實，但讀者可能以為該頁沒有接近細節。下次改稿可改為說明該頁有一段 2020 年的個人接近敘述、僅涵蓋部分路線且未經本文核實。不擋核准。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "KNPS 另載、正文未寫的規則：確認簡訊最晚使用日 2 日前才寄出、須申請者與同行者全員同意才轉為確認完成、未於 16 時前確認記為부도（1 次停止申請 1 個月、2 次以上 3 個月）、使用日前一日 24 時前自行取消不計부도、收訊不良可聯絡該國立公園處理、氣象特報或事故時管理者可取消。正文現有敘述未因省略而誤導（未暗示可在訂行程前就取得核准，也已提醒天候與管制可能改變安排），但「最多提前 30 日、確認最晚前 2 日才到」與부도罰則對海外旅客排程很實用，建議下次改稿以事實句補入。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "台帳標記一致性：段落 2 與段落 11 主體是本文範圍聲明，標 unverifiable 加 qualification 可通過檢查且較嚴格，但仁壽峰同性質的末段標為 editorial，兩組做法不同；不影響事實。段落 3 以韓文維基佐證道峰站為另一車站，足以支持此低風險事實，日後若能換成營運單位來源更佳。"
     }
   ]
 }

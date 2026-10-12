@@ -2,29 +2,49 @@
   "schema_version": 1,
   "article_id": "77bd05d60d5cdeb6838224fbb1ae0274",
   "source_sha256": "424c3d5433e6235bd8713c349ad57a286a7930a9d275d03bddade104a5a46252",
-  "evidence_sha256": "60de4864f077ee45b6b70a843b800960fa710e10e2ecdcc087399d91060ae530",
-  "reviewed_at": "2026-10-12T00:59:37.317938+00:00",
-  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "evidence_sha256": "1f59a78d2fde979218f9da7a9b4fe92aa053acdd700a4982ed4039950f47d997",
+  "reviewed_at": "2026-10-12T08:01:33Z",
+  "reviewer": "Claude 獨立審稿 subagent（未參與寫稿與本次台帳重建）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "MountainProject description及2022交通原段支持granite/multipitch/slab/crack/trad/run-out sport、牛耳/道詵寺及四條線名；旧計程費不當現價。KNPS list.do支持3–30日前/10:00/2–5人/最終SMS；cmsSeq28 reviewer fresh Groundlane full核對園區GPS+SMS link/16:00前開始/下山結束，修後補入。未驗指定岩壁/date/外籍流程保留。"
+      "notes": "本次以 curl -sL（桌面瀏覽器 User-Agent）於 2026-10-12T07:51Z 重新取得來源頁並轉純文字閱讀，逐筆對照台帳 12 筆 claim。KNPS 申請頁（permission/list.do）：3 日後至最多 30 日後可預約（當日至 2 日後不可）、每日上午 10 時新增一日、含本人 2 至 5 人（1 人不可）、僅收到最終確認簡訊者可使用岩壁、國立公園選項含「북한산」「북한산도봉」，均與正文及台帳 evidence 相符。KNPS 申請說明頁（cmsSeq=28）：使用當日入山時以簡訊連結確認開始、須在該國立公園範圍內且 GPS 開啟、當日 16 時前（原文「16시까지」，16 時後不可並自動記為부도）、下山時以簡訊連結確認完成，均相符；正文「16:00 前」的轉述可接受。KNPS 北漢山頁：「탐방전 [입산시간지정제] 및 [탐방로 통제현황] 정보를 꼭 확인 해 주세요.」相符。兩個申請頁均無「외국인」字樣，也無個別岩壁或名額，與 unverifiable 段的限制句相符。Mountain Project 仁壽峰頁：Description「Fantastic multipitch granite domes… Trad as well as super run-out sport. Mostly slab and crack climbing.」、Getting There（6/25/2022 - Chan；east side of Bukhansan National Park just north of Seoul；Bukhansan Ui Station or 우이역；Doseongsa Temple (도선사)；停車每小時 2,500 won、共乘上山 2000 won、下山 1000 won）、路線表 Chouinard A（Trad 4 pitches）、Chouinard B（Trad 5 pitches）、Insu A（Trad 4 pitches）、Insu B（Trad 5 pitches），均與台帳 evidence 相符。KNPS 北漢山頁讀取當下亦顯示「실시간 통제정보 부분통제」。1 筆 unverifiable（段落 6）的 qualification 逐字存在於原稿且確實在說明未查證範圍。補審：段落 1 reason 的出處已更正為「Getting There 另寫接近路線在北漢山國立公園東側、首爾北方」，與頁面原文「The approach hike to Insu-bong is on the east side of Bukhansan National Park just north of Seoul」相符；我以還原該句後的雜湊比對，確認這是台帳自上次核准以來唯一的變動，三語台帳改法相同。仍有一處紀錄不夠完整，見 advisory（Description 的分享日期 2008-08-09 未入 evidence）。未做：未登入申請系統、未操作選公園後的表單、未讀 Mountain Project 照片說明與留言、未驗 editorial_inputs 的本機檔案雜湊、未現場查證。"
     },
     "translation": {
       "passed": true,
-      "notes": "三語逐段及新GPS段重讀：申請窗口、隊伍數、10:00、16:00、園區定位/開始結束對齐；60m是被拒绝的通用清單而非裝備保證；社群歷史與非親訪限定一致。"
+      "notes": "本次重新逐段對照 zh／en／ja 全文與三份台帳：北漢山東側、北漢山牛耳站與道詵寺、2022 年費用不當現價、3 至 30 日、10:00、2 至 5 人、最終核准簡訊、園區內簡訊連結加 GPS、16:00 前、離山結束確認、未確認事項（指定岩壁名額、適用區域、外籍申請）、四條路線名、不提供 60 公尺繩通用清單、查核日 2026 年 10 月 12 日，三語一致。三份台帳結構相同（各 12 筆，location、verdict、來源 URL 逐筆一致，evidence 與 links 完全相同）；en／ja 台帳的 claim 為各自語言原文且逐字存在於原稿。小差異不影響事實：zh「室內上攀」在 en／ja 作 indoor lead／室内リード；ja「16:00前に」較自然的寫法是「16:00までに」。"
     },
     "editorial": {
       "passed": true,
-      "notes": "申請→選線/保護/下降→當日管制的旅行決策合理；必修開始/結束確認、H2、文末來源已修，無未解必修。沒有把入口當指定壁許可。"
+      "notes": "原稿本輪無變動（git diff 僅台帳）。4 筆 editorial（段落 2、4、9、11）主體確為本文定位、整日時間規劃、繩索與下降裝備判斷、何時值得排成攀登日的編輯建議，reason 所述背景與來源相符，未宣稱正文另有聲明，三語處理一致。仍標 confirmed 的段落 1、3、5、7、8、10 都有具體來源事實（8、10 為事實句加編輯建議的混合段，依規則維持 confirmed 恰當）。段落 1「部分運動路線的固定點間距很長」：來源是「super run-out sport」，沒有「部分」這個限定，屬略為弱化的轉述，整段仍在提醒不可當室內同級路線，判定可接受，見 advisory。zh 稿未見簡繁轉換錯字。"
     }
   },
   "findings": [
     {
       "severity": "blocking",
       "resolved": true,
-      "notes": "初稿H2起始與文末來源已補；KNPS園內GPS+SMS link16:00前開始及下山結束確認已補，三語及cmsSeq28raw重核。"
+      "notes": "先前審稿紀錄的必修（H2 起始、文末來源清單、KNPS 當日開始與結束確認）已在先前版本補齊；本次重讀三語原稿與 cmsSeq=28 原文後確認仍成立。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "段落 1：來源寫「Trad as well as super run-out sport」，沒有「部分／some／一部」的限定；正文加上限定會讓風險敘述略弱於來源。下次改稿建議拿掉「部分」（三語同步），或在台帳 reason 註明該限定是編輯轉述。不擋核准。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "台帳精確度（已解）：段落 1 的 reason 原把「場地位於北漢山國立公園、首爾北側」歸給 Description，實際出處是 Getting There；補審時台帳已更正為「Getting There 另寫接近路線在北漢山國立公園東側、首爾北方」，與頁面原文相符。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "台帳完整度：Mountain Project 來源的 source_date 為 null，evidence 只記了 Getting There 的 2022 年更新，沒記頁面標示「Shared By Ben Bruestle on Aug 9, 2008」；「super run-out sport」出自這段年代較早的 Description，建議補進 evidence。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "KNPS 另載、正文未寫的規則：確認簡訊最晚使用日 2 日前才寄出、須申請者與同行者全員同意才轉為確認完成、未於 16 時前確認記為부도（1 次停止申請 1 個月、2 次以上 3 個月）、使用日前一日 24 時前自行取消不計부도、收訊不良可聯絡該國立公園處理、氣象特報或事故時管理者可取消。正文現有敘述未因省略而誤導（段落 6 要讀者在訂交通前先向管理處確認，並未暗示屆時已能取得核准），但「最多提前 30 日、確認最晚前 2 日才到」與부도罰則對海外旅客排程很實用，建議下次改稿以事實句補入。"
     }
   ]
 }

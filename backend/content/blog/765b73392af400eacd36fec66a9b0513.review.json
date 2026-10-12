@@ -2,29 +2,44 @@
   "schema_version": 1,
   "article_id": "765b73392af400eacd36fec66a9b0513",
   "source_sha256": "63efbc7ecb2c4ca63b8c7a492249f0114524d5138ed78e19cb59f7b53e1e6a26",
-  "evidence_sha256": "945b92d0d7de5cbe321ae034d5ca09df09c4ae0d8310c7761f56c0c7f480e8e7",
-  "reviewed_at": "2026-10-12T00:57:33.346526+00:00",
-  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "evidence_sha256": "8daa157b453b80f31179c3fffce18a0fb728d334c19029db698a719121ff29e1",
+  "reviewed_at": "2026-10-12T07:55:18+00:00",
+  "reviewer": "Claude 獨立審稿 subagent（ed-reviewer，R8；未參與寫稿與本次修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "raw fetch-12 支持石灰岩、5.11/12重心、2007年4月自粛、停車與吊橋交通；原文自粛不是法律閉鎖，三語沒有誇大，未確認解除明示。"
+      "notes": "本輪台帳變更只有兩筆 confirmed 改標 editorial 與刪除一句過期說明，原稿未動。本次實際做的核對：git diff 逐行看過本組三語的原稿與台帳變更；重讀三語原稿全文並逐段對照數字、限制與否定敘述；以腳本確認每筆 claim（標題／摘要合併列除外）逐字存在於原稿、unverifiable 的 qualification 逐字存在於原稿、台帳 source_sha256 等於原稿實際 SHA-256；用 curl（瀏覽器 User-Agent）重新取得 CLIMBING-net 與 ROCKTOPO 兩個來源頁（皆 HTTP 200）並對照正文事實。CLIMBING-net 白妙橋頁支持：5.11 台、5.12 台充實；傾斜 80~130 度；奧多摩站搭日原行巴士於白妙橋下車、過吊橋到正面壁基部；トラウトカントリー受付停車、禁止路邊停車且橋前路側帶是巴士站；JFA 環境委員會自 2007 年 4 月起呼籲利用自粛（垃圾、殘置物、焚火痕跡、停車問題），現況請至 JFA 網站確認；不留器材、盡量回收快扣、嚴禁焚火、重視居民關係。ROCKTOPO areas/110 列有正面壁、ディンプル、カワラ、バルコニー、アイビー各 face。正文未引用來源上的舊停車費 500 日圓，且明示不作現價，處理恰當。兩筆 editorial（「向窗口確認、無明確答覆就改排其他場地」「行前三個問題」）主體確為決策建議，沒有具體事實主張被降級；reason 所述背景（2007 年 4 月自粛記錄與頁面要求確認現況；分區、吊橋接近、停車限制）與來源及台帳 evidence 相符，未宣稱正文已標明為編輯建議，語句完整。三語台帳同一段處理一致。沒做的：未到現場、未向 JFA／管理方／釣場查詢現況、未查當日巴士時刻、未看 ROCKTOPO 需登入或圖片形式的 topo、未驗 PR／CI／部署與線上頁面；未執行 pnpm blog:check（依任務書只跑單篇檢查）。"
     },
     "translation": {
       "passed": true,
-      "notes": "三語2007年4月與5.11/12、5.9 or easier包含邊界、歷史自粛非確定當期閉鎖與未確認解除一致。"
+      "notes": "本次重新逐段對照三語：2007 年 4 月、5.11／5.12、5.9 以下（en「5.9 or easier」含邊界）、自粛非確定仍生效亦非確定解除、未確認解除與造訪日許可、舊停車費不作現價、停車收費不等於攀登許可、不給新宿出發固定總時間，三語一致。小差異不影響語意：zh「近垂直到明顯仰角」，en／ja 為「vertical／垂直」；zh 有「對行程規劃而言，先知道難度重心…」一句，en／ja 省略。"
     },
     "editorial": {
       "passed": true,
-      "notes": "從先確認狀態到選區、交通與替代有具體行動，沒有作已確認可用推薦。"
+      "notes": "本次重新確認：全文以「先釐清利用狀態」為主線，未把白妙橋當成已確認可用的推薦；沒有為了台帳在正文加免責聲明。先前紀錄中無「編輯建議卻標 confirmed」的未解 advisory；本輪兩段已改標 editorial。"
     }
   },
   "findings": [
     {
       "severity": "blocking",
       "resolved": true,
-      "notes": "英文已改為routes graded 5.9 or easier，與繁中5.9以下、日文5.9以下包含邊界一致；三語全文回讀未改2007年4月自粛、未確認解除或其他限制。"
+      "notes": "（前一輪結論，本次重新確認仍成立）英文為 routes graded 5.9 or easier，與繁中「5.9以下」、日文「5.9以下」含邊界一致。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "本輪處理：「沒有解除證據…」第一段後半與「把查核結果轉成一個明確決定」兩段由 confirmed 改標 editorial。本次判定兩筆皆恰當，reason 屬實，三語一致。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "仍標 confirmed、但主體偏編輯建議的段落（不擋核准）：「石灰岩難度選擇…」第 2 段（5.9 以下隊伍未必適合、先取得完整路線圖、不把路線數當許可清單）三語皆為建議與解讀，來源只提供難度分布背景，可考慮改標 editorial。另外仍標 confirmed 的各段 reason 是同一句通用樣板（「目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議…」），未逐段說明，建議日後改寫。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "中文稿用字（非本輪修改，需改原稿，故只列建議）：標題、摘要與正文的「利用自粛」使用日文新字體「粛」，繁中應為「自肅」或改寫為「自律停用／暫停利用的呼籲」；「巴士停留所」為日文詞，建議「巴士站」；「トラウトカントリー受付」的「受付」建議「櫃檯報到」。日文稿「選線と装備」的「選線」不是日文慣用詞，建議「ルート選び」。"
     }
   ]
 }

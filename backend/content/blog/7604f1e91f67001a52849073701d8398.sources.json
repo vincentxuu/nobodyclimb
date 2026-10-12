@@ -274,7 +274,7 @@
     {
       "location": "Use the route list for selection, not permission",
       "claim": "Choose a short list of objectives, then use an up-to-date topo to check lengths, descents and equipment with your partner. If one person wants a hard project, establish whether the other can provide appropriate belaying. Keep the day flexible enough to leave without climbing the intended line.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/198",
@@ -307,7 +307,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "This paragraph is editorial advice on shortlisting routes, checking the topo, belaying and backing off. ROCKTOPO supports only the database route listings and grades; the management page supports the entry requirements and hazard warnings; the 2023 visit report supports only historical parking and approach observations. None of them supports the route-selection or retreat advice itself; it is editorial advice, not something verified on site."
     },
     {
       "location": "Make the rules part of the itinerary",

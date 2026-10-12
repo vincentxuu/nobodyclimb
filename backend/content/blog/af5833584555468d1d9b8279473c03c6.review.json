@@ -2,23 +2,49 @@
   "schema_version": 1,
   "article_id": "af5833584555468d1d9b8279473c03c6",
   "source_sha256": "9a812907d8e79a26f6d261befcf24f6b5c3d44fb73a6b8ea670c1d7446ab1c00",
-  "evidence_sha256": "c8c45a3daf6cc54ce7f5d6db487dc18ec0a74373cdaf0e71bd65ff7da72eed50",
-  "reviewed_at": "2026-10-12T00:59:36.124233+00:00",
-  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "evidence_sha256": "eb5fb0605df828707521039c4f1a1309b5b62977767a582122d35cbee3a44092",
+  "reviewed_at": "2026-10-12T08:01:08+00:00",
+  "reviewer": "Claude 獨立審稿 subagent（ed-reviewer，R8；未參與寫稿與本次修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "出版者全文支持小型石灰岩、右側數線20m以上、神戸岩別處且禁止攀登、藤倉/小岩巴士神戸岩入口、春日神社/紅橋/民家庭前、路肩和空地不可停、釣場需受付且不能車宿。現行停車/接近未驗明列。"
+      "notes": "第二次重審（台帳 reason 修正後）：以 git diff 與腳本確認三語台帳「從巴士站到岩壁」那筆 editorial 的 reason 已改為：來源支持巴士接近、停車限制，以及 CLIMBING-net 請攀登者盡量搭巴士與電車；不支持的是其餘安排（確認回程、巴士步行攀登一起規劃、保留回程時間）。此敘述與我第一次重審時重新取得的 CLIMBING-net 頁（「原則的にバスを利用したい」「電車、バスを積極的に利用したい」）相符。該筆 sources[].evidence 未補記這句：evidence 是原查證者的讀取紀錄，不補寫可以接受，因此「來源請攀登者搭巴士與電車」這一點的依據是本次審稿者的重新抓取，而非台帳 evidence 文字，特此註明。另一筆 editorial reason 分號後已改小寫。兩筆 editorial reason 三語逐字相同；原稿未再變動，claim 與 qualification 仍逐字存在於原稿，source_sha256 相符。本次沒有再重新抓取來源頁。以下為第一次重審的查核紀錄，結論仍成立：本次實際做的核對：git diff 逐行看過本組三語的原稿與台帳變更；重讀三語原稿全文並逐段對照數字、限制與否定敘述；以腳本確認每筆 claim（標題／摘要合併列除外）逐字存在於原稿、unverifiable 的 qualification 逐字存在於原稿、台帳 source_sha256 等於原稿實際 SHA-256；用 curl（瀏覽器 User-Agent）重新取得 CLIMBING-net 與 ROCKTOPO 兩個來源頁（皆 HTTP 200）並對照正文事實。CLIMBING-net 神戸の岩場頁支持：1990 年起開拓的緊湊石灰岩、右側 5～6 條 20 公尺以上；武藏五日市站搭往藤倉或小岩的巴士於神戸岩入口下車；經春日神社、小紅橋、民家庭先（請打聲招呼）、民家旁小溪；神戸岩不是此岩場且現在禁止攀登；春日神社周邊無處停車、公民館前空地與路肩不可停；釣場停車需受付並說明來攀登；釣場停車場不可露營、車中泊。ROCKTOPO areas/103 列有 face 先鋒 18 條及停車、接近條目。正文事實與來源相符。兩筆 editorial 的主體確為行程與準備建議，沒有具體事實被降級；第二筆（先看長度、結束點、下降與器材…）reason 所述背景屬實。zh 原稿「隻傳」→「只傳」修正正確、語意未變，台帳 claim 已同步，source_sha256 與原稿相符。沒做的：未到現場、未向 JFA／管理方／釣場查詢現況、未查當日巴士時刻、未看 ROCKTOPO 需登入或圖片形式的 topo、未驗 PR／CI／部署與線上頁面；未執行 pnpm blog:check（依任務書只跑單篇檢查）。"
     },
     "translation": {
       "passed": true,
-      "notes": "三語地名區分、20m以上、居民通行/釣場受付/無車宿限制及現況不確定一致；没有把小型變成短繩足夠。"
+      "notes": "本次重新逐段對照三語：地名區分（神戸の岩場／神戸岩）、神戸岩禁止攀登、20 公尺以上、藤倉或小岩巴士與神戸岩入口、春日神社周邊無停車與路肩／公民館旁不可停、釣場受付、不可露營車宿、現行停車與通行未核實、當日開放與固定點未檢查，三語一致。小差異：zh「比只挑一條最高星等線更實際」en／ja 省略；ja 省略「這些動作…是攀登日能否順利開始的條件」一句；en「Route totals describe a database's choices」語意較 zh「路線數只幫助理解選擇範圍」含糊。"
     },
     "editorial": {
       "passed": true,
-      "notes": "以導航誤用與居民空间串場，接近描述是來源線索而非即時turn-by-turn指令；具体行動與撤退資訊需求可理解。zh「隻傳」可選改「只傳」。"
+      "notes": "本次重新確認：以「別把岩場走成景點」與居民生活空間為主線，接近描述標明出自來源、現況未核實，沒有為台帳在正文加免責聲明。前一輪「zh『隻傳』可選改『只傳』」已在本輪修正。"
     }
   },
-  "findings": []
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "（已解）第一次重審的必修問題：editorial 一筆的 reason 稱來源不支持搭大眾運輸的建議，與來源頁不符，另有一處分號後誤用大寫。台帳已於本輪修正，第二次重審確認三語皆已改正。該筆 evidence 未補記來源請搭巴士電車一句，依據為審稿者重新抓取，可接受。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "前一輪 notes 提到 zh「隻傳」可改「只傳」：本輪已改，本次確認正確且台帳 claim 同步。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "來源轉述略為加碼（非本輪修改，需改原稿，故只列建議）：三語正文寫來源提醒「應打招呼、安靜通行／pass quietly／静かに通過するよう促しています」，來源原文只有「民家の庭先なので一声かけて通りたい」（打聲招呼），「安靜通行」不是來源說的。建議日後把「安靜通行」改成本文自己的建議語氣，或刪去。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "仍標 confirmed 的各段 reason 為通用樣板，且提到本文並不存在的「route grades」，建議日後改寫。「岩場名稱…」第 2 段後半與「保護岩場…」第 1 段前半是建議，屬事實與建議混合，維持 confirmed 可接受。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "用字（非本輪修改，需改原稿，故只列建議）：zh「踏跡」為日文「踏み跡」直譯，繁中建議「路跡」；「公民館」建議加註或改「社區活動中心」；「神戸」沿用日文字形屬專有名詞可保留。ja 稿「目的の攀登エリア」的「攀登」是中文詞，建議「クライミングエリア」；多處以「接近」代替「アプローチ」。"
+    }
+  ]
 }

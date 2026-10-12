@@ -158,7 +158,7 @@
     {
       "location": "ルート資料で選択肢を理解する",
       "claim": "能力に合う候補を選んだら、対応するトポ、長さ、終了点、下降を調べます。資料間で名前や位置が合わなければ、グレードで推測せず現地に詳しい人へ確認してください。リストだけで目標と撤退の共通理解を代用できません。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
@@ -191,7 +191,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support the background only: ROCKTOPO lists routes and database grades for the towers. They do not prescribe the selection sequence described here (pick a candidate, then gather topo, length, anchor and descent information, and ask someone familiar when sources disagree); that is editorial preparation advice, not a field-tested method."
     },
     {
       "location": "支点と動作の難しさを別に見る",
@@ -234,7 +234,7 @@
     {
       "location": "支点と動作の難しさを別に見る",
       "claim": "本記事は人工登攀、ネイリング、支点構築を教えず、旅行者による保護の追加も解決策として勧めません。既存支点、終了点、撤退を判断できなければ、先に技術や適切な指導を得るか訪問を取りやめます。一般的なスポート装備だけで到着し、そこで下降方法を尋ねるのは準備の順序が逆です。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
@@ -267,7 +267,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support the background only: CLIMBING-net notes that many lines rely on ring bolts or pitons. They do not state the go/no-go threshold given here (gain skills, seek instruction, or drop the destination); that is editorial judgement, not an on-site assessment of the fixed protection."
     },
     {
       "location": "日原へ向かう前に交通と接近を確認する",
@@ -350,7 +350,7 @@
     {
       "location": "日原へ向かう前に交通と接近を確認する",
       "claim": "目標峰、ルート、プロテクション、下降、帰路の五点を準備し、水、食事、雨具、照明を持ちます。河原の状態と撤退の余裕も考えます。五つの岩峰の旧ルートを、具体的な目的を持って探索するための候補です。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
@@ -383,7 +383,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support the background only: five towers, older routes and the general approach description. They do not provide the five-item preparation list or the packing list; these are editorial suggestions and no guarantee that the day will be climbable."
     }
   ],
   "media": [],

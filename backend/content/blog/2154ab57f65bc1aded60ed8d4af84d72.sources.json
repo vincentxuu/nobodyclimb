@@ -155,7 +155,7 @@
     {
       "location": "## Kanotoiwa Iriguchi is the start of the approach paragraph 2",
       "claim": "Check buses for your actual date and save the topo, transport details and a departure deadline before leaving. Allow additional time for navigation and equipment. If local signs differ from the description, follow them rather than improvise a shortcut.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/rocks/206",
@@ -178,7 +178,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+      "reason": "來源（ROCKTOPO、CLIMBING-net）只支持背景事實：由武蔵五日市搭往小岩方向巴士至神戸岩入口，再經第一橋、林道與山徑接近，以及停車空間極少。先查當日去回巴士、備妥路線圖與交通截圖、設定離開岩壁的截止時間、為找路與整理繩索多留餘裕、以現地告示為先，是編輯的行前準備建議，來源未記載這些做法，本站也未實地走過這段接近路。"
     },
     {
       "location": "## Parking space is limited paragraph 1",
@@ -280,7 +280,6 @@
   "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
   "verification_notes": [
     "No cover/body images; no media rights assumptions.",
-    "No self-approved reviews; independent factual/translation/editorial review required.",
     "Future visit permission explicitly qualified.",
     "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
   ]

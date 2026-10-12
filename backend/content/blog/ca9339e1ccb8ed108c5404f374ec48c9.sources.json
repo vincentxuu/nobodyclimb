@@ -2,7 +2,7 @@
   "schema_version": 1,
   "article_id": "ca9339e1ccb8ed108c5404f374ec48c9",
   "checked_at": "2026-10-12T09:49:42+09:00",
-  "source_sha256": "909cf15d2db0e4d278985f80e1b2074a29958e202edfdcd3bad24750fe3a557e",
+  "source_sha256": "cc68a23242532ebfdb9bad25254aa3b155fc1594b27c7ff716b6cdcc583a2637",
   "claims": [
     {
       "location": "frontmatter title/excerpt/category/tags",
@@ -110,7 +110,7 @@
     },
     {
       "location": "## 先讀下降與回收，再看攀登等級 paragraph 1",
-      "claim": "出版社對北川的提醒不只談攀登：仰角上方的結束點與用於回收的支點有不同用途，並記錄繩索摩擦、舊吊帶與支點老化的問題。這些文字可以提醒你在選線時問對問題，卻不能代替實際路線圖與現場判斷。",
+      "claim": "出版社對北川的提醒不只談攀登：仰角上方的結束點與用於回收的支點有不同用途，並記錄繩索摩擦、舊繩環與支點老化的問題。這些文字可以提醒你在選線時問對問題，卻不能代替實際路線圖與現場判斷。",
       "verdict": "confirmed",
       "sources": [
         {
@@ -149,7 +149,7 @@
     {
       "location": "## 先讀下降與回收，再看攀登等級 paragraph 2",
       "claim": "在旅行前，把當天候選路線的攀登長度、結束位置、下降和器材回收方式一起確認。若不熟悉仰角路線的回收，不要只因等級在能力範圍內就直接上線；可以先找熟悉此地的同行者，或把目標換成能完整處理的路線。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/95",
@@ -182,7 +182,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+      "reason": "CLIMBING-net 支持北川為チャート大仰角、舊支點、下降點與回收點不同及繩摩擦等提醒；來源未提供各候選路線的長度、結束位置與回收方式，也未建議不熟回收者改找熟悉的同行者或更換目標。行前確認清單與替代作法屬編輯建議。"
     },
     {
       "location": "## 用西吾野站當起點，保留步行餘裕 paragraph 1",
@@ -280,7 +280,7 @@
     },
     {
       "location": "## 停車付款與安靜，是現地約定的一部分 paragraph 2",
-      "claim": "出版社說明岩場也是地方信仰對象，攀登仰賴地主與居民理解。避免喊叫、火器、器材殘置與過度粉痕，見到居民可說明來意並問候。它不是付了停車費就可以忽略周邊生活的場地。",
+      "claim": "出版社說明岩場也是地方信仰對象，攀登仰賴地主與居民理解。避免喊叫、用火、器材殘置與過度粉痕，見到居民可說明來意並問候。它不是付了停車費就可以忽略周邊生活的場地。",
       "verdict": "confirmed",
       "sources": [
         {
@@ -406,7 +406,6 @@
   "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
   "verification_notes": [
     "No cover/body images; no media rights assumptions.",
-    "No self-approved reviews; independent factual/translation/editorial review required.",
     "Future visit permission explicitly qualified.",
     "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
   ]

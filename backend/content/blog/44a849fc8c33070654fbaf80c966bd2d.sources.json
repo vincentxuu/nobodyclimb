@@ -62,7 +62,7 @@
     {
       "location": "正文段落 2",
       "claim": "If cracks are your aim, assess your ability to place and evaluate natural protection, select the appropriate rack, establish belays and retreat. An indoor lead grade does not answer those questions. If these skills are new, arrange a guide familiar with the selected sector and make the day an introduction to cracks rather than an independent attempt on a seemingly easy route.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/9",
@@ -85,7 +85,7 @@
           "tool": "Groundlane web_fetch"
         }
       ],
-      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+      "reason": "本段主體為編輯對裂隙所需能力與預約嚮導的建議。TOMMY來源只支持富戶到赤澤一帶以裂隙為中心、且TOMMY本身是當地嚮導；ROCKTOPO只支持裂隙與岩面等路線類型的分列。兩者都不支持能力清單、室內級數不適用的判斷與預約嚮導的建議本身。"
     },
     {
       "location": "正文段落 3",
@@ -147,7 +147,7 @@
     },
     {
       "location": "正文段落 5",
-      "claim": "TOMMY warns about deterioration of fixed coastal equipment and the need to inspect tree anchors. Check sea conditions, tides, wind and the actual stance, even if photographs show dry rock. If you cannot assess the coastal setting, do not rappel in before establishing an exit. ROCKTOPO highlights December through April as its season reference, which does not guarantee conditions on a particular day. For an April trip, keep the outdoor day flexible rather than tying your only climbing day to a sea cliff.",
+      "claim": "TOMMY notes that anchors on Jogasaki cracks are mostly built on trees, and warns that fixed gear left by the sea deteriorates and corrodes badly and should be checked carefully. Check sea conditions, tides, wind and the actual stance, even if photographs show dry rock. If you cannot assess the coastal setting, do not rappel in before establishing an exit. ROCKTOPO highlights December through April as its season reference, which does not guarantee conditions on a particular day. For an April trip, keep the outdoor day flexible rather than tying your only climbing day to a sea cliff.",
       "verdict": "confirmed",
       "sources": [
         {
@@ -199,13 +199,13 @@
           "tool": "Groundlane web_fetch"
         }
       ],
-      "reason": "本段為編輯的行程安排示例，ROCKTOPO與TOMMY來源只支持岩區分散、海岸條件與季節等背景事實，不支持住宿、單一岩區與替代活動的安排本身；正文已明示為編輯安排示例、非已驗證的嚮導方案。",
+      "reason": "本段為編輯的行程安排範例，ROCKTOPO與TOMMY來源只支持岩區分散、海岸條件與季節等背景事實，不支持住宿、單一岩區與替代活動的安排本身；正文已明示為編輯安排範例、非已驗證的嚮導方案。",
       "disposition": "qualified",
       "qualification": "This is an editorial planning example, not a verified guiding package"
     }
   ],
   "media": [],
-  "source_sha256": "d2664071209c30ef9a39e25b8feb3b6d85ed7d0bde1dc6a764ab120403a52028",
+  "source_sha256": "61729c8b8401563fea233cba6072ff302af81808aa58a31d764fd75a501ba694",
   "links": [
     {
       "url": "https://www.rocktopo.net/areas/9",

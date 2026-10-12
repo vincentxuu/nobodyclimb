@@ -418,7 +418,7 @@
     {
       "location": "正文段落 7",
       "claim": "Suggested example: once eligibility and transport are confirmed, choose one available sector and a few objectives, and identify them on site before climbing. Wet rock, a closure sign or missing reliable descent information are reasons to change plans. This guide helps decide whether a Futagoyama visit can be planned; it is not an entry permit, an anchor inspection record or a replacement topo.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/92",
@@ -471,7 +471,7 @@
           "tool": "Groundlane web_fetch"
         }
       ],
-      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+      "reason": "來源支持二子山的分區與路線概況、雨季與夏季滲水、坂本側林道與國道299號的接近線索、広場區個別bolt脫落公告，以及協會要求入山者重讀注意事項等背景事實。來源未提供「只選一區、少量目標、先完成現場辨識」的行程安排，也未提供以濕壁、禁用告示或缺少下降資訊作為更改行程理由的判斷準則，這些是編輯的規劃建議。"
     }
   ],
   "media": [],

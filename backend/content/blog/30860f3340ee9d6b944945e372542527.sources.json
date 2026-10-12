@@ -82,7 +82,7 @@
     {
       "location": "正文段落 2",
       "claim": "Teams with outdoor leading, belaying and cleaning skills can make this a focused route-selection day. Visitors with gym-only experience should go with a guide who knows the venue. If your Tokyo itinerary has few climbing days, first make sure the whole team accepts the travel and approach commitment. A broad route range does not ensure everyone will immediately find a suitable objective.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/80",
@@ -115,7 +115,7 @@
           "tool": "Groundlane web_fetch"
         }
       ],
-      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+      "reason": "整段是編輯判斷。來源只支持背景事實：CLIMBING-net 與 ROCKTOPO 列出先鋒、多繩距及部分限 top-rope 的路線與級數，CLIMBING-net 另有約 30 分鐘的接近參考；沒有來源說明哪一類繩隊適合、只有室內經驗者應由嚮導帶領，或是否值得為此排一天，本站也未實地攀登驗證。"
     },
     {
       "location": "正文段落 3",

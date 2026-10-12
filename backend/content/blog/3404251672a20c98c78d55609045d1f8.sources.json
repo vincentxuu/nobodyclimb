@@ -119,7 +119,7 @@
     {
       "location": "## Match the wall shape to your objective paragraph 2",
       "claim": "A grade alone does not describe the movement: an overhanging start can ask something different from continuous vertical climbing within the same grade range. Shortlist an easier starting climb and a project. If a line is crowded or unsuitable, a small crag offers fewer alternatives, so keep the objective flexible.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/1797",
@@ -152,7 +152,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+      "reason": "ROCKTOPO 主岩區頁支持四條路線的難度，以及中央小仰角、片狀岩與口袋越仰角的描述，岩區頁支持登錄七條路線的小規模；來源未提供「先列一條有餘裕的起始線與一條嘗試線」的選線方法，也未比較同級路線的動作差異。該部分屬編輯的選線建議。"
     },
     {
       "location": "## Plan access without assuming parking permission paragraph 1",
@@ -184,7 +184,7 @@
     {
       "location": "## Plan access without assuming parking permission paragraph 2 — remainder",
       "claim": "If you cannot reach someone who can confirm them, keep an alternative venue with clear access arrangements. Do not arrive expecting to cross business property or use an informal roadside space. The roughly five-minute figure is attributed only to that activity description; this guide has not verified an independent visitor’s approach or duration on the visit date, shop hours or parking fees.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/1797",
@@ -217,7 +217,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "本段其餘來源背景已核對；查公告、帶補給、保留替代與返程餘裕是品牌編輯的規劃建議，不冒充實測或管理方規定。"
+      "reason": "BETA 活動頁僅支持「JR日向和田步行約5分」是該活動說明的記述，ROCKTOPO 支持停車註記帶保留語氣；來源未提供聯繫不到確認對象時改去替代場地、不臨場穿越店家土地或找路邊空位的作法。該備案屬編輯的規劃建議；獨立旅客的接近路徑、耗時、店家營業時間與停車費亦未核實。"
     },
     {
       "location": "## Let the chosen routes determine equipment paragraph 1",
@@ -338,7 +338,6 @@
   "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
   "verification_notes": [
     "No cover/body images; no media rights assumptions.",
-    "No self-approved reviews; independent factual/translation/editorial review required.",
     "Future visit permission explicitly qualified.",
     "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
   ]

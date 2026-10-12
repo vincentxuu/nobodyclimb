@@ -2,23 +2,39 @@
   "schema_version": 1,
   "article_id": "a81faf4baa85bd50e89afdc78a1c805f",
   "source_sha256": "d6b0c100b42d1e3fe247eff7d464f0ff1e0df97dbbaabb7f696fa97029160f1f",
-  "evidence_sha256": "04c0b150b9a1cbf8ca4a64b59bc3978932c4c372479066bc4b510710954b8044",
-  "reviewed_at": "2026-10-12T00:59:35.293307+00:00",
-  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "evidence_sha256": "13cebb14c2600e69082b456625f648b62d56a73f842124abc890703edace1a56",
+  "reviewed_at": "2026-10-12T07:55:48Z",
+  "reviewer": "Claude 獨立審稿 subagent（Opus 5.5；未參與寫稿與本次修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "CLIMBING-net核對80m高差/70m寬、多繩距訓練、留置保護不可靠與過去繩切事故；ROCKTOPO main lines multi。みろく2024-05-12山行8:20鳩ノ巣→8:50取り付き吻合30分，發布2024-06-07；費用現況未硬報。"
+      "notes": "本次重審（改標 editorial 後；本篇原稿未變）。本輪台帳把四筆 claim 由 confirmed 改標 editorial，逐筆判斷如下，均認為恰當：（1）隊員分工、把不攀登列為選項、先在受控環境練習——全段是建議，沒有數字或規則；（2）依目標線制定裝備、不照搬快扣數、本文不教架站與下降、與有經驗者核對 topo——全段是建議與本文範圍聲明；（3）同時找出起攀點／接近／下降／離開路線、查當日班次、設折返時間——全段是行程建議；（4）結語——編輯結論。四筆 reason 所稱的來源背景（多繩距訓練場、留置保護不可靠、岩緣鋒利與繩索切斷事故、ROCKTOPO 列為多繩距、2024 年一次山行由鳩ノ巣站接近）都能在該筆 sources 的 evidence 找到；reason 沒有宣稱正文已標明為編輯建議，語句完整。四筆 claim 文字逐字存在於各語原稿，三語台帳改標的位置與 reason 完全一致。本次以 curl 重新取得三個來源（均 HTTP 200）並核對：CLIMBING-net 越沢バットレス頁載「高差80メートル、幅70メートル」「マルチピッチ主体」「本チャンルートに向かうためのトレーニングの場所」「残置のプロテクションの信頼性のなさ」「部分的に鋭いエッジ…過去にロープ切断事故」與入岩料 200 円；ROCKTOPO areas/102 的路線分布只有「マルチ（3ルート）」；みろく山の会記錄為 2024/05/12 山行、2024-06-07 刊出，コースタイム「鳩ノ巣駅8:20…8:50越沢バットレス取り付き」，內文「鳩ノ巣駅から岩の取り付きまで徒歩約30分」。與正文及台帳 evidence 相符。台帳 source_sha256 等於原稿實際 SHA-256；unverifiable 一筆的 qualification 逐字存在於原稿。未驗：現行入岩費用、接近設施、支點實況與指定日交通（正文已明示未核實）；ROCKTOPO 個別路線頁與需登入的 topo 未讀。"
     },
     "translation": {
       "passed": true,
-      "notes": "三語80/70、May2024與30分鐘、尺寸非登攀長/繩數、現況費用/支點未驗一致；沒有把歷史山行時間當現在通行保證。"
+      "notes": "本次重新逐段對照 zh/en/ja 全文（十段正文與 title/excerpt）：約 80 公尺／約 70 公尺、2024 年 5 月山行與約 30 分鐘、「尺寸不能推算攀登長度或繩數」「資料庫不是現場操作手冊」「本文不教架站與下降」「山行時間不是現行通行保證」「現行費用、接近設施與支點狀況未核實」等數字、否定與限制三語一致，沒有任一語言多出保證。差異（不影響事實）：zh 段落「不要把旅行當天當成首次學習複雜操作的場合」en/ja 沒有對應子句；zh excerpt 有「不以低級數取代準備」，en excerpt 沒有級數一語，ja 以「グレードだけでなく」表達；ja 的 unverifiable qualification 多含末句「情報が不足するなら…」。"
     },
     "editorial": {
       "passed": true,
-      "notes": "以繩隊職責、撤退、回程回答多繩距旅行問題；日常地面確保與架站/下降差異解释明确，不引导首次自行學複雜操作。"
+      "notes": "本次重讀全文：以繩隊能力、岩緣與留置保護、接近與下降回答是否安排這一天，來源事實有出處，建議段落未假冒現場經驗，標題與摘要未承諾現行開放。本篇原稿本輪沒有文字變動。"
     }
   },
-  "findings": []
+  "findings": [
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "本輪修改：四筆建議段落由 confirmed 改標 editorial，reason 改寫為逐筆說明來源背景與編輯建議的分界。經對照 git diff、原稿與 evidence，判定恰當，三語一致，無需修正。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "不擋核准、非本輪修改：仍標 confirmed 的段落中，「這一天的主題是繩隊合作」首段（適合哪種繩隊、多繩距的一般說明）沒有直接引用來源，屬一般知識與編輯定位；其餘 confirmed 段落是來源事實夾帶一兩句建議，主體仍是事實，維持 confirmed 可接受。confirmed 各筆共用同一句樣板 reason，三筆來源也整組重複掛在每一筆 claim 上，沒有逐筆對應。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "不擋核准、非本輪修改：CLIMBING-net 原文是「高差80メートル、幅70メートル」，正文三語都加了「約」；另原文有「装備にしても国内の本チャンルートを登るのと同じと考えていただきたい」，可作為裝備段落的背景，但台帳 evidence 未收錄。ja 版以「出版者」稱 CLIMBING-net、用「接近設備」，讀來生硬，可日後潤稿。"
+    }
+  ]
 }

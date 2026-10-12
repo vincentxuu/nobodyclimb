@@ -1,24 +1,40 @@
 {
   "schema_version": 1,
   "article_id": "52fa6a72b2179173608991efd3bd602f",
-  "source_sha256": "1f472e3193d0906d41eeaefc47ed30145e5171cfe8173f2cb7aab5a444a88646",
-  "evidence_sha256": "18b1c574019a0348ec05ac4a3c5de636519dcb3e92b4c4a13bce9d8ae8db013c",
-  "reviewed_at": "2026-10-12T00:59:36.377205+00:00",
-  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "source_sha256": "6157ba2806a6fe6b2e18fbd431ee8213839629b8c09eacd3325ffdddcb7c6b46",
+  "evidence_sha256": "d7dc1f2633549a1852b0a3f17f4de9f12a811ebdfb172162900de22b1acbba19",
+  "reviewed_at": "2026-10-12T08:00:44Z",
+  "reviewer": "Claude 獨立審稿 subagent（claude-opus-5-5；未參與寫稿與本次修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "出版者A/B/C大、D/E小共五峰、日原川河原、東日原巴士+20分、平日中日原較近、ringbolt/piton與neiling級數變動警告均核對；ROCKTOPO C-E的ポパイ5.10b/鬼門5.11b/ロック5.12b吻合。"
+      "notes": "本次重審（editorial 標記稽核）：git diff 確認本輪變動：原稿三處簡繁轉換錯詞修正（「分割槽」→「分區」、「照舊錶」→「照舊表」、「低階數」→「低級數」），皆為還原原意、未改變語意，與 en「A single area name…」「A low grade」、ja「低いグレード」對應；台帳兩筆 claim 同步改字（程式比對逐字存在於原稿），三筆改標 editorial 並改寫 reason，source_sha256 更新。台帳 source_sha256 等於原稿實際 SHA-256；9 筆正文 claim 逐字存在於原稿，1 筆 unverifiable 的 qualification 逐字存在於原稿且確實在說明未核實範圍。editorial 標記共 3 筆，三語同段同處理、reason 相同，claim 皆逐字存在於各語原稿：(1)「先用路線資料理解範圍」第二段——選候選、找 topo／長度／結束點／下降、資料不一致先問熟悉者，主體是準備流程建議，無具體事實主張；reason 所稱背景（ROCKTOPO 列路線與資料庫級數）與 evidence 相符。(2)「舊固定點與級數要分開看」第二段——本文不教人工攀登／打釘／架設、無法判斷就補技能或取消，主體是編輯立場與去留判斷；reason 所稱背景（CLIMBING-net 提到多線使用 ring bolt／piton）與 evidence 相符。(3) 末段——五項準備、攜帶物、適合有計畫的探索，主體是行前建議；reason 所稱背景（五峰、舊線、接近概述）與 evidence 相符。三筆 reason 皆未宣稱正文已標明為編輯建議，改標恰當。本次以 curl（瀏覽器 User-Agent）重新取得三個來源頁並對照正文：CLIMBING-net 岳嶺岩（「日原川河原の岩峰群。大きいA、B、C峰の3つの岩と、やや小さいD、E峰の合計5つ」「シーズンは通年だが冬は寒い」「奥多摩駅からバスで東日原下車徒歩20分。平日なら中日原まで乗った方が近い」「リングボルトやピトンを使用するものも多いので注意。また無理なネイリングにより、グレイドが変わっている可能性がある」）、ROCKTOPO areas/106（東京都、リード（フェイス）32 ルート）、ROCKTOPO rocks/2226（ポパイ・ス・スキ 5.10b、鬼門 5.11b、ロック・スピリット 5.12b，皆為リード（フェイス））；皆與正文相符。未重新查證：目前巴士停靠與班次、接近通行、停車資格、固定點現況（正文已明示未核實）；未實地到場；未重跑台帳 links 的可達性紀錄（僅上述三頁本次實際取得 HTTP 200）。先前審稿（Codex /root/blog_path）對五峰、巴士＋20 分、平日中日原、ring bolt／piton 與級數變動警告、三條路線級數的核對結論，本次重新取得來源後確認仍成立。補審（2026-10-12T08:00:44Z）：台帳其後僅修正末段 editorial reason 的大小寫（「; These are」→「; these are」）；本次以位元組比對確認，把現行台帳的該處還原為大寫後 SHA-256 等於先前核准的 evidence_sha256，即全檔只差這一個字元，原稿未變；據此更新 evidence_sha256，未重做內容審查與來源取得。"
     },
     "translation": {
       "passed": true,
-      "notes": "三語五峰、3條等級、20分鐘、冬寒/通年非每日保證、face不等於完整現代bolt及未驗交通/停車/支點限定一致。"
+      "notes": "本次重新逐段對照 zh/en/ja 全文：五峰（A/B/C 較大、D/E 較小）、三條路線級數 5.10b／5.11b／5.12b、約 20 分鐘、平日中日原、通年但冬寒且非每日保證、face 分類不等於完整現代 bolt、未核實巴士／接近／停車／固定點等否定與限制敘述三語一致，無新增承諾。差異（不影響限制）：zh「強行打釘可能改變級數」為未然語氣，en「may have changed」、ja「変わった可能性」與來源「変わっている可能性がある」較貼近；zh 末段「若你想把岳嶺岩列入東京旅程」「而不是臨時補一個『冷門岩場』打卡」在 en/ja 未譯出。"
     },
     "editorial": {
       "passed": true,
-      "notes": "將目標峰/線/保護/下降/回程作五項准备，没有把cold spot當打卡理由；不提供neiling或增加保護操作。"
+      "notes": "本次重讀 zh 全文：先縮小目標峰、以資料庫理解範圍、分開看固定點與級數、交通與接近確認四節可獨立閱讀，未假冒親訪，未提供打釘或增設保護的操作。三處錯詞修正正確。全文再讀一遍找同類簡繁轉換錯字：未再發現；「運攀快扣」判定為台灣通行簡稱而非錯詞；其餘可斟酌的用詞列於 findings（advisory）。"
     }
   },
-  "findings": []
+  "findings": [
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "先前 advisory「三語台帳末段 editorial 的 reason 分號後 These 大寫」已由台帳修正為小寫 these，本次補審以位元組比對確認變動僅此一處。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "advisory（不擋核准）：仍標 confirmed 的第一段（位置事實＋「適合誰」的建議）與「舊固定點」第一段（來源警告＋編輯詮釋）為混合段，來源事實是主體，維持 confirmed 可接受。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "advisory（zh 用詞，非必修，未自行修改）：本輪三處簡繁轉換錯詞已修正；全文另讀一遍未再發現同類轉換錯字。「運攀快扣」的「運攀」是台灣對運動攀登的通行簡稱，不是轉換錯詞，若顧慮讀者可寫成「運動攀登快扣」。可再斟酌的用詞：「照舊表」（改後字正確但語意仍隱晦，建議「不能完全照舊資料的級數」）、「強行打釘可能改變級數」（來源為「可能已經改變」）、「結束點」（日文「終了点」直譯，御岳篇用「終點」，台灣常稱終點或固定點）、摘要「東京外岩行程」的「外岩」（日文寫法，台灣多稱戶外岩場）、「接近參考／接近通行」（アプローチ直譯，可作「進場路線」）、「停車資格」（可作「可否停車」）、「安全退回」（可作「安全撤退」，同段他處即用「撤退」）。"
+    }
+  ]
 }

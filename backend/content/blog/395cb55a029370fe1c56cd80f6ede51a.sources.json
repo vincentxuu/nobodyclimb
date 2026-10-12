@@ -174,7 +174,7 @@
     {
       "location": "古いルートで確認したいこと",
       "claim": "目標の岩峰、終了点、下降方法、必要な装備を確認してから登攀を決めましょう。終了点の判断や構築ができない場合は、対応できるパートナーや適切な指導を得る必要があります。ジムのグレードやデータベースのルート数だけで、安全の余裕や一日の登攀量は決まりません。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/氷川屏風岩/",
@@ -197,7 +197,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "CLIMBING-net supports only the background facts (A and C Peak sectors, some fragile rock, longer slings for C Peak anchors), and the ROCKTOPO user comments support only individual reports of pitons/ring bolts and a hard-to-find anchor. No source supports the recommended order of checks, the advice to bring a competent partner or instruction, or the warning against converting indoor grades; that is editorial advice, not a field-tested record."
     },
     {
       "location": "季節の説明を当日の保証にしない",
@@ -232,7 +232,7 @@
     {
       "location": "季節の説明を当日の保証にしない",
       "claim": "明確な少数の目標と代替案を用意し、トポのエリア、水と装備、下山と帰りの列車まで確認しておきます。接近路や岩面が適さなければ登攀を取りやめましょう。岩壁の変化と歴史を理解しながら訪れることが、この岩場を選ぶ楽しみにつながります。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/氷川屏風岩/",
@@ -255,7 +255,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "CLIMBING-net supports only the background facts (approach from Okutama Station, bring water, sectors and development history). No source supports the suggested trip plan of a few objectives plus a backup, reserved descent and return time, or the cancel-if-unsuitable rule; that is an editorial planning suggestion, not a tested itinerary."
     }
   ],
   "media": [],

@@ -158,7 +158,7 @@
     {
       "location": "Use the database to understand the options",
       "claim": "Choose a candidate appropriate to your abilities, then obtain the corresponding topo, length, anchor and descent information. If names or positions differ between sources, ask someone familiar with the crag instead of identifying a line by grade alone. A route list cannot replace a shared understanding of the objective and retreat.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
@@ -191,7 +191,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support the background only: ROCKTOPO lists routes and database grades for the towers. They do not prescribe the selection sequence described here (pick a candidate, then gather topo, length, anchor and descent information, and ask someone familiar when sources disagree); that is editorial preparation advice, not a field-tested method."
     },
     {
       "location": "Separate fixed protection from movement difficulty",
@@ -234,7 +234,7 @@
     {
       "location": "Separate fixed protection from movement difficulty",
       "claim": "This article does not teach aid climbing, nailing or anchor construction, nor does it suggest that visitors solve problems by adding protection. If you cannot assess the existing protection, identify the anchor and retreat safely, obtain skills or suitable instruction first, or drop the destination. Arriving with sport quickdraws and only then asking how to descend is too late.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
@@ -267,7 +267,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support the background only: CLIMBING-net notes that many lines rely on ring bolts or pitons. They do not state the go/no-go threshold given here (gain skills, seek instruction, or drop the destination); that is editorial judgement, not an on-site assessment of the fixed protection."
     },
     {
       "location": "Confirm transport and access before Nippara",
@@ -350,7 +350,7 @@
     {
       "location": "Confirm transport and access before Nippara",
       "claim": "Prepare five essentials: tower, route, protection, descent and return. Carry water, food, rain protection and lighting, and consider riverside conditions and retreat time. The interest is in the older routes across five towers, best explored with a particular plan.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
@@ -383,7 +383,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support the background only: five towers, older routes and the general approach description. They do not provide the five-item preparation list or the packing list; these are editorial suggestions and no guarantee that the day will be climbable."
     }
   ],
   "media": [],

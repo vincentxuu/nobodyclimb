@@ -2,23 +2,34 @@
   "schema_version": 1,
   "article_id": "2154ab57f65bc1aded60ed8d4af84d72",
   "source_sha256": "b26a352f78502bd4a743cd8c7da69dcfc80bce3107044cf1c1c6e5d1c444425a",
-  "evidence_sha256": "90987533daf1a17425c9f446f64d46782fad6241e20bac88cc6d5ff0f45f4d5b",
-  "reviewed_at": "2026-10-12T00:53:34.622148+00:00",
-  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "evidence_sha256": "ad235f0549d8f7cafab8582b372d0e79bdaea55d56f482f2f0c332e371565e8c",
+  "reviewed_at": "2026-10-12T07:55:59+00:00",
+  "reviewer": "Claude 獨立審稿 subagent（editorial 重審 R2；未參與寫稿與本次台帳修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "raw fetch-8 支持石灰岩90–110度、5.11為主、TNT5.10b/夏立ちぬ5.11a/ウッシーⅢ5.12b、11–3月、古螺栓、林道與山徑各15分、停車少與無公廁。"
+      "notes": "本次重新確認：以 curl（瀏覽器 UA，HTTP 200）自行取得 CLIMBING-net 障子岩頁與 ROCKTOPO rocks/206，逐項對照正文——檜原村小沢、石灰岩、傾斜 90~110 度、5.11 台最多（63 條中 36）、通年但夏季狀態差且最佳為 11 月至 3 月、古いボルトに注意、武蔵五日市搭小岩行巴士至神戸岩入口、過第一座橋後林道約 15 分再山道約 15 分、停車空間幾乎沒有、焚火嚴禁、公廁無；ROCKTOPO 登錄 TNT（5.10b）、夏立ちぬ（5.11a）、ウッシーⅢ（5.12b），並載明比該停車點更靠近岩場的道路周邊基本禁止停車、停不了請改用其他岩場。均支持正文，沒有發現數字或限制與來源不符。台帳 source_sha256 等於原稿實際 SHA-256；10 筆 claim 逐字存在於原稿；unverifiable 的 qualification 逐字存在且確實說明未確認。editorial 一筆：主體是先查當日去回巴士、備妥路線圖與交通資料、設定離開岩壁的截止時間、多留找路與整理時間、以現地告示為先，段內沒有數字或規則性的事實主張，改標 editorial 適當；reason 所列背景（巴士、第一橋、林道與山徑、停車極少）與該筆 evidence 文字及我取得的原頁相符，「來源未記載這些做法」屬實，也沒有宣稱正文已標明為編輯建議。未做：未到現地、未目視圖片式 topo、未查任何一天的實際巴士班次、未聯絡管理方；未跑 pnpm blog:check、D1、lint/typecheck，未驗 PR／CI／部署與讀者頁。"
     },
     "translation": {
       "passed": true,
-      "notes": "三語三条grade、11–3月與April外緣、15+15僅參考、神戸觀光點不是同岩場、滿位改地點均一致。"
+      "notes": "本次重讀三語全文並逐段對照：三條路線名與級數、11 月至 3 月與 4 月在適期之外、林道與山徑各約 15 分且僅供參考、神戸岩觀光點不是同一岩場、指定位置停不了就改地點、無公廁與不用火、實際造訪日未確認，三語一致。差異僅在措辭詳略（中文與日文有「重裝備」的條件，英文只寫為找路與裝備多留時間），不影響事實。三語台帳結構一致（10 筆、verdict 與來源相同），claim 為各語原文。中文稿未見簡體字或簡繁轉換錯詞；神戸岩、小沢等為日文地名原文。"
     },
     "editorial": {
       "passed": true,
-      "notes": "讀者範圍、路線/保護、巴士/路徑與停車補給完整且易讀；未指定沒有證據的通用繩長。"
+      "notes": "本次重新確認：讀者範圍、選線與保護、巴士與接近、停車與補給依序交代，沒有虛構親訪體驗；本輪未在正文增加免責句。仍標 confirmed 的各筆都含來源事實（最後一段 remainder 含無公廁與禁火），屬事實與建議混合段落，維持 confirmed 合理。"
     }
   },
-  "findings": []
+  "findings": [
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "台帳內部文字的小瑕疵（讀者看不到）：CLIMBING-net 一筆 evidence 的「停車极少」有一個簡體字；最後一段 remainder 的 reason 沿用舊的通用句（提到「保留替代與返程餘裕」，該段其實沒有這些內容）。不影響判定，下次動到台帳時可一併整理。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "來源另載、正文未寫的細節：ROCKTOPO 的停車點是「障子岩付近の路肩」、可停 2 台；CLIMBING-net 另提醒停車不要造成當地困擾。正文以「指定空間」「滿位就調整」帶過，沒有因省略而誤導，是否補入由編輯決定。"
+    }
+  ]
 }

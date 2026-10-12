@@ -2,34 +2,44 @@
   "schema_version": 1,
   "article_id": "48613c56b82390b44b67702d629eb6ba",
   "source_sha256": "a59893da3a7070d53642c573879116a2b74c16b37913ff408c21fd3e6a633ae7",
-  "evidence_sha256": "f5bd888d9455efecb9c4e801fbba8e02c2706da69949c95c35fde924b33f0126",
-  "reviewed_at": "2026-10-12T06:58:12Z",
-  "reviewer": "Claude 獨立審稿 subagent（claude-opus-5-5；未參與寫稿與本次台帳修改）",
+  "evidence_sha256": "ea3f777a1ff0f7fd3f6508dcdde278a1dd4760dee9613cb8899501ad2ebebbe9",
+  "reviewed_at": "2026-10-12T07:54:11Z",
+  "reviewer": "Claude 獨立審稿 subagent（claude-opus-5-5；未參與寫稿與本次修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "本次重審（2026-10-12）：git diff 確認本篇台帳唯一變動是刪除 limitations 的「尚待未參與寫稿者獨立審查。」，claims、sources、links 未動；該句寫於獨立審查之前，刪除恰當，保留的「未驗當日岩況/服務或交通」仍與正文相符。台帳 source_sha256 與原稿實際 SHA-256 相同。4 筆 unverifiable 的 qualification 逐字存在於原稿，其中段落 7 含「這是一日安排建議，不是當日狀態保證」（en/ja 有對應句）。本次以 curl 抽查：ROCKTOPO areas/108（東京都、チャート、マミ岩中央4級、忍者返し1級、シーズン含4月、玉堂美術館上トイレ前駐車場不可停但トイレ利用可、ナイトボルダー禁止）與 JFA kantou-area/4891（釣り/カヌー/観光共用、不占通路不大聲、刷掉粉痕、ナイトボルダリング/たき火/キャンプ場以外テント泊禁止、寒山寺/御岳交流センター/御岳苑地停車場、御岳駅徒歩1分マウンガ租借墊/刷/鞋），皆與正文相符。未重新查證：マウンガ當日庫存、價格、營業時間，東京出發車次，水位與當日開放狀況（正文已明示未核實）；未實地到場。（2026-10-12 補記：台帳其後僅經 Biome 重新排版，limitations 陣列由多行併為單行；另一位獨立審稿者以程式比對確認 JSON 內容與原核准版本完全相同後更新 evidence_sha256，未重做內容審查。）"
+      "notes": "本次重審（editorial 標記稽核）：git diff 確認本輪變動：en 原稿未改；台帳僅段落 2 由 confirmed 改標 editorial 並改寫 reason，source_sha256 未變且等於原稿實際值。台帳 source_sha256 等於原稿實際 SHA-256；7 筆正文 claim 逐字存在於原稿，3 筆 unverifiable（段落 4、6、7）的 qualification 逐字存在於原稿且確實在說明未核實範圍。editorial 標記（段落 2，三語同一段、同一 reason）：該段主體是適用對象與入門安全建議（誰適合、找熟悉者帶隊、從低而落地易處理的課題開始、不以室內級數推定安全、現場確認落地），沒有數字、費用、時間或「來源說了什麼」的事實主張，改標 editorial 恰當；reason 所稱背景（ROCKTOPO 列為抱石岩區、JFA 記錄河岸多方共用）與該筆 sources 的 evidence 相符，未宣稱正文已標明為編輯建議，語句完整；claim 逐字存在於原稿；三語處理一致。本次以 curl（瀏覽器 User-Agent）重新取得兩個來源頁並對照正文：ROCKTOPO areas/108（東京都、岩質チャート、人気の課題 マミ岩中央（4級）／忍者返し（1級）、シーズン含 4月、「玉堂美術館上のトイレ前駐車場に駐車しないこと。（トイレ利用での駐車は可）」、ナイトボルダーは禁止）與 JFA kantou-area/4891（釣り・カヌー・観光共用、通路を占領しない・大声を出さない、登った後はチョークを落とす、ナイトボルダリング／たき火／キャンプ場以外でのテント泊禁止、寒山寺・御岳交流センター・御岳苑地駐車場、御岳駅徒歩1分マウンガ有ボルダーマット・ブラシ・シューズ租借），皆與正文相符。未重新查證：マウンガ當日庫存、價格、營業時間，東京出發車次與總車程，水位與當日開放狀況（正文已明示未核實）；未實地到場；未重跑台帳 links 的可達性紀錄（僅上述兩頁本次實際取得 HTTP 200）。"
     },
     "translation": {
       "passed": true,
-      "notes": "本次重新逐段對照 zh/en/ja 全文：4級/1級、四月、三處停車場、廁所前停車限制、夜間/生火/營地外搭帳禁止、「未核實」範圍與「不是保證」等否定敘述三語一致，無新增承諾。差異僅為 zh 段落 4 末句「不要搭到站後才把器材有無交給運氣」與段落 5 末句「這些是實際能做的行動」在 en/ja 未譯出，不影響事實或限制。"
+      "notes": "本次重新逐段對照 zh/en/ja 全文：4級/1級、四月、三處停車場、廁所前停車限制、夜間抱石/生火/營地外搭帳禁止、「未核實」範圍與「不是保證」等否定敘述三語一致，無新增承諾。差異（不影響事實或限制）：zh 段落 4 末句「不要搭到站後才把器材有無交給運氣」與段落 5 末句「這些是實際能做的行動」在 en/ja 未譯出；en 段落 1 第二句主詞為「This article」，zh/ja 為 ROCKTOPO 頁；zh「不能拿來整天抱石停車」與 en「not an all-day bouldering stay」多了來源沒有的「整天／all-day」，但兩者同句都寫明僅限廁所使用，ja 改後的寫法最貼近來源。"
     },
     "editorial": {
       "passed": true,
-      "notes": "本次重讀全文：適用對象、課題與器材、共享河岸規則、交通停車與四月安排可獨立閱讀，未假冒親身攀登，編輯示例以「建議示例」與「這是一日安排建議，不是當日狀態保證」標明性質。先前審稿（Codex /root/commit_review）關於台帳 claim/qualification 與正文同步的結論，本次以程式比對 claim 與 qualification 皆逐字存在於原稿，仍成立。"
+      "notes": "本次重讀 en 全文：適用對象、課題與器材、共享河岸規則、交通停車與四月安排可獨立閱讀，未假冒親身攀登，行文自然。"
     }
   },
   "findings": [
     {
       "severity": "blocking",
       "resolved": true,
-      "notes": "先前審稿的必修（台帳 claim/qualification 與正文同步）本次重新確認仍成立：8 筆 claim 中 7 筆正文段落逐字存在於原稿，4 筆 qualification 逐字存在。"
+      "notes": "先前審稿的必修（台帳 claim/qualification 與正文同步）本次以程式重新比對仍成立：8 筆 claim 中 7 筆正文段落逐字存在於原稿（另 1 筆為 title/excerpt 說明），3 筆 qualification 逐字存在。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "先前 advisory「段落 2 全段為適用對象與安全建議卻標 confirmed」已因本輪改標 editorial 而解決；不需在正文補限制句。"
     },
     {
       "severity": "advisory",
       "resolved": false,
-      "notes": "非本次修改範圍：段落 2 全段為適用對象與安全建議、無來源事實，台帳仍標 confirmed（reason 自述「建議…非本站實測、保證或第一手紀錄」）。本輪其他文章的同類段落已改標 unverifiable，是否一致處理請主流程決定；該段沒有可當 qualification 的「編輯建議」句，若要改標需先改原稿。"
+      "notes": "advisory（不擋核准）：段落 3、5 仍標 confirmed，內容為來源事實（級數、JFA 規則）加上編輯建議的混合段，事實是主體，維持 confirmed 可接受；這兩筆與段落 1 的 reason 仍是舊的通用句「段落中來源可讀事實與編輯規劃建議已分開…」，未具體指出哪些是來源事實，可於下次整理時改寫。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "advisory（非本次修改範圍）：zh「不能拿來整天抱石停車」與 en「not an all-day bouldering stay」的「整天／all-day」為來源所無（ROCKTOPO 原文是不可停車、廁所利用除外）；同句已寫明僅限廁所使用，不致誤導，下次改稿可刪去「整天／all-day」。"
     }
   ]
 }

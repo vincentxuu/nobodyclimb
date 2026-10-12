@@ -192,7 +192,7 @@
     {
       "location": "## 解除の確認ができるまで別の候補を残す paragraph 1 — remainder",
       "claim": "現状を答えられる管理側や地元クライミング窓口に確認し、明確な回答がなければ条件の分かる別の場所を選びましょう。変更できない唯一の外岩日にしないことが大切です。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
@@ -215,7 +215,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "本段其餘來源背景已核對；查公告、帶補給、保留替代與返程餘裕是品牌編輯的規劃建議，不冒充實測或管理方規定。"
+      "reason": "CLIMBING-net僅支持背景事實：JFA自2007年4月起的利用自粛記錄與頁面要求確認現況。來源不支持「先向窗口確認、無明確答覆就改排其他場地」這項決策建議本身；此為編輯的備案建議。"
     },
     {
       "location": "## 解除の確認ができるまで別の候補を残す paragraph 2",
@@ -248,7 +248,7 @@
     {
       "location": "## 三つの質問に答えてから装備を決める paragraph 1",
       "claim": "入れる区画、通れるアプローチ、駐車とトイレの場所を別々に確認し、具体的な答えがそろってから選線と装備を計画します。岩場の魅力を知ることと、未解決の条件を旅行案内で覆い隠さないことを両立させましょう。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
@@ -271,7 +271,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+      "reason": "來源僅支持分區、吊橋接近與停車限制等背景事實，未提出「分三個問題、得到具體答案才排路線與裝備」的流程；此行前清單為編輯建議。"
     }
   ],
   "media": [],
@@ -308,7 +308,6 @@
   "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
   "verification_notes": [
     "No cover/body images; no media rights assumptions.",
-    "No self-approved reviews; independent factual/translation/editorial review required.",
     "Future visit permission explicitly qualified.",
     "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
   ]

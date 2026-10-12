@@ -2,122 +2,312 @@
   "schema_version": 1,
   "article_id": "b17a878a6f6cde0a8a599161443c8279",
   "source_sha256": "f1f7e99591d13fe7210b9c5fac96ae0ddaa12671fd38423e2565f294be700a6d",
-  "checked_at": "2026-10-12T00:52:13.807630+00:00",
+  "checked_at": "2026-10-12T07:33:34Z",
   "claims": [
     {
-      "location": "title/excerpt/intro; 導航／Station／駅; 裝備／Equipment／装備",
-      "claim": "道峰山在北漢山東北側、仙人峰花崗岩裂隙；1號線道峰山站不是道峰站；傳統器材依路線",
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場地、攀登類型和決策用途；分類與標籤依戶外旅行主題。仙人峰クライミング：道峰山のクラックへ、アクセスと申請の準備 / 北漢山国立公園の道峰山にある花崗岩クラック。道峰山駅からの方向、岩壁申請、ルートに合わせる準備を整理する。",
       "verdict": "confirmed",
       "sources": [
         {
           "url": "https://www.mountainproject.com/area/119848026/senin-bong-dobongsan",
           "title": "Rock Climbing in Seonin-bong (Dobongsan), Seoul/Gyeonggi-do (Northwest Korea)",
-          "publisher": "Mountain Project 社群",
+          "publisher": "Mountain Project 社群頁（Chan Kim 分享）",
+          "source_date": "2020-11-02",
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線清單（未讀照片說明與留言）。Description：「Seonin-bong is located in Dobongsan, which is located in the northeastern part of Bukhansan National Park. Like Insu-bong, it features high quality, granite climbing. Many consider Seonin-bong to have just as many, if not more quality crack routes than Insu-bong with fewer crowds.」Gear：「I would recommend at least a full rack of cams and some wide gear. 60m rope would suffice but a pull cord/tag line would be very useful.」Getting There：「take the 1 line to Dobongsan train station (도봉산역), take the 1 exit, and make your way west towards Dobongsan/Seonin-bong」；自駕段寫道峰山公營停車場「I think 2 or 3,000 won for 1 hour」，並敘述經石窟庵（석굴암）方向接近最左側路線的走法。路線清單 7 Total Climbs，Leopard (표범) 標示 Trad 6 pitches、5.10c。頁面標示 Shared By Chan Kim on Nov 2, 2020。原連結 slug senin-bong 會轉址到 seonin-bong，同一頁。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        },
+        {
+          "url": "https://www.knps.or.kr/smartsafe/permission/list.do",
+          "title": "스마트워치 상황관제 시스템（암벽이용 신청 서비스）",
+          "publisher": "KNPS 國立公園公團",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "accessed_at": "2026-10-12T07:29:11Z",
           "read_scope": "full",
-          "evidence": "Description identifies northeastern Dobongsan and granite cracks, traditional gear discussion. Getting There specifies line1 Dobongsan station 도봉산역. Community comparison/old uncertain parking/rack quantities omitted.",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "「암벽 이용안내」全文：「예약 가능 날짜: 오늘을 기준으로 3일 뒤부터 최대 30일 뒤까지의 일정을 예약할 수 있습니다. (당일~2일 뒤는 예약 불가)」「새로운 날짜 오픈 시간: 매일 오전 10시가 되면 새로운 예약 날짜(30일 뒤 날짜)가 하루씩 추가로 열립니다.」「신청 인원: … 최소 2명에서 최대 5명까지 … (1명은 신청 불가)」「예약 확정 안내: 신청하신 순서대로(선착순) 확인하며, 늦어도 이용하시기로 한 날의 2일 전까지는 예약 확정 안내 문자를 보내드립니다.」「코스 별 정원 조기 마감에 따라 이용에 제한을 받을 수 있습니다.」「*최종 확인 문자를 받은 신청자에 한해 암벽이용이 가능합니다.」「국립공원 선택」列出계룡산、금정산、무등산、북한산、북한산도봉、설악산、속리산、월악산、월출산、팔공산。公開頁沒有個別岩壁（如선인봉）、各日名額或外籍旅客申請方式的文字；進一步的岩壁與日期選擇需登入，未測。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+      "reason": "標題與摘要的場地定位由 Mountain Project 支持（仙人峰在北漢山國立公園東北部的道峰山、花崗岩裂隙路線、1 號線道峰山站）；「岩壁申請」主題由 KNPS 申請頁支持（國立公園選項含북한산도봉）。「交通、申請與準備」是本文涵蓋範圍的編輯描述；標籤「首爾攀岩」「岩場指南」為站內分類；Mountain Project 頁面標題把此場地歸在 Seoul/Gyeonggi-do。"
     },
     {
-      "location": "國立公園申請／Park application／申請",
-      "claim": "入口含북한산及북한산도봉；3–30日前、10:00新日期、2–5人、最終核准SMS；不等於特定岩壁已許可",
+      "location": "正文段落 1",
+      "claim": "仙人峰（선인봉、Seoninbong）は北漢山国立公園の北東側、道峰山（도봉산）エリアにある。[Mountain Projectの紹介](https://www.mountainproject.com/area/119848026/senin-bong-dobongsan)は花崗岩とクラッククライミングの場として説明している。ソウル旅行でトラッドのマルチピッチを目指すなら、仁寿峰の補足ではなく、独立して調べたい目的地だ。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/119848026/senin-bong-dobongsan",
+          "title": "Rock Climbing in Seonin-bong (Dobongsan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project 社群頁（Chan Kim 分享）",
+          "source_date": "2020-11-02",
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線清單（未讀照片說明與留言）。Description：「Seonin-bong is located in Dobongsan, which is located in the northeastern part of Bukhansan National Park. Like Insu-bong, it features high quality, granite climbing. Many consider Seonin-bong to have just as many, if not more quality crack routes than Insu-bong with fewer crowds.」Gear：「I would recommend at least a full rack of cams and some wide gear. 60m rope would suffice but a pull cord/tag line would be very useful.」Getting There：「take the 1 line to Dobongsan train station (도봉산역), take the 1 exit, and make your way west towards Dobongsan/Seonin-bong」；自駕段寫道峰山公營停車場「I think 2 or 3,000 won for 1 hour」，並敘述經石窟庵（석굴암）方向接近最左側路線的走法。路線清單 7 Total Climbs，Leopard (표범) 標示 Trad 6 pitches、5.10c。頁面標示 Shared By Chan Kim on Nov 2, 2020。原連結 slug senin-bong 會轉址到 seonin-bong，同一頁。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        }
+      ],
+      "reason": "Mountain Project 的 Description 支持：仙人峰在道峰山、道峰山位於北漢山國立公園東北部、花崗岩、裂隙路線；路線清單的 Leopard 標示 Trad 6 pitches，支持「多繩距傳統攀登」這個場地性質。「可作為獨立研究對象，而不是仁壽峰文章裡的附註」是編輯對行程安排的看法，不是來源內容。"
+    },
+    {
+      "location": "正文段落 2",
+      "claim": "同じ花崗岩でも、ルート、下降、交通計画を共有できるわけではない。本稿はアプローチの方向と申請の疑問を整理する。ピッチごとのベータは提供せず、コミュニティの比較を今日の混雑の少なさの保証にも使わない。",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/119848026/senin-bong-dobongsan",
+          "title": "Rock Climbing in Seonin-bong (Dobongsan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project 社群頁（Chan Kim 分享）",
+          "source_date": "2020-11-02",
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線清單（未讀照片說明與留言）。Description：「Seonin-bong is located in Dobongsan, which is located in the northeastern part of Bukhansan National Park. Like Insu-bong, it features high quality, granite climbing. Many consider Seonin-bong to have just as many, if not more quality crack routes than Insu-bong with fewer crowds.」Gear：「I would recommend at least a full rack of cams and some wide gear. 60m rope would suffice but a pull cord/tag line would be very useful.」Getting There：「take the 1 line to Dobongsan train station (도봉산역), take the 1 exit, and make your way west towards Dobongsan/Seonin-bong」；自駕段寫道峰山公營停車場「I think 2 or 3,000 won for 1 hour」，並敘述經石窟庵（석굴암）方向接近最左側路線的走法。路線清單 7 Total Climbs，Leopard (표범) 標示 Trad 6 pitches、5.10c。頁面標示 Shared By Chan Kim on Nov 2, 2020。原連結 slug senin-bong 會轉址到 seonin-bong，同一頁。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        }
+      ],
+      "reason": "本段是編輯的提醒與本文範圍聲明。Mountain Project 只提供背景：它把仙人峰與仁壽峰（Insu-bong）並提為花崗岩場地，並轉述「many consider…fewer crowds」的社群看法。來源沒有比較兩座岩峰的路線、下降或交通，也不能保證當日人潮；正文已明示不提供逐段 beta、不把人氣比較當保證。",
+      "disposition": "qualified",
+      "qualification": "ピッチごとのベータは提供せず、コミュニティの比較を今日の混雑の少なさの保証にも使わない。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "コミュニティの交通案内は1号線の道峰山駅（도봉산역、Dobongsan）を示している。名前の似た道峰駅（도봉역、Dobong）ではない。旅行メモの略称だけに頼らず、韓国語の駅名と岩峰名を保存したい。同ページは駅から道峰山方面への方向を説明しており、最新の曲がり角ごとのナビではない。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/119848026/senin-bong-dobongsan",
+          "title": "Rock Climbing in Seonin-bong (Dobongsan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project 社群頁（Chan Kim 分享）",
+          "source_date": "2020-11-02",
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線清單（未讀照片說明與留言）。Description：「Seonin-bong is located in Dobongsan, which is located in the northeastern part of Bukhansan National Park. Like Insu-bong, it features high quality, granite climbing. Many consider Seonin-bong to have just as many, if not more quality crack routes than Insu-bong with fewer crowds.」Gear：「I would recommend at least a full rack of cams and some wide gear. 60m rope would suffice but a pull cord/tag line would be very useful.」Getting There：「take the 1 line to Dobongsan train station (도봉산역), take the 1 exit, and make your way west towards Dobongsan/Seonin-bong」；自駕段寫道峰山公營停車場「I think 2 or 3,000 won for 1 hour」，並敘述經石窟庵（석굴암）方向接近最左側路線的走法。路線清單 7 Total Climbs，Leopard (표범) 標示 Trad 6 pitches、5.10c。頁面標示 Shared By Chan Kim on Nov 2, 2020。原連結 slug senin-bong 會轉址到 seonin-bong，同一頁。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        },
+        {
+          "url": "https://ko.wikipedia.org/wiki/%EB%8F%84%EB%B4%89%EC%97%AD",
+          "title": "도봉역 - 위키백과, 우리 모두의 백과사전",
+          "publisher": "韓文維基百科",
+          "source_date": "2026-03-07",
+          "accessed_at": "2026-10-12T07:30:35Z",
+          "read_scope": "partial",
+          "evidence": "讀了條目導言、資訊框與相鄰站列表：「도봉역 (道峰驛, Dobong station)은 서울특별시 도봉구 도봉동 에 있는 수도권 전철 1호선 의 전철역 이다.」資訊框列前一站「113 도봉산」、後一站「115 방학」，站間 1.2 km。只用來確認道峰站與道峰山站是 1 號線上相鄰的兩個不同車站，不作交通時刻或出口依據。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        }
+      ],
+      "reason": "Mountain Project 的 Getting There 支持：大眾運輸搭 1 號線到 Dobongsan train station（도봉산역）、1 號出口、往西朝道峰山／仙人峰方向。韓文維基百科支持：道峰站（도봉역，Dobong station）是 1 號線上另一個車站，與道峰山站相鄰。「保存韓文站名與岩峰名稱」是編輯建議；「並非一份最新逐轉彎導航」是編輯對該社群頁（2020 年分享）性質的判斷。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "本稿では現在のアプローチ全体と所要時間を確認できていないため、出発前に管理事務所や仙人峰を知るパートナーへ確認する必要がある。登る線によって取り付きへの判断も異なり、一般登山の山頂までの時間を登攀アプローチに流用できない。車の場合も駐車規則を再確認し、資料中の推測を含む古い駐車料金を現在の料金として扱わない。",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/119848026/senin-bong-dobongsan",
+          "title": "Rock Climbing in Seonin-bong (Dobongsan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project 社群頁（Chan Kim 分享）",
+          "source_date": "2020-11-02",
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線清單（未讀照片說明與留言）。Description：「Seonin-bong is located in Dobongsan, which is located in the northeastern part of Bukhansan National Park. Like Insu-bong, it features high quality, granite climbing. Many consider Seonin-bong to have just as many, if not more quality crack routes than Insu-bong with fewer crowds.」Gear：「I would recommend at least a full rack of cams and some wide gear. 60m rope would suffice but a pull cord/tag line would be very useful.」Getting There：「take the 1 line to Dobongsan train station (도봉산역), take the 1 exit, and make your way west towards Dobongsan/Seonin-bong」；自駕段寫道峰山公營停車場「I think 2 or 3,000 won for 1 hour」，並敘述經石窟庵（석굴암）方向接近最左側路線的走法。路線清單 7 Total Climbs，Leopard (표범) 標示 Trad 6 pitches、5.10c。頁面標示 Shared By Chan Kim on Nov 2, 2020。原連結 slug senin-bong 會轉址到 seonin-bong，同一頁。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        }
+      ],
+      "reason": "本段陳述本文未核實的範圍並給出相應提醒。Mountain Project 只支持背景：該頁有一段個人敘述的接近走法，並以「I think 2 or 3,000 won for 1 hour」的估計語氣寫停車費（2020 年分享）。這次沒有取得管理處對當期接近路線、所需時間或停車規則的說明，正文已明示未確認並請讀者另行查詢。",
+      "disposition": "qualified",
+      "qualification": "本稿では現在のアプローチ全体と所要時間を確認できていないため、出発前に管理事務所や仙人峰を知るパートナーへ確認する必要がある。"
+    },
+    {
+      "location": "正文段落 5",
+      "claim": "[国立公園の岩壁申請入口](https://www.knps.or.kr/smartsafe/permission/list.do)には「북한산도봉」がある。公開ルールでは3日後〜30日後を申請でき、新しい日付は10:00に開放、チームは2〜5人。最終承認のSMSを受けてから岩壁を利用する。宿や交通を決める前に確認し、一人で着いてから現場で許可を取れるとは考えないようにしたい。",
       "verdict": "confirmed",
       "sources": [
         {
           "url": "https://www.knps.or.kr/smartsafe/permission/list.do",
-          "title": "스마트워치 상황관제 시스템",
+          "title": "스마트워치 상황관제 시스템（암벽이용 신청 서비스）",
           "publisher": "KNPS 國立公園公團",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "accessed_at": "2026-10-12T07:29:11Z",
           "read_scope": "full",
-          "evidence": "Public application rules list both park choices, party bounds and advance date window; final approval SMS is required. Dynamic wall/date and foreign-visitor registration have not been tested.",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "「암벽 이용안내」全文：「예약 가능 날짜: 오늘을 기준으로 3일 뒤부터 최대 30일 뒤까지의 일정을 예약할 수 있습니다. (당일~2일 뒤는 예약 불가)」「새로운 날짜 오픈 시간: 매일 오전 10시가 되면 새로운 예약 날짜(30일 뒤 날짜)가 하루씩 추가로 열립니다.」「신청 인원: … 최소 2명에서 최대 5명까지 … (1명은 신청 불가)」「예약 확정 안내: 신청하신 순서대로(선착순) 확인하며, 늦어도 이용하시기로 한 날의 2일 전까지는 예약 확정 안내 문자를 보내드립니다.」「코스 별 정원 조기 마감에 따라 이용에 제한을 받을 수 있습니다.」「*최종 확인 문자를 받은 신청자에 한해 암벽이용이 가능합니다.」「국립공원 선택」列出계룡산、금정산、무등산、북한산、북한산도봉、설악산、속리산、월악산、월출산、팔공산。公開頁沒有個別岩壁（如선인봉）、各日名額或外籍旅客申請方式的文字；進一步的岩壁與日期選擇需登入，未測。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        },
+        {
+          "url": "https://www.knps.or.kr/smartsafe/cms/contents.do?cmsSeq=28",
+          "title": "스마트워치 상황관제 시스템（이용 신청 안내）",
+          "publisher": "KNPS 國立公園公團",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "full",
+          "evidence": "「등반 이용 신청 안내」全文。예약 정책：「이용신청은 매일 30일간(24:00) 오픈, 신청 접수는 오늘 기준으로 3일 이후 자정(24:00)부터 접수 가능」「매일 추가되는 이용일은 오전 10시 이후 신청접수 가능」。등반시작/등반완료 확인 방법：「등반시작 확인 : 이용당일 입산 시 받은 문자의 링크 주소를 통해 등반시작을 확인 합니다. ※ 단, 해당 국립공원 권역에 입산하여 신청자 스마트폰의 GPS(위치조회)가 켜진 상태여야 등반시작 확인을 할 수 있습니다.」「※ 등반시작 확인은 이용일 당일 16시까지 확인 해 주셔야 등반시작 확인 처리 됩니다. ( 16시 이후 등반시작 확인은 불가하며 등반하지 않은 것으로 간주되어 자동으로 부도처리 됩니다.)」「등반완료 확인 : 하산 시 받은 문자의 링크 주소를 통해 등반완료를 확인 합니다.」另有正文未引用的內容：兩日以上於最後一日確認完成；收訊不良可聯絡該國立公園處理；氣象特報或事故可由管理者取消；부도（未報到）1 次停權 1 個月、2 次以上 3 個月。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+      "reason": "KNPS 申請頁支持全部規則事實：國立公園選項含「북한산도봉」；可預約今日起 3 日後至最多 30 日後；每日上午 10 時新增一個日期；每次 2 至 5 人（1 人不可申請）；僅收到最終確認簡訊的申請者可使用岩壁。KNPS 申請說明頁的「예약 정책」與 3 日、10 時兩項一致。「值得在住宿與交通定案前就查清楚」「不能假定單人出發後能在現場補辦」是編輯依上述規則（1 人不可申請、須提前 3 日）給的行程建議。"
     },
     {
-      "location": "最終確認／Final checks／最終確認",
-      "claim": "官方要求核對入山時間制度和步道管制",
-      "verdict": "confirmed",
+      "location": "正文段落 6",
+      "claim": "今回の調査では、予定日の仙人峰の個別岩壁の空き、適用エリア、外国人の申請方法を確認できていないため、先に管理事務所へ問い合わせる必要がある。入口があるだけでは選んだルートの許可を意味せず、天候や当日の規制で計画は変わり得る。[北漢山の公式訪問案内](https://www.knps.or.kr/front/portal/visit/visitCourseSubMain.do?menuNo=7020092&parkId=121500&parkNavGb=guide)も入山時間制度と登山道規制の確認を促している。",
+      "verdict": "unverifiable",
       "sources": [
+        {
+          "url": "https://www.knps.or.kr/smartsafe/permission/list.do",
+          "title": "스마트워치 상황관제 시스템（암벽이용 신청 서비스）",
+          "publisher": "KNPS 國立公園公團",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "full",
+          "evidence": "「암벽 이용안내」全文：「예약 가능 날짜: 오늘을 기준으로 3일 뒤부터 최대 30일 뒤까지의 일정을 예약할 수 있습니다. (당일~2일 뒤는 예약 불가)」「새로운 날짜 오픈 시간: 매일 오전 10시가 되면 새로운 예약 날짜(30일 뒤 날짜)가 하루씩 추가로 열립니다.」「신청 인원: … 최소 2명에서 최대 5명까지 … (1명은 신청 불가)」「예약 확정 안내: 신청하신 순서대로(선착순) 확인하며, 늦어도 이용하시기로 한 날의 2일 전까지는 예약 확정 안내 문자를 보내드립니다.」「코스 별 정원 조기 마감에 따라 이용에 제한을 받을 수 있습니다.」「*최종 확인 문자를 받은 신청자에 한해 암벽이용이 가능합니다.」「국립공원 선택」列出계룡산、금정산、무등산、북한산、북한산도봉、설악산、속리산、월악산、월출산、팔공산。公開頁沒有個別岩壁（如선인봉）、各日名額或外籍旅客申請方式的文字；進一步的岩壁與日期選擇需登入，未測。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        },
         {
           "url": "https://www.knps.or.kr/front/portal/visit/visitCourseSubMain.do?menuNo=7020092&parkId=121500&parkNavGb=guide",
           "title": "코스별난이도 < 북한산국립공원 < 국립공원탐방 < 국립공원공단",
           "publisher": "KNPS 國立公園公團",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
-          "read_scope": "full",
-          "evidence": "Official visitor guide section 탐방전 asks checking 입산시간지정제 and 탐방로 통제현황. Text supplies planning advice, not hardware inspection.",
-          "tool": "Groundlane web_fetch extract=full"
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "partial",
+          "evidence": "北漢山國立公園「코스별난이도／탐방코스」頁，讀了主體文字（選單與頁尾略讀）。「탐방코스」區塊寫明：「탐방전 [입산시간지정제] 및 [탐방로 통제현황] 정보를 꼭 확인 해 주세요.」頁面另列「북한산 도봉 탐방로」地圖與 13 條탐방코스名稱（一般登山路線）；地圖與即時管制內容在圖片或動態元件中，未讀到。頁面沒有關於仙人峰攀岩路線、岩壁申請或固定點的文字。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
-    },
-    {
-      "location": "首次／申請限制",
-      "claim": "外籍登記與当期服務／岩壁名額適用條件尚未驗證",
-      "verdict": "unverifiable",
-      "sources": [],
-      "reason": "公開資料不足以確認特定旅客和指定日期的適用情況；正文明列先詢問再安排。",
+      "reason": "本段主體是未核實範圍的聲明。KNPS 申請頁公開文字只到國立公園層級（북한산도봉）並提到路線名額可能提前額滿，沒有仙人峰個別岩壁、各日名額或外籍旅客申請方式；登入後的選擇畫面未測。末句有來源支持：KNPS 北漢山頁寫「탐방전 [입산시간지정제] 및 [탐방로 통제현황] 정보를 꼭 확인 해 주세요」。「線上有入口不等於路線已被允許」「天候或管制可能改變安排」是編輯提醒；氣象特報可致申請被取消一事另見申請說明頁，但本段未引用。",
       "disposition": "qualified",
       "qualification": "今回の調査では、予定日の仙人峰の個別岩壁の空き、適用エリア、外国人の申請方法を確認できていないため、先に管理事務所へ問い合わせる必要がある。"
     },
     {
-      "location": "申請後當日程序",
-      "claim": "核准不替代16:00前園內GPS簡訊開始確認與離山結束確認",
+      "location": "正文段落 7",
+      "claim": "承認後には当日の確認手続きもある。[公式申請説明](https://www.knps.or.kr/smartsafe/cms/contents.do?cmsSeq=28)では、公園内でSMSのリンクとGPSを使って16:00前に登攀開始を確認し、下山時にも終了確認を行う必要がある。承認SMSを保存するだけでは開始・終了の手続きの代わりにならない。申請時に管理事務所へ詳細を確認したい。",
       "verdict": "confirmed",
       "sources": [
         {
           "url": "https://www.knps.or.kr/smartsafe/cms/contents.do?cmsSeq=28",
-          "title": "스마트워치 상황관제 시스템",
+          "title": "스마트워치 상황관제 시스템（이용 신청 안내）",
           "publisher": "KNPS 國立公園公團",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:55:34.481854+00:00",
+          "accessed_at": "2026-10-12T07:29:11Z",
           "read_scope": "full",
-          "evidence": "申請說明當日登攀確認：簡訊連結、園內GPS、16:00前開始確認，離山完成確認；未確認可視為未使用。",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "「등반 이용 신청 안내」全文。예약 정책：「이용신청은 매일 30일간(24:00) 오픈, 신청 접수는 오늘 기준으로 3일 이후 자정(24:00)부터 접수 가능」「매일 추가되는 이용일은 오전 10시 이후 신청접수 가능」。등반시작/등반완료 확인 방법：「등반시작 확인 : 이용당일 입산 시 받은 문자의 링크 주소를 통해 등반시작을 확인 합니다. ※ 단, 해당 국립공원 권역에 입산하여 신청자 스마트폰의 GPS(위치조회)가 켜진 상태여야 등반시작 확인을 할 수 있습니다.」「※ 등반시작 확인은 이용일 당일 16시까지 확인 해 주셔야 등반시작 확인 처리 됩니다. ( 16시 이후 등반시작 확인은 불가하며 등반하지 않은 것으로 간주되어 자동으로 부도처리 됩니다.)」「등반완료 확인 : 하산 시 받은 문자의 링크 주소를 통해 등반완료를 확인 합니다.」另有正文未引用的內容：兩日以上於最後一日確認完成；收訊不良可聯絡該國立公園處理；氣象特報或事故可由管理者取消；부도（未報到）1 次停權 1 個月、2 次以上 3 個月。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
         }
       ],
-      "reason": "已讀完整申請說明對應段落；限定外籍適用細節仍需管理處確認。"
+      "reason": "KNPS 申請說明頁支持：使用當日入山時透過簡訊連結確認攀登開始，須已進入該國立公園範圍且手機 GPS 開啟；須於當日 16 時前（原文「16시까지」）完成，逾時視為未攀登並自動記為未報到；下山時透過簡訊連結確認攀登完成。「不能只保留核准簡訊就略過報到與離山程序；細節請在申請時向管理處確認」是編輯依上述規則的提醒。"
+    },
+    {
+      "location": "正文段落 8",
+      "claim": "コミュニティの紹介にはクラックとトラッドのプロテクションが出てくる。岩場の性格を理解する資料にはなるが、全ルート共通のラック一覧にはできない。目標の線の最新トポを入手し、ピッチ長、固定支点、自分で設置する支点、ビレイ点、下降を確認しよう。ロープ長、下降回数、撤退できる地点も一緒に話し合ってから装備を選ぶ。",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/119848026/senin-bong-dobongsan",
+          "title": "Rock Climbing in Seonin-bong (Dobongsan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project 社群頁（Chan Kim 分享）",
+          "source_date": "2020-11-02",
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線清單（未讀照片說明與留言）。Description：「Seonin-bong is located in Dobongsan, which is located in the northeastern part of Bukhansan National Park. Like Insu-bong, it features high quality, granite climbing. Many consider Seonin-bong to have just as many, if not more quality crack routes than Insu-bong with fewer crowds.」Gear：「I would recommend at least a full rack of cams and some wide gear. 60m rope would suffice but a pull cord/tag line would be very useful.」Getting There：「take the 1 line to Dobongsan train station (도봉산역), take the 1 exit, and make your way west towards Dobongsan/Seonin-bong」；自駕段寫道峰山公營停車場「I think 2 or 3,000 won for 1 hour」，並敘述經石窟庵（석굴암）方向接近最左側路線的走法。路線清單 7 Total Climbs，Leopard (표범) 標示 Trad 6 pitches、5.10c。頁面標示 Shared By Chan Kim on Nov 2, 2020。原連結 slug senin-bong 會轉址到 seonin-bong，同一頁。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        }
+      ],
+      "reason": "本段是編輯建議的準備順序。Mountain Project 只支持首句的背景：社群頁談到裂隙路線，並建議 full rack of cams、wide gear 與 60m 繩，屬個人建議。取得最新 topo、確認各段長度、固定點、確保站、下降與撤退位置等做法是編輯建議，來源沒有這些內容。"
+    },
+    {
+      "location": "正文段落 9",
+      "claim": "室内リードができても、クラックの支点やマルチピッチ下降を判断できないなら、低いグレードだけではその差は埋まらない。現地を知る案内者に登攀とビレイの経験を伝え、可能な活動を相談したい。本稿では商業ガイドの提供状況、料金、資格を検証しておらず、予約を保証しない。",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/119848026/senin-bong-dobongsan",
+          "title": "Rock Climbing in Seonin-bong (Dobongsan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project 社群頁（Chan Kim 分享）",
+          "source_date": "2020-11-02",
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線清單（未讀照片說明與留言）。Description：「Seonin-bong is located in Dobongsan, which is located in the northeastern part of Bukhansan National Park. Like Insu-bong, it features high quality, granite climbing. Many consider Seonin-bong to have just as many, if not more quality crack routes than Insu-bong with fewer crowds.」Gear：「I would recommend at least a full rack of cams and some wide gear. 60m rope would suffice but a pull cord/tag line would be very useful.」Getting There：「take the 1 line to Dobongsan train station (도봉산역), take the 1 exit, and make your way west towards Dobongsan/Seonin-bong」；自駕段寫道峰山公營停車場「I think 2 or 3,000 won for 1 hour」，並敘述經石窟庵（석굴암）方向接近最左側路線的走法。路線清單 7 Total Climbs，Leopard (표범) 標示 Trad 6 pitches、5.10c。頁面標示 Shared By Chan Kim on Nov 2, 2020。原連結 slug senin-bong 會轉址到 seonin-bong，同一頁。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        }
+      ],
+      "reason": "本段是編輯對「會室內先鋒但不熟裂隙保護與多繩距下降」讀者的建議，並聲明未查證商業帶領服務。Mountain Project 只支持場地屬裂隙、傳統保護、多繩距這個背景；找有當地經驗的帶領者、由雙方確認活動內容是編輯建議，來源沒有這些內容，也沒有帶領服務的供應、價格或資格資訊。"
+    },
+    {
+      "location": "正文段落 10",
+      "claim": "申請とアプローチが明らかになり、チームがルートと下降を扱えるとき、仙人峰は希望の名前から実行可能な山の一日になる。移動、アプローチ、登攀、下山まで一日として確保し、天候悪化や遅れの代替案も共有しよう。市内観光の半日に無理にマルチピッチを詰め込まない。",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/119848026/senin-bong-dobongsan",
+          "title": "Rock Climbing in Seonin-bong (Dobongsan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project 社群頁（Chan Kim 分享）",
+          "source_date": "2020-11-02",
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線清單（未讀照片說明與留言）。Description：「Seonin-bong is located in Dobongsan, which is located in the northeastern part of Bukhansan National Park. Like Insu-bong, it features high quality, granite climbing. Many consider Seonin-bong to have just as many, if not more quality crack routes than Insu-bong with fewer crowds.」Gear：「I would recommend at least a full rack of cams and some wide gear. 60m rope would suffice but a pull cord/tag line would be very useful.」Getting There：「take the 1 line to Dobongsan train station (도봉산역), take the 1 exit, and make your way west towards Dobongsan/Seonin-bong」；自駕段寫道峰山公營停車場「I think 2 or 3,000 won for 1 hour」，並敘述經石窟庵（석굴암）方向接近最左側路線的走法。路線清單 7 Total Climbs，Leopard (표범) 標示 Trad 6 pitches、5.10c。頁面標示 Shared By Chan Kim on Nov 2, 2020。原連結 slug senin-bong 會轉址到 seonin-bong，同一頁。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        },
+        {
+          "url": "https://www.knps.or.kr/smartsafe/permission/list.do",
+          "title": "스마트워치 상황관제 시스템（암벽이용 신청 서비스）",
+          "publisher": "KNPS 國立公園公團",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:11Z",
+          "read_scope": "full",
+          "evidence": "「암벽 이용안내」全文：「예약 가능 날짜: 오늘을 기준으로 3일 뒤부터 최대 30일 뒤까지의 일정을 예약할 수 있습니다. (당일~2일 뒤는 예약 불가)」「새로운 날짜 오픈 시간: 매일 오전 10시가 되면 새로운 예약 날짜(30일 뒤 날짜)가 하루씩 추가로 열립니다.」「신청 인원: … 최소 2명에서 최대 5명까지 … (1명은 신청 불가)」「예약 확정 안내: 신청하신 순서대로(선착순) 확인하며, 늦어도 이용하시기로 한 날의 2일 전까지는 예약 확정 안내 문자를 보내드립니다.」「코스 별 정원 조기 마감에 따라 이용에 제한을 받을 수 있습니다.」「*최종 확인 문자를 받은 신청자에 한해 암벽이용이 가능합니다.」「국립공원 선택」列出계룡산、금정산、무등산、북한산、북한산도봉、설악산、속리산、월악산、월출산、팔공산。公開頁沒有個別岩壁（如선인봉）、各日名額或外籍旅客申請方式的文字；進一步的岩壁與日期選擇需登入，未測。",
+          "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀"
+        }
+      ],
+      "reason": "本段是編輯的排程建議。來源只支持背景：KNPS 申請頁說明岩壁須事先申請，Mountain Project 顯示場地有多繩距路線且需步行接近。留整天、預訂替代方案、不塞進半天市區行程是編輯建議，來源沒有這些內容。"
+    },
+    {
+      "location": "正文段落 11",
+      "claim": "公開資料の確認日は2026年10月12日。コミュニティの説明は登攀当日の現地検査ではなく、NobodyClimbが実登して検証したものでもない。次の具体的な一歩は、日付、チーム、目標ルートを管理事務所と現地のパートナーへ伝えて確認することだ。",
+      "verdict": "unverifiable",
+      "sources": [],
+      "reason": "本段是查證日期與未驗範圍的揭露，沒有外部來源可支持。公開資料確於 2026-10-12 重新讀取（見各來源 accessed_at）；本文未做現場檢查或實爬，正文已明示。末句是編輯建議的下一步。",
+      "disposition": "qualified",
+      "qualification": "コミュニティの説明は登攀当日の現地検査ではなく、NobodyClimbが実登して検証したものでもない。"
     }
   ],
   "links": [
     {
       "url": "https://www.mountainproject.com/area/119848026/senin-bong-dobongsan",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:29:11Z",
+      "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀",
       "status": "reachable",
       "status_code": 200,
-      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+      "reason": "HTTP 200；經 slug 轉址到 /area/119848026/seonin-bong-dobongsan，仍是仙人峰（道峰山）場地頁，內容與引用段落相符。"
     },
     {
       "url": "https://www.knps.or.kr/smartsafe/permission/list.do",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:29:11Z",
+      "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀",
       "status": "reachable",
       "status_code": 200,
-      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+      "reason": "HTTP 200；KNPS 岩壁使用申請服務頁，公開文字含申請規則與國立公園選項。"
     },
     {
       "url": "https://www.knps.or.kr/front/portal/visit/visitCourseSubMain.do?menuNo=7020092&parkId=121500&parkNavGb=guide",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:29:11Z",
+      "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀",
       "status": "reachable",
       "status_code": 200,
-      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+      "reason": "HTTP 200；KNPS 北漢山國立公園路線頁，含入山時間指定制與步道管制提醒。"
     },
     {
       "url": "https://www.knps.or.kr/smartsafe/cms/contents.do?cmsSeq=28",
-      "checked_at": "2026-10-12T00:55:34.481854+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:29:11Z",
+      "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀",
       "status": "reachable",
       "status_code": 200,
-      "reason": "官方頁200全文，申請說明對應當日確認程序。"
+      "reason": "HTTP 200；KNPS 岩壁使用申請說明頁，含預約政策與攀登開始／完成確認方法。"
+    },
+    {
+      "url": "https://ko.wikipedia.org/wiki/%EB%8F%84%EB%B4%89%EC%97%AD",
+      "checked_at": "2026-10-12T07:30:35Z",
+      "tool": "curl -sL（桌面瀏覽器 User-Agent），本機轉純文字後閱讀",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "HTTP 200；韓文維基百科「도봉역」條目，僅作為台帳來源，正文未連結。"
     }
   ],
   "media": [],

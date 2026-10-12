@@ -2,88 +2,297 @@
   "schema_version": 1,
   "article_id": "2e54298c1999d880d7aae65162a88774",
   "source_sha256": "f2bbb7184c65ea0666796f1e3b13dbea7186fdd28dccad8055cb5992d2cd0124",
-  "checked_at": "2026-10-12T00:52:13.807630+00:00",
+  "checked_at": "2026-10-12T07:31:18Z",
   "claims": [
     {
-      "location": "title/excerpt/intro; 地址／Address／住所",
-      "claim": "B弘大店2026-05-17閉店；延南店楊花路186三樓LC TOWER、02-2088-5071；旧弘大125",
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場館、分店辨識與決策用途；分類與標籤依首爾室內岩館主題。The Climb 延南店：店舗を確認してソウルのボルダー利用を計画 / 旧弘大店は閉店告知済み。延南店の所在地、公開営業時間、日帰り利用料金と初回確認事項をまとめる。",
       "verdict": "confirmed",
       "sources": [
         {
           "url": "http://theclimb.co.kr/branch/",
           "title": "branch | theclimb",
-          "publisher": "The Climb",
+          "publisher": "The Climb（더월클라이밍(주)）",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
-          "read_scope": "partial",
-          "evidence": "Branch footer explicitly dates Hongdae closure and lists separate Yeonnam address, floor and telephone; no first-hand visit claimed. Exa回傳於末段截斷；已讀支持Hongdae閉店與Yeonnam地址電話的段落，不宣稱整頁全文。",
-          "tool": "Exa MCP fetch after Groundlane bounded request failed"
-        }
-      ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
-    },
-    {
-      "location": "營業時間／Hours／営業時間",
-      "claim": "延南店平日07–24、土日祝08–22；品牌介紹為抱石與換線；非當日全壁可用保證",
-      "verdict": "confirmed",
-      "sources": [
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "韓文分店頁。연남점分頁：「서울특별시 마포구 양화로 186 3층 (LC TOWER)」、運營時間「평일 : 07:00~24:00」「토요일 , 일요일 , 공휴일 : 08:00~22:00」、電話 02-2088-5071。頁尾分店清單：「더클라임 클라이밍 B 홍대점 (26.05.17 폐점)」「서울 마포구 양화로 125 경남관광빌딩 2층 02.332.5014」；「더클라임 클라이밍 연남점 400평 규모의 클라이밍 짐 서울특별시 마포구 양화로 186 3층 (LC TOWER) 02.2088.5071」。同頁另列其他十家分店，以及서울대점（25.06.15 폐점）、신사점（26.06.28 폐점）。頁面未列車站出口步行時間（延南店）、登記流程、課程語言或名額。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        },
         {
           "url": "http://theclimb.co.kr/english/",
           "title": "Korea Climbing gym | theclimb",
-          "publisher": "The Climb",
+          "publisher": "The Climb（더월클라이밍(주)）",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "accessed_at": "2026-10-12T07:29:56Z",
           "read_scope": "full",
-          "evidence": "English page Yeonnam block lists address and hours before THECLIMB Yeonnam heading, matching branch footer. Brand introduction discusses bouldering setting.",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "英文頁。品牌介紹：「We are setting new bouldering problems every week.」。價目（未分店別）：「DAY PASS … 22,000 WON」「CLIMBING SHOES... 3,000WON」「CHALK...1,000WON」「Equipment can be rented at the front desk upon arrival.」；另列「10 - TIME PASSES ₩170,000」「5 - TIME PASSES ₩90,000」，皆「Valid 12 months from purchase」。THECLIMB Yeonnam 區塊：「3rd Floor 186, Yanghwa-ro, Mapo-gu, Seoul」「Monday ~ Friday 07:00~24:00」「Sat , Sun & Holiday 08:00~22:00」「02-2088-5071」。同頁仍保留 Sinsa 分店區塊，而頁尾清單標示신사점（26.06.28 폐점）、B 홍대점（26.05.17 폐점）。頁面沒有顏色分級表、初次登記流程、課程語言或名額資訊。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+      "reason": "分店頁支持舊 B 弘大店標示 26.05.17 閉店、延南店位於楊花路 186 三樓；英文頁支持營業時間與日票價目的存在。標題的「先分清分店」與摘要的「首次造訪要問的事項」是編輯的篇章安排；分類 gyms 與標籤依首爾室內岩館主題。"
     },
     {
-      "location": "日票／Day pass／日帰り料金",
-      "claim": "公開共通價目日票22000、鞋3000、粉1000韓元；合計25000或26000；當日延南適用價格待櫃檯確認",
+      "location": "正文段落 1",
+      "claim": "ソウル旅行のメモでは、The Climbが「弘大」とまとめられていることがある。しかし周辺の街の名前だけでは店舗を特定できない。[公式店舗情報](http://theclimb.co.kr/branch/)ではB弘大店が2026年5月17日閉店と記載されている。現在の計画では旧店の住所を使わず、延南店（연남점）を確認したい。",
       "verdict": "confirmed",
       "sources": [
         {
-          "url": "http://theclimb.co.kr/english/",
-          "title": "Korea Climbing gym | theclimb",
-          "publisher": "The Climb",
+          "url": "http://theclimb.co.kr/branch/",
+          "title": "branch | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "accessed_at": "2026-10-12T07:29:56Z",
           "read_scope": "full",
-          "evidence": "English DAY PASS and GEAR RENTAL sections. 22000+3000=25000 and +1000=26000 exclude instruction/extras. Same page retains older closed-branch blocks; text limits budget status rather than guarantees charged price.",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "韓文分店頁。연남점分頁：「서울특별시 마포구 양화로 186 3층 (LC TOWER)」、運營時間「평일 : 07:00~24:00」「토요일 , 일요일 , 공휴일 : 08:00~22:00」、電話 02-2088-5071。頁尾分店清單：「더클라임 클라이밍 B 홍대점 (26.05.17 폐점)」「서울 마포구 양화로 125 경남관광빌딩 2층 02.332.5014」；「더클라임 클라이밍 연남점 400평 규모의 클라이밍 짐 서울특별시 마포구 양화로 186 3층 (LC TOWER) 02.2088.5071」。同頁另列其他十家分店，以及서울대점（25.06.15 폐점）、신사점（26.06.28 폐점）。頁面未列車站出口步行時間（延南店）、登記流程、課程語言或名額。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+      "reason": "來源事實：分店頁頁尾將 B 弘大店標為「26.05.17 폐점」，並另列延南店（연남점）。「旅遊筆記常把 The Climb 與弘大放在一起」是編輯對常見寫法的描述，「應確認延南店而非沿用舊地址」是編輯建議，兩者不由來源支持。"
     },
     {
-      "location": "首次／申請限制",
-      "claim": "外籍登記與当期服務／岩壁名額適用條件尚未驗證",
+      "location": "正文段落 2",
+      "claim": "本稿は延南店だけを対象に、2026年10月12日に読めた公式情報を整理する。チェーン全体の設備や講習、営業状況を一つの店舗の情報として扱わない。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/branch/",
+          "title": "branch | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "韓文分店頁。연남점分頁：「서울특별시 마포구 양화로 186 3층 (LC TOWER)」、運營時間「평일 : 07:00~24:00」「토요일 , 일요일 , 공휴일 : 08:00~22:00」、電話 02-2088-5071。頁尾分店清單：「더클라임 클라이밍 B 홍대점 (26.05.17 폐점)」「서울 마포구 양화로 125 경남관광빌딩 2층 02.332.5014」；「더클라임 클라이밍 연남점 400평 규모의 클라이밍 짐 서울특별시 마포구 양화로 186 3층 (LC TOWER) 02.2088.5071」。同頁另列其他十家分店，以及서울대점（25.06.15 폐점）、신사점（26.06.28 폐점）。頁面未列車站出口步行時間（延南店）、登記流程、課程語言或名額。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        },
+        {
+          "url": "http://theclimb.co.kr/english/",
+          "title": "Korea Climbing gym | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "英文頁。品牌介紹：「We are setting new bouldering problems every week.」。價目（未分店別）：「DAY PASS … 22,000 WON」「CLIMBING SHOES... 3,000WON」「CHALK...1,000WON」「Equipment can be rented at the front desk upon arrival.」；另列「10 - TIME PASSES ₩170,000」「5 - TIME PASSES ₩90,000」，皆「Valid 12 months from purchase」。THECLIMB Yeonnam 區塊：「3rd Floor 186, Yanghwa-ro, Mapo-gu, Seoul」「Monday ~ Friday 07:00~24:00」「Sat , Sun & Holiday 08:00~22:00」「02-2088-5071」。同頁仍保留 Sinsa 分店區塊，而頁尾清單標示신사점（26.06.28 폐점）、B 홍대점（26.05.17 폐점）。頁面沒有顏色分級表、初次登記流程、課程語言或名額資訊。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        }
+      ],
+      "reason": "本段說明本文範圍。兩個官方頁面皆於 2026-10-12 讀取；兩頁都同時列出十餘家分店，本文只取延南店區塊，未把其他分店資訊併入。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "延南店はソウル麻浦区楊花路186、LC TOWERの3階。韓国語住所「서울특별시 마포구 양화로 186 3층」と公式電話02-2088-5071を保存しておこう。現地の地図で住所と연남점を一緒に入力し、目的地を確認する。閉店した弘大店の楊花路125へ向かわないようにしたい。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/branch/",
+          "title": "branch | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "韓文分店頁。연남점分頁：「서울특별시 마포구 양화로 186 3층 (LC TOWER)」、運營時間「평일 : 07:00~24:00」「토요일 , 일요일 , 공휴일 : 08:00~22:00」、電話 02-2088-5071。頁尾分店清單：「더클라임 클라이밍 B 홍대점 (26.05.17 폐점)」「서울 마포구 양화로 125 경남관광빌딩 2층 02.332.5014」；「더클라임 클라이밍 연남점 400평 규모의 클라이밍 짐 서울특별시 마포구 양화로 186 3층 (LC TOWER) 02.2088.5071」。同頁另列其他十家分店，以及서울대점（25.06.15 폐점）、신사점（26.06.28 폐점）。頁面未列車站出口步行時間（延南店）、登記流程、課程語言或名額。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        },
+        {
+          "url": "http://theclimb.co.kr/english/",
+          "title": "Korea Climbing gym | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "英文頁。品牌介紹：「We are setting new bouldering problems every week.」。價目（未分店別）：「DAY PASS … 22,000 WON」「CLIMBING SHOES... 3,000WON」「CHALK...1,000WON」「Equipment can be rented at the front desk upon arrival.」；另列「10 - TIME PASSES ₩170,000」「5 - TIME PASSES ₩90,000」，皆「Valid 12 months from purchase」。THECLIMB Yeonnam 區塊：「3rd Floor 186, Yanghwa-ro, Mapo-gu, Seoul」「Monday ~ Friday 07:00~24:00」「Sat , Sun & Holiday 08:00~22:00」「02-2088-5071」。同頁仍保留 Sinsa 分店區塊，而頁尾清單標示신사점（26.06.28 폐점）、B 홍대점（26.05.17 폐점）。頁面沒有顏色分級表、初次登記流程、課程語言或名額資訊。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        }
+      ],
+      "reason": "來源事實：分店頁列延南店「서울특별시 마포구 양화로 186 3층 (LC TOWER)」與電話 02-2088-5071，並列已閉店的 B 弘大店在楊花路 125；英文頁延南區塊列 3rd Floor 186, Yanghwa-ro, Mapo-gu 與同一電話。把地址與「연남점」一起輸入地圖核對是編輯建議，非來源內容。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "本稿では駅の各出口からの徒歩時間を検証していないため、数分で到着できるとは約束しない。宿からの移動には乗り換え、建物入口の確認、初回受付を加える。遅い時間に着くなら、繁華街との近さだけでなく、実際に登れる時間がどれだけ残るかを考えよう。",
       "verdict": "unverifiable",
-      "sources": [],
-      "reason": "公開資料不足以確認特定旅客和指定日期的適用情況；正文明列先詢問再安排。",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/branch/",
+          "title": "branch | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "韓文分店頁。연남점分頁：「서울특별시 마포구 양화로 186 3층 (LC TOWER)」、運營時間「평일 : 07:00~24:00」「토요일 , 일요일 , 공휴일 : 08:00~22:00」、電話 02-2088-5071。頁尾分店清單：「더클라임 클라이밍 B 홍대점 (26.05.17 폐점)」「서울 마포구 양화로 125 경남관광빌딩 2층 02.332.5014」；「더클라임 클라이밍 연남점 400평 규모의 클라이밍 짐 서울특별시 마포구 양화로 186 3층 (LC TOWER) 02.2088.5071」。同頁另列其他十家分店，以及서울대점（25.06.15 폐점）、신사점（26.06.28 폐점）。頁面未列車站出口步行時間（延南店）、登記流程、課程語言或名額。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        }
+      ],
+      "reason": "本段陳述未驗範圍：分店頁的延南店區塊沒有車站出口或步行時間資訊，本文也未另行查證；段內把轉乘、找入口、報到算進行程的做法是由此衍生的編輯規劃建議，來源不支持建議本身。",
+      "disposition": "qualified",
+      "qualification": "本稿では駅の各出口からの徒歩時間を検証していないため、数分で到着できるとは約束しない。"
+    },
+    {
+      "location": "正文段落 5",
+      "claim": "[公式英語ページ](http://theclimb.co.kr/english/)の延南店欄は平日07:00–24:00、土日祝08:00–22:00。同ページのブランド紹介にはボルダーや課題の更新があるが、特定の日に延南店の全壁が使える保証や、個々の課題の難易度保証ではない。イベント、セット、特別営業時間の有無は旅行前に確認したい。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/english/",
+          "title": "Korea Climbing gym | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "英文頁。品牌介紹：「We are setting new bouldering problems every week.」。價目（未分店別）：「DAY PASS … 22,000 WON」「CLIMBING SHOES... 3,000WON」「CHALK...1,000WON」「Equipment can be rented at the front desk upon arrival.」；另列「10 - TIME PASSES ₩170,000」「5 - TIME PASSES ₩90,000」，皆「Valid 12 months from purchase」。THECLIMB Yeonnam 區塊：「3rd Floor 186, Yanghwa-ro, Mapo-gu, Seoul」「Monday ~ Friday 07:00~24:00」「Sat , Sun & Holiday 08:00~22:00」「02-2088-5071」。同頁仍保留 Sinsa 分店區塊，而頁尾清單標示신사점（26.06.28 폐점）、B 홍대점（26.05.17 폐점）。頁面沒有顏色分級表、初次登記流程、課程語言或名額資訊。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        },
+        {
+          "url": "http://theclimb.co.kr/branch/",
+          "title": "branch | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "韓文分店頁。연남점分頁：「서울특별시 마포구 양화로 186 3층 (LC TOWER)」、運營時間「평일 : 07:00~24:00」「토요일 , 일요일 , 공휴일 : 08:00~22:00」、電話 02-2088-5071。頁尾分店清單：「더클라임 클라이밍 B 홍대점 (26.05.17 폐점)」「서울 마포구 양화로 125 경남관광빌딩 2층 02.332.5014」；「더클라임 클라이밍 연남점 400평 규모의 클라이밍 짐 서울특별시 마포구 양화로 186 3층 (LC TOWER) 02.2088.5071」。同頁另列其他十家分店，以及서울대점（25.06.15 폐점）、신사점（26.06.28 폐점）。頁面未列車站出口步行時間（延南店）、登記流程、課程語言或名額。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        }
+      ],
+      "reason": "來源事實：英文頁延南區塊與分店頁延南分頁皆列平日 07:00–24:00、週末及假日 08:00–22:00；英文頁品牌介紹提到每週設定新的抱石路線。「不等於保證每面牆可用或個別路線難度」是編輯對來源適用範圍的限制，「旅行前詢問活動、換線或特殊營業」是編輯建議。"
+    },
+    {
+      "location": "正文段落 6",
+      "claim": "普段からボルダーをする人も、スタート、ゴール、色、着地エリアのルールを聞き、易しい課題で慣れるところから始めよう。別のジムの色を自分の慣れたVグレードへ直接換算しない。これは利用計画の助言であり、未確認の色別グレード表は掲載しない。初めての人は体験講習が必要か、予約が必要か、理解できる言語で説明を受けられるかを先に尋ねたい。",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/english/",
+          "title": "Korea Climbing gym | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "英文頁。品牌介紹：「We are setting new bouldering problems every week.」。價目（未分店別）：「DAY PASS … 22,000 WON」「CLIMBING SHOES... 3,000WON」「CHALK...1,000WON」「Equipment can be rented at the front desk upon arrival.」；另列「10 - TIME PASSES ₩170,000」「5 - TIME PASSES ₩90,000」，皆「Valid 12 months from purchase」。THECLIMB Yeonnam 區塊：「3rd Floor 186, Yanghwa-ro, Mapo-gu, Seoul」「Monday ~ Friday 07:00~24:00」「Sat , Sun & Holiday 08:00~22:00」「02-2088-5071」。同頁仍保留 Sinsa 分店區塊，而頁尾清單標示신사점（26.06.28 폐점）、B 홍대점（26.05.17 폐점）。頁面沒有顏色分級表、初次登記流程、課程語言或名額資訊。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        }
+      ],
+      "reason": "本段為編輯給抱石者與初學者的入館建議。來源只支持品牌經營抱石並每週換線這項背景，沒有顏色分級、起終點規則、體驗課是否必要或語言支援的資訊，不支持建議本身。"
+    },
+    {
+      "location": "正文段落 7",
+      "claim": "英語ページの共通料金表には1日券22,000ウォン、シューズ3,000ウォン、チョーク1,000ウォンとある。券とシューズで25,000ウォン、チョークも借りれば26,000ウォンという計算になる。別売りの講習や追加サービスは含まない。英語ページには閉店した店舗の古い欄も残っているため、この金額は確認日の予算目安とし、延南店で当日適用される料金は受付に確認する。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/english/",
+          "title": "Korea Climbing gym | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "英文頁。品牌介紹：「We are setting new bouldering problems every week.」。價目（未分店別）：「DAY PASS … 22,000 WON」「CLIMBING SHOES... 3,000WON」「CHALK...1,000WON」「Equipment can be rented at the front desk upon arrival.」；另列「10 - TIME PASSES ₩170,000」「5 - TIME PASSES ₩90,000」，皆「Valid 12 months from purchase」。THECLIMB Yeonnam 區塊：「3rd Floor 186, Yanghwa-ro, Mapo-gu, Seoul」「Monday ~ Friday 07:00~24:00」「Sat , Sun & Holiday 08:00~22:00」「02-2088-5071」。同頁仍保留 Sinsa 分店區塊，而頁尾清單標示신사점（26.06.28 폐점）、B 홍대점（26.05.17 폐점）。頁面沒有顏色分級表、初次登記流程、課程語言或名額資訊。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        },
+        {
+          "url": "http://theclimb.co.kr/branch/",
+          "title": "branch | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "韓文分店頁。연남점分頁：「서울특별시 마포구 양화로 186 3층 (LC TOWER)」、運營時間「평일 : 07:00~24:00」「토요일 , 일요일 , 공휴일 : 08:00~22:00」、電話 02-2088-5071。頁尾分店清單：「더클라임 클라이밍 B 홍대점 (26.05.17 폐점)」「서울 마포구 양화로 125 경남관광빌딩 2층 02.332.5014」；「더클라임 클라이밍 연남점 400평 규모의 클라이밍 짐 서울특별시 마포구 양화로 186 3층 (LC TOWER) 02.2088.5071」。同頁另列其他十家分店，以及서울대점（25.06.15 폐점）、신사점（26.06.28 폐점）。頁面未列車站出口步行時間（延南店）、登記流程、課程語言或名額。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        }
+      ],
+      "reason": "來源事實：英文頁列 DAY PASS 22,000 WON、CLIMBING SHOES 3,000WON、CHALK 1,000WON，價目未分店別；同頁仍保留 Sinsa 分店區塊，而分店頁頁尾標示신사점 26.06.28 폐점。22,000+3,000=25,000、再加 1,000=26,000 是本文依公開價目的加總。「只作查核日預算參考、當日價格向櫃檯確認」是編輯的限制說明。"
+    },
+    {
+      "location": "正文段落 8",
+      "claim": "自分のシューズを持参すればレンタルの必要が減る。借りるならサイズと利用ルールを受付で聞こう。1回あたりが安く見えるだけで回数券を買わず、短期滞在では有効期限、本人利用の条件、実際の来店回数を先に確認したい。",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/english/",
+          "title": "Korea Climbing gym | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "英文頁。品牌介紹：「We are setting new bouldering problems every week.」。價目（未分店別）：「DAY PASS … 22,000 WON」「CLIMBING SHOES... 3,000WON」「CHALK...1,000WON」「Equipment can be rented at the front desk upon arrival.」；另列「10 - TIME PASSES ₩170,000」「5 - TIME PASSES ₩90,000」，皆「Valid 12 months from purchase」。THECLIMB Yeonnam 區塊：「3rd Floor 186, Yanghwa-ro, Mapo-gu, Seoul」「Monday ~ Friday 07:00~24:00」「Sat , Sun & Holiday 08:00~22:00」「02-2088-5071」。同頁仍保留 Sinsa 分店區塊，而頁尾清單標示신사점（26.06.28 폐점）、B 홍대점（26.05.17 폐점）。頁面沒有顏色分級表、初次登記流程、課程語言或名額資訊。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        }
+      ],
+      "reason": "本段為編輯的預算建議。來源只支持可租鞋，以及英文頁列有 5 次券 ₩90,000、10 次券 ₩170,000（購買後 12 個月有效）這些背景；租鞋尺寸、使用規則、本人使用條件來源未列，也不支持「不要先買多次票」的建議本身。"
+    },
+    {
+      "location": "正文段落 9",
+      "claim": "今日の延南店の1日利用総額、初回の登録や説明、シューズとチョークの料金、初心者講習の空きと言語対応。この四点を旅行メモに用意しておくとよい。本稿では外国人の登録手順全体、講習の対応言語、当日の空き枠を確認できていないため、延南店へ直接問い合わせる必要がある。",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/branch/",
+          "title": "branch | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "韓文分店頁。연남점分頁：「서울특별시 마포구 양화로 186 3층 (LC TOWER)」、運營時間「평일 : 07:00~24:00」「토요일 , 일요일 , 공휴일 : 08:00~22:00」、電話 02-2088-5071。頁尾分店清單：「더클라임 클라이밍 B 홍대점 (26.05.17 폐점)」「서울 마포구 양화로 125 경남관광빌딩 2층 02.332.5014」；「더클라임 클라이밍 연남점 400평 규모의 클라이밍 짐 서울특별시 마포구 양화로 186 3층 (LC TOWER) 02.2088.5071」。同頁另列其他十家分店，以及서울대점（25.06.15 폐점）、신사점（26.06.28 폐점）。頁面未列車站出口步行時間（延南店）、登記流程、課程語言或名額。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        },
+        {
+          "url": "http://theclimb.co.kr/english/",
+          "title": "Korea Climbing gym | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "英文頁。品牌介紹：「We are setting new bouldering problems every week.」。價目（未分店別）：「DAY PASS … 22,000 WON」「CLIMBING SHOES... 3,000WON」「CHALK...1,000WON」「Equipment can be rented at the front desk upon arrival.」；另列「10 - TIME PASSES ₩170,000」「5 - TIME PASSES ₩90,000」，皆「Valid 12 months from purchase」。THECLIMB Yeonnam 區塊：「3rd Floor 186, Yanghwa-ro, Mapo-gu, Seoul」「Monday ~ Friday 07:00~24:00」「Sat , Sun & Holiday 08:00~22:00」「02-2088-5071」。同頁仍保留 Sinsa 分店區塊，而頁尾清單標示신사점（26.06.28 폐점）、B 홍대점（26.05.17 폐점）。頁面沒有顏色分級表、初次登記流程、課程語言或名額資訊。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        }
+      ],
+      "reason": "本段陳述未驗範圍並列出應向館方詢問的問題。兩個官方頁面都沒有外籍旅客登記流程、課程語言或當日名額的資訊；四個提問是編輯建議，正文明示須直接向延南店詢問。",
       "disposition": "qualified",
       "qualification": "本稿では外国人の登録手順全体、講習の対応言語、当日の空き枠を確認できていないため、延南店へ直接問い合わせる必要がある。"
+    },
+    {
+      "location": "正文段落 10",
+      "claim": "延南店は室内ボルダーの候補として、屋外日の雨天代替にも検討できる。店舗、時間、サービスを順に確かめれば、代替案を実行しやすい。本稿は公開資料のガイドであり、NobodyClimbの訪問体験記ではない。",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "http://theclimb.co.kr/branch/",
+          "title": "branch | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "韓文分店頁。연남점分頁：「서울특별시 마포구 양화로 186 3층 (LC TOWER)」、運營時間「평일 : 07:00~24:00」「토요일 , 일요일 , 공휴일 : 08:00~22:00」、電話 02-2088-5071。頁尾分店清單：「더클라임 클라이밍 B 홍대점 (26.05.17 폐점)」「서울 마포구 양화로 125 경남관광빌딩 2층 02.332.5014」；「더클라임 클라이밍 연남점 400평 규모의 클라이밍 짐 서울특별시 마포구 양화로 186 3층 (LC TOWER) 02.2088.5071」。同頁另列其他十家分店，以及서울대점（25.06.15 폐점）、신사점（26.06.28 폐점）。頁面未列車站出口步行時間（延南店）、登記流程、課程語言或名額。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        },
+        {
+          "url": "http://theclimb.co.kr/english/",
+          "title": "Korea Climbing gym | theclimb",
+          "publisher": "The Climb（더월클라이밍(주)）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:56Z",
+          "read_scope": "full",
+          "evidence": "英文頁。品牌介紹：「We are setting new bouldering problems every week.」。價目（未分店別）：「DAY PASS … 22,000 WON」「CLIMBING SHOES... 3,000WON」「CHALK...1,000WON」「Equipment can be rented at the front desk upon arrival.」；另列「10 - TIME PASSES ₩170,000」「5 - TIME PASSES ₩90,000」，皆「Valid 12 months from purchase」。THECLIMB Yeonnam 區塊：「3rd Floor 186, Yanghwa-ro, Mapo-gu, Seoul」「Monday ~ Friday 07:00~24:00」「Sat , Sun & Holiday 08:00~22:00」「02-2088-5071」。同頁仍保留 Sinsa 分店區塊，而頁尾清單標示신사점（26.06.28 폐점）、B 홍대점（26.05.17 폐점）。頁面沒有顏色分級表、初次登記流程、課程語言或名額資訊。",
+          "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁"
+        }
+      ],
+      "reason": "本段為編輯的行程定位建議（作為室內抱石候選與雨天備案）。來源只支持延南店為營運中的室內場館及其公告營業時間，不支持備案安排本身。"
     }
   ],
   "links": [
     {
       "url": "http://theclimb.co.kr/branch/",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Exa MCP fetch after Groundlane bounded request failed",
+      "checked_at": "2026-10-12T07:29:56Z",
+      "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁",
       "status": "reachable",
       "status_code": null,
-      "reason": "Exa MCP 返回分店頁正文含目標地址與閉店公告；工具不提供HTTP狀態。"
+      "reason": "Tavily 與 Exa 皆回傳分店頁完整正文（含延南店分頁與頁尾閉店標示）；兩工具不提供 HTTP 狀態碼。直接 curl 得到的 HTTP 200 是站方 JavaScript 驗證頁而非內容，故不記為狀態碼。"
     },
     {
       "url": "http://theclimb.co.kr/english/",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:29:56Z",
+      "tool": "Tavily MCP tavily_extract (extract_depth=advanced)；Exa MCP web_fetch 交叉比對內容一致；curl 加瀏覽器 User-Agent 只取得 JavaScript 驗證頁",
       "status": "reachable",
-      "status_code": 200,
-      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+      "status_code": null,
+      "reason": "Tavily 與 Exa 皆回傳英文頁完整正文（含價目與 THECLIMB Yeonnam 區塊）；兩工具不提供 HTTP 狀態碼。直接 curl 得到的 HTTP 200 是站方 JavaScript 驗證頁而非內容，故不記為狀態碼。"
     }
   ],
   "media": [],

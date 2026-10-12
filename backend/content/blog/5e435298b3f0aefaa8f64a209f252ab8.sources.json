@@ -215,7 +215,7 @@
     {
       "location": "## 飯能轉巴士，回程先於上牆時間決定 paragraph 2",
       "claim": "先記回程巴士與離開牆面的時間，才分配嘗試次數。若帶重裝備或不熟山徑，別把介紹頁的步行分鐘數直接當成全隊速度。抵達後若告示、入口或地形與路線圖不同，停止往裡走並重新確認。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/94",
@@ -258,7 +258,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+      "reason": "埼玉巴士協會的停留所資料只支持河又名栗湖入口與飯能站之間有路線相連，CLIMBING-net只支持轉乘方向與自案內板步行的進場描述；來源不支持「先定回程與離牆時間再分配嘗試次數」、步行時間要為全隊另留餘裕、地形不符即停步等做法，這些是編輯的規劃建議，並非實測行程。"
     },
     {
       "location": "## 停車規則比地圖空位優先 paragraph 1",
@@ -434,7 +434,6 @@
   "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
   "verification_notes": [
     "No cover/body images; no media rights assumptions.",
-    "No self-approved reviews; independent factual/translation/editorial review required.",
     "Future visit permission explicitly qualified.",
     "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
   ]

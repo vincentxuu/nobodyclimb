@@ -174,7 +174,7 @@
     {
       "location": "公園の公式交通案内を使う",
       "claim": "当日の往復便を確認し、許可された経路を使います。車の場合もデータベースの駐車リンクを公園提供の駐車スペースと考えず、合法的な場所を別に確認してください。住宅道路や入口を塞がず、装備整理と他の公園利用者の通行も計画に含めます。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
@@ -197,7 +197,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "The Yokosuka park page supports only the background facts: the loop bus from Keikyu Oppama to Takatori Shogakko, the roughly ten-minute walk, and that the park has no car park; ROCKTOPO is a contributed database, not a parking provider. Checking same-day outbound and return buses, establishing lawful parking separately, keeping clear of residential roads and entrances, and allowing for equipment handling and other park users are editorial pre-trip advice that neither source states and that was not checked on site."
     },
     {
       "location": "通行止めの告示に合わせて経路を変える",

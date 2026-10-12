@@ -158,7 +158,7 @@
     {
       "location": "易しいグレードだけでは決められない",
       "claim": "誰がリードし、誰がセカンドを確保し、誰が支点を判断するか、互いが見えないときにどう連絡するかを共有しましょう。登攀中止も選択肢にします。一人だけが全システムを理解しているなら、まず管理された環境で練習するか、適切な指導を受けてください。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -191,7 +191,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial advice. CLIMBING-net supports only the background that this is a primarily multipitch training wall with unreliable fixed protection, and ROCKTOPO lists the recorded lines as multipitch; no source prescribes this division of roles, the option to cancel, or practising beforehand, and the site did not test the procedure on the wall."
     },
     {
       "location": "岩角と残置支点は別に評価する",
@@ -234,7 +234,7 @@
     {
       "location": "岩角と残置支点は別に評価する",
       "claim": "装備は目標ルートと現況に合わせ、プロテクション、支点、下降、個人の防護まで考えます。他のスポート岩場のクイックドロー本数をそのまま流用しないでください。本記事は支点構築や下降の手順を教えるものではありません。経験者とトポ、撤退方法を確認し、判断できない支点やロープ経路の区間へは進まないことを勧めます。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -267,12 +267,12 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial advice. CLIMBING-net supports the background hazard (unreliable fixed protection, sharp edges, past rope-cutting accidents); no source provides an equipment list or a retreat procedure for this wall, and the advice is not a guarantee of adequacy on site."
     },
     {
       "location": "接近から下山までを一日の計画にする",
       "claim": "取り付き、アプローチ、下降、帰路を同時に確認します。同じ道とは限らないため、岩壁の座標だけを保存しても不十分です。公共交通を使う場合は当日の往復便と、撤退の余裕を残す折り返し時刻を決めます。装備整理、ルート探し、他パーティーの待ち時間も必要です。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -305,7 +305,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial planning advice. The sources support only background (a multipitch wall; one club party's 2024 approach from Hatonosu Station); none states that the start, approach, descent and exit differ here, and none gives turnaround times or the listed delay factors. The site did not walk or time this itinerary."
     },
     {
       "location": "接近から下山までを一日の計画にする",
@@ -388,7 +388,7 @@
     {
       "location": "接近から下山までを一日の計画にする",
       "claim": "越沢バットレスは、山岳登攀の総合的な技術を使う目的で選びたい岩場です。自分たちで管理できる計画、撤退時間、代替活動を用意することで、意図のある練習の一日にできます。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -421,7 +421,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial conclusion. CLIMBING-net supports the framing of the wall as training for mountain routes; whether it merits a day, and the advice on an independently managed plan, retreat time and an alternative activity, are the editors' assessment rather than a firsthand ascent record."
     }
   ],
   "media": [],

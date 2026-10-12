@@ -148,7 +148,7 @@
     {
       "location": "接近路は地域の生活空間を通る",
       "claim": "公共交通を使えば現地での駐車探しを避けられますが、帰りの便の確認が必要です。バス、歩行、登攀をまとめて計画し、最後のトライだけに残り時間を使わないようにします。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
@@ -171,7 +171,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support the bus access (Fujikura/Koiwa bus to Kanoto-iwa Iriguchi), the parking restrictions, and CLIMBING-net's request that climbers use buses and trains where possible. They do not support the rest of the planning advice (confirming the return, planning bus, walk and climbing together, keeping time to get back to the station); that part is an editorial suggestion, not a tested itinerary."
     },
     {
       "location": "小さな岩場でも長いラインがある",
@@ -204,7 +204,7 @@
     {
       "location": "小さな岩場でも長いラインがある",
       "claim": "目標の実際の長さ、終了点、下降、器材を確認してから準備します。掲載本数は選択肢の目安であり、全ルートの現行状態や一日で登るチェックリストではありません。能力差のあるパーティーでは、一人ずつ無理なく撤退できる目標を考えます。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
@@ -227,7 +227,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support only that several right-hand lines exceed 20 m and that ROCKTOPO lists face routes. They do not support the preparation order or the advice on objectives for mixed-ability teams; these are editorial suggestions, not lessons from climbing the wall."
     },
     {
       "location": "接近路も岩場の一部として配慮する",

@@ -149,7 +149,7 @@
     {
       "location": "## Read about descent and cleaning first paragraph 2",
       "claim": "Before travelling, confirm length, finish, descent and equipment recovery for your shortlist. If cleaning an overhanging route is unfamiliar, its grade alone is not a reason to start it. Arrange knowledgeable support or choose an objective you can manage from start to finish.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/areas/95",
@@ -182,7 +182,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+      "reason": "CLIMBING-net 支持北川為チャート大仰角、舊支點、下降點與回收點不同及繩摩擦等提醒；來源未提供各候選路線的長度、結束位置與回收方式，也未建議不熟回收者改找熟悉的同行者或更換目標。行前確認清單與替代作法屬編輯建議。"
     },
     {
       "location": "## Walk from Nishi-Agano with time in hand paragraph 1",
@@ -406,7 +406,6 @@
   "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
   "verification_notes": [
     "No cover/body images; no media rights assumptions.",
-    "No self-approved reviews; independent factual/translation/editorial review required.",
     "Future visit permission explicitly qualified.",
     "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
   ]

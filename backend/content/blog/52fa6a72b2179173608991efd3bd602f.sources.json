@@ -81,7 +81,7 @@
     },
     {
       "location": "想探索岩峰群，先把目標縮到一面壁",
-      "claim": "[CLIMBING-net 的介紹](https://www.climbing-net.com/iwaba_detail/岳嶺岩/)描述 A、B、C 三座較大岩峰與 D、E 兩座較小岩峰，共五座。這樣的分割槽意味著一個「岳嶺岩」名稱下可能有不同起攀點與路線；傳給同行者的資料應指出目標峰和線名，不能只是一個共同座標。",
+      "claim": "[CLIMBING-net 的介紹](https://www.climbing-net.com/iwaba_detail/岳嶺岩/)描述 A、B、C 三座較大岩峰與 D、E 兩座較小岩峰，共五座。這樣的分區意味著一個「岳嶺岩」名稱下可能有不同起攀點與路線；傳給同行者的資料應指出目標峰和線名，不能只是一個共同座標。",
       "verdict": "confirmed",
       "sources": [
         {
@@ -158,7 +158,7 @@
     {
       "location": "先用路線資料理解範圍",
       "claim": "可以先選一條符合能力的候選，再尋找對應 topo、長度、結束點與下降資訊。若不同資料的線名或位置不一致，先向熟悉者確認，而不靠級數猜測是哪條。資料庫的一份清單，不能代替同伴間對目標與撤退的共同理解。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
@@ -191,11 +191,11 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support the background only: ROCKTOPO lists routes and database grades for the towers. They do not prescribe the selection sequence described here (pick a candidate, then gather topo, length, anchor and descent information, and ask someone familiar when sources disagree); that is editorial preparation advice, not a field-tested method."
     },
     {
       "location": "舊固定點與級數要分開看",
-      "claim": "出版者提醒許多線使用 ring bolt 或 piton，也指出強行打釘可能改變級數。這是兩種需要分開處理的問題：固定點的可靠性要判斷，動作難度也可能不能完全照舊錶。低階數並不抵消保護、岩質或下降的不確定性。",
+      "claim": "出版者提醒許多線使用 ring bolt 或 piton，也指出強行打釘可能改變級數。這是兩種需要分開處理的問題：固定點的可靠性要判斷，動作難度也可能不能完全照舊表。低級數並不抵消保護、岩質或下降的不確定性。",
       "verdict": "confirmed",
       "sources": [
         {
@@ -234,7 +234,7 @@
     {
       "location": "舊固定點與級數要分開看",
       "claim": "本文不提供人工攀登、打釘或支點架設教學，也不把增設保護當成旅行者可以自行做的解法。若不能判斷既有保護、辨認結束點與安全退回，就先補足技能、尋求適當指導，或取消這一站。只帶一般運攀快扣來到現場，再問如何撤退，順序已經太晚。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
@@ -267,7 +267,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support the background only: CLIMBING-net notes that many lines rely on ring bolts or pitons. They do not state the go/no-go threshold given here (gain skills, seek instruction, or drop the destination); that is editorial judgement, not an on-site assessment of the fixed protection."
     },
     {
       "location": "到日原之前，先完成交通與接近確認",
@@ -350,7 +350,7 @@
     {
       "location": "到日原之前，先完成交通與接近確認",
       "claim": "若你想把岳嶺岩列入東京旅程，先完成目標峰、路線、保護、下降與回程五項準備。帶水、食物、雨具與照明，將河岸現況和撤退餘裕納入判斷。它值得研究的是五座岩峰中的舊線特色，適合有具體計畫的探索，而不是臨時補一個「冷門岩場」打卡。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
@@ -383,11 +383,11 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support the background only: five towers, older routes and the general approach description. They do not provide the five-item preparation list or the packing list; these are editorial suggestions and no guarantee that the day will be climbable."
     }
   ],
   "media": [],
-  "source_sha256": "1f472e3193d0906d41eeaefc47ed30145e5171cfe8173f2cb7aab5a444a88646",
+  "source_sha256": "6157ba2806a6fe6b2e18fbd431ee8213839629b8c09eacd3325ffdddcb7c6b46",
   "links": [
     {
       "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",

@@ -202,9 +202,7 @@
     {
       "location": "歩行と撤退の余裕を確保する",
       "claim": "編集上の計画提案として、装備整理、荷物を背負った登り、ルート探し、下降、下山まで時間を確保します。水、行動食、雨具、ヘッドランプ、適した歩行靴を用意し、登山装備も忘れないようにします。ヘッドランプは備えであり、暗くなるまで登るための道具とは考えません。",
-      "verdict": "unverifiable",
-      "disposition": "qualified",
-      "qualification": "編集上の計画提案として",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -227,7 +225,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "本段為編輯的時間與裝備規劃建議，CLIMBING-net與ROCKTOPO來源只支持約一個半小時接近等背景事實，不支持時間分配與攜帶清單本身；正文已明示為編輯規劃建議。"
+      "reason": "This paragraph is editorial time-and-gear planning advice. CLIMBING-net supports only background facts (a long-established training crag on the ridge with a roughly 1.5-hour approach); ROCKTOPO supports only the shared つづら岩、天狗岩 area listing and gives no approach time. Neither source supports the time allocation or the packing list; it is an editorial planning recommendation, not a tested itinerary."
     },
     {
       "location": "歩行と撤退の余裕を確保する",
@@ -262,7 +260,7 @@
     {
       "location": "歩行と撤退の余裕を確保する",
       "claim": "目的が山岳トレーニングで、選んだルートと撤退に全員が対応できるなら検討したい岩場です。東京近郊で短時間に数本登りたい場合は、アプローチと持ち時間を比較してから選びましょう。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -285,7 +283,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "This paragraph is an editorial decision recommendation. CLIMBING-net supports only background facts (a long-established training crag on the ridge with a roughly 1.5-hour approach) and ROCKTOPO supports only the shared area listing; neither supports the judgement of who should shortlist the crag or how to weigh the approach cost. It is an editorial suggestion, not an assessment from climbing there."
     }
   ],
   "media": [],

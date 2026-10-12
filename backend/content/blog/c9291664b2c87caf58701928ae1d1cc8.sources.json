@@ -61,7 +61,7 @@
     },
     {
       "location": "岩場名稱是這一天最重要的導航資訊",
-      "claim": "[CLIMBING-net 的介紹](https://www.climbing-net.com/iwaba_detail/神戸の岩場/)明確指出兩者不同，並說神戸岩禁止攀登。開車時看到神戸岩指標，不能據此直接跟到峽谷，把觀光岩壁當成自己的攀登區。與同伴分享位置時，應同時傳送岩場 topo 和接近說明，而不是隻傳同名景點的地圖。",
+      "claim": "[CLIMBING-net 的介紹](https://www.climbing-net.com/iwaba_detail/神戸の岩場/)明確指出兩者不同，並說神戸岩禁止攀登。開車時看到神戸岩指標，不能據此直接跟到峽谷，把觀光岩壁當成自己的攀登區。與同伴分享位置時，應同時傳送岩場 topo 和接近說明，而不是只傳同名景點的地圖。",
       "verdict": "confirmed",
       "sources": [
         {
@@ -148,7 +148,7 @@
     {
       "location": "從巴士站到岩壁，會經過生活空間",
       "claim": "就旅行規劃而言，公共交通可避免到了入口才找車位，但必須先確認回程。把巴士時間、步行與攀登時間一起看，保留撤回車站的空間，而不是把所有時間留給最後一趟嘗試。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
@@ -171,7 +171,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support the bus access (Fujikura/Koiwa bus to Kanoto-iwa Iriguchi), the parking restrictions, and CLIMBING-net's request that climbers use buses and trains where possible. They do not support the rest of the planning advice (confirming the return, planning bus, walk and climbing together, keeping time to get back to the station); that part is an editorial suggestion, not a tested itinerary."
     },
     {
       "location": "小型岩場，也可能有長線",
@@ -204,7 +204,7 @@
     {
       "location": "小型岩場，也可能有長線",
       "claim": "先看目標線的實際長度、結束點、下降方式與器材需求，再整理裝備。路線數只幫助理解選擇範圍，不代表所有線現況都可爬，也不是一天爬完的清單。若旅行隊伍能力差異大，讓每人都有合適的可撤退目標，比只挑一條最高星等線更實際。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
@@ -227,7 +227,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support only that several right-hand lines exceed 20 m and that ROCKTOPO lists face routes. They do not support the preparation order or the advice on objectives for mixed-ability teams; these are editorial suggestions, not lessons from climbing the wall."
     },
     {
       "location": "保護岩場，也保護這條接近路",
@@ -289,7 +289,7 @@
     }
   ],
   "media": [],
-  "source_sha256": "d6bcab0414370f1d7188ef3bb07a8a61e49a329a50455aa7705e824c9959e9ba",
+  "source_sha256": "49ba4c1fe8a18accff4e2498764dacaa41f089752915988f7bb204dfd91d283f",
   "links": [
     {
       "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",

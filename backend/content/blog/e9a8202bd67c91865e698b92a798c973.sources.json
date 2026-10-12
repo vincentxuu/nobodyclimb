@@ -2,113 +2,331 @@
   "schema_version": 1,
   "article_id": "e9a8202bd67c91865e698b92a798c973",
   "source_sha256": "292ae18e2dc1a09420d9c0d4aaccf840b9d51eabbe5eca3c0d44b28aa590c484",
-  "checked_at": "2026-10-12T00:52:13.807630+00:00",
+  "checked_at": "2026-10-12T07:31:17Z",
   "claims": [
     {
-      "location": "title/excerpt/intro; 到哪裡／Getting there／アクセス",
-      "claim": "抱石、lead、top-rope；江戶川橋5分、神樂坂11分；平日12–23、土日祝10–21；不定休與換線可能影響區域",
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場地（Base Camp 江戶川橋）、可選的攀登類型與首次入場的決策用途；分類 gyms 與標籤「東京攀岩」「岩館指南」依東京室內岩館主題。Base Camp Edogawabashi: planning a bouldering or roped session / A Tokyo gym with bouldering and roped climbing. Compare first-visit costs, equipment rental and supervised experiences before choosing a session.",
       "verdict": "confirmed",
       "sources": [
         {
           "url": "https://b-camp.jp/edogawabashi/",
           "title": "BASE CAMP TOKYO 江戸川橋 - ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。 東京屈指の繁華街である池袋からもアクセス良好な立地に位置するBase Camp。 ボルダリングが初めての方へ、随時初回インストラクションを実施。",
-          "publisher": "Base Camp",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "accessed_at": "2026-10-12T07:28:55Z",
           "read_scope": "full",
-          "evidence": "Official introduction lists all three disciplines; access and opening hours footer; setting calendar advertises temporary wall closures.",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "頁面標題：「ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。」頁內嵌入的官方 Instagram 簡介：「【営業時間】平日12:00〜23:00 土日祝10:00〜21:00」「【アクセス】有楽町線江戸川橋駅 徒歩5分／東西線神楽坂駅 徒歩11分」。「ルート情報 ROUTE INFO」區塊列出各區換線封閉時段，例如「10月 ルートエリアセット情報 2026年10月22日(木)12：00 CLOSE ～ 10月23日(金)18：00 OPEN」「10月 2階ボルダー”Debut”セット情報 2026年10月12日(月)16：00 CLOSE ～」「10月 1階ボルダーエリアセット情報 2026年10月4日(日)18：00 CLOSE ～ 10月6日(火)18：00 OPEN」；「ピックアップ情報」另有「地下ルートクライミングエリア 塗装工事のお知らせ」的封閉公告。",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://b-camp.jp/edogawabashi/visitor/",
+          "title": "はじめての方へ - BASE CAMP TOKYO 江戸川橋",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:58Z",
+          "read_scope": "full",
+          "evidence": "「初回ボルダーインストラクション」：対象「クライミング未経験者」、料金「初回登録料1,100円＋施設利用料」、開催時間「随時」、「ボルダリングが初めての方はご来店時にスタッフまでお声がけください」、持ち物「動きやすい服装、靴下（レンタルシューズを履くため）」。「トップロープ体験のご案内」：対象「ボルダーインストラクションを受講された方またはボルダリング経験者」、時間「1時間」、料金「1,000円 (税込1,100円）（別途施設利用料）」、「講習案内ページ下部より開催スケジュールをご確認のうえ、ご予約をお願いいたします。予約定員制…ご予約は、HP予約フォーム・店頭受付またはお電話にて。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://b-camp.jp/edogawabashi/charge/",
+          "title": "営業時間・料金案内 - BASE CAMP TOKYO 江戸川橋",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:59Z",
+          "read_scope": "full",
+          "evidence": "「営業時間：平日12:00～23:00／土曜・日曜・祝日 10:00～21:00／定休日なし（臨時休業あり）」。「会員登録料 1,000円（税込1,100円）」「会員カードに有効期限はなく Base Camp 全ての店舗での共通となります。」施設利用料「一般 終日 2,200円（税込2,420円）」（平日與土日祝兩表皆同）。「レンタル用品など：シューズ 300円（税込330円）靴下をご持参ください／チョーク 100円（税込110円）／ハーネス 100円（税込110円）ルートエリア利用時に必要です／ビレイ器具 100円（税込110円）ルートエリア、ビレイの際に必要です／ロープ 500円（税込550円）リードクライミングの際に必要です」「初回登録時は、シューズ、チョーク、ハーネス、ビレイ器具（ATC）を無料でお使いいただけます。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+      "reason": "首頁標題支持館名、位於東京、江戶川橋站步行可達，以及同館有抱石與繩索攀登；初次造訪頁與費用頁支持摘要所說的首次費用、租借與體驗。摘要中的取捨與提醒是編輯的導讀，不是來源內容。"
     },
     {
-      "location": "抱石與繩索／Bouldering and ropes／ボルダーとロープ",
-      "claim": "多個抱石區與繩索設備",
+      "location": "正文段落 1",
+      "claim": "Base Camp Edogawabashi is a useful candidate for a Tokyo climbing day when you want a choice between bouldering and ropes. The [operator’s introduction](https://b-camp.jp/edogawabashi/) lists bouldering, lead climbing and top-rope climbing. Those options require different preparation. This guide uses published information; admission should not be treated as evidence that a visitor has been trained to belay.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://b-camp.jp/edogawabashi/",
+          "title": "BASE CAMP TOKYO 江戸川橋 - ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。 東京屈指の繁華街である池袋からもアクセス良好な立地に位置するBase Camp。 ボルダリングが初めての方へ、随時初回インストラクションを実施。",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:55Z",
+          "read_scope": "full",
+          "evidence": "頁面標題：「ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。」頁內嵌入的官方 Instagram 簡介：「【営業時間】平日12:00〜23:00 土日祝10:00〜21:00」「【アクセス】有楽町線江戸川橋駅 徒歩5分／東西線神楽坂駅 徒歩11分」。「ルート情報 ROUTE INFO」區塊列出各區換線封閉時段，例如「10月 ルートエリアセット情報 2026年10月22日(木)12：00 CLOSE ～ 10月23日(金)18：00 OPEN」「10月 2階ボルダー”Debut”セット情報 2026年10月12日(月)16：00 CLOSE ～」「10月 1階ボルダーエリアセット情報 2026年10月4日(日)18：00 CLOSE ～ 10月6日(火)18：00 OPEN」；「ピックアップ情報」另有「地下ルートクライミングエリア 塗装工事のお知らせ」的封閉公告。",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://b-camp.jp/edogawabashi/visitor/",
+          "title": "はじめての方へ - BASE CAMP TOKYO 江戸川橋",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:58Z",
+          "read_scope": "full",
+          "evidence": "「初回ボルダーインストラクション」：対象「クライミング未経験者」、料金「初回登録料1,100円＋施設利用料」、開催時間「随時」、「ボルダリングが初めての方はご来店時にスタッフまでお声がけください」、持ち物「動きやすい服装、靴下（レンタルシューズを履くため）」。「トップロープ体験のご案内」：対象「ボルダーインストラクションを受講された方またはボルダリング経験者」、時間「1時間」、料金「1,000円 (税込1,100円）（別途施設利用料）」、「講習案内ページ下部より開催スケジュールをご確認のうえ、ご予約をお願いいたします。予約定員制…ご予約は、HP予約フォーム・店頭受付またはお電話にて。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://b-camp.jp/edogawabashi/charge/",
+          "title": "営業時間・料金案内 - BASE CAMP TOKYO 江戸川橋",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:59Z",
+          "read_scope": "full",
+          "evidence": "「営業時間：平日12:00～23:00／土曜・日曜・祝日 10:00～21:00／定休日なし（臨時休業あり）」。「会員登録料 1,000円（税込1,100円）」「会員カードに有効期限はなく Base Camp 全ての店舗での共通となります。」施設利用料「一般 終日 2,200円（税込2,420円）」（平日與土日祝兩表皆同）。「レンタル用品など：シューズ 300円（税込330円）靴下をご持参ください／チョーク 100円（税込110円）／ハーネス 100円（税込110円）ルートエリア利用時に必要です／ビレイ器具 100円（税込110円）ルートエリア、ビレイの際に必要です／ロープ 500円（税込550円）リードクライミングの際に必要です」「初回登録時は、シューズ、チョーク、ハーネス、ビレイ器具（ATC）を無料でお使いいただけます。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "首頁標題列出抱石、先鋒與頂繩三種活動；初次造訪頁與費用頁顯示抱石入門說明、頂繩體驗的對象與費用各不相同，且繩索區需吊帶與確保器、先鋒需繩，支持「每種活動的入場準備不同」。「值得列入候選」是編輯判斷；末句說明本文依公開資料整理、不把入場視為受過確保訓練，是本文的範圍聲明。"
+    },
+    {
+      "location": "正文段落 2",
+      "claim": "The operator gives an approximate five-minute walk from Edogawabashi Station and eleven minutes from Kagurazaka Station. These are station-to-gym estimates, so add transfers, finding the exit and check-in to your hotel-to-gym plan. Published opening hours are 12:00–23:00 on weekdays and 10:00–21:00 on weekends and public holidays. There is no fixed weekly closing day, but temporary closures remain possible.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://b-camp.jp/edogawabashi/",
+          "title": "BASE CAMP TOKYO 江戸川橋 - ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。 東京屈指の繁華街である池袋からもアクセス良好な立地に位置するBase Camp。 ボルダリングが初めての方へ、随時初回インストラクションを実施。",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:55Z",
+          "read_scope": "full",
+          "evidence": "頁面標題：「ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。」頁內嵌入的官方 Instagram 簡介：「【営業時間】平日12:00〜23:00 土日祝10:00〜21:00」「【アクセス】有楽町線江戸川橋駅 徒歩5分／東西線神楽坂駅 徒歩11分」。「ルート情報 ROUTE INFO」區塊列出各區換線封閉時段，例如「10月 ルートエリアセット情報 2026年10月22日(木)12：00 CLOSE ～ 10月23日(金)18：00 OPEN」「10月 2階ボルダー”Debut”セット情報 2026年10月12日(月)16：00 CLOSE ～」「10月 1階ボルダーエリアセット情報 2026年10月4日(日)18：00 CLOSE ～ 10月6日(火)18：00 OPEN」；「ピックアップ情報」另有「地下ルートクライミングエリア 塗装工事のお知らせ」的封閉公告。",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://b-camp.jp/edogawabashi/charge/",
+          "title": "営業時間・料金案内 - BASE CAMP TOKYO 江戸川橋",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:59Z",
+          "read_scope": "full",
+          "evidence": "「営業時間：平日12:00～23:00／土曜・日曜・祝日 10:00～21:00／定休日なし（臨時休業あり）」。「会員登録料 1,000円（税込1,100円）」「会員カードに有効期限はなく Base Camp 全ての店舗での共通となります。」施設利用料「一般 終日 2,200円（税込2,420円）」（平日與土日祝兩表皆同）。「レンタル用品など：シューズ 300円（税込330円）靴下をご持参ください／チョーク 100円（税込110円）／ハーネス 100円（税込110円）ルートエリア利用時に必要です／ビレイ器具 100円（税込110円）ルートエリア、ビレイの際に必要です／ロープ 500円（税込550円）リードクライミングの際に必要です」「初回登録時は、シューズ、チョーク、ハーネス、ビレイ器具（ATC）を無料でお使いいただけます。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "江戶川橋站步行 5 分、神樂坂站 11 分見首頁標題與頁內官方 Instagram 簡介；平日 12:00–23:00、土日祝 10:00–21:00 與「定休日なし（臨時休業あり）」見費用頁。「飯店到館還要加入轉乘、找出口與報到時間」是編輯的行程提醒，不是來源內容。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "For a visitor with just one available evening, wall availability matters as much as closing time. The home page carries a setting schedule, and a bouldering or rope area can be unavailable while the gym is open. Check your intended area and leave time for registration, changing and warming up.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://b-camp.jp/edogawabashi/",
+          "title": "BASE CAMP TOKYO 江戸川橋 - ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。 東京屈指の繁華街である池袋からもアクセス良好な立地に位置するBase Camp。 ボルダリングが初めての方へ、随時初回インストラクションを実施。",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:55Z",
+          "read_scope": "full",
+          "evidence": "頁面標題：「ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。」頁內嵌入的官方 Instagram 簡介：「【営業時間】平日12:00〜23:00 土日祝10:00〜21:00」「【アクセス】有楽町線江戸川橋駅 徒歩5分／東西線神楽坂駅 徒歩11分」。「ルート情報 ROUTE INFO」區塊列出各區換線封閉時段，例如「10月 ルートエリアセット情報 2026年10月22日(木)12：00 CLOSE ～ 10月23日(金)18：00 OPEN」「10月 2階ボルダー”Debut”セット情報 2026年10月12日(月)16：00 CLOSE ～」「10月 1階ボルダーエリアセット情報 2026年10月4日(日)18：00 CLOSE ～ 10月6日(火)18：00 OPEN」；「ピックアップ情報」另有「地下ルートクライミングエリア 塗装工事のお知らせ」的封閉公告。",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "首頁「ルート情報」逐筆列出抱石區與繩索區的換線封閉與重開時間，支持「首頁有換線日程、營業中可能有區域暫停使用」。先看目標牆面、出發前確認、替註冊換裝熱身留時間，是編輯建議，來源不直接陳述。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "The [facilities page](https://b-camp.jp/edogawabashi/facilities/) describes several bouldering areas and roped facilities. If you have shoes but no qualified belay partner, tell reception that you intend to boulder and follow the gym’s briefing. The presence of top ropes does not establish that staff will be available to belay you on demand.",
       "verdict": "confirmed",
       "sources": [
         {
           "url": "https://b-camp.jp/edogawabashi/facilities/",
           "title": "施設紹介 - BASE CAMP TOKYO 江戸川橋",
-          "publisher": "Base Camp",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "accessed_at": "2026-10-12T07:28:57Z",
           "read_scope": "full",
-          "evidence": "Facility sections describe the bouldering areas and rope facilities.",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "頁面可見文字只有各牆面與設施的圖說：Instruction-wall、La-Plage、Bas-Cuvier、Au-bout-du-mond、Sympathique、Cascade、Ninja、Debut、Tokyo-Cave、休憩室、男性更衣室、女性更衣室、レンタルシューズ、ショップ、外観；沒有說明文字段落。區域歸屬只見於圖片檔名（「一階 ボルダーエリア2.jpg」「二階ボルダーエリア2.jpg」「ロープエリア全景.jpg」「地下 Cascade-…jpg」），圖片本身未判讀。頁面沒有任何關於工作人員代為確保的說明。",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://b-camp.jp/edogawabashi/",
+          "title": "BASE CAMP TOKYO 江戸川橋 - ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。 東京屈指の繁華街である池袋からもアクセス良好な立地に位置するBase Camp。 ボルダリングが初めての方へ、随時初回インストラクションを実施。",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:55Z",
+          "read_scope": "full",
+          "evidence": "頁面標題：「ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。」頁內嵌入的官方 Instagram 簡介：「【営業時間】平日12:00〜23:00 土日祝10:00〜21:00」「【アクセス】有楽町線江戸川橋駅 徒歩5分／東西線神楽坂駅 徒歩11分」。「ルート情報 ROUTE INFO」區塊列出各區換線封閉時段，例如「10月 ルートエリアセット情報 2026年10月22日(木)12：00 CLOSE ～ 10月23日(金)18：00 OPEN」「10月 2階ボルダー”Debut”セット情報 2026年10月12日(月)16：00 CLOSE ～」「10月 1階ボルダーエリアセット情報 2026年10月4日(日)18：00 CLOSE ～ 10月6日(火)18：00 OPEN」；「ピックアップ情報」另有「地下ルートクライミングエリア 塗装工事のお知らせ」的封閉公告。",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://b-camp.jp/edogawabashi/visitor/",
+          "title": "はじめての方へ - BASE CAMP TOKYO 江戸川橋",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:58Z",
+          "read_scope": "full",
+          "evidence": "「初回ボルダーインストラクション」：対象「クライミング未経験者」、料金「初回登録料1,100円＋施設利用料」、開催時間「随時」、「ボルダリングが初めての方はご来店時にスタッフまでお声がけください」、持ち物「動きやすい服装、靴下（レンタルシューズを履くため）」。「トップロープ体験のご案内」：対象「ボルダーインストラクションを受講された方またはボルダリング経験者」、時間「1時間」、料金「1,000円 (税込1,100円）（別途施設利用料）」、「講習案内ページ下部より開催スケジュールをご確認のうえ、ご予約をお願いいたします。予約定員制…ご予約は、HP予約フォーム・店頭受付またはお電話にて。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+      "reason": "設施頁以牆面圖說呈現館內各區，區域歸屬僅見於圖片檔名（一階、二階ボルダーエリア與ロープエリア）；首頁換線資訊另以文字寫明「1階ボルダーエリア」「2階ボルダー」與「ルートエリア」「地下ルートクライミングエリア」，兩者合併支持「多個抱石區，也有繩索設施」。初次造訪頁寫明抱石初次說明隨時進行、到館向工作人員提出，支持向櫃檯說明的做法。「不要推定隨時有工作人員替你確保」是編輯提醒：來源沒有任何代為確保的說明，也沒有否定的說明。"
     },
     {
-      "location": "抱石與繩索／Bouldering and ropes／ボルダーとロープ",
-      "claim": "頂繩體驗1小時1100另付設施費；完成抱石初心者講習或經驗者可參加；確認時段",
+      "location": "正文段落 5",
+      "claim": "If you want to try ropes without an established partner and the necessary skills, consult the [first-visit information](https://b-camp.jp/edogawabashi/visitor/). Its top-rope experience is one hour for ¥1,100, with a separate facility fee. Participants need to have completed the bouldering introduction or have bouldering experience; check the available session through the operator’s booking arrangements. General admission, a bouldering introduction and the top-rope experience are different services. Budget and book them separately.",
       "verdict": "confirmed",
       "sources": [
         {
           "url": "https://b-camp.jp/edogawabashi/visitor/",
           "title": "はじめての方へ - BASE CAMP TOKYO 江戸川橋",
-          "publisher": "Base Camp",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "accessed_at": "2026-10-12T07:28:58Z",
           "read_scope": "full",
-          "evidence": "Visitor page top-rope experience explains one-hour fee, separate facility admission and participant conditions.",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "「初回ボルダーインストラクション」：対象「クライミング未経験者」、料金「初回登録料1,100円＋施設利用料」、開催時間「随時」、「ボルダリングが初めての方はご来店時にスタッフまでお声がけください」、持ち物「動きやすい服装、靴下（レンタルシューズを履くため）」。「トップロープ体験のご案内」：対象「ボルダーインストラクションを受講された方またはボルダリング経験者」、時間「1時間」、料金「1,000円 (税込1,100円）（別途施設利用料）」、「講習案内ページ下部より開催スケジュールをご確認のうえ、ご予約をお願いいたします。予約定員制…ご予約は、HP予約フォーム・店頭受付またはお電話にて。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://b-camp.jp/edogawabashi/charge/",
+          "title": "営業時間・料金案内 - BASE CAMP TOKYO 江戸川橋",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:59Z",
+          "read_scope": "full",
+          "evidence": "「営業時間：平日12:00～23:00／土曜・日曜・祝日 10:00～21:00／定休日なし（臨時休業あり）」。「会員登録料 1,000円（税込1,100円）」「会員カードに有効期限はなく Base Camp 全ての店舗での共通となります。」施設利用料「一般 終日 2,200円（税込2,420円）」（平日與土日祝兩表皆同）。「レンタル用品など：シューズ 300円（税込330円）靴下をご持参ください／チョーク 100円（税込110円）／ハーネス 100円（税込110円）ルートエリア利用時に必要です／ビレイ器具 100円（税込110円）ルートエリア、ビレイの際に必要です／ロープ 500円（税込550円）リードクライミングの際に必要です」「初回登録時は、シューズ、チョーク、ハーネス、ビレイ器具（ATC）を無料でお使いいただけます。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+      "reason": "初次造訪頁「トップロープ体験」逐項支持：1 小時、含稅 1,100 日圓、另付設施利用料、對象為受過抱石說明者或抱石經驗者、須依講習案內頁時程預約（定員制）。同頁抱石初次說明為隨時進行、費用為註冊費加設施利用料，支持三者不是同一服務。「預算與預約也應分開」是編輯建議。"
     },
     {
-      "location": "首次預算／First-visit costs／初回料金",
-      "claim": "成人全天2420+初次註冊1100=3520日圓含稅；鞋330粉110吊帶110ATC110繩550；初次免費項目不含繩；鞋需襪子；分店登記共通",
+      "location": "正文段落 6",
+      "claim": "Checked on 12 October 2026, the [price page](https://b-camp.jp/edogawabashi/charge/) lists tax-inclusive adult full-day admission at ¥2,420 and initial registration at ¥1,100. Together they total ¥3,520 for an ordinary first adult full-day visit, before a top-rope experience or other paid extras.",
       "verdict": "confirmed",
       "sources": [
         {
           "url": "https://b-camp.jp/edogawabashi/charge/",
           "title": "営業時間・料金案内 - BASE CAMP TOKYO 江戸川橋",
-          "publisher": "Base Camp",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "accessed_at": "2026-10-12T07:28:59Z",
           "read_scope": "full",
-          "evidence": "Price page adult full-day and registration rows; rental rows and first-registration free rental note. 2420+1100=3520 excludes additional experiences; registration shared across branches.",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "「営業時間：平日12:00～23:00／土曜・日曜・祝日 10:00～21:00／定休日なし（臨時休業あり）」。「会員登録料 1,000円（税込1,100円）」「会員カードに有効期限はなく Base Camp 全ての店舗での共通となります。」施設利用料「一般 終日 2,200円（税込2,420円）」（平日與土日祝兩表皆同）。「レンタル用品など：シューズ 300円（税込330円）靴下をご持参ください／チョーク 100円（税込110円）／ハーネス 100円（税込110円）ルートエリア利用時に必要です／ビレイ器具 100円（税込110円）ルートエリア、ビレイの際に必要です／ロープ 500円（税込550円）リードクライミングの際に必要です」「初回登録時は、シューズ、チョーク、ハーネス、ビレイ器具（ATC）を無料でお使いいただけます。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+      "reason": "費用頁列一般終日 2,200 日圓（含稅 2,420 日圓，平日與土日祝相同）與會員登録料含稅 1,100 日圓；2,420＋1,100＝3,520 為本文自行加總，算式僅含這兩項，不含頂繩體驗等其他付費項目。查核日為 2026-10-12。"
+    },
+    {
+      "location": "正文段落 7",
+      "claim": "Regular rental prices are shoes ¥330, chalk ¥110, harness ¥110, an ATC belay device ¥110 and a lead rope ¥550. Initial registration includes free rental of shoes, chalk, a harness and an ATC; the lead rope is not on that free-rental list. Bring socks for rental shoes. Registration is shared across Base Camp branches, so ask reception to check an existing membership rather than assuming you need to pay registration again.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://b-camp.jp/edogawabashi/charge/",
+          "title": "営業時間・料金案内 - BASE CAMP TOKYO 江戸川橋",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:59Z",
+          "read_scope": "full",
+          "evidence": "「営業時間：平日12:00～23:00／土曜・日曜・祝日 10:00～21:00／定休日なし（臨時休業あり）」。「会員登録料 1,000円（税込1,100円）」「会員カードに有効期限はなく Base Camp 全ての店舗での共通となります。」施設利用料「一般 終日 2,200円（税込2,420円）」（平日與土日祝兩表皆同）。「レンタル用品など：シューズ 300円（税込330円）靴下をご持参ください／チョーク 100円（税込110円）／ハーネス 100円（税込110円）ルートエリア利用時に必要です／ビレイ器具 100円（税込110円）ルートエリア、ビレイの際に必要です／ロープ 500円（税込550円）リードクライミングの際に必要です」「初回登録時は、シューズ、チョーク、ハーネス、ビレイ器具（ATC）を無料でお使いいただけます。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "費用頁租借表支持岩鞋 330、粉袋 110、吊帶 110、確保器 110、繩 550 日圓（皆含稅）、租鞋自備襪子，以及初次註冊時岩鞋、粉袋、吊帶、確保器（ATC）免費；免費清單未列繩。「會員卡 Base Camp 全店共通」支持分店登記共通。請櫃檯確認會員資料、不要重複計入註冊費，是編輯建議。"
+    },
+    {
+      "location": "正文段落 8",
+      "claim": "Decide whether this is a bouldering visit, a rope session with a capable partner or an enquiry about an experience. Check opening information and setting closures for that day. Then list your membership status, rental needs and any experience fee separately so reception can clarify the total.",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "https://b-camp.jp/edogawabashi/",
+          "title": "BASE CAMP TOKYO 江戸川橋 - ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。 東京屈指の繁華街である池袋からもアクセス良好な立地に位置するBase Camp。 ボルダリングが初めての方へ、随時初回インストラクションを実施。",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:55Z",
+          "read_scope": "full",
+          "evidence": "頁面標題：「ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。」頁內嵌入的官方 Instagram 簡介：「【営業時間】平日12:00〜23:00 土日祝10:00〜21:00」「【アクセス】有楽町線江戸川橋駅 徒歩5分／東西線神楽坂駅 徒歩11分」。「ルート情報 ROUTE INFO」區塊列出各區換線封閉時段，例如「10月 ルートエリアセット情報 2026年10月22日(木)12：00 CLOSE ～ 10月23日(金)18：00 OPEN」「10月 2階ボルダー”Debut”セット情報 2026年10月12日(月)16：00 CLOSE ～」「10月 1階ボルダーエリアセット情報 2026年10月4日(日)18：00 CLOSE ～ 10月6日(火)18：00 OPEN」；「ピックアップ情報」另有「地下ルートクライミングエリア 塗装工事のお知らせ」的封閉公告。",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://b-camp.jp/edogawabashi/visitor/",
+          "title": "はじめての方へ - BASE CAMP TOKYO 江戸川橋",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:58Z",
+          "read_scope": "full",
+          "evidence": "「初回ボルダーインストラクション」：対象「クライミング未経験者」、料金「初回登録料1,100円＋施設利用料」、開催時間「随時」、「ボルダリングが初めての方はご来店時にスタッフまでお声がけください」、持ち物「動きやすい服装、靴下（レンタルシューズを履くため）」。「トップロープ体験のご案内」：対象「ボルダーインストラクションを受講された方またはボルダリング経験者」、時間「1時間」、料金「1,000円 (税込1,100円）（別途施設利用料）」、「講習案内ページ下部より開催スケジュールをご確認のうえ、ご予約をお願いいたします。予約定員制…ご予約は、HP予約フォーム・店頭受付またはお電話にて。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://b-camp.jp/edogawabashi/charge/",
+          "title": "営業時間・料金案内 - BASE CAMP TOKYO 江戸川橋",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:59Z",
+          "read_scope": "full",
+          "evidence": "「営業時間：平日12:00～23:00／土曜・日曜・祝日 10:00～21:00／定休日なし（臨時休業あり）」。「会員登録料 1,000円（税込1,100円）」「会員カードに有効期限はなく Base Camp 全ての店舗での共通となります。」施設利用料「一般 終日 2,200円（税込2,420円）」（平日與土日祝兩表皆同）。「レンタル用品など：シューズ 300円（税込330円）靴下をご持参ください／チョーク 100円（税込110円）／ハーネス 100円（税込110円）ルートエリア利用時に必要です／ビレイ器具 100円（税込110円）ルートエリア、ビレイの際に必要です／ロープ 500円（税込550円）リードクライミングの際に必要です」「初回登録時は、シューズ、チョーク、ハーネス、ビレイ器具（ATC）を無料でお使いいただけます。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "本段為編輯的行前準備建議。來源只支持背景：館內有抱石與繩索、首頁有換線日程、租借與體驗費用分列；不支持「先做這三件事」的順序建議本身，也不代表本站到館實測。"
+    },
+    {
+      "location": "正文段落 9",
+      "claim": "Renting equipment does not establish competence. Rope-use requirements and eligibility must follow the gym’s instructions. These checks help a short visit start with a clear purpose and reduce the chance of arriving during a closure of your chosen area. Prices and hours are a dated snapshot and need checking again for a future trip.",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "https://b-camp.jp/edogawabashi/",
+          "title": "BASE CAMP TOKYO 江戸川橋 - ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。 東京屈指の繁華街である池袋からもアクセス良好な立地に位置するBase Camp。 ボルダリングが初めての方へ、随時初回インストラクションを実施。",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:55Z",
+          "read_scope": "full",
+          "evidence": "頁面標題：「ボルダリング、リードクライミング・トップロープなど様々なクライミングが行える施設。江戸川橋駅徒歩5分。」頁內嵌入的官方 Instagram 簡介：「【営業時間】平日12:00〜23:00 土日祝10:00〜21:00」「【アクセス】有楽町線江戸川橋駅 徒歩5分／東西線神楽坂駅 徒歩11分」。「ルート情報 ROUTE INFO」區塊列出各區換線封閉時段，例如「10月 ルートエリアセット情報 2026年10月22日(木)12：00 CLOSE ～ 10月23日(金)18：00 OPEN」「10月 2階ボルダー”Debut”セット情報 2026年10月12日(月)16：00 CLOSE ～」「10月 1階ボルダーエリアセット情報 2026年10月4日(日)18：00 CLOSE ～ 10月6日(火)18：00 OPEN」；「ピックアップ情報」另有「地下ルートクライミングエリア 塗装工事のお知らせ」的封閉公告。",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://b-camp.jp/edogawabashi/charge/",
+          "title": "営業時間・料金案内 - BASE CAMP TOKYO 江戸川橋",
+          "publisher": "Base Camp Inc.（株式会社Base Camp）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:28:59Z",
+          "read_scope": "full",
+          "evidence": "「営業時間：平日12:00～23:00／土曜・日曜・祝日 10:00～21:00／定休日なし（臨時休業あり）」。「会員登録料 1,000円（税込1,100円）」「会員カードに有効期限はなく Base Camp 全ての店舗での共通となります。」施設利用料「一般 終日 2,200円（税込2,420円）」（平日與土日祝兩表皆同）。「レンタル用品など：シューズ 300円（税込330円）靴下をご持参ください／チョーク 100円（税込110円）／ハーネス 100円（税込110円）ルートエリア利用時に必要です／ビレイ器具 100円（税込110円）ルートエリア、ビレイの際に必要です／ロープ 500円（税込550円）リードクライミングの際に必要です」「初回登録時は、シューズ、チョーク、ハーネス、ビレイ器具（ATC）を無料でお使いいただけます。」",
+          "tool": "curl -sL（Chrome User-Agent），本機將 HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "本段是編輯對上述準備效果的看法，以及費用與營業時間為查核當日資料的提醒。來源只支持有換線封閉、費用與營業時間為 2026-10-12 讀取的版本；不支持「能避免撲空」這類效果。"
     }
   ],
   "links": [
     {
       "url": "https://b-camp.jp/edogawabashi/",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:28:55Z",
+      "tool": "curl -sL（Chrome User-Agent）",
       "status": "reachable",
       "status_code": 200,
-      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+      "reason": "HTTP 200、無重導；取得的頁面標題與內容和引用段落相符，無片段錨點。"
     },
     {
       "url": "https://b-camp.jp/edogawabashi/facilities/",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:28:57Z",
+      "tool": "curl -sL（Chrome User-Agent）",
       "status": "reachable",
       "status_code": 200,
-      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+      "reason": "HTTP 200、無重導；取得的頁面標題與內容和引用段落相符，無片段錨點。"
     },
     {
       "url": "https://b-camp.jp/edogawabashi/visitor/",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:28:58Z",
+      "tool": "curl -sL（Chrome User-Agent）",
       "status": "reachable",
       "status_code": 200,
-      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+      "reason": "HTTP 200、無重導；取得的頁面標題與內容和引用段落相符，無片段錨點。"
     },
     {
       "url": "https://b-camp.jp/edogawabashi/charge/",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:28:59Z",
+      "tool": "curl -sL（Chrome User-Agent）",
       "status": "reachable",
       "status_code": 200,
-      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+      "reason": "HTTP 200、無重導；取得的頁面標題與內容和引用段落相符，無片段錨點。"
     }
   ],
   "media": [],

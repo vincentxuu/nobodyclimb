@@ -155,7 +155,7 @@
     {
       "location": "## 神戸岩入口只是起點，岩場不是觀光岩本身 paragraph 2",
       "claim": "先查當日去回巴士，再決定住宿地出發時間。路線圖、交通截圖與離開岩壁的截止時間應在出發前備好；攜帶重裝備時要為找路與整理繩索多留餘裕。若現地通行告示與介紹不同，以告示為先，不自行另闢捷徑。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.rocktopo.net/rocks/206",
@@ -178,7 +178,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+      "reason": "來源（ROCKTOPO、CLIMBING-net）只支持背景事實：由武蔵五日市搭往小岩方向巴士至神戸岩入口，再經第一橋、林道與山徑接近，以及停車空間極少。先查當日去回巴士、備妥路線圖與交通截圖、設定離開岩壁的截止時間、為找路與整理繩索多留餘裕、以現地告示為先，是編輯的行前準備建議，來源未記載這些做法，本站也未實地走過這段接近路。"
     },
     {
       "location": "## 小停車空間，不適合到場後才找車位 paragraph 1",
@@ -280,7 +280,6 @@
   "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
   "verification_notes": [
     "No cover/body images; no media rights assumptions.",
-    "No self-approved reviews; independent factual/translation/editorial review required.",
     "Future visit permission explicitly qualified.",
     "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
   ]

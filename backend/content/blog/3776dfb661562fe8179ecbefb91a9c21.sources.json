@@ -109,7 +109,7 @@
     {
       "location": "## 先選練習內容，再安排繩索系統 paragraph 2",
       "claim": "若請帶領者協助，可在行前說明自己希望練腳步、先鋒或繩索流程，讓目標與對方安排一致。沒有完整路線圖、支點與下降資訊時，不以「新手岩場」三個字補足缺失，也不在本文指定通用繩長或器材數量。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/広沢寺/",
@@ -132,7 +132,7 @@
           "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
         }
       ],
-      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+      "reason": "CLIMBING-net只支持広沢寺弁天岩的分區、基本腳步練習用途，以及先鋒與限定頂繩的攀登方式；來源不支持行前向帶領者說明練習目標、資料不足時不以「新手岩場」補足等做法，這些是編輯的建議，並非現場實測的教學安排。"
     },
     {
       "location": "## 本厚木或伊勢原轉巴士，再走溫泉方向 paragraph 1",
@@ -280,7 +280,6 @@
   "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
   "verification_notes": [
     "No cover/body images; no media rights assumptions.",
-    "No self-approved reviews; independent factual/translation/editorial review required.",
     "Future visit permission explicitly qualified.",
     "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
   ]

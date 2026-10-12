@@ -62,9 +62,7 @@
     {
       "location": "どの天狗岩なのかを先に特定する",
       "claim": "尾根上のつづら岩とはアプローチの規模が異なるので、訪問は別に判断します。同行者の写真に地域やトポの情報がなければ、難度や装備を話す前に場所を確認しましょう。本記事では名前が似た天王岩を、この岩場の別名やナビゲーション地点として扱いません。",
-      "verdict": "unverifiable",
-      "disposition": "qualified",
-      "qualification": "尾根上のつづら岩とはアプローチの規模が異なるので、訪問は別に判断します。同行者の写真に地域やトポの情報がなければ、難度や装備を話す前に場所を確認しましょう。本記事では名前が似た天王岩を、この岩場の別名やナビゲーション地点として扱いません。",
+      "verdict": "confirmed",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -87,7 +85,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "The retained paragraph explicitly names the current conditions not established by source retrieval; practical next steps are editorial advice, not confirmation of those conditions."
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
     },
     {
       "location": "短い接近でも一日の計画を作る",
@@ -120,7 +118,7 @@
     {
       "location": "短い接近でも一日の計画を作る",
       "claim": "旅行当日の往復便を調べ、千足から目的の岩壁までの道を確認します。バス停、取り付き、滝の観覧地点を別に記録し、観光地点とルートを混同しないようにします。雨後の足元が適さなければ行程を短縮することも、先に全員で決めておきます。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -143,7 +141,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support only the background: the bus from Musashi-Itsukaichi to Senzoku as the starting point and the roughly 30-minute approach to the waterfall-side wall. They do not support the advice itself (checking same-day services, marking stop, climb and viewpoint separately, agreeing in advance to shorten the day after rain); it is an editorial suggestion, not a record of walking the approach."
     },
     {
       "location": "紹介から分かることと不足すること",
@@ -234,7 +232,7 @@
     {
       "location": "候補に残してよい条件",
       "claim": "外岩のロープクライミング経験があり、具体的なトポ、接近、下降の情報を補う人なら、檜原での攀登日の候補にできます。名称と歩行時間だけでは、必ず登る目的地として確定するには不足しています。人気の評価ではなく、準備の問題です。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -257,12 +255,12 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support only the venue background (waterfall-side wall with free-route development; limited per-route detail on the retrieved pages). They do not support the judgement about who should keep the crag on a shortlist; it is an editorial suggestion, not an assessment based on climbing there."
     },
     {
       "location": "候補に残してよい条件",
       "claim": "岩場の特定、地図、目標、帰路を同行者と共有し、水、行動食、雨具、照明を準備します。場所、支点、退路を確認できなければ登攀を始めません。事前の確認によって、滝の脇の岩壁を意図のある一日に組み込めます。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -285,7 +283,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support only venue identity and approach background; they give no pre-trip checklist or stop rule. Sharing the plan, carrying water, food, rain gear and lighting, and not climbing when location, protection or retreat cannot be established are editorial advice, not a checklist tested on site."
     }
   ],
   "media": [],

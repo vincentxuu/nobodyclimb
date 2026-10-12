@@ -118,7 +118,7 @@
     {
       "location": "A shorter approach still requires a complete plan",
       "claim": "Check outbound and return services for your actual travel date, then identify the path from Senzoku to the intended wall. Mark the bus stop, climb and waterfall viewpoint separately to avoid discovering that a sightseeing destination is not your route. Agree in advance that unsuitable post-rain footing may end the outing.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -141,7 +141,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support only the background: the bus from Musashi-Itsukaichi to Senzoku as the starting point and the roughly 30-minute approach to the waterfall-side wall. They do not support the advice itself (checking same-day services, marking stop, climb and viewpoint separately, agreeing in advance to shorten the day after rain); it is an editorial suggestion, not a record of walking the approach."
     },
     {
       "location": "What the sources establish—and leave open",
@@ -232,7 +232,7 @@
     {
       "location": "When to keep it on your shortlist",
       "claim": "Experienced outdoor rope climbers willing to obtain specific topo, approach and descent information can keep Tengu-iwa as a research candidate for a Hinohara day. A name and approximate walking time are insufficient for a firm climbing commitment. The issue is preparation, rather than a popularity ranking.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -255,12 +255,12 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support only the venue background (waterfall-side wall with free-route development; limited per-route detail on the retrieved pages). They do not support the judgement about who should keep the crag on a shortlist; it is an editorial suggestion, not an assessment based on climbing there."
     },
     {
       "location": "When to keep it on your shortlist",
       "claim": "Share the crag identity, map, objectives and return plan with partners; prepare water, food, rain protection and lighting. If you cannot establish the location, protection or retreat, do not begin climbing. Completing that preparation makes the waterfall wall a purposeful destination.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -283,7 +283,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support only venue identity and approach background; they give no pre-trip checklist or stop rule. Sharing the plan, carrying water, food, rain gear and lighting, and not climbing when location, protection or retreat cannot be established are editorial advice, not a checklist tested on site."
     }
   ],
   "media": [],

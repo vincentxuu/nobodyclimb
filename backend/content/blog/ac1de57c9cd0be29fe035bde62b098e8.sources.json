@@ -2,122 +2,279 @@
   "schema_version": 1,
   "article_id": "ac1de57c9cd0be29fe035bde62b098e8",
   "source_sha256": "197bb3a0247eb9e19a631f8c835a71fe05d35abb886c7885aa0aaebe3ca9f000",
-  "checked_at": "2026-10-12T00:52:13.807630+00:00",
+  "checked_at": "2026-10-12T07:32:04Z",
   "claims": [
     {
-      "location": "title/excerpt/intro; 進山／Approach／入山; 選線／Route／ルート",
-      "claim": "北漢山仁壽峰花崗岩、岩板裂隙多繩距傳統攀登及run-out sport；東側牛耳站/道詵寺；路線名稱Chouinard A/B、Insu A/B",
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場地、攀登類型和決策用途；分類 travel，標籤「首爾攀岩」「岩場指南」。Insubong: plan permits and descent before a Seoul granite climb / Granite cracks and slabs require a different plan from a gym visit. Check park applications, approach orientation and route-specific descent before committing.",
       "verdict": "confirmed",
       "sources": [
         {
           "url": "https://www.mountainproject.com/area/106225638/insu-bong-bukhansan",
           "title": "Rock Climbing in Insu-bong (Bukhansan), Seoul/Gyeonggi-do (Northwest Korea)",
-          "publisher": "Mountain Project 社群",
+          "publisher": "Mountain Project（使用者貢獻的社群資料庫）",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "accessed_at": "2026-10-12T07:29:07Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線列表。Description：「Fantastic multipitch granite domes within an ancient fortress. … Trad as well as super run-out sport. Mostly slab and crack climbing.」Getting There 為署名更新「6/25/2022 - Chan」：「The approach hike to Insu-bong is on the east side of Bukhansan National Park just north of Seoul」，提到「Bukhansan Ui Station or 우이역」、朝「Doseongsa Temple (도선사)」方向，並列出停車每小時 2,500 won、上山共乘計程車每人 2000 won、下山每人 1000 won。路線列表含 Chouinard A（Trad 4 pitches）、Chouinard B（Trad 5 pitches）、Insu A（Trad 4 pitches）、Insu B（Trad 5 pitches）。頁面未提供步行時間保證，也未談申請制度；照片與留言區未逐一閱讀。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://www.knps.or.kr/smartsafe/permission/list.do",
+          "title": "스마트워치 상황관제 시스템",
+          "publisher": "국립공원공단（韓國國立公園公團，KNPS）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:09Z",
           "read_scope": "full",
-          "evidence": "Description identifies granite multipitch, slab and crack, trad and run-out sport. Getting There update dated2022 gives Bukhansan Ui and Doseonsa. Route table lists names. Old taxi and parking figures omitted, no universal equipment claim.",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "「암벽이용 신청 서비스」頁全文（韓文）。規則原文：「예약 가능 날짜: 오늘을 기준으로 3일 뒤부터 최대 30일 뒤까지의 일정을 예약할 수 있습니다. (당일~2일 뒤는 예약 불가)」「새로운 날짜 오픈 시간: 매일 오전 10시가 되면 새로운 예약 날짜(30일 뒤 날짜)가 하루씩 추가로 열립니다.」「신청 인원: 한 번 신청할 때 본인을 포함해서 최소 2명에서 최대 5명까지 예약할 수 있습니다. (1명은 신청 불가)」「*최종 확인 문자를 받은 신청자에 한해 암벽이용이 가능합니다.」另寫明最遲於使用日 2 日前以簡訊通知確認結果，且各路線名額提前額滿時使用可能受限。國立公園選項共 10 個，含「북한산」與「북한산도봉」。頁面沒有出現「외국인」（外國人）字樣，也沒有列出個別岩壁或名額；選公園之後的表單（需送出表單）未操作。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+      "reason": "標題與摘要的場地性質（首爾北漢山、花崗岩、裂隙與岩板、多繩距）由 Mountain Project 支持；「國立公園岩壁申請」由 KNPS 申請頁支持。摘要提到的未確認事項對應正文段落 6。標籤「首爾攀岩」：Mountain Project 寫場地在北漢山國立公園、首爾北側。"
     },
     {
-      "location": "國立公園申請／Park application／申請",
-      "claim": "入口含북한산及북한산도봉；3–30日前、10:00新日期、2–5人、最終核准SMS；不等於特定岩壁已許可",
+      "location": "正文段落 1",
+      "claim": "Insubong (인수봉, also written Insu-bong) is a roped-climbing destination in Seoul’s Bukhansan area. Its appeal is a full mountain day on granite slabs, cracks and multipitch terrain. The [Mountain Project area description](https://www.mountainproject.com/area/106225638/insu-bong-bukhansan) describes traditional climbing and also warns of very widely spaced protection on some sport climbs. A familiar numerical grade should not turn this into the outdoor equivalent of a gym route.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/106225638/insu-bong-bukhansan",
+          "title": "Rock Climbing in Insu-bong (Bukhansan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project（使用者貢獻的社群資料庫）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:07Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線列表。Description：「Fantastic multipitch granite domes within an ancient fortress. … Trad as well as super run-out sport. Mostly slab and crack climbing.」Getting There 為署名更新「6/25/2022 - Chan」：「The approach hike to Insu-bong is on the east side of Bukhansan National Park just north of Seoul」，提到「Bukhansan Ui Station or 우이역」、朝「Doseongsa Temple (도선사)」方向，並列出停車每小時 2,500 won、上山共乘計程車每人 2000 won、下山每人 1000 won。路線列表含 Chouinard A（Trad 4 pitches）、Chouinard B（Trad 5 pitches）、Insu A（Trad 4 pitches）、Insu B（Trad 5 pitches）。頁面未提供步行時間保證，也未談申請制度；照片與留言區未逐一閱讀。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "來源事實：Mountain Project 的 Description 寫明花崗岩多繩距、傳統攀登與「super run-out sport」、以岩板與裂隙為主，Getting There 另寫接近路線在北漢山國立公園東側、首爾北方。「不是下車後立刻攀爬」與末句「不要把它當成室內同級路線的旅行版」是編輯的提醒，來源沒有這樣寫。"
+    },
+    {
+      "location": "正文段落 2",
+      "claim": "This is an itinerary guide, not a substitute for a topo or local leadership. It is a research starting point for teams able to plan multipitch climbing, protection and descent. If your experience is limited to bouldering or indoor lead climbing, discuss the day with someone who knows the area before choosing a line that merely looks easy.",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/106225638/insu-bong-bukhansan",
+          "title": "Rock Climbing in Insu-bong (Bukhansan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project（使用者貢獻的社群資料庫）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:07Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線列表。Description：「Fantastic multipitch granite domes within an ancient fortress. … Trad as well as super run-out sport. Mostly slab and crack climbing.」Getting There 為署名更新「6/25/2022 - Chan」：「The approach hike to Insu-bong is on the east side of Bukhansan National Park just north of Seoul」，提到「Bukhansan Ui Station or 우이역」、朝「Doseongsa Temple (도선사)」方向，並列出停車每小時 2,500 won、上山共乘計程車每人 2000 won、下山每人 1000 won。路線列表含 Chouinard A（Trad 4 pitches）、Chouinard B（Trad 5 pitches）、Insu A（Trad 4 pitches）、Insu B（Trad 5 pitches）。頁面未提供步行時間保證，也未談申請制度；照片與留言區未逐一閱讀。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "本段說明本文定位與適合的隊伍，是編輯的判斷與建議；Mountain Project 只支持「多繩距、傳統攀登、run-out」這些背景，沒有給出適用對象或能力門檻。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "The community page places the approach on the east side of Bukhansan and mentions Bukhansan Ui Station (북한산우이역) and Doseonsa Temple (도선사). Use those names to orient your research, then confirm the current approach with the park or a local partner. The page contains transport and shared-taxi prices from 2022; this guide does not present those as current quotes or promise a fixed walking time.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/106225638/insu-bong-bukhansan",
+          "title": "Rock Climbing in Insu-bong (Bukhansan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project（使用者貢獻的社群資料庫）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:07Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線列表。Description：「Fantastic multipitch granite domes within an ancient fortress. … Trad as well as super run-out sport. Mostly slab and crack climbing.」Getting There 為署名更新「6/25/2022 - Chan」：「The approach hike to Insu-bong is on the east side of Bukhansan National Park just north of Seoul」，提到「Bukhansan Ui Station or 우이역」、朝「Doseongsa Temple (도선사)」方向，並列出停車每小時 2,500 won、上山共乘計程車每人 2000 won、下山每人 1000 won。路線列表含 Chouinard A（Trad 4 pitches）、Chouinard B（Trad 5 pitches）、Insu A（Trad 4 pitches）、Insu B（Trad 5 pitches）。頁面未提供步行時間保證，也未談申請制度；照片與留言區未逐一閱讀。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "來源事實：Mountain Project 的 Getting There（署名更新日期 6/25/2022）寫接近路線在北漢山國立公園東側，提到 Bukhansan Ui Station／우이역 與 도선사，並列出停車與共乘計程車的金額。正文未引用這些金額，也未承諾步行時間，與來源範圍相符。「再向公園或當地夥伴確認當期路徑」是編輯建議。站名的韓文全稱「북한산우이역」與漢字「道詵寺」是正文的寫法，來源頁面寫的是「Bukhansan Ui Station or 우이역」「Doseongsa Temple (도선사)」。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "Count transport, approach, preparation, climbing, descent and leaving the mountain in the day from your Seoul accommodation. Being reachable from the city does not establish that a climb fits within daylight. A plan without descent time should not rely solely on an earlier start.",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/106225638/insu-bong-bukhansan",
+          "title": "Rock Climbing in Insu-bong (Bukhansan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project（使用者貢獻的社群資料庫）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:07Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線列表。Description：「Fantastic multipitch granite domes within an ancient fortress. … Trad as well as super run-out sport. Mostly slab and crack climbing.」Getting There 為署名更新「6/25/2022 - Chan」：「The approach hike to Insu-bong is on the east side of Bukhansan National Park just north of Seoul」，提到「Bukhansan Ui Station or 우이역」、朝「Doseongsa Temple (도선사)」方向，並列出停車每小時 2,500 won、上山共乘計程車每人 2000 won、下山每人 1000 won。路線列表含 Chouinard A（Trad 4 pitches）、Chouinard B（Trad 5 pitches）、Insu A（Trad 4 pitches）、Insu B（Trad 5 pitches）。頁面未提供步行時間保證，也未談申請制度；照片與留言區未逐一閱讀。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "本段是編輯的整日時間規劃建議；Mountain Project 只支持「從首爾市區可搭地鐵到接近起點、路線為多繩距」的背景，沒有提供攀登或下降所需時間，也不支持這項安排本身。"
+    },
+    {
+      "location": "正文段落 5",
+      "claim": "The [national park rock-climbing application page](https://www.knps.or.kr/smartsafe/permission/list.do) includes Bukhansan. Its published rules allow applications for dates three to thirty days ahead, with a new date released at 10:00. Teams must have two to five people and receive final approval by text message before using the rock. This is distinct from ordinary trail access; a hiking trail does not establish climbing permission.",
       "verdict": "confirmed",
       "sources": [
         {
           "url": "https://www.knps.or.kr/smartsafe/permission/list.do",
           "title": "스마트워치 상황관제 시스템",
-          "publisher": "KNPS 國立公園公團",
+          "publisher": "국립공원공단（韓國國立公園公團，KNPS）",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "accessed_at": "2026-10-12T07:29:09Z",
           "read_scope": "full",
-          "evidence": "Public application rules list both park choices, party bounds and advance date window; final approval SMS is required. Dynamic wall/date and foreign-visitor registration have not been tested.",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "「암벽이용 신청 서비스」頁全文（韓文）。規則原文：「예약 가능 날짜: 오늘을 기준으로 3일 뒤부터 최대 30일 뒤까지의 일정을 예약할 수 있습니다. (당일~2일 뒤는 예약 불가)」「새로운 날짜 오픈 시간: 매일 오전 10시가 되면 새로운 예약 날짜(30일 뒤 날짜)가 하루씩 추가로 열립니다.」「신청 인원: 한 번 신청할 때 본인을 포함해서 최소 2명에서 최대 5명까지 예약할 수 있습니다. (1명은 신청 불가)」「*최종 확인 문자를 받은 신청자에 한해 암벽이용이 가능합니다.」另寫明最遲於使用日 2 日前以簡訊通知確認結果，且各路線名額提前額滿時使用可能受限。國立公園選項共 10 個，含「북한산」與「북한산도봉」。頁面沒有出現「외국인」（外國人）字樣，也沒有列出個別岩壁或名額；選公園之後的表單（需送出表單）未操作。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+      "reason": "來源事實（KNPS 岩壁使用申請頁，韓文原文已讀）：國立公園選項含「북한산」；可預約今日起 3 日後至最多 30 日後（當日至 2 日後不可）；每日上午 10 時新增一個預約日；每件申請含申請人 2 至 5 人；只有收到最終確認簡訊的申請人可使用岩壁。末句「這不是一般步道門票，也不能用有登山步道推定可以攀岩」是編輯依申請制度所作的提醒，來源沒有這句話。"
     },
     {
-      "location": "最終確認／Final checks／最終確認",
-      "claim": "官方要求核對入山時間制度和步道管制",
-      "verdict": "confirmed",
+      "location": "正文段落 6",
+      "claim": "This research has not confirmed availability for a particular Insubong wall and date, the applicable sectors or the application process for foreign visitors; ask the park office first. Do so before booking transport or a guiding service. Give your intended date, party size, wall and visitor status. Finding a form does not mean your application has been approved.",
+      "verdict": "unverifiable",
       "sources": [
         {
-          "url": "https://www.knps.or.kr/front/portal/visit/visitCourseSubMain.do?menuNo=7020092&parkId=121500&parkNavGb=guide",
-          "title": "코스별난이도 < 북한산국립공원 < 국립공원탐방 < 국립공원공단",
-          "publisher": "KNPS 國立公園公團",
+          "url": "https://www.knps.or.kr/smartsafe/permission/list.do",
+          "title": "스마트워치 상황관제 시스템",
+          "publisher": "국립공원공단（韓國國立公園公團，KNPS）",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "accessed_at": "2026-10-12T07:29:09Z",
           "read_scope": "full",
-          "evidence": "Official visitor guide section 탐방전 asks checking 입산시간지정제 and 탐방로 통제현황. Text supplies planning advice, not hardware inspection.",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "「암벽이용 신청 서비스」頁全文（韓文）。規則原文：「예약 가능 날짜: 오늘을 기준으로 3일 뒤부터 최대 30일 뒤까지의 일정을 예약할 수 있습니다. (당일~2일 뒤는 예약 불가)」「새로운 날짜 오픈 시간: 매일 오전 10시가 되면 새로운 예약 날짜(30일 뒤 날짜)가 하루씩 추가로 열립니다.」「신청 인원: 한 번 신청할 때 본인을 포함해서 최소 2명에서 최대 5명까지 예약할 수 있습니다. (1명은 신청 불가)」「*최종 확인 문자를 받은 신청자에 한해 암벽이용이 가능합니다.」另寫明最遲於使用日 2 日前以簡訊通知確認結果，且各路線名額提前額滿時使用可能受限。國立公園選項共 10 個，含「북한산」與「북한산도봉」。頁面沒有出現「외국인」（外國人）字樣，也沒有列出個別岩壁或名額；選公園之後的表單（需送出表單）未操作。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
+        },
+        {
+          "url": "https://www.knps.or.kr/smartsafe/cms/contents.do?cmsSeq=28",
+          "title": "스마트워치 상황관제 시스템",
+          "publisher": "국립공원공단（韓國國立公園公團，KNPS）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:12Z",
+          "read_scope": "full",
+          "evidence": "「등반 이용 신청 안내」頁全文（韓文，為文字不是圖片）。「등반시작 확인 : 이용당일 입산 시 받은 문자의 링크 주소를 통해 등반시작을 확인 합니다. ※ 단, 해당 국립공원 권역에 입산하여 신청자 스마트폰의 GPS(위치조회)가 켜진 상태여야 등반시작 확인을 할 수 있습니다.」「※ 등반시작 확인은 이용일 당일 16시까지 확인 해 주셔야 등반시작 확인 처리 됩니다. ( 16시 이후 등반시작 확인은 불가하며 등반하지 않은 것으로 간주되어 자동으로 부도처리 됩니다.)」「등반완료 확인 : 하산 시 받은 문자의 링크 주소를 통해 등반완료를 확인 합니다.」另載：兩日以上的使用在最後一天做完成確認；收訊不良無法確認時聯絡該國立公園處理；未到（부도）1 次停止申請 1 個月、2 次以上 3 個月；氣象特報或事故時管理者可取消。頁面沒有出現「외국인」字樣。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
         }
       ],
-      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
-    },
-    {
-      "location": "首次／申請限制",
-      "claim": "外籍登記與当期服務／岩壁名額適用條件尚未驗證",
-      "verdict": "unverifiable",
-      "sources": [],
-      "reason": "公開資料不足以確認特定旅客和指定日期的適用情況；正文明列先詢問再安排。",
+      "reason": "本段陳述本文未查證的範圍，並建議先向管理處確認。這次讀到的兩個 KNPS 頁面都沒有外籍旅客的申請說明，也沒有列出仁壽峰個別岩壁或指定日期的名額（選公園後的表單未操作），所以這些事項無法由來源確認；qualification 取正文說明未驗的那一句。",
       "disposition": "qualified",
       "qualification": "This research has not confirmed availability for a particular Insubong wall and date, the applicable sectors or the application process for foreign visitors; ask the park office first."
     },
     {
-      "location": "申請後當日程序",
-      "claim": "核准不替代16:00前園內GPS簡訊開始確認與離山結束確認",
+      "location": "正文段落 7",
+      "claim": "Approval is followed by a same-day confirmation procedure. The [official application instructions](https://www.knps.or.kr/smartsafe/cms/contents.do?cmsSeq=28) require confirming the climbing start from within the park through the text-message link and GPS before 16:00, and confirming completion when leaving. Keeping the approval message does not replace these start and completion steps; clarify the details with the park office when applying.",
       "verdict": "confirmed",
       "sources": [
         {
           "url": "https://www.knps.or.kr/smartsafe/cms/contents.do?cmsSeq=28",
           "title": "스마트워치 상황관제 시스템",
-          "publisher": "KNPS 國立公園公團",
+          "publisher": "국립공원공단（韓國國立公園公團，KNPS）",
           "source_date": null,
-          "accessed_at": "2026-10-12T00:55:34.481854+00:00",
+          "accessed_at": "2026-10-12T07:29:12Z",
           "read_scope": "full",
-          "evidence": "申請說明當日登攀確認：簡訊連結、園內GPS、16:00前開始確認，離山完成確認；未確認可視為未使用。",
-          "tool": "Groundlane web_fetch extract=full"
+          "evidence": "「등반 이용 신청 안내」頁全文（韓文，為文字不是圖片）。「등반시작 확인 : 이용당일 입산 시 받은 문자의 링크 주소를 통해 등반시작을 확인 합니다. ※ 단, 해당 국립공원 권역에 입산하여 신청자 스마트폰의 GPS(위치조회)가 켜진 상태여야 등반시작 확인을 할 수 있습니다.」「※ 등반시작 확인은 이용일 당일 16시까지 확인 해 주셔야 등반시작 확인 처리 됩니다. ( 16시 이후 등반시작 확인은 불가하며 등반하지 않은 것으로 간주되어 자동으로 부도처리 됩니다.)」「등반완료 확인 : 하산 시 받은 문자의 링크 주소를 통해 등반완료를 확인 합니다.」另載：兩日以上的使用在最後一天做完成確認；收訊不良無法確認時聯絡該國立公園處理；未到（부도）1 次停止申請 1 個月、2 次以上 3 個月；氣象特報或事故時管理者可取消。頁面沒有出現「외국인」字樣。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
         }
       ],
-      "reason": "已讀完整申請說明對應段落；限定外籍適用細節仍需管理處確認。"
+      "reason": "來源事實（KNPS「등반 이용 신청 안내」，韓文原文已讀）：使用當日入山時透過收到簡訊的連結確認開始攀登，須已進入該國立公園範圍且手機 GPS 開啟；須於使用日當天 16 時前完成，逾時視為未攀登並自動記為未到；下山時透過簡訊連結確認完成。「不能只保留核准簡訊就略過」與「細節請在申請時向管理處確認」是編輯的提醒。"
+    },
+    {
+      "location": "正文段落 8",
+      "claim": "The community listing includes names such as Chouinard A, Chouinard B, Insu A and Insu B. They are keywords for finding a topo, not a reason to replace pitch-by-pitch information with one overall grade. Confirm each pitch’s protection, current fixed hardware, length, belay stations, descent line and retreat options. Slabs and cracks require different decisions, and the presence of bolts alone does not establish the rack you need.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/106225638/insu-bong-bukhansan",
+          "title": "Rock Climbing in Insu-bong (Bukhansan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project（使用者貢獻的社群資料庫）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:07Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線列表。Description：「Fantastic multipitch granite domes within an ancient fortress. … Trad as well as super run-out sport. Mostly slab and crack climbing.」Getting There 為署名更新「6/25/2022 - Chan」：「The approach hike to Insu-bong is on the east side of Bukhansan National Park just north of Seoul」，提到「Bukhansan Ui Station or 우이역」、朝「Doseongsa Temple (도선사)」方向，並列出停車每小時 2,500 won、上山共乘計程車每人 2000 won、下山每人 1000 won。路線列表含 Chouinard A（Trad 4 pitches）、Chouinard B（Trad 5 pitches）、Insu A（Trad 4 pitches）、Insu B（Trad 5 pitches）。頁面未提供步行時間保證，也未談申請制度；照片與留言區未逐一閱讀。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "來源事實：Mountain Project 路線列表有 Chouinard A、Chouinard B、Insu A、Insu B，皆標為 Trad 多繩距（4 至 5 段）。其餘內容（逐段確認保護、固定點、確保站、下降與撤退；岩板與裂隙操作不同；不能只看有無 bolt）是編輯的選線建議，來源只提供「trad 與 run-out sport、岩板與裂隙」的背景，沒有逐段資料。"
+    },
+    {
+      "location": "正文段落 9",
+      "claim": "This guide therefore offers no universal “one 60-metre rope is enough” list. Rope and descent equipment must fit current information for the chosen route. Resolve those requirements before deciding whether the climb suits the team. If descent information, protection or identifying the line remains unclear, seek someone familiar with the area or change the plan.",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/106225638/insu-bong-bukhansan",
+          "title": "Rock Climbing in Insu-bong (Bukhansan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project（使用者貢獻的社群資料庫）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:07Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線列表。Description：「Fantastic multipitch granite domes within an ancient fortress. … Trad as well as super run-out sport. Mostly slab and crack climbing.」Getting There 為署名更新「6/25/2022 - Chan」：「The approach hike to Insu-bong is on the east side of Bukhansan National Park just north of Seoul」，提到「Bukhansan Ui Station or 우이역」、朝「Doseongsa Temple (도선사)」方向，並列出停車每小時 2,500 won、上山共乘計程車每人 2000 won、下山每人 1000 won。路線列表含 Chouinard A（Trad 4 pitches）、Chouinard B（Trad 5 pitches）、Insu A（Trad 4 pitches）、Insu B（Trad 5 pitches）。頁面未提供步行時間保證，也未談申請制度；照片與留言區未逐一閱讀。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "本段是編輯對繩索與下降裝備的判斷建議；Mountain Project 這次讀到的區域頁沒有給出繩長或裝備清單，只支持「多繩距、傳統攀登」的背景，不支持建議本身。"
+    },
+    {
+      "location": "正文段落 10",
+      "claim": "The [official Bukhansan visitor page](https://www.knps.or.kr/front/portal/visit/visitCourseSubMain.do?menuNo=7020092&parkId=121500&parkNavGb=guide) advises checking designated entry times and trail restrictions. Check approval and current restrictions first, then weather and the chosen route. Agree with your partner on when to stop climbing, how to descend and what to do if progress is slower than planned.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.knps.or.kr/front/portal/visit/visitCourseSubMain.do?menuNo=7020092&parkId=121500&parkNavGb=guide",
+          "title": "코스별난이도 < 북한산국립공원 < 국립공원탐방 < 국립공원공단",
+          "publisher": "국립공원공단（韓國國立公園公團，KNPS）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:10Z",
+          "read_scope": "partial",
+          "evidence": "北漢山國立公園「코스별난이도／탐방코스」頁（韓文）。탐방코스 區塊原文：「탐방전 [입산시간지정제] 및 [탐방로 통제현황] 정보를 꼭 확인 해 주세요.」（出發前務必確認入山時間指定制與步道管制現況）。讀取當下頁面另顯示「실시간 통제정보 부분통제」。此頁列的是健行路線（백운대코스、우이암코스 等），沒有攀岩或仁壽峰岩壁的規則；地圖與各路線詳情為圖片或需點選的內容，未讀。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "來源事實（KNPS 北漢山頁，韓文原文已讀）：「탐방전 [입산시간지정제] 및 [탐방로 통제현황] 정보를 꼭 확인 해 주세요.」即出發前確認入山時間指定制與步道管制現況。第二句起的查核先後順序與和夥伴的約定事項是編輯建議，來源沒有規定順序；該頁是一般健行路線頁，不含攀岩規則。"
+    },
+    {
+      "location": "正文段落 11",
+      "claim": "Insubong can be a central part of a Seoul climbing trip when permission, route requirements and team skills align. Public sources were checked on 12 October 2026. This is neither an inspection of fixed hardware nor a NobodyClimb first-hand climbing report.",
+      "verdict": "editorial",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/106225638/insu-bong-bukhansan",
+          "title": "Rock Climbing in Insu-bong (Bukhansan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project（使用者貢獻的社群資料庫）",
+          "source_date": null,
+          "accessed_at": "2026-10-12T07:29:07Z",
+          "read_scope": "partial",
+          "evidence": "讀了 Description、Getting There 與路線列表。Description：「Fantastic multipitch granite domes within an ancient fortress. … Trad as well as super run-out sport. Mostly slab and crack climbing.」Getting There 為署名更新「6/25/2022 - Chan」：「The approach hike to Insu-bong is on the east side of Bukhansan National Park just north of Seoul」，提到「Bukhansan Ui Station or 우이역」、朝「Doseongsa Temple (도선사)」方向，並列出停車每小時 2,500 won、上山共乘計程車每人 2000 won、下山每人 1000 won。路線列表含 Chouinard A（Trad 4 pitches）、Chouinard B（Trad 5 pitches）、Insu A（Trad 4 pitches）、Insu B（Trad 5 pitches）。頁面未提供步行時間保證，也未談申請制度；照片與留言區未逐一閱讀。",
+          "tool": "curl -sL（瀏覽器 User-Agent），HTML 轉純文字後閱讀"
+        }
+      ],
+      "reason": "本段是編輯對「何時值得排成攀登日」的建議，並說明查核日與本文性質；來源只支持仁壽峰是首爾近郊多繩距場地的背景，不支持這項取捨。「公開資料查核日 2026 年 10 月 12 日」與這次重新讀取四個來源頁的日期（UTC 2026-10-12）相符。"
     }
   ],
   "links": [
     {
       "url": "https://www.mountainproject.com/area/106225638/insu-bong-bukhansan",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:29:07Z",
+      "tool": "curl -sL（瀏覽器 User-Agent）",
       "status": "reachable",
       "status_code": 200,
-      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+      "reason": "HTTP 200，取得仁壽峰區域頁，讀到 Description、Getting There 與路線列表。"
     },
     {
       "url": "https://www.knps.or.kr/smartsafe/permission/list.do",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:29:09Z",
+      "tool": "curl -sL（瀏覽器 User-Agent）",
       "status": "reachable",
       "status_code": 200,
-      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+      "reason": "HTTP 200，取得岩壁使用申請頁，讀到預約規則與國立公園選項。"
     },
     {
       "url": "https://www.knps.or.kr/front/portal/visit/visitCourseSubMain.do?menuNo=7020092&parkId=121500&parkNavGb=guide",
-      "checked_at": "2026-10-12T00:52:13.807630+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:29:10Z",
+      "tool": "curl -sL（瀏覽器 User-Agent）",
       "status": "reachable",
       "status_code": 200,
-      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+      "reason": "HTTP 200，取得北漢山國立公園路線頁，讀到出發前確認入山時間指定制與管制現況的提示。"
     },
     {
       "url": "https://www.knps.or.kr/smartsafe/cms/contents.do?cmsSeq=28",
-      "checked_at": "2026-10-12T00:55:34.481854+00:00",
-      "tool": "Groundlane web_fetch extract=full",
+      "checked_at": "2026-10-12T07:29:12Z",
+      "tool": "curl -sL（瀏覽器 User-Agent）",
       "status": "reachable",
       "status_code": 200,
-      "reason": "官方頁200全文，申請說明對應當日確認程序。"
+      "reason": "HTTP 200，取得申請說明頁，讀到開始與完成確認的方法及未到規定。"
     }
   ],
   "media": [],

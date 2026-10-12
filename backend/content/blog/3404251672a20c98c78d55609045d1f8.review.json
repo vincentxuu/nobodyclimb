@@ -2,29 +2,39 @@
   "schema_version": 1,
   "article_id": "3404251672a20c98c78d55609045d1f8",
   "source_sha256": "adcd956db07093d432bea5d4f51f9b242d6dce56f3dc7390255f7c73712cd2ea",
-  "evidence_sha256": "6f442a7053f9d7756d9145574da2a396b994f1927af0cdd07e3bcc88a5f18d5d",
-  "reviewed_at": "2026-10-12T00:57:33.346526+00:00",
-  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "evidence_sha256": "6bfc0ddeb2ac4e8a943286136cb1747a015172ec6f00b79b113b2d052188abfe",
+  "reviewed_at": "2026-10-12T07:55:22Z",
+  "reviewer": "Claude 獨立審稿 subagent（未參與寫稿與本次修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "raw fetch-0 支持七條、石灰岩與四條路線grade；kernel-extra BETA的日向和田約5分與青梅定位支持帶歸屬引用。Rose Town停車原文「とのこと」已保留。"
+      "notes": "本次重審實際核對：(1) git diff：本篇原稿無變更；台帳有三處變更——「選線」段第 2 段（「A grade alone does not describe the movement…」）與「交通」段第 2 段的 remainder（「If you cannot reach someone who can confirm them…」）兩筆由 confirmed 改標 editorial 並改寫 reason；verification_notes 刪除過期的 \"No self-approved reviews…\" 一句（恰當）。(2) 兩筆 editorial 的判斷：選線段第 2 段是「同級不同壁形可能要不同動作、先列一條有餘裕的線與一條嘗試線、小岩場替代有限要願意調整」的選線建議，段內沒有獨立的數字或規則，改標恰當；交通段 remainder 是「聯繫不到確認對象就保留替代場地、不臨場穿越店家土地或找路邊空位」的備案建議，加上「約 5 分鐘只引自活動說明、其餘未確認」的範圍聲明，沒有新的事實主張（約 5 分鐘本身在前一段的 confirmed claim 已有來源），改標恰當。(3) reason 屬實：ROCKTOPO rocks/8264 的 evidence 有四條路線難度、中央小ハング、片狀岩與口袋越仰角；areas/1797 的 evidence 有登錄 7 條；BETA 的 evidence 有 JR 日向和田步行約 5 分；ROCKTOPO 停車註記「とのこと」。reason 沒有宣稱正文已標明為編輯建議，語句完整。(4) 以程式確認正文各筆 claim 逐字存在於原稿（frontmatter 那筆為標題／摘要並列），unverifiable 那筆的 qualification 逐字存在於原稿，台帳 source_sha256 等於原稿實際 SHA-256。(5) 以 curl 重新取得三個來源（皆 HTTP 200）核對：ROCKTOPO areas/1797 東京都、石灰岩、シーズン 1/2/3/4/5/10/11/12 月、リード（フェイス）7 ルート；rocks/8264 プレイヤー 5.9、セント・フローリア 5.10a（正面壁中央、途中の小ハング）、ぶらり 5.10c、カモン・エディ！5.11a（顕著なハングをフレークやポケットで越える）、「Rose Town Tea Gardenの駐車場が利用可能とのこと」；BETA 頁「東京都青梅市・カーネルロック」「日向和田の駅から徒歩5分程度」「ルートは7本」「石灰岩」。均與正文相符。另外注意到（不屬本輪修改，列為 advisory）：BETA 頁寫的是「岩場の利用料として500円が必要です」，台帳 evidence 記成「講習利用料500円」，與原文不符；同頁並指出トポ與注意事項刊在奥多摩クライミングセンター的網站，本文與台帳都沒有引用該站，我這次也沒有去讀。未做：管理單位或店家的現行公告、停車與收費條件、當日接近路徑、topo 圖與繩長，未實地。"
     },
     "translation": {
       "passed": true,
-      "notes": "三語7、5.9/5.10a/5.10c/5.11a及管理公告缺口一致。"
+      "notes": "本次重新逐段對照 zh／en／ja 全文：7 條登錄路線、石灰岩、2026 年 10 月 12 日讀取、四條路線與難度（5.9／5.10a／5.10c／5.11a）、日向和田步行約 5 分鐘及其「只引自活動說明」的歸屬、停車註記不等於店家同意、未取得管理單位公告、未確認進入／停車／收費、沒有全岩場通用繩長與快扣數、季節欄不是岩況預報，三語一致，沒有哪一語多出承諾。非必修差異：日文選線段寫「必要な動きが違います」，比中文「可能要求不同動作」與英文 \"can ask something different\" 肯定；英文與日文省略中文「不把翻譯名當成現地標示」；三語小標題各自改寫但對應同一段。"
     },
     "editorial": {
       "passed": true,
-      "notes": "重讀三語全文與更新台帳：5分鐘明确只歸屬BETA活動說明，獨立旅客當日接近路徑/耗時、停車與營業未確認，不再自相矛盾。7路線與各grade/限制均保留；段落接縫自然。"
+      "notes": "本次重讀全文：規模與選線、壁形、交通與停車保留、裝備交給實際選線、季節與彈性，可獨立閱讀，沒有虛構現場經驗。en 原稿本輪無文字變更，台帳 claim 為英文原文。三語台帳兩筆 editorial 的 location 對應、verdict、reason、sources 一致，且沒有 disposition／qualification。仍標 confirmed 的各筆裡，「裝備」段第 1 段主體是「取得的文字不足以支持通用繩長」加上裝備確認建議，沒有來源事實作主體，按本輪標準也可改標 editorial（advisory，不擋核准）；其餘 confirmed 為事實主體或事實與建議混合，可接受。"
     }
   },
   "findings": [
     {
-      "severity": "blocking",
+      "severity": "advisory",
       "resolved": true,
-      "notes": "三語約5分鐘明確只歸屬BETA活動說明，獨立旅客當日路徑與耗時未確認；對照kernel-extra及ROCKTOPO原文，與其他段落無矛盾。"
+      "notes": "本輪兩筆改標 editorial（選線段第 2 段、交通段第 2 段 remainder）經逐筆檢視恰當，reason 與 evidence 相符，三語一致；刪除 verification_notes 的過期句恰當。先前的必修問題（約 5 分鐘只歸屬 BETA 活動說明）這次重新確認仍已解決。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "非本輪修改、不擋核准：BETA 活動頁原文是「岩場の利用料として500円が必要です」，台帳 evidence 記為「講習利用料500円」，建議改成與原文一致。正文寫「未確認收費條件」並未錯，但本文引用的同一頁就載有 500 円利用料，讀者會用得到；若要補，請以「該活動說明記載」的歸屬方式寫入三語並同步台帳。同頁指向奥多摩クライミングセンター網站的トポ與注意事項，可作為後續查證進入條件的來源，本次未讀。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "非本輪修改、不擋核准：(a)「裝備」段第 1 段主體是編輯建議卻仍標 confirmed，可比照改標 editorial；(b) unverifiable 那筆的 reason 寫「給出延期或向管理方確認的行動」，正文實際寫的是保留替代場地與向現地確認，沒有「延期」；(c) 仍標 confirmed 的各筆共用一句制式 reason；(d) 日文選線段「必要な動きが違います」語氣比中英文肯定，可改為「違うことがあります」。"
     }
   ]
 }

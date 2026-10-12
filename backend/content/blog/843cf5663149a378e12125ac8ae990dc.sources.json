@@ -118,7 +118,7 @@
     {
       "location": "比較短的接近仍需要完整計畫",
       "claim": "安排公共交通時，先核對旅行當日去回班次，再確認從千足往目標岩壁的路線。把下車站、起攀點與瀑布景點分開標在地圖上，避免走到觀景處後才發現不是自己的線。雨後若接近不合適，縮短行程也應是事先約定的選項。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -141,7 +141,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support only the background: the bus from Musashi-Itsukaichi to Senzoku as the starting point and the roughly 30-minute approach to the waterfall-side wall. They do not support the advice itself (checking same-day services, marking stop, climb and viewpoint separately, agreeing in advance to shorten the day after rain); it is an editorial suggestion, not a record of walking the approach."
     },
     {
       "location": "岩場介紹有什麼，沒有什麼",
@@ -173,7 +173,7 @@
     },
     {
       "location": "岩場介紹有什麼，沒有什麼",
-      "claim": "本指南未核實天狗岩各線的現行級數、長度、固定點與下降方式，不提供按級數選線的推薦清單。若已找到近期 topo，應再核對它是否確實涵蓋這面瀑布側壁，而不是隻畫了つづら岩；向熟悉者詢問路線與現況，再決定是否適合自己的繩隊。",
+      "claim": "本指南未核實天狗岩各線的現行級數、長度、固定點與下降方式，不提供按級數選線的推薦清單。若已找到近期 topo，應再核對它是否確實涵蓋這面瀑布側壁，而不是只畫了つづら岩；向熟悉者詢問路線與現況，再決定是否適合自己的繩隊。",
       "verdict": "unverifiable",
       "disposition": "qualified",
       "qualification": "本指南未核實天狗岩各線的現行級數、長度、固定點與下降方式，不提供按級數選線的推薦清單。",
@@ -232,7 +232,7 @@
     {
       "location": "哪些人可以把它保留在候選名單",
       "claim": "如果你已有戶外繩攀能力，也願意補足具體 topo、接近與下降資訊，天狗岩可以作為檜原攀登日的研究候選。若只有網頁名稱與粗略接近時間，資料還不足以把它排成必爬的一站。這不是人氣高低的評分，而是準備是否足夠的問題。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -255,12 +255,12 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support only the venue background (waterfall-side wall with free-route development; limited per-route detail on the retrieved pages). They do not support the judgement about who should keep the crag on a shortlist; it is an editorial suggestion, not an assessment based on climbing there."
     },
     {
       "location": "哪些人可以把它保留在候選名單",
       "claim": "出發前將岩場名稱、地圖、目標線與回程一起交給同行者，備好水、行動糧、雨具與照明。現場若無法確認地點、保護或退路，就不進入攀登。先完成辨認與準備，才能讓這面瀑布旁的岩壁成為有目的的行程，而不是與別座同名岩場的誤會。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",
@@ -283,11 +283,11 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Sources support only venue identity and approach background; they give no pre-trip checklist or stop rule. Sharing the plan, carrying water, food, rain gear and lighting, and not climbing when location, protection or retreat cannot be established are editorial advice, not a checklist tested on site."
     }
   ],
   "media": [],
-  "source_sha256": "8afe4787125915ea06a5c2ee739b2322f902f7964de08b7575b5a94690ffcf44",
+  "source_sha256": "a9498da2291b3aa03c13a302d01ad3393b7ec40e3ae4adb3f4d32a989b69a4a4",
   "links": [
     {
       "url": "https://www.climbing-net.com/iwaba_detail/つづら岩、天狗岩/",

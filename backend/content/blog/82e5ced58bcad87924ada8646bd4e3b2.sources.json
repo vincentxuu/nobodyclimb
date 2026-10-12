@@ -174,7 +174,7 @@
     {
       "location": "級數之外，舊線會帶來哪些問題",
       "claim": "先確認目標線是哪個峰、結束點如何辨識、下降需要什麼裝備，再決定是否攀登；不熟悉結束點架設的人，應找具備相應能力的同伴或適合的指導。不要把室內級數直接換算成此處的安全餘裕，也不要只憑網頁上的路線數量估計一天能爬多少。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/氷川屏風岩/",
@@ -197,7 +197,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "CLIMBING-net supports only the background facts (A and C Peak sectors, some fragile rock, longer slings for C Peak anchors), and the ROCKTOPO user comments support only individual reports of pitons/ring bolts and a hard-to-find anchor. No source supports the recommended order of checks, the advice to bring a competent partner or instruction, or the warning against converting indoor grades; that is editorial advice, not a field-tested record."
     },
     {
       "location": "季節資訊如何使用",
@@ -232,7 +232,7 @@
     {
       "location": "季節資訊如何使用",
       "claim": "比較好的行程是帶著少量明確目標與備案出發，而非到場才找最簡單的線。先在 topo 上確認區域、帶足水與裝備、留出下山與回程空間；若接近路況或岩面不合適，就取消攀登。氷川屏風岩的價值在岩壁變化與歷史脈絡，閱讀與判斷也是體驗的一部分。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/氷川屏風岩/",
@@ -255,7 +255,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "CLIMBING-net supports only the background facts (approach from Okutama Station, bring water, sectors and development history). No source supports the suggested trip plan of a few objectives plus a backup, reserved descent and return time, or the cancel-if-unsuitable rule; that is an editorial planning suggestion, not a tested itinerary."
     }
   ],
   "media": [],

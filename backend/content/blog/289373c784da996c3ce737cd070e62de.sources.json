@@ -158,7 +158,7 @@
     {
       "location": "An easy grade is only one piece of information",
       "claim": "Establish who will lead, who can belay the second, who can assess anchors and how you will communicate out of sight. Keep cancelling the climb as a valid option. If one person is the sole keeper of all the systems, practise in a controlled setting or arrange appropriate instruction first.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -191,7 +191,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial advice. CLIMBING-net supports only the background that this is a primarily multipitch training wall with unreliable fixed protection, and ROCKTOPO lists the recorded lines as multipitch; no source prescribes this division of roles, the option to cancel, or practising beforehand, and the site did not test the procedure on the wall."
     },
     {
       "location": "Assess rock edges and fixed protection separately",
@@ -234,7 +234,7 @@
     {
       "location": "Assess rock edges and fixed protection separately",
       "claim": "Build the equipment list around the intended route and current conditions, including protection, anchors, descent and personal protection. Do not copy a quickdraw count from an unrelated sport crag. This article does not teach anchor construction or descent procedures. Review the topo and retreat options with someone experienced, and do not enter a section you cannot assess.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -267,12 +267,12 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial advice. CLIMBING-net supports the background hazard (unreliable fixed protection, sharp edges, past rope-cutting accidents); no source provides an equipment list or a retreat procedure for this wall, and the advice is not a guarantee of adequacy on site."
     },
     {
       "location": "Plan the approach and return as part of the climb",
       "claim": "Identify the start, approach, descent and exit together. They may follow different paths, so a saved wall coordinate is insufficient. Public-transport visitors need the actual outbound and return services for their date, plus a turnaround time that leaves room for retreat. Sorting equipment, locating the line and waiting for other teams all take time.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -305,7 +305,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial planning advice. The sources support only background (a multipitch wall; one club party's 2024 approach from Hatonosu Station); none states that the start, approach, descent and exit differ here, and none gives turnaround times or the listed delay factors. The site did not walk or time this itinerary."
     },
     {
       "location": "Plan the approach and return as part of the climb",
@@ -388,7 +388,7 @@
     {
       "location": "Plan the approach and return as part of the climb",
       "claim": "Choose Koshizawa Buttress for a purposeful day using the full skills of mountain climbing. Bring a plan your team can manage independently, leave room for retreat and retain another activity if conditions do not support the climb.",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -421,7 +421,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial conclusion. CLIMBING-net supports the framing of the wall as training for mountain routes; whether it merits a day, and the advice on an independently managed plan, retreat time and an alternative activity, are the editors' assessment rather than a firsthand ascent record."
     }
   ],
   "media": [],

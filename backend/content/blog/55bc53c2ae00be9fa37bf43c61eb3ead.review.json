@@ -2,23 +2,44 @@
   "schema_version": 1,
   "article_id": "55bc53c2ae00be9fa37bf43c61eb3ead",
   "source_sha256": "c4f5b328b921fead7ded5481958778a81db186e2f5e7147cdb9fa7011b392551",
-  "evidence_sha256": "fa2d4882eb74437deb0f2ac9b75d80af6de565c60d775a8b724d8a4c88c69ccd",
-  "reviewed_at": "2026-10-12T00:53:34.622148+00:00",
-  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "evidence_sha256": "11f9d97246dbd7c5439cd0c30d5cbf4f78500935fa3b508460c448037deb85d1",
+  "reviewed_at": "2026-10-12T07:56:07Z",
+  "reviewer": "Claude 獨立審稿 subagent（claude-opus-5-5；未參與寫稿與本次修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "raw fetch-12 官方支持日照冬季、短線與排隊、bus約15分/梅季收費；出版社凝灰岩10–5月、上部危險/テントウムシ以西禁入/2005禁營與不同巴士版本均有保留。"
+      "notes": "本輪（editorial 標記重審，2026-10-12）實際做的：以 git diff 確認三語原稿皆未動；本篇台帳相對 HEAD 只有三處變更——「## 湯河原站之後，查當日的幕山公園巴士」段落 2由 confirmed 改標 editorial、該筆 reason 改寫、verification_notes 刪除過期的「No self-approved reviews; independent factual/translation/editorial review required.」。判斷：同意改標。該段主體是預留收繩、從岩區下到公園與候車的時間，以及開車者依當期停車配置與現地指示使用的行程建議，不含數字、時間、費用或來源轉述；事實（巴士約15分、梅の宴收費）已由前後段的 confirmed claim 承載，改標不會讓事實失去來源。新 reason 所列背景（官方觀光頁：JR湯河原站轉幕山公園行巴士、終點下車、乘車約15分，梅の宴期間入園與停車收費；CLIMBING-net：舊交通描述與官方不同、幕山公園禁露營）逐項與該筆兩個來源的 evidence 文字相符，也與我重取的頁面相符；reason 沒有宣稱正文已標明為編輯建議，語句完整。三語台帳此筆的 verdict 與 reason 完全相同，claim 為各語原文且逐字存在於各自原稿。刪除過期說明恰當（審稿狀態以 review.json 為準）。抽查來源：以 curl 加瀏覽器 User-Agent 重新取得兩個來源（皆 HTTP 200），去標籤後對照全文事實。湯河原官方觀光頁列「日当たりの良さ」「冬の定番スポット」「短いコースが多く…人気のコースには列ができる」「JR湯河原駅より幕山公園行バスに乗車 終点『幕山公園』バス停下車（乗車時間 約15分）」「『梅の宴』開催期間は入園料200円」「駐車場…開催期間は有料」。CLIMBING-net 列岩質凝灰岩、シーズン10月~5月、正面壁與茅ヶ崎ロック、上部新岩場「アプローチに危険な部分もある」、短く傾斜のないルートは「リードの場合、長く、前傾したルートより実は危険な場合もある」、「立入禁止の場所も。現状をJFA HPで確認」、「現在テントウムシロック以西は立ち入り禁止」（無日期）、「鍛冶屋行きバスで『診療所前』下車。幕山公園へ徒歩約25分」、「2005年4月1日から幕山公園でのキャンプは全面禁止」。以上皆與正文相符，未發現數字、限制或否定敘述錯誤。台帳 source_sha256 等於原稿實際 SHA-256；unverifiable 一筆的 qualification 逐字存在於原稿，且確實在說明造訪日開放範圍與活動季費用未經確認。沒做的：未讀台帳所指的原始擷取檔，也未使用台帳記載的 Exa 工具（改用 curl）；未查 JFA 網站的幕岩現況公告；未查當期巴士時刻、當年度梅の宴日期與費用、停車配置；未檢視頁面圖片或 topo；未實地到場。先前審稿（/root/editorial_best_practices）的事實結論與本輪重取結果一致，但其「實際閱讀 /tmp 原始擷取檔」的部分我無法重現，不沿用為本輪的核對。"
     },
     "translation": {
       "passed": true,
-      "notes": "三語15分、梅季費用不保證、區界未確認、短不陡不代表安全、非全部自由可用均一致。"
+      "notes": "本輪重新逐段對照 zh/en/ja 全文與 title/excerpt：乘車約15分、秋至春、梅の宴期間有入園與停車收費但不保證金額、テントウムシロック以西禁入資訊與其無日期、造訪日開放範圍與活動季費用未確認、短而不陡不代表較寬容、日照好不等於全區可自由使用、公園入園不等於岩區攀登許可、幕山公園禁露營，三語一致，沒有任何一語新增開放、費用或安全承諾。措辭層級差異（不影響事實）：zh 巴士段第 2 段多一句「將回程截止時間留在手機與同行計畫裡」，en/ja 把回程期限放在末段（retain the departure deadline／帰路の締切を保ちましょう）；zh 選區段第 2 段多「若只有岩館經驗，先安排戶外指導」；zh 梅季段第 1 段多「即使不在活動季」；首段 zh/ja 作「先與帶領者（指導者）確認區域」，en 作 arrange suitable instruction。審稿者非英、日文母語編輯，該兩語的語感判斷以明顯錯誤與語意偏差為限。"
     },
     "editorial": {
       "passed": true,
-      "notes": "選區不看总數、公園費用不等於登攀許可、熱門線備案清楚，摘要與正文一致。"
+      "notes": "重讀本篇全文並與另兩語對照：選區優先於總路線數、公園費用與攀登許可分開查、熱門線留同區備案的結構清楚，摘要與正文一致，沒有假冒親身攀登或實測。editorial 標記不要求正文另加聲明，本輪沒有建議在正文補句。zh 稿以常見簡體字與日文漢字、兩岸用詞表掃描（非完整字典，未用 OpenCC），未見簡體字；「梅の宴」「茅ヶ崎ロック」「テントウムシロック」為保留原名；「整區總本數」的「本數」是日文量詞用法，建議日後改「總路線數」（見 findings）。en/ja 稿閱讀時未見混入中文詞。"
     }
   },
-  "findings": []
+  "findings": [
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "本輪修改：「## 湯河原站之後，查當日的幕山公園巴士」段落 2改標 editorial 並改寫 reason，同意；reason 與來源 evidence 及重取頁面相符，三語台帳處理一致；verification_notes 刪除過期說明恰當。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "未解，HEAD 既有狀態、不擋核准：仍標 confirmed 的末段（熱門線留替代目標）主體是備選與現場禮節建議，只有「出版社記錄幕山公園禁止露營」一項來源事實；首段主體是適用對象說明。兩段都含來源事實，依「事實與建議混合仍標 confirmed」可維持。另外 confirmed 各筆共用同一句樣板 reason（「目標選擇、難度餘裕、交通倒推…」），「梅季段落 2 — remainder」一筆的 reason 提到「帶補給、保留替代與返程餘裕」，該段並沒有這些內容；該筆與 frontmatter 一筆的 claim 是拼接文字而非原稿逐字（en 該筆中間有連續兩個空白）。下次整理台帳時可一併改寫。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "未解，小瑕疵：新 reason 寫「也未說明攀岩者的停車配置」，而 CLIMBING-net 其實記有梅の宴期間利用岩場者須付入場料200円、駐車場代500円——這是收費而非配置，reason 前半已涵蓋收費，不算不實，但可寫得更精確。en/ja 台帳的 reason 提到「回程截止時間」，en/ja 該段並沒有這一句（在末段），敘述本身仍屬實。links 的 status_code 為 null（原查證工具未提供），我以 curl 取得兩個網址皆為 200。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "未解，非本次修改範圍：zh 稿「別以整區總本數推算」的「本數」為日文用法，建議改「總路線數」（需同步台帳並重審）；三語有數處措辭增減（見 translation notes），不影響事實。"
+    }
+  ]
 }

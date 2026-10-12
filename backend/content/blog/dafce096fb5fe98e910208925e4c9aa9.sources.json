@@ -5,7 +5,7 @@
   "claims": [
     {
       "location": "title / excerpt",
-      "claim": "越沢バットレス攀岩指南：以多繩距能力安排奧多摩一天 / 越沢バットレス以多繩距與山嶽訓練為主。東京旅人應先確認繩隊能力、下降與現況，不以低階數取代準備。",
+      "claim": "越沢バットレス攀岩指南：以多繩距能力安排奧多摩一天 / 越沢バットレス以多繩距與山嶽訓練為主。東京旅人應先確認繩隊能力、下降與現況，不以低級數取代準備。",
       "verdict": "confirmed",
       "sources": [
         {
@@ -158,7 +158,7 @@
     {
       "location": "為什麼不能只看「容易的線」",
       "claim": "先確認每位隊員能做什麼：誰負責先鋒、誰能確保後攀者、誰能判斷支點、如何在看不見對方時溝通。把「今天不攀登」也列為選項。若只有一人瞭解全部系統，應先在受控環境練習或安排適合的指導，不要把旅行當天當成首次學習複雜操作的場合。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -191,7 +191,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial advice. CLIMBING-net supports only the background that this is a primarily multipitch training wall with unreliable fixed protection, and ROCKTOPO lists the recorded lines as multipitch; no source prescribes this division of roles, the option to cancel, or practising beforehand, and the site did not test the procedure on the wall."
     },
     {
       "location": "岩石與留置保護需要獨立判斷",
@@ -234,7 +234,7 @@
     {
       "location": "岩石與留置保護需要獨立判斷",
       "claim": "因此，裝備清單要依目標線與現況制定，包含保護、架站、下降與個人防護，而不是照搬另一個運攀岩場的快扣數。本文不提供支點搭建或下降的逐步教學。出發前應與有相關經驗的人核對 topo，確認撤退方式；現場若無法判斷保護或繩路，就不進入該段。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -267,12 +267,12 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial advice. CLIMBING-net supports the background hazard (unreliable fixed protection, sharp edges, past rope-cutting accidents); no source provides an equipment list or a retreat procedure for this wall, and the advice is not a guarantee of adequacy on site."
     },
     {
       "location": "把接近與下山算進完整的一天",
       "claim": "閱讀 topo 時，同時找出起攀點、接近路線、下降與離開路線。這些不一定是同一條路，不能只儲存岩壁座標。大眾運輸旅人還要查實際當日的去回班次，設定不影響撤退的折返時間；裝備整理、等待其他繩隊與路線辨認都可能增加時間。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -305,7 +305,7 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial planning advice. The sources support only background (a multipitch wall; one club party's 2024 approach from Hatonosu Station); none states that the start, approach, descent and exit differ here, and none gives turnaround times or the listed delay factors. The site did not walk or time this itinerary."
     },
     {
       "location": "把接近與下山算進完整的一天",
@@ -388,7 +388,7 @@
     {
       "location": "把接近與下山算進完整的一天",
       "claim": "越沢バットレス值得安排的理由，是用山嶽攀登的完整能力面對一面岩壁。帶著能自行管理的計畫前往，保留撤退時間與替代活動，才讓這一天真正成為有目的的練習。",
-      "verdict": "confirmed",
+      "verdict": "editorial",
       "sources": [
         {
           "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
@@ -421,11 +421,11 @@
           "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
         }
       ],
-      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+      "reason": "Editorial conclusion. CLIMBING-net supports the framing of the wall as training for mountain routes; whether it merits a day, and the advice on an independently managed plan, retreat time and an alternative activity, are the editors' assessment rather than a firsthand ascent record."
     }
   ],
   "media": [],
-  "source_sha256": "324f2c23c556302872fc6f6b6072a03b0784cc8219f95b7cf4448e26b705d18d",
+  "source_sha256": "9fc4f57943b882146a8b55946371790e4bb372e33e1de2e2bf626ecf6eb89494",
   "links": [
     {
       "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",

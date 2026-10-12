@@ -1,24 +1,40 @@
 {
   "schema_version": 1,
   "article_id": "539a55b775755912bb59b30b8edc855d",
-  "source_sha256": "107fb90a9e1f14a9d25c332cb439bee3b9bf1c01bcb8122931d6fd6112ea7bd2",
-  "evidence_sha256": "bc3a448a762f970a99e6519331348755c924d1223766819a957e3905b4ffeca2",
-  "reviewed_at": "2026-10-12T00:53:34.622148+00:00",
-  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "source_sha256": "f781092fe670efc352f55c657bc857d014fa250daf9fc95b10cef336f1706a12",
+  "evidence_sha256": "cfc680d93fc1053d9075b969adbf766c45eb49fd35dc06b6b036a41a789d08fe",
+  "reviewed_at": "2026-10-12T08:00:47Z",
+  "reviewer": "Claude 獨立審稿 subagent（未參與寫稿與本次修改）",
   "decision": "approved",
   "sections": {
     "factual": {
       "passed": true,
-      "notes": "raw fetch-4/extra-fetch 支持チャート、大仰角、19條快照、回收支點與終了點區別、30/40分矛盾、2025-05 500円、滿位不可路邊、暗前下山。"
+      "notes": "本次重審實際核對：(1) git diff：本篇原稿無變更；台帳有兩處變更——「下降與回收」段第 2 段（「候補の長さ、終了位置、下降、器材回収を旅行前に確認します…」）由 confirmed 改標 editorial 並改寫 reason；verification_notes 刪除過期的 \"No self-approved reviews…\" 一句（恰當）。(2) editorial 的判斷：該段是行前確認清單（候選路線的長度、結束位置、下降、器材回收）與「不熟仰角回收就找熟悉的同行者或換目標」的建議，段內沒有數字、規則或來源轉述，改標恰當。(3) reason 屬實：CLIMBING-net 的 evidence 有チャート大ハング、舊支點、下降與回收點不同、繩摩擦；我另外對照來源頁全文，確認該頁沒有逐條路線的長度／結束位置，也沒有「不熟回收者改找同行者或換目標」的建議（原文只寫「創意と工夫で安全にトライと回収をしてもらいたい」）。reason 沒有宣稱正文已標明為編輯建議，語句完整。(4) 以程式確認正文各筆 claim 逐字存在於原稿（frontmatter 那筆為標題／摘要並列），unverifiable 那筆的 qualification 逐字存在於原稿，台帳 source_sha256 等於原稿實際 SHA-256。(5) 以 curl 重新取得三個來源（皆 HTTP 200）核對：CLIMBING-net 埼玉県飯能市北川、チャート、大ハング、信仰對象與地主／居民理解、西吾野駅徒歩（頁內 30 分與 40 分兩種寫法）、全昌寺→中組自治会館右側踏み跡、駐車 2～3 台 500 円（1 台）、滿車不路邊停、終了點舊ロープスリング損傷、ハング上“リアル終了点”與“回収用の支点”分設、ロープドラッグ、叫び声苦情、火気厳禁、過度のティックマークやギアの残置、ベスト 10～12 月與 3～5 月、冬季自治會長希望天黑前下山；ROCKTOPO areas/95 リード（フェイス）19 ルート（5.10a～ 4、5.11a～ 3、5.12a～ 8）；JFA 2025 年 5 月 4 日公告（5 月 12 日更新）有人未付約定的 ¥500 停車費、狹小停車場請有效率停放。數字與規則均與正文相符。未做：實際造訪日的利用與停車條件、現行付款方式、列車班次、topo 圖與個別路線，未實地。（同日複審補記）負責人依要求修正原稿一處錯字後，本次複審實際核對：git diff 確認原稿相對於上次審閱的版本只有「火器」→「火気」一處，台帳對應 claim 文字同步、source_sha256 更新，其餘未動；以程式確認全部正文 claim 與 unverifiable 的 qualification 仍逐字存在於原稿、台帳 source_sha256 等於原稿實際 SHA-256；修正後的文字與上次以 curl 取得的 CLIMBING-net 北川頁原文「火気厳禁」相符。複審沒有重新抓取來源頁。"
     },
     "translation": {
       "passed": true,
-      "notes": "三語19、5.10/11/12、500円每車與五月2025、future未保證、回收不熟需支援均一致。"
+      "notes": "本次重新逐段對照 zh／en／ja 全文：飯能市、西吾野步行、チャート／chert、19 條登錄路線與 5.10／5.11／5.12 範圍、2026 年 10 月 12 日讀取、結束點與回收支點的區別、頁內步行時間不一致所以不保證分鐘數、天黑前離開、JFA 2025 年 5 月公告與每車 500 日圓、不當成未來費率保證、滿位不找路邊、造訪日利用與停車條件未確認，三語的數字、限制與否定敘述一致。先前的必修錯字已修正並於複審確認：「火器」改為「火気」，與來源「火気厳禁」、英文 \"flames\"、中文「用火」一致。其餘用詞（古いスリング、回収用支点、踏み跡）與來源相符。"
     },
     "editorial": {
       "passed": true,
-      "notes": "難度與回收先於交通安排，停車與居民需求具體；保留季節與通行未確認界線。"
+      "notes": "本次重讀全文：難度與回收先於交通、停車與居民要求具體、保留未確認界線，可獨立閱讀，沒有虛構現場經驗；台帳 claim 為日文原文。台帳一筆 editorial 的三語 location、verdict、reason、sources 一致，且沒有 disposition／qualification。"
     }
   },
-  "findings": []
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "已修正並於複審確認：原稿「支払いと静かな利用を守る」段第 2 段的「火器」已改為「火気」，與來源 CLIMBING-net「火気厳禁」一致；台帳該筆 claim 同步。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "本輪改標 editorial 的一筆（下降與回收段第 2 段）經檢視恰當，reason 與 evidence 及來源頁相符，三語一致；刪除 verification_notes 的過期句恰當。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "非本輪修改、不擋核准：(a)「停車付款」段第 3 段 remainder（春秋季節＋再查公告）仍標 confirmed，其 reason 是制式句，提到的「帶補給、保留替代與返程餘裕」不在該句內，建議改寫 reason；(b) unverifiable 那筆的 reason 寫「給出延期或向管理方確認的行動」，正文沒有「延期」；(c) 首段與「步行」段第 2 段是事實與建議混合，維持 confirmed 可接受；(d) 來源寫的天黑前下山是「冬季」日短時自治會長的要求，正文未提冬季，不算錯；(e) 來源的最佳季節是 10～12 月與 3～5 月，正文概括為春秋，可接受。"
+    }
+  ]
 }
