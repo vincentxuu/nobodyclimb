@@ -49,7 +49,7 @@ const SheetContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   SheetContentProps
 >(({ side = 'right', className, children, ...props }, ref) => {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
 
   return (
     <SheetPortal>

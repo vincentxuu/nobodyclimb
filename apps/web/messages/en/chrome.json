@@ -1,0 +1,61 @@
+{
+  "Navbar": {
+    "biography": "Biography",
+    "crag": "Crags",
+    "gym": "Gyms",
+    "gallery": "Gallery",
+    "videos": "Videos",
+    "blog": "Blog"
+  },
+  "Footer": {
+    "joinUs": "Join us and share your climbing story",
+    "joinButton": "Join Now",
+    "copyright": "NobodyClimb © {year}."
+  },
+  "LocaleSwitcher": {
+    "label": "Language",
+    "zh": "繁中",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "MobileMenu": {
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menuTitle": "Menu",
+    "exploreTab": "Explore",
+    "personalTab": "Personal",
+    "guestMessage": "A climber? Join and write your story",
+    "writeArticle": "Write Article",
+    "uploadPhoto": "Upload Photo",
+    "login": "Log In",
+    "register": "Sign Up",
+    "logout": "Log Out",
+    "profile": "Biography",
+    "recommendations": "Recommendations",
+    "memory": "Memory",
+    "bucketList": "Bucket List",
+    "ascents": "Ascents",
+    "stats": "Achievements",
+    "articles": "Articles",
+    "photos": "Photos",
+    "bookmarks": "Bookmarks",
+    "settings": "Settings"
+  },
+  "UserMenu": {
+    "create": "Create",
+    "writeArticle": "Write Article",
+    "uploadPhoto": "Upload Photo",
+    "exploreTab": "Explore",
+    "personalTab": "Personal",
+    "logout": "Log Out",
+    "myProfile": "My Biography",
+    "bucketList": "Bucket List",
+    "ascents": "Ascents",
+    "recommendations": "AI Recommendations",
+    "stats": "Climbing Achievements",
+    "photos": "My Photos",
+    "articles": "My Articles",
+    "bookmarks": "My Bookmarks",
+    "settings": "Account Settings"
+  }
+}

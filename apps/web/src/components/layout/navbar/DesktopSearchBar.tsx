@@ -11,7 +11,7 @@ import { useUIStore } from '@/store/uiStore'
  * 只在桌面版且搜尋框處於打開狀態時顯示
  */
 export default function DesktopSearchBar() {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const router = useRouter()
   const { isSearchOpen, closeSearch, searchQuery, setSearchQuery } = useUIStore()
 

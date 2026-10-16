@@ -9,7 +9,7 @@ import { useUIStore } from '@/store/uiStore'
  * 只在桌面版顯示，點擊後打開搜尋框
  */
 export default function SearchBar() {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const { toggleSearch } = useUIStore()
 
   return (

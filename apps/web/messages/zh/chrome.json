@@ -1,0 +1,61 @@
+{
+  "Navbar": {
+    "biography": "人物誌",
+    "crag": "岩場",
+    "gym": "岩館",
+    "gallery": "攝影集",
+    "videos": "影片",
+    "blog": "部落格"
+  },
+  "Footer": {
+    "joinUs": "加入我們，寫下你的攀岩故事",
+    "joinButton": "立即加入",
+    "copyright": "NobodyClimb © {year}."
+  },
+  "LocaleSwitcher": {
+    "label": "語言",
+    "zh": "繁中",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "MobileMenu": {
+    "openMenu": "開啟選單",
+    "closeMenu": "關閉選單",
+    "menuTitle": "選單",
+    "exploreTab": "探索",
+    "personalTab": "個人",
+    "guestMessage": "也是攀岩人？加入寫下你的故事",
+    "writeArticle": "發表文章",
+    "uploadPhoto": "上傳照片",
+    "login": "登入",
+    "register": "註冊",
+    "logout": "登出",
+    "profile": "人物誌",
+    "recommendations": "推薦",
+    "memory": "記憶",
+    "bucketList": "清單",
+    "ascents": "攀爬紀錄",
+    "stats": "成就",
+    "articles": "文章",
+    "photos": "照片",
+    "bookmarks": "收藏",
+    "settings": "設定"
+  },
+  "UserMenu": {
+    "create": "創作",
+    "writeArticle": "發表文章",
+    "uploadPhoto": "上傳照片",
+    "exploreTab": "探索",
+    "personalTab": "個人",
+    "logout": "登出",
+    "myProfile": "我的人物誌",
+    "bucketList": "人生清單",
+    "ascents": "攀爬紀錄",
+    "recommendations": "AI 推薦",
+    "stats": "攀登成就",
+    "photos": "我的照片",
+    "articles": "我的文章",
+    "bookmarks": "我的收藏",
+    "settings": "帳號設定"
+  }
+}

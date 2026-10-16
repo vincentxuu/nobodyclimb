@@ -1,0 +1,1347 @@
+{
+  "BiographyPage": {
+    "title": "人物誌",
+    "description": "認識台灣攀岩社群的故事與人物。",
+    "skillsAndExperienceTitle": "技巧與經驗分享",
+    "experienceTopic_fear_title": "克服恐懼經驗",
+    "experienceTopic_fear_description": "分享如何面對和克服攀岩中的恐懼",
+    "experienceTopic_recovery_title": "受傷復原故事",
+    "experienceTopic_recovery_description": "受傷後的復健與重返岩壁的歷程",
+    "experienceTopic_experience_title": "攀登經驗分享",
+    "experienceTopic_experience_description": "難忘的攀登經歷與心得",
+    "experienceTopic_training_title": "訓練心得",
+    "experienceTopic_training_description": "有效的訓練方法與技巧",
+    "explore": "探索",
+    "exploreByCategoryTitle": "依目標分類探索",
+    "goalCount": "{count} 個目標",
+    "exploreByLocationTitle": "依地點探索",
+    "moreLocations": "更多地點",
+    "taiwanCrags": "台灣岩場",
+    "overseasClimbing": "海外攀岩",
+    "goalLocations": "目標地點",
+    "noTaiwanCragData": "暫無台灣岩場資料",
+    "noOverseasData": "暫無海外攀岩資料",
+    "noGoalLocationData": "暫無目標地點資料",
+    "locationLoadError": "載入地點資料時發生錯誤，請稍後再試",
+    "visitorsCount": "{count} 人去過",
+    "setAsGoal": "設為目標",
+    "itemCountUnit": "{count} 個",
+    "inChallenge": "挑戰中",
+    "personCountUnit": "{count} 人",
+    "completed": "已完成",
+    "recentCompletedStoriesTitle": "最新完成故事",
+    "noCompletedStories": "目前沒有完成故事",
+    "noCompletedStoriesForSearch": "找不到符合「{term}」的完成故事",
+    "recentStoriesLoadError": "載入最新完成故事時發生錯誤",
+    "completedGoal": "完成了「{title}」",
+    "psychologicalAspect": "心理層面",
+    "technicalAspect": "技術層面",
+    "inspiredCount": "{count} 人也加入",
+    "viewFullStory": "查看完整故事",
+    "minutesAgo": "{count} 分鐘前",
+    "hoursAgo": "{count} 小時前",
+    "daysAgo": "{count} 天前",
+    "weeklyTrendingGoalsTitle": "本週熱門目標",
+    "noTrendingGoals": "目前沒有熱門目標",
+    "noTrendingGoalsForSearch": "找不到符合「{term}」的熱門目標",
+    "trendingGoalsLoadError": "載入熱門目標時發生錯誤",
+    "addedToListCount": "被 {count} 人加入清單",
+    "completedCount": "{count} 人已完成",
+    "goalCreatedBy": "由 {name} 設立",
+    "adding": "加入中...",
+    "added": "已加入",
+    "addToMyList": "加入我的清單",
+    "progress": "進度",
+    "unlockedAt": "{date} 解鎖",
+    "badgeCollectionTitle": "徽章收藏",
+    "badgesUnlocked": "已解鎖 {unlocked}/{total} 個徽章",
+    "all": "全部",
+    "comingSoonUnlock": "即將解鎖",
+    "noBadgesUnlocked": "尚未解鎖任何徽章",
+    "totalBiographies": "人物誌總數",
+    "totalGoals": "目標總數",
+    "completedGoals": "完成目標",
+    "storiesShared": "故事分享",
+    "activeThisWeek": "本週活躍",
+    "communityGoalCompletionRate": "社群目標完成率",
+    "completionRate": "完成率",
+    "inProgress": "進行中",
+    "trendingGoalCategories": "熱門目標分類",
+    "noCategoryData": "尚無分類數據",
+    "communityOverview": "社群概況",
+    "leaderboard": "排行榜",
+    "leaderboardGoalsCompleted": "目標達成王",
+    "leaderboardValueCompleted": "完成",
+    "leaderboardPopularity": "人氣王",
+    "leaderboardValueFollowers": "追蹤者",
+    "leaderboardMostLoved": "最受喜愛",
+    "leaderboardValueLikes": "讚",
+    "noLeaderboardData": "尚無排行數據",
+    "score": "分數",
+    "totalViews": "瀏覽次數",
+    "totalLikes": "收到的讚",
+    "followers": "追蹤者",
+    "storiesSharedStat": "已分享故事",
+    "climbingFootprint": "攀岩足跡",
+    "storyCompletion": "故事完成度",
+    "coreStories": "核心故事",
+    "advancedStories": "進階故事",
+    "goalAchievementRate": "目標達成率",
+    "total": "總計",
+    "communityInteraction": "社群互動",
+    "following": "追蹤中",
+    "justNow": "剛剛",
+    "secondsAgo": "{count} 秒前",
+    "saving": "儲存中...",
+    "saved": "已儲存",
+    "saveFailed": "儲存失敗，請重試",
+    "lastSaved": "上次儲存：{time}",
+    "fieldsFilled": "{completed}/{total} 已填寫",
+    "edit": "編輯",
+    "startWriting": "開始寫",
+    "avatarAlt": "{name} 的頭像",
+    "multiSelect": "可複選",
+    "singleSelect": "單選",
+    "selectedCount": "已選 {count} 個",
+    "customTag": "自訂標籤",
+    "tagYourself": "幫自己貼標籤",
+    "thirtySeconds": "30 秒",
+    "totalTagsSelected": "已選 {count} 個標籤",
+    "tagSelectorHint": "選一選就完成了，不用打字",
+    "collapseMoreTags": "收合更多標籤",
+    "expandMoreTags": "展開更多標籤 ({count} 個類別)",
+    "addTagCategory": "新增標籤類別",
+    "visitedPlaces": "去過 {count} 個地方",
+    "moreLocationsCount": "還有 {count} 個地點...",
+    "locationAndVisitorCount": "{locations} 地點 · {visitors} 人",
+    "followButton": "追蹤",
+    "unfollowButton": "取消追蹤",
+    "operationFailed": "操作失敗",
+    "operationFailedDesc": "請稍後再試",
+    "loginRequired": "請先登入",
+    "loginRequiredDesc": "登入後才能按讚",
+    "commentLoginPrompt": "登入後才能留言",
+    "login": "登入",
+    "loadFailed": "載入失敗",
+    "loadFailedDesc": "無法載入留言，請稍後再試",
+    "commentFailed": "留言失敗",
+    "commentFailedDesc": "留言失敗，請稍後再試",
+    "commentSuccess": "留言成功",
+    "commentSuccessDesc": "你的留言已發布",
+    "deleteFailed": "刪除失敗",
+    "deleteFailedDesc": "刪除留言失敗，請稍後再試",
+    "deleteSuccess": "刪除成功",
+    "deleteSuccessDesc": "留言已刪除",
+    "commentPlaceholder": "寫下你的留言...",
+    "noComments": "還沒有留言，成為第一個留言的人吧！",
+    "anonymous": "匿名用戶",
+    "commentLoadFailed": "載入留言失敗",
+    "commentPostSuccess": "留言發表成功",
+    "commentPostSuccessDesc": "感謝你的分享！",
+    "commentPostFailed": "留言發表失敗",
+    "commentDeleteFailed": "刪除留言失敗",
+    "headerTitle": "人物誌",
+    "headerSubtitle": "記載了 Nobody 們的攀岩小故事",
+    "biographyCoverAlt": "{name} 封面",
+    "seeStory": "看看 {name} 的故事",
+    "loadError": "無法載入人物誌資料",
+    "loadErrorAlt": "載入人物誌時發生錯誤",
+    "noResults": "找不到符合「{term}」的人物",
+    "noBiographies": "目前沒有人物誌",
+    "loadMore": "看更多",
+    "storyLoadError": "載入故事時發生錯誤",
+    "noMatchingStories": "找不到符合的故事",
+    "noStories": "目前沒有故事",
+    "loadMoreStories": "載入更多",
+    "pageTitle": "人物誌",
+    "pageSubtitle": "記載了 Nobody 們的攀岩小故事",
+    "guestBannerText": "你也是攀岩人嗎？註冊建立你的人物誌，讓大家認識你！",
+    "guestBannerButton": "立即加入",
+    "tabStories": "小故事",
+    "tabPeople": "小人物",
+    "searchStoriesPlaceholder": "搜尋故事關鍵字...",
+    "searchPeoplePlaceholder": "搜尋人物關鍵字...",
+    "homeLabel": "首頁",
+    "biographyLabel": "人物誌",
+    "keywordsLabel": "關鍵字",
+    "showMoreTags": "展開更多標籤 (+{count})",
+    "collapseTags": "收合",
+    "aboutMeLabel": "關於我",
+    "storiesLabel": "小故事",
+    "storiesSharedCount": "已分享 {count} 則故事",
+    "climbingFootprintsLabel": "攀岩足跡",
+    "galleryLabel": "攀岩日常",
+    "findMeLabel": "找到我",
+    "climbingLocations": "攀岩地點",
+    "countries": "個國家",
+    "timeSpan": "時間跨度",
+    "locationsCount": "{count} 個地點",
+    "footprintsYearLabel": "那些年的足跡",
+    "keepExploring": "持續探索中...",
+    "expandNotes": "展開更多",
+    "collapseNotes": "收合",
+    "viewAll": "查看全部 ({count})",
+    "viewAllGallery": "查看全部相簿",
+    "emptyStateNoContent": "這裡還沒有任何故事",
+    "emptyStateNoContentDesc": "每個人的故事都值得被記錄，跟你爬多難沒關係",
+    "emptyStateNoContentAction": "開始記錄我的故事",
+    "emptyStatePrivate": "這位岩友的人物誌是私密的",
+    "emptyStatePrivateDesc": "他們可能正在準備中，或想保持低調",
+    "emptyStatePrivateAction": "探索其他岩友的故事",
+    "emptyStateNotFound": "找不到這個人物誌",
+    "emptyStateNotFoundDesc": "這個頁面可能已被移除或網址有誤",
+    "emptyStateNotFoundAction": "回到人物誌列表",
+    "ownerGuide": "小提示：選幾個標籤就能完成基本的人物誌，不需要寫很多字！",
+    "sectionEmptyAddLabel": "新增",
+    "privateEmptyTitle": "這位岩友的人物誌是私密的",
+    "privateEmptyDesc": "他們可能正在準備中，或選擇保持低調。",
+    "privateEmptyNote": "每個人都有自己的節奏，尊重他們的選擇。",
+    "privateEmptyExplore": "探索其他岩友的故事",
+    "privateEmptyHome": "回到首頁",
+    "privateEmptyCtaDesc": "想建立自己的人物誌嗎？記錄攀岩故事，與社群分享你的經歷。",
+    "privateEmptyCtaAction": "立即開始",
+    "anonymousName": "匿名岩友",
+    "anonymousSharing": "匿名分享",
+    "reactionLoginPrompt": "登入後即可表達你的反應",
+    "reactionFailed": "操作失敗",
+    "meTooPanelEmpty": "還沒有人說我也是",
+    "plusOnePanelEmpty": "還沒有人說 +1",
+    "wellSaidPanelEmpty": "還沒有人說說得好",
+    "noLikers": "還沒有人按讚",
+    "coverImageAlt": "封面圖片",
+    "climbingYears": "攀岩第 {count} 年",
+    "climbingYearsDefault": "從入坑那天起算",
+    "armSpanLabel": "臂展 {cm}cm",
+    "frequentLocations": "常出沒：{locations}",
+    "yearGoal": "{year} 目標",
+    "storyProgressTitle": "故事進度",
+    "storyProgressCompleted": "已完成 {percentage}% 的進階故事",
+    "myStoryProgress": "我的故事進度",
+    "continueWriting": "繼續填寫",
+    "overallProgress": "整體進度：{completed}/{total} 題",
+    "categoryProgress": "分類進度",
+    "storiesWritten": "已填寫 {completed}/{total} 個故事",
+    "continueWritingStories": "繼續填寫故事",
+    "chapter1": "Chapter 1",
+    "chapter1Title": "你與攀岩的相遇",
+    "chapter1Locked": "成為岩友後解鎖相遇故事",
+    "chapter2": "Chapter 2",
+    "chapter2Title": "攀岩對你來說是什麼",
+    "chapter2DefaultMeaning": "這題還在想，等我爬完這條再說",
+    "chapter3": "Chapter 3",
+    "chapter3Title": "攀岩人生清單",
+    "chapter3Placeholder": "{name} 的攀岩人生清單正在醞釀中...",
+    "chapter3SubPlaceholder": "每個攀岩者都有屬於自己的目標與夢想",
+    "chapter4": "Chapter 4",
+    "chapter4Title": "給剛開始攀岩的自己",
+    "chapter4Locked": "等這個人心情好再來問",
+    "climbingFootprintsSection": "攀岩足跡",
+    "footprintsTitle": "探索世界的腳步",
+    "footprintsPlaceholder": "{name} 的攀岩足跡正在累積中...",
+    "footprintsSubPlaceholder": "每一次出發，都是新的冒險",
+    "quickFactsTitle": "快速了解 {name}",
+    "startClimbing": "開始攀岩",
+    "climbingStartYear": "{year} ({count} 年)",
+    "climbingStartDefault": "從入坑那天起算",
+    "frequentLocationsLabel": "常出沒地點",
+    "frequentLocationsDefault": "哪裡有牆哪裡去",
+    "favoriteTypes": "喜歡的類型",
+    "favoriteTypesDefault": "能爬的都是好路線",
+    "bodyStats": "身體數據",
+    "height": "身高",
+    "heightDefault": "神秘高度",
+    "armSpan": "臂展",
+    "armSpanDefault": "未知長度",
+    "apeIndex": "Ape Index",
+    "apeIndexDefault": "謎之比例",
+    "yearTarget": "{year} 目標",
+    "yearTargetDefault": "偷偷努力中...",
+    "keywordsLabel2": "關鍵字",
+    "showMoreTagsMobile": "展開更多 (+{count})",
+    "coreStoriesTitle": "我的故事",
+    "addMoreStories": "新增更多故事",
+    "addMoreStoriesDesc": "分享你的攀岩經歷",
+    "featuredStoriesTitle": "精選小故事",
+    "storiesNotShared": "還沒有分享故事",
+    "communityStatsTitle": "社群統計",
+    "communityStatsDesc": "查看 NobodyClimb 社群的整體統計數據與排行榜",
+    "backToBiography": "返回人物誌",
+    "loadCommunityStatsFailed": "無法載入社群統計",
+    "retryLater": "請稍後再試",
+    "reload": "重新載入",
+    "exploreStories": "探索攀岩故事",
+    "exploreStoriesDesc": "發現社群中精彩的攀岩目標與故事",
+    "browseBiography": "瀏覽人物誌",
+    "browseBiographyDesc": "認識更多攀岩小人物的故事",
+    "explorePageTitle": "探索攀岩故事",
+    "explorePageSubtitle": "發現社群中精彩的攀岩目標與故事",
+    "communityStats": "社群統計",
+    "searchPlaceholder": "搜尋目標、地點或攀岩者...",
+    "filterAll": "全部",
+    "filterGrowth": "成長故事",
+    "filterExperience": "攀登經驗",
+    "filterRecovery": "受傷復原",
+    "filterFootprint": "攀岩足跡",
+    "personalWebsite": "個人網站",
+    "noInteractors": "還沒有人",
+    "reactionMeToo": "我也是",
+    "reactionWellSaid": "說得好",
+    "profileNotFound": "人物資料不存在",
+    "breadcrumbHome": "首頁",
+    "breadcrumbBiography": "人物誌",
+    "backToEdit": "返回編輯",
+    "prevProfile": "上一篇",
+    "nextProfile": "下一篇",
+    "recommendedTitle": "推薦其他人物誌",
+    "moreProfiles": "更多小人物",
+    "locationNotFound": "找不到此地點",
+    "loadLocationError": "無法載入地點資料",
+    "backToExplore": "返回探索頁面",
+    "backToExploreBtn": "返回探索",
+    "visitorsHereCount": "{count} 位岩友去過這裡",
+    "visitorsListTitle": "去過的岩友",
+    "exploreLocationsTitle": "攀岩足跡探索",
+    "exploreLocationsDesc": "探索社群岩友去過的攀岩地點，找到志同道合的夥伴",
+    "backToBiographyBtn": "返回人物誌",
+    "statsCountries": "{count} 個國家",
+    "statsLocations": "{count} 個地點",
+    "statsVisits": "{count} 次造訪",
+    "filterByCountry": "依國家篩選",
+    "allCountries": "全部國家",
+    "noMatchLocationsTitle": "找不到符合的地點",
+    "noFootprintsTitle": "還沒有攀岩足跡",
+    "noMatchLocations": "試試其他搜尋關鍵字",
+    "noFootprints": "成為第一個分享攀岩足跡的人吧！",
+    "beFirstToShare": "成為第一個分享攀岩足跡的人吧！",
+    "tryOtherKeywords": "試試其他搜尋關鍵字",
+    "anonymousUser": "匿名",
+    "metaFallbackTitle": "人物誌",
+    "metaFallbackDesc": "探索攀岩人物的故事",
+    "metaTitleSuffix": "攀岩人物誌",
+    "metaDefaultDesc": "認識 {name}，一位熱愛攀岩的攀岩愛好者。",
+    "metaKeyword1": "攀岩人物",
+    "metaKeyword2": "人物誌",
+    "metaKeyword3": "攀岩社群",
+    "guestCtaTitle": "你也有攀岩故事嗎？",
+    "guestCtaDesc": "來寫寫你的小人物誌吧",
+    "guestCtaAction": "立即註冊加入"
+  },
+  "BiographyEditor": {
+    "editBiographyTitle": "編輯人物誌",
+    "unsavedChangesTitle": "尚未儲存",
+    "unsavedChangesMessage": "尚有未儲存的變更，確定要離開嗎？",
+    "unsavedChangesConfirm": "離開",
+    "unsavedChangesCancel": "留下",
+    "cropAvatarTitle": "裁切頭像",
+    "cropCoverTitle": "裁切封面圖片",
+    "sectionBasicInfo": "基本資料",
+    "sectionAnnualGoals": "年度目標",
+    "sectionIdentityTags": "身份標籤",
+    "sectionQuickQA": "快問快答",
+    "sectionDeepStories": "深度故事",
+    "sectionClimbingFootprints": "攀岩足跡",
+    "basicInfoTitle": "基本資料",
+    "basicInfoTimeEstimate": "1 分鐘",
+    "coverImageLabel": "封面圖片",
+    "coverImageAlt": "封面圖片",
+    "coverImageUploadHint": "點擊上傳封面圖片",
+    "coverImageChangeHover": "更換封面",
+    "coverImageSizeHint": "建議尺寸：1200 x 400 像素",
+    "avatarLabel": "頭像",
+    "avatarAlt": "頭像",
+    "avatarClickHint": "點擊頭像更換",
+    "avatarShapeHint": "建議使用正方形圖片",
+    "displayNameLabel": "顯示名稱",
+    "displayNameRequired": "*",
+    "displayNamePlaceholder": "你想怎麼被稱呼？",
+    "displayNameHint": "這會顯示在你的人物誌上",
+    "taglineLabel": "一句話介紹自己",
+    "taglineOptional": "(選填)",
+    "taglinePlaceholder": "例如：快樂最重要的週末岩友",
+    "taglineHint": "這句話會顯示在你的名字下方",
+    "climbingStartYearLabel": "開始攀岩年份",
+    "climbingStartYearOptional": "(選填)",
+    "climbingStartYearSelect": "選擇年份",
+    "climbingYearsExperience": "約 {years} 年經驗",
+    "climbingStartDefault": "從入坑那天起算",
+    "climbingStartYearHint": "選擇你開始攀岩的年份，系統會自動計算年資",
+    "bodyStatsLabel": "身體數據",
+    "bodyStatsOptional": "(選填)",
+    "heightLabel": "身高",
+    "armSpanLabel": "臂展",
+    "apeIndexWithValue": "Ape Index: {value} cm",
+    "apeIndexHint": "臂展與身高的差距稱為 Ape Index，對攀岩很有參考價值",
+    "frequentLocationsLabel": "平常出沒的地方",
+    "frequentLocationsMultiple": "(可多選)",
+    "frequentLocationsInputPlaceholder": "輸入後按 Enter",
+    "frequentLocationsHint": "岩館、戶外岩場都可以加",
+    "favoriteRouteTypesLabel": "喜歡的路線型態",
+    "favoriteRouteTypesMultiple": "(可多選)",
+    "favoriteRouteTypesCategoryClimbing": "攀登方式",
+    "favoriteRouteTypesCategoryTerrain": "地形型態",
+    "favoriteRouteTypesCategoryMovement": "動作風格",
+    "favoriteRouteTypesCustomCategory": "自訂",
+    "favoriteRouteTypesCustomPlaceholder": "沒有想要的？自己輸入...",
+    "socialLinksTitle": "社群連結",
+    "socialLinksHint": "新增你的社群帳號，讓其他岩友可以追蹤你的動態",
+    "instagramLabel": "Instagram",
+    "instagramOptional": "(選填)",
+    "youtubeLabel": "YouTube 頻道",
+    "youtubeOptional": "(選填)",
+    "youtubePlaceholder": "頻道 ID 或網址",
+    "websiteLabel": "個人網站",
+    "websiteOptional": "(選填)",
+    "savingStatus": "儲存中...",
+    "savedStatus": "已儲存",
+    "saveErrorStatus": "儲存失敗",
+    "autoSaveEnabled": "自動儲存已啟用",
+    "saveButton": "儲存",
+    "previewButton": "預覽",
+    "publishButton": "發布",
+    "publishingStatus": "發布中...",
+    "visibilityPublicLabel": "公開",
+    "visibilityPublicDesc": "所有人都可以看到",
+    "visibilityCommunityLabel": "社群",
+    "visibilityCommunityDesc": "只有社群成員可以看到",
+    "visibilityPrivateLabel": "私密",
+    "visibilityPrivateDesc": "只有自己可以看到",
+    "visibilityAnonymousLabel": "匿名公開",
+    "visibilityAnonymousDesc": "公開但不顯示你的名字",
+    "visibilityCurrentSetting": "目前設定：{label}",
+    "progressTitle": "完成進度",
+    "progressComplete": "太棒了！你的人物誌已經完成！",
+    "tagsTitle": "身份標籤",
+    "tagsSelectedCount": "已選 {count} 個",
+    "tagsNoneSelected": "還沒有選擇任何標籤",
+    "tagsEditButton": "編輯標籤",
+    "tagsMoreCount": "+{count} 個",
+    "oneLinersTitle": "快問快答",
+    "oneLinersTimeEstimate": "2 分鐘",
+    "oneLinersFilledCount": "{filled}/{total} 已填寫",
+    "oneLinersHint": "選幾題回答就好，不用全部填",
+    "answerInputPlaceholder": "輸入你的答案...",
+    "clearAnswer": "清除回答",
+    "randomRecommend": "隨機推薦問題",
+    "addCustomQuestion": "自訂問題",
+    "storiesTitle": "深度故事",
+    "storiesTimeEstimate": "5 分鐘以上",
+    "storiesFilledCount": "{filled}/{total} 已填寫",
+    "storiesHint": "挑一兩個有感覺的題目寫就好，這部分可以慢慢補",
+    "storiesRandomRecommend": "隨機推薦一題",
+    "storiesEditButton": "編輯",
+    "storiesStartButton": "開始寫",
+    "storiesAddCustomQuestion": "自訂問題",
+    "editStoryTitle": "編輯故事",
+    "storyTextPlaceholder": "寫下你的故事...",
+    "deleteStory": "刪除這篇故事",
+    "writingTipTitle": "寫作小提示：",
+    "writingTipContent": "不用追求完美，想到什麼就寫什麼。你隨時可以回來修改。",
+    "cancelButton": "取消",
+    "saveStoryButton": "儲存",
+    "deleteConfirmPrompt": "確定刪除？",
+    "deleteConfirmYes": "確定",
+    "deleteConfirmNo": "取消",
+    "deleteButton": "刪除",
+    "writingTip1": "不用追求完美，想到什麼就寫什麼",
+    "writingTip2": "可以先寫幾句，之後再慢慢補充",
+    "writingTip3": "真實的故事最動人",
+    "writingTip4": "你的經驗對其他人可能很有幫助",
+    "gradeTargetsTitle": "年度攀爬目標",
+    "gradeTargetsHint": "設定每年想要完攀的級數與數量，記錄攀爬後會自動追蹤進度",
+    "gradeTargetsCountUnit": "條",
+    "gradeTargetsDeleteLabel": "刪除目標",
+    "gradeTargetsAddButton": "新增 {year} 年目標",
+    "footprintsTitle": "攀岩足跡",
+    "footprintsSaving": "儲存中...",
+    "footprintsEmpty": "還沒有記錄攀岩足跡",
+    "footprintsEmptyHint": "點擊上方按鈕新增你的第一個攀岩地點",
+    "footprintsRetry": "重試",
+    "footprintsCountSummary": "{countries} 國 / {locations} 地點",
+    "footprintsEditorEmpty": "還沒有記錄攀岩足跡",
+    "footprintsEditorEmptyHint": "點擊下方按鈕新增你去過的攀岩地點",
+    "footprintsEditorAddTitle": "新增攀岩地點",
+    "footprintsEditorEditTitle": "編輯地點",
+    "footprintsLocationNameLabel": "地點名稱",
+    "footprintsLocationNamePlaceholder": "例如：龍洞、Krabi、陽朔",
+    "footprintsCountryLabel": "國家",
+    "footprintsVisitYearLabel": "造訪年份",
+    "footprintsVisitYearPlaceholder": "例如：2024 或 2023-2024",
+    "footprintsNotesLabel": "心得筆記（選填）",
+    "footprintsNotesPlaceholder": "分享你的攀岩心得...",
+    "footprintsIsPublicLabel": "公開此地點（其他人可以在探索頁面看到）",
+    "footprintsPrivateBadge": "私密",
+    "footprintsSetPrivateTitle": "設為私密",
+    "footprintsSetPublicTitle": "設為公開",
+    "footprintsAddButton": "新增攀岩地點",
+    "footprintsUpdateButton": "更新",
+    "footprintsAddButtonForm": "新增",
+    "tagsBottomSheetTitle": "幫自己貼標籤",
+    "tagsBottomSheetClose": "關閉",
+    "tagsBottomSheetDone": "完成",
+    "tagsCanMultiselect": "可複選",
+    "tagsSingleSelect": "單選",
+    "tagsAddCustom": "新增",
+    "tagsAddDimension": "新增標籤類別",
+    "randomRecommendTitle": "隨機推薦問題",
+    "randomRecommendAllDone": "太棒了！你已經回答了所有問題！",
+    "randomRecommendShuffle": "換一題",
+    "randomRecommendStart": "開始回答",
+    "randomRecommendRemaining": "還有 {count} 題未回答",
+    "addCustomTagTitle": "新增自訂標籤",
+    "tagNameLabel": "標籤名稱",
+    "tagNamePlaceholder": "例如：深夜岩館族",
+    "tagNameHint": "會自動加上 # 符號，最多 20 字",
+    "tagDescriptionLabel": "標籤說明",
+    "tagDescriptionOptional": "(選填)",
+    "tagDescriptionPlaceholder": "例如：十點後才開始爬",
+    "tagDescriptionHint": "幫助其他人了解這個標籤，最多 50 字",
+    "tagCategoryLabel": "所屬類別",
+    "tagPreviewLabel": "預覽",
+    "addingStatus": "新增中...",
+    "addTagButton": "新增標籤",
+    "addCustomDimensionTitle": "新增標籤類別",
+    "dimensionIconLabel": "圖示",
+    "dimensionNameLabel": "類別名稱",
+    "dimensionNamePlaceholder": "例如：裝備偏好",
+    "dimensionNameHint": "最多 10 字",
+    "dimensionDescriptionLabel": "類別說明",
+    "dimensionDescriptionOptional": "(選填)",
+    "dimensionDescriptionPlaceholder": "例如：你喜歡什麼裝備？",
+    "dimensionSelectionModeLabel": "選擇模式",
+    "dimensionSingleMode": "單選",
+    "dimensionSingleModeDesc": "只能選一個標籤",
+    "dimensionMultipleMode": "複選",
+    "dimensionMultipleModeDesc": "可以選多個標籤",
+    "dimensionPreviewLabel": "預覽",
+    "dimensionMultipleHint": "可複選",
+    "dimensionCreatingStatus": "建立中...",
+    "createDimensionButton": "建立類別",
+    "dimensionCreateHint": "建立類別後，你可以在裡面新增自訂標籤。",
+    "addCustomOneLinerTitle": "新增一句話問題",
+    "oneLinerQuestionLabel": "問題內容",
+    "oneLinerQuestionPlaceholder": "例如：最喜歡的攀岩電影是？",
+    "oneLinerQuestionHint": "會自動加上問號，最多 50 字",
+    "oneLinerFormatHintLabel": "格式引導",
+    "oneLinerFormatHintOptional": "(選填)",
+    "oneLinerFormatHintPlaceholder": "例如：因為＿＿＿、我覺得＿＿＿",
+    "oneLinerFormatHintHint": "幫助回答者知道該怎麼回答",
+    "oneLinerExampleLabel": "範例答案",
+    "oneLinerExampleOptional": "(選填)",
+    "oneLinerExamplePlaceholder": "例如：Free Solo，看完整個人都燃起來了",
+    "oneLinerExampleHint": "作為回答的參考範例",
+    "oneLinerPreviewLabel": "預覽",
+    "oneLinerTip": "一句話問題適合簡短、有趣的回答。想深入分享可以用「深度故事」。",
+    "addOneLinerButton": "新增問題",
+    "addCustomStoryTitle": "新增故事問題",
+    "storyTitleLabel": "問題標題",
+    "storyTitlePlaceholder": "例如：有沒有印象深刻的攀岩經歷",
+    "storyTitleHint": "會自動加上問號，最多 50 字",
+    "storySubtitleLabel": "問題說明",
+    "storySubtitleOptional": "(選填)",
+    "storySubtitlePlaceholder": "例如：不一定要很厲害，只要對你有意義",
+    "storySubtitleHint": "幫助作答者理解問題",
+    "storyCategoryLabel": "所屬分類",
+    "storyPlaceholderLabel": "範例開頭",
+    "storyPlaceholderOptional": "(選填)",
+    "storyPlaceholderPlaceholder": "例如：記得有一次...",
+    "storyPreviewLabel": "預覽",
+    "storyUncategorized": "未分類",
+    "storyTip": "故事問題適合需要深入分享的內容，可以寫長一點。",
+    "addStoryButton": "新增問題",
+    "wizardStep1Title": "基本資訊",
+    "wizardStep1Subtitle": "設定你的人物誌",
+    "wizardStep2Title": "你的攀岩故事",
+    "wizardStep2Subtitle": "這部分會讓你的人物誌更有溫度",
+    "wizardStep3Title": "人生清單",
+    "wizardStep3Subtitle": "在攀岩世界裡，你想完成的目標有什麼？",
+    "wizardSaveError": "儲存失敗，請稍後再試",
+    "wizardAvatarLabel": "頭像",
+    "wizardAvatarOptional": "（選填）",
+    "wizardAvatarUploadButton": "上傳照片",
+    "wizardAvatarUploadingButton": "上傳中...",
+    "wizardAvatarUploadSuccess": "上傳成功",
+    "wizardAvatarUploadSuccessDesc": "頭像已更新",
+    "wizardAvatarFormatError": "檔案格式錯誤",
+    "wizardAvatarFormatErrorDesc": "請上傳 JPG、PNG、WebP 或 GIF 格式的圖片",
+    "wizardAvatarUploadFailed": "上傳失敗",
+    "wizardNicknameLabel": "你的暱稱",
+    "wizardNicknamePlaceholder": "輸入你的暱稱",
+    "wizardPersonalTagLabel": "個人標籤",
+    "wizardPersonalTagOptional": "（選填）",
+    "wizardPersonalTagPlaceholder": "例如：專業攀岩者、業餘愛好者、攀岩教練",
+    "wizardPersonalTagHint": "一句話描述你在攀岩界的身份或定位",
+    "wizardStartYearLabel": "哪一年開始攀岩",
+    "wizardStartYearPlaceholder": "選擇年份",
+    "wizardFrequentLocationsLabel": "平常出沒的地方",
+    "wizardFrequentLocationsPlaceholder": "輸入地點",
+    "wizardFrequentLocationsButton": "新增",
+    "wizardRouteTypesLabel": "喜歡的路線型態",
+    "wizardStoryLabel": "你的攀岩故事",
+    "wizardBucketListLabel": "人生清單",
+    "wizardBucketListPlaceholder": "輸入一個目標",
+    "wizardBucketListButton": "新增",
+    "wizardBucketListHint": "你想在攀岩旅程中完成的事",
+    "wizardNextButton": "下一步",
+    "wizardSavingButton": "儲存中...",
+    "wizardFinishButton": "完成",
+    "wizardSkipButton": "跳過",
+    "wizardPrevButton": "上一步",
+    "wizardCancelButton": "取消",
+    "storyPromptWelcome": "歡迎回來，{name}！",
+    "storyPromptSubtitle": "今天來聊聊這個嗎？",
+    "storyPromptSaveError": "儲存失敗，請稍後再試",
+    "storyPromptCategoryProgress": "「{category}」第 {current}/{total} 題",
+    "storyPromptOverallProgress": "已完成 {completed}/{total} 個故事（{percentage}%）",
+    "storyPromptShowExamples": "看看其他人怎麼分享",
+    "storyPromptExampleAuthor": "— 匿名岩友",
+    "storyPromptSkip": "下次再說",
+    "storyPromptShuffle": "換一題",
+    "storyPromptSave": "儲存",
+    "storyPromptBadgeText": "今天來寫個故事？",
+    "storyPromptBadgeCount": "{count} 題待填",
+    "bucketListProgress": "進度",
+    "bucketListCollapseStory": "收合完成故事",
+    "bucketListExpandStory": "查看完成故事",
+    "bucketListCompletedDateLabel": "完成日期",
+    "bucketListCompletionStoryLabel": "完成故事",
+    "bucketListPsychologicalInsightsLabel": "心理感悟",
+    "bucketListTechnicalInsightsLabel": "技術分享",
+    "bucketListSectionEmpty": "還沒有人生清單項目",
+    "bucketListActive": "{count} 進行中",
+    "bucketListCompleted": "{count} 已完成",
+    "bucketListFilterAll": "全部",
+    "bucketListFilterActive": "進行中",
+    "bucketListFilterCompleted": "已完成",
+    "bucketListNoItems": "沒有符合篩選條件的項目",
+    "referenceAddToList": "加入我的清單",
+    "referenceRemoveFromList": "從我的清單移除",
+    "referenceAdded": "已加入",
+    "referenceAdd": "我也想",
+    "referenceError": "操作失敗",
+    "referenceErrorDesc": "操作失敗，請稍後再試",
+    "instagramHint": "輸入你的 Instagram 用戶名（不含 @）",
+    "youtubeHint": "輸入你的 YouTube 頻道 ID 或網址",
+    "websiteHint": "你的個人網站或部落格",
+    "footprintsSubtitle": "記錄你去過的攀岩地點和旅程",
+    "wizardStep2Origin": "你與攀岩的相遇",
+    "wizardStep2OriginHint": "描述第一次接觸攀岩的情景，是什麼讓你想繼續？",
+    "wizardStep2OriginPlaceholder": "那年某天，我第一次踏進岩館...",
+    "wizardStep2Meaning": "攀岩對你來說是什麼",
+    "wizardStep2MeaningHint": "攀岩在你生活中扮演什麼角色？帶給你什麼？",
+    "wizardStep2MeaningPlaceholder": "攀岩對我來說，是...",
+    "wizardStep2Advice": "給剛開始攀岩的自己",
+    "wizardStep2AdviceHint": "如果能回到起點，你會對自己說什麼？",
+    "wizardStep2AdvicePlaceholder": "如果能回到那時候，我想說...",
+    "advancedStoryFilled": "已填寫 {completed}/{total} 個故事 · {percentage}%",
+    "advancedStoryCharCount": "字",
+    "advancedStoryClickToEdit": "點擊編輯",
+    "advancedStoryClickToFill": "點擊開始填寫",
+    "advancedStoryUnfilled": "未填寫的故事",
+    "wizardAvatarUploadFailedMsg": "上傳失敗",
+    "wizardAvatarUploadErrorDesc": "頭像上傳時發生錯誤，請稍後再試",
+    "advancedStoryUnfilledCount": "({count} 題)",
+    "bucketListCategoryOutdoor": "戶外攀登",
+    "bucketListCategoryIndoor": "室內攀登",
+    "bucketListCategoryBouldering": "抱石",
+    "bucketListCategorySport": "運動攀登",
+    "bucketListCategoryTrad": "傳統攀登",
+    "bucketListCategoryAlpine": "高山攀登",
+    "bucketListCategoryTraining": "訓練目標",
+    "bucketListCategoryTravel": "攀岩旅行",
+    "bucketListCategoryOther": "其他"
+  },
+  "BiographyQuestions": {
+    "oneliner_climbing_origin": "你與攀岩的相遇",
+    "oneliner_climbing_meaning": "攀岩對你來說是什麼？",
+    "oneliner_advice_to_self": "給剛開始攀岩的自己",
+    "oneliner_best_moment": "爬岩最爽的是？",
+    "oneliner_favorite_place": "最喜歡在哪裡爬？",
+    "oneliner_current_goal": "目前的攀岩小目標？",
+    "oneliner_climbing_takeaway": "攀岩教會我的一件事？",
+    "oneliner_climbing_style_desc": "用一句話形容你的攀岩風格？",
+    "oneliner_life_outside": "攀岩之外，你是誰？",
+    "oneliner_bucket_list": "攀岩人生清單上有什麼？",
+    "story_memorable_moment": "有沒有某次攀爬讓你一直記到現在？",
+    "story_biggest_challenge": "有遇過什麼卡關的時候嗎？",
+    "story_breakthrough_story": "最近有沒有覺得自己進步的時刻？",
+    "story_first_outdoor": "還記得第一次戶外攀岩嗎？",
+    "story_first_grade": "有沒有哪條路線讓你特別有成就感？",
+    "story_frustrating_climb": "有沒有讓你很挫折的經驗？後來怎麼面對？",
+    "story_fear_management": "會怕高或怕墜落嗎？怎麼面對的？",
+    "story_climbing_lesson": "攀岩有沒有讓你學到什麼？",
+    "story_failure_perspective": "爬不上去的時候會怎麼想？",
+    "story_flow_moment": "有沒有爬到忘記時間的經驗？",
+    "story_life_balance": "怎麼安排攀岩和其他生活？",
+    "story_unexpected_gain": "攀岩有帶給你什麼意外的收穫嗎？",
+    "story_climbing_mentor": "有沒有想感謝的人？",
+    "story_climbing_partner": "有沒有固定的攀岩夥伴？有什麼故事？",
+    "story_funny_moment": "有沒有什麼搞笑或尷尬的經歷？",
+    "story_favorite_spot": "最常去或最推薦哪裡爬？為什麼？",
+    "story_advice_to_group": "想對新手（或某個族群）說什麼？",
+    "story_climbing_space": "有沒有對你特別有意義的岩館或地點？",
+    "story_injury_recovery": "有受過傷嗎？怎麼復原的？",
+    "story_memorable_route": "有沒有想分享的路線或經驗？",
+    "story_training_method": "你平常怎麼練習？有什麼小習慣？",
+    "story_effective_practice": "有沒有對你特別有效的練習方法？",
+    "story_technique_tip": "有沒有學到什麼實用的技巧？",
+    "story_gear_choice": "關於裝備有沒有什麼心得？",
+    "story_dream_climb": "如果能去任何地方爬，你想去哪？",
+    "story_climbing_trip": "有沒有印象深刻的攀岩旅行？",
+    "story_bucket_list_story": "有沒有完成過什麼攀岩目標？感覺如何？",
+    "story_climbing_goal": "最近有什麼想達成的小目標？",
+    "story_climbing_style": "最喜歡什麼樣的路線或風格？",
+    "story_climbing_inspiration": "有沒有啟發你的人、影片或故事？",
+    "story_life_outside_climbing": "攀岩之外，還有什麼讓你著迷？",
+    "category_sys_cat_growth": "成長與突破",
+    "category_sys_cat_psychology": "心理與哲學",
+    "category_sys_cat_community": "社群與連結",
+    "category_sys_cat_practical": "實用分享",
+    "category_sys_cat_dreams": "夢想與探索",
+    "category_sys_cat_life": "生活整合",
+    "category_custom": "故事",
+    "category_uncategorized": "故事"
+  },
+  "BiographyStories": {
+    "categories": {
+      "growth": {
+        "name": "成長與突破",
+        "description": "紀錄攀岩路上的重要時刻"
+      },
+      "psychology": {
+        "name": "心理與哲學",
+        "description": "探索攀岩帶來的內在轉變"
+      },
+      "community": {
+        "name": "社群與連結",
+        "description": "分享與岩友們的故事"
+      },
+      "practical": {
+        "name": "實用分享",
+        "description": "傳承實用的經驗與技巧"
+      },
+      "dreams": {
+        "name": "夢想與探索",
+        "description": "描繪攀岩的夢想藍圖"
+      },
+      "life": {
+        "name": "生活整合",
+        "description": "攀岩之外的你"
+      }
+    },
+    "questions": {
+      "climbing_origin": {
+        "title": "你與攀岩的相遇",
+        "subtitle": "描述第一次接觸攀岩的情景，是什麼讓你想繼續？",
+        "placeholder": "那年某天，我第一次踏進岩館..."
+      },
+      "climbing_meaning": {
+        "title": "攀岩對你來說是什麼",
+        "subtitle": "攀岩在你生活中扮演什麼角色？帶給你什麼？",
+        "placeholder": "攀岩對我來說，是..."
+      },
+      "advice_to_self": {
+        "title": "給剛開始攀岩的自己",
+        "subtitle": "如果能回到起點，你會對自己說什麼？",
+        "placeholder": "如果能回到那時候，我想說..."
+      },
+      "memorable_moment": {
+        "title": "最難忘的攀登經歷",
+        "subtitle": "可以是某個瞬間或一次完整的攀登，聚焦在最觸動你的部分",
+        "placeholder": "那一次攀登，讓我永遠難忘..."
+      },
+      "biggest_challenge": {
+        "title": "遇到的最大挑戰與如何面對",
+        "subtitle": "描述具體的挑戰（受傷、瓶頸、恐懼等）和你的應對方式",
+        "placeholder": "我曾經遇到最大的挑戰是..."
+      },
+      "breakthrough_story": {
+        "title": "最大的突破經歷",
+        "subtitle": "難度突破、心理突破、技術突破等",
+        "placeholder": "那次突破讓我明白了..."
+      },
+      "first_outdoor": {
+        "title": "第一次戶外攀岩的經歷",
+        "subtitle": "第一次從室內走到戶外的經驗、感受與收穫",
+        "placeholder": "第一次戶外攀岩，我記得..."
+      },
+      "first_grade": {
+        "title": "第一次完攀某個難度的感覺",
+        "subtitle": "選一個對你有意義的難度（如 5.11a, V4），分享過程",
+        "placeholder": "當我第一次完攀那個難度時..."
+      },
+      "frustrating_climb": {
+        "title": "最挫折的一次攀登經歷",
+        "subtitle": "失敗、放棄、或特別困難的經歷，以及如何面對",
+        "placeholder": "那次挫折讓我學到..."
+      },
+      "fear_management": {
+        "title": "如何克服攀岩中的恐懼",
+        "subtitle": "分享你克服墜落、高度、失敗等恐懼的具體方法",
+        "placeholder": "面對恐懼時，我會..."
+      },
+      "climbing_lesson": {
+        "title": "攀岩教會你最重要的一件事",
+        "subtitle": "可以是關於失敗、堅持、專注、信任等的領悟",
+        "placeholder": "攀岩教會我最重要的是..."
+      },
+      "failure_perspective": {
+        "title": "攀岩如何改變你看待失敗",
+        "subtitle": "攀岩經驗如何影響你面對失敗的態度",
+        "placeholder": "攀岩改變了我看待失敗的方式..."
+      },
+      "flow_moment": {
+        "title": "在岩壁上的心流時刻",
+        "subtitle": "描述一次完全專注、忘我的攀爬體驗",
+        "placeholder": "那種心流的感覺..."
+      },
+      "life_balance": {
+        "title": "攀岩與生活的平衡",
+        "subtitle": "如何在工作、家庭、攀岩之間取得平衡",
+        "placeholder": "在平衡生活與攀岩上，我的方式是..."
+      },
+      "unexpected_gain": {
+        "title": "攀岩帶給你的意外收穫",
+        "subtitle": "原本沒預期到，但因攀岩而獲得的好處",
+        "placeholder": "沒想到攀岩還帶給我..."
+      },
+      "climbing_mentor": {
+        "title": "攀岩路上的貴人",
+        "subtitle": "教練、岩友、家人，或甚至是某個影片中的攀岩者",
+        "placeholder": "在我的攀岩路上，有一個人..."
+      },
+      "climbing_partner": {
+        "title": "最喜歡的攀岩夥伴與故事",
+        "subtitle": "分享一個特別的岩友以及你們之間的故事",
+        "placeholder": "我和我的繩伴..."
+      },
+      "funny_moment": {
+        "title": "攀岩時最尷尬或搞笑的時刻",
+        "subtitle": "輕鬆有趣的經歷，讓大家笑一笑",
+        "placeholder": "有一次超尷尬的是..."
+      },
+      "favorite_spot": {
+        "title": "最推薦的攀岩地點與原因",
+        "subtitle": "室內或戶外皆可，說明為何推薦",
+        "placeholder": "我最推薦的攀岩地點是..."
+      },
+      "advice_to_group": {
+        "title": "想對某個族群說的話",
+        "subtitle": "給女生/新手/年長者/小孩等特定族群的建議",
+        "placeholder": "我想對...說的是..."
+      },
+      "climbing_space": {
+        "title": "最難忘的岩館或攀岩空間",
+        "subtitle": "對你有特殊意義的攀岩場所",
+        "placeholder": "對我來說最特別的攀岩空間是..."
+      },
+      "injury_recovery": {
+        "title": "一次受傷經歷與從中學到的事",
+        "subtitle": "描述一次具體的受傷經歷、復原過程，以及這次經驗帶給你的收穫與啟發",
+        "placeholder": "那次受傷讓我學到..."
+      },
+      "memorable_route": {
+        "title": "最想分享的一次攀登經驗",
+        "subtitle": "可以是某條路線、某次戶外攀登，分享過程、技巧、心得",
+        "placeholder": "這條路線我最想分享的是..."
+      },
+      "training_method": {
+        "title": "你的訓練方式與心得",
+        "subtitle": "分享你的訓練內容、頻率、心得",
+        "placeholder": "我的訓練方式是..."
+      },
+      "effective_practice": {
+        "title": "對你最有效的練習方法",
+        "subtitle": "某個特別有效的練習，幫助你進步",
+        "placeholder": "這個練習方法對我特別有效..."
+      },
+      "technique_tip": {
+        "title": "一個對你很有幫助的技巧",
+        "subtitle": "某個技巧的領悟或訣竅（如腳法、重心等）",
+        "placeholder": "這個技巧對我很有幫助..."
+      },
+      "gear_choice": {
+        "title": "攀岩裝備的選擇心得",
+        "subtitle": "鞋子、粉袋、確保器等裝備的選擇經驗",
+        "placeholder": "關於裝備選擇，我的經驗是..."
+      },
+      "dream_climb": {
+        "title": "夢想中的攀登",
+        "subtitle": "國內外皆可，說明這個地點或路線為何吸引你",
+        "placeholder": "我夢想中的攀登是..."
+      },
+      "climbing_trip": {
+        "title": "一次特別的攀岩旅行",
+        "subtitle": "國內外攀岩旅行的經歷與收穫",
+        "placeholder": "那次攀岩旅行..."
+      },
+      "bucket_list_story": {
+        "title": "完成人生清單中某個目標的故事",
+        "subtitle": "詳細描述完成過程（與人生清單完成故事可互補）",
+        "placeholder": "當我完成這個目標時..."
+      },
+      "climbing_goal": {
+        "title": "目前最想達成的攀岩目標",
+        "subtitle": "現在正在努力的目標與進度",
+        "placeholder": "我目前最想達成的目標是..."
+      },
+      "climbing_style": {
+        "title": "最吸引你的攀岩風格",
+        "subtitle": "抱石/先鋒/裂隙/屋簷等，為何吸引你",
+        "placeholder": "最吸引我的攀岩風格是..."
+      },
+      "climbing_inspiration": {
+        "title": "啟發你的攀岩者或影片",
+        "subtitle": "某個攀岩者、影片、書籍對你的啟發",
+        "placeholder": "啟發我最深的是..."
+      },
+      "life_outside_climbing": {
+        "title": "除了攀岩，還讓我著迷的事",
+        "subtitle": "其他讓你投入熱情的興趣或活動",
+        "placeholder": "除了攀岩，我也熱愛..."
+      }
+    }
+  },
+  "BiographyTags": {
+    "dimensions": {
+      "sys_style_cult": {
+        "name": "風格邪教",
+        "description": "你是哪個邪教的？"
+      },
+      "sys_injury_badge": {
+        "name": "傷痛勳章",
+        "description": "攀岩路上的戰績"
+      },
+      "sys_shoe_faction": {
+        "name": "鞋子門派",
+        "description": "你的攀岩鞋信仰"
+      },
+      "sys_time_type": {
+        "name": "時間型態",
+        "description": "什麼時候爬？"
+      },
+      "sys_lifestyle": {
+        "name": "生活方式",
+        "description": "攀岩與生活的平衡"
+      },
+      "sys_climbing_music": {
+        "name": "爬牆 BGM",
+        "description": "爬牆時聽什麼？"
+      },
+      "sys_failure_response": {
+        "name": "面對失敗",
+        "description": "爬不上去的時候？"
+      },
+      "sys_social_type": {
+        "name": "社交類型",
+        "description": "你的攀岩社交風格"
+      },
+      "sys_chalk_habit": {
+        "name": "抹粉習慣",
+        "description": "對於碳酸鎂的態度"
+      },
+      "sys_training_approach": {
+        "name": "訓練取向",
+        "description": "怎麼變強？"
+      },
+      "sys_local_identity": {
+        "name": "在地認同",
+        "description": "你的攀岩地盤"
+      }
+    },
+    "options": {
+      "sys_style_cult_crack": {
+        "label": "#裂隙邪教",
+        "description": "塞裂隙的快感無可取代"
+      },
+      "sys_style_cult_slab": {
+        "label": "#Slab邪教",
+        "description": "平衡就是藝術"
+      },
+      "sys_style_cult_overhang": {
+        "label": "#外傾邪教",
+        "description": "沒有倒掛不想爬"
+      },
+      "sys_style_cult_dyno": {
+        "label": "#Dyno邪教",
+        "description": "能飛就不要慢慢來"
+      },
+      "sys_style_cult_crimp": {
+        "label": "#Crimp邪教",
+        "description": "小點越小越愛"
+      },
+      "sys_style_cult_jug": {
+        "label": "#大把手邪教",
+        "description": "jug 是我的信仰"
+      },
+      "sys_style_cult_all": {
+        "label": "#什麼都爬教",
+        "description": "我不挑"
+      },
+      "sys_injury_badge_a2": {
+        "label": "#A2滑輪倖存者",
+        "description": "手指滑輪損傷"
+      },
+      "sys_injury_badge_trigger_finger": {
+        "label": "#扳機指苦主",
+        "description": "腱鞘炎"
+      },
+      "sys_injury_badge_tfcc": {
+        "label": "#手腕TFCC",
+        "description": "三角纖維軟骨損傷"
+      },
+      "sys_injury_badge_tennis_elbow": {
+        "label": "#網球肘",
+        "description": "外側上髁炎"
+      },
+      "sys_injury_badge_golf_elbow": {
+        "label": "#高爾夫球肘",
+        "description": "內側上髁炎"
+      },
+      "sys_injury_badge_impingement": {
+        "label": "#肩夾擠",
+        "description": "肩夾擠症候群"
+      },
+      "sys_injury_badge_rotator_cuff": {
+        "label": "#旋轉肌撕裂",
+        "description": "肩旋轉肌損傷"
+      },
+      "sys_injury_badge_back": {
+        "label": "#下背痛",
+        "description": "腰椎相關"
+      },
+      "sys_injury_badge_knee": {
+        "label": "#膝蓋積水",
+        "description": "膝關節問題"
+      },
+      "sys_injury_badge_ankle": {
+        "label": "#腳踝扭傷",
+        "description": "落地傷害"
+      },
+      "sys_injury_badge_neck": {
+        "label": "#脖子僵硬",
+        "description": "頸椎不適"
+      },
+      "sys_injury_badge_skin": {
+        "label": "#手皮勳章",
+        "description": "撕皮/破皮"
+      },
+      "sys_injury_badge_none": {
+        "label": "#目前無傷",
+        "description": "珍惜這個狀態"
+      },
+      "sys_injury_badge_rehab": {
+        "label": "#永遠在復健",
+        "description": "休息也是訓練"
+      },
+      "sys_shoe_faction_lasportiva": {
+        "label": "#LaSportiva黨",
+        "description": "Solution 是信仰"
+      },
+      "sys_shoe_faction_scarpa": {
+        "label": "#Scarpa派",
+        "description": "Instinct 用過回不去"
+      },
+      "sys_shoe_faction_evolv": {
+        "label": "#Evolv教",
+        "description": "美國設計懂我的腳"
+      },
+      "sys_shoe_faction_unparallel": {
+        "label": "#UnParallel新勢力",
+        "description": "小眾但好穿"
+      },
+      "sys_shoe_faction_many": {
+        "label": "#鞋子越多越好",
+        "description": "不同路線不同鞋"
+      },
+      "sys_shoe_faction_one": {
+        "label": "#一雙穿到爛",
+        "description": "感情比性能重要"
+      },
+      "sys_shoe_faction_rental": {
+        "label": "#租借鞋也能爬",
+        "description": "鞋子不是重點"
+      },
+      "sys_time_type_morning": {
+        "label": "#晨型攀岩人",
+        "description": "早上岩館人少爽爽爬"
+      },
+      "sys_time_type_night": {
+        "label": "#夜貓攀岩人",
+        "description": "下班後的岩館時光"
+      },
+      "sys_time_type_weekend": {
+        "label": "#週末戰士",
+        "description": "平日上班週末爆發"
+      },
+      "sys_time_type_lunch": {
+        "label": "#午休攻擊手",
+        "description": "中午偷爬一下"
+      },
+      "sys_time_type_whenever": {
+        "label": "#有空就爬",
+        "description": "不固定但把握機會"
+      },
+      "sys_time_type_fulltime": {
+        "label": "#全職岩棍",
+        "description": "每天都是攀岩日"
+      },
+      "sys_lifestyle_dirtbag": {
+        "label": "#Dirtbag精神",
+        "description": "為了爬可以睡車上"
+      },
+      "sys_lifestyle_workbag": {
+        "label": "#Workbag",
+        "description": "有工作但心在岩壁上"
+      },
+      "sys_lifestyle_weekend": {
+        "label": "#週末出逃",
+        "description": "平日社畜週末野人"
+      },
+      "sys_lifestyle_gym": {
+        "label": "#岩館居民",
+        "description": "室內就很滿足了"
+      },
+      "sys_lifestyle_travel": {
+        "label": "#旅行攀岩派",
+        "description": "去哪都要找岩場"
+      },
+      "sys_lifestyle_local": {
+        "label": "#就近解決",
+        "description": "家裡附近的岩館最好"
+      },
+      "sys_climbing_music_none": {
+        "label": "#不聽音樂派",
+        "description": "要專心感受動作"
+      },
+      "sys_climbing_music_electronic": {
+        "label": "#電子Techno",
+        "description": "節奏帶動身體"
+      },
+      "sys_climbing_music_hiphop": {
+        "label": "#嘻哈饒舌",
+        "description": "Wu-Tang 給我力量"
+      },
+      "sys_climbing_music_rock": {
+        "label": "#搖滾金屬",
+        "description": "爆發力來源"
+      },
+      "sys_climbing_music_lofi": {
+        "label": "#Lofi放鬆",
+        "description": "chill 才爬得好"
+      },
+      "sys_climbing_music_podcast": {
+        "label": "#Podcast派",
+        "description": "邊聽邊爬"
+      },
+      "sys_climbing_music_gym": {
+        "label": "#聽岩館放的",
+        "description": "沒特別想法"
+      },
+      "sys_failure_response_retry": {
+        "label": "#再試一次",
+        "description": "今天一定要送"
+      },
+      "sys_failure_response_rest": {
+        "label": "#先休息明天再來",
+        "description": "不硬拼"
+      },
+      "sys_failure_response_switch": {
+        "label": "#換條線",
+        "description": "這條不適合我"
+      },
+      "sys_failure_response_watch": {
+        "label": "#看別人怎麼爬",
+        "description": "偷學 beta"
+      },
+      "sys_failure_response_video": {
+        "label": "#錄影分析",
+        "description": "科學派"
+      },
+      "sys_failure_response_ask": {
+        "label": "#問人請教",
+        "description": "請教厲害的人"
+      },
+      "sys_social_type_solo": {
+        "label": "#獨攀俠",
+        "description": "一個人也能爬"
+      },
+      "sys_social_type_partner": {
+        "label": "#固定繩伴",
+        "description": "有穩定的搭檔"
+      },
+      "sys_social_type_organizer": {
+        "label": "#揪團仔",
+        "description": "人多熱鬧"
+      },
+      "sys_social_type_shy": {
+        "label": "#社恐但想交朋友",
+        "description": "默默觀察中"
+      },
+      "sys_social_type_talkative": {
+        "label": "#話很多",
+        "description": "邊爬邊聊"
+      },
+      "sys_social_type_quiet": {
+        "label": "#安靜專注派",
+        "description": "不太講話"
+      },
+      "sys_chalk_habit_heavy": {
+        "label": "#瘋狂抹粉",
+        "description": "沒在省的"
+      },
+      "sys_chalk_habit_moderate": {
+        "label": "#適量就好",
+        "description": "環保一點"
+      },
+      "sys_chalk_habit_liquid": {
+        "label": "#液態粉派",
+        "description": "比較不會飛"
+      },
+      "sys_chalk_habit_minimal": {
+        "label": "#幾乎不抹粉",
+        "description": "手不太流汗"
+      },
+      "sys_chalk_habit_stalling": {
+        "label": "#抹粉等於拖延",
+        "description": "其實在逃避 crux"
+      },
+      "sys_training_approach_climb": {
+        "label": "#爬就對了",
+        "description": "爬多就會進步"
+      },
+      "sys_training_approach_hangboard": {
+        "label": "#指力板信徒",
+        "description": "Hangboard 是日常"
+      },
+      "sys_training_approach_campus": {
+        "label": "#CampusBoard派",
+        "description": "爆發力至上"
+      },
+      "sys_training_approach_core": {
+        "label": "#核心訓練狂",
+        "description": "身體張力很重要"
+      },
+      "sys_training_approach_zen": {
+        "label": "#佛系進步",
+        "description": "有爬就好不強求"
+      },
+      "sys_training_approach_planned": {
+        "label": "#有計畫訓練",
+        "description": "週期化、記錄、分析"
+      },
+      "sys_training_approach_youtube": {
+        "label": "#YouTube研究員",
+        "description": "看影片比爬多"
+      },
+      "sys_local_identity_longdong": {
+        "label": "#龍洞信徒",
+        "description": "週末必去朝聖"
+      },
+      "sys_local_identity_limestone": {
+        "label": "#石灰岩愛好者",
+        "description": "天然岩壁的魅力"
+      },
+      "sys_local_identity_indoor": {
+        "label": "#只爬室內派",
+        "description": "有冷氣有軟墊"
+      },
+      "sys_local_identity_anywhere": {
+        "label": "#哪裡都爬",
+        "description": "不挑場地"
+      },
+      "sys_local_identity_gym": {
+        "label": "#岩館常客",
+        "description": "動態標籤，顯示主場岩館"
+      }
+    },
+    "templates": {
+      "sys_local_identity_gym": "#{value}常客"
+    }
+  },
+  "BiographyMisc": {
+    "commentLoginPrompt": "<login>登入</login> 後才能留言",
+    "listSeparator": "、",
+    "yearSpan": "{count} 年",
+    "shareTitle": "{name} 的攀岩人物誌 - NobodyClimb",
+    "shareDescription": "來看看 {name} 的攀岩故事",
+    "coverPhotoAlt": "{name} 的封面照片",
+    "personalityTitle": "攀岩人格",
+    "personalityStrengths": "優勢",
+    "personalityBlindSpots": "盲點",
+    "personalityBestState": "最佳狀態",
+    "readMore": "繼續閱讀",
+    "collapse": "收合",
+    "loadBiographyFailed": "載入人物誌失敗",
+    "saveFailed": "儲存失敗",
+    "saveFailedRetry": "儲存失敗，請稍後再試",
+    "saveTimeout": "儲存逾時，請稍後再試",
+    "autoSaveTimeout": "儲存逾時，已暫停自動重試，請稍後再試",
+    "publishFailed": "發布失敗",
+    "loginToEdit": "請先登入以編輯人物誌",
+    "reload": "重新載入",
+    "uploadSuccess": "上傳成功",
+    "avatarUpdated": "頭像已更新",
+    "coverUpdated": "封面圖片已更新",
+    "uploadFailed": "上傳失敗",
+    "retryLater": "請稍後再試",
+    "defaultUserName": "你",
+    "promptExampleDefault": "這是一段很棒的攀岩故事...",
+    "promptExamples": {
+      "memorable_moment": "那次在龍洞的夕陽下完攀，整個人被橘紅色的光芒包圍，那一刻覺得所有的練習都值得了。",
+      "biggest_challenge": "曾經因為指腱炎休息了半年，那段時間學會了耐心，也更珍惜能夠攀爬的每一天。",
+      "funny_moment": "有一次爬到一半褲子破掉，只好硬著頭皮爬完整條路線，下來後才發現後面的人都在偷笑。",
+      "fear_management": "每次害怕墜落時，我會深呼吸三次，告訴自己繩子會接住我，然後專注在下一個動作。",
+      "favorite_spot": "最推薦北部的原岩，定線有創意，氣氛也很好，是我開始愛上抱石的地方。",
+      "climbing_mentor": "我的教練總是說「慢慢來，比較快」，這句話改變了我急躁的個性，不只在攀岩上。",
+      "life_outside_climbing": "除了攀岩，我也很喜歡攝影。常常帶著相機去岩場，記錄岩友們專注的表情。"
+    },
+    "storyCategoryMeta": {
+      "growth": {
+        "label": "成長軌跡",
+        "description": "你的攀岩旅程"
+      },
+      "psychology": {
+        "label": "心理層面",
+        "description": "攀岩中的心理感受"
+      },
+      "community": {
+        "label": "社群連結",
+        "description": "與岩友的故事"
+      },
+      "practical": {
+        "label": "實用經驗",
+        "description": "裝備、訓練、技巧"
+      },
+      "dreams": {
+        "label": "願望與目標",
+        "description": "未來的攀岩計畫"
+      },
+      "life": {
+        "label": "人生連結",
+        "description": "攀岩與生活"
+      }
+    },
+    "routeTypes": {
+      "bouldering": "抱石",
+      "sport": "運動攀登",
+      "topRope": "頂繩攀登",
+      "speed": "速度攀登",
+      "trad": "傳統攀登",
+      "slab": "平板岩",
+      "vertical": "垂直岩壁",
+      "overhang": "外傾岩壁",
+      "roof": "屋簷",
+      "crack": "裂隙",
+      "arete": "稜線",
+      "face": "壁面",
+      "chimney": "煙囪",
+      "dynamic": "動態路線",
+      "parkour": "跑酷風格",
+      "coordination": "協調性",
+      "static": "靜態",
+      "technical": "技術性",
+      "power": "力量型",
+      "endurance": "耐力型"
+    }
+  }
+}

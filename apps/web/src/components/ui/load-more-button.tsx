@@ -30,7 +30,7 @@ export function LoadMoreButton({
   noMoreText,
   className,
 }: LoadMoreButtonProps) {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
 
   if (!hasMore) {
     return (

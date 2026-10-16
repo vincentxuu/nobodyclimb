@@ -1,0 +1,73 @@
+{
+  "GalleryPage": {
+    "title": "相片牆",
+    "description": "探索捕捉攀岩之美的攀岩攝影。",
+    "subtitle": "欣賞小人物們攀岩的英姿",
+    "photoAlt": "攀岩照片",
+    "loadFailed": "載入失敗",
+    "loadError": "無法載入照片",
+    "fetchError": "載入照片時發生錯誤",
+    "noPhotos": "目前還沒有照片",
+    "reload": "重新載入",
+    "allPhotosShown": "已顯示所有照片"
+  },
+  "GalleryUI": {
+    "upload": {
+      "title": "上傳照片",
+      "invalidType": "請上傳 JPG、PNG 或 WebP 格式的圖片",
+      "compressFailed": "圖片 \"{name}\" 壓縮失敗",
+      "maxFiles": "最多只能上傳 {max} 張照片",
+      "noFiles": "請選擇要上傳的圖片",
+      "imageUploadFailed": "圖片上傳失敗",
+      "photoSaveFailed": "照片資料儲存失敗",
+      "uploadFailed": "上傳失敗",
+      "partialSuccess": "{success} 張照片上傳成功，{failed} 張失敗",
+      "allFailed": "所有照片上傳失敗，請稍後再試",
+      "dropHint": "拖曳照片到這裡，或點擊選擇",
+      "formatHint": "支援 JPG、PNG、WebP（超過 500KB 自動壓縮，最多 {max} 張）",
+      "processing": "正在處理圖片... ({current}/{total})",
+      "selectedCount": "已選擇 {count} 張照片",
+      "compressedCount": "(已壓縮 {count} 張)",
+      "clearAll": "清除全部",
+      "originalSize": "原始: {size}KB",
+      "uploadingProgress": "正在上傳 {uploading} 張照片...（已完成 {done}/{total}）",
+      "captionLabel": "說明（選填，套用至所有照片）",
+      "captionPlaceholder": "為照片添加說明...",
+      "locationLabel": "拍攝地點（選填，套用至所有照片）",
+      "country": "國家",
+      "city": "城市",
+      "spot": "地點",
+      "submitProcessing": "處理中...",
+      "submitUploading": "上傳中...",
+      "submitCount": "上傳 {count} 張照片",
+      "submit": "上傳照片"
+    },
+    "edit": {
+      "title": "編輯照片資訊",
+      "updateFailed": "更新失敗，請稍後再試",
+      "photoAlt": "照片",
+      "captionLabel": "說明",
+      "captionPlaceholder": "為照片添加說明...",
+      "locationLabel": "拍攝地點",
+      "country": "國家",
+      "city": "城市",
+      "spot": "地點",
+      "cancel": "取消",
+      "saving": "儲存中...",
+      "save": "儲存變更"
+    },
+    "popup": {
+      "uploadDate": "上傳日期:"
+    }
+  },
+  "UploadPage": {
+    "loginTitle": "請先登入",
+    "loginDesc": "登入後即可上傳照片到攝影集",
+    "goLogin": "前往登入",
+    "successTitle": "上傳成功！",
+    "successDesc": "{count} 張照片已成功上傳到攝影集",
+    "uploadMore": "繼續上傳",
+    "goGallery": "前往攝影集",
+    "subtitle": "分享你的攀岩照片到社群"
+  }
+}

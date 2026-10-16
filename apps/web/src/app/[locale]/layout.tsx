@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages, getTranslations } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import React from 'react'
 import { ChatWidget } from '@/components/ai'
 import { Footer } from '@/components/layout/footer'
@@ -14,6 +14,7 @@ import { ErrorBoundary } from '@/components/shared/error-boundary'
 import { ProgressBar } from '@/components/shared/progress-bar'
 import { ShareInvitation } from '@/components/shared/share-invitation'
 import { StoryPromptWrapper } from '@/components/shared/story-prompt-wrapper'
+import { coreMessages } from '@/i18n/route-messages'
 import { routing } from '@/i18n/routing'
 import { SITE_LOGO, SITE_NAME, SITE_URL } from '@/lib/constants'
 
@@ -67,7 +68,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     notFound()
   }
 
-  const messages = await getMessages()
+  const messages = await coreMessages()
   const tSite = await getTranslations({ locale, namespace: 'Metadata.site' })
   const jsonLd = buildJsonLd({
     alternateName: tSite.raw('alternateNames') as string[],

@@ -1,0 +1,270 @@
+{
+  "SearchPage": {
+    "metaTitle": "搜尋",
+    "metaDescription": "在 NobodyClimb 搜尋攀岩相關內容",
+    "searchResults": "搜尋結果",
+    "searchResultsFor": "{query} 的搜尋結果",
+    "searchPlaceholder": "搜尋...",
+    "tabAll": "全部",
+    "tabBiography": "人物誌",
+    "tabCrag": "岩場介紹",
+    "tabBlog": "部落格",
+    "searchInProgress": "搜尋功能開發中",
+    "searchKeyword": "搜尋關鍵字：{query}{type}"
+  },
+  "NotificationCenter": {
+    "title": "通知",
+    "markAllRead": "全部已讀",
+    "close": "關閉通知",
+    "empty": "還沒有通知",
+    "startedFollowing": "開始追蹤你了",
+    "markAsRead": "標記為已讀",
+    "delete": "刪除",
+    "deleteNotification": "刪除通知",
+    "loadMore": "載入更多"
+  },
+  "SharePage": {
+    "title": "匿名分享故事",
+    "emailLabel": "Email（可選）",
+    "emailHint": "留下 email，之後用同一個 email 註冊就能自動認領",
+    "filledCount": "已填寫 {count} 題",
+    "emptyPrompt": "選擇題目開始分享",
+    "leaveEmail": "留 Email",
+    "publishAnonymous": "匿名發布",
+    "errorNoStory": "請至少填寫一個故事",
+    "errorSessionLost": "Session 遺失，請重新整理頁面",
+    "errorSubmitFailed": "提交失敗"
+  },
+  "ShareButton": {
+    "copiedTitle": "已複製連結",
+    "copiedDescription": "分享連結已複製到剪貼簿",
+    "copyFailedTitle": "複製失敗",
+    "copyFailedDescription": "無法複製連結，請手動複製",
+    "nativeShare": "分享...",
+    "copied": "已複製",
+    "copyLink": "複製連結",
+    "shareToFacebook": "分享到 Facebook",
+    "shareToX": "分享到 X (Twitter)",
+    "shareToLine": "分享到 LINE"
+  },
+  "ShareInvitation": {
+    "close": "關閉",
+    "title": "想分享你的攀岩故事嗎？",
+    "description": "每個攀岩者都有獨特的故事，匿名分享也可以",
+    "startShare": "開始分享",
+    "loginToShare": "登入後分享",
+    "viewedCount": "你已瀏覽 {count} 個攀岩者故事"
+  },
+  "AnonymousShare": {
+    "answeredCount": "已填寫 ({count})",
+    "startHere": "從這題開始",
+    "coreStoriesTitle": "核心故事",
+    "coreStoriesSubtitle": "深度分享",
+    "oneLinersTitle": "一句話",
+    "oneLinersSubtitle": "快速回答",
+    "moreStoriesTitle": "更多故事",
+    "moreStoriesSubtitle": "選填",
+    "writeMore": "想寫更多",
+    "storyPlaceholder": "分享你的故事...",
+    "answerPlaceholder": "輸入你的回答...",
+    "eligibilityTitle": "再多看看別人的故事",
+    "eligibilityDesc": "瀏覽更多攀岩者的故事後，就可以開始分享",
+    "viewedCount": "已瀏覽 {count} 個故事",
+    "exploreStories": "探索攀岩者故事",
+    "alreadySignedInTitle": "你已經登入了",
+    "alreadySignedInDesc": "可以直接在個人頁面編輯你的故事",
+    "goEdit": "前往編輯我的故事",
+    "sharedTitle": "故事已分享！",
+    "sharedDesc": "你的故事已經以匿名方式發布",
+    "totalStories": "共 {count} 則故事",
+    "claimTitle": "之後想認領這個故事？",
+    "claimDesc": "用同一個裝置和瀏覽器登入，系統會自動幫你連結",
+    "viewMyStory": "查看我的故事",
+    "keepExploring": "繼續探索其他故事",
+    "back": "返回",
+    "save": "儲存",
+    "charsNeeded": "還需要 {count} 個字",
+    "readyToSave": "可以儲存了",
+    "charCount": "{count} 字"
+  },
+  "ClaimContent": {
+    "claimFailed": "認領失敗",
+    "mergeFailed": "合併失敗",
+    "title": "發現你之前分享的故事！",
+    "subtitle": "要把這個故事連結到你的帳號嗎？",
+    "storyCount": "{count} 則故事",
+    "keepAnonymous": "保持匿名顯示",
+    "keepAnonymousHint": "其他人只會看到「{name}」，不會看到你的帳號資訊",
+    "claim": "認領這個故事",
+    "skip": "不是我的，跳過",
+    "mergeTitle": "你已經有人物誌了",
+    "mergeSubtitle": "要把匿名故事的內容合併到你現有的人物誌嗎？",
+    "merge": "合併到我的人物誌",
+    "keepSeparate": "保持分開，不合併"
+  },
+  "RankBadge": {
+    "tiers": {
+      "foothill": {
+        "display": "麓",
+        "description": "踏上山腳，攀岩旅途的起點"
+      },
+      "wall": {
+        "display": "壁",
+        "description": "面對岩壁，開始真正的攀爬"
+      },
+      "ridge": {
+        "display": "稜",
+        "description": "站上稜線，俯瞰山谷與天際"
+      },
+      "summit": {
+        "display": "巔",
+        "description": "登上頂點，攀岩已融入靈魂"
+      },
+      "admin": {
+        "display": "管理員",
+        "description": "管理員"
+      }
+    },
+    "levelLabel": "等級：{rank}",
+    "levelUpHint": "充實攀岩日誌可提升等級"
+  },
+  "InstagramEmbed": {
+    "invalidUrl": "無效的 Instagram URL",
+    "checkUrl": "請確認 URL 格式正確",
+    "loading": "載入 Instagram 貼文中...",
+    "loadFailed": "無法載入 Instagram 貼文",
+    "viewOnInstagram": "在 Instagram 上查看 →",
+    "viewPost": "在 Instagram 查看這則貼文"
+  },
+  "StoryPage": {
+    "typeLabels": {
+      "coreStories": "核心故事",
+      "oneLiners": "一句話",
+      "stories": "小故事",
+      "default": "故事"
+    },
+    "metaDescription": "閱讀這則{typeLabel}，來自攀岩社群的真實故事"
+  },
+  "StoryDetail": {
+    "invalidType": "無效的故事類型",
+    "notFound": "找不到這則故事",
+    "loadError": "載入故事時發生錯誤",
+    "likeFailed": "按讚失敗",
+    "commentFailed": "新增留言失敗",
+    "deleteCommentUnsupported": "此類型不支援刪除留言",
+    "browseMore": "瀏覽更多故事",
+    "home": "首頁",
+    "stories": "故事",
+    "backToList": "返回故事列表",
+    "wordCount": "{count} 字",
+    "viewStory": "查看故事",
+    "viewAuthorStory": "查看 {name} 的完整故事",
+    "moreFrom": "來自 {name} 的更多故事",
+    "readMore": "閱讀全文",
+    "dateToday": "今天",
+    "dateYesterday": "昨天",
+    "dateDaysAgo": "{count} 天前",
+    "dateWeeksAgo": "{count} 週前",
+    "dateMonthsAgo": "{count} 個月前"
+  },
+  "Ascent": {
+    "types": {
+      "redpoint": {
+        "label": "Redpoint",
+        "description": "經過練習後一次完攀"
+      },
+      "flash": {
+        "label": "Flash",
+        "description": "第一次嘗試且看過他人攀爬"
+      },
+      "onsight": {
+        "label": "Onsight",
+        "description": "第一次嘗試且未看過任何資訊"
+      },
+      "attempt": {
+        "label": "Attempt",
+        "description": "未完攀"
+      },
+      "toprope": {
+        "label": "Top Rope",
+        "description": "上方確保攀登"
+      },
+      "lead": {
+        "label": "Lead",
+        "description": "先鋒攀登"
+      },
+      "seconding": {
+        "label": "Second",
+        "description": "跟攀"
+      },
+      "repeat": {
+        "label": "Repeat",
+        "description": "重複完攀"
+      }
+    },
+    "card": {
+      "attempts": "{count} 次嘗試",
+      "perceivedGrade": "感受：{grade}",
+      "photoAlt": "照片 {index}",
+      "youtubeAlt": "YouTube 影片",
+      "instagramPost": "Instagram 貼文"
+    },
+    "form": {
+      "title": "記錄攀爬",
+      "type": "攀爬類型",
+      "date": "攀爬日期",
+      "attempts": "嘗試次數",
+      "rating": "個人評分 (可選)",
+      "perceivedGrade": "感受難度 (可選)",
+      "perceivedGradePlaceholder": "例如：比標示難度稍難",
+      "notes": "筆記 (可選)",
+      "notesPlaceholder": "記錄這次攀爬的心得...",
+      "photos": "照片 (可選)",
+      "mediaLinks": "媒體連結 (可選)",
+      "youtubePlaceholder": "YouTube 影片連結",
+      "instagramPlaceholder": "Instagram 貼文連結",
+      "cancel": "取消",
+      "saving": "儲存中...",
+      "save": "儲存"
+    },
+    "dialog": {
+      "selectCrag": "選擇岩場",
+      "selectArea": "選擇區域 ({name})",
+      "selectSector": "選擇子區域 ({name})",
+      "selectRoute": "選擇路線 ({name})",
+      "routeSearchPlaceholder": "直接搜尋路線名稱或難度...",
+      "noRoutes": "找不到符合的路線",
+      "orStepByStep": "或逐步選擇",
+      "searchCrag": "搜尋岩場...",
+      "noCrags": "找不到符合的岩場",
+      "routeCount": "{count} 條路線",
+      "orSelectArea": "或選擇區域",
+      "searchArea": "搜尋區域...",
+      "noAreas": "找不到符合的區域",
+      "orSelectSector": "或選擇子區域",
+      "searchSector": "搜尋子區域...",
+      "showAllRoutes": "顯示所有路線",
+      "showAllRoutesDesc": "不篩選子區域，顯示 {count} 條路線",
+      "noSectors": "找不到符合的子區域",
+      "searchRoute": "搜尋路線..."
+    }
+  },
+  "RouteStory": {
+    "formTitle": "分享路線故事",
+    "routeRequired": "請選擇路線",
+    "contentRequired": "請輸入內容",
+    "titleLabel": "標題 (可選)",
+    "titlePlaceholder": "例如：為什麼叫做這個名字",
+    "contentLabel": "故事內容 *",
+    "contentPlaceholder": "分享這條路線的命名由來、歷史故事或特別的經歷...",
+    "cancel": "取消",
+    "publishing": "發布中...",
+    "publish": "發布",
+    "featured": "精選",
+    "photoAlt": "照片 {index}",
+    "video": "影片",
+    "post": "貼文",
+    "helpful": "有幫助",
+    "noLikes": "還沒有人按讚"
+  }
+}

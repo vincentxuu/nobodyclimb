@@ -13,7 +13,7 @@ import { useUIStore } from '@/store/uiStore'
  * 在 layout 中渲染，負責管理故事推薦彈窗的顯示邏輯
  */
 export function StoryPromptWrapper() {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const { status, user } = useAuthStore()
   const { isStoryPromptOpen, closeStoryPrompt } = useUIStore()
   const [biography, setBiography] = useState<Biography | null>(null)

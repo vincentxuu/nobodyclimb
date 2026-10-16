@@ -14,7 +14,7 @@ interface SearchInputProps {
 }
 
 export function SearchInput({ value, onChange, placeholder, className }: SearchInputProps) {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
 
   return (
     <div className={`flex justify-center px-4 md:px-0 ${className ?? ''}`}>

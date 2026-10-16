@@ -58,7 +58,7 @@ description: nobodyclimb 專案憲法 — 不變量、禁令、事實表、任�
 | Node / pnpm | CI 用 Node 20；pnpm 鎖定 9.15.0（`packageManager`） |
 | Migration 編號 | 4 位數零填充遞增；**歷史上已出現重複編號（兩個 0071）**，新增前必須檢查 |
 | web/mobile lint | 各 app 的 `lint` script 也是 `biome check .` |
-| i18n | next-intl，locales `zh`(default)/`en`/`ja`，訊息檔在 `apps/web/messages/{zh,en,ja}.json` |
+| i18n | next-intl，locales `zh`(default)/`en`/`ja`；訊息檔依模組拆在 `apps/web/messages/{locale}/{module}.json`（各語系 `index.ts` 合併；模組對應見 `scripts/i18n/modules.mjs`）。檢查：`pnpm i18n:check` |
 
 ## 快速索引（東西放哪裡）
 

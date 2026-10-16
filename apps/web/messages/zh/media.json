@@ -1,0 +1,69 @@
+{
+  "VideosPage": {
+    "title": "攀岩影片",
+    "subtitle": "探索精彩的攀岩影片",
+    "searchPlaceholder": "搜尋影片標題、頻道...",
+    "loadingData": "載入影片資料中...",
+    "searchResultCount": "找到 {count} 個相關影片",
+    "searchResultPartial": " (已載入部分資料)",
+    "loadingMore": "載入中...",
+    "loadMore": "載入更多影片",
+    "allVideosShown": "已顯示所有影片",
+    "noSearchResults": "沒有找到相關影片",
+    "noSearchResultsDesc": "請嘗試其他搜尋關鍵字或篩選條件",
+    "noVideos": "目前沒有影片資料"
+  },
+  "VideosFilter": {
+    "categories": {
+      "all": "全部",
+      "outdoorLead": "戶外上攀",
+      "outdoorBoulder": "戶外抱石",
+      "indoorLead": "室內上攀",
+      "indoorBoulder": "室內抱石",
+      "competition": "賽事",
+      "tutorial": "教學影片",
+      "training": "訓練",
+      "documentary": "紀錄片",
+      "gearReview": "裝備評測",
+      "challenge": "挑戰影片",
+      "interview": "訪談",
+      "outdoorClimbing": "戶外攀岩",
+      "indoorClimbing": "室內攀岩",
+      "competitionClimbing": "競技攀岩",
+      "bouldering": "抱石"
+    },
+    "channelPlaceholder": "選擇頻道",
+    "allChannels": "全部頻道",
+    "durationPlaceholder": "選擇時長",
+    "duration": {
+      "all": "全部時長",
+      "short": "短片 (<5分鐘)",
+      "medium": "中片 (5-20分鐘)",
+      "long": "長片 (>20分鐘)"
+    },
+    "popularityPlaceholder": "熱門程度",
+    "popularity": {
+      "all": "全部",
+      "viral": "百萬點閱",
+      "popular": "熱門",
+      "normal": "一般",
+      "niche": "小眾"
+    },
+    "featured": "精選",
+    "closeVideo": "關閉影片",
+    "viewCount": "{count} 觀看次數",
+    "watchOnYoutube": "在 YouTube 上觀看"
+  },
+  "Weather": {
+    "today": "今天",
+    "tomorrow": "明天",
+    "morning": "早",
+    "evening": "晚",
+    "forecastLabel": "{day}{period}",
+    "unknown": "未知",
+    "fetchFailed": "無法取得天氣資料",
+    "serviceUnavailable": "無法連接天氣服務",
+    "loading": "載入天氣資料...",
+    "forecastTitle": "未來七天天氣"
+  }
+}

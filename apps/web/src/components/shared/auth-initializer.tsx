@@ -21,7 +21,7 @@ const BIOGRAPHY_PROMPT_KEY = 'nobodyclimb_biography_prompt_shown'
  * 使用 @nobodyclimb/hooks 的 hydrate 方法恢復認證狀態
  */
 export function AuthInitializer() {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const status = useAuthStore((state) => state.status)
   const hydrate = useAuthStore((state) => state.hydrate)
   const { openStoryPrompt } = useUIStore()

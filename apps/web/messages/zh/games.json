@@ -1,0 +1,280 @@
+{
+  "GamesPage": {
+    "title": "攀岩系統練習",
+    "subtitle": "練習繩索系統操作，學習安全攀岩技術",
+    "learnMode": {
+      "title": "學習模式",
+      "description": "答錯顯示詳細解釋"
+    },
+    "examMode": {
+      "title": "系統考試",
+      "comingSoon": "即將推出"
+    },
+    "certificationMode": {
+      "title": "認證徽章",
+      "comingSoon": "即將推出"
+    },
+    "disclaimer": "題目內容根據國際攀岩聯盟 (IFSC)、美國登山協會 (AAC)等權威來源編寫。實際操作請在專業教練指導下進行，本系統僅供學習參考。"
+  },
+  "RopeGame": {
+    "defaultTitle": "攀岩系統練習",
+    "questionCount": "{count} 題",
+    "difficulty": {
+      "1": "入門",
+      "2": "進階",
+      "3": "困難"
+    },
+    "parents": {
+      "sport": "運動攀登",
+      "trad": "傳統攀登"
+    },
+    "categories": {
+      "sport-belay": {
+        "name": "基礎確保",
+        "description": "學習正確的確保技術與安全觀念"
+      },
+      "sport-lead": {
+        "name": "先鋒攀登",
+        "description": "掌握先鋒攀登的繩索管理與掛繩技巧"
+      },
+      "sport-toprope": {
+        "name": "頂繩架設",
+        "description": "學習頂繩系統的架設與安全確認"
+      },
+      "sport-rappel": {
+        "name": "垂降系統",
+        "description": "掌握垂降設備操作與安全程序"
+      },
+      "trad-anchor": {
+        "name": "固定點架設",
+        "description": "學習多點固定系統的架設原則"
+      },
+      "trad-protection": {
+        "name": "保護裝備",
+        "description": "掌握各類保護裝備的放置技巧"
+      },
+      "trad-multipitch": {
+        "name": "多繩距系統",
+        "description": "學習多繩距攀登的繩索管理"
+      },
+      "trad-rescue": {
+        "name": "自我救援",
+        "description": "掌握基本的自我救援技術"
+      }
+    },
+    "categoryNotFound": "找不到該類別",
+    "checkUrl": "請確認網址是否正確",
+    "loadingQuestions": "正在載入題目...",
+    "exit": "離開",
+    "nextQuestion": "下一題 →",
+    "continue": "繼續 →",
+    "correct": "答對了！",
+    "incorrect": "答錯了",
+    "correctAnswer": "正確答案",
+    "explanation": "解釋",
+    "hint": "提示",
+    "references": "參考資料",
+    "scenario": "情境",
+    "question": "問題",
+    "questionImageAlt": "題目圖片",
+    "orderingHint": "請將步驟拖曳至正確的順序，完成後點擊「確認順序」。",
+    "confirmOrder": "確認順序",
+    "gameOver": "遊戲結束",
+    "completed": "完成練習！",
+    "score": "分數",
+    "accuracy": "正確率",
+    "maxCombo": "最高連擊",
+    "time": "用時",
+    "playAgain": "再玩一次",
+    "backHome": "回到首頁",
+    "belayStation": "確保站",
+    "soundOff": "關閉音效",
+    "soundOn": "開啟音效"
+  },
+  "Quiz": {
+    "homeAria": "前往首頁",
+    "landing": {
+      "badge": "24 題 · 3-5 分鐘",
+      "title": "你是哪種<em>攀岩者</em>？",
+      "description": "探索你的攀岩性格，找到最適合你的訓練方式和攀岩夥伴",
+      "start": "開始測驗",
+      "note": "不需要登入 · 完全免費"
+    },
+    "axisLabels": {
+      "body": "身體風格",
+      "motive": "攀爬動機",
+      "mind": "心理模式"
+    },
+    "likert": {
+      "1": "非常不同意",
+      "2": "不同意",
+      "3": "普通",
+      "4": "同意",
+      "5": "非常同意"
+    },
+    "prevQuestion": "上一題",
+    "result": {
+      "taglineQuote": "「{tagline}」",
+      "radarTitle": "性格雷達圖",
+      "radarAxes": {
+        "body": "力量/技巧",
+        "motive": "目標/自由",
+        "mind": "大膽/穩健"
+      },
+      "gritIndex": "恆毅力指數",
+      "flowIndex": "心流指數",
+      "profileTitle": "性格描述",
+      "flowState": "Flow 最佳狀態",
+      "clutchState": "Clutch 關鍵時刻",
+      "strengths": "優勢",
+      "blindSpots": "盲點",
+      "trainingTitle": "專屬訓練計畫",
+      "weekHeading": "Week {week}：{theme}",
+      "dayHeading": "Day {day}：{title}",
+      "minutes": "{count} 分鐘",
+      "goTraining": "前往訓練計畫",
+      "loginUnlock": "登入解鎖完整訓練計畫",
+      "compatTitle": "相性分析",
+      "bestPartner": "最佳拍檔",
+      "worstMatch": "最大剋星",
+      "share": "分享結果",
+      "retake": "重新測驗",
+      "join": "加入 NobodyClimb",
+      "tryYourself": "測測你自己 →"
+    },
+    "share": {
+      "title": "我是{name} — NobodyClimb 攀岩人格測驗",
+      "modalTitle": "分享你的結果",
+      "toSocial": "分享到社群",
+      "copied": "已複製！",
+      "copyLink": "複製連結",
+      "generating": "正在生成圖卡..."
+    },
+    "collection": {
+      "title": "8 種攀岩人格",
+      "subtitle": "探索每種攀岩人格的特質與風格"
+    },
+    "training": {
+      "redirecting": "正在導向登入頁面...",
+      "notAvailable": "此型態的訓練計畫尚未開放",
+      "completedCount": "已完成 {completed} / {total} 天",
+      "headerTitle": "{name} 訓練計畫",
+      "daysUnit": "天",
+      "guideTitle": "開始你的訓練計畫",
+      "guideBody": "這個計畫專為<strong>{name}</strong>設計，核心理念是「訓練你的反面」——透過強化你較少使用的面向，成為更全面的攀岩者。",
+      "statWeeks": "4 週",
+      "statWeeksLabel": "完整計畫",
+      "statDays": "12 天",
+      "statDaysLabel": "訓練天數",
+      "statDuration": "20-45 分",
+      "statDurationLabel": "每日時長",
+      "graduatedTitle": "訓練計畫完成！",
+      "graduatedDesc": "恭喜你完成 {name} 的 4 週訓練計畫",
+      "viewNotes": "查看筆記",
+      "addNotes": "新增筆記",
+      "notesPlaceholder": "記錄今天的訓練心得...",
+      "savingNotes": "儲存中...",
+      "saveNotes": "儲存筆記"
+    },
+    "questions": {
+      "body-l1": "我喜歡用力量直接拉上去，而不是慢慢找腳點",
+      "motive-l1": "我會設定明確的攀岩等級目標並努力達成",
+      "mind-l1": "我願意嘗試可能會墜落的高難度動作",
+      "body-r1": "我會花很多時間研究腳點的位置和踩法",
+      "motive-r1": "我攀岩主要是為了享受過程，不太在意等級",
+      "mind-r1": "我會先觀察整條路線再開始攀爬",
+      "body-l2": "我覺得鍛鍊肌力比練習平衡更有效率",
+      "motive-l2": "完攀一條目標路線會讓我非常有成就感",
+      "mind-l2": "我喜歡在沒有完全準備好的情況下挑戰新路線",
+      "body-r2": "我認為好的技巧比蠻力更能突破難關",
+      "motive-r2": "我喜歡嘗試各種不同風格的路線",
+      "mind-r2": "我偏好從簡單的路線開始慢慢加難度",
+      "body-l3": "遇到動態動作時我會感到興奮",
+      "motive-l3": "我會為了突破某個難度而反覆練習特定動作",
+      "mind-l3": "我覺得墜落是攀岩的一部分，不需要害怕",
+      "body-r3": "我喜歡用巧妙的身體擺位來節省力氣",
+      "motive-r3": "比起反覆練同一條路線，我更想探索新路線",
+      "mind-r3": "我會確保每個動作都穩定後才繼續往上",
+      "body-l4": "我偏好需要大幅拉伸或跳躍的路線",
+      "motive-l4": "我喜歡追蹤自己的攀登紀錄和進步曲線",
+      "mind-l4": "遇到未知的路線我會直接嘗試，而不是先觀察很久",
+      "body-r4": "我更享受需要精細腳法的垂直或薄片路線",
+      "motive-r4": "我覺得攀岩最棒的部分是和朋友一起的時光",
+      "mind-r4": "我認為做好充分準備比冒險嘗試更重要"
+    },
+    "personalities": {
+      "PGB": {
+        "name": "碎岩者",
+        "tagline": "以力量征服，用決心突破",
+        "description": "你是天生的力量型攀岩者，總是用最直接的方式面對挑戰。明確的目標驅動你不斷前進，大膽的心態讓你敢於嘗試極限動作。在岩壁上，你就像一台碎岩機——勢不可擋。",
+        "strengths": ["強大的身體素質與爆發力", "目標明確不輕易放棄", "敢於挑戰高難度路線"],
+        "blindSpots": ["可能忽略技巧與節奏的重要性", "過度執著目標時容易受傷"],
+        "flowState": "全力輸出，感受肌肉與岩壁的對話",
+        "clutchState": "面對 crux 時用爆發力一搏"
+      },
+      "PGS": {
+        "name": "鍛造者",
+        "tagline": "穩扎穩打，鍛造實力",
+        "description": "你相信力量需要時間鍛造。目標導向的你會制定長期訓練計畫，搭配穩健的心態逐步累積實力。你不急於求成，但每一步都踏得紮實。",
+        "strengths": ["有紀律的訓練習慣", "穩定的進步軌跡", "良好的體能管理"],
+        "blindSpots": ["可能過於保守錯過突破時機", "計畫過於僵化缺乏彈性"],
+        "flowState": "在熟悉的訓練節奏中感受力量的成長",
+        "clutchState": "靠長期累積的實力穩定通過難點"
+      },
+      "PFB": {
+        "name": "野火",
+        "tagline": "燃燒熱情，自由攀登",
+        "description": "你像野火般充滿能量與不可預測性。偏好力量型攀登但不受目標束縛，大膽的心態讓你願意嘗試各種風格。你享受攀岩本身的樂趣，不在乎分數與等級。",
+        "strengths": ["充沛的攀岩熱情", "願意嘗試不同風格", "不怕失敗的勇氣"],
+        "blindSpots": ["缺乏系統性訓練", "難以在單一方向深入精進"],
+        "flowState": "在新路線上感受身體的自由與力量",
+        "clutchState": "靠直覺與膽量突破未知難點"
+      },
+      "PFS": {
+        "name": "恆者",
+        "tagline": "如錨般堅定，享受過程",
+        "description": "你是攀岩世界的定海神針。力量型的身體搭配自由探索的動機與穩健的心態，讓你能在各種環境中保持穩定。你不追求速成，而是享受每次攀登的過程。",
+        "strengths": ["情緒穩定不易受壓力影響", "良好的基礎體能", "持續且不間斷的攀岩習慣"],
+        "blindSpots": ["可能缺乏明確的進步方向", "過於舒適不願跳出安全圈"],
+        "flowState": "在熟悉的岩場中感受力量與平靜的交融",
+        "clutchState": "用穩定的心態與體能慢慢磨過難點"
+      },
+      "TGB": {
+        "name": "狙擊手",
+        "tagline": "精準出手，一擊必殺",
+        "description": "你是技巧型攀岩者中的狙擊手。明確的目標讓你專注於特定路線的攻克，大膽的心態讓你敢於嘗試極限動作。你追求的是用最精準的技巧完成最難的挑戰。",
+        "strengths": ["優秀的動作閱讀能力", "對目標路線的專注力", "關鍵時刻的執行力"],
+        "blindSpots": ["對非目標路線可能缺乏耐心", "過度追求效率忽略體驗"],
+        "flowState": "在完美的技巧執行中感受精準的快感",
+        "clutchState": "用精準的動作解讀一次性通過 crux"
+      },
+      "TGS": {
+        "name": "解碼者",
+        "tagline": "解讀岩壁，系統精進",
+        "description": "你像密碼學家一樣分析每條路線。技巧型的攀登風格搭配目標導向的動機與穩健的心態，讓你善於拆解問題、制定策略，然後系統性地攻克挑戰。",
+        "strengths": ["出色的路線解讀能力", "系統化的訓練方法", "冷靜的問題解決能力"],
+        "blindSpots": ["可能過度分析而猶豫不決", "缺乏即興應變的彈性"],
+        "flowState": "在解讀路線謎題的過程中進入心流",
+        "clutchState": "用冷靜的分析找到最佳解法"
+      },
+      "TFB": {
+        "name": "浪人",
+        "tagline": "四處遊走，技巧為伴",
+        "description": "你是攀岩界的遊牧者。精湛的技巧讓你適應各種岩質與風格，自由探索的動機驅動你走遍各地岩場，大膽的心態讓你無畏未知。每一面岩壁都是新的冒險。",
+        "strengths": ["適應力強可攀登各種岩質", "豐富的攀岩經驗與見識", "享受探索的樂趣"],
+        "blindSpots": ["難以在單一領域達到頂尖", "缺乏長期訓練的持續性"],
+        "flowState": "在全新的岩場中發現身體與岩壁的對話",
+        "clutchState": "靠豐富的經驗即興應對未知難點"
+      },
+      "TFS": {
+        "name": "禪者",
+        "tagline": "靜心攀登，與岩合一",
+        "description": "你是攀岩界的修行者。技巧型的攀登風格搭配自由探索的動機與穩健的心態，讓你追求的不是等級或成績，而是攀登過程中身心合一的境界。",
+        "strengths": ["優秀的身心協調能力", "不受外在壓力影響的穩定性", "深度的攀岩感受力"],
+        "blindSpots": ["可能缺乏突破的動力", "對競技面向興趣較低"],
+        "flowState": "在攀登中感受呼吸、動作與岩壁的合一",
+        "clutchState": "用深呼吸與專注力找到內在的穩定"
+      }
+    }
+  }
+}

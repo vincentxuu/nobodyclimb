@@ -53,7 +53,7 @@ export default function UserMenu() {
   const [activeTab, setActiveTab] = useState<'explore' | 'personal'>('personal')
   const t = useTranslations('UserMenu')
   const tNav = useTranslations('Navbar')
-  const tShared = useTranslations('SharedUI')
+  const tShared = useTranslations('Common')
   const tAuth = useTranslations('AuthPage')
 
   const avatarStyle = user?.avatarStyle

@@ -1,0 +1,270 @@
+{
+  "SearchPage": {
+    "metaTitle": "Search",
+    "metaDescription": "Search climbing-related content on NobodyClimb",
+    "searchResults": "Search Results",
+    "searchResultsFor": "Results for \"{query}\"",
+    "searchPlaceholder": "Search...",
+    "tabAll": "All",
+    "tabBiography": "Biography",
+    "tabCrag": "Crags",
+    "tabBlog": "Blog",
+    "searchInProgress": "Search feature coming soon",
+    "searchKeyword": "Search keyword: {query}{type}"
+  },
+  "NotificationCenter": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "close": "Close notifications",
+    "empty": "No notifications yet",
+    "startedFollowing": "started following you",
+    "markAsRead": "Mark as read",
+    "delete": "Delete",
+    "deleteNotification": "Delete notification",
+    "loadMore": "Load more"
+  },
+  "SharePage": {
+    "title": "Share Story Anonymously",
+    "emailLabel": "Email (optional)",
+    "emailHint": "Leave your email so you can claim this profile when you register with the same email",
+    "filledCount": "{count} answered",
+    "emptyPrompt": "Select a question to start sharing",
+    "leaveEmail": "Add Email",
+    "publishAnonymous": "Publish Anonymously",
+    "errorNoStory": "Please answer at least one question",
+    "errorSessionLost": "Session lost, please refresh the page",
+    "errorSubmitFailed": "Submission failed"
+  },
+  "ShareButton": {
+    "copiedTitle": "Link copied",
+    "copiedDescription": "The share link has been copied to your clipboard",
+    "copyFailedTitle": "Copy failed",
+    "copyFailedDescription": "Could not copy the link. Please copy it manually.",
+    "nativeShare": "Share...",
+    "copied": "Copied",
+    "copyLink": "Copy link",
+    "shareToFacebook": "Share on Facebook",
+    "shareToX": "Share on X (Twitter)",
+    "shareToLine": "Share on LINE"
+  },
+  "ShareInvitation": {
+    "close": "Close",
+    "title": "Want to share your climbing story?",
+    "description": "Every climber has a unique story. You can share anonymously, too.",
+    "startShare": "Start sharing",
+    "loginToShare": "Log in to share",
+    "viewedCount": "You've viewed {count} climber stories"
+  },
+  "AnonymousShare": {
+    "answeredCount": "Answered ({count})",
+    "startHere": "Start with this one",
+    "coreStoriesTitle": "Core Stories",
+    "coreStoriesSubtitle": "In-depth sharing",
+    "oneLinersTitle": "One-liners",
+    "oneLinersSubtitle": "Quick answers",
+    "moreStoriesTitle": "More Stories",
+    "moreStoriesSubtitle": "Optional",
+    "writeMore": "I want to write more",
+    "storyPlaceholder": "Share your story...",
+    "answerPlaceholder": "Type your answer...",
+    "eligibilityTitle": "Read a few more climbers' stories first",
+    "eligibilityDesc": "After browsing more climbers' stories, you can start sharing your own",
+    "viewedCount": "{count} stories viewed",
+    "exploreStories": "Explore climbers' stories",
+    "alreadySignedInTitle": "You're already signed in",
+    "alreadySignedInDesc": "You can edit your stories directly from your profile",
+    "goEdit": "Edit my stories",
+    "sharedTitle": "Story shared!",
+    "sharedDesc": "Your story has been published anonymously",
+    "totalStories": "{count} stories in total",
+    "claimTitle": "Want to claim this story later?",
+    "claimDesc": "Sign in on the same device and browser, and it will be linked to your account automatically",
+    "viewMyStory": "View my story",
+    "keepExploring": "Keep exploring other stories",
+    "back": "Back",
+    "save": "Save",
+    "charsNeeded": "{count} more characters needed",
+    "readyToSave": "Ready to save",
+    "charCount": "{count} characters"
+  },
+  "ClaimContent": {
+    "claimFailed": "Failed to claim the story",
+    "mergeFailed": "Failed to merge",
+    "title": "We found a story you shared earlier!",
+    "subtitle": "Would you like to link this story to your account?",
+    "storyCount": "{count} stories",
+    "keepAnonymous": "Keep it anonymous",
+    "keepAnonymousHint": "Others will only see \"{name}\", not your account details",
+    "claim": "Claim this story",
+    "skip": "It's not mine, skip",
+    "mergeTitle": "You already have a biography",
+    "mergeSubtitle": "Would you like to merge the anonymous story into your existing biography?",
+    "merge": "Merge into my biography",
+    "keepSeparate": "Keep them separate"
+  },
+  "RankBadge": {
+    "tiers": {
+      "foothill": {
+        "display": "Foothill",
+        "description": "At the foot of the mountain, where the climbing journey begins"
+      },
+      "wall": {
+        "display": "Wall",
+        "description": "Facing the wall, where the real climbing starts"
+      },
+      "ridge": {
+        "display": "Ridge",
+        "description": "Standing on the ridge, looking out over valley and sky"
+      },
+      "summit": {
+        "display": "Summit",
+        "description": "At the summit, climbing has become part of your soul"
+      },
+      "admin": {
+        "display": "Admin",
+        "description": "Administrator"
+      }
+    },
+    "levelLabel": "Rank: {rank}",
+    "levelUpHint": "Fill in your climbing journal to rank up"
+  },
+  "InstagramEmbed": {
+    "invalidUrl": "Invalid Instagram URL",
+    "checkUrl": "Please check that the URL format is correct",
+    "loading": "Loading Instagram post...",
+    "loadFailed": "Unable to load the Instagram post",
+    "viewOnInstagram": "View on Instagram →",
+    "viewPost": "View this post on Instagram"
+  },
+  "StoryPage": {
+    "typeLabels": {
+      "coreStories": "Core Story",
+      "oneLiners": "One-liner",
+      "stories": "Short Story",
+      "default": "Story"
+    },
+    "metaDescription": "Read this {typeLabel} from the climbing community"
+  },
+  "StoryDetail": {
+    "invalidType": "Invalid story type",
+    "notFound": "Story not found",
+    "loadError": "An error occurred while loading the story",
+    "likeFailed": "Failed to like",
+    "commentFailed": "Failed to add comment",
+    "deleteCommentUnsupported": "Deleting comments is not supported for this type",
+    "browseMore": "Browse more stories",
+    "home": "Home",
+    "stories": "Stories",
+    "backToList": "Back to stories",
+    "wordCount": "{count} characters",
+    "viewStory": "View story",
+    "viewAuthorStory": "View {name}'s full story",
+    "moreFrom": "More stories from {name}",
+    "readMore": "Read more",
+    "dateToday": "Today",
+    "dateYesterday": "Yesterday",
+    "dateDaysAgo": "{count, plural, one {# day} other {# days}} ago",
+    "dateWeeksAgo": "{count, plural, one {# week} other {# weeks}} ago",
+    "dateMonthsAgo": "{count, plural, one {# month} other {# months}} ago"
+  },
+  "Ascent": {
+    "types": {
+      "redpoint": {
+        "label": "Redpoint",
+        "description": "Sent cleanly after working the route"
+      },
+      "flash": {
+        "label": "Flash",
+        "description": "Sent first try, with prior beta"
+      },
+      "onsight": {
+        "label": "Onsight",
+        "description": "Sent first try, with no prior beta"
+      },
+      "attempt": {
+        "label": "Attempt",
+        "description": "Not sent"
+      },
+      "toprope": {
+        "label": "Top Rope",
+        "description": "Climbed on top rope"
+      },
+      "lead": {
+        "label": "Lead",
+        "description": "Climbed on lead"
+      },
+      "seconding": {
+        "label": "Second",
+        "description": "Climbed as the second"
+      },
+      "repeat": {
+        "label": "Repeat",
+        "description": "Repeat send"
+      }
+    },
+    "card": {
+      "attempts": "{count, plural, one {# attempt} other {# attempts}}",
+      "perceivedGrade": "Felt like: {grade}",
+      "photoAlt": "Photo {index}",
+      "youtubeAlt": "YouTube video",
+      "instagramPost": "Instagram post"
+    },
+    "form": {
+      "title": "Log an ascent",
+      "type": "Ascent type",
+      "date": "Date",
+      "attempts": "Attempts",
+      "rating": "Your rating (optional)",
+      "perceivedGrade": "Perceived grade (optional)",
+      "perceivedGradePlaceholder": "e.g. a bit harder than the given grade",
+      "notes": "Notes (optional)",
+      "notesPlaceholder": "Jot down your thoughts on this climb...",
+      "photos": "Photos (optional)",
+      "mediaLinks": "Media links (optional)",
+      "youtubePlaceholder": "YouTube video link",
+      "instagramPlaceholder": "Instagram post link",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "save": "Save"
+    },
+    "dialog": {
+      "selectCrag": "Select a crag",
+      "selectArea": "Select an area ({name})",
+      "selectSector": "Select a sector ({name})",
+      "selectRoute": "Select a route ({name})",
+      "routeSearchPlaceholder": "Search directly by route name or grade...",
+      "noRoutes": "No matching routes",
+      "orStepByStep": "or pick step by step",
+      "searchCrag": "Search crags...",
+      "noCrags": "No matching crags",
+      "routeCount": "{count, plural, one {# route} other {# routes}}",
+      "orSelectArea": "or select an area",
+      "searchArea": "Search areas...",
+      "noAreas": "No matching areas",
+      "orSelectSector": "or select a sector",
+      "searchSector": "Search sectors...",
+      "showAllRoutes": "Show all routes",
+      "showAllRoutesDesc": "Skip sector filtering and show {count, plural, one {# route} other {# routes}}",
+      "noSectors": "No matching sectors",
+      "searchRoute": "Search routes..."
+    }
+  },
+  "RouteStory": {
+    "formTitle": "Share a Route Story",
+    "routeRequired": "Please select a route",
+    "contentRequired": "Please enter some content",
+    "titleLabel": "Title (optional)",
+    "titlePlaceholder": "e.g. How the route got its name",
+    "contentLabel": "Story *",
+    "contentPlaceholder": "Share the origin of this route's name, its history or a special experience...",
+    "cancel": "Cancel",
+    "publishing": "Publishing...",
+    "publish": "Publish",
+    "featured": "Featured",
+    "photoAlt": "Photo {index}",
+    "video": "Video",
+    "post": "Post",
+    "helpful": "Helpful",
+    "noLikes": "No likes yet"
+  }
+}

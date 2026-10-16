@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { QuizLayoutWrapper } from '@/components/quiz/QuizLayoutWrapper'
 import { Link } from '@/i18n/navigation'
+import { RouteMessages } from '@/i18n/route-messages'
 
 type Props = {
   children: React.ReactNode
@@ -27,7 +28,9 @@ export default async function QuizLayout({ children, params }: Props) {
             />
           </Link>
         </header>
-        <div className="flex-1">{children}</div>
+        <div className="flex-1">
+          <RouteMessages route="quiz">{children}</RouteMessages>
+        </div>
       </div>
     </QuizLayoutWrapper>
   )

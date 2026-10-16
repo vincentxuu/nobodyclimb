@@ -37,7 +37,7 @@ export function EmptyState({
   action,
   className,
 }: EmptyStateProps) {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
 
   const renderIcon = () => {
     if (React.isValidElement(icon)) {

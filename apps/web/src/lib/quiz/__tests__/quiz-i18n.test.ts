@@ -1,7 +1,7 @@
 import { PERSONALITY_TYPES, QUIZ_QUESTIONS, TRAINING_PLANS } from '@nobodyclimb/constants'
-import en from '../../../../messages/en.json'
-import ja from '../../../../messages/ja.json'
-import zh from '../../../../messages/zh.json'
+import en from '../../../../messages/en'
+import ja from '../../../../messages/ja'
+import zh from '../../../../messages/zh'
 import { translateTrainingText } from '../training-i18n'
 
 // constants 的測驗資料是繁中單一來源；這裡確保新增／修改資料時，譯文不會漏掉

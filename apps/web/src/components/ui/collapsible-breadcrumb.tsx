@@ -18,7 +18,7 @@ interface CollapsibleBreadcrumbProps {
 }
 
 export function CollapsibleBreadcrumb({ items, className }: CollapsibleBreadcrumbProps) {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (

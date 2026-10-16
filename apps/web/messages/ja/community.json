@@ -1,0 +1,270 @@
+{
+  "SearchPage": {
+    "metaTitle": "検索",
+    "metaDescription": "NobodyClimbでクライミング関連コンテンツを検索",
+    "searchResults": "検索結果",
+    "searchResultsFor": "「{query}」の検索結果",
+    "searchPlaceholder": "検索...",
+    "tabAll": "すべて",
+    "tabBiography": "プロフィール",
+    "tabCrag": "岩場",
+    "tabBlog": "ブログ",
+    "searchInProgress": "検索機能は開発中です",
+    "searchKeyword": "検索キーワード：{query}{type}"
+  },
+  "NotificationCenter": {
+    "title": "通知",
+    "markAllRead": "すべて既読にする",
+    "close": "通知を閉じる",
+    "empty": "通知はまだありません",
+    "startedFollowing": "あなたをフォローしました",
+    "markAsRead": "既読にする",
+    "delete": "削除",
+    "deleteNotification": "通知を削除",
+    "loadMore": "さらに読み込む"
+  },
+  "SharePage": {
+    "title": "匿名でストーリーを共有",
+    "emailLabel": "メールアドレス（任意）",
+    "emailHint": "メールアドレスを残すと、同じアドレスで登録したときに自動的に引き継げます",
+    "filledCount": "{count} 問回答済み",
+    "emptyPrompt": "質問を選んでシェアを始める",
+    "leaveEmail": "メール追加",
+    "publishAnonymous": "匿名で公開",
+    "errorNoStory": "少なくとも1つのストーリーを入力してください",
+    "errorSessionLost": "セッションが失われました。ページを再読み込みしてください",
+    "errorSubmitFailed": "送信に失敗しました"
+  },
+  "ShareButton": {
+    "copiedTitle": "リンクをコピーしました",
+    "copiedDescription": "共有リンクをクリップボードにコピーしました",
+    "copyFailedTitle": "コピーに失敗しました",
+    "copyFailedDescription": "リンクをコピーできませんでした。手動でコピーしてください",
+    "nativeShare": "シェア...",
+    "copied": "コピーしました",
+    "copyLink": "リンクをコピー",
+    "shareToFacebook": "Facebook でシェア",
+    "shareToX": "X (Twitter) でシェア",
+    "shareToLine": "LINE でシェア"
+  },
+  "ShareInvitation": {
+    "close": "閉じる",
+    "title": "あなたのクライミングストーリーをシェアしませんか？",
+    "description": "クライマー一人ひとりに、それぞれのストーリーがあります。匿名でもシェアできます",
+    "startShare": "シェアを始める",
+    "loginToShare": "ログインしてシェア",
+    "viewedCount": "これまでに{count}件のクライマーのストーリーを見ました"
+  },
+  "AnonymousShare": {
+    "answeredCount": "回答済み（{count}）",
+    "startHere": "まずはこの質問から",
+    "coreStoriesTitle": "コアストーリー",
+    "coreStoriesSubtitle": "じっくり語る",
+    "oneLinersTitle": "ひとこと",
+    "oneLinersSubtitle": "さくっと回答",
+    "moreStoriesTitle": "もっとストーリー",
+    "moreStoriesSubtitle": "任意",
+    "writeMore": "もっと書きたい",
+    "storyPlaceholder": "あなたのストーリーをシェア...",
+    "answerPlaceholder": "回答を入力...",
+    "eligibilityTitle": "もう少しほかの人のストーリーを見てみましょう",
+    "eligibilityDesc": "ほかのクライマーのストーリーをもう少し見ると、シェアを始められます",
+    "viewedCount": "{count} 件のストーリーを閲覧済み",
+    "exploreStories": "クライマーのストーリーを見る",
+    "alreadySignedInTitle": "すでにログインしています",
+    "alreadySignedInDesc": "マイページからストーリーを直接編集できます",
+    "goEdit": "ストーリーを編集する",
+    "sharedTitle": "ストーリーをシェアしました！",
+    "sharedDesc": "あなたのストーリーは匿名で公開されました",
+    "totalStories": "全 {count} 件のストーリー",
+    "claimTitle": "あとでこのストーリーを自分のものにしたいときは？",
+    "claimDesc": "同じ端末・同じブラウザでログインすると、自動的にアカウントに紐づけられます",
+    "viewMyStory": "自分のストーリーを見る",
+    "keepExploring": "ほかのストーリーを見る",
+    "back": "戻る",
+    "save": "保存",
+    "charsNeeded": "あと {count} 文字必要です",
+    "readyToSave": "保存できます",
+    "charCount": "{count} 文字"
+  },
+  "ClaimContent": {
+    "claimFailed": "ストーリーの引き継ぎに失敗しました",
+    "mergeFailed": "統合に失敗しました",
+    "title": "以前シェアしたストーリーが見つかりました！",
+    "subtitle": "このストーリーをアカウントに紐づけますか？",
+    "storyCount": "ストーリー{count}件",
+    "keepAnonymous": "匿名のまま表示する",
+    "keepAnonymousHint": "他のユーザーには「{name}」のみが表示され、アカウント情報は表示されません",
+    "claim": "このストーリーを引き継ぐ",
+    "skip": "自分のものではないのでスキップ",
+    "mergeTitle": "すでに人物誌があります",
+    "mergeSubtitle": "匿名ストーリーの内容を既存の人物誌に統合しますか？",
+    "merge": "自分の人物誌に統合する",
+    "keepSeparate": "統合せず、別々のままにする"
+  },
+  "RankBadge": {
+    "tiers": {
+      "foothill": {
+        "display": "麓",
+        "description": "山のふもとに立つ、クライミングの旅の出発点"
+      },
+      "wall": {
+        "display": "壁",
+        "description": "壁と向き合い、本当のクライミングが始まる"
+      },
+      "ridge": {
+        "display": "稜",
+        "description": "稜線に立ち、谷と空を見渡す"
+      },
+      "summit": {
+        "display": "頂",
+        "description": "頂に立ち、クライミングが魂の一部になっている"
+      },
+      "admin": {
+        "display": "管理者",
+        "description": "管理者"
+      }
+    },
+    "levelLabel": "ランク：{rank}",
+    "levelUpHint": "クライミング日誌を充実させるとランクが上がります"
+  },
+  "InstagramEmbed": {
+    "invalidUrl": "無効な Instagram の URL です",
+    "checkUrl": "URL の形式が正しいかご確認ください",
+    "loading": "Instagram の投稿を読み込み中...",
+    "loadFailed": "Instagram の投稿を読み込めませんでした",
+    "viewOnInstagram": "Instagram で見る →",
+    "viewPost": "この投稿を Instagram で見る"
+  },
+  "StoryPage": {
+    "typeLabels": {
+      "coreStories": "コアストーリー",
+      "oneLiners": "ひとこと",
+      "stories": "ショートストーリー",
+      "default": "ストーリー"
+    },
+    "metaDescription": "クライミングコミュニティからの{typeLabel}を読む"
+  },
+  "StoryDetail": {
+    "invalidType": "無効なストーリータイプです",
+    "notFound": "このストーリーは見つかりません",
+    "loadError": "ストーリーの読み込み中にエラーが発生しました",
+    "likeFailed": "いいねに失敗しました",
+    "commentFailed": "コメントの投稿に失敗しました",
+    "deleteCommentUnsupported": "このタイプではコメントを削除できません",
+    "browseMore": "ほかのストーリーを見る",
+    "home": "ホーム",
+    "stories": "ストーリー",
+    "backToList": "ストーリー一覧へ戻る",
+    "wordCount": "{count} 文字",
+    "viewStory": "ストーリーを見る",
+    "viewAuthorStory": "{name} さんのストーリーをすべて見る",
+    "moreFrom": "{name} さんのほかのストーリー",
+    "readMore": "続きを読む",
+    "dateToday": "今日",
+    "dateYesterday": "昨日",
+    "dateDaysAgo": "{count} 日前",
+    "dateWeeksAgo": "{count} 週間前",
+    "dateMonthsAgo": "{count} か月前"
+  },
+  "Ascent": {
+    "types": {
+      "redpoint": {
+        "label": "レッドポイント",
+        "description": "トライを重ねたうえでノーテンションで完登"
+      },
+      "flash": {
+        "label": "フラッシュ",
+        "description": "事前に情報を得たうえで一撃で完登"
+      },
+      "onsight": {
+        "label": "オンサイト",
+        "description": "事前情報なしで一撃で完登"
+      },
+      "attempt": {
+        "label": "トライ",
+        "description": "未完登"
+      },
+      "toprope": {
+        "label": "トップロープ",
+        "description": "トップロープで登攀"
+      },
+      "lead": {
+        "label": "リード",
+        "description": "リードで登攀"
+      },
+      "seconding": {
+        "label": "フォロー",
+        "description": "フォローで登攀"
+      },
+      "repeat": {
+        "label": "リピート",
+        "description": "再登"
+      }
+    },
+    "card": {
+      "attempts": "{count} トライ",
+      "perceivedGrade": "体感：{grade}",
+      "photoAlt": "写真 {index}",
+      "youtubeAlt": "YouTube 動画",
+      "instagramPost": "Instagram の投稿"
+    },
+    "form": {
+      "title": "登攀を記録",
+      "type": "登り方",
+      "date": "登った日",
+      "attempts": "トライ回数",
+      "rating": "おすすめ度（任意）",
+      "perceivedGrade": "体感グレード（任意）",
+      "perceivedGradePlaceholder": "例：表示グレードよりやや難しい",
+      "notes": "メモ（任意）",
+      "notesPlaceholder": "今回登った感想を記録しましょう...",
+      "photos": "写真（任意）",
+      "mediaLinks": "メディアリンク（任意）",
+      "youtubePlaceholder": "YouTube 動画のリンク",
+      "instagramPlaceholder": "Instagram 投稿のリンク",
+      "cancel": "キャンセル",
+      "saving": "保存中...",
+      "save": "保存"
+    },
+    "dialog": {
+      "selectCrag": "岩場を選択",
+      "selectArea": "エリアを選択（{name}）",
+      "selectSector": "サブエリアを選択（{name}）",
+      "selectRoute": "ルートを選択（{name}）",
+      "routeSearchPlaceholder": "ルート名やグレードで直接検索...",
+      "noRoutes": "該当するルートが見つかりません",
+      "orStepByStep": "または順番に選択",
+      "searchCrag": "岩場を検索...",
+      "noCrags": "該当する岩場が見つかりません",
+      "routeCount": "{count} ルート",
+      "orSelectArea": "またはエリアを選択",
+      "searchArea": "エリアを検索...",
+      "noAreas": "該当するエリアが見つかりません",
+      "orSelectSector": "またはサブエリアを選択",
+      "searchSector": "サブエリアを検索...",
+      "showAllRoutes": "すべてのルートを表示",
+      "showAllRoutesDesc": "サブエリアで絞り込まず、{count} ルートを表示します",
+      "noSectors": "該当するサブエリアが見つかりません",
+      "searchRoute": "ルートを検索..."
+    }
+  },
+  "RouteStory": {
+    "formTitle": "ルートのストーリーをシェア",
+    "routeRequired": "ルートを選択してください",
+    "contentRequired": "内容を入力してください",
+    "titleLabel": "タイトル（任意）",
+    "titlePlaceholder": "例：このルート名の由来",
+    "contentLabel": "ストーリー *",
+    "contentPlaceholder": "このルートの名前の由来や歴史、特別な体験をシェアしましょう...",
+    "cancel": "キャンセル",
+    "publishing": "投稿中...",
+    "publish": "投稿",
+    "featured": "おすすめ",
+    "photoAlt": "写真 {index}",
+    "video": "動画",
+    "post": "投稿",
+    "helpful": "参考になった",
+    "noLikes": "まだ「いいね」はありません"
+  }
+}

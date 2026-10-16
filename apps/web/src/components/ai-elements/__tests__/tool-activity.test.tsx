@@ -4,9 +4,9 @@ jest.unmock('next-intl')
 import { fireEvent, render, screen } from '@testing-library/react'
 import { NextIntlClientProvider } from 'next-intl'
 import type { AIStreamProgressEvent } from '@/lib/api/ai'
-import en from '../../../../messages/en.json'
-import ja from '../../../../messages/ja.json'
-import zh from '../../../../messages/zh.json'
+import en from '../../../../messages/en'
+import ja from '../../../../messages/ja'
+import zh from '../../../../messages/zh'
 import { ToolActivity } from '../tool-activity'
 
 const MESSAGES = { zh, en, ja } as const

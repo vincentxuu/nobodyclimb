@@ -27,7 +27,7 @@ export function ConfirmDialog({
   isLoading = false,
   variant = 'default',
 }: ConfirmDialogProps) {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
 
   if (!isOpen) return null
 

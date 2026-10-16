@@ -20,7 +20,7 @@ export function UnsavedChangesPrompt({
   confirmText,
   cancelText,
 }: UnsavedChangesPromptProps) {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()

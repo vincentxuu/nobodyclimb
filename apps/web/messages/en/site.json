@@ -1,0 +1,229 @@
+{
+  "Metadata": {
+    "site": {
+      "alternateNames": ["NobodyClimb Taiwan Climbing", "Taiwan Climbing Community"],
+      "description": "Taiwan's climbing community platform. Explore outdoor crags such as Long Dong, Kenting, Guanziling and Defulan as well as indoor gyms, with route information, grades and climbing videos. Whether you're a beginner or an expert, you'll find like-minded climbing partners here.",
+      "keywords": "climbing,Long Dong,Kenting,Guanziling,Defulan,Taiwan climbing,outdoor climbing,climbing routes,crags"
+    },
+    "about": {
+      "title": "About NobodyClimb",
+      "description": "NobodyClimb is Taiwan's climbing community platform, dedicated to promoting climbing, building community and recording every climber's story.",
+      "keywords": "NobodyClimb,Taiwan climbing community,climbing platform",
+      "ogDescription": "Every Nobody has a climbing story of their own."
+    },
+    "biography": {
+      "title": "Biography",
+      "description": "Meet the climbers of Taiwan's climbing community, read their stories and experiences, and find like-minded climbing partners.",
+      "keywords": "climbers,climbing community,climbing stories,climbing partners",
+      "ogDescription": "Meet the climbers of Taiwan's climbing community and share climbing stories."
+    },
+    "gallery": {
+      "title": "Gallery",
+      "description": "A collection of climbing photography capturing great moments on the wall and the power and beauty of climbing.",
+      "keywords": "climbing photography,climbing photos,outdoor climbing photos,bouldering photography",
+      "ogDescription": "A collection of climbing photography capturing great moments on the wall."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Climbing articles covering technique tutorials, personal experiences, gear reviews, competition news and more to help you improve your skills and knowledge.",
+      "keywords": "climbing blog,climbing technique,climbing tutorials,climbing experiences,climbing gear,bouldering tips",
+      "ogDescription": "Climbing articles covering technique tutorials, personal experiences, gear reviews and competition news."
+    },
+    "videos": {
+      "title": "Climbing Videos",
+      "description": "Curated climbing videos including technique tutorials, competition coverage and outdoor climbing films. Watch world-class climbers at their best.",
+      "keywords": "climbing videos,climbing tutorial videos,bouldering videos,climbing competitions,Adam Ondra,Janja Garnbret",
+      "ogDescription": "Curated climbing videos featuring performances and tutorials from world-class climbers."
+    },
+    "gym": {
+      "title": "Climbing Gyms",
+      "description": "A complete guide to indoor climbing gyms in Taiwan, including bouldering and rope climbing gyms, with addresses, opening hours, facilities, prices and more.",
+      "keywords": "climbing gyms,bouldering gyms,indoor climbing,Taipei climbing gyms,Taichung climbing gyms,Kaohsiung climbing gyms",
+      "ogDescription": "A complete guide to indoor climbing gyms in Taiwan. Find the gym closest to you."
+    },
+    "ropeSystem": {
+      "title": "Climbing Systems Practice",
+      "description": "Learn climbing rope systems through an interactive game, suitable for self-study and for instruction and certification by organizations.",
+      "keywords": "climbing,rope systems,belaying,lead climbing,top rope,rappelling,anchors",
+      "ogDescription": "Learn climbing rope systems through an interactive game."
+    },
+    "chat": {
+      "title": "AI Climbing Assistant",
+      "description": "Chat with the AI climbing assistant for route recommendations, training advice and climbing knowledge"
+    },
+    "quizLanding": {
+      "title": "What kind of climber are you? — {siteName} Climbing Personality Quiz",
+      "description": "A 24-question climbing personality quiz. Discover your climbing character in 3–5 minutes. Are you a Crusher, a Sniper, a Wanderer or a Zen? Take the quiz now and find your climbing personality!",
+      "ogDescription": "A 24-question climbing personality quiz. Discover your climbing character in 3–5 minutes. Are you a Crusher, a Sniper, a Wanderer or a Zen?"
+    },
+    "quizCollection": {
+      "title": "8 Climbing Personalities — {siteName} Climbing Personality Quiz",
+      "description": "Crusher, Forger, Wildfire, Anchor, Sniper, Cipher, Wanderer, Zen — explore the 8 climbing personality types",
+      "ogDescription": "Explore the 8 climbing personality types and find your climbing style"
+    },
+    "quizResult": {
+      "notFound": "Result not found",
+      "title": "I'm the {name} — {siteName} Climbing Personality Quiz",
+      "description": "{tagline}. {excerpt}..."
+    },
+    "quizTraining": {
+      "notFound": "Training plan not found",
+      "title": "{name} Training Plan — {siteName}",
+      "description": "A 4-week climbing training plan for the {name}. Built on the core idea of “training your opposite”, it helps you become a more well-rounded climber."
+    }
+  },
+  "AboutPage": {
+    "logoAlt": "NobodyClimb",
+    "logoMarkAlt": "NobodyClimb logo",
+    "heroTagline": "Every Nobody has a climbing story of their own",
+    "story": {
+      "title": "Our Story",
+      "p1": "NobodyClimb began with one Nobody's love of climbing.",
+      "p2": "On the climbing journey, we are all nobodies. Whether you've just stepped into a gym for the first time or you're a veteran of crags far and wide, everyone has their own story, their own struggles and their own breakthroughs.",
+      "p3": "We want to build a platform where every climber can find information, share stories and make connections. Because here, every Nobody deserves to be seen."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "promote": {
+        "title": "Promote Climbing",
+        "description": "Lower the barrier to entry with complete crag information and guides, so more people can discover and fall in love with climbing."
+      },
+      "community": {
+        "title": "Build Community",
+        "description": "Connect climbers across Taiwan and create a space to exchange and share, so we can grow and improve together."
+      },
+      "stories": {
+        "title": "Record Stories",
+        "description": "Through biographies and the blog, record every climber's precious memories and unique experiences."
+      }
+    },
+    "features": {
+      "title": "Platform Features",
+      "subtitle": "From beginner to advanced, every resource you need for your climbing journey",
+      "crag": {
+        "title": "Explore Crags",
+        "description": "Complete information and route data for natural crags across Taiwan"
+      },
+      "biography": {
+        "title": "Biography",
+        "description": "The stories and journeys of climbers"
+      },
+      "videos": {
+        "title": "Climbing Videos",
+        "description": "Curated climbing tutorials and films"
+      },
+      "gallery": {
+        "title": "Gallery",
+        "description": "Capturing great climbing moments"
+      },
+      "blog": {
+        "title": "Blog",
+        "description": "Climbing knowledge, experiences and guides"
+      },
+      "gym": {
+        "title": "Gym Guide",
+        "description": "A complete guide to indoor climbing gyms across Taiwan"
+      }
+    },
+    "stats": {
+      "gyms": "Gyms",
+      "crags": "Crags",
+      "routes": "Routes",
+      "biographies": "Biographies",
+      "posts": "Articles",
+      "videos": "Videos"
+    },
+    "cta": {
+      "title": "Become one of the Nobodies",
+      "description": "Join our community to share, learn and grow with other climbers",
+      "button": "Join now"
+    }
+  },
+  "ErrorPage": {
+    "title": "Something went wrong",
+    "description": "Sorry, something went wrong on this page. Please try reloading or come back later.",
+    "retry": "Retry",
+    "reload": "Reload page"
+  },
+  "Countries": {
+    "TW": "Taiwan",
+    "TH": "Thailand",
+    "VN": "Vietnam",
+    "CN": "China",
+    "JP": "Japan",
+    "KR": "South Korea",
+    "US": "United States",
+    "ES": "Spain",
+    "FR": "France",
+    "IT": "Italy",
+    "GR": "Greece",
+    "TR": "Türkiye",
+    "MY": "Malaysia",
+    "ID": "Indonesia",
+    "PH": "Philippines",
+    "AU": "Australia",
+    "NZ": "New Zealand",
+    "GB": "United Kingdom",
+    "DE": "Germany",
+    "CH": "Switzerland",
+    "OTHER": "Other"
+  },
+  "Badges": {
+    "categories": {
+      "story": "Storytelling",
+      "goal": "Goal Tracking",
+      "social": "Community",
+      "footprint": "Climbing Footprints"
+    },
+    "items": {
+      "story_beginner": {
+        "name": "First Story",
+        "description": "Write your first story"
+      },
+      "story_writer": {
+        "name": "Storyteller",
+        "description": "Complete 5 in-depth stories"
+      },
+      "inspirator": {
+        "name": "Inspirer",
+        "description": "Have your stories marked \"Encouraged\" by 10 people"
+      },
+      "trending": {
+        "name": "Trending Story",
+        "description": "Get 50 likes on a single story"
+      },
+      "goal_setter": {
+        "name": "Goal Setter",
+        "description": "Set your first goal"
+      },
+      "achiever": {
+        "name": "Achiever",
+        "description": "Complete your first goal"
+      },
+      "consistent": {
+        "name": "Committed",
+        "description": "Complete 3 goals"
+      },
+      "supportive": {
+        "name": "Cheerleader",
+        "description": "Give 50 likes"
+      },
+      "conversationalist": {
+        "name": "Conversationalist",
+        "description": "Post 20 comments"
+      },
+      "explorer": {
+        "name": "Curious Mind",
+        "description": "Read 20 climber biographies"
+      },
+      "traveler": {
+        "name": "Climbing Traveler",
+        "description": "Log 5 climbing locations"
+      },
+      "international": {
+        "name": "International Climber",
+        "description": "Log 3 climbing locations abroad"
+      }
+    }
+  }
+}
