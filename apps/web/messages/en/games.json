@@ -1,0 +1,333 @@
+{
+  "GamesPage": {
+    "title": "Climbing Systems Practice",
+    "subtitle": "Practice rope system operations and learn safe climbing techniques",
+    "learnMode": {
+      "title": "Learn Mode",
+      "description": "Wrong answers show detailed explanations"
+    },
+    "examMode": {
+      "title": "System Exam",
+      "comingSoon": "Coming Soon"
+    },
+    "certificationMode": {
+      "title": "Certification Badge",
+      "comingSoon": "Coming Soon"
+    },
+    "disclaimer": "Questions are based on authoritative sources including IFSC and AAC. Please practice under the guidance of a professional instructor. This system is for educational purposes only."
+  },
+  "RopeGame": {
+    "defaultTitle": "Climbing Systems Practice",
+    "questionCount": "{count} questions",
+    "difficulty": {
+      "1": "Beginner",
+      "2": "Intermediate",
+      "3": "Advanced"
+    },
+    "parents": {
+      "sport": "Sport Climbing",
+      "trad": "Trad Climbing"
+    },
+    "categories": {
+      "sport-belay": {
+        "name": "Basic Belaying",
+        "description": "Learn correct belay technique and safety principles"
+      },
+      "sport-lead": {
+        "name": "Lead Climbing",
+        "description": "Master rope management and clipping for lead climbing"
+      },
+      "sport-toprope": {
+        "name": "Top-Rope Setup",
+        "description": "Learn to set up a top-rope system and run safety checks"
+      },
+      "sport-rappel": {
+        "name": "Rappel Systems",
+        "description": "Master rappel device operation and safety procedures"
+      },
+      "trad-anchor": {
+        "name": "Anchor Building",
+        "description": "Learn the principles of building multi-point anchors"
+      },
+      "trad-protection": {
+        "name": "Protection",
+        "description": "Master placement technique for each type of protection"
+      },
+      "trad-multipitch": {
+        "name": "Multi-Pitch Systems",
+        "description": "Learn rope management for multi-pitch climbing"
+      },
+      "trad-rescue": {
+        "name": "Self-Rescue",
+        "description": "Master basic self-rescue techniques"
+      }
+    },
+    "categoryNotFound": "Category not found",
+    "checkUrl": "Please check that the URL is correct",
+    "loadingQuestions": "Loading questions...",
+    "exit": "Exit",
+    "nextQuestion": "Next question →",
+    "continue": "Continue →",
+    "correct": "Correct!",
+    "incorrect": "Incorrect",
+    "correctAnswer": "Correct answer",
+    "explanation": "Explanation",
+    "hint": "Hint",
+    "references": "References",
+    "scenario": "Scenario",
+    "question": "Question",
+    "questionImageAlt": "Question image",
+    "orderingHint": "Drag the steps into the correct order, then click “Confirm order”.",
+    "confirmOrder": "Confirm order",
+    "gameOver": "Game over",
+    "completed": "Practice complete!",
+    "score": "Score",
+    "accuracy": "Accuracy",
+    "maxCombo": "Best streak",
+    "time": "Time",
+    "playAgain": "Play again",
+    "backHome": "Back to home",
+    "belayStation": "Belay station",
+    "soundOff": "Turn sound off",
+    "soundOn": "Turn sound on"
+  },
+  "Quiz": {
+    "homeAria": "Go to homepage",
+    "landing": {
+      "badge": "24 questions · 3–5 min",
+      "title": "What kind of <em>climber</em> are you?",
+      "description": "Discover your climbing personality and find the training style and climbing partners that suit you best",
+      "start": "Start the quiz",
+      "note": "No sign-in required · Completely free"
+    },
+    "axisLabels": {
+      "body": "Body style",
+      "motive": "Motivation",
+      "mind": "Mindset"
+    },
+    "likert": {
+      "1": "Strongly disagree",
+      "2": "Disagree",
+      "3": "Neutral",
+      "4": "Agree",
+      "5": "Strongly agree"
+    },
+    "prevQuestion": "Previous",
+    "result": {
+      "taglineQuote": "“{tagline}”",
+      "radarTitle": "Personality radar",
+      "radarAxes": {
+        "body": "Power / Technique",
+        "motive": "Goal / Free",
+        "mind": "Bold / Steady"
+      },
+      "gritIndex": "Grit index",
+      "flowIndex": "Flow index",
+      "profileTitle": "Personality profile",
+      "flowState": "Flow · at your best",
+      "clutchState": "Clutch · when it counts",
+      "strengths": "Strengths",
+      "blindSpots": "Blind spots",
+      "trainingTitle": "Your training plan",
+      "weekHeading": "Week {week}: {theme}",
+      "dayHeading": "Day {day}: {title}",
+      "minutes": "{count} min",
+      "goTraining": "Go to training plan",
+      "loginUnlock": "Sign in to unlock the full training plan",
+      "compatTitle": "Compatibility",
+      "bestPartner": "Best partner",
+      "worstMatch": "Toughest match",
+      "share": "Share result",
+      "retake": "Retake quiz",
+      "join": "Join NobodyClimb",
+      "tryYourself": "Take the quiz yourself →"
+    },
+    "share": {
+      "title": "I'm {name} — NobodyClimb Climbing Personality Quiz",
+      "modalTitle": "Share your result",
+      "toSocial": "Share to social media",
+      "copied": "Copied!",
+      "copyLink": "Copy link",
+      "generating": "Generating card..."
+    },
+    "collection": {
+      "title": "8 Climbing Personalities",
+      "subtitle": "Explore the traits and style of each climbing personality"
+    },
+    "training": {
+      "redirecting": "Redirecting to sign in...",
+      "notAvailable": "The training plan for this type is not available yet",
+      "completedCount": "{completed} / {total} days completed",
+      "headerTitle": "{name} Training Plan",
+      "daysUnit": "days",
+      "guideTitle": "Start your training plan",
+      "guideBody": "This plan is designed for the <strong>{name}</strong>. Its core idea is to “train your opposite” — by strengthening the sides you use less, you become a more well-rounded climber.",
+      "statWeeks": "4 weeks",
+      "statWeeksLabel": "Full plan",
+      "statDays": "12 days",
+      "statDaysLabel": "Training days",
+      "statDuration": "20–45 min",
+      "statDurationLabel": "Per session",
+      "graduatedTitle": "Training plan complete!",
+      "graduatedDesc": "Congratulations on finishing the 4-week {name} training plan",
+      "viewNotes": "View notes",
+      "addNotes": "Add notes",
+      "notesPlaceholder": "Jot down how today's session went...",
+      "savingNotes": "Saving...",
+      "saveNotes": "Save notes"
+    },
+    "questions": {
+      "body-l1": "I'd rather pull straight through with power than slowly hunt for footholds",
+      "motive-l1": "I set clear grade goals and work hard to reach them",
+      "mind-l1": "I'm willing to try hard moves even if I might fall",
+      "body-r1": "I spend a lot of time studying where the footholds are and how to stand on them",
+      "motive-r1": "I climb mainly to enjoy the process and don't care much about grades",
+      "mind-r1": "I read the whole route before I start climbing",
+      "body-l2": "I think building strength is more efficient than practicing balance",
+      "motive-l2": "Sending a project route gives me a huge sense of achievement",
+      "mind-l2": "I like taking on new routes even when I'm not fully prepared",
+      "body-r2": "I believe good technique gets you past hard sections better than brute force",
+      "motive-r2": "I like trying routes in all kinds of styles",
+      "mind-r2": "I prefer to start on easy routes and gradually raise the difficulty",
+      "body-l3": "Dynamic moves get me excited",
+      "motive-l3": "I drill specific moves over and over to break into a new grade",
+      "mind-l3": "I think falling is part of climbing and nothing to be afraid of",
+      "body-r3": "I like using clever body positioning to save energy",
+      "motive-r3": "I'd rather explore new routes than work the same one repeatedly",
+      "mind-r3": "I make sure each move is stable before I continue upward",
+      "body-l4": "I prefer routes with big reaches or jumps",
+      "motive-l4": "I like tracking my climbing log and my progress over time",
+      "mind-l4": "On an unfamiliar route I just go for it instead of studying it for a long time",
+      "body-r4": "I enjoy vertical or thin face routes that demand precise footwork more",
+      "motive-r4": "I think the best part of climbing is the time spent with friends",
+      "mind-r4": "I believe thorough preparation matters more than taking risks"
+    },
+    "personalities": {
+      "PGB": {
+        "name": "Crusher",
+        "tagline": "Conquer with power, break through with resolve",
+        "description": "You're a natural power climber who meets every challenge head-on. Clear goals keep driving you forward, and a bold mindset lets you commit to moves at your limit. On the wall you're a rock-crushing machine — unstoppable.",
+        "strengths": [
+          "Great physical strength and explosive power",
+          "Clear goals and a refusal to give up easily",
+          "Not afraid to take on high-difficulty routes"
+        ],
+        "blindSpots": [
+          "May overlook the importance of technique and rhythm",
+          "Prone to injury when overly fixated on a goal"
+        ],
+        "flowState": "Going all out and feeling the conversation between muscle and rock",
+        "clutchState": "Throwing everything into one explosive effort at the crux"
+      },
+      "PGS": {
+        "name": "Forger",
+        "tagline": "Steady work forges real strength",
+        "description": "You believe strength takes time to forge. Goal-driven, you build long-term training plans and pair them with a steady mindset to accumulate ability step by step. You're in no rush, but every step is solid.",
+        "strengths": [
+          "Disciplined training habits",
+          "A steady track of improvement",
+          "Good management of physical condition"
+        ],
+        "blindSpots": [
+          "May be too conservative and miss the moment to break through",
+          "Plans can be too rigid and lack flexibility"
+        ],
+        "flowState": "Feeling your strength grow within a familiar training rhythm",
+        "clutchState": "Relying on long-built ability to move steadily through the hard section"
+      },
+      "PFB": {
+        "name": "Wildfire",
+        "tagline": "Burn with passion, climb free",
+        "description": "Like a wildfire, you're full of energy and unpredictability. You lean toward powerful climbing but aren't bound by goals, and your bold mindset makes you willing to try any style. You enjoy climbing for its own sake and don't care about scores or grades.",
+        "strengths": [
+          "Abundant passion for climbing",
+          "Willingness to try different styles",
+          "The courage not to fear failure"
+        ],
+        "blindSpots": [
+          "Lacks systematic training",
+          "Finds it hard to go deep in a single direction"
+        ],
+        "flowState": "Feeling the freedom and power of your body on a new route",
+        "clutchState": "Breaking through unknown cruxes on instinct and nerve"
+      },
+      "PFS": {
+        "name": "Anchor",
+        "tagline": "Steady as an anchor, enjoying the journey",
+        "description": "You're the steadying force of the climbing world. A powerful body paired with a free-exploring motivation and a steady mindset keeps you stable in any environment. You don't chase quick results; you enjoy the process of every climb.",
+        "strengths": [
+          "Emotionally stable and not easily shaken by pressure",
+          "A solid base of fitness",
+          "A consistent, uninterrupted climbing habit"
+        ],
+        "blindSpots": [
+          "May lack a clear direction for improvement",
+          "Too comfortable to step outside the comfort zone"
+        ],
+        "flowState": "Feeling power and calm blend together at a familiar crag",
+        "clutchState": "Grinding slowly through the hard section with a steady mind and body"
+      },
+      "TGB": {
+        "name": "Sniper",
+        "tagline": "Precise aim, one decisive shot",
+        "description": "You're the sniper among technical climbers. Clear goals keep you focused on sending specific routes, and a bold mindset lets you attempt moves at your limit. What you pursue is completing the hardest challenges with the most precise technique.",
+        "strengths": [
+          "Excellent ability to read moves",
+          "Focus on project routes",
+          "Execution when it matters most"
+        ],
+        "blindSpots": [
+          "May lack patience for routes that are not the project",
+          "Chasing efficiency at the expense of the experience"
+        ],
+        "flowState": "Feeling the thrill of precision in perfectly executed technique",
+        "clutchState": "Reading the moves precisely and passing the crux in one go"
+      },
+      "TGS": {
+        "name": "Cipher",
+        "tagline": "Decode the wall, improve systematically",
+        "description": "You analyze every route like a cryptographer. A technical climbing style combined with goal-driven motivation and a steady mindset makes you good at breaking problems down, forming a strategy, and then systematically overcoming the challenge.",
+        "strengths": [
+          "Outstanding route-reading ability",
+          "A systematic approach to training",
+          "Calm problem-solving skills"
+        ],
+        "blindSpots": ["May over-analyze and hesitate", "Lacks the flexibility to improvise"],
+        "flowState": "Entering flow while decoding the puzzle of a route",
+        "clutchState": "Finding the best solution through calm analysis"
+      },
+      "TFB": {
+        "name": "Wanderer",
+        "tagline": "Roaming everywhere with technique as a companion",
+        "description": "You're the nomad of the climbing world. Refined technique lets you adapt to every rock type and style, a free-exploring motivation sends you to crags everywhere, and a bold mindset makes you fearless of the unknown. Every wall is a new adventure.",
+        "strengths": [
+          "Highly adaptable, able to climb any rock type",
+          "Rich climbing experience and perspective",
+          "Enjoys the fun of exploring"
+        ],
+        "blindSpots": [
+          "Hard to reach the very top in a single discipline",
+          "Lacks consistency in long-term training"
+        ],
+        "flowState": "Discovering the conversation between body and rock at a brand-new crag",
+        "clutchState": "Improvising through unknown cruxes with a wealth of experience"
+      },
+      "TFS": {
+        "name": "Zen",
+        "tagline": "Climb with a quiet mind, at one with the rock",
+        "description": "You're the practitioner of the climbing world. With a technical climbing style, a free-exploring motivation and a steady mindset, what you seek is not grades or results but the state of mind and body becoming one as you climb.",
+        "strengths": [
+          "Excellent mind-body coordination",
+          "Stability unaffected by outside pressure",
+          "A deep sensitivity to the experience of climbing"
+        ],
+        "blindSpots": [
+          "May lack the drive to push through limits",
+          "Less interested in the competitive side"
+        ],
+        "flowState": "Feeling breath, movement and rock become one while climbing",
+        "clutchState": "Finding inner stability through deep breathing and focus"
+      }
+    }
+  }
+}

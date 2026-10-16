@@ -64,8 +64,13 @@ Mutation 後 `queryClient.invalidateQueries({ queryKey: ['things'] })`。
 
 ## i18n（漏掉會直接爆在別的語系）
 
-- 新 namespace 要同時加進 **三個檔案**：`apps/web/messages/zh.json`、`en.json`、`ja.json`
-  （頂層 key = namespace，如 `MyPage`）。
+- 訊息檔依模組拆在 `apps/web/messages/{locale}/{module}.json`（三語系 `zh`/`en`/`ja` 都要改）。
+  模組與 namespace 的對應在 `scripts/i18n/modules.mjs`（頂層 key = namespace，如 `MyPage`）。
+- 新 namespace 要加進對應模組的**三個語系檔**，並把名字補進 `modules.mjs` 對應模組的陣列，
+  再跑 `pnpm i18n:check` 驗證（CI 也會跑）。
+- 新增用到新 namespace 的 client 元件後，跑 `pnpm i18n:emit` 更新 `src/i18n/client-namespaces.ts`。
+- 新 route 若沒有自己的 `layout.tsx`，要新增一個並用 `<RouteMessages route="...">` 包住 children，
+  否則該 route 的 client 元件拿不到訊息（`pnpm i18n:check` 會擋）。
 - 站內連結 / 導頁一律 `import { Link, useRouter, usePathname } from '@/i18n/navigation'`，
   **禁用 `next/link`**（會掉 locale）。
 

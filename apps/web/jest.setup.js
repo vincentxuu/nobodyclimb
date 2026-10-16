@@ -23,7 +23,16 @@ jest.mock('framer-motion', () => ({
 }))
 
 // Mock next-intl with real zh translations
-const zhMessages = require('./messages/zh.json')
+// 訊息檔已依模組拆分到 messages/zh/*.json，這裡合併回單一物件
+const fs = require('node:fs')
+const path = require('node:path')
+const zhMessagesDir = path.join(__dirname, 'messages', 'zh')
+const zhMessages = {}
+for (const file of fs.readdirSync(zhMessagesDir)) {
+  if (file.endsWith('.json')) {
+    Object.assign(zhMessages, JSON.parse(fs.readFileSync(path.join(zhMessagesDir, file), 'utf8')))
+  }
+}
 jest.mock('next-intl', () => ({
   useTranslations: (namespace) => {
     const msgs = namespace ? zhMessages[namespace] || {} : zhMessages

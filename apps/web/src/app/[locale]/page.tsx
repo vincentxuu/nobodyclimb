@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import { RouteMessages } from '@/i18n/route-messages'
 import { OG_IMAGE, SITE_NAME, SITE_URL } from '@/lib/constants'
 import { buildHreflangAlternates, buildOgLocale } from '@/lib/i18n-metadata'
 import HomeClient from './HomeClient'
@@ -40,5 +41,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function HomePage() {
-  return <HomeClient />
+  return (
+    <RouteMessages route="home">
+      <HomeClient />
+    </RouteMessages>
+  )
 }

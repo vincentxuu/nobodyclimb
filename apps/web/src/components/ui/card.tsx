@@ -79,7 +79,7 @@ const CardTitle = React.forwardRef<HTMLDivElement, CardTitleProps>(
     },
     ref
   ) => {
-    const t = useTranslations('SharedUI')
+    const t = useTranslations('Common')
 
     return (
       <div ref={ref} className={cn('mb-3 flex items-center justify-between', className)} {...props}>

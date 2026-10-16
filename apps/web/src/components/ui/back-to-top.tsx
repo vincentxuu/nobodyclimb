@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
 
 export const BackToTop: React.FC = () => {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const [isVisible, setIsVisible] = useState(false)
 
   // 監聽滾動事件，決定按鈕顯示與否

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { RouteMessages } from '@/i18n/route-messages'
 import { buildSectionMetadata } from '@/lib/section-metadata'
 
 type Props = {
@@ -11,5 +12,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function AboutLayout({ children }: { children: React.ReactNode }) {
-  return children
+  return <RouteMessages route="about">{children}</RouteMessages>
 }

@@ -18,7 +18,7 @@ export const PlaceholderImage: React.FC<PlaceholderImageProps> = ({
   bgColor = '#CBD5E1', // tailwind gray-300
   textColor = '#1E293B', // tailwind gray-800
 }) => {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
 
   return (
     <div

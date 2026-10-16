@@ -1,0 +1,69 @@
+{
+  "VideosPage": {
+    "title": "クライミング動画",
+    "subtitle": "素晴らしいクライミング動画を探索しよう",
+    "searchPlaceholder": "動画タイトル、チャンネルを検索...",
+    "loadingData": "動画データを読み込み中...",
+    "searchResultCount": "{count} 件の動画が見つかりました",
+    "searchResultPartial": "（一部のデータのみ読み込み済み）",
+    "loadingMore": "読み込み中...",
+    "loadMore": "もっと動画を読み込む",
+    "allVideosShown": "すべての動画を表示しました",
+    "noSearchResults": "動画が見つかりませんでした",
+    "noSearchResultsDesc": "別の検索キーワードやフィルターをお試しください",
+    "noVideos": "動画データがありません"
+  },
+  "VideosFilter": {
+    "categories": {
+      "all": "すべて",
+      "outdoorLead": "外岩ルート",
+      "outdoorBoulder": "外岩ボルダー",
+      "indoorLead": "インドア ルート",
+      "indoorBoulder": "インドア ボルダリング",
+      "competition": "コンペ",
+      "tutorial": "ハウツー",
+      "training": "トレーニング",
+      "documentary": "ドキュメンタリー",
+      "gearReview": "ギアレビュー",
+      "challenge": "チャレンジ企画",
+      "interview": "インタビュー",
+      "outdoorClimbing": "外岩クライミング",
+      "indoorClimbing": "インドアクライミング",
+      "competitionClimbing": "競技クライミング",
+      "bouldering": "ボルダリング"
+    },
+    "channelPlaceholder": "チャンネルを選択",
+    "allChannels": "すべてのチャンネル",
+    "durationPlaceholder": "再生時間を選択",
+    "duration": {
+      "all": "すべての長さ",
+      "short": "短編（5分未満）",
+      "medium": "中編（5〜20分）",
+      "long": "長編（20分超）"
+    },
+    "popularityPlaceholder": "人気度",
+    "popularity": {
+      "all": "すべて",
+      "viral": "100万回再生以上",
+      "popular": "人気",
+      "normal": "標準",
+      "niche": "ニッチ"
+    },
+    "featured": "おすすめ",
+    "closeVideo": "動画を閉じる",
+    "viewCount": "{count} 回視聴",
+    "watchOnYoutube": "YouTube で見る"
+  },
+  "Weather": {
+    "today": "今日",
+    "tomorrow": "明日",
+    "morning": "朝",
+    "evening": "夜",
+    "forecastLabel": "{day} {period}",
+    "unknown": "不明",
+    "fetchFailed": "天気情報を取得できませんでした",
+    "serviceUnavailable": "天気サービスに接続できませんでした",
+    "loading": "天気情報を読み込み中...",
+    "forecastTitle": "7日間の天気予報"
+  }
+}

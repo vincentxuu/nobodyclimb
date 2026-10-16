@@ -20,6 +20,8 @@
     "lint": "biome check .",
     "test": "turbo run test",
     "typecheck": "pnpm -r --if-present run typecheck",
+    "i18n:check": "node scripts/i18n/check-i18n.mjs && node scripts/i18n/analyze-namespaces.mjs verify",
+    "i18n:emit": "node scripts/i18n/analyze-namespaces.mjs emit",
     "format": "biome format --write .",
     "format:check": "biome format .",
     "blog:article": "node scripts/blog/article.mjs",

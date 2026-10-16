@@ -42,6 +42,17 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint
 
+  i18n:
+    name: i18n
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/i18n/check-i18n.mjs
+      - run: node scripts/i18n/analyze-namespaces.mjs verify
+
   typecheck:
     name: Typecheck
     runs-on: ubuntu-latest

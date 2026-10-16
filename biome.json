@@ -67,6 +67,7 @@
       "!**/backend/scripts",
       "!**/*.min.js",
       "!**/public/data",
+      "!**/client-namespaces.ts",
       "!**/.claude/settings.local.json"
     ]
   }

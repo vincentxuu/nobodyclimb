@@ -35,7 +35,7 @@ export function PhotoUpload({
   disabled = false,
   className,
 }: PhotoUploadProps) {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const [uploadingPhotos, setUploadingPhotos] = useState<PhotoWithStatus[]>([])
 
   const compressImage = async (file: File): Promise<File> => {

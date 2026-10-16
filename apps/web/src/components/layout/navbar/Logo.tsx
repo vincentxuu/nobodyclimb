@@ -9,7 +9,7 @@ import { useTranslations } from 'next-intl'
  * 顯示網站 Logo，並支援點擊回到首頁
  */
 export default function Logo() {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const router = useRouter()
 
   return (

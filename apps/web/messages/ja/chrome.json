@@ -1,0 +1,61 @@
+{
+  "Navbar": {
+    "biography": "人物誌",
+    "crag": "岩場",
+    "gym": "クライミングジム",
+    "gallery": "ギャラリー",
+    "videos": "動画",
+    "blog": "ブログ"
+  },
+  "Footer": {
+    "joinUs": "参加して、あなたのクライミングストーリーを書こう",
+    "joinButton": "今すぐ参加",
+    "copyright": "NobodyClimb © {year}."
+  },
+  "LocaleSwitcher": {
+    "label": "言語",
+    "zh": "繁中",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "MobileMenu": {
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "menuTitle": "メニュー",
+    "exploreTab": "探索",
+    "personalTab": "個人",
+    "guestMessage": "クライマーですか？参加してストーリーを書こう",
+    "writeArticle": "記事を書く",
+    "uploadPhoto": "写真をアップロード",
+    "login": "ログイン",
+    "register": "登録",
+    "logout": "ログアウト",
+    "profile": "人物誌",
+    "recommendations": "おすすめ",
+    "memory": "メモリー",
+    "bucketList": "リスト",
+    "ascents": "登攀記録",
+    "stats": "実績",
+    "articles": "記事",
+    "photos": "写真",
+    "bookmarks": "ブックマーク",
+    "settings": "設定"
+  },
+  "UserMenu": {
+    "create": "作成",
+    "writeArticle": "記事を書く",
+    "uploadPhoto": "写真をアップロード",
+    "exploreTab": "探索",
+    "personalTab": "個人",
+    "logout": "ログアウト",
+    "myProfile": "マイ人物誌",
+    "bucketList": "バケットリスト",
+    "ascents": "登攀記録",
+    "recommendations": "AIおすすめ",
+    "stats": "クライミング実績",
+    "photos": "マイ写真",
+    "articles": "マイ記事",
+    "bookmarks": "マイブックマーク",
+    "settings": "アカウント設定"
+  }
+}

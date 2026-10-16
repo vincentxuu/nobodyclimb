@@ -14,7 +14,7 @@ interface ProtectedRouteProps {
  * 確保只有已登入用戶可以訪問包裝的內容
  */
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const { status } = useAuthStore()
   const router = useRouter()
 

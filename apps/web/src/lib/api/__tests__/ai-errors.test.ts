@@ -1,7 +1,7 @@
 import { TextDecoder, TextEncoder } from 'node:util'
-import en from '../../../../messages/en.json'
-import ja from '../../../../messages/ja.json'
-import zh from '../../../../messages/zh.json'
+import en from '../../../../messages/en'
+import ja from '../../../../messages/ja'
+import zh from '../../../../messages/zh'
 import type { AIRequestError, AIStreamDoneEvent } from '../ai'
 import {
   AI_ERROR_CODES,

@@ -1,0 +1,69 @@
+{
+  "VideosPage": {
+    "title": "Climbing Videos",
+    "subtitle": "Discover amazing climbing videos",
+    "searchPlaceholder": "Search video titles, channels...",
+    "loadingData": "Loading video data...",
+    "searchResultCount": "Found {count} related videos",
+    "searchResultPartial": " (partial data loaded)",
+    "loadingMore": "Loading...",
+    "loadMore": "Load More Videos",
+    "allVideosShown": "All videos shown",
+    "noSearchResults": "No videos found",
+    "noSearchResultsDesc": "Try different search terms or filters",
+    "noVideos": "No videos available"
+  },
+  "VideosFilter": {
+    "categories": {
+      "all": "All",
+      "outdoorLead": "Outdoor Rope Climbing",
+      "outdoorBoulder": "Outdoor Bouldering",
+      "indoorLead": "Indoor Rope Climbing",
+      "indoorBoulder": "Indoor Bouldering",
+      "competition": "Competitions",
+      "tutorial": "Tutorials",
+      "training": "Training",
+      "documentary": "Documentaries",
+      "gearReview": "Gear Reviews",
+      "challenge": "Challenges",
+      "interview": "Interviews",
+      "outdoorClimbing": "Outdoor Climbing",
+      "indoorClimbing": "Indoor Climbing",
+      "competitionClimbing": "Competition Climbing",
+      "bouldering": "Bouldering"
+    },
+    "channelPlaceholder": "Select channel",
+    "allChannels": "All channels",
+    "durationPlaceholder": "Select duration",
+    "duration": {
+      "all": "Any duration",
+      "short": "Short (<5 min)",
+      "medium": "Medium (5–20 min)",
+      "long": "Long (>20 min)"
+    },
+    "popularityPlaceholder": "Popularity",
+    "popularity": {
+      "all": "All",
+      "viral": "1M+ views",
+      "popular": "Popular",
+      "normal": "Regular",
+      "niche": "Niche"
+    },
+    "featured": "Featured",
+    "closeVideo": "Close video",
+    "viewCount": "{count} views",
+    "watchOnYoutube": "Watch on YouTube"
+  },
+  "Weather": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "morning": "AM",
+    "evening": "PM",
+    "forecastLabel": "{day} {period}",
+    "unknown": "Unknown",
+    "fetchFailed": "Unable to load weather data",
+    "serviceUnavailable": "Unable to reach the weather service",
+    "loading": "Loading weather...",
+    "forecastTitle": "7-day forecast"
+  }
+}

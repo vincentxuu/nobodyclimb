@@ -1,0 +1,73 @@
+{
+  "GalleryPage": {
+    "title": "Gallery",
+    "description": "Explore climbing photography that captures the beauty of the sport.",
+    "subtitle": "Admire the grace of climbers in action",
+    "photoAlt": "Climbing photo",
+    "loadFailed": "Failed to Load",
+    "loadError": "Unable to load photos",
+    "fetchError": "An error occurred while loading photos",
+    "noPhotos": "No photos yet",
+    "reload": "Reload",
+    "allPhotosShown": "All photos shown"
+  },
+  "GalleryUI": {
+    "upload": {
+      "title": "Upload Photos",
+      "invalidType": "Please upload images in JPG, PNG or WebP format",
+      "compressFailed": "Failed to compress image \"{name}\"",
+      "maxFiles": "You can upload up to {max} photos",
+      "noFiles": "Please select images to upload",
+      "imageUploadFailed": "Image upload failed",
+      "photoSaveFailed": "Failed to save photo details",
+      "uploadFailed": "Upload failed",
+      "partialSuccess": "{success} photos uploaded, {failed} failed",
+      "allFailed": "All photos failed to upload. Please try again later",
+      "dropHint": "Drag photos here, or click to select",
+      "formatHint": "JPG, PNG and WebP supported (files over 500KB are compressed automatically, up to {max} photos)",
+      "processing": "Processing images... ({current}/{total})",
+      "selectedCount": "{count} photos selected",
+      "compressedCount": "({count} compressed)",
+      "clearAll": "Clear all",
+      "originalSize": "Original: {size}KB",
+      "uploadingProgress": "Uploading {uploading} photos... ({done}/{total} done)",
+      "captionLabel": "Caption (optional, applies to all photos)",
+      "captionPlaceholder": "Add a caption for your photos...",
+      "locationLabel": "Location (optional, applies to all photos)",
+      "country": "Country",
+      "city": "City",
+      "spot": "Spot",
+      "submitProcessing": "Processing...",
+      "submitUploading": "Uploading...",
+      "submitCount": "Upload {count} photos",
+      "submit": "Upload photos"
+    },
+    "edit": {
+      "title": "Edit Photo Details",
+      "updateFailed": "Update failed. Please try again later",
+      "photoAlt": "Photo",
+      "captionLabel": "Caption",
+      "captionPlaceholder": "Add a caption for the photo...",
+      "locationLabel": "Location",
+      "country": "Country",
+      "city": "City",
+      "spot": "Spot",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "save": "Save changes"
+    },
+    "popup": {
+      "uploadDate": "Uploaded:"
+    }
+  },
+  "UploadPage": {
+    "loginTitle": "Please sign in first",
+    "loginDesc": "Sign in to upload photos to the gallery",
+    "goLogin": "Go to sign in",
+    "successTitle": "Upload complete!",
+    "successDesc": "{count} photos were uploaded to the gallery",
+    "uploadMore": "Upload more",
+    "goGallery": "Go to gallery",
+    "subtitle": "Share your climbing photos with the community"
+  }
+}

@@ -10,7 +10,7 @@ interface MessageScrollerProps extends React.ComponentProps<'div'> {
 
 const MessageScroller = React.forwardRef<HTMLDivElement, MessageScrollerProps>(
   ({ className, autoScroll = true, children, ...props }, ref) => {
-    const t = useTranslations('SharedUI')
+    const t = useTranslations('Common')
     const innerRef = React.useRef<HTMLDivElement>(null)
     const [isAtBottom, setIsAtBottom] = React.useState(true)
 

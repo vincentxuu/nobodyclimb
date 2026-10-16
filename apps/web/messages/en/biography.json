@@ -1,0 +1,1347 @@
+{
+  "BiographyPage": {
+    "title": "Biography",
+    "description": "Discover the stories and people of Taiwan's climbing community.",
+    "skillsAndExperienceTitle": "Skills & Experience Sharing",
+    "experienceTopic_fear_title": "Overcoming Fear",
+    "experienceTopic_fear_description": "Stories about facing and overcoming fear in climbing",
+    "experienceTopic_recovery_title": "Injury Recovery",
+    "experienceTopic_recovery_description": "The journey of rehab and returning to the wall after injury",
+    "experienceTopic_experience_title": "Climbing Experiences",
+    "experienceTopic_experience_description": "Unforgettable climbing experiences and insights",
+    "experienceTopic_training_title": "Training Tips",
+    "experienceTopic_training_description": "Effective training methods and techniques",
+    "explore": "Explore",
+    "exploreByCategoryTitle": "Explore by Goal Category",
+    "goalCount": "{count} goals",
+    "exploreByLocationTitle": "Explore by Location",
+    "moreLocations": "More Locations",
+    "taiwanCrags": "Taiwan Crags",
+    "overseasClimbing": "Overseas Climbing",
+    "goalLocations": "Goal Locations",
+    "noTaiwanCragData": "No Taiwan crag data available",
+    "noOverseasData": "No overseas climbing data available",
+    "noGoalLocationData": "No goal location data available",
+    "locationLoadError": "Failed to load location data, please try again later",
+    "visitorsCount": "{count} visited",
+    "setAsGoal": "Set as Goal",
+    "itemCountUnit": "{count} items",
+    "inChallenge": "In Progress",
+    "personCountUnit": "{count} people",
+    "completed": "Completed",
+    "recentCompletedStoriesTitle": "Recent Completed Stories",
+    "noCompletedStories": "No completed stories yet",
+    "noCompletedStoriesForSearch": "No completed stories found for \"{term}\"",
+    "recentStoriesLoadError": "Failed to load recent completed stories",
+    "completedGoal": "completed \"{title}\"",
+    "psychologicalAspect": "Psychological",
+    "technicalAspect": "Technical",
+    "inspiredCount": "{count} also joined",
+    "viewFullStory": "View Full Story",
+    "minutesAgo": "{count} minutes ago",
+    "hoursAgo": "{count} hours ago",
+    "daysAgo": "{count} days ago",
+    "weeklyTrendingGoalsTitle": "Trending Goals This Week",
+    "noTrendingGoals": "No trending goals yet",
+    "noTrendingGoalsForSearch": "No trending goals found for \"{term}\"",
+    "trendingGoalsLoadError": "Failed to load trending goals",
+    "addedToListCount": "Added by {count} people",
+    "completedCount": "{count} completed",
+    "goalCreatedBy": "Created by {name}",
+    "adding": "Adding...",
+    "added": "Added",
+    "addToMyList": "Add to My List",
+    "progress": "Progress",
+    "unlockedAt": "Unlocked on {date}",
+    "badgeCollectionTitle": "Badge Collection",
+    "badgesUnlocked": "{unlocked}/{total} badges unlocked",
+    "all": "All",
+    "comingSoonUnlock": "Coming Soon",
+    "noBadgesUnlocked": "No badges unlocked yet",
+    "totalBiographies": "Total Biographies",
+    "totalGoals": "Total Goals",
+    "completedGoals": "Completed Goals",
+    "storiesShared": "Stories Shared",
+    "activeThisWeek": "Active This Week",
+    "communityGoalCompletionRate": "Community Goal Completion Rate",
+    "completionRate": "Completion Rate",
+    "inProgress": "In Progress",
+    "trendingGoalCategories": "Trending Goal Categories",
+    "noCategoryData": "No category data yet",
+    "communityOverview": "Community Overview",
+    "leaderboard": "Leaderboard",
+    "leaderboardGoalsCompleted": "Top Achiever",
+    "leaderboardValueCompleted": "Completed",
+    "leaderboardPopularity": "Most Popular",
+    "leaderboardValueFollowers": "Followers",
+    "leaderboardMostLoved": "Most Loved",
+    "leaderboardValueLikes": "Likes",
+    "noLeaderboardData": "No leaderboard data yet",
+    "score": "Score",
+    "totalViews": "Total Views",
+    "totalLikes": "Likes Received",
+    "followers": "Followers",
+    "storiesSharedStat": "Stories Shared",
+    "climbingFootprint": "Climbing Footprint",
+    "storyCompletion": "Story Completion",
+    "coreStories": "Core Stories",
+    "advancedStories": "Advanced Stories",
+    "goalAchievementRate": "Goal Achievement Rate",
+    "total": "Total",
+    "communityInteraction": "Community Interaction",
+    "following": "Following",
+    "justNow": "Just now",
+    "secondsAgo": "{count}s ago",
+    "saving": "Saving...",
+    "saved": "Saved",
+    "saveFailed": "Save failed, please try again",
+    "lastSaved": "Last saved: {time}",
+    "fieldsFilled": "{completed}/{total} filled",
+    "edit": "Edit",
+    "startWriting": "Start Writing",
+    "avatarAlt": "{name}'s avatar",
+    "multiSelect": "Multiple",
+    "singleSelect": "Single",
+    "selectedCount": "{count} selected",
+    "customTag": "Custom tag",
+    "tagYourself": "Tag Yourself",
+    "thirtySeconds": "30 sec",
+    "totalTagsSelected": "{count} tags selected",
+    "tagSelectorHint": "Just pick and you're done, no typing needed",
+    "collapseMoreTags": "Collapse tags",
+    "expandMoreTags": "Expand more tags ({count} categories)",
+    "addTagCategory": "Add tag category",
+    "visitedPlaces": "Visited {count} places",
+    "moreLocationsCount": "{count} more locations...",
+    "locationAndVisitorCount": "{locations} locations · {visitors} people",
+    "followButton": "Follow",
+    "unfollowButton": "Unfollow",
+    "operationFailed": "Operation Failed",
+    "operationFailedDesc": "Please try again later",
+    "loginRequired": "Login Required",
+    "loginRequiredDesc": "Please log in to like",
+    "commentLoginPrompt": "Log in to leave a comment",
+    "login": "Log In",
+    "loadFailed": "Load Failed",
+    "loadFailedDesc": "Unable to load comments, please try again",
+    "commentFailed": "Comment Failed",
+    "commentFailedDesc": "Failed to post comment, please try again",
+    "commentSuccess": "Comment Posted",
+    "commentSuccessDesc": "Your comment has been published",
+    "deleteFailed": "Delete Failed",
+    "deleteFailedDesc": "Failed to delete comment, please try again",
+    "deleteSuccess": "Deleted",
+    "deleteSuccessDesc": "Comment has been deleted",
+    "commentPlaceholder": "Write a comment...",
+    "noComments": "No comments yet. Be the first to comment!",
+    "anonymous": "Anonymous User",
+    "commentLoadFailed": "Failed to load comments",
+    "commentPostSuccess": "Comment posted",
+    "commentPostSuccessDesc": "Thanks for sharing!",
+    "commentPostFailed": "Failed to post comment",
+    "commentDeleteFailed": "Failed to delete comment",
+    "headerTitle": "Biography",
+    "headerSubtitle": "Stories of Nobody climbers",
+    "biographyCoverAlt": "{name}'s cover",
+    "seeStory": "See {name}'s story",
+    "loadError": "Unable to load biographies",
+    "loadErrorAlt": "An error occurred while loading biographies",
+    "noResults": "No results for \"{term}\"",
+    "noBiographies": "No biographies yet",
+    "loadMore": "Load More",
+    "storyLoadError": "An error occurred while loading stories",
+    "noMatchingStories": "No matching stories found",
+    "noStories": "No stories yet",
+    "loadMoreStories": "Load More",
+    "pageTitle": "Biography",
+    "pageSubtitle": "Stories of Nobody climbers",
+    "guestBannerText": "Are you a climber? Sign up and create your biography!",
+    "guestBannerButton": "Join Now",
+    "tabStories": "Stories",
+    "tabPeople": "People",
+    "searchStoriesPlaceholder": "Search stories...",
+    "searchPeoplePlaceholder": "Search people...",
+    "homeLabel": "Home",
+    "biographyLabel": "Biography",
+    "keywordsLabel": "Keywords",
+    "showMoreTags": "Show more (+{count})",
+    "collapseTags": "Collapse",
+    "aboutMeLabel": "About Me",
+    "storiesLabel": "Stories",
+    "storiesSharedCount": "{count} stories shared",
+    "climbingFootprintsLabel": "Climbing Footprints",
+    "galleryLabel": "Climbing Daily",
+    "findMeLabel": "Find Me",
+    "climbingLocations": "Climbing Locations",
+    "countries": "Countries",
+    "timeSpan": "Time Span",
+    "locationsCount": "{count} locations",
+    "footprintsYearLabel": "Footprints from the past",
+    "keepExploring": "Still exploring...",
+    "expandNotes": "Show more",
+    "collapseNotes": "Collapse",
+    "viewAll": "View All ({count})",
+    "viewAllGallery": "View All Photos",
+    "emptyStateNoContent": "No stories yet",
+    "emptyStateNoContentDesc": "Every story is worth telling, no matter how hard you climb",
+    "emptyStateNoContentAction": "Start writing my story",
+    "emptyStatePrivate": "This climber's biography is private",
+    "emptyStatePrivateDesc": "They might be preparing or prefer to keep a low profile",
+    "emptyStatePrivateAction": "Explore other climbers' stories",
+    "emptyStateNotFound": "Biography not found",
+    "emptyStateNotFoundDesc": "This page may have been removed or the URL is incorrect",
+    "emptyStateNotFoundAction": "Back to biography list",
+    "ownerGuide": "Tip: Selecting a few tags is enough to complete a basic biography — no need to write much!",
+    "sectionEmptyAddLabel": "Add",
+    "privateEmptyTitle": "This climber's biography is private",
+    "privateEmptyDesc": "They might be preparing or prefer to keep a low profile.",
+    "privateEmptyNote": "Everyone has their own pace. Respect their choice.",
+    "privateEmptyExplore": "Explore other climbers' stories",
+    "privateEmptyHome": "Back to Home",
+    "privateEmptyCtaDesc": "Want to create your own biography? Record your climbing stories and share with the community.",
+    "privateEmptyCtaAction": "Get Started",
+    "anonymousName": "Anonymous Climber",
+    "anonymousSharing": "Anonymous",
+    "reactionLoginPrompt": "Log in to react",
+    "reactionFailed": "Operation Failed",
+    "meTooPanelEmpty": "No one said \"me too\" yet",
+    "plusOnePanelEmpty": "No one said \"+1\" yet",
+    "wellSaidPanelEmpty": "No one said \"well said\" yet",
+    "noLikers": "No likes yet",
+    "coverImageAlt": "Cover image",
+    "climbingYears": "Year {count} of climbing",
+    "climbingYearsDefault": "Since day one",
+    "armSpanLabel": "Arm span {cm}cm",
+    "frequentLocations": "Often at: {locations}",
+    "yearGoal": "{year} Goals",
+    "storyProgressTitle": "Story Progress",
+    "storyProgressCompleted": "{percentage}% of advanced stories completed",
+    "myStoryProgress": "My Story Progress",
+    "continueWriting": "Continue Writing",
+    "overallProgress": "Overall: {completed}/{total} questions",
+    "categoryProgress": "Category Progress",
+    "storiesWritten": "{completed}/{total} stories written",
+    "continueWritingStories": "Continue Writing Stories",
+    "chapter1": "Chapter 1",
+    "chapter1Title": "How You Met Climbing",
+    "chapter1Locked": "Unlock your origin story when you become a climber",
+    "chapter2": "Chapter 2",
+    "chapter2Title": "What Climbing Means to You",
+    "chapter2DefaultMeaning": "Still thinking about this one...",
+    "chapter3": "Chapter 3",
+    "chapter3Title": "Climbing Bucket List",
+    "chapter3Placeholder": "{name}'s climbing bucket list is brewing...",
+    "chapter3SubPlaceholder": "Every climber has their own goals and dreams",
+    "chapter4": "Chapter 4",
+    "chapter4Title": "Advice to Your Beginner Self",
+    "chapter4Locked": "Come back when this person is in the mood",
+    "climbingFootprintsSection": "Climbing Footprints",
+    "footprintsTitle": "Footsteps Around the World",
+    "footprintsPlaceholder": "{name}'s climbing footprints are accumulating...",
+    "footprintsSubPlaceholder": "Every departure is a new adventure",
+    "quickFactsTitle": "Quick Facts About {name}",
+    "startClimbing": "Started Climbing",
+    "climbingStartYear": "{year} ({count} years)",
+    "climbingStartDefault": "Since the very beginning",
+    "frequentLocationsLabel": "Frequent Locations",
+    "frequentLocationsDefault": "Anywhere with walls",
+    "favoriteTypes": "Favorite Styles",
+    "favoriteTypesDefault": "Any climbable route is a good route",
+    "bodyStats": "Body Stats",
+    "height": "Height",
+    "heightDefault": "Mysterious height",
+    "armSpan": "Arm Span",
+    "armSpanDefault": "Unknown length",
+    "apeIndex": "Ape Index",
+    "apeIndexDefault": "Mysterious ratio",
+    "yearTarget": "{year} Goals",
+    "yearTargetDefault": "Quietly working on it...",
+    "keywordsLabel2": "Keywords",
+    "showMoreTagsMobile": "Show more (+{count})",
+    "coreStoriesTitle": "My Stories",
+    "addMoreStories": "Add More Stories",
+    "addMoreStoriesDesc": "Share your climbing experiences",
+    "featuredStoriesTitle": "Featured Stories",
+    "storiesNotShared": "No stories shared yet",
+    "communityStatsTitle": "Community Stats",
+    "communityStatsDesc": "View overall statistics and leaderboards for the NobodyClimb community",
+    "backToBiography": "Back to Biography",
+    "loadCommunityStatsFailed": "Unable to load community statistics",
+    "retryLater": "Please try again later",
+    "reload": "Reload",
+    "exploreStories": "Explore Climbing Stories",
+    "exploreStoriesDesc": "Discover inspiring climbing goals and stories from the community",
+    "browseBiography": "Browse Biographies",
+    "browseBiographyDesc": "Meet more climbing Nobodies",
+    "explorePageTitle": "Explore Climbing Stories",
+    "explorePageSubtitle": "Discover inspiring climbing goals and stories from the community",
+    "communityStats": "Community Stats",
+    "searchPlaceholder": "Search goals, locations or climbers...",
+    "filterAll": "All",
+    "filterGrowth": "Growth Stories",
+    "filterExperience": "Climbing Experience",
+    "filterRecovery": "Injury Recovery",
+    "filterFootprint": "Climbing Footprints",
+    "personalWebsite": "Personal Website",
+    "noInteractors": "No one yet",
+    "reactionMeToo": "Me too",
+    "reactionWellSaid": "Well said",
+    "profileNotFound": "This climber's profile doesn't exist",
+    "breadcrumbHome": "Home",
+    "breadcrumbBiography": "Biography",
+    "backToEdit": "Back to Edit",
+    "prevProfile": "Previous",
+    "nextProfile": "Next",
+    "recommendedTitle": "More Climbers You May Like",
+    "moreProfiles": "More Climbers",
+    "locationNotFound": "Location not found",
+    "loadLocationError": "Failed to load location data",
+    "backToExplore": "Back to Explore",
+    "backToExploreBtn": "Back to Explore",
+    "visitorsHereCount": "{count} climbers have been here",
+    "visitorsListTitle": "Climbers Who've Been Here",
+    "exploreLocationsTitle": "Climbing Footprints Explorer",
+    "exploreLocationsDesc": "Explore climbing locations visited by the community and find fellow climbers",
+    "backToBiographyBtn": "Back to Biography",
+    "statsCountries": "{count} countries",
+    "statsLocations": "{count} locations",
+    "statsVisits": "{count} visits",
+    "filterByCountry": "Filter by Country",
+    "allCountries": "All Countries",
+    "noMatchLocationsTitle": "No matching locations",
+    "noFootprintsTitle": "No climbing footprints yet",
+    "noMatchLocations": "Try different search keywords",
+    "noFootprints": "Be the first to share your climbing footprints!",
+    "beFirstToShare": "Be the first to share your climbing footprints!",
+    "tryOtherKeywords": "Try different search keywords",
+    "anonymousUser": "Anonymous",
+    "metaFallbackTitle": "Biography",
+    "metaFallbackDesc": "Explore stories of climbers",
+    "metaTitleSuffix": "Climber Biography",
+    "metaDefaultDesc": "Meet {name}, a passionate rock climber.",
+    "metaKeyword1": "climber",
+    "metaKeyword2": "biography",
+    "metaKeyword3": "climbing community",
+    "guestCtaTitle": "Have a climbing story of your own?",
+    "guestCtaDesc": "Write your own climber biography.",
+    "guestCtaAction": "Sign up now"
+  },
+  "BiographyEditor": {
+    "editBiographyTitle": "Edit Profile",
+    "unsavedChangesTitle": "Unsaved Changes",
+    "unsavedChangesMessage": "You have unsaved changes. Are you sure you want to leave?",
+    "unsavedChangesConfirm": "Leave",
+    "unsavedChangesCancel": "Stay",
+    "cropAvatarTitle": "Crop Avatar",
+    "cropCoverTitle": "Crop Cover Image",
+    "sectionBasicInfo": "Basic Info",
+    "sectionAnnualGoals": "Annual Goals",
+    "sectionIdentityTags": "Identity Tags",
+    "sectionQuickQA": "Quick Q&A",
+    "sectionDeepStories": "Deep Stories",
+    "sectionClimbingFootprints": "Climbing Footprints",
+    "basicInfoTitle": "Basic Info",
+    "basicInfoTimeEstimate": "1 min",
+    "coverImageLabel": "Cover Image",
+    "coverImageAlt": "Cover Image",
+    "coverImageUploadHint": "Click to upload cover image",
+    "coverImageChangeHover": "Change Cover",
+    "coverImageSizeHint": "Recommended size: 1200 x 400 pixels",
+    "avatarLabel": "Avatar",
+    "avatarAlt": "Avatar",
+    "avatarClickHint": "Click avatar to change",
+    "avatarShapeHint": "Square image recommended",
+    "displayNameLabel": "Display Name",
+    "displayNameRequired": "*",
+    "displayNamePlaceholder": "What do you want to be called?",
+    "displayNameHint": "This will be shown on your profile",
+    "taglineLabel": "One-line introduction",
+    "taglineOptional": "(optional)",
+    "taglinePlaceholder": "e.g. Weekend climber who loves having fun",
+    "taglineHint": "This appears below your name",
+    "climbingStartYearLabel": "Climbing start year",
+    "climbingStartYearOptional": "(optional)",
+    "climbingStartYearSelect": "Select year",
+    "climbingYearsExperience": "~{years} years experience",
+    "climbingStartDefault": "Since you started",
+    "climbingStartYearHint": "Select when you started climbing, the system will calculate your experience",
+    "bodyStatsLabel": "Body Stats",
+    "bodyStatsOptional": "(optional)",
+    "heightLabel": "Height",
+    "armSpanLabel": "Arm Span",
+    "apeIndexWithValue": "Ape Index: {value} cm",
+    "apeIndexHint": "The difference between arm span and height is called Ape Index, very useful for climbing",
+    "frequentLocationsLabel": "Frequent locations",
+    "frequentLocationsMultiple": "(multiple allowed)",
+    "frequentLocationsInputPlaceholder": "Type and press Enter",
+    "frequentLocationsHint": "Gyms and outdoor crags both welcome",
+    "favoriteRouteTypesLabel": "Favorite route types",
+    "favoriteRouteTypesMultiple": "(multiple allowed)",
+    "favoriteRouteTypesCategoryClimbing": "Climbing style",
+    "favoriteRouteTypesCategoryTerrain": "Terrain type",
+    "favoriteRouteTypesCategoryMovement": "Movement style",
+    "favoriteRouteTypesCustomCategory": "Custom",
+    "favoriteRouteTypesCustomPlaceholder": "Don't see what you want? Type it in...",
+    "socialLinksTitle": "Social Links",
+    "socialLinksHint": "Add your social accounts so other climbers can follow you",
+    "instagramLabel": "Instagram",
+    "instagramOptional": "(optional)",
+    "youtubeLabel": "YouTube Channel",
+    "youtubeOptional": "(optional)",
+    "youtubePlaceholder": "Channel ID or URL",
+    "websiteLabel": "Personal Website",
+    "websiteOptional": "(optional)",
+    "savingStatus": "Saving...",
+    "savedStatus": "Saved",
+    "saveErrorStatus": "Save failed",
+    "autoSaveEnabled": "Auto-save enabled",
+    "saveButton": "Save",
+    "previewButton": "Preview",
+    "publishButton": "Publish",
+    "publishingStatus": "Publishing...",
+    "visibilityPublicLabel": "Public",
+    "visibilityPublicDesc": "Anyone can see it",
+    "visibilityCommunityLabel": "Community",
+    "visibilityCommunityDesc": "Only community members can see it",
+    "visibilityPrivateLabel": "Private",
+    "visibilityPrivateDesc": "Only you can see it",
+    "visibilityAnonymousLabel": "Anonymous",
+    "visibilityAnonymousDesc": "Public but your name is hidden",
+    "visibilityCurrentSetting": "Current: {label}",
+    "progressTitle": "Completion Progress",
+    "progressComplete": "Amazing! Your profile is complete!",
+    "tagsTitle": "Identity Tags",
+    "tagsSelectedCount": "{count} selected",
+    "tagsNoneSelected": "No tags selected yet",
+    "tagsEditButton": "Edit Tags",
+    "tagsMoreCount": "+{count} more",
+    "oneLinersTitle": "Quick Q&A",
+    "oneLinersTimeEstimate": "2 min",
+    "oneLinersFilledCount": "{filled}/{total} answered",
+    "oneLinersHint": "Answer a few questions, no need to fill them all",
+    "answerInputPlaceholder": "Enter your answer...",
+    "clearAnswer": "Clear answer",
+    "randomRecommend": "Random question",
+    "addCustomQuestion": "Custom question",
+    "storiesTitle": "Deep Stories",
+    "storiesTimeEstimate": "5+ minutes",
+    "storiesFilledCount": "{filled}/{total} written",
+    "storiesHint": "Pick a question or two that resonate with you — you can always add more later",
+    "storiesRandomRecommend": "Suggest a question",
+    "storiesEditButton": "Edit",
+    "storiesStartButton": "Start writing",
+    "storiesAddCustomQuestion": "Custom question",
+    "editStoryTitle": "Edit Story",
+    "storyTextPlaceholder": "Write your story...",
+    "deleteStory": "Delete this story",
+    "writingTipTitle": "Writing tip:",
+    "writingTipContent": "Don't aim for perfection — just write what comes to mind. You can always come back to edit.",
+    "cancelButton": "Cancel",
+    "saveStoryButton": "Save",
+    "deleteConfirmPrompt": "Confirm delete?",
+    "deleteConfirmYes": "Confirm",
+    "deleteConfirmNo": "Cancel",
+    "deleteButton": "Delete",
+    "writingTip1": "Don't aim for perfection — just write what comes to mind",
+    "writingTip2": "Start with a few sentences, you can always expand later",
+    "writingTip3": "Authentic stories are the most moving",
+    "writingTip4": "Your experience might really help someone else",
+    "gradeTargetsTitle": "Annual Climbing Goals",
+    "gradeTargetsHint": "Set the grades and counts you want to complete each year; progress is tracked automatically after logging ascents",
+    "gradeTargetsCountUnit": "routes",
+    "gradeTargetsDeleteLabel": "Delete goal",
+    "gradeTargetsAddButton": "Add {year} goal",
+    "footprintsTitle": "Climbing Footprints",
+    "footprintsSaving": "Saving...",
+    "footprintsEmpty": "No climbing footprints recorded yet",
+    "footprintsEmptyHint": "Click the button above to add your first climbing location",
+    "footprintsRetry": "Retry",
+    "footprintsCountSummary": "{countries} countries / {locations} locations",
+    "footprintsEditorEmpty": "No climbing footprints recorded yet",
+    "footprintsEditorEmptyHint": "Click the button below to add a climbing location you've visited",
+    "footprintsEditorAddTitle": "Add Climbing Location",
+    "footprintsEditorEditTitle": "Edit Location",
+    "footprintsLocationNameLabel": "Location Name",
+    "footprintsLocationNamePlaceholder": "e.g. Longdong, Krabi, Yangshuo",
+    "footprintsCountryLabel": "Country",
+    "footprintsVisitYearLabel": "Year visited",
+    "footprintsVisitYearPlaceholder": "e.g. 2024 or 2023-2024",
+    "footprintsNotesLabel": "Notes (optional)",
+    "footprintsNotesPlaceholder": "Share your climbing experience...",
+    "footprintsIsPublicLabel": "Make this location public (others can see it on the explore page)",
+    "footprintsPrivateBadge": "Private",
+    "footprintsSetPrivateTitle": "Set to private",
+    "footprintsSetPublicTitle": "Set to public",
+    "footprintsAddButton": "Add Climbing Location",
+    "footprintsUpdateButton": "Update",
+    "footprintsAddButtonForm": "Add",
+    "tagsBottomSheetTitle": "Tag Yourself",
+    "tagsBottomSheetClose": "Close",
+    "tagsBottomSheetDone": "Done",
+    "tagsCanMultiselect": "Multiple allowed",
+    "tagsSingleSelect": "Single select",
+    "tagsAddCustom": "Add",
+    "tagsAddDimension": "Add tag category",
+    "randomRecommendTitle": "Random Question",
+    "randomRecommendAllDone": "Amazing! You've answered all questions!",
+    "randomRecommendShuffle": "Another one",
+    "randomRecommendStart": "Start answering",
+    "randomRecommendRemaining": "{count} questions remaining",
+    "addCustomTagTitle": "Add Custom Tag",
+    "tagNameLabel": "Tag Name",
+    "tagNamePlaceholder": "e.g. Late-night gym rat",
+    "tagNameHint": "# will be added automatically, max 20 characters",
+    "tagDescriptionLabel": "Tag Description",
+    "tagDescriptionOptional": "(optional)",
+    "tagDescriptionPlaceholder": "e.g. Only starts climbing after 10pm",
+    "tagDescriptionHint": "Help others understand this tag, max 50 characters",
+    "tagCategoryLabel": "Category",
+    "tagPreviewLabel": "Preview",
+    "addingStatus": "Adding...",
+    "addTagButton": "Add Tag",
+    "addCustomDimensionTitle": "Add Tag Category",
+    "dimensionIconLabel": "Icon",
+    "dimensionNameLabel": "Category Name",
+    "dimensionNamePlaceholder": "e.g. Gear preferences",
+    "dimensionNameHint": "Max 10 characters",
+    "dimensionDescriptionLabel": "Category Description",
+    "dimensionDescriptionOptional": "(optional)",
+    "dimensionDescriptionPlaceholder": "e.g. What gear do you prefer?",
+    "dimensionSelectionModeLabel": "Selection Mode",
+    "dimensionSingleMode": "Single",
+    "dimensionSingleModeDesc": "Only one tag can be selected",
+    "dimensionMultipleMode": "Multiple",
+    "dimensionMultipleModeDesc": "Multiple tags can be selected",
+    "dimensionPreviewLabel": "Preview",
+    "dimensionMultipleHint": "Multiple allowed",
+    "dimensionCreatingStatus": "Creating...",
+    "createDimensionButton": "Create Category",
+    "dimensionCreateHint": "After creating the category, you can add custom tags to it.",
+    "addCustomOneLinerTitle": "Add Custom Q&A Question",
+    "oneLinerQuestionLabel": "Question",
+    "oneLinerQuestionPlaceholder": "e.g. Favorite climbing movie?",
+    "oneLinerQuestionHint": "Question mark will be added automatically, max 50 characters",
+    "oneLinerFormatHintLabel": "Format hint",
+    "oneLinerFormatHintOptional": "(optional)",
+    "oneLinerFormatHintPlaceholder": "e.g. Because ___, I think ___",
+    "oneLinerFormatHintHint": "Help answerers know how to respond",
+    "oneLinerExampleLabel": "Example answer",
+    "oneLinerExampleOptional": "(optional)",
+    "oneLinerExamplePlaceholder": "e.g. Free Solo — it fired me up completely",
+    "oneLinerExampleHint": "A reference example for answerers",
+    "oneLinerPreviewLabel": "Preview",
+    "oneLinerTip": "Quick Q&A is great for short, fun answers. Use Deep Stories for more in-depth sharing.",
+    "addOneLinerButton": "Add Question",
+    "addCustomStoryTitle": "Add Custom Story Question",
+    "storyTitleLabel": "Question Title",
+    "storyTitlePlaceholder": "e.g. Do you have a memorable climbing experience?",
+    "storyTitleHint": "Question mark will be added automatically, max 50 characters",
+    "storySubtitleLabel": "Question Description",
+    "storySubtitleOptional": "(optional)",
+    "storySubtitlePlaceholder": "e.g. It doesn't have to be impressive, just meaningful to you",
+    "storySubtitleHint": "Help answerers understand the question",
+    "storyCategoryLabel": "Category",
+    "storyPlaceholderLabel": "Starter phrase",
+    "storyPlaceholderOptional": "(optional)",
+    "storyPlaceholderPlaceholder": "e.g. I remember the time...",
+    "storyPreviewLabel": "Preview",
+    "storyUncategorized": "Uncategorized",
+    "storyTip": "Story questions are for in-depth sharing — feel free to write at length.",
+    "addStoryButton": "Add Question",
+    "wizardStep1Title": "Basic Info",
+    "wizardStep1Subtitle": "Set up your profile",
+    "wizardStep2Title": "Your Climbing Story",
+    "wizardStep2Subtitle": "This makes your profile more personal",
+    "wizardStep3Title": "Bucket List",
+    "wizardStep3Subtitle": "What goals do you want to accomplish in climbing?",
+    "wizardSaveError": "Save failed, please try again",
+    "wizardAvatarLabel": "Avatar",
+    "wizardAvatarOptional": "(optional)",
+    "wizardAvatarUploadButton": "Upload Photo",
+    "wizardAvatarUploadingButton": "Uploading...",
+    "wizardAvatarUploadSuccess": "Upload successful",
+    "wizardAvatarUploadSuccessDesc": "Avatar updated",
+    "wizardAvatarFormatError": "Invalid file format",
+    "wizardAvatarFormatErrorDesc": "Please upload a JPG, PNG, WebP, or GIF image",
+    "wizardAvatarUploadFailed": "Upload failed",
+    "wizardNicknameLabel": "Your nickname",
+    "wizardNicknamePlaceholder": "Enter your nickname",
+    "wizardPersonalTagLabel": "Personal tag",
+    "wizardPersonalTagOptional": "(optional)",
+    "wizardPersonalTagPlaceholder": "e.g. Professional climber, hobbyist, climbing instructor",
+    "wizardPersonalTagHint": "A one-line description of your identity in the climbing world",
+    "wizardStartYearLabel": "When did you start climbing?",
+    "wizardStartYearPlaceholder": "Select year",
+    "wizardFrequentLocationsLabel": "Frequent locations",
+    "wizardFrequentLocationsPlaceholder": "Enter a location",
+    "wizardFrequentLocationsButton": "Add",
+    "wizardRouteTypesLabel": "Favorite route types",
+    "wizardStoryLabel": "Your climbing story",
+    "wizardBucketListLabel": "Bucket list",
+    "wizardBucketListPlaceholder": "Enter a goal",
+    "wizardBucketListButton": "Add",
+    "wizardBucketListHint": "Things you want to accomplish on your climbing journey",
+    "wizardNextButton": "Next",
+    "wizardSavingButton": "Saving...",
+    "wizardFinishButton": "Done",
+    "wizardSkipButton": "Skip",
+    "wizardPrevButton": "Back",
+    "wizardCancelButton": "Cancel",
+    "storyPromptWelcome": "Welcome back, {name}!",
+    "storyPromptSubtitle": "Want to talk about this today?",
+    "storyPromptSaveError": "Save failed, please try again",
+    "storyPromptCategoryProgress": "\"{category}\" question {current}/{total}",
+    "storyPromptOverallProgress": "{completed}/{total} stories completed ({percentage}%)",
+    "storyPromptShowExamples": "See how others share",
+    "storyPromptExampleAuthor": "— Anonymous climber",
+    "storyPromptSkip": "Maybe later",
+    "storyPromptShuffle": "Different question",
+    "storyPromptSave": "Save",
+    "storyPromptBadgeText": "Write a story today?",
+    "storyPromptBadgeCount": "{count} questions pending",
+    "bucketListProgress": "Progress",
+    "bucketListCollapseStory": "Collapse completion story",
+    "bucketListExpandStory": "View completion story",
+    "bucketListCompletedDateLabel": "Completion date",
+    "bucketListCompletionStoryLabel": "Completion story",
+    "bucketListPsychologicalInsightsLabel": "Mental insights",
+    "bucketListTechnicalInsightsLabel": "Technical insights",
+    "bucketListSectionEmpty": "No bucket list items yet",
+    "bucketListActive": "{count} in progress",
+    "bucketListCompleted": "{count} completed",
+    "bucketListFilterAll": "All",
+    "bucketListFilterActive": "In progress",
+    "bucketListFilterCompleted": "Completed",
+    "bucketListNoItems": "No items match the filter",
+    "referenceAddToList": "Add to my list",
+    "referenceRemoveFromList": "Remove from my list",
+    "referenceAdded": "Added",
+    "referenceAdd": "I want this",
+    "referenceError": "Operation failed",
+    "referenceErrorDesc": "Operation failed. Please try again later.",
+    "instagramHint": "Enter your Instagram username (without @)",
+    "youtubeHint": "Enter your YouTube channel ID or URL",
+    "websiteHint": "Your personal website or blog",
+    "footprintsSubtitle": "Record the climbing spots and journeys you have been to",
+    "wizardStep2Origin": "Your Encounter with Climbing",
+    "wizardStep2OriginHint": "Describe the first time you encountered climbing, what made you want to continue?",
+    "wizardStep2OriginPlaceholder": "One day, I first walked into a climbing gym...",
+    "wizardStep2Meaning": "What Does Climbing Mean to You",
+    "wizardStep2MeaningHint": "What role does climbing play in your life? What does it give you?",
+    "wizardStep2MeaningPlaceholder": "Climbing is to me...",
+    "wizardStep2Advice": "Advice to Your Past Self",
+    "wizardStep2AdviceHint": "If you could go back to the beginning, what would you say to yourself?",
+    "wizardStep2AdvicePlaceholder": "If I could go back to that time, I would say...",
+    "advancedStoryFilled": "Filled {completed}/{total} stories · {percentage}%",
+    "advancedStoryCharCount": "chars",
+    "advancedStoryClickToEdit": "Click to edit",
+    "advancedStoryClickToFill": "Click to start writing",
+    "advancedStoryUnfilled": "Unfilled Stories",
+    "wizardAvatarUploadFailedMsg": "Upload failed",
+    "wizardAvatarUploadErrorDesc": "An error occurred while uploading the avatar. Please try again later.",
+    "advancedStoryUnfilledCount": "({count} questions)",
+    "bucketListCategoryOutdoor": "Outdoor Climbing",
+    "bucketListCategoryIndoor": "Indoor Climbing",
+    "bucketListCategoryBouldering": "Bouldering",
+    "bucketListCategorySport": "Sport Climbing",
+    "bucketListCategoryTrad": "Trad Climbing",
+    "bucketListCategoryAlpine": "Alpine Climbing",
+    "bucketListCategoryTraining": "Training Goal",
+    "bucketListCategoryTravel": "Climbing Travel",
+    "bucketListCategoryOther": "Other"
+  },
+  "BiographyQuestions": {
+    "oneliner_climbing_origin": "How Did You Meet Climbing?",
+    "oneliner_climbing_meaning": "What Does Climbing Mean to You?",
+    "oneliner_advice_to_self": "Advice to Your Beginner Self",
+    "oneliner_best_moment": "What's the Best Thing About Climbing?",
+    "oneliner_favorite_place": "Where Do You Love to Climb?",
+    "oneliner_current_goal": "What's Your Current Climbing Goal?",
+    "oneliner_climbing_takeaway": "One Thing Climbing Has Taught You?",
+    "oneliner_climbing_style_desc": "Describe Your Climbing Style in One Sentence",
+    "oneliner_life_outside": "Who Are You Outside of Climbing?",
+    "oneliner_bucket_list": "What's on Your Climbing Bucket List?",
+    "story_memorable_moment": "A Climb You'll Never Forget",
+    "story_biggest_challenge": "Have You Ever Hit a Wall?",
+    "story_breakthrough_story": "A Recent Moment of Progress",
+    "story_first_outdoor": "Your First Outdoor Climb",
+    "story_first_grade": "A Route That Made You Proud",
+    "story_frustrating_climb": "A Frustrating Experience — and How You Got Through It",
+    "story_fear_management": "Are You Afraid of Heights or Falling?",
+    "story_climbing_lesson": "What Has Climbing Taught You?",
+    "story_failure_perspective": "What Goes Through Your Mind When You Can't Send?",
+    "story_flow_moment": "Have You Ever Been in the Flow?",
+    "story_life_balance": "How Do You Balance Climbing with Life?",
+    "story_unexpected_gain": "Any Unexpected Gains from Climbing?",
+    "story_climbing_mentor": "Someone You're Grateful For",
+    "story_climbing_partner": "Do You Have a Regular Climbing Partner?",
+    "story_funny_moment": "Any Funny or Awkward Moments?",
+    "story_favorite_spot": "Your Favorite or Most-Recommended Spot",
+    "story_advice_to_group": "Advice to Beginners or a Certain Group",
+    "story_climbing_space": "A Gym or Spot That Means Something Special",
+    "story_injury_recovery": "Have You Been Injured? How Did You Recover?",
+    "story_memorable_route": "A Route or Experience Worth Sharing",
+    "story_training_method": "How Do You Train? Any Habits?",
+    "story_effective_practice": "Any Training Methods That Work for You?",
+    "story_technique_tip": "Any Useful Techniques You've Learned?",
+    "story_gear_choice": "Any Thoughts on Gear?",
+    "story_dream_climb": "If You Could Climb Anywhere, Where Would You Go?",
+    "story_climbing_trip": "Any Memorable Climbing Trips?",
+    "story_bucket_list_story": "Have You Completed a Climbing Goal? How Did It Feel?",
+    "story_climbing_goal": "Any Recent Goals You're Working Toward?",
+    "story_climbing_style": "What Style of Climbing Do You Love Most?",
+    "story_climbing_inspiration": "Someone or Something That Inspires You",
+    "story_life_outside_climbing": "What Else Captivates You Outside Climbing?",
+    "category_sys_cat_growth": "Growth & Breakthroughs",
+    "category_sys_cat_psychology": "Mind & Philosophy",
+    "category_sys_cat_community": "Community & Connection",
+    "category_sys_cat_practical": "Practical Tips",
+    "category_sys_cat_dreams": "Dreams & Exploration",
+    "category_sys_cat_life": "Life Integration",
+    "category_custom": "Story",
+    "category_uncategorized": "Story"
+  },
+  "BiographyStories": {
+    "categories": {
+      "growth": {
+        "name": "Growth & Breakthroughs",
+        "description": "Capture the milestones of your climbing journey"
+      },
+      "psychology": {
+        "name": "Mindset & Philosophy",
+        "description": "Explore how climbing has changed you inside"
+      },
+      "community": {
+        "name": "Community & Connection",
+        "description": "Share stories about your climbing friends"
+      },
+      "practical": {
+        "name": "Practical Tips",
+        "description": "Pass on useful experience and techniques"
+      },
+      "dreams": {
+        "name": "Dreams & Exploration",
+        "description": "Sketch out your climbing dreams"
+      },
+      "life": {
+        "name": "Life Beyond Climbing",
+        "description": "Who you are off the wall"
+      }
+    },
+    "questions": {
+      "climbing_origin": {
+        "title": "How You Met Climbing",
+        "subtitle": "Describe the first time you tried climbing. What made you want to keep going?",
+        "placeholder": "One day that year, I walked into a climbing gym for the first time..."
+      },
+      "climbing_meaning": {
+        "title": "What Climbing Means to You",
+        "subtitle": "What role does climbing play in your life? What does it give you?",
+        "placeholder": "To me, climbing is..."
+      },
+      "advice_to_self": {
+        "title": "To My Beginner Self",
+        "subtitle": "If you could go back to the start, what would you tell yourself?",
+        "placeholder": "If I could go back, I would say..."
+      },
+      "memorable_moment": {
+        "title": "Your Most Unforgettable Climb",
+        "subtitle": "It can be a single moment or a whole climb. Focus on what moved you most",
+        "placeholder": "That climb is one I will never forget..."
+      },
+      "biggest_challenge": {
+        "title": "Your Biggest Challenge and How You Faced It",
+        "subtitle": "Describe the challenge (injury, plateau, fear, etc.) and how you dealt with it",
+        "placeholder": "The biggest challenge I have faced was..."
+      },
+      "breakthrough_story": {
+        "title": "Your Biggest Breakthrough",
+        "subtitle": "A new grade, a mental breakthrough, a technical breakthrough, and so on",
+        "placeholder": "That breakthrough made me realize..."
+      },
+      "first_outdoor": {
+        "title": "Your First Time Climbing Outdoors",
+        "subtitle": "What it was like to go from the gym to real rock, and what you took away",
+        "placeholder": "My first time climbing outdoors, I remember..."
+      },
+      "first_grade": {
+        "title": "Sending a Grade for the First Time",
+        "subtitle": "Pick a grade that matters to you (e.g. 5.11a, V4) and share the journey",
+        "placeholder": "When I sent that grade for the first time..."
+      },
+      "frustrating_climb": {
+        "title": "Your Most Frustrating Climb",
+        "subtitle": "A failure, a bail, or an especially hard experience, and how you handled it",
+        "placeholder": "That setback taught me..."
+      },
+      "fear_management": {
+        "title": "How You Overcome Fear in Climbing",
+        "subtitle": "Share the specific ways you deal with fear of falling, heights, or failure",
+        "placeholder": "When I face fear, I..."
+      },
+      "climbing_lesson": {
+        "title": "The Most Important Thing Climbing Taught You",
+        "subtitle": "It could be about failure, persistence, focus, trust, and more",
+        "placeholder": "The most important thing climbing taught me is..."
+      },
+      "failure_perspective": {
+        "title": "How Climbing Changed Your View of Failure",
+        "subtitle": "How your climbing experience shapes the way you face failure",
+        "placeholder": "Climbing changed how I see failure..."
+      },
+      "flow_moment": {
+        "title": "Flow Moments on the Wall",
+        "subtitle": "Describe a climb when you were completely absorbed and lost track of everything else",
+        "placeholder": "That feeling of flow..."
+      },
+      "life_balance": {
+        "title": "Balancing Climbing and Life",
+        "subtitle": "How you balance work, family, and climbing",
+        "placeholder": "The way I balance life and climbing is..."
+      },
+      "unexpected_gain": {
+        "title": "Unexpected Gifts from Climbing",
+        "subtitle": "Benefits you didn't expect but gained through climbing",
+        "placeholder": "I never expected climbing to also give me..."
+      },
+      "climbing_mentor": {
+        "title": "The People Who Helped You Along the Way",
+        "subtitle": "A coach, a climbing friend, family, or even a climber in a video",
+        "placeholder": "On my climbing journey, there was someone..."
+      },
+      "climbing_partner": {
+        "title": "Your Favorite Climbing Partner",
+        "subtitle": "Share a special climbing partner and the story between you",
+        "placeholder": "My rope partner and I..."
+      },
+      "funny_moment": {
+        "title": "Your Most Awkward or Funny Climbing Moment",
+        "subtitle": "A lighthearted story to make everyone laugh",
+        "placeholder": "One super awkward time was..."
+      },
+      "favorite_spot": {
+        "title": "The Climbing Spot You Recommend Most",
+        "subtitle": "Indoor or outdoor, and why you recommend it",
+        "placeholder": "The climbing spot I recommend most is..."
+      },
+      "advice_to_group": {
+        "title": "A Message to a Certain Group",
+        "subtitle": "Advice for women, beginners, older climbers, kids, or any specific group",
+        "placeholder": "What I want to say to ... is ..."
+      },
+      "climbing_space": {
+        "title": "Your Most Memorable Gym or Climbing Space",
+        "subtitle": "A climbing place that holds special meaning for you",
+        "placeholder": "The most special climbing space to me is..."
+      },
+      "injury_recovery": {
+        "title": "An Injury and What You Learned from It",
+        "subtitle": "Describe a specific injury, the recovery process, and what the experience taught you",
+        "placeholder": "That injury taught me..."
+      },
+      "memorable_route": {
+        "title": "A Climb You Most Want to Share",
+        "subtitle": "It can be a route or an outdoor trip. Share the process, technique, and takeaways",
+        "placeholder": "What I most want to share about this route is..."
+      },
+      "training_method": {
+        "title": "How You Train",
+        "subtitle": "Share what you train, how often, and what you have learned",
+        "placeholder": "The way I train is..."
+      },
+      "effective_practice": {
+        "title": "The Practice That Works Best for You",
+        "subtitle": "A particularly effective drill that helped you improve",
+        "placeholder": "This practice works especially well for me..."
+      },
+      "technique_tip": {
+        "title": "A Technique That Really Helped You",
+        "subtitle": "An insight or trick about a technique (footwork, body positioning, etc.)",
+        "placeholder": "This technique has really helped me..."
+      },
+      "gear_choice": {
+        "title": "Thoughts on Choosing Gear",
+        "subtitle": "Your experience choosing shoes, chalk bags, belay devices, and other gear",
+        "placeholder": "When it comes to gear, my experience is..."
+      },
+      "dream_climb": {
+        "title": "Your Dream Climb",
+        "subtitle": "Anywhere in the world. Tell us why this place or route draws you in",
+        "placeholder": "My dream climb is..."
+      },
+      "climbing_trip": {
+        "title": "A Special Climbing Trip",
+        "subtitle": "A climbing trip at home or abroad and what you took from it",
+        "placeholder": "That climbing trip..."
+      },
+      "bucket_list_story": {
+        "title": "The Story of Ticking Off a Bucket List Goal",
+        "subtitle": "Describe how you did it in detail (it can complement your bucket list completion story)",
+        "placeholder": "When I achieved this goal..."
+      },
+      "climbing_goal": {
+        "title": "Your Current Climbing Goal",
+        "subtitle": "The goal you're working toward right now and how it's going",
+        "placeholder": "The goal I most want to achieve right now is..."
+      },
+      "climbing_style": {
+        "title": "The Climbing Style That Draws You Most",
+        "subtitle": "Bouldering, lead, cracks, roofs, and so on. Why does it draw you in?",
+        "placeholder": "The climbing style that draws me most is..."
+      },
+      "climbing_inspiration": {
+        "title": "Climbers or Films That Inspire You",
+        "subtitle": "How a climber, a film, or a book inspired you",
+        "placeholder": "What inspired me most was..."
+      },
+      "life_outside_climbing": {
+        "title": "What Else Fascinates Me Besides Climbing",
+        "subtitle": "Other interests or activities you're passionate about",
+        "placeholder": "Besides climbing, I also love..."
+      }
+    }
+  },
+  "BiographyTags": {
+    "dimensions": {
+      "sys_style_cult": {
+        "name": "Style Cult",
+        "description": "Which cult do you belong to?"
+      },
+      "sys_injury_badge": {
+        "name": "Injury Badges",
+        "description": "Battle scars from the wall"
+      },
+      "sys_shoe_faction": {
+        "name": "Shoe Faction",
+        "description": "Your climbing shoe religion"
+      },
+      "sys_time_type": {
+        "name": "Climbing Hours",
+        "description": "When do you climb?"
+      },
+      "sys_lifestyle": {
+        "name": "Lifestyle",
+        "description": "Balancing climbing and life"
+      },
+      "sys_climbing_music": {
+        "name": "Climbing BGM",
+        "description": "What do you listen to on the wall?"
+      },
+      "sys_failure_response": {
+        "name": "Facing Failure",
+        "description": "When you can't send it?"
+      },
+      "sys_social_type": {
+        "name": "Social Type",
+        "description": "Your social style at the crag"
+      },
+      "sys_chalk_habit": {
+        "name": "Chalk Habits",
+        "description": "Your relationship with chalk"
+      },
+      "sys_training_approach": {
+        "name": "Training Approach",
+        "description": "How do you get stronger?"
+      },
+      "sys_local_identity": {
+        "name": "Home Turf",
+        "description": "Where you belong"
+      }
+    },
+    "options": {
+      "sys_style_cult_crack": {
+        "label": "#CrackCult",
+        "description": "Nothing beats a perfect jam"
+      },
+      "sys_style_cult_slab": {
+        "label": "#SlabCult",
+        "description": "Balance is an art"
+      },
+      "sys_style_cult_overhang": {
+        "label": "#OverhangCult",
+        "description": "If it's not steep, I'm not interested"
+      },
+      "sys_style_cult_dyno": {
+        "label": "#DynoCult",
+        "description": "Why go slow when you can fly?"
+      },
+      "sys_style_cult_crimp": {
+        "label": "#CrimpCult",
+        "description": "The smaller the edge, the better"
+      },
+      "sys_style_cult_jug": {
+        "label": "#JugCult",
+        "description": "In jugs we trust"
+      },
+      "sys_style_cult_all": {
+        "label": "#ClimbEverything",
+        "description": "I'm not picky"
+      },
+      "sys_injury_badge_a2": {
+        "label": "#A2PulleySurvivor",
+        "description": "Finger pulley injury"
+      },
+      "sys_injury_badge_trigger_finger": {
+        "label": "#TriggerFingerClub",
+        "description": "Tenosynovitis"
+      },
+      "sys_injury_badge_tfcc": {
+        "label": "#WristTFCC",
+        "description": "Triangular fibrocartilage complex injury"
+      },
+      "sys_injury_badge_tennis_elbow": {
+        "label": "#TennisElbow",
+        "description": "Lateral epicondylitis"
+      },
+      "sys_injury_badge_golf_elbow": {
+        "label": "#GolfersElbow",
+        "description": "Medial epicondylitis"
+      },
+      "sys_injury_badge_impingement": {
+        "label": "#ShoulderImpingement",
+        "description": "Shoulder impingement syndrome"
+      },
+      "sys_injury_badge_rotator_cuff": {
+        "label": "#RotatorCuffTear",
+        "description": "Rotator cuff injury"
+      },
+      "sys_injury_badge_back": {
+        "label": "#LowerBackPain",
+        "description": "Lumbar issues"
+      },
+      "sys_injury_badge_knee": {
+        "label": "#SwollenKnee",
+        "description": "Knee joint problems"
+      },
+      "sys_injury_badge_ankle": {
+        "label": "#SprainedAnkle",
+        "description": "Landing injury"
+      },
+      "sys_injury_badge_neck": {
+        "label": "#StiffNeck",
+        "description": "Neck discomfort"
+      },
+      "sys_injury_badge_skin": {
+        "label": "#FlapperBadge",
+        "description": "Flappers and split tips"
+      },
+      "sys_injury_badge_none": {
+        "label": "#InjuryFreeForNow",
+        "description": "Cherishing it while it lasts"
+      },
+      "sys_injury_badge_rehab": {
+        "label": "#ForeverInRehab",
+        "description": "Rest is training too"
+      },
+      "sys_shoe_faction_lasportiva": {
+        "label": "#TeamLaSportiva",
+        "description": "Solutions are my religion"
+      },
+      "sys_shoe_faction_scarpa": {
+        "label": "#TeamScarpa",
+        "description": "Once you go Instinct, you never go back"
+      },
+      "sys_shoe_faction_evolv": {
+        "label": "#TeamEvolv",
+        "description": "American design gets my feet"
+      },
+      "sys_shoe_faction_unparallel": {
+        "label": "#TeamUnParallel",
+        "description": "Niche but comfy"
+      },
+      "sys_shoe_faction_many": {
+        "label": "#MoreShoesMoreBetter",
+        "description": "Different routes, different shoes"
+      },
+      "sys_shoe_faction_one": {
+        "label": "#OnePairTillTheyDie",
+        "description": "Loyalty over performance"
+      },
+      "sys_shoe_faction_rental": {
+        "label": "#RentalsWorkFine",
+        "description": "It's not about the shoes"
+      },
+      "sys_time_type_morning": {
+        "label": "#MorningClimber",
+        "description": "Empty gym, happy climber"
+      },
+      "sys_time_type_night": {
+        "label": "#NightOwlClimber",
+        "description": "After-work gym sessions"
+      },
+      "sys_time_type_weekend": {
+        "label": "#WeekendWarrior",
+        "description": "Desk job on weekdays, sending on weekends"
+      },
+      "sys_time_type_lunch": {
+        "label": "#LunchBreakSender",
+        "description": "Sneaking in a midday session"
+      },
+      "sys_time_type_whenever": {
+        "label": "#ClimbWheneverICan",
+        "description": "No fixed schedule, never miss a chance"
+      },
+      "sys_time_type_fulltime": {
+        "label": "#FullTimeClimber",
+        "description": "Every day is a climbing day"
+      },
+      "sys_lifestyle_dirtbag": {
+        "label": "#DirtbagSpirit",
+        "description": "I'll sleep in my car to climb"
+      },
+      "sys_lifestyle_workbag": {
+        "label": "#Workbag",
+        "description": "Got a job, but my heart is on the wall"
+      },
+      "sys_lifestyle_weekend": {
+        "label": "#WeekendEscape",
+        "description": "Office drone by weekday, wild thing by weekend"
+      },
+      "sys_lifestyle_gym": {
+        "label": "#GymResident",
+        "description": "Perfectly happy indoors"
+      },
+      "sys_lifestyle_travel": {
+        "label": "#ClimbingTraveler",
+        "description": "Everywhere I go, I look for rock"
+      },
+      "sys_lifestyle_local": {
+        "label": "#KeepItLocal",
+        "description": "The gym closest to home is the best gym"
+      },
+      "sys_climbing_music_none": {
+        "label": "#NoMusic",
+        "description": "I need to feel every move"
+      },
+      "sys_climbing_music_electronic": {
+        "label": "#Techno",
+        "description": "The beat moves my body"
+      },
+      "sys_climbing_music_hiphop": {
+        "label": "#HipHop",
+        "description": "Wu-Tang gives me strength"
+      },
+      "sys_climbing_music_rock": {
+        "label": "#RockAndMetal",
+        "description": "Where my power comes from"
+      },
+      "sys_climbing_music_lofi": {
+        "label": "#LofiChill",
+        "description": "I climb best when I chill"
+      },
+      "sys_climbing_music_podcast": {
+        "label": "#PodcastCrew",
+        "description": "Listening while climbing"
+      },
+      "sys_climbing_music_gym": {
+        "label": "#WhateverTheGymPlays",
+        "description": "No strong opinion"
+      },
+      "sys_failure_response_retry": {
+        "label": "#OneMoreGo",
+        "description": "Sending it today, no matter what"
+      },
+      "sys_failure_response_rest": {
+        "label": "#RestAndComeBack",
+        "description": "No need to force it"
+      },
+      "sys_failure_response_switch": {
+        "label": "#NextProblem",
+        "description": "This one's just not my style"
+      },
+      "sys_failure_response_watch": {
+        "label": "#WatchAndLearn",
+        "description": "Stealing beta"
+      },
+      "sys_failure_response_video": {
+        "label": "#VideoAnalysis",
+        "description": "The scientific approach"
+      },
+      "sys_failure_response_ask": {
+        "label": "#AskForBeta",
+        "description": "Learning from stronger climbers"
+      },
+      "sys_social_type_solo": {
+        "label": "#SoloClimber",
+        "description": "Happy climbing on my own"
+      },
+      "sys_social_type_partner": {
+        "label": "#SteadyPartner",
+        "description": "Got a regular belay partner"
+      },
+      "sys_social_type_organizer": {
+        "label": "#CrewOrganizer",
+        "description": "The more the merrier"
+      },
+      "sys_social_type_shy": {
+        "label": "#ShyButFriendly",
+        "description": "Quietly observing for now"
+      },
+      "sys_social_type_talkative": {
+        "label": "#Chatterbox",
+        "description": "Climbing and chatting"
+      },
+      "sys_social_type_quiet": {
+        "label": "#QuietAndFocused",
+        "description": "Don't talk much"
+      },
+      "sys_chalk_habit_heavy": {
+        "label": "#ChalkMonster",
+        "description": "No holding back"
+      },
+      "sys_chalk_habit_moderate": {
+        "label": "#JustEnoughChalk",
+        "description": "Keeping it eco-friendly"
+      },
+      "sys_chalk_habit_liquid": {
+        "label": "#LiquidChalk",
+        "description": "Less dust in the air"
+      },
+      "sys_chalk_habit_minimal": {
+        "label": "#BarelyChalk",
+        "description": "My hands don't really sweat"
+      },
+      "sys_chalk_habit_stalling": {
+        "label": "#ChalkingIsStalling",
+        "description": "Actually just avoiding the crux"
+      },
+      "sys_training_approach_climb": {
+        "label": "#JustClimb",
+        "description": "Climb more, get better"
+      },
+      "sys_training_approach_hangboard": {
+        "label": "#HangboardDevotee",
+        "description": "Hangboarding is my daily routine"
+      },
+      "sys_training_approach_campus": {
+        "label": "#CampusBoardCrew",
+        "description": "Power above all"
+      },
+      "sys_training_approach_core": {
+        "label": "#CoreFanatic",
+        "description": "Body tension matters"
+      },
+      "sys_training_approach_zen": {
+        "label": "#ZenProgress",
+        "description": "As long as I climb, no pressure"
+      },
+      "sys_training_approach_planned": {
+        "label": "#StructuredTraining",
+        "description": "Periodization, logging, analysis"
+      },
+      "sys_training_approach_youtube": {
+        "label": "#YouTubeResearcher",
+        "description": "Watch more than I climb"
+      },
+      "sys_local_identity_longdong": {
+        "label": "#LongDongDevotee",
+        "description": "Weekend pilgrimage, every time"
+      },
+      "sys_local_identity_limestone": {
+        "label": "#LimestoneLover",
+        "description": "The magic of real rock"
+      },
+      "sys_local_identity_indoor": {
+        "label": "#IndoorOnly",
+        "description": "Air conditioning and soft pads"
+      },
+      "sys_local_identity_anywhere": {
+        "label": "#ClimbAnywhere",
+        "description": "Not picky about venues"
+      },
+      "sys_local_identity_gym": {
+        "label": "#GymRegular",
+        "description": "Dynamic tag showing your home gym"
+      }
+    },
+    "templates": {
+      "sys_local_identity_gym": "#{value}Regular"
+    }
+  },
+  "BiographyMisc": {
+    "commentLoginPrompt": "<login>Log in</login> to leave a comment",
+    "listSeparator": ", ",
+    "yearSpan": "{count} yrs",
+    "shareTitle": "{name}'s Climbing Biography - NobodyClimb",
+    "shareDescription": "Check out {name}'s climbing story",
+    "coverPhotoAlt": "{name}'s cover photo",
+    "personalityTitle": "Climbing Personality",
+    "personalityStrengths": "Strengths",
+    "personalityBlindSpots": "Blind Spots",
+    "personalityBestState": "Best State",
+    "readMore": "Read more",
+    "collapse": "Show less",
+    "loadBiographyFailed": "Failed to load biography",
+    "saveFailed": "Failed to save",
+    "saveFailedRetry": "Failed to save. Please try again later",
+    "saveTimeout": "Save timed out. Please try again later",
+    "autoSaveTimeout": "Save timed out. Auto-retry has been paused. Please try again later",
+    "publishFailed": "Failed to publish",
+    "loginToEdit": "Please log in to edit your biography",
+    "reload": "Reload",
+    "uploadSuccess": "Upload successful",
+    "avatarUpdated": "Avatar updated",
+    "coverUpdated": "Cover image updated",
+    "uploadFailed": "Upload failed",
+    "retryLater": "Please try again later",
+    "defaultUserName": "you",
+    "promptExampleDefault": "This is a wonderful climbing story...",
+    "promptExamples": {
+      "memorable_moment": "I topped out at Long Dong as the sun was setting, wrapped in orange-red light. In that moment, all the training felt worth it.",
+      "biggest_challenge": "I once had to rest for six months because of finger tendonitis. That time taught me patience, and to cherish every day I get to climb.",
+      "funny_moment": "My pants ripped halfway up a route once, so I just had to grit my teeth and finish it. When I got down, I found out everyone behind me had been giggling.",
+      "fear_management": "Whenever I'm scared of falling, I take three deep breaths, remind myself the rope will catch me, and focus on the next move.",
+      "favorite_spot": "I recommend T-UP in northern Taiwan the most. The setting is creative, the vibe is great, and it's where I fell in love with bouldering.",
+      "climbing_mentor": "My coach always says, \"Slow is fast.\" That line changed my impatient nature, and not just in climbing.",
+      "life_outside_climbing": "Besides climbing, I love photography. I often bring my camera to the crag to capture the focused look on my friends' faces."
+    },
+    "storyCategoryMeta": {
+      "growth": {
+        "label": "Growth",
+        "description": "Your climbing journey"
+      },
+      "psychology": {
+        "label": "Mindset",
+        "description": "How climbing feels on the inside"
+      },
+      "community": {
+        "label": "Community",
+        "description": "Stories with your climbing friends"
+      },
+      "practical": {
+        "label": "Practical Experience",
+        "description": "Gear, training, technique"
+      },
+      "dreams": {
+        "label": "Wishes & Goals",
+        "description": "Your future climbing plans"
+      },
+      "life": {
+        "label": "Life",
+        "description": "Climbing and everyday life"
+      }
+    },
+    "routeTypes": {
+      "bouldering": "Bouldering",
+      "sport": "Sport Climbing",
+      "topRope": "Top Rope",
+      "speed": "Speed Climbing",
+      "trad": "Trad Climbing",
+      "slab": "Slab",
+      "vertical": "Vertical",
+      "overhang": "Overhang",
+      "roof": "Roof",
+      "crack": "Crack",
+      "arete": "Arête",
+      "face": "Face",
+      "chimney": "Chimney",
+      "dynamic": "Dynamic",
+      "parkour": "Parkour Style",
+      "coordination": "Coordination",
+      "static": "Static",
+      "technical": "Technical",
+      "power": "Power",
+      "endurance": "Endurance"
+    }
+  }
+}

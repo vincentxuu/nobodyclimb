@@ -24,7 +24,7 @@ export function TagInput({
   className,
   disabled = false,
 }: TagInputProps) {
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const [inputValue, setInputValue] = useState('')
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {

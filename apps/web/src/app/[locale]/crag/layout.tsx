@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import { RouteMessages } from '@/i18n/route-messages'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
 // 台灣主要岩場（集中管理，方便新增或修改）；名稱與說明在訊息檔 CragPage.featured
@@ -51,7 +52,7 @@ export default async function CragLayout({ children }: { children: React.ReactNo
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(cragItemListJsonLd) }}
       />
-      {children}
+      <RouteMessages route="crag">{children}</RouteMessages>
     </>
   )
 }

@@ -100,7 +100,7 @@ export default function ImageCropper({
 }: ImageCropperProps) {
   // 計算輸出高度：優先使用 outputHeight，否則根據 aspectRatio 計算
   const finalOutputHeight = outputHeight ?? Math.round(outputSize / aspectRatio)
-  const t = useTranslations('SharedUI')
+  const t = useTranslations('Common')
   const [crop, setCrop] = useState<Crop>()
   const [percentCrop, setPercentCrop] = useState<Crop>()
   const [isProcessing, setIsProcessing] = useState(false)

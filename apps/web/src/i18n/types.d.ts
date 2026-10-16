@@ -1,4 +1,4 @@
-import type messages from '../../messages/zh.json'
+import type messages from '../../messages/zh'
 
 declare global {
   // next-intl 型別安全 key

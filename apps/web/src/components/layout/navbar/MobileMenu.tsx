@@ -45,7 +45,7 @@ export default function MobileMenu() {
   const { status, signOut, user } = useAuthStore()
   const t = useTranslations('MobileMenu')
   const tNav = useTranslations('Navbar')
-  const tShared = useTranslations('SharedUI')
+  const tShared = useTranslations('Common')
 
   const toggleMenu = () => setIsOpen(!isOpen)
   const closeMenu = () => setIsOpen(false)

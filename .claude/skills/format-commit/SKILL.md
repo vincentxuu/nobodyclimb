@@ -16,9 +16,9 @@ description: Use when committing changes - drafts a Why/How commit message from 
 
 ### 步驟 2: i18n 健康檢查（條件式）
 
-只在 staged 變更包含 `apps/web` 的 UI 原始檔（`.tsx`）或訊息檔（`apps/web/messages/{zh,en,ja}.json`）時才執行；純後端、mobile、設定、CI、文件類 commit 直接跳過，不要輸出任何 i18n 相關文字。
+只在 staged 變更包含 `apps/web` 的 UI 原始檔（`.tsx`）或訊息檔（`apps/web/messages/**`）時才執行；純後端、mobile、設定、CI、文件類 commit 直接跳過，不要輸出任何 i18n 相關文字。
 
-觸發時檢查：
+觸發時先跑 `pnpm i18n:check`（三語系 key 對齊 + namespace 對應表 + route 接線），再人工檢查：
 
 1. **訊息檔同步**：`zh.json`、`en.json`、`ja.json` 三份的 key（含巢狀）是否完全一致
 2. **硬編碼字串**：從 `git diff --staged` 新增行（`+` 開頭）找可疑的硬編碼 UI 文字（`>文字<`、`label="..."`、`placeholder="..."` 等），排除 import、console.log、type/interface 宣告、URL、className、測試 fixture，以及存進資料庫或用來比對的資料值（如 `value: '抱石'`）

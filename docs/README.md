@@ -44,7 +44,7 @@
 - `service-design/`：飛輪策略、冷啟動、商業模式等服務設計
 - `games/rope-system/`：繩結系統產品規格、技術架構、資料庫 schema
 - `superpowers/`：`plans/`、`specs/`，內容待確認
-- `tech-debt/`：自動儲存修正、互動系統統一
+- `tech-debt/`：自動儲存修正、互動系統統一、i18n 盤點報告
 
 研究與內容：
 - `research/`：攀岩人格測驗、訓練知識庫、Langfuse 整合等研究
