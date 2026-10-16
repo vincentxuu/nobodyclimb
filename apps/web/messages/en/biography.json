@@ -324,7 +324,19 @@
     "metaKeyword3": "climbing community",
     "guestCtaTitle": "Have a climbing story of your own?",
     "guestCtaDesc": "Write your own climber biography.",
-    "guestCtaAction": "Sign up now"
+    "guestCtaAction": "Sign up now",
+    "yearSpan": "{count} yrs",
+    "shareTitle": "{name}'s Climbing Biography - NobodyClimb",
+    "shareDescription": "Check out {name}'s climbing story",
+    "listSeparator": ", ",
+    "coverPhotoAlt": "{name}'s cover photo",
+    "personalityTitle": "Climbing Personality",
+    "personalityStrengths": "Strengths",
+    "personalityBlindSpots": "Blind Spots",
+    "personalityBestState": "Best State",
+    "readMore": "Read more",
+    "collapse": "Show less",
+    "commentLoginPromptRich": "<login>Log in</login> to leave a comment"
   },
   "BiographyEditor": {
     "editBiographyTitle": "Edit Profile",
@@ -648,7 +660,80 @@
     "bucketListCategoryAlpine": "Alpine Climbing",
     "bucketListCategoryTraining": "Training Goal",
     "bucketListCategoryTravel": "Climbing Travel",
-    "bucketListCategoryOther": "Other"
+    "bucketListCategoryOther": "Other",
+    "storyPromptPlaceholder": "Share your story...",
+    "routeTypes": {
+      "bouldering": "Bouldering",
+      "sport": "Sport Climbing",
+      "topRope": "Top Rope",
+      "speed": "Speed Climbing",
+      "trad": "Trad Climbing",
+      "slab": "Slab",
+      "vertical": "Vertical",
+      "overhang": "Overhang",
+      "roof": "Roof",
+      "crack": "Crack",
+      "arete": "Arête",
+      "face": "Face",
+      "chimney": "Chimney",
+      "dynamic": "Dynamic",
+      "parkour": "Parkour Style",
+      "coordination": "Coordination",
+      "static": "Static",
+      "technical": "Technical",
+      "power": "Power",
+      "endurance": "Endurance"
+    },
+    "storyCategoryMeta": {
+      "growth": {
+        "label": "Growth",
+        "description": "Your climbing journey"
+      },
+      "psychology": {
+        "label": "Mindset",
+        "description": "How climbing feels on the inside"
+      },
+      "community": {
+        "label": "Community",
+        "description": "Stories with your climbing friends"
+      },
+      "practical": {
+        "label": "Practical Experience",
+        "description": "Gear, training, technique"
+      },
+      "dreams": {
+        "label": "Wishes & Goals",
+        "description": "Your future climbing plans"
+      },
+      "life": {
+        "label": "Life",
+        "description": "Climbing and everyday life"
+      }
+    },
+    "promptExamples": {
+      "memorable_moment": "I topped out at Long Dong as the sun was setting, wrapped in orange-red light. In that moment, all the training felt worth it.",
+      "biggest_challenge": "I once had to rest for six months because of finger tendonitis. That time taught me patience, and to cherish every day I get to climb.",
+      "funny_moment": "My pants ripped halfway up a route once, so I just had to grit my teeth and finish it. When I got down, I found out everyone behind me had been giggling.",
+      "fear_management": "Whenever I'm scared of falling, I take three deep breaths, remind myself the rope will catch me, and focus on the next move.",
+      "favorite_spot": "I recommend T-UP in northern Taiwan the most. The setting is creative, the vibe is great, and it's where I fell in love with bouldering.",
+      "climbing_mentor": "My coach always says, \"Slow is fast.\" That line changed my impatient nature, and not just in climbing.",
+      "life_outside_climbing": "Besides climbing, I love photography. I often bring my camera to the crag to capture the focused look on my friends' faces."
+    },
+    "promptExampleDefault": "This is a wonderful climbing story...",
+    "defaultUserName": "you",
+    "loadBiographyFailed": "Failed to load biography",
+    "saveFailed": "Failed to save",
+    "saveTimeout": "Save timed out. Please try again later",
+    "saveFailedRetry": "Failed to save. Please try again later",
+    "publishFailed": "Failed to publish",
+    "loginToEdit": "Please log in to edit your biography",
+    "reload": "Reload",
+    "autoSaveTimeout": "Save timed out. Auto-retry has been paused. Please try again later",
+    "uploadSuccess": "Upload successful",
+    "avatarUpdated": "Avatar updated",
+    "coverUpdated": "Cover image updated",
+    "uploadFailed": "Upload failed",
+    "retryLater": "Please try again later"
   },
   "BiographyQuestions": {
     "oneliner_climbing_origin": "How Did You Meet Climbing?",
@@ -1256,92 +1341,6 @@
     },
     "templates": {
       "sys_local_identity_gym": "#{value}Regular"
-    }
-  },
-  "BiographyMisc": {
-    "commentLoginPrompt": "<login>Log in</login> to leave a comment",
-    "listSeparator": ", ",
-    "yearSpan": "{count} yrs",
-    "shareTitle": "{name}'s Climbing Biography - NobodyClimb",
-    "shareDescription": "Check out {name}'s climbing story",
-    "coverPhotoAlt": "{name}'s cover photo",
-    "personalityTitle": "Climbing Personality",
-    "personalityStrengths": "Strengths",
-    "personalityBlindSpots": "Blind Spots",
-    "personalityBestState": "Best State",
-    "readMore": "Read more",
-    "collapse": "Show less",
-    "loadBiographyFailed": "Failed to load biography",
-    "saveFailed": "Failed to save",
-    "saveFailedRetry": "Failed to save. Please try again later",
-    "saveTimeout": "Save timed out. Please try again later",
-    "autoSaveTimeout": "Save timed out. Auto-retry has been paused. Please try again later",
-    "publishFailed": "Failed to publish",
-    "loginToEdit": "Please log in to edit your biography",
-    "reload": "Reload",
-    "uploadSuccess": "Upload successful",
-    "avatarUpdated": "Avatar updated",
-    "coverUpdated": "Cover image updated",
-    "uploadFailed": "Upload failed",
-    "retryLater": "Please try again later",
-    "defaultUserName": "you",
-    "promptExampleDefault": "This is a wonderful climbing story...",
-    "promptExamples": {
-      "memorable_moment": "I topped out at Long Dong as the sun was setting, wrapped in orange-red light. In that moment, all the training felt worth it.",
-      "biggest_challenge": "I once had to rest for six months because of finger tendonitis. That time taught me patience, and to cherish every day I get to climb.",
-      "funny_moment": "My pants ripped halfway up a route once, so I just had to grit my teeth and finish it. When I got down, I found out everyone behind me had been giggling.",
-      "fear_management": "Whenever I'm scared of falling, I take three deep breaths, remind myself the rope will catch me, and focus on the next move.",
-      "favorite_spot": "I recommend T-UP in northern Taiwan the most. The setting is creative, the vibe is great, and it's where I fell in love with bouldering.",
-      "climbing_mentor": "My coach always says, \"Slow is fast.\" That line changed my impatient nature, and not just in climbing.",
-      "life_outside_climbing": "Besides climbing, I love photography. I often bring my camera to the crag to capture the focused look on my friends' faces."
-    },
-    "storyCategoryMeta": {
-      "growth": {
-        "label": "Growth",
-        "description": "Your climbing journey"
-      },
-      "psychology": {
-        "label": "Mindset",
-        "description": "How climbing feels on the inside"
-      },
-      "community": {
-        "label": "Community",
-        "description": "Stories with your climbing friends"
-      },
-      "practical": {
-        "label": "Practical Experience",
-        "description": "Gear, training, technique"
-      },
-      "dreams": {
-        "label": "Wishes & Goals",
-        "description": "Your future climbing plans"
-      },
-      "life": {
-        "label": "Life",
-        "description": "Climbing and everyday life"
-      }
-    },
-    "routeTypes": {
-      "bouldering": "Bouldering",
-      "sport": "Sport Climbing",
-      "topRope": "Top Rope",
-      "speed": "Speed Climbing",
-      "trad": "Trad Climbing",
-      "slab": "Slab",
-      "vertical": "Vertical",
-      "overhang": "Overhang",
-      "roof": "Roof",
-      "crack": "Crack",
-      "arete": "Arête",
-      "face": "Face",
-      "chimney": "Chimney",
-      "dynamic": "Dynamic",
-      "parkour": "Parkour Style",
-      "coordination": "Coordination",
-      "static": "Static",
-      "technical": "Technical",
-      "power": "Power",
-      "endurance": "Endurance"
     }
   }
 }

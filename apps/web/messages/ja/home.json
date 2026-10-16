@@ -81,9 +81,7 @@
     "showcaseTopLocations": "よく現れる場所：{locations}",
     "showcaseTotalStories": "{count}のクライミングストーリーが積み重なっています",
     "showcaseCta": "私もストーリーをシェアしたい",
-    "showcaseLoadError": "コミュニティ統計の読み込みエラー"
-  },
-  "Home": {
+    "showcaseLoadError": "コミュニティ統計の読み込みエラー",
     "meta": {
       "title": "台湾ロッククライミングコミュニティ",
       "description": "台湾のロッククライミングコミュニティプラットフォーム。龍洞、墾丁、関子嶺、デフランなどの屋外クラッグや室内クライミングジムを探索し、ルート情報やクライミング動画を提供。"

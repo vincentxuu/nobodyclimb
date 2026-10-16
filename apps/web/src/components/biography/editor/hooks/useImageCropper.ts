@@ -26,7 +26,7 @@ export function useImageCropper({
   onFlushSave,
 }: UseImageCropperOptions) {
   const { toast } = useToast()
-  const tm = useTranslations('BiographyMisc')
+  const t = useTranslations('BiographyEditor')
 
   const [showCropper, setShowCropper] = useState(false)
   const [cropperImageSrc, setCropperImageSrc] = useState<string>('')
@@ -78,17 +78,17 @@ export function useImageCropper({
           // 立即執行儲存，避免使用者重新整理時遺失圖片
           onFlushSave?.()
           toast({
-            title: tm('uploadSuccess'),
-            description: cropType === 'avatar' ? tm('avatarUpdated') : tm('coverUpdated'),
+            title: t('uploadSuccess'),
+            description: cropType === 'avatar' ? t('avatarUpdated') : t('coverUpdated'),
           })
         } else {
-          throw new Error(tm('uploadFailed'))
+          throw new Error(t('uploadFailed'))
         }
       } catch (err) {
         console.error('圖片上傳失敗:', err)
         toast({
-          title: tm('uploadFailed'),
-          description: err instanceof Error ? err.message : tm('retryLater'),
+          title: t('uploadFailed'),
+          description: err instanceof Error ? err.message : t('retryLater'),
           variant: 'destructive',
         })
       } finally {

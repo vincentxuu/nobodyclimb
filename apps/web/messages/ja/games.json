@@ -310,6 +310,8 @@
         "flowState": "登りながら、呼吸とムーブと岩がひとつになるのを感じているとき",
         "clutchState": "深い呼吸と集中力で、内なる安定を見つける"
       }
-    }
+    },
+    "trainingProgressUpdateFailed": "更新に失敗しました",
+    "trainingProgressUpdateFailedDesc": "トレーニングの進捗を更新できませんでした。しばらくしてからもう一度お試しください。"
   }
 }

@@ -38,7 +38,7 @@ interface StoriesSectionProps {
   className?: string
 }
 
-// 分類的顯示文字在訊息檔 `BiographyMisc.storyCategoryMeta.<category>`
+// 分類的顯示文字在訊息檔 `BiographyEditor.storyCategoryMeta.<category>`
 const categoryMeta: Record<StoryCategory, { icon: LucideIcon }> = {
   growth: { icon: TrendingUp },
   psychology: { icon: Brain },
@@ -62,7 +62,6 @@ export function StoriesSection({
   className,
 }: StoriesSectionProps) {
   const t = useTranslations('BiographyEditor')
-  const tm = useTranslations('BiographyMisc')
   const [randomRecommendVisible, setRandomRecommendVisible] = useState(showRandomRecommend)
   // 預設所有分類都是收合的
   const [expandedCategories, setExpandedCategories] = useState<Set<StoryCategory>>(new Set())
@@ -165,10 +164,10 @@ export function StoriesSection({
                     <meta.icon size={20} className="text-[#3F3D3D]" />
                     <div className="text-left">
                       <span className="font-medium text-[#1B1A1A]">
-                        {tm(`storyCategoryMeta.${category}.label`)}
+                        {t(`storyCategoryMeta.${category}.label`)}
                       </span>
                       <p className="text-xs text-[#6D6C6C]">
-                        {tm(`storyCategoryMeta.${category}.description`)}
+                        {t(`storyCategoryMeta.${category}.description`)}
                       </p>
                     </div>
                   </div>

@@ -33,6 +33,7 @@
     "profile": "人物誌",
     "recommendations": "推薦",
     "memory": "記憶",
+    "goals": "目標",
     "bucketList": "清單",
     "ascents": "攀爬紀錄",
     "stats": "成就",
@@ -56,6 +57,7 @@
     "photos": "我的照片",
     "articles": "我的文章",
     "bookmarks": "我的收藏",
-    "settings": "帳號設定"
+    "settings": "帳號設定",
+    "login": "登入"
   }
 }

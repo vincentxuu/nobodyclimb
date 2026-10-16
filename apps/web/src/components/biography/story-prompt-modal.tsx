@@ -130,12 +130,10 @@ export function StoryPromptModal({
   initialField,
 }: StoryPromptModalProps) {
   const t = useTranslations('BiographyEditor')
-  const tm = useTranslations('BiographyMisc')
-  const tLib = useTranslations('LibMisc')
   const { getStoryTitle, getCategoryName } = useBiographyQuestionText()
   // 範例答案以題目 id 為 key，直接讀訊息物件（題目 id 來自 API，未必每題都有範例）
   const promptExamples = (
-    (useMessages() as Record<string, unknown>).BiographyMisc as
+    (useMessages() as Record<string, unknown>).BiographyEditor as
       | { promptExamples?: Record<string, string> }
       | undefined
   )?.promptExamples
@@ -275,7 +273,7 @@ export function StoryPromptModal({
             <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">
-                  {t('storyPromptWelcome', { name: userName ?? tm('defaultUserName') })}
+                  {t('storyPromptWelcome', { name: userName ?? t('defaultUserName') })}
                 </h2>
                 <p className="text-sm text-gray-500">{t('storyPromptSubtitle')}</p>
               </div>
@@ -312,7 +310,7 @@ export function StoryPromptModal({
                 <Textarea
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
-                  placeholder={currentQuestion.placeholder || tLib('storyPromptPlaceholder')}
+                  placeholder={currentQuestion.placeholder || t('storyPromptPlaceholder')}
                   className="min-h-[100px] resize-none border-gray-200 bg-white text-sm"
                   autoFocus
                 />
@@ -378,7 +376,7 @@ export function StoryPromptModal({
                   className="mb-4 rounded-lg bg-gray-50 p-4"
                 >
                   <p className="text-sm italic text-gray-500">
-                    「{promptExamples?.[currentQuestion.field] ?? tm('promptExampleDefault')}」
+                    「{promptExamples?.[currentQuestion.field] ?? t('promptExampleDefault')}」
                   </p>
                   <p className="mt-2 text-right text-xs text-gray-400">
                     — {t('storyPromptExampleAuthor')}

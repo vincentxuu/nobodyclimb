@@ -57,7 +57,7 @@ export function StoryCard({
   onReadMore,
   className,
 }: StoryCardProps) {
-  const tm = useTranslations('BiographyMisc')
+  const t = useTranslations('BiographyPage')
   const [isExpanded, setIsExpanded] = useState(false)
 
   // 判斷內容是否需要截斷
@@ -115,7 +115,7 @@ export function StoryCard({
           }}
           className="mt-3 text-sm text-brand-dark font-medium hover:underline"
         >
-          {tm('readMore')}
+          {t('readMore')}
         </button>
       )}
 
@@ -128,7 +128,7 @@ export function StoryCard({
           }}
           className="mt-3 text-sm text-[#6D6C6C] font-medium hover:underline"
         >
-          {tm('collapse')}
+          {t('collapse')}
         </button>
       )}
     </div>

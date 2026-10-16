@@ -37,7 +37,6 @@ interface QuickFactsSectionProps {
 export function QuickFactsSection({ person, mobileTagLimit = 8 }: QuickFactsSectionProps) {
   const t = useTranslations('BiographyPage')
   const { tagLabel, tagTemplate } = useBiographyTagText()
-  const tm = useTranslations('BiographyMisc')
   const routeTypeLabel = useRouteTypeLabel()
   const [showAllTags, setShowAllTags] = useState(false)
 
@@ -172,7 +171,7 @@ export function QuickFactsSection({ person, mobileTagLimit = 8 }: QuickFactsSect
       icon: <MapPin className="h-6 w-6 text-gray-600" />,
       label: t('frequentLocationsLabel'),
       value:
-        locations.length > 0 ? locations.join(tm('listSeparator')) : t('frequentLocationsDefault'),
+        locations.length > 0 ? locations.join(t('listSeparator')) : t('frequentLocationsDefault'),
       isEmpty: locations.length === 0,
     },
     {
@@ -180,7 +179,7 @@ export function QuickFactsSection({ person, mobileTagLimit = 8 }: QuickFactsSect
       label: t('favoriteTypes'),
       value:
         person.favorite_route_types && person.favorite_route_types.length > 0
-          ? person.favorite_route_types.map(routeTypeLabel).join(tm('listSeparator'))
+          ? person.favorite_route_types.map(routeTypeLabel).join(t('listSeparator'))
           : t('favoriteTypesDefault'),
       isEmpty: !person.favorite_route_types || person.favorite_route_types.length === 0,
     },

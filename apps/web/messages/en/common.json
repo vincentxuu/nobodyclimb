@@ -44,6 +44,13 @@
     "defaultUser": "User",
     "goHome": "Go to homepage",
     "search": "Search",
-    "searchKeywordPlaceholder": "Enter keywords"
+    "searchKeywordPlaceholder": "Enter keywords",
+    "imageErrors": {
+      "unsupportedFormat": "Unsupported file format. Only JPEG, PNG, WebP, and GIF are supported.",
+      "gifTooLarge": "GIF files must be 500KB or smaller.",
+      "canvasUnavailable": "Couldn't process the image. Please try again in a different browser.",
+      "compressFailed": "Failed to compress the image.",
+      "loadFailed": "Failed to load the image."
+    }
   }
 }

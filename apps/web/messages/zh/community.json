@@ -136,15 +136,6 @@
     "viewOnInstagram": "在 Instagram 上查看 →",
     "viewPost": "在 Instagram 查看這則貼文"
   },
-  "StoryPage": {
-    "typeLabels": {
-      "coreStories": "核心故事",
-      "oneLiners": "一句話",
-      "stories": "小故事",
-      "default": "故事"
-    },
-    "metaDescription": "閱讀這則{typeLabel}，來自攀岩社群的真實故事"
-  },
   "StoryDetail": {
     "invalidType": "無效的故事類型",
     "notFound": "找不到這則故事",
@@ -165,7 +156,14 @@
     "dateYesterday": "昨天",
     "dateDaysAgo": "{count} 天前",
     "dateWeeksAgo": "{count} 週前",
-    "dateMonthsAgo": "{count} 個月前"
+    "dateMonthsAgo": "{count} 個月前",
+    "typeLabels": {
+      "coreStories": "核心故事",
+      "oneLiners": "一句話",
+      "stories": "小故事",
+      "default": "故事"
+    },
+    "metaDescription": "閱讀這則{typeLabel}，來自攀岩社群的真實故事"
   },
   "Ascent": {
     "types": {

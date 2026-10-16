@@ -44,6 +44,13 @@
     "defaultUser": "用戶",
     "goHome": "前往首頁",
     "search": "搜尋",
-    "searchKeywordPlaceholder": "請輸入關鍵字"
+    "searchKeywordPlaceholder": "請輸入關鍵字",
+    "imageErrors": {
+      "unsupportedFormat": "不支援的檔案格式，僅支援 JPEG、PNG、WebP、GIF",
+      "gifTooLarge": "GIF 檔案大小不能超過 500KB",
+      "canvasUnavailable": "無法處理圖片，請換個瀏覽器再試一次",
+      "compressFailed": "圖片壓縮失敗",
+      "loadFailed": "圖片載入失敗"
+    }
   }
 }

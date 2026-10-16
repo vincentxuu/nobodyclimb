@@ -3,7 +3,7 @@
 import { useMessages } from 'next-intl'
 
 /**
- * 路線型態（資料庫存的中文值）→ 訊息檔 `BiographyMisc.routeTypes` 的 key。
+ * 路線型態（資料庫存的中文值）→ 訊息檔 `BiographyEditor.routeTypes` 的 key。
  *
  * `favorite_route_types` 存的是中文值（如「抱石」），既有使用者資料也是中文，不可翻譯；
  * 顯示時用這張表換成 key，再依語系查顯示文字。
@@ -40,7 +40,7 @@ const ROUTE_TYPE_MESSAGE_KEYS: Record<string, string> = {
  */
 export function useRouteTypeLabel() {
   const messages = useMessages() as Record<string, unknown>
-  const misc = (messages.BiographyMisc ?? {}) as { routeTypes?: Record<string, string> }
+  const misc = (messages.BiographyEditor ?? {}) as { routeTypes?: Record<string, string> }
 
   return (value: string): string => {
     const key = ROUTE_TYPE_MESSAGE_KEYS[value.trim()]

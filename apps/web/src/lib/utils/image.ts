@@ -44,7 +44,7 @@ export function isSvgUrl(url: string): boolean {
 }
 
 /**
- * 圖片處理錯誤代碼，對應訊息檔 `LibMisc.imageErrors.*`
+ * 圖片處理錯誤代碼，對應訊息檔 `Common.imageErrors.*`
  */
 export type ImageErrorCode =
   | 'unsupportedFormat'

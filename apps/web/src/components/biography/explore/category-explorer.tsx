@@ -121,10 +121,10 @@ export function CategoryExplorer() {
                         <Icon className={`h-5 w-5 ${topic.color}`} />
                       </div>
                       <h3 className="mb-1 font-semibold text-[#1B1A1A]">
-                        {t(`experienceTopic_${topic.id}_title`)}
+                        {t(`experienceTopic_${topic.id}_title` as Parameters<typeof t>[0])}
                       </h3>
                       <p className="text-sm text-gray-500">
-                        {t(`experienceTopic_${topic.id}_description`)}
+                        {t(`experienceTopic_${topic.id}_description` as Parameters<typeof t>[0])}
                       </p>
                       <div className="mt-3 flex items-center gap-1 text-sm text-gray-600">
                         {t('explore')}

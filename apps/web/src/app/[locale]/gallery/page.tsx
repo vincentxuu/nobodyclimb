@@ -63,7 +63,7 @@ const transformPhoto = (
 })
 
 const GalleryPage: React.FC = () => {
-  const t = useTranslations('GalleryPage')
+  const t = useTranslations('GalleryUI')
   const locale = useLocale()
   const [selectedPhoto, setSelectedPhoto] = useState<DisplayPhoto | null>(null)
   const [currentIndex, setCurrentIndex] = useState<number>(0)

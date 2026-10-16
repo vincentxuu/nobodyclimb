@@ -34,7 +34,6 @@ interface HeroSectionProps {
 export function HeroSection({ person, followerCount, isOwner, onFollowChange }: HeroSectionProps) {
   const { user } = useAuthStore()
   const t = useTranslations('BiographyPage')
-  const tm = useTranslations('BiographyMisc')
   const hasPersonality = !!person.personality_type
   const isViewingOwnProfile = isOwner && !!user
   const { data: quizResult } = useQuizResult(hasPersonality && isViewingOwnProfile)
@@ -63,7 +62,7 @@ export function HeroSection({ person, followerCount, isOwner, onFollowChange }: 
         <div className="relative w-full aspect-3/1 bg-gray-200 overflow-hidden rounded-b-xl">
           <Image
             src={person.cover_image || getDefaultCoverUrl(person.id || person.name || 'default')}
-            alt={tm('coverPhotoAlt', { name: person.name })}
+            alt={t('coverPhotoAlt', { name: person.name })}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 1024px"
@@ -161,8 +160,8 @@ export function HeroSection({ person, followerCount, isOwner, onFollowChange }: 
                   <span>{commentsCount}</span>
                 </button>
                 <ShareButton
-                  title={tm('shareTitle', { name: person.name })}
-                  description={person.title || tm('shareDescription', { name: person.name })}
+                  title={t('shareTitle', { name: person.name })}
+                  description={person.title || t('shareDescription', { name: person.name })}
                   className="text-text-subtle hover:text-text-subtle"
                 />
               </div>

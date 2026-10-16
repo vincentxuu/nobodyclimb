@@ -22,7 +22,7 @@ interface ProfileEditorV2WrapperProps {
  */
 export function ProfileEditorV2Wrapper({ className }: ProfileEditorV2WrapperProps) {
   const { user } = useAuthStore()
-  const tm = useTranslations('BiographyMisc')
+  const t = useTranslations('BiographyEditor')
   const { getOneLinerText, getStoryTitle } = useBiographyQuestionText()
   const [biography, setBiography] = useState<BiographyV2 | null>(null)
   const [loading, setLoading] = useState(true)
@@ -132,7 +132,7 @@ export function ProfileEditorV2Wrapper({ className }: ProfileEditorV2WrapperProp
         }
       } catch (err) {
         console.error('Failed to load biography:', err)
-        setError(tm('loadBiographyFailed'))
+        setError(t('loadBiographyFailed'))
         // 建立空白的人物誌
         setBiography(createEmptyBiographyV2(user.id))
       } finally {
@@ -228,7 +228,7 @@ export function ProfileEditorV2Wrapper({ className }: ProfileEditorV2WrapperProp
       const response = await biographyService.autosaveV2(bio)
 
       if (!response.success) {
-        throw new Error(tm('saveFailed'))
+        throw new Error(t('saveFailed'))
       }
 
       // 更新本地狀態
@@ -236,9 +236,7 @@ export function ProfileEditorV2Wrapper({ className }: ProfileEditorV2WrapperProp
     } catch (err) {
       console.error('Failed to save biography:', err)
       const message = err instanceof Error ? err.message : ''
-      setError(
-        message.toLowerCase().includes('timeout') ? tm('saveTimeout') : tm('saveFailedRetry')
-      )
+      setError(message.toLowerCase().includes('timeout') ? t('saveTimeout') : t('saveFailedRetry'))
       throw err
     } finally {
       // no-op: autosave should not block editing
@@ -255,7 +253,7 @@ export function ProfileEditorV2Wrapper({ className }: ProfileEditorV2WrapperProp
       const updatedBio = { ...biography, visibility: 'public' as const }
       const response = await biographyService.updateMyBiography(buildBiographyPayload(updatedBio))
       if (!response.success) {
-        throw new Error(tm('publishFailed'))
+        throw new Error(t('publishFailed'))
       }
       setBiography(updatedBio)
     } finally {
@@ -276,7 +274,7 @@ export function ProfileEditorV2Wrapper({ className }: ProfileEditorV2WrapperProp
   if (!user) {
     return (
       <div className="flex min-h-[400px] items-center justify-center">
-        <p className="text-[#6D6C6C]">{tm('loginToEdit')}</p>
+        <p className="text-[#6D6C6C]">{t('loginToEdit')}</p>
       </div>
     )
   }
@@ -290,7 +288,7 @@ export function ProfileEditorV2Wrapper({ className }: ProfileEditorV2WrapperProp
           onClick={() => window.location.reload()}
           className="rounded-lg bg-[#1B1A1A] px-4 py-2 text-white hover:bg-[#333]"
         >
-          {tm('reload')}
+          {t('reload')}
         </button>
       </div>
     )

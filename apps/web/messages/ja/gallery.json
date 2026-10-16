@@ -1,5 +1,5 @@
 {
-  "GalleryPage": {
+  "GalleryUI": {
     "title": "ギャラリー",
     "description": "スポーツの美しさを捉えたクライミング写真を探索する。",
     "subtitle": "クライマーたちの雄姿を鑑賞しよう",
@@ -9,9 +9,7 @@
     "fetchError": "写真の読み込み中にエラーが発生しました",
     "noPhotos": "まだ写真がありません",
     "reload": "再読み込み",
-    "allPhotosShown": "すべての写真を表示しました"
-  },
-  "GalleryUI": {
+    "allPhotosShown": "すべての写真を表示しました",
     "upload": {
       "title": "写真をアップロード",
       "invalidType": "JPG、PNG、WebP 形式の画像をアップロードしてください",

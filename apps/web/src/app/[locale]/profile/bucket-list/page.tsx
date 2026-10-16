@@ -513,7 +513,7 @@ function UnderlineTab({
 }
 
 // 分頁標籤文字
-function getTabLabel(tab: TabValue, t: (key: string) => string): string {
+function getTabLabel(tab: TabValue, t: ReturnType<typeof useTranslations<'ProfilePage'>>): string {
   const labels: Record<TabValue, string> = {
     all: t('statAllGoals'),
     active: t('statActive'),

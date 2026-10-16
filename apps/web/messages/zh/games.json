@@ -275,6 +275,8 @@
         "flowState": "在攀登中感受呼吸、動作與岩壁的合一",
         "clutchState": "用深呼吸與專注力找到內在的穩定"
       }
-    }
+    },
+    "trainingProgressUpdateFailed": "更新失敗",
+    "trainingProgressUpdateFailedDesc": "訓練進度更新失敗，請稍後再試"
   }
 }

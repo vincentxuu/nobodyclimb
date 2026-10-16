@@ -47,7 +47,6 @@ const MEMORY_KEY_LABEL_KEYS: Record<string, string> = {
 export default function AiMemoryPage() {
   const t = useTranslations('ProfilePage')
   const locale = useLocale()
-  const tMisc = useTranslations('ProfilePagesMisc')
   const queryClient = useQueryClient()
   const { toast } = useToast()
   const [deletingId, setDeletingId] = useState<string | null>(null)
@@ -105,9 +104,7 @@ export default function AiMemoryPage() {
           <div className="rounded-lg border border-dashed border-gray-200 py-12 text-center">
             <Brain className="mx-auto mb-3 h-8 w-8 text-gray-300" />
             <p className="text-sm text-gray-400">{t('aiMemoryEmpty')}</p>
-            <p className="mx-auto mt-2 max-w-xs text-xs text-gray-300">
-              {tMisc('aiMemoryEmptyHint')}
-            </p>
+            <p className="mx-auto mt-2 max-w-xs text-xs text-gray-300">{t('aiMemoryEmptyHint')}</p>
           </div>
         ) : (
           <>
@@ -115,16 +112,16 @@ export default function AiMemoryPage() {
             <div className="mb-4 flex flex-wrap items-center gap-2">
               {(
                 [
-                  { key: 'all', label: tMisc('aiMemoryFilterAll', { count: memories.length }) },
+                  { key: 'all', label: t('aiMemoryFilterAll', { count: memories.length }) },
                   {
                     key: 'preference',
-                    label: tMisc('aiMemoryFilterPreference', { count: stats.preference }),
+                    label: t('aiMemoryFilterPreference', { count: stats.preference }),
                   },
                   {
                     key: 'behavior',
-                    label: tMisc('aiMemoryFilterBehavior', { count: stats.behavior }),
+                    label: t('aiMemoryFilterBehavior', { count: stats.behavior }),
                   },
-                  { key: 'fact', label: tMisc('aiMemoryFilterFact', { count: stats.fact }) },
+                  { key: 'fact', label: t('aiMemoryFilterFact', { count: stats.fact }) },
                 ] satisfies { key: 'all' | 'preference' | 'behavior' | 'fact'; label: string }[]
               ).map(({ key, label }) => (
                 <button
@@ -143,7 +140,7 @@ export default function AiMemoryPage() {
 
             {filteredMemories.length === 0 ? (
               <div className="rounded-lg border border-dashed border-gray-200 py-8 text-center">
-                <p className="text-sm text-gray-400">{tMisc('aiMemoryFilterEmpty')}</p>
+                <p className="text-sm text-gray-400">{t('aiMemoryFilterEmpty')}</p>
               </div>
             ) : (
               <ul className="space-y-3">

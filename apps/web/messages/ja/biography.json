@@ -324,7 +324,19 @@
     "metaKeyword3": "クライミングコミュニティ",
     "guestCtaTitle": "あなたにもクライミングの物語がありますか？",
     "guestCtaDesc": "あなたの人物誌を書いてみませんか",
-    "guestCtaAction": "今すぐ登録"
+    "guestCtaAction": "今すぐ登録",
+    "yearSpan": "{count}年間",
+    "shareTitle": "{name}さんのクライマープロフィール - NobodyClimb",
+    "shareDescription": "{name}さんのクライミングストーリーを見てみましょう",
+    "listSeparator": "、",
+    "coverPhotoAlt": "{name}さんのカバー写真",
+    "personalityTitle": "クライミングパーソナリティ",
+    "personalityStrengths": "強み",
+    "personalityBlindSpots": "弱点",
+    "personalityBestState": "ベストな状態",
+    "readMore": "続きを読む",
+    "collapse": "閉じる",
+    "commentLoginPromptRich": "コメントするには<login>ログイン</login>してください"
   },
   "BiographyEditor": {
     "editBiographyTitle": "プロフィール編集",
@@ -648,7 +660,80 @@
     "bucketListCategoryAlpine": "高山クライミング",
     "bucketListCategoryTraining": "トレーニング目標",
     "bucketListCategoryTravel": "クライミング旅行",
-    "bucketListCategoryOther": "その他"
+    "bucketListCategoryOther": "その他",
+    "storyPromptPlaceholder": "あなたのストーリーを聞かせてください...",
+    "routeTypes": {
+      "bouldering": "ボルダリング",
+      "sport": "スポートクライミング",
+      "topRope": "トップロープ",
+      "speed": "スピード",
+      "trad": "トラッド",
+      "slab": "スラブ",
+      "vertical": "垂壁",
+      "overhang": "強傾斜",
+      "roof": "ルーフ",
+      "crack": "クラック",
+      "arete": "カンテ",
+      "face": "フェイス",
+      "chimney": "チムニー",
+      "dynamic": "ダイナミック",
+      "parkour": "パルクール系",
+      "coordination": "コーディネーション",
+      "static": "スタティック",
+      "technical": "テクニカル",
+      "power": "パワー系",
+      "endurance": "持久系"
+    },
+    "storyCategoryMeta": {
+      "growth": {
+        "label": "成長の軌跡",
+        "description": "あなたのクライミングの歩み"
+      },
+      "psychology": {
+        "label": "メンタル",
+        "description": "クライミング中の心の動き"
+      },
+      "community": {
+        "label": "仲間とのつながり",
+        "description": "クライミング仲間とのエピソード"
+      },
+      "practical": {
+        "label": "実践的な経験",
+        "description": "ギア、トレーニング、テクニック"
+      },
+      "dreams": {
+        "label": "願いと目標",
+        "description": "これからのクライミング計画"
+      },
+      "life": {
+        "label": "人生とのつながり",
+        "description": "クライミングと暮らし"
+      }
+    },
+    "promptExamples": {
+      "memorable_moment": "龍洞の夕日の中で完登したとき、オレンジ色の光に包まれて、これまでの練習がすべて報われたと感じました。",
+      "biggest_challenge": "指の腱鞘炎で半年間休んだことがあります。その間に忍耐を学び、登れる一日一日をより大切に思うようになりました。",
+      "funny_moment": "登っている途中でパンツが破れてしまい、仕方なくそのまま最後まで登りきりました。降りてから、後ろの人たちがこっそり笑っていたことに気づきました。",
+      "fear_management": "フォールが怖いときは、深呼吸を3回して「ロープが止めてくれる」と自分に言い聞かせ、次のムーブに集中します。",
+      "favorite_spot": "いちばんのおすすめは台湾北部の原岩（T-UP）です。セットが面白くて雰囲気も良く、ボルダリングを好きになったきっかけの場所です。",
+      "climbing_mentor": "コーチがいつも「ゆっくりやるほうが、結局は早い」と言っていました。この言葉が、クライミングに限らず、せっかちな私を変えてくれました。",
+      "life_outside_climbing": "クライミング以外では写真も好きです。よくカメラを持って岩場に行き、仲間たちの真剣な表情を撮っています。"
+    },
+    "promptExampleDefault": "素敵なクライミングストーリーです…",
+    "defaultUserName": "あなた",
+    "loadBiographyFailed": "プロフィールの読み込みに失敗しました",
+    "saveFailed": "保存に失敗しました",
+    "saveTimeout": "保存がタイムアウトしました。しばらくしてからもう一度お試しください",
+    "saveFailedRetry": "保存に失敗しました。しばらくしてからもう一度お試しください",
+    "publishFailed": "公開に失敗しました",
+    "loginToEdit": "プロフィールを編集するにはログインしてください",
+    "reload": "再読み込み",
+    "autoSaveTimeout": "保存がタイムアウトしたため、自動リトライを一時停止しました。しばらくしてからもう一度お試しください",
+    "uploadSuccess": "アップロードしました",
+    "avatarUpdated": "アイコンを更新しました",
+    "coverUpdated": "カバー画像を更新しました",
+    "uploadFailed": "アップロードに失敗しました",
+    "retryLater": "しばらくしてからもう一度お試しください"
   },
   "BiographyQuestions": {
     "oneliner_climbing_origin": "クライミングとの出会い",
@@ -1256,92 +1341,6 @@
     },
     "templates": {
       "sys_local_identity_gym": "#{value}の常連"
-    }
-  },
-  "BiographyMisc": {
-    "commentLoginPrompt": "コメントするには<login>ログイン</login>してください",
-    "listSeparator": "、",
-    "yearSpan": "{count}年間",
-    "shareTitle": "{name}さんのクライマープロフィール - NobodyClimb",
-    "shareDescription": "{name}さんのクライミングストーリーを見てみましょう",
-    "coverPhotoAlt": "{name}さんのカバー写真",
-    "personalityTitle": "クライミングパーソナリティ",
-    "personalityStrengths": "強み",
-    "personalityBlindSpots": "弱点",
-    "personalityBestState": "ベストな状態",
-    "readMore": "続きを読む",
-    "collapse": "閉じる",
-    "loadBiographyFailed": "プロフィールの読み込みに失敗しました",
-    "saveFailed": "保存に失敗しました",
-    "saveFailedRetry": "保存に失敗しました。しばらくしてからもう一度お試しください",
-    "saveTimeout": "保存がタイムアウトしました。しばらくしてからもう一度お試しください",
-    "autoSaveTimeout": "保存がタイムアウトしたため、自動リトライを一時停止しました。しばらくしてからもう一度お試しください",
-    "publishFailed": "公開に失敗しました",
-    "loginToEdit": "プロフィールを編集するにはログインしてください",
-    "reload": "再読み込み",
-    "uploadSuccess": "アップロードしました",
-    "avatarUpdated": "アイコンを更新しました",
-    "coverUpdated": "カバー画像を更新しました",
-    "uploadFailed": "アップロードに失敗しました",
-    "retryLater": "しばらくしてからもう一度お試しください",
-    "defaultUserName": "あなた",
-    "promptExampleDefault": "素敵なクライミングストーリーです…",
-    "promptExamples": {
-      "memorable_moment": "龍洞の夕日の中で完登したとき、オレンジ色の光に包まれて、これまでの練習がすべて報われたと感じました。",
-      "biggest_challenge": "指の腱鞘炎で半年間休んだことがあります。その間に忍耐を学び、登れる一日一日をより大切に思うようになりました。",
-      "funny_moment": "登っている途中でパンツが破れてしまい、仕方なくそのまま最後まで登りきりました。降りてから、後ろの人たちがこっそり笑っていたことに気づきました。",
-      "fear_management": "フォールが怖いときは、深呼吸を3回して「ロープが止めてくれる」と自分に言い聞かせ、次のムーブに集中します。",
-      "favorite_spot": "いちばんのおすすめは台湾北部の原岩（T-UP）です。セットが面白くて雰囲気も良く、ボルダリングを好きになったきっかけの場所です。",
-      "climbing_mentor": "コーチがいつも「ゆっくりやるほうが、結局は早い」と言っていました。この言葉が、クライミングに限らず、せっかちな私を変えてくれました。",
-      "life_outside_climbing": "クライミング以外では写真も好きです。よくカメラを持って岩場に行き、仲間たちの真剣な表情を撮っています。"
-    },
-    "storyCategoryMeta": {
-      "growth": {
-        "label": "成長の軌跡",
-        "description": "あなたのクライミングの歩み"
-      },
-      "psychology": {
-        "label": "メンタル",
-        "description": "クライミング中の心の動き"
-      },
-      "community": {
-        "label": "仲間とのつながり",
-        "description": "クライミング仲間とのエピソード"
-      },
-      "practical": {
-        "label": "実践的な経験",
-        "description": "ギア、トレーニング、テクニック"
-      },
-      "dreams": {
-        "label": "願いと目標",
-        "description": "これからのクライミング計画"
-      },
-      "life": {
-        "label": "人生とのつながり",
-        "description": "クライミングと暮らし"
-      }
-    },
-    "routeTypes": {
-      "bouldering": "ボルダリング",
-      "sport": "スポートクライミング",
-      "topRope": "トップロープ",
-      "speed": "スピード",
-      "trad": "トラッド",
-      "slab": "スラブ",
-      "vertical": "垂壁",
-      "overhang": "強傾斜",
-      "roof": "ルーフ",
-      "crack": "クラック",
-      "arete": "カンテ",
-      "face": "フェイス",
-      "chimney": "チムニー",
-      "dynamic": "ダイナミック",
-      "parkour": "パルクール系",
-      "coordination": "コーディネーション",
-      "static": "スタティック",
-      "technical": "テクニカル",
-      "power": "パワー系",
-      "endurance": "持久系"
     }
   }
 }

@@ -13,7 +13,7 @@ export async function generateMetadata({
   params: Promise<{ type: string; id: string; locale: string }>
 }): Promise<Metadata> {
   const { type, id, locale } = await params
-  const t = await getTranslations({ locale, namespace: 'StoryPage' })
+  const t = await getTranslations({ locale, namespace: 'StoryDetail' })
 
   // 故事類型標籤
   const typeLabels: Record<string, string> = {
