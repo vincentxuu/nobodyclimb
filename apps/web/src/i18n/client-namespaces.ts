@@ -5,16 +5,13 @@
 // ROUTE_NAMESPACES：各 route 底下 client 元件所需的 namespace（尚未含 core）。
 
 export const CORE_NAMESPACES = [
-    'AuthPage',
     'BiographyEditor',
-    'BiographyMisc',
     'BiographyQuestions',
     'Chat',
     'ClaimContent',
     'Common',
     'ErrorPage',
     'Footer',
-    'LibMisc',
     'LocaleSwitcher',
     'MobileMenu',
     'Navbar',
@@ -50,7 +47,6 @@ export const ROUTE_NAMESPACES: Record<string, string[]> = {
   "biography": [
     'Badges',
     'BiographyEditor',
-    'BiographyMisc',
     'BiographyPage',
     'BiographyQuestions',
     'BiographyStories',
@@ -103,7 +99,6 @@ export const ROUTE_NAMESPACES: Record<string, string[]> = {
   ],
   "gallery": [
     'Common',
-    'GalleryPage',
     'GalleryUI',
   ],
   "games": [
@@ -124,7 +119,6 @@ export const ROUTE_NAMESPACES: Record<string, string[]> = {
     'Ascent',
     'Badges',
     'BiographyEditor',
-    'BiographyMisc',
     'BiographyPage',
     'BiographyQuestions',
     'BiographyStories',
@@ -135,12 +129,10 @@ export const ROUTE_NAMESPACES: Record<string, string[]> = {
     'Common',
     'Countries',
     'GalleryUI',
-    'LibMisc',
     'ProfileEditor',
     'ProfileEvolution',
     'ProfileGoals',
     'ProfilePage',
-    'ProfilePagesMisc',
     'ProfileSections',
     'ProfileTraining',
     'RankBadge',
@@ -148,11 +140,9 @@ export const ROUTE_NAMESPACES: Record<string, string[]> = {
     'Validation',
   ],
   "quiz": [
-    'LibMisc',
     'Quiz',
   ],
   "search": [
-    'AuthPage',
     'Common',
     'LocaleSwitcher',
     'MobileMenu',
@@ -171,7 +161,6 @@ export const ROUTE_NAMESPACES: Record<string, string[]> = {
     'RankBadge',
     'ShareButton',
     'StoryDetail',
-    'StoryPage',
   ],
   "upload": [
     'GalleryUI',

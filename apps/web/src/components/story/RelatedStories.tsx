@@ -29,7 +29,7 @@ const TYPE_LABEL_KEYS = {
 
 export function RelatedStories({ stories, authorName }: RelatedStoriesProps) {
   const t = useTranslations('StoryDetail')
-  const tType = useTranslations('StoryPage.typeLabels')
+  const tType = useTranslations('StoryDetail.typeLabels')
 
   if (stories.length === 0) {
     return null

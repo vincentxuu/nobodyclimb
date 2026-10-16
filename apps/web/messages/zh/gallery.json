@@ -1,5 +1,5 @@
 {
-  "GalleryPage": {
+  "GalleryUI": {
     "title": "相片牆",
     "description": "探索捕捉攀岩之美的攀岩攝影。",
     "subtitle": "欣賞小人物們攀岩的英姿",
@@ -9,9 +9,7 @@
     "fetchError": "載入照片時發生錯誤",
     "noPhotos": "目前還沒有照片",
     "reload": "重新載入",
-    "allPhotosShown": "已顯示所有照片"
-  },
-  "GalleryUI": {
+    "allPhotosShown": "已顯示所有照片",
     "upload": {
       "title": "上傳照片",
       "invalidType": "請上傳 JPG、PNG 或 WebP 格式的圖片",

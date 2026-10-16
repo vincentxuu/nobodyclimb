@@ -12,7 +12,6 @@ import games from './games.json'
 import gym from './gym.json'
 import home from './home.json'
 import media from './media.json'
-import misc from './misc.json'
 import profile from './profile.json'
 import site from './site.json'
 
@@ -33,7 +32,6 @@ const messages = {
   ...gym,
   ...home,
   ...media,
-  ...misc,
   ...profile,
   ...site,
 }

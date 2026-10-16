@@ -54,7 +54,6 @@ export default function UserMenu() {
   const t = useTranslations('UserMenu')
   const tNav = useTranslations('Navbar')
   const tShared = useTranslations('Common')
-  const tAuth = useTranslations('AuthPage')
 
   const avatarStyle = user?.avatarStyle
     ? DEFAULT_AVATARS.find((a) => a.id === user.avatarStyle) || DEFAULT_AVATARS[0]
@@ -178,7 +177,7 @@ export default function UserMenu() {
             className="h-7 rounded-lg border border-[#1B1A1A] px-2 font-medium text-[#1B1A1A] hover:bg-gray-100/80 md:h-8 md:px-3 lg:h-9 lg:px-4"
           >
             <span className="font-['Noto_Sans_CJK_TC'] text-xs font-medium leading-5 tracking-[0.01em] md:text-sm">
-              {tAuth('login')}
+              {t('login')}
             </span>
           </Button>
         </Link>

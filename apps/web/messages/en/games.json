@@ -328,6 +328,8 @@
         "flowState": "Feeling breath, movement and rock become one while climbing",
         "clutchState": "Finding inner stability through deep breathing and focus"
       }
-    }
+    },
+    "trainingProgressUpdateFailed": "Update failed",
+    "trainingProgressUpdateFailedDesc": "Couldn't update your training progress. Please try again later."
   }
 }

@@ -56,7 +56,6 @@ export function BiographyCommentSection({
   const { toast } = useToast()
   const t = useTranslations('BiographyPage')
   const locale = useLocale()
-  const tm = useTranslations('BiographyMisc')
 
   const loadComments = useCallback(async () => {
     setIsLoading(true)
@@ -311,7 +310,7 @@ export function BiographyCommentSection({
 
             {status !== 'signIn' && (
               <p className="text-sm text-gray-500">
-                {tm.rich('commentLoginPrompt', {
+                {t.rich('commentLoginPromptRich', {
                   login: (chunks) => (
                     <button
                       onClick={() => router.push('/auth/login')}

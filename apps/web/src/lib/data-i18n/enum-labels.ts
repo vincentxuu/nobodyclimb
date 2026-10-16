@@ -5,110 +5,118 @@
  * 只有顯示時才透過訊息檔翻譯。對照表查不到的值原樣顯示。
  */
 
-type CragDataKey = keyof IntlMessages['CragData']
-type GymDataKey = keyof IntlMessages['GymData']
+import type { Messages, useTranslations } from 'next-intl'
+
+/** 把物件型別攤平成以 `.` 串接的巢狀 leaf key（如 `'amenity.parking'`） */
+type LeafKeys<T> = {
+  [K in keyof T & string]: T[K] extends Record<string, unknown> ? `${K}.${LeafKeys<T[K]>}` : K
+}[keyof T & string]
+
+type CragDataKey = LeafKeys<Messages['CragData']>
+type GymDataKey = LeafKeys<Messages['GymData']>
 
 const ROCK_TYPE_KEYS: Record<string, CragDataKey> = {
-  四稜砂岩: 'rockSzelengSandstone',
-  珊瑚礁石灰岩: 'rockCoralLimestone',
-  石英質砂岩: 'rockQuartziteSandstone',
+  四稜砂岩: 'rock.szelengSandstone',
+  珊瑚礁石灰岩: 'rock.coralLimestone',
+  石英質砂岩: 'rock.quartziteSandstone',
 }
 
 const CLIMBING_TYPE_KEYS: Record<string, CragDataKey> = {
-  sport: 'climbSport',
-  trad: 'climbTrad',
-  boulder: 'climbBoulder',
-  mixed: 'climbMixed',
+  sport: 'climb.sport',
+  trad: 'climb.trad',
+  boulder: 'climb.boulder',
+  mixed: 'climb.mixed',
 }
 
 const AMENITY_KEYS: Record<string, CragDataKey> = {
-  停車場: 'amenityParking',
-  廁所: 'amenityRestroom',
-  公廁: 'amenityPublicRestroom',
-  海灘: 'amenityBeach',
-  浮潛: 'amenitySnorkeling',
-  便利商店: 'amenityConvenienceStore',
-  '7-11便利商店': 'amenitySevenEleven',
-  餐廳: 'amenityRestaurant',
-  民宿: 'amenityGuesthouse',
-  泥漿溫泉: 'amenityMudHotSpring',
-  附近溫泉: 'amenityNearbyHotSpring',
-  溪流: 'amenityStream',
-  船帆石周邊民宿: 'amenityGuesthousesSailRock',
-  墾丁大街餐廳: 'amenityRestaurantsKentingStreet',
-  恆春鎮機能完善: 'amenityHengchunTown',
+  停車場: 'amenity.parking',
+  廁所: 'amenity.restroom',
+  公廁: 'amenity.publicRestroom',
+  海灘: 'amenity.beach',
+  浮潛: 'amenity.snorkeling',
+  便利商店: 'amenity.convenienceStore',
+  '7-11便利商店': 'amenity.sevenEleven',
+  餐廳: 'amenity.restaurant',
+  民宿: 'amenity.guesthouse',
+  泥漿溫泉: 'amenity.mudHotSpring',
+  附近溫泉: 'amenity.nearbyHotSpring',
+  溪流: 'amenity.stream',
+  船帆石周邊民宿: 'amenity.guesthousesSailRock',
+  墾丁大街餐廳: 'amenity.restaurantsKentingStreet',
+  恆春鎮機能完善: 'amenity.hengchunTown',
 }
 
 const SEASON_KEYS: Record<string, CragDataKey> = {
-  春: 'seasonSpring',
-  夏: 'seasonSummer',
-  秋: 'seasonAutumn',
-  冬: 'seasonWinter',
+  春: 'season.spring',
+  夏: 'season.summer',
+  秋: 'season.autumn',
+  冬: 'season.winter',
 }
 
 const TRANSPORT_TYPE_KEYS: Record<string, CragDataKey> = {
-  開車: 'transportDrive',
-  大眾運輸: 'transportPublic',
-  '高鐵+客運': 'transportHsrBus',
-  捷運: 'transportMrt',
-  公車: 'transportBus',
-  步行: 'transportWalk',
+  開車: 'transport.drive',
+  大眾運輸: 'transport.public',
+  '高鐵+客運': 'transport.hsrBus',
+  捷運: 'transport.mrt',
+  公車: 'transport.bus',
+  步行: 'transport.walk',
 }
 
 const FACILITY_KEYS: Record<string, GymDataKey> = {
-  抱石區: 'facilityBouldering',
-  先鋒攀登: 'facilityLead',
-  上方確保: 'facilityTopRope',
-  速度攀登: 'facilitySpeed',
-  體能訓練區: 'facilityTraining',
-  休息區: 'facilityRest',
-  淋浴設施: 'facilityShower',
-  置物櫃: 'facilityLockers',
+  抱石區: 'facility.bouldering',
+  先鋒攀登: 'facility.lead',
+  上方確保: 'facility.topRope',
+  速度攀登: 'facility.speed',
+  體能訓練區: 'facility.training',
+  休息區: 'facility.rest',
+  淋浴設施: 'facility.shower',
+  置物櫃: 'facility.lockers',
 }
 
 const GYM_TYPE_KEYS: Record<string, GymDataKey> = {
-  bouldering: 'typeBouldering',
-  lead: 'typeLead',
-  mixed: 'typeMixed',
+  bouldering: 'type.bouldering',
+  lead: 'type.lead',
+  mixed: 'type.mixed',
 }
 
-type CragDataT = (key: CragDataKey) => string
-type GymDataT = (key: GymDataKey) => string
+type CragDataT = ReturnType<typeof useTranslations<'CragData'>>
+type GymDataT = ReturnType<typeof useTranslations<'GymData'>>
 
-const lookup = <K extends string>(
-  t: (key: K) => string,
-  keys: Record<string, K>,
-  value: string
-): string => {
+const cragLookup = (t: CragDataT, keys: Record<string, CragDataKey>, value: string): string => {
+  const key = keys[value.trim()]
+  return key ? t(key) : value
+}
+
+const gymLookup = (t: GymDataT, keys: Record<string, GymDataKey>, value: string): string => {
   const key = keys[value.trim()]
   return key ? t(key) : value
 }
 
 /** 岩石類型（如「四稜砂岩」） */
-export const rockTypeLabel = (t: CragDataT, value: string) => lookup(t, ROCK_TYPE_KEYS, value)
+export const rockTypeLabel = (t: CragDataT, value: string) => cragLookup(t, ROCK_TYPE_KEYS, value)
 
 /** 岩場設施 */
-export const amenityLabel = (t: CragDataT, value: string) => lookup(t, AMENITY_KEYS, value)
+export const amenityLabel = (t: CragDataT, value: string) => cragLookup(t, AMENITY_KEYS, value)
 
 /** 季節（春／夏／秋／冬） */
-export const seasonLabel = (t: CragDataT, value: string) => lookup(t, SEASON_KEYS, value)
+export const seasonLabel = (t: CragDataT, value: string) => cragLookup(t, SEASON_KEYS, value)
 
 /** 交通方式類型（開車、捷運…） */
 export const transportTypeLabel = (t: CragDataT, value: string) =>
-  lookup(t, TRANSPORT_TYPE_KEYS, value)
+  cragLookup(t, TRANSPORT_TYPE_KEYS, value)
 
 /** 攀登類型：後端回傳 `sport`、`trad` 等代碼，可能以逗號串接 */
 export const climbingTypesLabel = (t: CragDataT, value: string) =>
   value
     .split(',')
-    .map((type) => lookup(t, CLIMBING_TYPE_KEYS, type))
+    .map((type) => cragLookup(t, CLIMBING_TYPE_KEYS, type))
     .join(t('typeSeparator'))
 
 /** 把多個已翻譯的值串成一句話裡的列舉（中文「、」、英文「, 」） */
 export const joinLabels = (t: CragDataT, labels: string[]) => labels.join(t('listSeparator'))
 
 /** 岩館設施 */
-export const facilityLabel = (t: GymDataT, value: string) => lookup(t, FACILITY_KEYS, value)
+export const facilityLabel = (t: GymDataT, value: string) => gymLookup(t, FACILITY_KEYS, value)
 
 /** 岩館類型（bouldering／lead／mixed） */
-export const gymTypeLabel = (t: GymDataT, type: string) => lookup(t, GYM_TYPE_KEYS, type)
+export const gymTypeLabel = (t: GymDataT, type: string) => gymLookup(t, GYM_TYPE_KEYS, type)

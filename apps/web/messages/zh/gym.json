@@ -72,17 +72,21 @@
     "moreGyms": "更多岩館"
   },
   "GymData": {
-    "facilityBouldering": "抱石區",
-    "facilityLead": "先鋒攀登",
-    "facilityTopRope": "上方確保",
-    "facilitySpeed": "速度攀登",
-    "facilityTraining": "體能訓練區",
-    "facilityRest": "休息區",
-    "facilityShower": "淋浴設施",
-    "facilityLockers": "置物櫃",
-    "typeBouldering": "抱石",
-    "typeLead": "上攀",
-    "typeMixed": "上攀和抱石",
+    "facility": {
+      "bouldering": "抱石區",
+      "lead": "先鋒攀登",
+      "topRope": "上方確保",
+      "speed": "速度攀登",
+      "training": "體能訓練區",
+      "rest": "休息區",
+      "shower": "淋浴設施",
+      "lockers": "置物櫃"
+    },
+    "type": {
+      "bouldering": "抱石",
+      "lead": "上攀",
+      "mixed": "上攀和抱石"
+    },
     "metaNotFound": "找不到岩館",
     "metaNotFoundDesc": "您要找的岩館不存在",
     "metaDescription": "{name}位於{address}，提供{type}服務。",

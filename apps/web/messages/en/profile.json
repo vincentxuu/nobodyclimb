@@ -262,7 +262,14 @@
     "toastBookmarkRemoveFailedDesc": "Unable to remove bookmark, please try again later",
     "toastMemoryDeleted": "Memory deleted",
     "toastQuotaExceeded": "Daily AI quota exhausted, resets tomorrow",
-    "toastRecommendationFailed": "Recommendation generation failed, please try again later"
+    "toastRecommendationFailed": "Recommendation generation failed, please try again later",
+    "aiMemoryEmptyHint": "When you chat with the AI assistant, it automatically remembers your climbing preferences and habits. Try telling it your favorite crag or target grade!",
+    "aiMemoryFilterAll": "All {count}",
+    "aiMemoryFilterPreference": "Preference {count}",
+    "aiMemoryFilterBehavior": "Behavior {count}",
+    "aiMemoryFilterFact": "Fact {count}",
+    "aiMemoryFilterEmpty": "No memories in this category",
+    "photoAlt": "Photo"
   },
   "ProfileDashboard": {
     "title": "My Biography",
@@ -662,15 +669,6 @@
         "targetPlaceholder": "e.g. 50 routes sent"
       }
     }
-  },
-  "ProfilePagesMisc": {
-    "aiMemoryEmptyHint": "When you chat with the AI assistant, it automatically remembers your climbing preferences and habits. Try telling it your favorite crag or target grade!",
-    "aiMemoryFilterAll": "All {count}",
-    "aiMemoryFilterPreference": "Preference {count}",
-    "aiMemoryFilterBehavior": "Behavior {count}",
-    "aiMemoryFilterFact": "Fact {count}",
-    "aiMemoryFilterEmpty": "No memories in this category",
-    "photoAlt": "Photo"
   },
   "ProfileSections": {
     "pageTitle": "My Biography",

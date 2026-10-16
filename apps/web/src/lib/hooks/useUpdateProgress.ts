@@ -12,7 +12,7 @@ type ProgressCache = ApiResponse<TrainingProgressRecord[]>
 export function useUpdateProgress(type: PersonalityTypeCode) {
   const queryClient = useQueryClient()
   const { toast } = useToast()
-  const t = useTranslations('LibMisc')
+  const t = useTranslations('Quiz')
 
   return useMutation({
     mutationFn: trainingService.updateTrainingProgress,

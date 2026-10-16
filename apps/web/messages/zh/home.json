@@ -81,9 +81,7 @@
     "showcaseTopLocations": "最常出沒：{locations}",
     "showcaseTotalStories": "{count} 個攀岩故事正在累積中",
     "showcaseCta": "我也想分享我的故事",
-    "showcaseLoadError": "載入社群統計時發生錯誤"
-  },
-  "Home": {
+    "showcaseLoadError": "載入社群統計時發生錯誤",
     "meta": {
       "title": "台灣攀岩社群平台",
       "description": "台灣攀岩社群平台，探索龍洞、墾丁、關子嶺、德芙蘭等戶外岩場與室內岩館，提供攀岩路線、難度資訊及攀岩影片。"

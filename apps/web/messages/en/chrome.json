@@ -33,6 +33,7 @@
     "profile": "Biography",
     "recommendations": "Recommendations",
     "memory": "Memory",
+    "goals": "Goals",
     "bucketList": "Bucket List",
     "ascents": "Ascents",
     "stats": "Achievements",
@@ -56,6 +57,7 @@
     "photos": "My Photos",
     "articles": "My Articles",
     "bookmarks": "My Bookmarks",
-    "settings": "Account Settings"
+    "settings": "Account Settings",
+    "login": "Log In"
   }
 }

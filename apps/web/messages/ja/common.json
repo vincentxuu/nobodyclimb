@@ -44,6 +44,13 @@
     "defaultUser": "ユーザー",
     "goHome": "ホームへ移動",
     "search": "検索",
-    "searchKeywordPlaceholder": "キーワードを入力"
+    "searchKeywordPlaceholder": "キーワードを入力",
+    "imageErrors": {
+      "unsupportedFormat": "対応していないファイル形式です。JPEG、PNG、WebP、GIF のみ利用できます。",
+      "gifTooLarge": "GIF ファイルは 500KB 以下にしてください。",
+      "canvasUnavailable": "画像を処理できませんでした。別のブラウザでもう一度お試しください。",
+      "compressFailed": "画像の圧縮に失敗しました。",
+      "loadFailed": "画像の読み込みに失敗しました。"
+    }
   }
 }

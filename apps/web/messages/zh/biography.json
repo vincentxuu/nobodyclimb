@@ -324,7 +324,19 @@
     "metaKeyword3": "攀岩社群",
     "guestCtaTitle": "你也有攀岩故事嗎？",
     "guestCtaDesc": "來寫寫你的小人物誌吧",
-    "guestCtaAction": "立即註冊加入"
+    "guestCtaAction": "立即註冊加入",
+    "yearSpan": "{count} 年",
+    "shareTitle": "{name} 的攀岩人物誌 - NobodyClimb",
+    "shareDescription": "來看看 {name} 的攀岩故事",
+    "listSeparator": "、",
+    "coverPhotoAlt": "{name} 的封面照片",
+    "personalityTitle": "攀岩人格",
+    "personalityStrengths": "優勢",
+    "personalityBlindSpots": "盲點",
+    "personalityBestState": "最佳狀態",
+    "readMore": "繼續閱讀",
+    "collapse": "收合",
+    "commentLoginPromptRich": "<login>登入</login> 後才能留言"
   },
   "BiographyEditor": {
     "editBiographyTitle": "編輯人物誌",
@@ -648,7 +660,80 @@
     "bucketListCategoryAlpine": "高山攀登",
     "bucketListCategoryTraining": "訓練目標",
     "bucketListCategoryTravel": "攀岩旅行",
-    "bucketListCategoryOther": "其他"
+    "bucketListCategoryOther": "其他",
+    "storyPromptPlaceholder": "分享你的故事...",
+    "routeTypes": {
+      "bouldering": "抱石",
+      "sport": "運動攀登",
+      "topRope": "頂繩攀登",
+      "speed": "速度攀登",
+      "trad": "傳統攀登",
+      "slab": "平板岩",
+      "vertical": "垂直岩壁",
+      "overhang": "外傾岩壁",
+      "roof": "屋簷",
+      "crack": "裂隙",
+      "arete": "稜線",
+      "face": "壁面",
+      "chimney": "煙囪",
+      "dynamic": "動態路線",
+      "parkour": "跑酷風格",
+      "coordination": "協調性",
+      "static": "靜態",
+      "technical": "技術性",
+      "power": "力量型",
+      "endurance": "耐力型"
+    },
+    "storyCategoryMeta": {
+      "growth": {
+        "label": "成長軌跡",
+        "description": "你的攀岩旅程"
+      },
+      "psychology": {
+        "label": "心理層面",
+        "description": "攀岩中的心理感受"
+      },
+      "community": {
+        "label": "社群連結",
+        "description": "與岩友的故事"
+      },
+      "practical": {
+        "label": "實用經驗",
+        "description": "裝備、訓練、技巧"
+      },
+      "dreams": {
+        "label": "願望與目標",
+        "description": "未來的攀岩計畫"
+      },
+      "life": {
+        "label": "人生連結",
+        "description": "攀岩與生活"
+      }
+    },
+    "promptExamples": {
+      "memorable_moment": "那次在龍洞的夕陽下完攀，整個人被橘紅色的光芒包圍，那一刻覺得所有的練習都值得了。",
+      "biggest_challenge": "曾經因為指腱炎休息了半年，那段時間學會了耐心，也更珍惜能夠攀爬的每一天。",
+      "funny_moment": "有一次爬到一半褲子破掉，只好硬著頭皮爬完整條路線，下來後才發現後面的人都在偷笑。",
+      "fear_management": "每次害怕墜落時，我會深呼吸三次，告訴自己繩子會接住我，然後專注在下一個動作。",
+      "favorite_spot": "最推薦北部的原岩，定線有創意，氣氛也很好，是我開始愛上抱石的地方。",
+      "climbing_mentor": "我的教練總是說「慢慢來，比較快」，這句話改變了我急躁的個性，不只在攀岩上。",
+      "life_outside_climbing": "除了攀岩，我也很喜歡攝影。常常帶著相機去岩場，記錄岩友們專注的表情。"
+    },
+    "promptExampleDefault": "這是一段很棒的攀岩故事...",
+    "defaultUserName": "你",
+    "loadBiographyFailed": "載入人物誌失敗",
+    "saveFailed": "儲存失敗",
+    "saveTimeout": "儲存逾時，請稍後再試",
+    "saveFailedRetry": "儲存失敗，請稍後再試",
+    "publishFailed": "發布失敗",
+    "loginToEdit": "請先登入以編輯人物誌",
+    "reload": "重新載入",
+    "autoSaveTimeout": "儲存逾時，已暫停自動重試，請稍後再試",
+    "uploadSuccess": "上傳成功",
+    "avatarUpdated": "頭像已更新",
+    "coverUpdated": "封面圖片已更新",
+    "uploadFailed": "上傳失敗",
+    "retryLater": "請稍後再試"
   },
   "BiographyQuestions": {
     "oneliner_climbing_origin": "你與攀岩的相遇",
@@ -1256,92 +1341,6 @@
     },
     "templates": {
       "sys_local_identity_gym": "#{value}常客"
-    }
-  },
-  "BiographyMisc": {
-    "commentLoginPrompt": "<login>登入</login> 後才能留言",
-    "listSeparator": "、",
-    "yearSpan": "{count} 年",
-    "shareTitle": "{name} 的攀岩人物誌 - NobodyClimb",
-    "shareDescription": "來看看 {name} 的攀岩故事",
-    "coverPhotoAlt": "{name} 的封面照片",
-    "personalityTitle": "攀岩人格",
-    "personalityStrengths": "優勢",
-    "personalityBlindSpots": "盲點",
-    "personalityBestState": "最佳狀態",
-    "readMore": "繼續閱讀",
-    "collapse": "收合",
-    "loadBiographyFailed": "載入人物誌失敗",
-    "saveFailed": "儲存失敗",
-    "saveFailedRetry": "儲存失敗，請稍後再試",
-    "saveTimeout": "儲存逾時，請稍後再試",
-    "autoSaveTimeout": "儲存逾時，已暫停自動重試，請稍後再試",
-    "publishFailed": "發布失敗",
-    "loginToEdit": "請先登入以編輯人物誌",
-    "reload": "重新載入",
-    "uploadSuccess": "上傳成功",
-    "avatarUpdated": "頭像已更新",
-    "coverUpdated": "封面圖片已更新",
-    "uploadFailed": "上傳失敗",
-    "retryLater": "請稍後再試",
-    "defaultUserName": "你",
-    "promptExampleDefault": "這是一段很棒的攀岩故事...",
-    "promptExamples": {
-      "memorable_moment": "那次在龍洞的夕陽下完攀，整個人被橘紅色的光芒包圍，那一刻覺得所有的練習都值得了。",
-      "biggest_challenge": "曾經因為指腱炎休息了半年，那段時間學會了耐心，也更珍惜能夠攀爬的每一天。",
-      "funny_moment": "有一次爬到一半褲子破掉，只好硬著頭皮爬完整條路線，下來後才發現後面的人都在偷笑。",
-      "fear_management": "每次害怕墜落時，我會深呼吸三次，告訴自己繩子會接住我，然後專注在下一個動作。",
-      "favorite_spot": "最推薦北部的原岩，定線有創意，氣氛也很好，是我開始愛上抱石的地方。",
-      "climbing_mentor": "我的教練總是說「慢慢來，比較快」，這句話改變了我急躁的個性，不只在攀岩上。",
-      "life_outside_climbing": "除了攀岩，我也很喜歡攝影。常常帶著相機去岩場，記錄岩友們專注的表情。"
-    },
-    "storyCategoryMeta": {
-      "growth": {
-        "label": "成長軌跡",
-        "description": "你的攀岩旅程"
-      },
-      "psychology": {
-        "label": "心理層面",
-        "description": "攀岩中的心理感受"
-      },
-      "community": {
-        "label": "社群連結",
-        "description": "與岩友的故事"
-      },
-      "practical": {
-        "label": "實用經驗",
-        "description": "裝備、訓練、技巧"
-      },
-      "dreams": {
-        "label": "願望與目標",
-        "description": "未來的攀岩計畫"
-      },
-      "life": {
-        "label": "人生連結",
-        "description": "攀岩與生活"
-      }
-    },
-    "routeTypes": {
-      "bouldering": "抱石",
-      "sport": "運動攀登",
-      "topRope": "頂繩攀登",
-      "speed": "速度攀登",
-      "trad": "傳統攀登",
-      "slab": "平板岩",
-      "vertical": "垂直岩壁",
-      "overhang": "外傾岩壁",
-      "roof": "屋簷",
-      "crack": "裂隙",
-      "arete": "稜線",
-      "face": "壁面",
-      "chimney": "煙囪",
-      "dynamic": "動態路線",
-      "parkour": "跑酷風格",
-      "coordination": "協調性",
-      "static": "靜態",
-      "technical": "技術性",
-      "power": "力量型",
-      "endurance": "耐力型"
     }
   }
 }

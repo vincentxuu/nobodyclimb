@@ -136,15 +136,6 @@
     "viewOnInstagram": "Instagram で見る →",
     "viewPost": "この投稿を Instagram で見る"
   },
-  "StoryPage": {
-    "typeLabels": {
-      "coreStories": "コアストーリー",
-      "oneLiners": "ひとこと",
-      "stories": "ショートストーリー",
-      "default": "ストーリー"
-    },
-    "metaDescription": "クライミングコミュニティからの{typeLabel}を読む"
-  },
   "StoryDetail": {
     "invalidType": "無効なストーリータイプです",
     "notFound": "このストーリーは見つかりません",
@@ -165,7 +156,14 @@
     "dateYesterday": "昨日",
     "dateDaysAgo": "{count} 日前",
     "dateWeeksAgo": "{count} 週間前",
-    "dateMonthsAgo": "{count} か月前"
+    "dateMonthsAgo": "{count} か月前",
+    "typeLabels": {
+      "coreStories": "コアストーリー",
+      "oneLiners": "ひとこと",
+      "stories": "ショートストーリー",
+      "default": "ストーリー"
+    },
+    "metaDescription": "クライミングコミュニティからの{typeLabel}を読む"
   },
   "Ascent": {
     "types": {

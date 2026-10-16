@@ -136,15 +136,6 @@
     "viewOnInstagram": "View on Instagram →",
     "viewPost": "View this post on Instagram"
   },
-  "StoryPage": {
-    "typeLabels": {
-      "coreStories": "Core Story",
-      "oneLiners": "One-liner",
-      "stories": "Short Story",
-      "default": "Story"
-    },
-    "metaDescription": "Read this {typeLabel} from the climbing community"
-  },
   "StoryDetail": {
     "invalidType": "Invalid story type",
     "notFound": "Story not found",
@@ -165,7 +156,14 @@
     "dateYesterday": "Yesterday",
     "dateDaysAgo": "{count, plural, one {# day} other {# days}} ago",
     "dateWeeksAgo": "{count, plural, one {# week} other {# weeks}} ago",
-    "dateMonthsAgo": "{count, plural, one {# month} other {# months}} ago"
+    "dateMonthsAgo": "{count, plural, one {# month} other {# months}} ago",
+    "typeLabels": {
+      "coreStories": "Core Story",
+      "oneLiners": "One-liner",
+      "stories": "Short Story",
+      "default": "Story"
+    },
+    "metaDescription": "Read this {typeLabel} from the climbing community"
   },
   "Ascent": {
     "types": {

@@ -14,7 +14,7 @@
 export const MODULES = {
   common: ['Common'],
   chrome: ['Navbar', 'Footer', 'LocaleSwitcher', 'MobileMenu', 'UserMenu'],
-  home: ['HomePage', 'Home'],
+  home: ['HomePage'],
   crag: ['CragPage', 'CragData', 'CragFaq', 'TrafficCameras'],
   gym: ['GymPage', 'GymData'],
   biography: [
@@ -23,7 +23,6 @@ export const MODULES = {
     'BiographyQuestions',
     'BiographyStories',
     'BiographyTags',
-    'BiographyMisc',
   ],
   profile: [
     'ProfilePage',
@@ -32,14 +31,13 @@ export const MODULES = {
     'ProfileEvolution',
     'ProfileGallery',
     'ProfileGoals',
-    'ProfilePagesMisc',
     'ProfileSections',
     'ProfileSetup',
     'ProfileTraining',
   ],
   blog: ['BlogPage', 'BlogCategories'],
-  gallery: ['GalleryPage', 'GalleryUI', 'UploadPage'],
-  auth: ['Auth', 'AuthPage', 'Onboarding'],
+  gallery: ['GalleryUI', 'UploadPage'],
+  auth: ['Auth', 'Onboarding'],
   community: [
     'SearchPage',
     'NotificationCenter',
@@ -50,7 +48,6 @@ export const MODULES = {
     'ClaimContent',
     'RankBadge',
     'InstagramEmbed',
-    'StoryPage',
     'StoryDetail',
     'Ascent',
     'RouteStory',
@@ -60,7 +57,6 @@ export const MODULES = {
   media: ['VideosPage', 'VideosFilter', 'Weather'],
   chat: ['Chat'],
   site: ['Metadata', 'AboutPage', 'ErrorPage', 'Countries', 'Badges'],
-  misc: ['LibMisc'],
 }
 
 export const LOCALES = ['zh', 'en', 'ja']

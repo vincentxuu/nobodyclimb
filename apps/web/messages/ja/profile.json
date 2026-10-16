@@ -262,7 +262,14 @@
     "toastBookmarkRemoveFailedDesc": "ブックマークを削除できませんでした。しばらくしてから再試行してください",
     "toastMemoryDeleted": "メモリが削除されました",
     "toastQuotaExceeded": "本日のAIクォータを使い果たしました。明日リセットされます",
-    "toastRecommendationFailed": "おすすめの生成に失敗しました。しばらくしてから再試行してください"
+    "toastRecommendationFailed": "おすすめの生成に失敗しました。しばらくしてから再試行してください",
+    "aiMemoryEmptyHint": "AI アシスタントと会話すると、あなたのクライミングの好みや習慣を自動で覚えます。お気に入りの岩場や目標グレードを伝えてみましょう！",
+    "aiMemoryFilterAll": "すべて {count}",
+    "aiMemoryFilterPreference": "好み {count}",
+    "aiMemoryFilterBehavior": "行動 {count}",
+    "aiMemoryFilterFact": "事実 {count}",
+    "aiMemoryFilterEmpty": "このカテゴリーにはメモリがありません",
+    "photoAlt": "写真"
   },
   "ProfileDashboard": {
     "title": "マイプロフィール",
@@ -662,15 +669,6 @@
         "targetPlaceholder": "例：50本完登"
       }
     }
-  },
-  "ProfilePagesMisc": {
-    "aiMemoryEmptyHint": "AI アシスタントと会話すると、あなたのクライミングの好みや習慣を自動で覚えます。お気に入りの岩場や目標グレードを伝えてみましょう！",
-    "aiMemoryFilterAll": "すべて {count}",
-    "aiMemoryFilterPreference": "好み {count}",
-    "aiMemoryFilterBehavior": "行動 {count}",
-    "aiMemoryFilterFact": "事実 {count}",
-    "aiMemoryFilterEmpty": "このカテゴリーにはメモリがありません",
-    "photoAlt": "写真"
   },
   "ProfileSections": {
     "pageTitle": "マイプロフィール",

@@ -160,7 +160,7 @@ export function BiographyPersonality({
   boldPct,
   className,
 }: BiographyPersonalityProps) {
-  const tm = useTranslations('BiographyMisc')
+  const tm = useTranslations('BiographyPage')
   const t = getPersonalityType(personalityType as PersonalityTypeCode)
   const color = getPersonalityColor(personalityType as PersonalityTypeCode)
   if (!t) return null

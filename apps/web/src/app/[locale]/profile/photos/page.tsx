@@ -28,7 +28,6 @@ interface PhotoCardProps {
 const PhotoCard = ({ photo, onEdit, onDelete, isDeleting }: PhotoCardProps) => {
   const t = useTranslations('ProfilePage')
   const locale = useLocale()
-  const tMisc = useTranslations('ProfilePagesMisc')
   const locationParts = [photo.location_country, photo.location_city, photo.location_spot].filter(
     Boolean
   )
@@ -40,7 +39,7 @@ const PhotoCard = ({ photo, onEdit, onDelete, isDeleting }: PhotoCardProps) => {
       <div className="relative aspect-square w-full overflow-hidden bg-gray-100">
         <Image
           src={photo.image_url}
-          alt={photo.caption || tMisc('photoAlt')}
+          alt={photo.caption || t('photoAlt')}
           fill
           className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

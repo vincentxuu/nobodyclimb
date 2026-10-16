@@ -94,7 +94,7 @@ export default function StoryDetailClient({ params }: StoryDetailClientProps) {
   const { type, id } = use(params)
   const locale = useLocale()
   const t = useTranslations('StoryDetail')
-  const tType = useTranslations('StoryPage.typeLabels')
+  const tType = useTranslations('StoryDetail.typeLabels')
   const [story, setStory] = useState<StoryDetail | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

@@ -1,5 +1,5 @@
 {
-  "GalleryPage": {
+  "GalleryUI": {
     "title": "Gallery",
     "description": "Explore climbing photography that captures the beauty of the sport.",
     "subtitle": "Admire the grace of climbers in action",
@@ -9,9 +9,7 @@
     "fetchError": "An error occurred while loading photos",
     "noPhotos": "No photos yet",
     "reload": "Reload",
-    "allPhotosShown": "All photos shown"
-  },
-  "GalleryUI": {
+    "allPhotosShown": "All photos shown",
     "upload": {
       "title": "Upload Photos",
       "invalidType": "Please upload images in JPG, PNG or WebP format",

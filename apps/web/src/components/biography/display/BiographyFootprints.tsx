@@ -205,7 +205,6 @@ function StatsSummary({
  */
 export function BiographyFootprints({ biography, className }: BiographyFootprintsProps) {
   const t = useTranslations('BiographyPage')
-  const tm = useTranslations('BiographyMisc')
   const [locations, setLocations] = useState<ClimbingLocationRecord[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -287,7 +286,7 @@ export function BiographyFootprints({ biography, className }: BiographyFootprint
     years.length > 0
       ? years.length === 1
         ? `${Math.min(...years)}`
-        : tm('yearSpan', { count: Math.max(...years) - Math.min(...years) + 1 })
+        : t('yearSpan', { count: Math.max(...years) - Math.min(...years) + 1 })
       : '-'
 
   return (

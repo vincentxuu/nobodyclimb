@@ -1,12 +1,12 @@
 # NobodyClimb Web i18n 盤點報告
 
-**狀態**: 🟢 P0/P1/P2/P3 已實作（P4 未做）
+**狀態**: 🟢 P0～P4 已實作（P4 為使用者核可的收斂範圍，見文末）
 **建立日期**: 2026-10-16
 **最後更新**: 2026-10-16
 **影響範圍**: `apps/web/messages/{locale}/{module}.json`、`apps/web/src/i18n/`、`apps/web/src/app/[locale]/**`
 **對照基準**: next-intl 官方 Design principles / Request configuration / Server & Client Components
 
-> **2026-10-16 更新**：本報告的 P0～P3 已於同日實作完成，見文末「六、已完成的改善」。P4（catch-all／扁平 key／重複概念 namespace 重整）尚未處理。
+> **2026-10-16 更新**：P0～P4 已於同日完成，見文末「六、已完成的改善」。P4 採**使用者核可的收斂範圍**：把型別安全接回、`CragData`/`GymData` 枚舉巢狀化、併掉零重疊的重複概念 namespace、分派 3 個 catch-all。刻意未做的部分（全站扁平前綴、298 組領域標籤去重）已在該節說明。
 
 ---
 
@@ -159,7 +159,7 @@ const clientMessages = pick(messages, ['Common', 'CragPage'])
 | **P1** | 收斂重複字串、合併 `Common` 與 `SharedUI` | 低-中 | 減少重複來源 | ✅ 部分完成（見下） |
 | **P2** | 依模組**拆檔**（`messages/{locale}/{module}.json`）並在 `request.ts` merge | 中 | 可維護性提升 | ✅ 已完成 |
 | **P3** | 各 route 只送需要的 namespace 給 `NextIntlClientProvider` | 中 | client payload 下降 37–80% | ✅ 已完成 |
-| **P4** | 清 catch-all namespace、扁平 key 改巢狀、消除重複概念 namespace（`Home`/`HomePage` 等） | 中-高 | 結構一致 | ⬜ 未做 |
+| **P4** | 清 catch-all namespace、扁平 key 改巢狀、消除重複概念 namespace（`Home`/`HomePage` 等） | 中-高 | 結構一致 | ✅ 已完成（範圍收斂，見下） |
 
 > P0、P1、P3 為建議優先序。P2（拆檔）只有在 P3 一起做時才有效能意義；單獨做只是整理檔案。
 
@@ -208,6 +208,41 @@ const clientMessages = pick(messages, ['Common', 'CragPage'])
 - ✅ 合併 `Common` 與 `SharedUI` → 統一為 `Common`（`SharedUI` 的 `loading`/`cancel`/`confirm`/`close` 與 `Common` 同值，無衝突），22 個元件改為 `useTranslations('Common')`。
 - ⬜ 其餘 ~298 組重複**未動**：多數是「人物誌」「攀岩足跡」這類**領域標籤**，在不同情境（導覽列、頁標題、麵包屑）本就可能各自演化，硬併會造成不必要的耦合。要做屬 P4。
 
+### P4 — 型別安全接回 + catch-all／重複命名收斂
+
+**（0）型別安全接回（前置，重要）**
+next-intl v4 已**不再讀取**舊的 `global.IntlMessages`（v2/v3 寫法），本專案原本的 `src/i18n/types.d.ts` 因此形同失效——`useTranslations('不存在的 namespace')`、`t('錯的 key')` 都不會被 typecheck 抓到（實測過）。
+改成 v4 的 `declare module 'next-intl' { interface AppConfig { Messages } }` 後，typecheck 重新成為 i18n 的安全網，並**立刻抓到一個真實 bug**：`MobileMenu.goals` 三語系皆缺（手機版個人選單「目標」會顯示缺字），已補上。
+
+**（1）`CragData`／`GymData` 枚舉 key 巢狀化**
+`CragData.rockSzelengSandstone` → `CragData.rock.szelengSandstone`、`GymData.facilityBouldering` → `GymData.facility.bouldering` 等等。對照表 `src/lib/data-i18n/enum-labels.ts` 改用遞迴的 `LeafKeys<T>` 產生 dotted key 型別（`keyof` 會變成群組名，故不能用）。
+
+**（2）重複概念 namespace 併掉（實測零重疊，等於正名）**
+
+| 保留 | 併入、移除 | 說明 |
+|---|---|---|
+| `HomePage` | `Home` | meta 文案移到 `HomePage.meta` |
+| `GalleryUI` | `GalleryPage` | |
+| `StoryDetail` | `StoryPage` | |
+| `UserMenu` | `AuthPage` | 僅 `login` 有被使用；`logout` 早已在 `UserMenu` |
+| `ProfilePage` | `ProfilePagesMisc` | |
+
+> 註：這些成對 namespace **交集為 0 個 leaf key**，所以整併是「正名／去混淆」而非去重。
+
+**（3）3 個 catch-all 分派**
+
+- `LibMisc`（4 key）：`imageErrors` → `Common`；`storyPromptPlaceholder` → `BiographyEditor`；`trainingProgressUpdateFailed(+Desc)` → `Quiz`（唯一消費者 `TrainingPageClient` 已用 `Quiz`，避免為了 2 個 key 拉進整個 `ProfileTraining`）。
+- `BiographyMisc`（30 key）：編輯／儲存相關 18 key → `BiographyEditor`；顯示相關 12 key → `BiographyPage`。其中 `commentLoginPrompt`（帶 `<login>` rich tag）與 `BiographyPage` 既有同名 key 衝突，改名 `commentLoginPromptRich`。
+- `misc` 模組因此清空並移除（模組 17 → 16，`messages/{locale}/misc.json` 刪除）。
+
+**結果**：core namespace 17 → 14；各 route 與 core 的 payload 與整併前相比變化 ≤0.02%（無回歸）；三語系 key 對齊、`tsc`、95 個測試、`pnpm i18n:check`、慣例檢查全綠。
+
+**刻意未做**（低投報或需另開設計）：
+
+- 全站 100+ 個「扁平前綴」key 群：多數是**巧合**（如 `loadFailed`/`loadMore`/`loadError` 其實分屬不同子物件），全面巢狀化只會更難讀，因此只挑了真正的**枚舉**（`CragData`/`GymData`）。
+- ~298 組「領域標籤」重複（人物誌／攀岩足跡…）：跨情境本就可能各自演化，硬併會造成耦合，維持現狀。
+- `Common` 的通用字串尚未被各處回收重用：需逐處評估語意，屬下一次的整理。
+
 ---
 
 ## 附錄 A：重複譯文樣本（前 20 大群組）
@@ -237,7 +272,7 @@ const clientMessages = pick(messages, ['Common', 'CragPage'])
 
 （完整 298 組可用報告產出時的分析腳本重跑。）
 
-## 附錄 B：70 個 namespace 清單（依性質分類）
+## 附錄 B：70 個 namespace 清單（P0～P4 前的原始狀態，依性質分類）
 
 - **頁面級**：`HomePage` `CragPage` `GymPage` `BiographyPage` `GalleryPage` `VideosPage` `BlogPage` `SearchPage` `ProfilePage` `AuthPage` `BucketListPage` `GamesPage` `SharePage` `UploadPage` `AboutPage` `ErrorPage` `StoryPage` `StoryDetail`
 - **元件級**：`Navbar` `Footer` `LocaleSwitcher` `MobileMenu` `UserMenu` `ShareButton` `ShareInvitation` `NotificationCenter` `RankBadge` `InstagramEmbed` `AnonymousShare` `ClaimContent` `Weather` `TrafficCameras` `VideosFilter` `GalleryUI` `Editor` `AiTool`

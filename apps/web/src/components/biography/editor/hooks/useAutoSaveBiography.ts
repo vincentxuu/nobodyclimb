@@ -27,7 +27,7 @@ export function useAutoSaveBiography({
   setSaved,
   setError,
 }: UseAutoSaveBiographyOptions) {
-  const tm = useTranslations('BiographyMisc')
+  const t = useTranslations('BiographyEditor')
   // 本地草稿
   const [localBiography, setLocalBiography] = useState(biography)
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
@@ -126,11 +126,11 @@ export function useAutoSaveBiography({
           }
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : tm('saveFailed')
+        const message = err instanceof Error ? err.message : t('saveFailed')
         const isTimeoutError = message.toLowerCase().includes('timeout')
 
         if (isMountedRef.current) {
-          setError(isTimeoutError ? tm('autoSaveTimeout') : message)
+          setError(isTimeoutError ? t('autoSaveTimeout') : message)
         }
 
         // 自動重試（最多 3 次）

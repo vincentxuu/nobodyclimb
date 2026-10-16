@@ -72,17 +72,21 @@
     "moreGyms": "もっと見る"
   },
   "GymData": {
-    "facilityBouldering": "ボルダリングエリア",
-    "facilityLead": "リードクライミング",
-    "facilityTopRope": "トップロープ",
-    "facilitySpeed": "スピードクライミング",
-    "facilityTraining": "トレーニングエリア",
-    "facilityRest": "休憩エリア",
-    "facilityShower": "シャワー",
-    "facilityLockers": "ロッカー",
-    "typeBouldering": "ボルダリング",
-    "typeLead": "ロープクライミング",
-    "typeMixed": "ロープクライミング＆ボルダリング",
+    "facility": {
+      "bouldering": "ボルダリングエリア",
+      "lead": "リードクライミング",
+      "topRope": "トップロープ",
+      "speed": "スピードクライミング",
+      "training": "トレーニングエリア",
+      "rest": "休憩エリア",
+      "shower": "シャワー",
+      "lockers": "ロッカー"
+    },
+    "type": {
+      "bouldering": "ボルダリング",
+      "lead": "ロープクライミング",
+      "mixed": "ロープクライミング＆ボルダリング"
+    },
     "metaNotFound": "ジムが見つかりません",
     "metaNotFoundDesc": "お探しのジムは存在しません",
     "metaDescription": "{name}は{address}にあり、{type}を楽しめます。",

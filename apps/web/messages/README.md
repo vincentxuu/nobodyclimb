@@ -15,8 +15,9 @@ messages/
 ```
 
 - 每個 JSON 檔的**頂層 key = namespace**（如 `CragPage`）。
-- 模組 ↔ namespace 對應表在 `scripts/i18n/modules.mjs`。
+- 模組 ↔ namespace 對應表在 `scripts/i18n/modules.mjs`（目前 16 個模組）。
 - `index.ts` 會把同語系所有模組檔合併回一個物件，runtime 行為與舊的單一大檔完全等價。
+- 命名已收斂（P4）：`Home`→`HomePage`、`GalleryPage`→`GalleryUI`、`StoryPage`→`StoryDetail`、`AuthPage`→`UserMenu`、`ProfilePagesMisc`→`ProfilePage`；catch-all 的 `LibMisc`/`BiographyMisc` 已分派、`misc` 模組移除。詳見 `docs/tech-debt/i18n-audit.md` 第六節。
 
 ## 新增 / 修改譯文
 

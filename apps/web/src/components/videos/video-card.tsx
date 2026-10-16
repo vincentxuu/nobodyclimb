@@ -18,7 +18,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onClick }) => {
   const categoryKey: string | undefined =
     VIDEO_CATEGORY_KEYS[video.category] ?? VIDEO_EXTRA_CATEGORY_KEYS[video.category]
   const categoryLabel =
-    categoryKey && t.has(`categories.${categoryKey}`)
+    categoryKey && t.has(`categories.${categoryKey}` as Parameters<typeof t>[0])
       ? t(`categories.${categoryKey}` as Parameters<typeof t>[0])
       : video.category
 
