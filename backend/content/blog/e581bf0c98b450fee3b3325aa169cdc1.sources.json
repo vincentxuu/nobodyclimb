@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "article_id": "e581bf0c98b450fee3b3325aa169cdc1",
+  "checked_at": "2026-10-12T09:49:42+09:00",
+  "source_sha256": "d23666d90e6020b96bfd32bf8ff2345495aa69a46b80226b03e361dec009abd5",
+  "claims": [
+    {
+      "location": "frontmatter title/excerpt/category/tags",
+      "claim": "天王岩ガイド：電車とバスで計画する秋川のリードクライミング / 天王岩の岩質と上下の区画、武蔵五日市からのバス、釣場施設の利用制限を整理します。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/天王岩/",
+          "title": "山と溪谷社 CLIMBING-net — 天王岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "場地為あきる野市養沢的チャート岩場；5.10、5.11路線較多，北西向冬冷。武蔵五日市轉養沢方向巴士曽利郷橋，指定山徑。記錄釣場停車與廁所無斷使用禁止、舊火葬場路通行禁令、十里木替代停車及攜帶如廁安排。未據此確認未來造訪日許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/111",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "天王岩區分上／下岩場及抱石登錄，重申釣場停車、廁所禁用。投稿型資料不是管理方許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "場地、主題與正文承諾均以已讀來源為背景；分類與標籤是編輯選擇，不宣稱已開放或親身體驗。"
+    },
+    {
+      "location": "## 秋川でリードを楽しみたい人へ paragraph 1",
+      "claim": "天王岩は東京都あきる野市養沢にある自然の岩場です。屋外でのリードとビレイを自立して行えるパートナー同士に向け、岩の特徴と移動が旅行日程に合うかを整理します。室内ボルダリングだけの経験なら、先に外岩講習や現地に詳しい人の同行を手配してください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/天王岩/",
+          "title": "山と溪谷社 CLIMBING-net — 天王岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "場地為あきる野市養沢的チャート岩場；5.10、5.11路線較多，北西向冬冷。武蔵五日市轉養沢方向巴士曽利郷橋，指定山徑。記錄釣場停車與廁所無斷使用禁止、舊火葬場路通行禁令、十里木替代停車及攜帶如廁安排。未據此確認未來造訪日許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/111",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "天王岩區分上／下岩場及抱石登錄，重申釣場停車、廁所禁用。投稿型資料不是管理方許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 秋川でリードを楽しみたい人へ paragraph 2",
+      "claim": "[CLIMBING-netの紹介](https://www.climbing-net.com/iwaba_detail/天王岩/)では岩質はチャート、5.10台と5.11台のルートが多く、垂直から薄かぶりの壁とされています。グレードを候補選びに使いつつ、実際のトポ、支点、屋外での経験から登るラインを決めましょう。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/天王岩/",
+          "title": "山と溪谷社 CLIMBING-net — 天王岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "場地為あきる野市養沢的チャート岩場；5.10、5.11路線較多，北西向冬冷。武蔵五日市轉養沢方向巴士曽利郷橋，指定山徑。記錄釣場停車與廁所無斷使用禁止、舊火葬場路通行禁令、十里木替代停車及攜帶如廁安排。未據此確認未來造訪日許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 上下の岩場を決めてからルートを選ぶ paragraph 1",
+      "claim": "[ROCKTOPOの天王岩ページ](https://www.rocktopo.net/areas/111)は上の岩場と下の岩場を分け、ボルダーも掲載しています。同じ地名でも必要な装備は異なります。この記事はロープを使う日を想定しているので、どの区画で何を登るかをパートナーと先に合わせてください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/111",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "天王岩區分上／下岩場及抱石登錄，重申釣場停車、廁所禁用。投稿型資料不是管理方許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 上下の岩場を決めてからルートを選ぶ paragraph 2",
+      "claim": "出版社の紹介は北西向きで冬は寒いとしています。春の旅行では直前の雨を確認し、現場の岩の状態を見て登るか判断しましょう。通年という表示は乾燥の保証ではありません。普段の外岩限界より余裕のある一本から始め、手足の置き方と下降を確認してから次の目標へ進む計画が組めます。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/天王岩/",
+          "title": "山と溪谷社 CLIMBING-net — 天王岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "場地為あきる野市養沢的チャート岩場；5.10、5.11路線較多，北西向冬冷。武蔵五日市轉養沢方向巴士曽利郷橋，指定山徑。記錄釣場停車與廁所無斷使用禁止、舊火葬場路通行禁令、十里木替代停車及攜帶如廁安排。未據此確認未來造訪日許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/111",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "天王岩區分上／下岩場及抱石登錄，重申釣場停車、廁所禁用。投稿型資料不是管理方許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 武蔵五日市から先のバスを確認する paragraph 1",
+      "claim": "紹介されている交通の骨格は、武蔵五日市駅から養沢方面のバスで曽利郷橋へ行き、車道脇の指定された山道から取り付くものです。宿泊地や出発時刻は、旅行当日の往復バスを調べてから決めましょう。ここでは固定の便や新宿からの所要時間を約束しません。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/天王岩/",
+          "title": "山と溪谷社 CLIMBING-net — 天王岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "場地為あきる野市養沢的チャート岩場；5.10、5.11路線較多，北西向冬冷。武蔵五日市轉養沢方向巴士曽利郷橋，指定山徑。記錄釣場停車與廁所無斷使用禁止、舊火葬場路通行禁令、十里木替代停車及攜帶如廁安排。未據此確認未來造訪日許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/111",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "天王岩區分上／下岩場及抱石登錄，重申釣場停車、廁所禁用。投稿型資料不是管理方許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 武蔵五日市から先のバスを確認する paragraph 2",
+      "claim": "以前の火葬場へ向かう道は地権者から通行しないよう求められています。秋川国際マス釣場の駐車場、その周辺の路肩、岩場上の資材置き場を駐車先にしないでください。車なら十里木の正規の駐車方法を確認し、追加の徒歩やバス移動も予定に入れます。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/天王岩/",
+          "title": "山と溪谷社 CLIMBING-net — 天王岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "場地為あきる野市養沢的チャート岩場；5.10、5.11路線較多，北西向冬冷。武蔵五日市轉養沢方向巴士曽利郷橋，指定山徑。記錄釣場停車與廁所無斷使用禁止、舊火葬場路通行禁令、十里木替代停車及攜帶如廁安排。未據此確認未來造訪日許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/111",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "天王岩區分上／下岩場及抱石登錄，重申釣場停車、廁所禁用。投稿型資料不是管理方許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 補給と帰路を登る前に決める paragraph 1",
+      "claim": "釣場の施設はクライマー用のサービスではありません。両資料はトイレの無断利用を避けるよう求めています。アプローチ前に用を済ませ、飲食物を用意し、ゴミは持ち帰りましょう。釣場の売店や食堂を利用するときも、施設のルールを先に尋ねてください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/天王岩/",
+          "title": "山と溪谷社 CLIMBING-net — 天王岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "場地為あきる野市養沢的チャート岩場；5.10、5.11路線較多，北西向冬冷。武蔵五日市轉養沢方向巴士曽利郷橋，指定山徑。記錄釣場停車與廁所無斷使用禁止、舊火葬場路通行禁令、十里木替代停車及攜帶如廁安排。未據此確認未來造訪日許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/111",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "天王岩區分上／下岩場及抱石登錄，重申釣場停車、廁所禁用。投稿型資料不是管理方許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 補給と帰路を登る前に決める paragraph 2",
+      "claim": "実際の訪問日の開放状況と通行条件は確認できていません。",
+      "verdict": "unverifiable",
+      "sources": [],
+      "disposition": "qualified",
+      "qualification": "実際の訪問日の開放状況と通行条件は確認できていません。",
+      "reason": "未取得能確認實際造訪日管理條件的現行來源；正文明示不確定並給出延期或向管理方確認的行動。"
+    },
+    {
+      "location": "## 補給と帰路を登る前に決める paragraph 2 — remainder",
+      "claim": "交通予約後も管理情報を再確認し、データベース掲載を許可の代わりにしないでください。片付け、徒歩、バス待ちの余裕を残して岩場を出る時刻を決めると、一本追加するために帰路を圧迫せずに済みます。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/天王岩/",
+          "title": "山と溪谷社 CLIMBING-net — 天王岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "場地為あきる野市養沢的チャート岩場；5.10、5.11路線較多，北西向冬冷。武蔵五日市轉養沢方向巴士曽利郷橋，指定山徑。記錄釣場停車與廁所無斷使用禁止、舊火葬場路通行禁令、十里木替代停車及攜帶如廁安排。未據此確認未來造訪日許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/111",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "天王岩區分上／下岩場及抱石登錄，重申釣場停車、廁所禁用。投稿型資料不是管理方許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "本段其餘來源背景已核對；查公告、帶補給、保留替代與返程餘裕是品牌編輯的規劃建議，不冒充實測或管理方規定。"
+    }
+  ],
+  "media": [],
+  "links": [
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/天王岩/",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "https://www.rocktopo.net/areas/111",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
+  "verification_notes": [
+    "No cover/body images; no media rights assumptions.",
+    "No self-approved reviews; independent factual/translation/editorial review required.",
+    "Future visit permission explicitly qualified.",
+    "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
+  ]
+}

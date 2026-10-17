@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "article_id": "0225e44e1bc9ca45cd60c5f524dfd8d3",
+  "checked_at": "2026-10-12T09:49:42+09:00",
+  "source_sha256": "df4858157be1ea40333a22e0f5abc9b42953d23cb5b4a14a7f5ca6675202d62b",
+  "claims": [
+    {
+      "location": "frontmatter title/excerpt/category/tags",
+      "claim": "湯河原幕岩ガイド：日当たりのよい岩壁と区画ごとの確認 / 幕岩の日照と短いルート、バス接近、公園料金と区画の登攀許可を分けて確認します。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.yugawara.or.jp/sightseeing/893/",
+          "title": "湯河原温泉公式観光サイト — 893",
+          "publisher": "湯河原温泉公式観光サイト",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "湯河原官方觀光頁：幕山公園幕岩、日照冬季人氣、短路線排隊；JR湯河原站幕山公園巴士終點、參考15分；梅の宴有入園停車費。未將日期與金額視為未來保證。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/幕岩/",
+          "title": "山と溪谷社 CLIMBING-net — 幕岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "幕岩凝灰岩秋至春，正面壁、茅ヶ崎ロック等分區，上部接近路徑注意；短低角路線墜落不一定更寬容；有禁止進入與需查JFA、テントウムシ以西舊禁入資訊。舊交通描述與官方不同，不拼為時刻表。幕山公園禁露營。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "場地、主題與正文承諾均以已讀來源為背景；分類與標籤是編輯選擇，不宣稱已開放或親身體驗。"
+    },
+    {
+      "location": "## 東京から岩を中心にした一日へ paragraph 1",
+      "claim": "湯河原幕岩は神奈川県湯河原町の幕山公園周辺にあります。駅とバスでつなぎ、自然の岩を登る日として検討できる場所です。自立したロープクライマー向けに季節、交通、区画の制限を整理します。初めての外岩なら指導者と行く区画を先に相談してください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.yugawara.or.jp/sightseeing/893/",
+          "title": "湯河原温泉公式観光サイト — 893",
+          "publisher": "湯河原温泉公式観光サイト",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "湯河原官方觀光頁：幕山公園幕岩、日照冬季人氣、短路線排隊；JR湯河原站幕山公園巴士終點、參考15分；梅の宴有入園停車費。未將日期與金額視為未來保證。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/幕岩/",
+          "title": "山と溪谷社 CLIMBING-net — 幕岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "幕岩凝灰岩秋至春，正面壁、茅ヶ崎ロック等分區，上部接近路徑注意；短低角路線墜落不一定更寬容；有禁止進入與需查JFA、テントウムシ以西舊禁入資訊。舊交通描述與官方不同，不拼為時刻表。幕山公園禁露營。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 東京から岩を中心にした一日へ paragraph 2",
+      "claim": "[湯河原の公式観光ページ](https://www.yugawara.or.jp/sightseeing/893/)は日当たりのよさ、冬の人気、短いルートと順番待ちを紹介しています。[CLIMBING-net](https://www.climbing-net.com/iwaba_detail/幕岩/)は凝灰岩、秋から春のシーズンを掲載します。計画に役立つ特徴ですが、晴天が全区画の自由な利用を保証するわけではありません。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.yugawara.or.jp/sightseeing/893/",
+          "title": "湯河原温泉公式観光サイト — 893",
+          "publisher": "湯河原温泉公式観光サイト",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "湯河原官方觀光頁：幕山公園幕岩、日照冬季人氣、短路線排隊；JR湯河原站幕山公園巴士終點、參考15分；梅の宴有入園停車費。未將日期與金額視為未來保證。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/幕岩/",
+          "title": "山と溪谷社 CLIMBING-net — 幕岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "幕岩凝灰岩秋至春，正面壁、茅ヶ崎ロック等分區，上部接近路徑注意；短低角路線墜落不一定更寬容；有禁止進入與需查JFA、テントウムシ以西舊禁入資訊。舊交通描述與官方不同，不拼為時刻表。幕山公園禁露營。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 総本数より訪れる区画を決める paragraph 1",
+      "claim": "幕岩は一枚の壁ではありません。出版社は正面壁、茅ヶ崎ロックなどを分け、一部の上部アプローチの危険と立入禁止範囲を記しています。区画と目標を決めてトポと利用条件を確認し、全エリアの本数から登れる量を推測しないでください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.yugawara.or.jp/sightseeing/893/",
+          "title": "湯河原温泉公式観光サイト — 893",
+          "publisher": "湯河原温泉公式観光サイト",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "湯河原官方觀光頁：幕山公園幕岩、日照冬季人氣、短路線排隊；JR湯河原站幕山公園巴士終點、參考15分；梅の宴有入園停車費。未將日期與金額視為未來保證。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/幕岩/",
+          "title": "山と溪谷社 CLIMBING-net — 幕岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "幕岩凝灰岩秋至春，正面壁、茅ヶ崎ロック等分區，上部接近路徑注意；短低角路線墜落不一定更寬容；有禁止進入與需查JFA、テントウムシ以西舊禁入資訊。舊交通描述與官方不同，不拼為時刻表。幕山公園禁露營。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 総本数より訪れる区画を決める paragraph 2",
+      "claim": "短いラインも気軽とは限りません。出版社は短く傾斜が少ないリードでの墜落が危険になる場合を注意しています。選線、ビレイ位置、下降、回収をまとめて確認します。「初心者向き」という観光紹介は屋外のロープ能力を不要にするものではありません。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.yugawara.or.jp/sightseeing/893/",
+          "title": "湯河原温泉公式観光サイト — 893",
+          "publisher": "湯河原温泉公式観光サイト",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "湯河原官方觀光頁：幕山公園幕岩、日照冬季人氣、短路線排隊；JR湯河原站幕山公園巴士終點、參考15分；梅の宴有入園停車費。未將日期與金額視為未來保證。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/幕岩/",
+          "title": "山と溪谷社 CLIMBING-net — 幕岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "幕岩凝灰岩秋至春，正面壁、茅ヶ崎ロック等分區，上部接近路徑注意；短低角路線墜落不一定更寬容；有禁止進入與需查JFA、テントウムシ以西舊禁入資訊。舊交通描述與官方不同，不拼為時刻表。幕山公園禁露營。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 湯河原駅から当日のバスを調べる paragraph 1",
+      "claim": "公式観光ページはJR湯河原駅から幕山公園行きに乗り、終点下車、乗車約15分としています。出版社の古いページには診療所前からの徒歩案内もあります。両者を固定の時刻表のように組み合わせず、旅行当日の便、停留所、最終の帰りを確認して出発時刻を決めます。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.yugawara.or.jp/sightseeing/893/",
+          "title": "湯河原温泉公式観光サイト — 893",
+          "publisher": "湯河原温泉公式観光サイト",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "湯河原官方觀光頁：幕山公園幕岩、日照冬季人氣、短路線排隊；JR湯河原站幕山公園巴士終點、參考15分；梅の宴有入園停車費。未將日期與金額視為未來保證。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/幕岩/",
+          "title": "山と溪谷社 CLIMBING-net — 幕岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "幕岩凝灰岩秋至春，正面壁、茅ヶ崎ロック等分區，上部接近路徑注意；短低角路線墜落不一定更寬容；有禁止進入與需查JFA、テントウムシ以西舊禁入資訊。舊交通描述與官方不同，不拼為時刻表。幕山公園禁露營。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 湯河原駅から当日のバスを調べる paragraph 2",
+      "claim": "ロープを片付け、区画から公園まで下り、バスを待つ時間を確保します。車は当期の駐車配置と現地指示を守り、道路や観光客用の区画を勝手に終日利用先としないでください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.yugawara.or.jp/sightseeing/893/",
+          "title": "湯河原温泉公式観光サイト — 893",
+          "publisher": "湯河原温泉公式観光サイト",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "湯河原官方觀光頁：幕山公園幕岩、日照冬季人氣、短路線排隊；JR湯河原站幕山公園巴士終點、參考15分；梅の宴有入園停車費。未將日期與金額視為未來保證。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/幕岩/",
+          "title": "山と溪谷社 CLIMBING-net — 幕岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "幕岩凝灰岩秋至春，正面壁、茅ヶ崎ロック等分區，上部接近路徑注意；短低角路線墜落不一定更寬容；有禁止進入與需查JFA、テントウムシ以西舊禁入資訊。舊交通描述與官方不同，不拼為時刻表。幕山公園禁露營。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 梅の季節の料金と立入制限は別に確認する paragraph 1",
+      "claim": "公式ページは「梅の宴」期間の入園料と有料駐車を記しています。その年の開催日と料金を調べ、過去の金額を保証と受け取らないでください。公園への入園は特定の岩場の登攀許可を代替しません。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.yugawara.or.jp/sightseeing/893/",
+          "title": "湯河原温泉公式観光サイト — 893",
+          "publisher": "湯河原温泉公式観光サイト",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "湯河原官方觀光頁：幕山公園幕岩、日照冬季人氣、短路線排隊；JR湯河原站幕山公園巴士終點、參考15分；梅の宴有入園停車費。未將日期與金額視為未來保證。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/幕岩/",
+          "title": "山と溪谷社 CLIMBING-net — 幕岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "幕岩凝灰岩秋至春，正面壁、茅ヶ崎ロック等分區，上部接近路徑注意；短低角路線墜落不一定更寬容；有禁止進入與需查JFA、テントウムシ以西舊禁入資訊。舊交通描述與官方不同，不拼為時刻表。幕山公園禁露營。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 梅の季節の料金と立入制限は別に確認する paragraph 2",
+      "claim": "実際の訪問日の各区画の開放範囲とイベント期の料金は確認できていません。",
+      "verdict": "unverifiable",
+      "sources": [],
+      "disposition": "qualified",
+      "qualification": "実際の訪問日の各区画の開放範囲とイベント期の料金は確認できていません。",
+      "reason": "未取得能確認實際造訪日管理條件的現行來源；正文明示不確定並給出延期或向管理方確認的行動。"
+    },
+    {
+      "location": "## 梅の季節の料金と立入制限は別に確認する paragraph 2 — remainder",
+      "claim": "CLIMBING-netにはテントウムシロック以西の立入禁止とJFAでの現状確認が記載されています。適用時期を確定できる日付がないため、現在の全境界として扱いません。最新管理情報と現地掲示を読み、不明な場所へ入らないことが必要です。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.yugawara.or.jp/sightseeing/893/",
+          "title": "湯河原温泉公式観光サイト — 893",
+          "publisher": "湯河原温泉公式観光サイト",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "湯河原官方觀光頁：幕山公園幕岩、日照冬季人氣、短路線排隊；JR湯河原站幕山公園巴士終點、參考15分；梅の宴有入園停車費。未將日期與金額視為未來保證。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/幕岩/",
+          "title": "山と溪谷社 CLIMBING-net — 幕岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "幕岩凝灰岩秋至春，正面壁、茅ヶ崎ロック等分區，上部接近路徑注意；短低角路線墜落不一定更寬容；有禁止進入與需查JFA、テントウムシ以西舊禁入資訊。舊交通描述與官方不同，不拼為時刻表。幕山公園禁露營。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "本段其餘來源背景已核對；查公告、帶補給、保留替代與返程餘裕是品牌編輯的規劃建議，不冒充實測或管理方規定。"
+    },
+    {
+      "location": "## 許可された区画内で予備目標を用意する paragraph 1",
+      "claim": "同じ利用可能な区画で主目標と予備を決めると、空いた壁を探して区画間を移動するより計画しやすくなります。順番を相談し、帰路の締切を保ちましょう。公園の指定施設を使い、ゴミを持ち帰り、幕営しないでください。出版社は幕山公園のキャンプ禁止を掲載しています。他の公園利用者とも場所を共有する一日です。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.yugawara.or.jp/sightseeing/893/",
+          "title": "湯河原温泉公式観光サイト — 893",
+          "publisher": "湯河原温泉公式観光サイト",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "湯河原官方觀光頁：幕山公園幕岩、日照冬季人氣、短路線排隊；JR湯河原站幕山公園巴士終點、參考15分；梅の宴有入園停車費。未將日期與金額視為未來保證。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/幕岩/",
+          "title": "山と溪谷社 CLIMBING-net — 幕岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "幕岩凝灰岩秋至春，正面壁、茅ヶ崎ロック等分區，上部接近路徑注意；短低角路線墜落不一定更寬容；有禁止進入與需查JFA、テントウムシ以西舊禁入資訊。舊交通描述與官方不同，不拼為時刻表。幕山公園禁露營。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    }
+  ],
+  "media": [],
+  "links": [
+    {
+      "url": "https://www.yugawara.or.jp/sightseeing/893/",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/幕岩/",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
+  "verification_notes": [
+    "No cover/body images; no media rights assumptions.",
+    "No self-approved reviews; independent factual/translation/editorial review required.",
+    "Future visit permission explicitly qualified.",
+    "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
+  ]
+}

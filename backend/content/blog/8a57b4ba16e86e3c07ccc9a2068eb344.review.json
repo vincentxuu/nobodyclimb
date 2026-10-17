@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "8a57b4ba16e86e3c07ccc9a2068eb344",
+  "source_sha256": "626a62005a92de4b192724ab24b314fa4048ab7ab834e59fbe8bf5bc6f0ff328",
+  "evidence_sha256": "22757ab94f58d7cd61f783450e3207aecff0409046e948e129e41e5d10ddcc7a",
+  "reviewed_at": "2026-10-12T00:59:36.480219+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "出版者A/B/C大、D/E小共五峰、日原川河原、東日原巴士+20分、平日中日原較近、ringbolt/piton與neiling級數變動警告均核對；ROCKTOPO C-E的ポパイ5.10b/鬼門5.11b/ロック5.12b吻合。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語五峰、3條等級、20分鐘、冬寒/通年非每日保證、face不等於完整現代bolt及未驗交通/停車/支點限定一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "將目標峰/線/保護/下降/回程作五項准备，没有把cold spot當打卡理由；不提供neiling或增加保護操作。"
+    }
+  },
+  "findings": []
+}

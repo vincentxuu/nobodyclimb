@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "article_id": "4170cdb52c273770734572c680c669c4",
+  "source_sha256": "000cda6683a217474333df263d2fc6effd77674382167d5160ea0df16a752c81",
+  "evidence_sha256": "fc627fcf301f32edb5fbc14c8133229d189108812e61bb517b0aee0100d4da82",
+  "reviewed_at": "2026-10-12T00:59:37.003268+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "館方home/facilities/visitor/charge相關正文實讀：5/11分、12–23/10–21、無固定休日/換線、頂繩體驗1h1100另設施。資格已修為完成抱石講習或抱石経験，未擴成任何攀登。2420+1100=3520；租鞋330/粉110/吊帶110/ATC110/繩550、初次免费不含繩/襪子/分店登記共通均吻合。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語全文及修後資格再次比對；5/11分鐘英文以單字寫出亦一致，adult/all-day/tax-inclusive/initial registration/不含體驗、免费清單與繩排除一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "選抱石/繩伴/體驗三條行动清楚；没有誤認頂繩即工作人員隨到隨確保。正文H2起始與來源清單已補，價目日期與未來重查保留。參考標題過長可選縮成館名。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "初稿H2起始與文末來源已補；頂繩體驗资格已限定完成抱石講習或抱石經驗，三語重讀。"
+    }
+  ]
+}

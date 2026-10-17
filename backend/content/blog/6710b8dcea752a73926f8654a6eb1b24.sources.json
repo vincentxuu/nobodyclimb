@@ -1,0 +1,300 @@
+{
+  "schema_version": 1,
+  "article_id": "6710b8dcea752a73926f8654a6eb1b24",
+  "checked_at": "2026-10-12T00:52:07.867501+00:00",
+  "claims": [
+    {
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場地、攀登類型和決策用途；分類與標籤依室內抱石/戶外旅行主題。B-PUMP Akihabara guide: first-visit costs and a Tokyo bouldering day / Check Akihabara's own hours, registration, day admission and shoe rental, then plan a session around your ability and setting notices.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/akiba/",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店自身のACCESS、OPEN HOUR、PRICEを確認。住所湯島1-1-8、両駅徒歩5分。平日12-23、土祝11-21、日10-21。税込登録2200、他PUMP1100、成人通日2420、鞋330初回無料。チョーク貸出なし。粉末にバッグ要、液体単体可。未成年条件と2026年10月セット案内も読取。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/akiba/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店の初訪問ページ。初回指導、動きやすい衣服と靴下、初回鞋無料、粉貸出なし、初回成人4620円、18歳未満同意書。主頁の料金と整合。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "已對照場地來源及正文承諾；地理標籤東京攀岩指東京旅行延伸目的地，不把外縣岩場寫成位於東京。"
+    },
+    {
+      "location": "正文段落 1",
+      "claim": "[B-PUMP TOKYO Akihabara](https://pump-climbing.com/gym/akiba/) is a bouldering gym at 1-1-8 Yushima, Bunkyo-ku, Tokyo. Its official site gives about a five-minute walk from either Akihabara or Ochanomizu Station, making it practical before or after city activities. This is a bouldering option. If your original goal was rope leading or belay practice, reset the day's aim to problems, movement and the gym experience.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/akiba/",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店自身のACCESS、OPEN HOUR、PRICEを確認。住所湯島1-1-8、両駅徒歩5分。平日12-23、土祝11-21、日10-21。税込登録2200、他PUMP1100、成人通日2420、鞋330初回無料。チョーク貸出なし。粉末にバッグ要、液体単体可。未成年条件と2026年10月セット案内も読取。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/akiba/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店の初訪問ページ。初回指導、動きやすい衣服と靴下、初回鞋無料、粉貸出なし、初回成人4620円、18歳未満同意書。主頁の料金と整合。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 2",
+      "claim": "The official homepage's October 2026 setting news mentions beginner-to-intermediate use on the first floor and a Beginner Wall on the third, alongside other floor and rooftop updates. These are useful first-visit orientation clues: ask staff about current grades and available walls on arrival. A dated setting update is not a permanent problem inventory. Even experienced boulderers should first learn the landing area, movement around the gym and local rules.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/akiba/",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店自身のACCESS、OPEN HOUR、PRICEを確認。住所湯島1-1-8、両駅徒歩5分。平日12-23、土祝11-21、日10-21。税込登録2200、他PUMP1100、成人通日2420、鞋330初回無料。チョーク貸出なし。粉末にバッグ要、液体単体可。未成年条件と2026年10月セット案内も読取。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/akiba/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店の初訪問ページ。初回指導、動きやすい衣服と靴下、初回鞋無料、粉貸出なし、初回成人4620円、18歳未満同意書。主頁の料金と整合。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "As read on October 12, 2026, Akihabara's official page lists weekday hours of 12:00–23:00, Saturdays and public holidays 11:00–21:00, and Sundays 10:00–21:00, all Japan local time. Check current notices for exceptions and setting. Adult full-day admission is ¥2,420 including tax. Initial registration is ¥2,200, or ¥1,100 for someone registered at another PUMP gym who is new to Akihabara.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/akiba/",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店自身のACCESS、OPEN HOUR、PRICEを確認。住所湯島1-1-8、両駅徒歩5分。平日12-23、土祝11-21、日10-21。税込登録2200、他PUMP1100、成人通日2420、鞋330初回無料。チョーク貸出なし。粉末にバッグ要、液体単体可。未成年条件と2026年10月セット案内も読取。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/akiba/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店の初訪問ページ。初回指導、動きやすい衣服と靴下、初回鞋無料、粉貸出なし、初回成人4620円、18歳未満同意書。主頁の料金と整合。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "Budget example: an adult entirely new to PUMP buying full-day admission pays ¥4,620 for registration plus use. With the other-PUMP registration rate, the total is ¥3,520. These are sums of the two official charges and exclude other spending. The site also lists weekday daytime and evening rates with specific time windows. Check the table for a shorter visit rather than budgeting an evening rate for a full day.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/akiba/",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店自身のACCESS、OPEN HOUR、PRICEを確認。住所湯島1-1-8、両駅徒歩5分。平日12-23、土祝11-21、日10-21。税込登録2200、他PUMP1100、成人通日2420、鞋330初回無料。チョーク貸出なし。粉末にバッグ要、液体単体可。未成年条件と2026年10月セット案内も読取。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/akiba/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店の初訪問ページ。初回指導、動きやすい衣服と靴下、初回鞋無料、粉貸出なし、初回成人4620円、18歳未満同意書。主頁の料金と整合。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 5",
+      "claim": "Akihabara lists shoe rental at ¥330, free on the first visit, and says chalk rental is currently unavailable. Powdered chalk requires a chalk bag; liquid chalk may be used on its own. Its [first-visit page](https://pump-climbing.com/gym/akiba/discovery) also asks visitors to bring socks and clothing suitable for movement. Bring suitable chalk supplies or ask beforehand if needed. State your first-visit and PUMP registration status at reception, complete orientation and then warm up.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/akiba/",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店自身のACCESS、OPEN HOUR、PRICEを確認。住所湯島1-1-8、両駅徒歩5分。平日12-23、土祝11-21、日10-21。税込登録2200、他PUMP1100、成人通日2420、鞋330初回無料。チョーク貸出なし。粉末にバッグ要、液体単体可。未成年条件と2026年10月セット案内も読取。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/akiba/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店の初訪問ページ。初回指導、動きやすい衣服と靴下、初回鞋無料、粉貸出なし、初回成人4620円、18歳未満同意書。主頁の料金と整合。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 6",
+      "claim": "This budget uses an adult example. Akihabara's official page sets accompaniment, time restrictions and first-visit consent requirements for minors, so an adult itinerary should not simply be reused for children. A guardian should read the branch's rules and prepare the required documents. Group capacity, storage capacity and coaching availability for a specific date have not been verified here; confirm essential arrangements with the gym before booking.",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/akiba/",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店自身のACCESS、OPEN HOUR、PRICEを確認。住所湯島1-1-8、両駅徒歩5分。平日12-23、土祝11-21、日10-21。税込登録2200、他PUMP1100、成人通日2420、鞋330初回無料。チョーク貸出なし。粉末にバッグ要、液体単体可。未成年条件と2026年10月セット案内も読取。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/akiba/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店の初訪問ページ。初回指導、動きやすい衣服と靴下、初回鞋無料、粉貸出なし、初回成人4620円、18歳未満同意書。主頁の料金と整合。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "This budget uses an adult example. Akihabara's official page sets accompaniment, time restrictions and first-visit consent requirements for minors, so an adult itinerary should not simply be reused for children. A guardian should read the branch's rules and prepare the required documents. Group capacity, storage capacity and coaching availability for a specific date have not been verified here; confirm essential arrangements with the gym before booking."
+    },
+    {
+      "location": "正文段落 7",
+      "claim": "Suggested example: arrive on a weekday afternoon, learn the current grading on easy problems, choose a few interesting movements to work on and finish with energy for dinner. If an outdoor day follows, there is no need to exhaust yourself on every popular problem. This is an editorial plan, not a firsthand crowd assessment or a tested training outcome. If walls are being reset, ask staff to direct you to available areas.",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/akiba/",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店自身のACCESS、OPEN HOUR、PRICEを確認。住所湯島1-1-8、両駅徒歩5分。平日12-23、土祝11-21、日10-21。税込登録2200、他PUMP1100、成人通日2420、鞋330初回無料。チョーク貸出なし。粉末にバッグ要、液体単体可。未成年条件と2026年10月セット案内も読取。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/akiba/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店の初訪問ページ。初回指導、動きやすい衣服と靴下、初回鞋無料、粉貸出なし、初回成人4620円、18歳未満同意書。主頁の料金と整合。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "本段為編輯的行程建議，官網來源只支持換線等背景事實，不支持建議本身；正文已明示為編輯安排、非本站實測。",
+      "disposition": "qualified",
+      "qualification": "This is an editorial plan, not a firsthand crowd assessment or a tested training outcome"
+    },
+    {
+      "location": "正文段落 8",
+      "claim": "The fees and hours above are the official-page snapshot read on October 12, 2026, not a price guarantee for April 2027. Before travelling, reread Akihabara's own PRICE and OPEN HOUR sections and its latest setting notices. The same check applies when substituting the gym for a rainy outdoor day.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://pump-climbing.com/gym/akiba/",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店自身のACCESS、OPEN HOUR、PRICEを確認。住所湯島1-1-8、両駅徒歩5分。平日12-23、土祝11-21、日10-21。税込登録2200、他PUMP1100、成人通日2420、鞋330初回無料。チョーク貸出なし。粉末にバッグ要、液体単体可。未成年条件と2026年10月セット案内も読取。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://pump-climbing.com/gym/akiba/discovery",
+          "title": "ボルダリングジム＆ショップ B-PUMP TOKYO 秋葉原",
+          "publisher": "PUMP",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "秋葉原店の初訪問ページ。初回指導、動きやすい衣服と靴下、初回鞋無料、粉貸出なし、初回成人4620円、18歳未満同意書。主頁の料金と整合。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    }
+  ],
+  "media": [],
+  "source_sha256": "d2ee5a4974f6df4cb47de75bcfa2488695e9555b349cb206094cfef44e47d4ac",
+  "links": [
+    {
+      "url": "https://pump-climbing.com/gym/akiba/",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://pump-climbing.com/gym/akiba/discovery",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_artifacts": [
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/f0.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/ak.json"
+  ],
+  "limitations": ["未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。"]
+}

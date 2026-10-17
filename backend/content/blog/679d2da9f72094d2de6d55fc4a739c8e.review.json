@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "article_id": "679d2da9f72094d2de6d55fc4a739c8e",
+  "source_sha256": "e243055991d60e81f257420ef7bdb89f4ea4ae195c9008dec3226d362ee6bdbf",
+  "evidence_sha256": "9fd714d650fa8c64a2a93dd1c1084ec098d20c784f4b3a2aec7b603a655923cf",
+  "reviewed_at": "2026-10-12T06:59:58Z",
+  "reviewer": "Claude 獨立審稿 subagent（claude-opus-5-5；未參與寫稿與本次台帳修改）",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "本次第二輪重審（2026-10-12）。第一輪我對「正文段落 7」改標 unverifiable 的版本判 changes_requested（qualification 只說明本文不是入場許可、固定點檢查紀錄或 topo 替代，不符本輪統一標準）；其後該筆改標已整筆還原。本輪以 git diff 確認：原稿未動；台帳相對 HEAD 只剩刪除 limitations 的「尚待未參與寫稿者獨立審查。」（+1/−2 行），段落 7 回到 confirmed 與原 reason，claims、sources、links 與 HEAD 相同。刪除該句恰當（寫於獨立審查之前），保留的「未驗當日岩況/服務或交通」與正文相符。台帳 source_sha256 等於原稿實際 SHA-256；段落 4、5、6 三筆 unverifiable 的 qualification 逐字存在於原稿。來源事實方面，第一輪已以 curl 抽查 ROCKTOPO areas/92（中央稜最高5.9、悪魔のエチュード5.10b、シリアル5.11a、ノースマウンテン5.12a、任侠道5.13a；弓状エリア存在）與 JFA access/10079（2024年12月，広場エリア「青い瞳のセリーヌ」1ピン目ボルト抜け），與正文相符；本輪未再重取。未重新查證：CLIMBING-net、JFA access/6829、小鹿野協會入山頁兩輪皆未重取，沿用台帳紀錄；會員/登記/開放條件、bolt 修復狀態、公共交通與林道停車未驗（正文已明示）；未實地到場。保留事項：段落 7 主體是編輯的行程建議與改期判準，來源只支持背景事實，confirmed 高估了對建議本身的證據；此為 HEAD 既有狀態、非本輪引入，列為未解 advisory（見 findings）。（2026-10-12 補記：台帳其後僅經 Biome 重新排版，limitations 陣列由多行併為單行；另一位獨立審稿者以程式比對確認 JSON 內容與原核准版本完全相同後更新 evidence_sha256，未重做內容審查。）"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "第一輪已逐段對照 zh/en/ja 全文，本輪原稿 hash 未變、結論沿用並重看段落 7：5.9/5.10b/5.11a/5.12a/5.13a、2024年12月、國道299、四月，以及「不宣稱全區開放」「未取得修復完成資訊」「不能推論其他線安全」「未核實公共交通與林道停車」等限制與否定三語一致，無新增承諾。段落 7 的標示用語 zh「建議示例」、en「Suggested example」、ja「計画例」，ja 未出現「提案」，語氣略弱但未改變事實。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "全文於第一輪重讀：岩區選擇、能力門檻、topo 線索、入場與固定點公告、交通與岩況可獨立閱讀，未假冒親身攀登；段落 7 以「建議示例」開頭並聲明本文不是入場許可、固定點檢查紀錄或 topo 替代，讀者不致把建議誤當保證，但正文沒有一句直接說明該段是編輯建議／非實測。先前審稿（Codex /root/commit_review）關於簡體字修正與台帳同步的結論，重讀 zh 全文未見簡體字、claim 逐字存在於原稿，仍成立。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "第一輪必修（段落 7 的 qualification 不符統一標準）已解：該筆改標整筆還原為 HEAD 的 confirmed 與原 reason，不合格的 qualification 已不存在於台帳。殘留的標示問題改列 advisory。"
+    },
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "先前審稿的必修（正文簡體字修成繁中、台帳 claim/qualification 與正文同步）重新確認仍成立。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "未解，待使用者決定：台帳「正文段落 7」主體是編輯的行程建議與改期判準（只選一區、少量目標、濕壁/禁用告示/無可靠下降資訊即改行程），五筆來源只支持岩區劃分、滲水、入山注意等背景事實，不支持建議本身，卻標 confirmed（reason 自述「建議為帶限制的決策建議，非本站實測、保證或第一手紀錄」）。本輪曾改標 unverifiable，但原稿沒有合格的限制句可當 qualification（現有句只說明本文不是入場許可、固定點檢查紀錄或 topo 替代），因此改標已還原。要正確改標需先在三語原稿段落 7 補一句說明建議性質的句子（例：zh「這是編輯的行程建議，不是實測紀錄或當日狀態保證」及 en/ja 對應句），再同步台帳並重審。此為 HEAD 既有狀態，不是本輪引入的退步，故不列 blocking。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": false,
+      "notes": "未解，非本次修改範圍：段落 2（適用對象與行程判斷）與段落 3 後半同樣以編輯建議為主，台帳標 confirmed；建議與段落 7 一併列入待決清單。"
+    }
+  ]
+}
