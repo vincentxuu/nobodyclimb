@@ -2,6 +2,7 @@ import { D1Database, KVNamespace, R2Bucket } from '@cloudflare/workers-types'
 import { z } from 'zod'
 import { PostListItem, PostQueryOptions, PostRepository } from '../repositories/post-repository'
 import { Post } from '../types'
+import { PostLang } from '../utils/post-lang'
 import { deleteR2Images, extractR2ImagesFromContent } from '../utils/storage'
 import { trackAndUpdateViewCount } from '../utils/viewTracker'
 
@@ -136,15 +137,15 @@ export class PostService {
   /**
    * 取得 featured posts
    */
-  async getFeatured(limit: number = 6): Promise<PostListResponse[]> {
-    return await this.repository.findFeatured(limit)
+  async getFeatured(limit: number = 6, lang?: PostLang): Promise<PostListResponse[]> {
+    return await this.repository.findFeatured(limit, lang)
   }
 
   /**
    * 取得熱門 posts
    */
-  async getPopular(limit: number = 5): Promise<PostListResponse[]> {
-    const posts = await this.repository.findPopular(limit)
+  async getPopular(limit: number = 5, lang?: PostLang): Promise<PostListResponse[]> {
+    const posts = await this.repository.findPopular(limit, lang)
 
     // 批次獲取 tags
     const postIds = posts.map((p) => p.id as string)
@@ -194,8 +195,8 @@ export class PostService {
   /**
    * 取得所有 tags
    */
-  async getAllTags(): Promise<Array<{ tag: string; count: number }>> {
-    return await this.repository.getAllTags()
+  async getAllTags(lang?: PostLang): Promise<Array<{ tag: string; count: number }>> {
+    return await this.repository.getAllTags(lang)
   }
 
   /**

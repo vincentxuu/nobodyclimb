@@ -119,14 +119,14 @@ export default function BlogDetailClient() {
   // 獲取熱門文章
   const fetchPopularArticles = useCallback(async () => {
     try {
-      const response = await postService.getPopularPosts(4)
+      const response = await postService.getPopularPosts(4, locale)
       if (response.success && response.data) {
         setPopularArticles(response.data)
       }
     } catch (err) {
       console.error('Failed to fetch popular articles:', err)
     }
-  }, [])
+  }, [locale])
 
   // 獲取相關文章
   const fetchRelatedArticles = useCallback(async () => {

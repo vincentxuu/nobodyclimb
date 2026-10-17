@@ -49,7 +49,7 @@ pnpm blog:baseline <saved-public-api-response.json> --output backend/content/blo
 
 同 group 的 category、tags、cover_image、status、is_featured、author_username 相同；title/excerpt/body 自然翻譯。正文三語互連：中文 `/blog/<zh-id>`、英文 `/en/blog/<en-id>`、日文 `/ja/blog/<ja-id>`，連結名稱用「繁體中文」「English」「日本語」。術語首次對照，數字、日期、單位、否定、限制與原始來源 URL 一致。
 
-本站沿用現有 DB 的三篇文章，不新增 locale 表、不改 API/renderer。lang/group/mapping 用原稿與 checker 維護，DB 無文章語系欄位；目前列表不按文章語系篩選，三篇會混列。公開 locale 路由是三篇互連，不宣稱已实现本文語系切換資料模型。
+本站沿用現有 DB 的三篇文章，不新增 locale 表、不改 API/renderer。group/mapping 用原稿與 checker 維護；同步時將原稿的 lang 寫入 `posts.lang`，列表 API 依介面語系只回傳該語系與未標語系（使用者自行發表）的文章。公開 locale 路由是三篇互連，不宣稱已实现本文語系切換資料模型。
 
 三份原稿放同一 PR。更新同步三語原稿/來源/報告；沒有實際內容變更的 sibling 不改。baseline 只在第一次把 legacy 文章納入原稿管理時需要，每篇取自己的 baseline。已存在 legacy 單篇文章要先補其餘兩篇，再建立完整對照；新增譯稿 operation=create，既有文 operation=update。各語正文與資料的改動依實際 baseline 判斷，不能為了湊三份 update 無變更稿。
 
