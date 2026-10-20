@@ -1,10 +1,13 @@
 import { gradeToNumeric } from '../../core/climbing-schema'
 import { loadPipelineConfig } from '../../core/config'
-import { buildExcerpt, buildUrl, extractTitle } from '../../core/documents'
+import { buildExcerpt, buildUrl, extractTitle, formatRouteForLLM } from '../../core/documents'
 import { EmbeddingService } from '../../core/embedding'
 import { hybridSearch } from '../../tools/hybrid-search'
 import type { Tool, ToolContext, ToolResult } from '../types'
 import { type AgentRouteSource, fetchLatestVideoMap } from './route-sources'
+
+// 复用 formatRouteForLLM 的參數型別，避免跨目錄模組解析問題
+type RouteDoc = Parameters<typeof formatRouteForLLM>[0]
 
 export const recommendTool: Tool = {
   name: 'recommend',
@@ -115,6 +118,7 @@ export const recommendTool: Tool = {
           score: match.score,
           text: doc.text.slice(0, 300),
           url: buildUrl(doc),
+          _doc: doc as RouteDoc,
         }
       })
       .filter(Boolean) as Array<{
@@ -124,6 +128,7 @@ export const recommendTool: Tool = {
       score: number
       text: string
       url?: string
+      _doc: RouteDoc
     }>
 
     // 難度過濾
@@ -156,10 +161,14 @@ export const recommendTool: Tool = {
       db,
       filtered.map((r) => r.id)
     )
-    const recommendations = filtered.map((r) => ({
-      ...r,
-      latestVideoUrl: latestVideoMap.get(r.id),
-    }))
+    const recommendations = filtered.map((r) => {
+      const { _doc, ...rest } = r
+      return {
+        ...rest,
+        latestVideoUrl: latestVideoMap.get(r.id),
+        formattedText: formatRouteForLLM(_doc, latestVideoMap.get(r.id)),
+      }
+    })
 
     return {
       recentAscents: ascents.results ?? [],
@@ -180,6 +189,7 @@ export const recommendTool: Tool = {
         url?: string
         score?: number
         latestVideoUrl?: string
+        formattedText?: string
       }>
       count?: number
     }
@@ -191,10 +201,8 @@ export const recommendTool: Tool = {
     const lines: string[] = []
     if (data.recommendations?.length) {
       lines.push(`推薦路線（${data.count} 條）：`)
-      for (const [i, r] of data.recommendations.entries()) {
-        lines.push(
-          `${i + 1}. ${r.title}${r.excerpt ? `\n   ${r.excerpt}` : ''}${r.text ? `\n   ${r.text.slice(0, 200)}` : ''}`
-        )
+      for (const r of data.recommendations) {
+        lines.push(r.formattedText ?? r.title)
       }
     } else {
       lines.push('目前沒有推薦路線。')

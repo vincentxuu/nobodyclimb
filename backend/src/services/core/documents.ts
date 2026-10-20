@@ -67,6 +67,55 @@ export function buildExcerpt(doc: AIDocument): string {
   return doc.text.slice(0, 120).replace(/\n/g, ' ')
 }
 
+// 統一路線摘要格式化：供 pipeline / agent / SQL 路徑共用
+// 輸入為純物件（Record<string, unknown>），欄位名稱參照 formatRouteForLLm / formatSqlRowForLLm 的慣例
+// 格式：⛰ 路線名稱，難度等級：5.10a，類型：運攀，岩場：龍洞，岩場區域：長巷，路線長度：22m。描述。
+export function formatRouteSummary(data: Record<string, unknown>, videoUrl?: string): string {
+  const name = (data.name ?? data.title ?? data['路線名稱'] ?? '') as string
+  const grade = (data.grade ?? data.grade_numeric ?? data['難度等級'] ?? '') as string
+  const routeType = (data.route_type ?? data['攀登類型'] ?? '') as string
+  const cragName = (data.crag_name ?? data['所屬岩場'] ?? '') as string
+  const areaName = (data.area_name ?? data['岩場區域'] ?? '') as string
+  const height = (data.height ?? data.route_length ?? data['路線長度'] ?? '') as string
+  const description = (data.description ?? data['路線描述'] ?? '') as string
+
+  const parts: string[] = []
+  if (name) parts.push(`⛰ ${name}`)
+  if (grade) parts.push(`難度等級：${grade}`)
+  if (routeType) parts.push(`類型：${routeTypeLabel(routeType)}`)
+  if (cragName) parts.push(`岩場：${cragName}`)
+  if (areaName) parts.push(`岩場區域：${areaName}`)
+  if (height) parts.push(`路線長度：${height}`)
+  if (description) parts.push(description)
+
+  let result = parts.join('，') + '。'
+  if (videoUrl) {
+    result += ` [觀看影片](${videoUrl})`
+  }
+  return result
+}
+
+// 將路線文件格式化為與 pipeline 一致的一段式描述，供 agent 與 pipeline 共用
+// 格式：⛰ 路線名稱，難度等級：5.10a，類型：運攀，岩場：龍洞，岩場區域：長巷，路線長度：22m。描述。
+export function formatRouteForLLM(doc: AIDocument, videoUrl?: string): string {
+  if (doc.type !== 'route') return doc.text
+
+  const fieldMap: Record<string, string> = {}
+  for (const line of doc.text.split('\n')) {
+    const match = line.match(/^([^：\n]+)：(.+)$/)
+    if (match) fieldMap[match[1].trim()] = match[2].trim()
+  }
+
+  return formatRouteSummary(fieldMap, videoUrl)
+}
+
+// 將 SQL 查詢單行結果格式化為與 pipeline/agent 共用的一段式描述
+// 輸入為 TextToSqlService 回傳的單筆路線資料（純物件，非 AIDocument）
+// 格式：◯ 路線名稱，難度等級：5.10a，類型：運攀，岩場：龍洞，路線長度：22m。描述。
+export function formatSqlRowForLLM(row: Record<string, unknown>): string {
+  return formatRouteSummary(row)
+}
+
 // 依文件類型建立 URL
 export function buildUrl(doc: AIDocument): string | undefined {
   if (doc.type === 'route') {
@@ -132,4 +181,24 @@ export function injectRouteLinks(text: string, sources: AISource[]): string {
     }
   }
   return result
+}
+
+// 輸出正規化保底：確保所有 RAG 模式（pipeline / agent / GK / SQL）回覆格式一致
+// 在 finalizeResponse 之前執行，作為防漂移的安全網
+export function normalizeResponseFormat(answer: string): string {
+  let result = answer
+
+  // 1. 列表符號統一：* 開頭改為 - 開頭
+  result = result.replace(/^(?:\*\s+)/gm, '- ')
+
+  // 2. 移除 ## 標題語法（保留標題文字，去掉 ## 前綴）
+  result = result.replace(/^#{2,6}\s+/gm, '')
+
+  // 3. 移除縮排或子列表（開頭空白後的 - 或 *）
+  result = result.replace(/^\s+[-*]\s+/gm, '- ')
+
+  // 4. 壓縮連續空行（超過 2 個換行壓為 2 個）
+  result = result.replace(/\n{3,}/g, '\n\n')
+
+  return result.trim()
 }

@@ -18,6 +18,7 @@ import {
   MULTI_QUERY_EXPANSION_PROMPT,
   PLANNING_PROMPT,
   QUERY_TEMPLATE,
+  SQL_RESULT_ASSEMBLY_PROMPT,
   SYNTHESIS_PROMPT,
   SYSTEM_PROMPT,
   TOOL_SELECTION_PROMPT,
@@ -50,6 +51,7 @@ import {
   extractTitle,
   getDocuments,
   injectRouteLinks,
+  normalizeResponseFormat,
 } from './core/documents'
 import { EmbeddingService } from './core/embedding'
 import { buildFilter, buildFiltersFromParsed } from './core/filters'
@@ -126,6 +128,7 @@ export class QueryService {
   private finalizeResponse(response: AIAskResponse, locale?: AiLocale): AIAskResponse {
     if (locale === 'ja') return response
     response.answer = toTraditionalChinese(response.answer)
+    response.answer = normalizeResponseFormat(response.answer)
     response.suggested_questions = response.suggested_questions.map(toTraditionalChinese)
     return response
   }
@@ -216,7 +219,10 @@ export class QueryService {
     ])
 
     const p = {
-      SYSTEM_PROMPT: resolvePrompt(dbPrompts['system_prompt'], SYSTEM_PROMPT, []),
+      SYSTEM_PROMPT:
+        resolvePrompt(dbPrompts['system_prompt'], SYSTEM_PROMPT, []) +
+        (dbPrompts['format_rules'] ? `\n\n${dbPrompts['format_rules']}` : ''),
+      FORMAT_RULES: dbPrompts['format_rules'] ?? '',
       TOOL_SELECTION_PROMPT: resolvePrompt(
         dbPrompts['tool_selection_prompt'],
         TOOL_SELECTION_PROMPT,
@@ -257,6 +263,11 @@ export class QueryService {
         'context',
         'query',
       ]),
+      SQL_RESULT_ASSEMBLY_PROMPT: resolvePrompt(
+        dbPrompts['sql_result_assembly_prompt'],
+        SQL_RESULT_ASSEMBLY_PROMPT,
+        ['query', 'count', 'results']
+      ),
     }
     const gatewayOptions = this.env.AI_GATEWAY_SLUG
       ? { gateway: { id: this.env.AI_GATEWAY_SLUG } }
@@ -436,6 +447,7 @@ export class QueryService {
               onTokenReset: streamOpts?.onTokenReset,
               onProgress,
               signal: controller.signal,
+              formatRules: p.FORMAT_RULES,
             }),
             pipelineCfg.pipeline_timeout_ms,
             'pipeline'

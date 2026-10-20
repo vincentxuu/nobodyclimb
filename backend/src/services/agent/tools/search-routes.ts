@@ -1,11 +1,14 @@
 import { loadPipelineConfig } from '../../core/config'
-import { buildExcerpt, buildUrl, extractTitle } from '../../core/documents'
+import { buildExcerpt, buildUrl, extractTitle, formatRouteForLLM } from '../../core/documents'
 import { EmbeddingService } from '../../core/embedding'
 import { extractGradeFilter } from '../../core/nlp'
 import { hybridSearch } from '../../tools/hybrid-search'
 import type { Tool, ToolContext, ToolResult } from '../types'
 import { isSmallModel } from '../types'
 import { type AgentRouteSource, fetchLatestVideoMap } from './route-sources'
+
+// 复用 formatRouteForLLM 的參數型別，避免跨目錄模組解析問題
+type RouteDoc = Parameters<typeof formatRouteForLLM>[0]
 
 export const searchRoutesTool: Tool = {
   name: 'search_routes',
@@ -105,6 +108,8 @@ export const searchRoutesTool: Tool = {
           score: Math.round(match.score * 1000) / 1000,
           text: doc.text.slice(0, 500),
           url: buildUrl(doc),
+          // 保留原始文件供 formatRouteForLLM 使用（formatResult 時移除）
+          _doc: doc as RouteDoc,
         }
       })
       .filter(Boolean) as Array<{
@@ -114,6 +119,7 @@ export const searchRoutesTool: Tool = {
       score: number
       text: string
       url?: string
+      _doc: RouteDoc
     }>
 
     // 補上最新影片連結（與 pipeline 的 popularity-rerank 共用同一資料來源）
@@ -121,10 +127,14 @@ export const searchRoutesTool: Tool = {
       ctx.env.DB,
       routes.map((r) => r.id)
     )
-    const enriched = routes.map((r) => ({
-      ...r,
-      latestVideoUrl: latestVideoMap.get(r.id),
-    }))
+    const enriched = routes.map((r) => {
+      const { _doc, ...rest } = r
+      return {
+        ...rest,
+        latestVideoUrl: latestVideoMap.get(r.id),
+        formattedText: formatRouteForLLM(_doc, latestVideoMap.get(r.id)),
+      }
+    })
 
     return {
       results: enriched,
@@ -152,6 +162,7 @@ export const searchRoutesTool: Tool = {
         text?: string
         url?: string
         latestVideoUrl?: string
+        formattedText?: string
       }>
       count: number
       _trace?: Record<string, unknown>
@@ -162,10 +173,7 @@ export const searchRoutesTool: Tool = {
         metadata: { resultCount: 0, _trace: data._trace },
       }
     }
-    const lines = data.results.map(
-      (r, i) =>
-        `${i + 1}. ${r.title}${r.excerpt ? `\n   ${r.excerpt}` : ''}${r.text ? `\n   ${r.text.slice(0, 200)}` : ''}`
-    )
+    const lines = data.results.map((r) => r.formattedText ?? r.title)
     // 結構化來源保留給 post_loop 注入站內連結與影片連結用
     const sources: AgentRouteSource[] = data.results
       .filter((r) => r.url)

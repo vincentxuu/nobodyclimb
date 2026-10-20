@@ -308,7 +308,7 @@ export class TextToSqlService {
     const limit = this.safeLimit(params, 'limit', 50, 50)
 
     let sql =
-      'SELECT r.name, r.grade, r.route_type, r.description, r.bolt_count, r.height FROM routes r WHERE r.crag_id = ?'
+      'SELECT r.id, r.crag_id, r.name, r.grade, r.route_type, r.description, r.bolt_count, r.height, c.name as crag_name, a.name as area_name FROM routes r JOIN crags c ON r.crag_id = c.id LEFT JOIN areas a ON r.area_id = a.id WHERE r.crag_id = ?'
     const binds: unknown[] = [cragId]
 
     // 處理 grade 篩選
@@ -360,7 +360,7 @@ export class TextToSqlService {
     const gradeParam = this.isBaseGrade(grade) ? `${grade}%` : grade
     const result = await this.db
       .prepare(
-        `SELECT name, grade, route_type, description, bolt_count, height FROM routes WHERE crag_id = ? AND ${gradeCondition} ORDER BY grade ASC, name ASC LIMIT ?`
+        `SELECT r.id, r.crag_id, r.name, r.grade, r.route_type, r.description, r.bolt_count, r.height, c.name as crag_name, a.name as area_name FROM routes r JOIN crags c ON r.crag_id = c.id LEFT JOIN areas a ON r.area_id = a.id WHERE r.crag_id = ? AND ${gradeCondition} ORDER BY grade ASC, name ASC LIMIT ?`
       )
       .bind(cragId, gradeParam, limit)
       .all<Record<string, unknown>>()

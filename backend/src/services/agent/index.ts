@@ -213,6 +213,8 @@ export interface RunAgentParams {
   onTokenReset?: () => Promise<void>
   onProgress?: (event: ProgressEvent) => Promise<void>
   signal?: AbortSignal
+  /** 從 DB 動態載入的回答格式規則（format_rules），插入 system prompt 確保與 pipeline 一致 */
+  formatRules?: string
 }
 
 export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
@@ -452,7 +454,8 @@ export async function runAgent(params: RunAgentParams): Promise<AgentResult> {
     memorySummary,
     ascentContext,
     abilityLevel,
-    buildAgentBasePrompt(toolsSection, capabilitySection)
+    buildAgentBasePrompt(toolsSection, capabilitySection) +
+      (params.formatRules ? `\n\n${params.formatRules}` : '')
   )
   const proactiveSection = buildProactivePromptSection(proactiveCtx)
   const systemPrompt = [

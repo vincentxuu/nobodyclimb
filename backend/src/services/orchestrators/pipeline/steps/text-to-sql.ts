@@ -1,7 +1,11 @@
+import type { AISource } from '../../../../types'
 import { SQL_RESULT_ASSEMBLY_PROMPT } from '../../../../utils/ai-prompts'
 import { logGeneration } from '../../../../utils/langfuse'
+import { fetchLatestVideoMap } from '../../../agent/tools/route-sources'
+import { formatSqlRowForLLM } from '../../../core/documents'
 import { SqlExecutionError, TextToSqlService } from '../../../domain/text-to-sql'
 import { LLMResponse, PipelineContext, PipelineStep } from '../types'
+import { parseSuggestedQuestions } from '../utils'
 
 export const textToSqlStep: PipelineStep = {
   id: 'text-to-sql',
@@ -117,16 +121,45 @@ async function handleSqlPath(
       return fallbackToRag(ctx, 'empty_result')
     }
 
+    // 組裝 sources（與 pipeline / agent 一致），供前端來源卡片顯示
+    const routeIds = result.rows
+      .map((r) => r.id as string | undefined)
+      .filter((id): id is string => Boolean(id))
+    const latestVideoMap = await fetchLatestVideoMap(env.DB, routeIds)
+
+    const sqlSources: AISource[] = result.rows.map((r) => {
+      const id = r.id as string
+      const cragId = r.crag_id as string
+      const title = (r.name as string) ?? ''
+      const excerpt = (r.description as string) ?? ''
+      return {
+        id,
+        type: 'route' as const,
+        title,
+        url: cragId ? `/crag/${cragId}/route/${id}` : undefined,
+        excerpt,
+        score: 0,
+        latestVideoUrl: latestVideoMap.get(id),
+      }
+    })
+
     // 用輕量 LLM 組裝自然語言回答
     // 清單模板：去除 description 避免 payload 過大，並動態調整 max_tokens
+    // 每筆資料先用 formatSqlRowForLLM 統一成與 pipeline/agent 共用的一段式格式，
+    // 避免 SQL 路徑與其他 RAG 模式的回覆格式不一致。
     const assemblyRows = isListTemplate
       ? result.rows.map(({ description, ...rest }) => rest)
       : result.rows
     const assemblyMaxTokens = Math.min(200 + result.rows.length * 30, 2000)
 
-    const assemblyPrompt = SQL_RESULT_ASSEMBLY_PROMPT.replace('{query}', query)
+    const formattedRows = assemblyRows.map((r) => formatSqlRowForLLM(r)).join('\n')
+
+    const assemblyPromptTemplate =
+      ctx.prompts['SQL_RESULT_ASSEMBLY_PROMPT'] ?? SQL_RESULT_ASSEMBLY_PROMPT
+    const assemblyPrompt = assemblyPromptTemplate
+      .replace('{query}', query)
       .replace('{count}', String(result.rows.length))
-      .replace('{results}', JSON.stringify(assemblyRows, null, 2))
+      .replace('{results}', formattedRows)
 
     const llmResult = (await env.AI.run(
       pipelineConfig.lightweight_model,
@@ -135,11 +168,14 @@ async function handleSqlPath(
     )) as LLMResponse
 
     const answer = llmResult.response || formatFallback(query, result.rows, template)
+    // 解析建議問題（LLM 可透過 ---SUGGESTIONS--- 分隔符輸出）
+    const { answer: cleanedAnswer, suggested_questions: sqlSuggestions } =
+      parseSuggestedQuestions(answer)
     logGeneration(ctx.currentLfSpan ?? ctx.langfuseTrace ?? null, {
       name: 'text-to-sql',
       model: pipelineConfig.lightweight_model,
       input: [{ role: 'user', content: assemblyPrompt }],
-      output: answer,
+      output: cleanedAnswer,
       usage: llmResult.usage
         ? {
             promptTokens: llmResult.usage.prompt_tokens,
@@ -201,10 +237,10 @@ async function handleSqlPath(
 
     // KV 快取
     const response = {
-      answer,
-      sources: [] as import('../../../../types').AISource[],
+      answer: cleanedAnswer,
+      sources: sqlSources,
       query_id: queryId,
-      suggested_questions: [] as string[],
+      suggested_questions: sqlSuggestions,
       query_route: 'sql' as const,
     }
     // 個人模板不快取（資料因使用者不同）
