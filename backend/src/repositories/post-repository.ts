@@ -1,5 +1,6 @@
 import { D1Database } from '@cloudflare/workers-types'
 import { Post } from '../types'
+import { PostLang, postLangClause } from '../utils/post-lang'
 
 /**
  * Post 列表項目（用於列表顯示）
@@ -21,7 +22,10 @@ export interface PostQueryOptions {
   category?: string
   featured?: boolean
   authorId?: string
+  lang?: PostLang
 }
+
+const LANG_CLAUSE = postLangClause('p')
 
 /**
  * Post Repository - 資料存取層
@@ -38,7 +42,7 @@ export class PostRepository {
    * 查詢 posts 列表（分頁）
    */
   async findMany(options: PostQueryOptions): Promise<PostListItem[]> {
-    const { page = 1, limit = 20, status = 'published', tag, category, featured } = options
+    const { page = 1, limit = 20, status = 'published', tag, category, featured, lang } = options
 
     const offset = (page - 1) * limit
     const params: (string | number)[] = [status]
@@ -53,6 +57,11 @@ export class PostRepository {
     if (category) {
       whereClause += ' AND p.category = ?'
       params.push(category)
+    }
+
+    if (lang) {
+      whereClause += ` AND ${LANG_CLAUSE}`
+      params.push(lang)
     }
 
     let query = `
@@ -88,7 +97,7 @@ export class PostRepository {
    * 計算符合條件的 posts 總數
    */
   async count(options: PostQueryOptions): Promise<number> {
-    const { status = 'published', tag, category, featured, authorId } = options
+    const { status = 'published', tag, category, featured, authorId, lang } = options
 
     const params: (string | number)[] = []
     let whereClause = ''
@@ -113,6 +122,11 @@ export class PostRepository {
       if (category) {
         whereClause += ' AND p.category = ?'
         params.push(category)
+      }
+
+      if (lang) {
+        whereClause += ` AND ${LANG_CLAUSE}`
+        params.push(lang)
       }
     }
 
@@ -206,17 +220,20 @@ export class PostRepository {
   /**
    * 查詢 featured posts
    */
-  async findFeatured(limit: number = 6): Promise<PostListItem[]> {
+  async findFeatured(limit: number = 6, lang?: PostLang): Promise<PostListItem[]> {
     const query = `
       SELECT p.*, u.username, u.display_name, u.avatar_url as author_avatar
       FROM posts p
       JOIN users u ON p.author_id = u.id
-      WHERE p.status = 'published' AND p.is_featured = 1
+      WHERE p.status = 'published' AND p.is_featured = 1${lang ? ` AND ${LANG_CLAUSE}` : ''}
       ORDER BY p.published_at DESC
       LIMIT ?
     `
 
-    const result = await this.db.prepare(query).bind(limit).all<PostListItem>()
+    const result = await this.db
+      .prepare(query)
+      .bind(...(lang ? [lang, limit] : [limit]))
+      .all<PostListItem>()
 
     return result.results || []
   }
@@ -224,17 +241,20 @@ export class PostRepository {
   /**
    * 查詢熱門 posts（按觀看數排序）
    */
-  async findPopular(limit: number = 5): Promise<PostListItem[]> {
+  async findPopular(limit: number = 5, lang?: PostLang): Promise<PostListItem[]> {
     const query = `
       SELECT p.*, u.username, u.display_name, u.avatar_url as author_avatar
       FROM posts p
       JOIN users u ON p.author_id = u.id
-      WHERE p.status = 'published'
+      WHERE p.status = 'published'${lang ? ` AND ${LANG_CLAUSE}` : ''}
       ORDER BY p.view_count DESC
       LIMIT ?
     `
 
-    const result = await this.db.prepare(query).bind(limit).all<PostListItem>()
+    const result = await this.db
+      .prepare(query)
+      .bind(...(lang ? [lang, limit] : [limit]))
+      .all<PostListItem>()
 
     return result.results || []
   }
@@ -451,16 +471,17 @@ export class PostRepository {
   /**
    * 獲取所有 tags（帶計數）
    */
-  async getAllTags(): Promise<Array<{ tag: string; count: number }>> {
+  async getAllTags(lang?: PostLang): Promise<Array<{ tag: string; count: number }>> {
     const result = await this.db
       .prepare(
         `SELECT tag, COUNT(*) as count
        FROM post_tags pt
        JOIN posts p ON pt.post_id = p.id
-       WHERE p.status = 'published'
+       WHERE p.status = 'published'${lang ? ` AND ${LANG_CLAUSE}` : ''}
        GROUP BY tag
        ORDER BY count DESC`
       )
+      .bind(...(lang ? [lang] : []))
       .all<{ tag: string; count: number }>()
 
     return result.results || []
