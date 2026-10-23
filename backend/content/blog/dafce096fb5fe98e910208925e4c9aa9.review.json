@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "dafce096fb5fe98e910208925e4c9aa9",
+  "source_sha256": "324f2c23c556302872fc6f6b6072a03b0784cc8219f95b7cf4448e26b705d18d",
+  "evidence_sha256": "e70790d29c12aaec0154bcd1ccadc967eb41b7a32ee3dab38c5e21c485b0c979",
+  "reviewed_at": "2026-10-12T00:59:35.081447+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "CLIMBING-net核對80m高差/70m寬、多繩距訓練、留置保護不可靠與過去繩切事故；ROCKTOPO main lines multi。みろく2024-05-12山行8:20鳩ノ巣→8:50取り付き吻合30分，發布2024-06-07；費用現況未硬報。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語80/70、May2024與30分鐘、尺寸非登攀長/繩數、現況費用/支點未驗一致；沒有把歷史山行時間當現在通行保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "以繩隊職責、撤退、回程回答多繩距旅行問題；日常地面確保與架站/下降差異解释明确，不引导首次自行學複雜操作。"
+    }
+  },
+  "findings": []
+}

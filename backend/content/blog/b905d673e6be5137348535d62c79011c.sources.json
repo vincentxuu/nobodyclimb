@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "article_id": "b905d673e6be5137348535d62c79011c",
+  "checked_at": "2026-10-12T09:49:42+09:00",
+  "source_sha256": "39e418d736728da9d5543f96049dac20635a22f7608d4cd5fcff14ad77240ab7",
+  "claims": [
+    {
+      "location": "frontmatter title/excerpt/category/tags",
+      "claim": "障子岩攀岩指南：檜原石灰岩路線與巴士步行規劃 / 障子岩的石灰岩路線、神戸岩入口巴士與山徑接近，兼顧老支點、季節與有限停車。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/rocks/206",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "障子岩主牆登錄TNT5.10b、夏立ちぬ5.11a、ウッシーⅢ5.12b；靠近岩場路邊基本禁停，指定空間滿就改場。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/障子岩/",
+          "title": "山と溪谷社 CLIMBING-net — 障子岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "檜原村小沢石灰岩90至110度，5.11較多，11至3月較佳、夏況較差，古螺栓注意。武蔵五日市小岩方向巴士神戸岩入口，第一橋、林道和山徑，停車极少、公廁無、禁火。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "場地、主題與正文承諾均以已讀來源為背景；分類與標籤是編輯選擇，不宣稱已開放或親身體驗。"
+    },
+    {
+      "location": "## 想找5.11石灰岩路線，可以先看這裡 paragraph 1",
+      "claim": "障子岩位於東京都檜原村小沢，是東京旅程中可研究的繩索岩場。這篇給已有外岩先鋒經驗、願意花時間處理巴士與山徑接近的搭檔，說明如何選目標與安排一天。它不適合只看到「東京境內」便當成市區岩館的替代行程。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/rocks/206",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "障子岩主牆登錄TNT5.10b、夏立ちぬ5.11a、ウッシーⅢ5.12b；靠近岩場路邊基本禁停，指定空間滿就改場。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/障子岩/",
+          "title": "山と溪谷社 CLIMBING-net — 障子岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "檜原村小沢石灰岩90至110度，5.11較多，11至3月較佳、夏況較差，古螺栓注意。武蔵五日市小岩方向巴士神戸岩入口，第一橋、林道和山徑，停車极少、公廁無、禁火。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 想找5.11石灰岩路線，可以先看這裡 paragraph 2",
+      "claim": "[CLIMBING-net的介紹](https://www.climbing-net.com/iwaba_detail/障子岩/)將岩質列為石灰岩，傾斜從近垂直到微仰角，路線構成以5.11級較多。比起只想隨意攀幾條簡單線的旅行者，它更適合先看過路線圖、知道自己想練習或嘗試什麼的人。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/障子岩/",
+          "title": "山と溪谷社 CLIMBING-net — 障子岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "檜原村小沢石灰岩90至110度，5.11較多，11至3月較佳、夏況較差，古螺栓注意。武蔵五日市小岩方向巴士神戸岩入口，第一橋、林道和山徑，停車极少、公廁無、禁火。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 路線名幫你對照，不代替支點資訊 paragraph 1",
+      "claim": "[ROCKTOPO主岩壁頁](https://www.rocktopo.net/rocks/206)可核對TNT（5.10b）、夏立ちぬ（5.11a）與ウッシーⅢ（5.12b）等登錄。保留日文名稱有助在實際路線圖上找線，但等級與登錄狀態都不保證當天的設備或岩況。選線時應把起攀、保護與下降一起看，而不是只找數字最接近岩館成績的路線。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/rocks/206",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "障子岩主牆登錄TNT5.10b、夏立ちぬ5.11a、ウッシーⅢ5.12b；靠近岩場路邊基本禁停，指定空間滿就改場。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 路線名幫你對照，不代替支點資訊 paragraph 2",
+      "claim": "出版社特別提醒古老螺栓，並指出夏季狀態較差、較佳季節為11月至3月。若旅行安排在4月，這是季節外緣的候選，不應把冬季適期直接延伸成春季乾燥保證。給第一條線保留難度餘裕，實際確認腳點、握點與保護需求後再增加強度。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/rocks/206",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "障子岩主牆登錄TNT5.10b、夏立ちぬ5.11a、ウッシーⅢ5.12b；靠近岩場路邊基本禁停，指定空間滿就改場。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/障子岩/",
+          "title": "山と溪谷社 CLIMBING-net — 障子岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "檜原村小沢石灰岩90至110度，5.11較多，11至3月較佳、夏況較差，古螺栓注意。武蔵五日市小岩方向巴士神戸岩入口，第一橋、林道和山徑，停車极少、公廁無、禁火。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 神戸岩入口只是起點，岩場不是觀光岩本身 paragraph 1",
+      "claim": "交通骨架是武蔵五日市站搭小岩方向巴士，在神戸岩入口下車，往神戸岩方向走，過第一座橋後沿林道，再由小溪旁進入山徑。出版社描述林道與山徑各約15分鐘；這是接近路線的參考，不是全隊抵達時間的保證。本文談的是障子岩，不將神戸岩觀光點或其他鄰近岩場混為同一入口。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/rocks/206",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "障子岩主牆登錄TNT5.10b、夏立ちぬ5.11a、ウッシーⅢ5.12b；靠近岩場路邊基本禁停，指定空間滿就改場。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/障子岩/",
+          "title": "山と溪谷社 CLIMBING-net — 障子岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "檜原村小沢石灰岩90至110度，5.11較多，11至3月較佳、夏況較差，古螺栓注意。武蔵五日市小岩方向巴士神戸岩入口，第一橋、林道和山徑，停車极少、公廁無、禁火。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 神戸岩入口只是起點，岩場不是觀光岩本身 paragraph 2",
+      "claim": "先查當日去回巴士，再決定住宿地出發時間。路線圖、交通截圖與離開岩壁的截止時間應在出發前備好；攜帶重裝備時要為找路與整理繩索多留餘裕。若現地通行告示與介紹不同，以告示為先，不自行另闢捷徑。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/rocks/206",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "障子岩主牆登錄TNT5.10b、夏立ちぬ5.11a、ウッシーⅢ5.12b；靠近岩場路邊基本禁停，指定空間滿就改場。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/障子岩/",
+          "title": "山と溪谷社 CLIMBING-net — 障子岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "檜原村小沢石灰岩90至110度，5.11較多，11至3月較佳、夏況較差，古螺栓注意。武蔵五日市小岩方向巴士神戸岩入口，第一橋、林道和山徑，停車极少、公廁無、禁火。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 小停車空間，不適合到場後才找車位 paragraph 1",
+      "claim": "ROCKTOPO主岩壁頁提醒靠近岩場的道路周邊原則上禁止停車，指定空間停不了時應改去其他場地；出版社也說停車空間極少。開車並不一定比巴士更省事。先確認可使用的指定位置與條件，滿位就調整，別把看似空曠的林道路肩當備案。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/rocks/206",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "障子岩主牆登錄TNT5.10b、夏立ちぬ5.11a、ウッシーⅢ5.12b；靠近岩場路邊基本禁停，指定空間滿就改場。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/障子岩/",
+          "title": "山と溪谷社 CLIMBING-net — 障子岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "檜原村小沢石灰岩90至110度，5.11較多，11至3月較佳、夏況較差，古螺栓注意。武蔵五日市小岩方向巴士神戸岩入口，第一橋、林道和山徑，停車极少、公廁無、禁火。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 小停車空間，不適合到場後才找車位 paragraph 2",
+      "claim": "目前未確認障子岩在實際造訪日的通行與攀登條件。",
+      "verdict": "unverifiable",
+      "sources": [],
+      "disposition": "qualified",
+      "qualification": "目前未確認障子岩在實際造訪日的通行與攀登條件。",
+      "reason": "未取得能確認實際造訪日管理條件的現行來源；正文明示不確定並給出延期或向管理方確認的行動。"
+    },
+    {
+      "location": "## 小停車空間，不適合到場後才找車位 paragraph 2 — remainder",
+      "claim": "把它列為候選後，再取得最新利用資訊與雨況；社群頁面上的路線紀錄不足以證明許可。資料也列岩場沒有公廁，需在進山前處理如廁並帶足水與午餐，不焚火、不留下垃圾。對旅行者而言，一天的完成標準包括準時下山與不增加當地負擔。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/rocks/206",
+          "title": "ROCKTOPO — rocks",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "障子岩主牆登錄TNT5.10b、夏立ちぬ5.11a、ウッシーⅢ5.12b；靠近岩場路邊基本禁停，指定空間滿就改場。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/障子岩/",
+          "title": "山と溪谷社 CLIMBING-net — 障子岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "檜原村小沢石灰岩90至110度，5.11較多，11至3月較佳、夏況較差，古螺栓注意。武蔵五日市小岩方向巴士神戸岩入口，第一橋、林道和山徑，停車极少、公廁無、禁火。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "本段其餘來源背景已核對；查公告、帶補給、保留替代與返程餘裕是品牌編輯的規劃建議，不冒充實測或管理方規定。"
+    }
+  ],
+  "media": [],
+  "links": [
+    {
+      "url": "https://www.rocktopo.net/rocks/206",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/障子岩/",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
+  "verification_notes": [
+    "No cover/body images; no media rights assumptions.",
+    "No self-approved reviews; independent factual/translation/editorial review required.",
+    "Future visit permission explicitly qualified.",
+    "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
+  ]
+}

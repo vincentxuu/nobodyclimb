@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "article_id": "f593da3943f02c8541fd4365a2e857de",
+  "source_sha256": "a6e4978b66e3e147a1bf51f0aab46ce8e015aa8f84e2fcad5ec0bca0d5189ab5",
+  "evidence_sha256": "de8c6046653fbbe21980d0c8633213c90f4d238fe26a547ca7bfe46e32e3d7ad",
+  "reviewed_at": "2026-10-12T06:58:21Z",
+  "reviewer": "Claude 獨立審稿 subagent（Opus 5.5；未參與寫稿，也未參與本次台帳修改）",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "本次重審（台帳改標後）：以 git diff 確認三語台帳只動「步行與撤退餘裕」一節第 1 筆 claim（confirmed→unverifiable，加 disposition/qualification，改寫 reason），其餘 9 筆與 links 未變。該段全文是時間分配、攜帶清單與頭燈用途的建議，台帳兩筆來源的 evidence 只有接近約 1.5 小時、千足巴士、舊 piton 與共同 listing，沒有任何一句支持建議本身，改標 unverifiable 比 confirmed 貼切。qualification 片語逐字存在於原稿且各只出現一次。依本輪統一標準判定合格：它在段首直接向讀者標明整段是「編輯規劃建議」，屬標準列舉的「編輯建議」一類，不是被排除的「只說現況未確認」或「只說本文未涵蓋什麼」；缺點是僅為句首片語、沒有「非實測／非保證」否定語，列為 advisory。新 reason 與 evidence 相符（1.5 小時出自 CLIMBING-net；ROCKTOPO 只支持共同 listing，reason 把兩者並列稍寬鬆）。另以 curl 重新取得 CLIMBING-net 頁面（HTTP 200）抽查：馬頭刈尾根、古くからゲレンデ、アプローチ1時間半、天狗岩滝の側壁與30分、スリングを直接ピトンに通す（カラビナが入らない）、山崎ハングルート30メートル、武蔵五日市よりバスで千足下車，均與正文相符；ROCKTOPO areas/101 回 200、標題為つづら岩、天狗岩（東京都）。台帳 source_sha256 等於原稿實際 SHA-256。沒有重新查證現行開放、步道與支點，也沒有重驗前一輪審稿者自述的 raw 檔讀取。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "本次重新逐段對照 zh/en/ja 全文：接近「約一個半小時／approximately an hour and a half／約一時間半」、山崎ハングルート約 30 公尺、天狗岩接近時間不同、千足巴士線索三語一致；「非東京住宿到起攀點總時間」「piton 線索不等於支點可靠」「未核實現行開放、登山道通行與固定點」「沒有新留言不等於封閉、有條目不等於可通行」等限制與否定三語都保留。被改標段落的性質標示三語對應一致。差異僅在建議細節：zh 的「登山裝備不要被攀登裝備擠出揹包」en 省略、ja 弱化為「登山装備も忘れない」；zh 的「不以訓練場三字推論能自行學會」與「過了折返時間不再增加新目標」en/ja 部分省略。不涉及數字或事實限制，列為 advisory。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "本次重讀全文：標題與摘要未承諾現行開放、支點安全或親訪；正文可獨立回答是否值得為長接近排一天；建議段以句首片語標明為編輯規劃建議，未驗範圍另段明示。重要主張有 inline 來源，文末清單與三語互連存在。node scripts/blog/article.mjs check 退出碼 0。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "改標 claim 的 qualification 只是句首片語（zh「以編輯規劃建議來說」、en「As an editorial planning recommendation」、ja「編集上の計画提案として」），已判定符合本輪標準（明示編輯建議性質），但沒有非實測／非保證的否定語，屬合格案例中偏弱者；若日後改稿，可在該句補一句「非本站實測」並改用整句作 qualification。不阻擋本版。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "改標 claim 的新 reason 把 CLIMBING-net 與 ROCKTOPO 並列為支持「約一個半小時接近等背景事實」；1.5 小時實際只出自 CLIMBING-net，ROCKTOPO 的 evidence 只有共同 listing。因有「等」字不算錯，但可更精確。另 en/ja 台帳的這筆 reason 為中文，其餘 reason 為英文，僅格式不一致。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "同節最後一筆 claim（「值得列為候選…再決定是否適合當天」）主體同樣是編輯判斷，仍標 confirmed；本輪未改標。它建立在來源描述的訓練岩場與長接近之上，未判為必修，但與本輪改標原則的一致性請主流程裁決。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "zh 有三處建議細節在 en/ja 省略或弱化（揹包配置、訓練場推論、折返後不加目標），不涉及數字、限制或否定敘述。"
+    }
+  ]
+}

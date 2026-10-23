@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "article_id": "77bd05d60d5cdeb6838224fbb1ae0274",
+  "source_sha256": "424c3d5433e6235bd8713c349ad57a286a7930a9d275d03bddade104a5a46252",
+  "checked_at": "2026-10-12T00:52:13.807630+00:00",
+  "claims": [
+    {
+      "location": "title/excerpt/intro; 進山／Approach／入山; 選線／Route／ルート",
+      "claim": "北漢山仁壽峰花崗岩、岩板裂隙多繩距傳統攀登及run-out sport；東側牛耳站/道詵寺；路線名稱Chouinard A/B、Insu A/B",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.mountainproject.com/area/106225638/insu-bong-bukhansan",
+          "title": "Rock Climbing in Insu-bong (Bukhansan), Seoul/Gyeonggi-do (Northwest Korea)",
+          "publisher": "Mountain Project 社群",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "read_scope": "full",
+          "evidence": "Description identifies granite multipitch, slab and crack, trad and run-out sport. Getting There update dated2022 gives Bukhansan Ui and Doseonsa. Route table lists names. Old taxi and parking figures omitted, no universal equipment claim.",
+          "tool": "Groundlane web_fetch extract=full"
+        }
+      ],
+      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+    },
+    {
+      "location": "國立公園申請／Park application／申請",
+      "claim": "入口含북한산及북한산도봉；3–30日前、10:00新日期、2–5人、最終核准SMS；不等於特定岩壁已許可",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.knps.or.kr/smartsafe/permission/list.do",
+          "title": "스마트워치 상황관제 시스템",
+          "publisher": "KNPS 國立公園公團",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "read_scope": "full",
+          "evidence": "Public application rules list both park choices, party bounds and advance date window; final approval SMS is required. Dynamic wall/date and foreign-visitor registration have not been tested.",
+          "tool": "Groundlane web_fetch extract=full"
+        }
+      ],
+      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+    },
+    {
+      "location": "最終確認／Final checks／最終確認",
+      "claim": "官方要求核對入山時間制度和步道管制",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.knps.or.kr/front/portal/visit/visitCourseSubMain.do?menuNo=7020092&parkId=121500&parkNavGb=guide",
+          "title": "코스별난이도 < 북한산국립공원 < 국립공원탐방 < 국립공원공단",
+          "publisher": "KNPS 國立公園公團",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:13.807630+00:00",
+          "read_scope": "full",
+          "evidence": "Official visitor guide section 탐방전 asks checking 입산시간지정제 and 탐방로 통제현황. Text supplies planning advice, not hardware inspection.",
+          "tool": "Groundlane web_fetch extract=full"
+        }
+      ],
+      "reason": "核對實際取得的相關正文段落；計算與實務建議已區分外部事實，未將歷史交通價當成現價。"
+    },
+    {
+      "location": "首次／申請限制",
+      "claim": "外籍登記與当期服務／岩壁名額適用條件尚未驗證",
+      "verdict": "unverifiable",
+      "sources": [],
+      "reason": "公開資料不足以確認特定旅客和指定日期的適用情況；正文明列先詢問再安排。",
+      "disposition": "qualified",
+      "qualification": "本次未確認仁壽峰指定岩壁在預定日期的名額、適用區域及外籍旅客申請方式；應先向管理處確認。"
+    },
+    {
+      "location": "申請後當日程序",
+      "claim": "核准不替代16:00前園內GPS簡訊開始確認與離山結束確認",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.knps.or.kr/smartsafe/cms/contents.do?cmsSeq=28",
+          "title": "스마트워치 상황관제 시스템",
+          "publisher": "KNPS 國立公園公團",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:55:34.481854+00:00",
+          "read_scope": "full",
+          "evidence": "申請說明當日登攀確認：簡訊連結、園內GPS、16:00前開始確認，離山完成確認；未確認可視為未使用。",
+          "tool": "Groundlane web_fetch extract=full"
+        }
+      ],
+      "reason": "已讀完整申請說明對應段落；限定外籍適用細節仍需管理處確認。"
+    }
+  ],
+  "links": [
+    {
+      "url": "https://www.mountainproject.com/area/106225638/insu-bong-bukhansan",
+      "checked_at": "2026-10-12T00:52:13.807630+00:00",
+      "tool": "Groundlane web_fetch extract=full",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+    },
+    {
+      "url": "https://www.knps.or.kr/smartsafe/permission/list.do",
+      "checked_at": "2026-10-12T00:52:13.807630+00:00",
+      "tool": "Groundlane web_fetch extract=full",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+    },
+    {
+      "url": "https://www.knps.or.kr/front/portal/visit/visitCourseSubMain.do?menuNo=7020092&parkId=121500&parkNavGb=guide",
+      "checked_at": "2026-10-12T00:52:13.807630+00:00",
+      "tool": "Groundlane web_fetch extract=full",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "讀取的最終頁面主題與支持段落相符；無片段錨點。"
+    },
+    {
+      "url": "https://www.knps.or.kr/smartsafe/cms/contents.do?cmsSeq=28",
+      "checked_at": "2026-10-12T00:55:34.481854+00:00",
+      "tool": "Groundlane web_fetch extract=full",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "官方頁200全文，申請說明對應當日確認程序。"
+    }
+  ],
+  "media": [],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ]
+}

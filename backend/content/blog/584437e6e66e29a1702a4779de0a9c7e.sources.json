@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "article_id": "584437e6e66e29a1702a4779de0a9c7e",
+  "checked_at": "2026-10-12T09:49:42+09:00",
+  "source_sha256": "9eaf76db3d79729e52f05e3e3dd731f3a73ba79f7369b6e715ad2375aa99cb27",
+  "claims": [
+    {
+      "location": "frontmatter title/excerpt/category/tags",
+      "claim": "Shirotaebashi climbing guide: Okutama limestone and unresolved access status / Understand Shirotaebashi's limestone and transport background while its voluntary non-use status remains unresolved.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
+          "title": "山と溪谷社 CLIMBING-net — 白妙橋",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋奧多摩石灰岩5.11、5.12集中，垂直至前傾；奧多摩日原方向巴士白妙橋、吊橋正面壁。路邊停車禁止、釣場受付舊停車費不作現價；JFA自2007年4月自粛記錄與最新確認要求；自然保護、器材垃圾火禁。沒有取得解除證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/110",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋岩區索引列正面壁、バルコニー、カワラ、ディンプル、アイビー各牆；登錄不是管理方開放證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "場地、主題與正文承諾均以已讀來源為背景；分類與標籤是編輯選擇，不宣稱已開放或親身體驗。"
+    },
+    {
+      "location": "## Resolve access before planning a climbing day paragraph 1",
+      "claim": "Shirotaebashi is an Okutama limestone venue with roped routes. It can enter a Tokyo-trip research list, but this article does not recommend it as confirmed available. For experienced partners comparing 5.11 and 5.12 objectives, the wall and transport background help explain why permission must come before booking and route selection.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
+          "title": "山と溪谷社 CLIMBING-net — 白妙橋",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋奧多摩石灰岩5.11、5.12集中，垂直至前傾；奧多摩日原方向巴士白妙橋、吊橋正面壁。路邊停車禁止、釣場受付舊停車費不作現價；JFA自2007年4月自粛記錄與最新確認要求；自然保護、器材垃圾火禁。沒有取得解除證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/110",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋岩區索引列正面壁、バルコニー、カワラ、ディンプル、アイビー各牆；登錄不是管理方開放證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## Resolve access before planning a climbing day paragraph 2",
+      "claim": "[CLIMBING-net's page](https://www.climbing-net.com/iwaba_detail/白妙橋/) retains a record of JFA calling for voluntary non-use from April 2007 because of rubbish, abandoned equipment, fire and parking problems, and asks readers to check the current situation. Its age neither proves the original restriction remains unchanged nor establishes that it was lifted.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
+          "title": "山と溪谷社 CLIMBING-net — 白妙橋",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋奧多摩石灰岩5.11、5.12集中，垂直至前傾；奧多摩日原方向巴士白妙橋、吊橋正面壁。路邊停車禁止、釣場受付舊停車費不作現價；JFA自2007年4月自粛記錄與最新確認要求；自然保護、器材垃圾火禁。沒有取得解除證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## A limestone selection weighted toward harder climbs paragraph 1",
+      "claim": "The publisher describes vertical to distinctly overhanging limestone and emphasizes 5.11 and 5.12 routes. [ROCKTOPO's index](https://www.rocktopo.net/areas/110) lists the front wall, Balcony Face, Kawara Face, Dimple Face and Ivy Face. These entries explain the sectors; they do not establish opening status.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/110",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋岩區索引列正面壁、バルコニー、カワラ、ディンプル、アイビー各牆；登錄不是管理方開放證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## A limestone selection weighted toward harder climbs paragraph 2",
+      "claim": "A team seeking many routes graded 5.9 or easier may find this a poor fit. Partners interested in harder limestone should obtain the complete topo for their chosen wall, after confirming access. Database route counts are not a management-approved climbing list for a particular day.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
+          "title": "山と溪谷社 CLIMBING-net — 白妙橋",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋奧多摩石灰岩5.11、5.12集中，垂直至前傾；奧多摩日原方向巴士白妙橋、吊橋正面壁。路邊停車禁止、釣場受付舊停車費不作現價；JFA自2007年4月自粛記錄與最新確認要求；自然保護、器材垃圾火禁。沒有取得解除證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/110",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋岩區索引列正面壁、バルコニー、カワラ、ディンプル、アイビー各牆；登錄不是管理方開放證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## Transport background from Okutama paragraph 1",
+      "claim": "The publisher describes a Nippara-bound bus from Okutama to Shirotaebashi, then a suspension bridge toward the front wall. This is a transport outline, not confirmation that the bridge or entrance is usable on your date. Establish permission first, then check return services and walking arrangements. No fixed total travel time from Shinjuku is promised.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
+          "title": "山と溪谷社 CLIMBING-net — 白妙橋",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋奧多摩石灰岩5.11、5.12集中，垂直至前傾；奧多摩日原方向巴士白妙橋、吊橋正面壁。路邊停車禁止、釣場受付舊停車費不作現價；JFA自2007年4月自粛記錄與最新確認要求；自然保護、器材垃圾火禁。沒有取得解除證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/110",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋岩區索引列正面壁、バルコニー、カワラ、ディンプル、アイビー各牆；登錄不是管理方開放證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## Transport background from Okutama paragraph 2",
+      "claim": "Older driving information mentions reception and parking at Trout Country and prohibits roadside parking, especially beside the bus stop. Keep the prohibition in mind without treating the old parking fee as a current quote. Paying for parking does not establish climbing permission at a separate wall.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
+          "title": "山と溪谷社 CLIMBING-net — 白妙橋",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋奧多摩石灰岩5.11、5.12集中，垂直至前傾；奧多摩日原方向巴士白妙橋、吊橋正面壁。路邊停車禁止、釣場受付舊停車費不作現價；JFA自2007年4月自粛記錄與最新確認要求；自然保護、器材垃圾火禁。沒有取得解除證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/110",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋岩區索引列正面壁、バルコニー、カワラ、ディンプル、アイビー各牆；登錄不是管理方開放證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## Keep an alternative until the status is clear paragraph 1",
+      "claim": "Whether Shirotaebashi's voluntary non-use request has been lifted, and climbing and approach permission for your actual visit date, have not been confirmed.",
+      "verdict": "unverifiable",
+      "sources": [],
+      "disposition": "qualified",
+      "qualification": "Whether Shirotaebashi's voluntary non-use request has been lifted, and climbing and approach permission for your actual visit date, have not been confirmed.",
+      "reason": "未取得能確認實際造訪日管理條件的現行來源；正文明示不確定並給出延期或向管理方確認的行動。"
+    },
+    {
+      "location": "## Keep an alternative until the status is clear paragraph 1 — remainder",
+      "claim": "Ask an appropriate management or local climbing contact for the current position. If no clear answer is available, choose a venue with confirmed use conditions rather than make this your only outdoor day.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
+          "title": "山と溪谷社 CLIMBING-net — 白妙橋",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋奧多摩石灰岩5.11、5.12集中，垂直至前傾；奧多摩日原方向巴士白妙橋、吊橋正面壁。路邊停車禁止、釣場受付舊停車費不作現價；JFA自2007年4月自粛記錄與最新確認要求；自然保護、器材垃圾火禁。沒有取得解除證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/110",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋岩區索引列正面壁、バルコニー、カワラ、ディンプル、アイビー各牆；登錄不是管理方開放證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "本段其餘來源背景已核對；查公告、帶補給、保留替代與返程餘裕是品牌編輯的規劃建議，不冒充實測或管理方規定。"
+    },
+    {
+      "location": "## Keep an alternative until the status is clear paragraph 2",
+      "claim": "Recent database activity only shows that people submitted information; it does not prove landowner consent. The publisher also stresses community relations and conservation: remove quickdraws and equipment, avoid fires and carry rubbish out. These remain relevant even if permission is later confirmed.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
+          "title": "山と溪谷社 CLIMBING-net — 白妙橋",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋奧多摩石灰岩5.11、5.12集中，垂直至前傾；奧多摩日原方向巴士白妙橋、吊橋正面壁。路邊停車禁止、釣場受付舊停車費不作現價；JFA自2007年4月自粛記錄與最新確認要求；自然保護、器材垃圾火禁。沒有取得解除證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/110",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋岩區索引列正面壁、バルコニー、カワラ、ディンプル、アイビー各牆；登錄不是管理方開放證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## Turn the check into a clear decision paragraph 1",
+      "claim": "Resolve three questions before equipment planning: which sector may be entered, which approach is allowed, and where parking and toilet needs can be handled. Each needs a concrete answer. This approach lets you understand Shirotaebashi's climbing character without hiding unresolved access behind a travel guide.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
+          "title": "山と溪谷社 CLIMBING-net — 白妙橋",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋奧多摩石灰岩5.11、5.12集中，垂直至前傾；奧多摩日原方向巴士白妙橋、吊橋正面壁。路邊停車禁止、釣場受付舊停車費不作現價；JFA自2007年4月自粛記錄與最新確認要求；自然保護、器材垃圾火禁。沒有取得解除證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/110",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "白妙橋岩區索引列正面壁、バルコニー、カワラ、ディンプル、アイビー各牆；登錄不是管理方開放證據。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    }
+  ],
+  "media": [],
+  "links": [
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/白妙橋/",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "https://www.rocktopo.net/areas/110",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
+  "verification_notes": [
+    "No cover/body images; no media rights assumptions.",
+    "No self-approved reviews; independent factual/translation/editorial review required.",
+    "Future visit permission explicitly qualified.",
+    "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
+  ]
+}

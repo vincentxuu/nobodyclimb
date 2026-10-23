@@ -1,0 +1,467 @@
+{
+  "schema_version": 1,
+  "article_id": "289373c784da996c3ce737cd070e62de",
+  "checked_at": "2026-10-12T00:52:59.652278+00:00",
+  "claims": [
+    {
+      "location": "title / excerpt",
+      "claim": "Koshizawa Buttress guide: plan an Okutama multipitch day / Koshizawa Buttress is primarily a multipitch training crag. Check team systems, descent and current access before making it a Tokyo day trip.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+          "title": "越沢バットレス",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: approximately 80 m high and 70 m wide; primarily multipitch, a training ground for mountain routes. Warns that fixed protection may be unreliable and sharp edges caused rope-cutting accidents in the past. Historical page includes a maintenance fee; present fee is not independently established.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/102",
+          "title": "越沢バットレス | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo area listing categorizes three recorded routes as multipitch; route-list link exists. These are database records, not a complete route/approach instruction or live protection assessment.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+          "title": "越沢バットレス自主トレ",
+          "publisher": "みろく山の会",
+          "source_date": "2024-06-07T07:00:42+09:00",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Club trip dated 2024-05-12, published 2024-06-07: route time starts from Hatonosu Station at 08:20 and reaches the buttress at 08:50; narrative also states about 30 minutes on foot. Used as an attributed historical approach example, not a present trail-passability or fixed-equipment guarantee.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Title and excerpt reflect source-described venue setting and the concrete preparation questions answered in the body; no visit or opening guarantee is asserted."
+    },
+    {
+      "location": "The objective is a functioning rope team",
+      "claim": "Koshizawa Buttress is an Okutama multipitch crag for teams already able to manage belays, bring up a second and descend. Multipitch climbing divides a route into stages with intermediate belays. Its time and technical demands differ from a single sport pitch belayed from the ground.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+          "title": "越沢バットレス",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: approximately 80 m high and 70 m wide; primarily multipitch, a training ground for mountain routes. Warns that fixed protection may be unreliable and sharp edges caused rope-cutting accidents in the past. Historical page includes a maintenance fee; present fee is not independently established.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/102",
+          "title": "越沢バットレス | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo area listing categorizes three recorded routes as multipitch; route-list link exists. These are database records, not a complete route/approach instruction or live protection assessment.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+          "title": "越沢バットレス自主トレ",
+          "publisher": "みろく山の会",
+          "source_date": "2024-06-07T07:00:42+09:00",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Club trip dated 2024-05-12, published 2024-06-07: route time starts from Hatonosu Station at 08:20 and reaches the buttress at 08:50; narrative also states about 30 minutes on foot. Used as an attributed historical approach example, not a present trail-passability or fixed-equipment guarantee.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "The objective is a functioning rope team",
+      "claim": "[CLIMBING-net](https://www.climbing-net.com/iwaba_detail/越沢バットレス/) describes a wall approximately 80 metres high and 70 metres wide, primarily used for multipitch climbing and training for mountain routes. Those dimensions explain the wall's scale; they do not establish a particular route's climbing length or the ropes required. Plan a suitable complete outing instead of a day of accumulating grades.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+          "title": "越沢バットレス",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: approximately 80 m high and 70 m wide; primarily multipitch, a training ground for mountain routes. Warns that fixed protection may be unreliable and sharp edges caused rope-cutting accidents in the past. Historical page includes a maintenance fee; present fee is not independently established.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/102",
+          "title": "越沢バットレス | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo area listing categorizes three recorded routes as multipitch; route-list link exists. These are database records, not a complete route/approach instruction or live protection assessment.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+          "title": "越沢バットレス自主トレ",
+          "publisher": "みろく山の会",
+          "source_date": "2024-06-07T07:00:42+09:00",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Club trip dated 2024-05-12, published 2024-06-07: route time starts from Hatonosu Station at 08:20 and reaches the buttress at 08:50; narrative also states about 30 minutes on foot. Used as an attributed historical approach example, not a present trail-passability or fixed-equipment guarantee.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "An easy grade is only one piece of information",
+      "claim": "[ROCKTOPO's area page](https://www.rocktopo.net/areas/102) categorizes its recorded main lines as multipitch. A database is not a complete operating manual. Names and grades are insufficient if you cannot identify intermediate belays and descents.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+          "title": "越沢バットレス",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: approximately 80 m high and 70 m wide; primarily multipitch, a training ground for mountain routes. Warns that fixed protection may be unreliable and sharp edges caused rope-cutting accidents in the past. Historical page includes a maintenance fee; present fee is not independently established.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/102",
+          "title": "越沢バットレス | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo area listing categorizes three recorded routes as multipitch; route-list link exists. These are database records, not a complete route/approach instruction or live protection assessment.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+          "title": "越沢バットレス自主トレ",
+          "publisher": "みろく山の会",
+          "source_date": "2024-06-07T07:00:42+09:00",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Club trip dated 2024-05-12, published 2024-06-07: route time starts from Hatonosu Station at 08:20 and reaches the buttress at 08:50; narrative also states about 30 minutes on foot. Used as an attributed historical approach example, not a present trail-passability or fixed-equipment guarantee.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "An easy grade is only one piece of information",
+      "claim": "Establish who will lead, who can belay the second, who can assess anchors and how you will communicate out of sight. Keep cancelling the climb as a valid option. If one person is the sole keeper of all the systems, practise in a controlled setting or arrange appropriate instruction first.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+          "title": "越沢バットレス",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: approximately 80 m high and 70 m wide; primarily multipitch, a training ground for mountain routes. Warns that fixed protection may be unreliable and sharp edges caused rope-cutting accidents in the past. Historical page includes a maintenance fee; present fee is not independently established.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/102",
+          "title": "越沢バットレス | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo area listing categorizes three recorded routes as multipitch; route-list link exists. These are database records, not a complete route/approach instruction or live protection assessment.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+          "title": "越沢バットレス自主トレ",
+          "publisher": "みろく山の会",
+          "source_date": "2024-06-07T07:00:42+09:00",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Club trip dated 2024-05-12, published 2024-06-07: route time starts from Hatonosu Station at 08:20 and reaches the buttress at 08:50; narrative also states about 30 minutes on foot. Used as an attributed historical approach example, not a present trail-passability or fixed-equipment guarantee.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Assess rock edges and fixed protection separately",
+      "claim": "The publisher questions the reliability of fixed protection. It also warns of sharp edges and past rope-cutting accidents. These issues are distinct from movement difficulty: being able to climb the moves does not establish that you can manage an unsafe rope path or unreliable protection.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+          "title": "越沢バットレス",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: approximately 80 m high and 70 m wide; primarily multipitch, a training ground for mountain routes. Warns that fixed protection may be unreliable and sharp edges caused rope-cutting accidents in the past. Historical page includes a maintenance fee; present fee is not independently established.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/102",
+          "title": "越沢バットレス | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo area listing categorizes three recorded routes as multipitch; route-list link exists. These are database records, not a complete route/approach instruction or live protection assessment.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+          "title": "越沢バットレス自主トレ",
+          "publisher": "みろく山の会",
+          "source_date": "2024-06-07T07:00:42+09:00",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Club trip dated 2024-05-12, published 2024-06-07: route time starts from Hatonosu Station at 08:20 and reaches the buttress at 08:50; narrative also states about 30 minutes on foot. Used as an attributed historical approach example, not a present trail-passability or fixed-equipment guarantee.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Assess rock edges and fixed protection separately",
+      "claim": "Build the equipment list around the intended route and current conditions, including protection, anchors, descent and personal protection. Do not copy a quickdraw count from an unrelated sport crag. This article does not teach anchor construction or descent procedures. Review the topo and retreat options with someone experienced, and do not enter a section you cannot assess.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+          "title": "越沢バットレス",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: approximately 80 m high and 70 m wide; primarily multipitch, a training ground for mountain routes. Warns that fixed protection may be unreliable and sharp edges caused rope-cutting accidents in the past. Historical page includes a maintenance fee; present fee is not independently established.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/102",
+          "title": "越沢バットレス | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo area listing categorizes three recorded routes as multipitch; route-list link exists. These are database records, not a complete route/approach instruction or live protection assessment.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+          "title": "越沢バットレス自主トレ",
+          "publisher": "みろく山の会",
+          "source_date": "2024-06-07T07:00:42+09:00",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Club trip dated 2024-05-12, published 2024-06-07: route time starts from Hatonosu Station at 08:20 and reaches the buttress at 08:50; narrative also states about 30 minutes on foot. Used as an attributed historical approach example, not a present trail-passability or fixed-equipment guarantee.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Plan the approach and return as part of the climb",
+      "claim": "Identify the start, approach, descent and exit together. They may follow different paths, so a saved wall coordinate is insufficient. Public-transport visitors need the actual outbound and return services for their date, plus a turnaround time that leaves room for retreat. Sorting equipment, locating the line and waiting for other teams all take time.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+          "title": "越沢バットレス",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: approximately 80 m high and 70 m wide; primarily multipitch, a training ground for mountain routes. Warns that fixed protection may be unreliable and sharp edges caused rope-cutting accidents in the past. Historical page includes a maintenance fee; present fee is not independently established.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/102",
+          "title": "越沢バットレス | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo area listing categorizes three recorded routes as multipitch; route-list link exists. These are database records, not a complete route/approach instruction or live protection assessment.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+          "title": "越沢バットレス自主トレ",
+          "publisher": "みろく山の会",
+          "source_date": "2024-06-07T07:00:42+09:00",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Club trip dated 2024-05-12, published 2024-06-07: route time starts from Hatonosu Station at 08:20 and reaches the buttress at 08:50; narrative also states about 30 minutes on foot. Used as an attributed historical approach example, not a present trail-passability or fixed-equipment guarantee.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Plan the approach and return as part of the climb",
+      "claim": "A [Miroku mountaineering club report from May 2024](https://npo.mirokuyamanokai.org/2024/06/07/56265) records approximately 30 minutes from Hatonosu Station to the climb. Use Hatonosu as a transport-planning point, but treat the time as that team's observation, not a guarantee of current trail passage or your walking speed. Check trains for your date and obtain the current approach and descent description.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+          "title": "越沢バットレス",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: approximately 80 m high and 70 m wide; primarily multipitch, a training ground for mountain routes. Warns that fixed protection may be unreliable and sharp edges caused rope-cutting accidents in the past. Historical page includes a maintenance fee; present fee is not independently established.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/102",
+          "title": "越沢バットレス | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo area listing categorizes three recorded routes as multipitch; route-list link exists. These are database records, not a complete route/approach instruction or live protection assessment.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+          "title": "越沢バットレス自主トレ",
+          "publisher": "みろく山の会",
+          "source_date": "2024-06-07T07:00:42+09:00",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Club trip dated 2024-05-12, published 2024-06-07: route time starts from Hatonosu Station at 08:20 and reaches the buttress at 08:50; narrative also states about 30 minutes on foot. Used as an attributed historical approach example, not a present trail-passability or fixed-equipment guarantee.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Plan the approach and return as part of the climb",
+      "claim": "CLIMBING-net mentions a maintenance contribution, but the present fee, approach facilities and fixed-protection condition were not verified in this research; confirm them with relevant management or climbers familiar with the area before departure, rather than treating an older description as a current guarantee. If this information is missing, obtain it before committing the day.",
+      "verdict": "unverifiable",
+      "disposition": "qualified",
+      "qualification": "CLIMBING-net mentions a maintenance contribution, but the present fee, approach facilities and fixed-protection condition were not verified in this research; confirm them with relevant management or climbers familiar with the area before departure, rather than treating an older description as a current guarantee.",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+          "title": "越沢バットレス",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: approximately 80 m high and 70 m wide; primarily multipitch, a training ground for mountain routes. Warns that fixed protection may be unreliable and sharp edges caused rope-cutting accidents in the past. Historical page includes a maintenance fee; present fee is not independently established.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/102",
+          "title": "越沢バットレス | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo area listing categorizes three recorded routes as multipitch; route-list link exists. These are database records, not a complete route/approach instruction or live protection assessment.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+          "title": "越沢バットレス自主トレ",
+          "publisher": "みろく山の会",
+          "source_date": "2024-06-07T07:00:42+09:00",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Club trip dated 2024-05-12, published 2024-06-07: route time starts from Hatonosu Station at 08:20 and reaches the buttress at 08:50; narrative also states about 30 minutes on foot. Used as an attributed historical approach example, not a present trail-passability or fixed-equipment guarantee.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "The retained paragraph explicitly names the current conditions not established by source retrieval; practical next steps are editorial advice, not confirmation of those conditions."
+    },
+    {
+      "location": "Plan the approach and return as part of the climb",
+      "claim": "Choose Koshizawa Buttress for a purposeful day using the full skills of mountain climbing. Bring a plan your team can manage independently, leave room for retreat and retain another activity if conditions do not support the climb.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+          "title": "越沢バットレス",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: approximately 80 m high and 70 m wide; primarily multipitch, a training ground for mountain routes. Warns that fixed protection may be unreliable and sharp edges caused rope-cutting accidents in the past. Historical page includes a maintenance fee; present fee is not independently established.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/102",
+          "title": "越沢バットレス | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo area listing categorizes three recorded routes as multipitch; route-list link exists. These are database records, not a complete route/approach instruction or live protection assessment.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+          "title": "越沢バットレス自主トレ",
+          "publisher": "みろく山の会",
+          "source_date": "2024-06-07T07:00:42+09:00",
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Club trip dated 2024-05-12, published 2024-06-07: route time starts from Hatonosu Station at 08:20 and reaches the buttress at 08:50; narrative also states about 30 minutes on foot. Used as an attributed historical approach example, not a present trail-passability or fixed-equipment guarantee.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    }
+  ],
+  "media": [],
+  "source_sha256": "92ce0203ae36cf7fc61302aec0c3c72aa15f8baae6affb3f833fefbda1637a15",
+  "links": [
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/越沢バットレス/",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    },
+    {
+      "url": "https://www.rocktopo.net/areas/102",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    },
+    {
+      "url": "https://npo.mirokuyamanokai.org/2024/06/07/56265",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ]
+}

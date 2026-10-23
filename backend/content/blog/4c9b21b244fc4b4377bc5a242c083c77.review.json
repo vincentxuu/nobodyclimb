@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "article_id": "4c9b21b244fc4b4377bc5a242c083c77",
+  "source_sha256": "46f44c6cff59bc8a31d2d4797a1df5513da190a514625c4ecc67f4c6bfcf7c73",
+  "evidence_sha256": "989f788040f9924c12925849cbac88569bb7bc9f6e2d934adeaaaf1a8a6a0800",
+  "reviewed_at": "2026-10-12T00:57:33.346526+00:00",
+  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "raw fetch-4/extra-fetch及本次Groundlane JFA原文支持石灰岩、巴士、停車與蛇岩2025-10公告；新2010解除和コウモリ岩原則禁止均出自CLIMBING-net河又同頁，時效/範圍未確定的限定準確。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語2025年10月、蛇岩而非全部河又、未確認重新開放與其他區實際條件一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "先讀蛇岩警訊、選區、巴士、停車與利用衝突按自然順序；新增コウモリ警示不以歷史解除推定現況。三語全文/接縫回讀通順；新警示位置差異不改含義。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "三語新增CLIMBING-net開頭2010解除與その他欄コウモリ岩原則禁止並存，適用範圍/更新日期未確認、不由歷史推定當期可入、未確認不得進入；再次對照extra-fetch.json該URL原文兩段確實支持。日文曾插斷的蛇岩原句已恢復完整，新段獨立，全文接縫及三語限定一致。"
+    }
+  ]
+}

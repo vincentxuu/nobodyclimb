@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "3bd5d63c9d8194fc6a547792b33ed6e7",
+  "source_sha256": "1907491d57f70c91ee6bf3562edab0efb5150a86b46900f42353ad6187665cb0",
+  "evidence_sha256": "a12b39257c6e4cf5a5ab780753614739e7dfbad3951c85696653193a25402eea",
+  "reviewed_at": "2026-10-12T00:53:34.622148+00:00",
+  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "raw fetch-4/extra-fetch 支持チャート、大仰角、19條快照、回收支點與終了點區別、30/40分矛盾、2025-05 500円、滿位不可路邊、暗前下山。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語19、5.10/11/12、500円每車與五月2025、future未保證、回收不熟需支援均一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "難度與回收先於交通安排，停車與居民需求具體；保留季節與通行未確認界線。"
+    }
+  },
+  "findings": []
+}

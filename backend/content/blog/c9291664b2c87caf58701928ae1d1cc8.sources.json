@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "article_id": "c9291664b2c87caf58701928ae1d1cc8",
+  "checked_at": "2026-10-12T00:52:59.652278+00:00",
+  "claims": [
+    {
+      "location": "title / excerpt",
+      "claim": "神戸の岩場攀岩指南：別把石灰岩場走成神戸岩景點 / 檜原的神戸の岩場是小型石灰岩攀登區，與禁攀的神戸岩不同。整理巴士接近、居民通行與路線選擇的準備。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
+          "title": "神戸の岩場",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: compact limestone; several right-hand lines exceed 20 m. Access described from Musashi-Itsukaichi by Fujikura/Koiwa bus to Kanoto-iwa Iriguchi, via Kasuga Shrine, red bridge and stream beside residences. Explicitly distinguishes climbing crag from Kanoto-iwa, which it says is prohibited for climbing. No parking near shrine, road shoulder/community-hall space prohibited; fishing-site parking requires reception and instructions. Passing a residential yard requires greeting; fishing-site parking is not for camping or vehicle overnighting. Present arrangements are not verified.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/103",
+          "title": "神戸の岩場 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Kanoto no Iwaba area listing identifies face routes and an approach/parking information entry. Database route counts are not treated as live climbability or parking permission.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Title and excerpt reflect source-described venue setting and the concrete preparation questions answered in the body; no visit or opening guarantee is asserted."
+    },
+    {
+      "location": "岩場名稱是這一天最重要的導航資訊",
+      "claim": "神戸の岩場（Kanoto no Iwaba）是東京檜原一帶的小型石灰岩攀登區。它適合已有外岩繩攀經驗、想安排明確路線目標的人；但第一項準備不是挑級數，而是分清楚「神戸の岩場」與觀光地點「神戸岩」。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
+          "title": "神戸の岩場",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: compact limestone; several right-hand lines exceed 20 m. Access described from Musashi-Itsukaichi by Fujikura/Koiwa bus to Kanoto-iwa Iriguchi, via Kasuga Shrine, red bridge and stream beside residences. Explicitly distinguishes climbing crag from Kanoto-iwa, which it says is prohibited for climbing. No parking near shrine, road shoulder/community-hall space prohibited; fishing-site parking requires reception and instructions. Passing a residential yard requires greeting; fishing-site parking is not for camping or vehicle overnighting. Present arrangements are not verified.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/103",
+          "title": "神戸の岩場 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Kanoto no Iwaba area listing identifies face routes and an approach/parking information entry. Database route counts are not treated as live climbability or parking permission.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "岩場名稱是這一天最重要的導航資訊",
+      "claim": "[CLIMBING-net 的介紹](https://www.climbing-net.com/iwaba_detail/神戸の岩場/)明確指出兩者不同，並說神戸岩禁止攀登。開車時看到神戸岩指標，不能據此直接跟到峽谷，把觀光岩壁當成自己的攀登區。與同伴分享位置時，應同時傳送岩場 topo 和接近說明，而不是隻傳同名景點的地圖。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
+          "title": "神戸の岩場",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: compact limestone; several right-hand lines exceed 20 m. Access described from Musashi-Itsukaichi by Fujikura/Koiwa bus to Kanoto-iwa Iriguchi, via Kasuga Shrine, red bridge and stream beside residences. Explicitly distinguishes climbing crag from Kanoto-iwa, which it says is prohibited for climbing. No parking near shrine, road shoulder/community-hall space prohibited; fishing-site parking requires reception and instructions. Passing a residential yard requires greeting; fishing-site parking is not for camping or vehicle overnighting. Present arrangements are not verified.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/103",
+          "title": "神戸の岩場 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Kanoto no Iwaba area listing identifies face routes and an approach/parking information entry. Database route counts are not treated as live climbability or parking permission.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "從巴士站到岩壁，會經過生活空間",
+      "claim": "出版者提供武藏五日市搭往藤倉或小岩的巴士、在神戸岩入口下車的接近線索；往春日神社、小紅橋與住宅旁小溪的路線，與一路走向觀光地點不同。這是資料中的接近描述，出發前仍須核對當天巴士、踏跡與居民通行安排。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
+          "title": "神戸の岩場",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: compact limestone; several right-hand lines exceed 20 m. Access described from Musashi-Itsukaichi by Fujikura/Koiwa bus to Kanoto-iwa Iriguchi, via Kasuga Shrine, red bridge and stream beside residences. Explicitly distinguishes climbing crag from Kanoto-iwa, which it says is prohibited for climbing. No parking near shrine, road shoulder/community-hall space prohibited; fishing-site parking requires reception and instructions. Passing a residential yard requires greeting; fishing-site parking is not for camping or vehicle overnighting. Present arrangements are not verified.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/103",
+          "title": "神戸の岩場 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Kanoto no Iwaba area listing identifies face routes and an approach/parking information entry. Database route counts are not treated as live climbability or parking permission.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "從巴士站到岩壁，會經過生活空間",
+      "claim": "來源提醒接近會經住宅院旁，應打招呼、安靜通行；春日神社周邊沒有可停車的位置，路肩和公民館旁空地不可停車。若使用資料所述的付費釣場停車，須先向釣場說明來攀登並依安排停放。本指南未核實目前停車接待、費用與接近通行條件，出發前需確認，不能把舊介紹當停車授權。",
+      "verdict": "unverifiable",
+      "disposition": "qualified",
+      "qualification": "本指南未核實目前停車接待、費用與接近通行條件，出發前需確認，不能把舊介紹當停車授權。",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
+          "title": "神戸の岩場",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: compact limestone; several right-hand lines exceed 20 m. Access described from Musashi-Itsukaichi by Fujikura/Koiwa bus to Kanoto-iwa Iriguchi, via Kasuga Shrine, red bridge and stream beside residences. Explicitly distinguishes climbing crag from Kanoto-iwa, which it says is prohibited for climbing. No parking near shrine, road shoulder/community-hall space prohibited; fishing-site parking requires reception and instructions. Passing a residential yard requires greeting; fishing-site parking is not for camping or vehicle overnighting. Present arrangements are not verified.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/103",
+          "title": "神戸の岩場 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Kanoto no Iwaba area listing identifies face routes and an approach/parking information entry. Database route counts are not treated as live climbability or parking permission.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "The retained paragraph explicitly names the current conditions not established by source retrieval; practical next steps are editorial advice, not confirmation of those conditions."
+    },
+    {
+      "location": "從巴士站到岩壁，會經過生活空間",
+      "claim": "就旅行規劃而言，公共交通可避免到了入口才找車位，但必須先確認回程。把巴士時間、步行與攀登時間一起看，保留撤回車站的空間，而不是把所有時間留給最後一趟嘗試。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
+          "title": "神戸の岩場",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: compact limestone; several right-hand lines exceed 20 m. Access described from Musashi-Itsukaichi by Fujikura/Koiwa bus to Kanoto-iwa Iriguchi, via Kasuga Shrine, red bridge and stream beside residences. Explicitly distinguishes climbing crag from Kanoto-iwa, which it says is prohibited for climbing. No parking near shrine, road shoulder/community-hall space prohibited; fishing-site parking requires reception and instructions. Passing a residential yard requires greeting; fishing-site parking is not for camping or vehicle overnighting. Present arrangements are not verified.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/103",
+          "title": "神戸の岩場 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Kanoto no Iwaba area listing identifies face routes and an approach/parking information entry. Database route counts are not treated as live climbability or parking permission.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "小型岩場，也可能有長線",
+      "claim": "介紹將此處描述為緊湊石灰岩，右側幾條線有超過 20 公尺的尺度。[ROCKTOPO 區域頁](https://www.rocktopo.net/areas/103)可用於查詢已收錄的 face 路線。這表示「小型」不是所有線都短；不能帶一條平常在岩館用的繩，就預設能完成戶外下降。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
+          "title": "神戸の岩場",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: compact limestone; several right-hand lines exceed 20 m. Access described from Musashi-Itsukaichi by Fujikura/Koiwa bus to Kanoto-iwa Iriguchi, via Kasuga Shrine, red bridge and stream beside residences. Explicitly distinguishes climbing crag from Kanoto-iwa, which it says is prohibited for climbing. No parking near shrine, road shoulder/community-hall space prohibited; fishing-site parking requires reception and instructions. Passing a residential yard requires greeting; fishing-site parking is not for camping or vehicle overnighting. Present arrangements are not verified.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/103",
+          "title": "神戸の岩場 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Kanoto no Iwaba area listing identifies face routes and an approach/parking information entry. Database route counts are not treated as live climbability or parking permission.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "小型岩場，也可能有長線",
+      "claim": "先看目標線的實際長度、結束點、下降方式與器材需求，再整理裝備。路線數只幫助理解選擇範圍，不代表所有線現況都可爬，也不是一天爬完的清單。若旅行隊伍能力差異大，讓每人都有合適的可撤退目標，比只挑一條最高星等線更實際。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
+          "title": "神戸の岩場",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: compact limestone; several right-hand lines exceed 20 m. Access described from Musashi-Itsukaichi by Fujikura/Koiwa bus to Kanoto-iwa Iriguchi, via Kasuga Shrine, red bridge and stream beside residences. Explicitly distinguishes climbing crag from Kanoto-iwa, which it says is prohibited for climbing. No parking near shrine, road shoulder/community-hall space prohibited; fishing-site parking requires reception and instructions. Passing a residential yard requires greeting; fishing-site parking is not for camping or vehicle overnighting. Present arrangements are not verified.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/103",
+          "title": "神戸の岩場 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Kanoto no Iwaba area listing identifies face routes and an approach/parking information entry. Database route counts are not treated as live climbability or parking permission.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "保護岩場，也保護這條接近路",
+      "claim": "不要在居民附近喧嘩、佔用停車或擋住出入口。這些動作不是另外附加的旅遊禮貌，而是攀登日能否順利開始的條件。來源也指出釣場停車處不可露營或車宿，當天攀登計畫與住宿安排應分開處理。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
+          "title": "神戸の岩場",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: compact limestone; several right-hand lines exceed 20 m. Access described from Musashi-Itsukaichi by Fujikura/Koiwa bus to Kanoto-iwa Iriguchi, via Kasuga Shrine, red bridge and stream beside residences. Explicitly distinguishes climbing crag from Kanoto-iwa, which it says is prohibited for climbing. No parking near shrine, road shoulder/community-hall space prohibited; fishing-site parking requires reception and instructions. Passing a residential yard requires greeting; fishing-site parking is not for camping or vehicle overnighting. Present arrangements are not verified.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/103",
+          "title": "神戸の岩場 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Kanoto no Iwaba area listing identifies face routes and an approach/parking information entry. Database route counts are not treated as live climbability or parking permission.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "保護岩場，也保護這條接近路",
+      "claim": "本指南未檢查岩場當日開放與固定點，請在出發前取得近期 topo、現況與接近訊息；遇到禁止告示或不能確認的通行安排，就不進入。神戸の岩場值得研究的特色是緊湊岩壁中的石灰岩長線，而這一切的前提，是走到正確場地並尊重其周邊的生活空間。",
+      "verdict": "unverifiable",
+      "disposition": "qualified",
+      "qualification": "本指南未檢查岩場當日開放與固定點，請在出發前取得近期 topo、現況與接近訊息；遇到禁止告示或不能確認的通行安排，就不進入。",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
+          "title": "神戸の岩場",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: compact limestone; several right-hand lines exceed 20 m. Access described from Musashi-Itsukaichi by Fujikura/Koiwa bus to Kanoto-iwa Iriguchi, via Kasuga Shrine, red bridge and stream beside residences. Explicitly distinguishes climbing crag from Kanoto-iwa, which it says is prohibited for climbing. No parking near shrine, road shoulder/community-hall space prohibited; fishing-site parking requires reception and instructions. Passing a residential yard requires greeting; fishing-site parking is not for camping or vehicle overnighting. Present arrangements are not verified.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/103",
+          "title": "神戸の岩場 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Kanoto no Iwaba area listing identifies face routes and an approach/parking information entry. Database route counts are not treated as live climbability or parking permission.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "The retained paragraph explicitly names the current conditions not established by source retrieval; practical next steps are editorial advice, not confirmation of those conditions."
+    }
+  ],
+  "media": [],
+  "source_sha256": "d6bcab0414370f1d7188ef3bb07a8a61e49a329a50455aa7705e824c9959e9ba",
+  "links": [
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/神戸の岩場/",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    },
+    {
+      "url": "https://www.rocktopo.net/areas/103",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ]
+}

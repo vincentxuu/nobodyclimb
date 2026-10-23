@@ -1,0 +1,429 @@
+{
+  "schema_version": 1,
+  "article_id": "8a57b4ba16e86e3c07ccc9a2068eb344",
+  "checked_at": "2026-10-12T00:52:59.652278+00:00",
+  "claims": [
+    {
+      "location": "title / excerpt",
+      "claim": "Gakurei-iwa guide: five riverside towers in Nippara / Explore Gakurei-iwa's riverside towers with careful route identification, older-protection assessment and current approach checks.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
+          "title": "岳嶺岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: five Nippara riverside towers, larger A/B/C and smaller D/E; cold in winter despite year-round season description. Bus from Okutama to Higashi-Nippara plus about 20-minute walk; source notes Naka-Nippara weekday alternative. Many lines use ring bolts/pitons and forceful nailing may change grades. These are source descriptions, not verified current transport or anchor condition.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/106",
+          "title": "岳嶺岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Gakurei-iwa listing records face routes. No contemporary anchor inspection, live opening confirmation or bus timetable is supplied.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/2226",
+          "title": "C峰～E峰 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Gakurei-iwa C-E tower page lists ポパイ・ス・スキ 5.10b, 鬼門 5.11b, ロック・スピリット 5.12b as face routes. Database category does not establish full modern bolt protection.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Title and excerpt reflect source-described venue setting and the concrete preparation questions answered in the body; no visit or opening guarantee is asserted."
+    },
+    {
+      "location": "Narrow the objective to a particular wall",
+      "claim": "Gakurei-iwa is a group of rock towers on the Nippara River in Okutama, Tokyo. It is a candidate for outdoor rope climbers prepared to investigate older routes and protection. An easy database grade is not sufficient preparation; know which tower you intend to climb before reaching the river.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
+          "title": "岳嶺岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: five Nippara riverside towers, larger A/B/C and smaller D/E; cold in winter despite year-round season description. Bus from Okutama to Higashi-Nippara plus about 20-minute walk; source notes Naka-Nippara weekday alternative. Many lines use ring bolts/pitons and forceful nailing may change grades. These are source descriptions, not verified current transport or anchor condition.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/106",
+          "title": "岳嶺岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Gakurei-iwa listing records face routes. No contemporary anchor inspection, live opening confirmation or bus timetable is supplied.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/2226",
+          "title": "C峰～E峰 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Gakurei-iwa C-E tower page lists ポパイ・ス・スキ 5.10b, 鬼門 5.11b, ロック・スピリット 5.12b as face routes. Database category does not establish full modern bolt protection.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Narrow the objective to a particular wall",
+      "claim": "[CLIMBING-net](https://www.climbing-net.com/iwaba_detail/岳嶺岩/) identifies five towers: the larger A, B and C, and the smaller D and E. A single area name can cover different starts and routes. Give partners the target tower and route name rather than just a shared coordinate.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
+          "title": "岳嶺岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: five Nippara riverside towers, larger A/B/C and smaller D/E; cold in winter despite year-round season description. Bus from Okutama to Higashi-Nippara plus about 20-minute walk; source notes Naka-Nippara weekday alternative. Many lines use ring bolts/pitons and forceful nailing may change grades. These are source descriptions, not verified current transport or anchor condition.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/106",
+          "title": "岳嶺岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Gakurei-iwa listing records face routes. No contemporary anchor inspection, live opening confirmation or bus timetable is supplied.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/2226",
+          "title": "C峰～E峰 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Gakurei-iwa C-E tower page lists ポパイ・ス・スキ 5.10b, 鬼門 5.11b, ロック・スピリット 5.12b as face routes. Database category does not establish full modern bolt protection.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Use the database to understand the options",
+      "claim": "The [ROCKTOPO area page](https://www.rocktopo.net/areas/106) records face routes. Its [C-to-E tower page](https://www.rocktopo.net/rocks/2226) includes ポパイ・ス・スキ at 5.10b, 鬼門 at 5.11b and ロック・スピリット at 5.12b. These are database grades, not NobodyClimb field assessments. A face-route label does not establish modern, complete bolt protection.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
+          "title": "岳嶺岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: five Nippara riverside towers, larger A/B/C and smaller D/E; cold in winter despite year-round season description. Bus from Okutama to Higashi-Nippara plus about 20-minute walk; source notes Naka-Nippara weekday alternative. Many lines use ring bolts/pitons and forceful nailing may change grades. These are source descriptions, not verified current transport or anchor condition.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/106",
+          "title": "岳嶺岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Gakurei-iwa listing records face routes. No contemporary anchor inspection, live opening confirmation or bus timetable is supplied.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/2226",
+          "title": "C峰～E峰 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Gakurei-iwa C-E tower page lists ポパイ・ス・スキ 5.10b, 鬼門 5.11b, ロック・スピリット 5.12b as face routes. Database category does not establish full modern bolt protection.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Use the database to understand the options",
+      "claim": "Choose a candidate appropriate to your abilities, then obtain the corresponding topo, length, anchor and descent information. If names or positions differ between sources, ask someone familiar with the crag instead of identifying a line by grade alone. A route list cannot replace a shared understanding of the objective and retreat.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
+          "title": "岳嶺岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: five Nippara riverside towers, larger A/B/C and smaller D/E; cold in winter despite year-round season description. Bus from Okutama to Higashi-Nippara plus about 20-minute walk; source notes Naka-Nippara weekday alternative. Many lines use ring bolts/pitons and forceful nailing may change grades. These are source descriptions, not verified current transport or anchor condition.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/106",
+          "title": "岳嶺岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Gakurei-iwa listing records face routes. No contemporary anchor inspection, live opening confirmation or bus timetable is supplied.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/2226",
+          "title": "C峰～E峰 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Gakurei-iwa C-E tower page lists ポパイ・ス・スキ 5.10b, 鬼門 5.11b, ロック・スピリット 5.12b as face routes. Database category does not establish full modern bolt protection.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Separate fixed protection from movement difficulty",
+      "claim": "The publisher warns that many lines use ring bolts or pitons, and that forceful nailing may have changed grades. Protection reliability and movement difficulty need separate assessment. A low grade does not remove uncertainty about protection, rock or descent.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
+          "title": "岳嶺岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: five Nippara riverside towers, larger A/B/C and smaller D/E; cold in winter despite year-round season description. Bus from Okutama to Higashi-Nippara plus about 20-minute walk; source notes Naka-Nippara weekday alternative. Many lines use ring bolts/pitons and forceful nailing may change grades. These are source descriptions, not verified current transport or anchor condition.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/106",
+          "title": "岳嶺岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Gakurei-iwa listing records face routes. No contemporary anchor inspection, live opening confirmation or bus timetable is supplied.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/2226",
+          "title": "C峰～E峰 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Gakurei-iwa C-E tower page lists ポパイ・ス・スキ 5.10b, 鬼門 5.11b, ロック・スピリット 5.12b as face routes. Database category does not establish full modern bolt protection.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Separate fixed protection from movement difficulty",
+      "claim": "This article does not teach aid climbing, nailing or anchor construction, nor does it suggest that visitors solve problems by adding protection. If you cannot assess the existing protection, identify the anchor and retreat safely, obtain skills or suitable instruction first, or drop the destination. Arriving with sport quickdraws and only then asking how to descend is too late.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
+          "title": "岳嶺岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: five Nippara riverside towers, larger A/B/C and smaller D/E; cold in winter despite year-round season description. Bus from Okutama to Higashi-Nippara plus about 20-minute walk; source notes Naka-Nippara weekday alternative. Many lines use ring bolts/pitons and forceful nailing may change grades. These are source descriptions, not verified current transport or anchor condition.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/106",
+          "title": "岳嶺岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Gakurei-iwa listing records face routes. No contemporary anchor inspection, live opening confirmation or bus timetable is supplied.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/2226",
+          "title": "C峰～E峰 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Gakurei-iwa C-E tower page lists ポパイ・ス・スキ 5.10b, 鬼門 5.11b, ロック・スピリット 5.12b as face routes. Database category does not establish full modern bolt protection.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Confirm transport and access before Nippara",
+      "claim": "The publisher describes a bus from Okutama Station to Higashi-Nippara followed by an approximately 20-minute walk, noting a shorter approach from Naka-Nippara on weekdays. This is source information, not a guarantee of services on your travel date. Check the day's outbound and return buses and the path from the road to the river.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
+          "title": "岳嶺岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: five Nippara riverside towers, larger A/B/C and smaller D/E; cold in winter despite year-round season description. Bus from Okutama to Higashi-Nippara plus about 20-minute walk; source notes Naka-Nippara weekday alternative. Many lines use ring bolts/pitons and forceful nailing may change grades. These are source descriptions, not verified current transport or anchor condition.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/106",
+          "title": "岳嶺岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Gakurei-iwa listing records face routes. No contemporary anchor inspection, live opening confirmation or bus timetable is supplied.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/2226",
+          "title": "C峰～E峰 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Gakurei-iwa C-E tower page lists ポパイ・ス・スキ 5.10b, 鬼門 5.11b, ロック・スピリット 5.12b as face routes. Database category does not establish full modern bolt protection.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "Confirm transport and access before Nippara",
+      "claim": "Current bus stops, approach passage, parking permission and fixed-protection condition were not verified in this research; obtain recent information before departure rather than parking or entering solely from an older page. The source's year-round season description, with cold winters, is a climate clue rather than a promise of suitable climbing every day.",
+      "verdict": "unverifiable",
+      "disposition": "qualified",
+      "qualification": "Current bus stops, approach passage, parking permission and fixed-protection condition were not verified in this research; obtain recent information before departure rather than parking or entering solely from an older page.",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
+          "title": "岳嶺岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: five Nippara riverside towers, larger A/B/C and smaller D/E; cold in winter despite year-round season description. Bus from Okutama to Higashi-Nippara plus about 20-minute walk; source notes Naka-Nippara weekday alternative. Many lines use ring bolts/pitons and forceful nailing may change grades. These are source descriptions, not verified current transport or anchor condition.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/106",
+          "title": "岳嶺岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Gakurei-iwa listing records face routes. No contemporary anchor inspection, live opening confirmation or bus timetable is supplied.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/2226",
+          "title": "C峰～E峰 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Gakurei-iwa C-E tower page lists ポパイ・ス・スキ 5.10b, 鬼門 5.11b, ロック・スピリット 5.12b as face routes. Database category does not establish full modern bolt protection.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "The retained paragraph explicitly names the current conditions not established by source retrieval; practical next steps are editorial advice, not confirmation of those conditions."
+    },
+    {
+      "location": "Confirm transport and access before Nippara",
+      "claim": "Prepare five essentials: tower, route, protection, descent and return. Carry water, food, rain protection and lighting, and consider riverside conditions and retreat time. The interest is in the older routes across five towers, best explored with a particular plan.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
+          "title": "岳嶺岩",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Overview: five Nippara riverside towers, larger A/B/C and smaller D/E; cold in winter despite year-round season description. Bus from Okutama to Higashi-Nippara plus about 20-minute walk; source notes Naka-Nippara weekday alternative. Many lines use ring bolts/pitons and forceful nailing may change grades. These are source descriptions, not verified current transport or anchor condition.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/106",
+          "title": "岳嶺岩 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Tokyo Gakurei-iwa listing records face routes. No contemporary anchor inspection, live opening confirmation or bus timetable is supplied.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/rocks/2226",
+          "title": "C峰～E峰 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Gakurei-iwa C-E tower page lists ポパイ・ス・スキ 5.10b, 鬼門 5.11b, ロック・スピリット 5.12b as face routes. Database category does not establish full modern bolt protection.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    }
+  ],
+  "media": [],
+  "source_sha256": "626a62005a92de4b192724ab24b314fa4048ab7ab834e59fbe8bf5bc6f0ff328",
+  "links": [
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/岳嶺岩/",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    },
+    {
+      "url": "https://www.rocktopo.net/areas/106",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    },
+    {
+      "url": "https://www.rocktopo.net/rocks/2226",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ]
+}

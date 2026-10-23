@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "article_id": "5c1f7dd326e222ca8162fcde107f3559",
+  "source_sha256": "efe97b0bd66de91532cd849aa2a55c64f1405a6c9d8879a2a15f52eede97f6de",
+  "evidence_sha256": "26adf5c61fc7cbf94c7a255dbb60c265af4310671da7cdd04d326bc2200b4074",
+  "reviewed_at": "2026-10-12T00:57:33.346526+00:00",
+  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "raw fetch-12 支持石灰岩、5.11/12重心、2007年4月自粛、停車與吊橋交通；原文自粛不是法律閉鎖，三語沒有誇大，未確認解除明示。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語2007年4月與5.11/12、5.9 or easier包含邊界、歷史自粛非確定當期閉鎖與未確認解除一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "從先確認狀態到選區、交通與替代有具體行動，沒有作已確認可用推薦。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "英文已改為routes graded 5.9 or easier，與繁中5.9以下、日文5.9以下包含邊界一致；三語全文回讀未改2007年4月自粛、未確認解除或其他限制。"
+    }
+  ]
+}

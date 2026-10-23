@@ -1,0 +1,26 @@
+# 獨立審稿：越沢バットレス（ja／a81faf4baa85bd50e89afdc78a1c805f）
+
+審查人：Codex independent reviewer /root/blog_path (未參與本輪寫稿)。審查日期：2026-10-12T00:59:35.293307+00:00。三語完整全文、來源台帳與raw支持段落均已閱讀；判定 approved 僅對下列版本的內容審查有效，不等於已上線。
+原稿 SHA-256：d6b0c100b42d1e3fe247eff7d464f0ff1e0df97dbbaabb7f696fa97029160f1f；來源台帳 SHA-256：04c0b150b9a1cbf8ca4a64b59bc3978932c4c372479066bc4b510710954b8044。PR head 未查，本task禁止git操作。
+
+## 機械檢查
+
+`node scripts/blog/article.mjs check backend/content/blog/a81faf4baa85bd50e89afdc78a1c805f.md` 退出碼 0。原稿/台帳完整bytes hash相符；三語獨立ID與互連、同group metadata相符；H2起始、來源清單已實查。未生成或檢查migration，未跑本地D1、lint/typecheck，這些是主流程後續發布gate。沒有SQL/production操作。
+
+## 事實查證
+
+台帳：`backend/content/blog/a81faf4baa85bd50e89afdc78a1c805f.sources.json`；逐段核對 11 條claim records（含metadata/編輯建議，非把每條當獨立外部事實），狀態：{"confirmed": 10, "unverifiable": 1}。
+CLIMBING-net核對80m高差/70m寬、多繩距訓練、留置保護不可靠與過去繩切事故；ROCKTOPO main lines multi。みろく2024-05-12山行8:20鳩ノ巣→8:50取り付き吻合30分，發布2024-06-07；費用現況未硬報。
+以任務B/raw.json及獨立管理/club raw、root/raw*.json實際支持段落為證據；Groundlane callable inventory已找到web_fetch。本review additionally Groundlane extract=full讀ROCKTOPO1671與KNPScmsSeq28；原本狹窄reader結果不當全文。TheClimb branch採作者記錄的Groundlane boundedfail後Exa公開頁段落，非Groundlane驗證；不傳認證資料、不使用退役fetch或browser scrape。
+來源支持與可達性分開：台帳links均有實際工具紀錄，已核對目的主題，HTTP200不單獨當支持證據；沒有媒體（cover=null/media=[]）。沒有原音/字幕查證範圍。
+
+## 內容與語氣
+
+以繩隊職責、撤退、回程回答多繩距旅行問題；日常地面確保與架站/下降差異解释明确，不引导首次自行學複雜操作。
+翻譯審查：三語80/70、May2024與30分鐘、尺寸非登攀長/繩數、現況費用/支點未驗一致；沒有把歷史山行時間當現在通行保證。
+每篇獨立回答場地選擇與準備，不要求按系列閱讀；標題/摘要未承諾即時通行、支點安全或親訪。正文重要主張inline來源，文末清單及三語真實ID互連均存在。未解必修：無。可選文句改善不阻擋此版。
+
+## 未驗範圍
+
+未現場實爬或檢查固定點、未證明旅行日期開放/通行、未測實際導航/巴士或壁面當日狀況；本文相應限制已三語明示。未驗外籍登記實際交易、指定岩壁預約名額/適用、現場charged價格或課程可用性，不宣稱已完成。
+本查證不單獨證明主題覆蓋完整；另已按本文旅行判斷用途做內容覆蓋與逐段三語審查。未檢查PR/CI/部署/SSR SEO、站內公開render與圖片行為；互連ID僅以本次三語原稿bundle驗，尚未production可達性證據。
