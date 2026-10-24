@@ -1,9 +1,12 @@
 # NobodyClimb AI 教練功能測試
 #
-# 用法：
-#   gatelane eval --tag baseline          # 跑基線
-#   gatelane eval --tag model-upgrade     # 換模型後跑
-#   gatelane compare --baseline baseline --candidate model-upgrade
+# 用法（需要 @lanefoundry/gatelane-cli >= 0.2.0）：
+#   npx @lanefoundry/gatelane-cli eval --tag baseline          # 跑基線
+#   npx @lanefoundry/gatelane-cli eval --tag model-upgrade     # 換模型後跑
+#   npx @lanefoundry/gatelane-cli compare --baseline baseline --candidate model-upgrade
+#
+# 需要的環境變數（可放在 .env）：GATELANE_TEST_TOKEN、ANTHROPIC_API_KEY
+# 結果存在 .gatelane/runs/<tag>.json；compare 有測試退步或新被攻破的攻擊時 exit 1
 
 # ── Target ────────────────────────────────────────────────────────────────────
 target:

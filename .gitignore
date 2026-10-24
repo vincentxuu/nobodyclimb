@@ -51,3 +51,6 @@ output/
 .startmoving
 docs/start-moving*
 .worktrees/
+
+# gatelane eval runs
+.gatelane/
