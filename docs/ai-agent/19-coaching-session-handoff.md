@@ -93,7 +93,7 @@ tool_calls: 頂層 tool_calls → 頂層 toolCalls → choices[0].message.tool_c
 1. **批量模型測試腳本修正** — 目前 curl 30s 超時對推理模型不夠，token 15 分鐘過期對跑 9 個模型不夠。需要：
    - 每個模型重新登入取 token
    - 超時改 60s+
-   - 或用 gatelane 跑（需先修 gatelane 的 `trace-store-fs` export 問題）
+   - 或用 gatelane 跑：`npx @lanefoundry/gatelane-cli eval --tag <模型名>`（gatelane 0.2.0 起支援，見根目錄 `gatelane.yaml`）
 
 2. **Cloudflare API Token Workers AI 權限** — CI 的 auto-pr-description 和 code-review workflow 用 Cloudflare Workers AI，但 GitHub 的 `CLOUDFLARE_API_TOKEN` 沒有 Workers AI 權限。需去 Cloudflare Dashboard → API Tokens → 編輯 → 加 `Account > Workers AI > Read`
 
@@ -106,7 +106,7 @@ tool_calls: 頂層 tool_calls → 頂層 toolCalls → choices[0].message.tool_c
 5. **recommend 路由優化** — 目前走 agent loop，小模型可能選錯 tool。glm-5.3-flash 的 function calling 效果待驗證
 
 6. **gatelane 整合** — `gatelane.yaml` 已寫好 12 個功能測試 + red team + blue team。需要：
-   - 修 gatelane 的 `trace-store-fs` build 問題
+   - ~~修 gatelane 的 `trace-store-fs` build 問題~~ — 已不需要：gatelane 0.2.0 的 `eval` 直接打 HTTP endpoint，不再依賴 trace store（2026-10-24）
    - 加 Cloudflare Workers AI 的 API token 做 LLM judge（或用 OpenAI/Anthropic key）
 
 ### 低優先
