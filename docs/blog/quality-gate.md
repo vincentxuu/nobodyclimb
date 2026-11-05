@@ -6,7 +6,7 @@
 
 - `pnpm blog:test`：文章工具與閘門行為測試。
 - `pnpm blog:translations`：從三語原稿生成 SEO 對照 manifest。
-- `pnpm blog:check`：原稿、來源台帳、審稿核准與三語對照；`backend/migrations` 出現帶 `-- blog-source:` 的文章 migration 一律失敗。
+- `pnpm blog:check`：原稿、來源台帳、審稿核准與三語對照；`backend/migrations` 出現帶 `-- blog-source:` 的文章 migration 一律失敗。中文稿另以 OpenCC 字典檢查簡體字形（如「午后」「会」）：只抓高把握的情況，不是完整的用語檢查；日文專有名詞若被誤判，加入 `scripts/blog/zh-hant-allow.json`。
 - `pnpm blog:validate-local`：用隔離本地 D1 對全部原稿跑一次同步，驗證新增、重跑無變動、更新保留首次發表日期與瀏覽數、缺作者失敗；沒有原稿時改用內建範例文章。
 - `pnpm blog:sync --output <sync.sql>`：產生可重複執行的同步 SQL，供檢視或部署使用；產物不納入版控。
 

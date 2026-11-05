@@ -6,6 +6,7 @@ import test from 'node:test'
 import {
   checkEvidence,
   checkReview,
+  checkTraditional,
   checkTranslations,
   contentHash,
   discoverSources,
@@ -224,4 +225,20 @@ test('已知錯誤主張不能發布，未驗主張必須在原稿明示限制',
   assert.doesNotThrow(() =>
     checkEvidence(uncertain, 'article', [], undefined, [], uncertain.claims[0].qualification)
   )
+})
+
+test('中文稿混入簡體字形會被擋下，繁體慣用字與日文專有名詞不誤判', () => {
+  const zh = (body, extra = {}) => checkTraditional({ id: 'zh', lang: 'zh', ...extra }, body)
+  assert.throws(() => zh('建議平日午后入場。'), /「后」→「後」/)
+  assert.throws(() => zh('這里是会員專區。'), /「里」→「裡」.*「会」→「會」/)
+  assert.throws(() => zh('正文沒問題。', { title: '岩馆指南' }), /「馆」→「館」/)
+  assert.doesNotThrow(() =>
+    zh('皇后大道離岩場三公里；櫃台只占用一格，請先了解壁面包含的岩峰群與山岳路線，核准後再出發。')
+  )
+  assert.doesNotThrow(() =>
+    zh(
+      '在広沢寺温泉入口下車，或到たかとり小学校、荻窪東亜会館；參考[奥多摩クライミング協会](https://example.com/会)。'
+    )
+  )
+  assert.doesNotThrow(() => checkTraditional({ id: 'ja', lang: 'ja' }, '会員向け案内'))
 })
