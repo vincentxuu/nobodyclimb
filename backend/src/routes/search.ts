@@ -3,6 +3,7 @@ import { describeRoute, validator } from 'hono-openapi'
 import { z } from 'zod'
 import { Env } from '../types'
 import { parsePagination } from '../utils/id'
+import { postLangClause, postLangQuerySchema, resolvePostLang } from '../utils/post-lang'
 
 export const searchRoutes = new Hono<{ Bindings: Env }>()
 
@@ -12,10 +13,12 @@ const searchQuerySchema = z.object({
   type: z.enum(['posts', 'crags', 'gyms', 'galleries', 'videos']).optional(),
   page: z.string().optional(),
   limit: z.string().optional(),
+  lang: postLangQuerySchema.shape.lang,
 })
 
 const suggestionsQuerySchema = z.object({
   q: z.string().min(2, '搜尋關鍵字至少需要 2 個字元').optional(),
+  lang: postLangQuerySchema.shape.lang,
 })
 
 // GET /search - Global search
@@ -25,7 +28,7 @@ searchRoutes.get(
     tags: ['Search'],
     summary: '全域搜尋',
     description:
-      '搜尋文章、岩場、岩館、相簿、影片等內容。可透過 type 參數指定搜尋類型，若未指定則搜尋所有類型。',
+      '搜尋文章、岩場、岩館、相簿、影片等內容。可透過 type 參數指定搜尋類型，若未指定則搜尋所有類型。文章依 lang 篩選語系（zh/en/ja/all，未帶時為 zh）。',
     responses: {
       200: { description: '搜尋成功，回傳符合條件的結果' },
       400: { description: '搜尋關鍵字不符合要求（至少需要 2 個字元）' },
@@ -33,7 +36,8 @@ searchRoutes.get(
   }),
   validator('query', searchQuerySchema),
   async (c) => {
-    const { q: query, type, page: pageStr, limit: limitStr } = c.req.valid('query')
+    const { q: query, type, page: pageStr, limit: limitStr, lang: langParam } = c.req.valid('query')
+    const lang = resolvePostLang(langParam)
     const { page, limit } = parsePagination(pageStr, limitStr)
 
     const searchPattern = `%${query}%`
@@ -48,10 +52,17 @@ searchRoutes.get(
          JOIN users u ON p.author_id = u.id
          WHERE p.status = 'published'
            AND (p.title LIKE ? OR p.content LIKE ? OR p.excerpt LIKE ?)
+           ${lang ? `AND ${postLangClause('p')}` : ''}
          ORDER BY p.published_at DESC
          LIMIT ?`
       )
-        .bind(searchPattern, searchPattern, searchPattern, type ? limit : 5)
+        .bind(
+          searchPattern,
+          searchPattern,
+          searchPattern,
+          ...(lang ? [lang] : []),
+          type ? limit : 5
+        )
         .all()
       results.posts = posts.results
     }
@@ -150,7 +161,8 @@ searchRoutes.get(
   }),
   validator('query', suggestionsQuerySchema),
   async (c) => {
-    const { q: query } = c.req.valid('query')
+    const { q: query, lang: langParam } = c.req.valid('query')
+    const lang = resolvePostLang(langParam)
 
     if (!query || query.length < 2) {
       return c.json({
@@ -166,9 +178,10 @@ searchRoutes.get(
     const posts = await c.env.DB.prepare(
       `SELECT title FROM posts
        WHERE status = 'published' AND title LIKE ?
+         ${lang ? `AND ${postLangClause('')}` : ''}
        LIMIT 3`
     )
-      .bind(searchPattern)
+      .bind(searchPattern, ...(lang ? [lang] : []))
       .all<{ title: string }>()
     suggestions.push(...posts.results.map((p) => p.title))
 

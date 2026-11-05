@@ -10,7 +10,7 @@
 
 三份 frontmatter 的 `translation_group` 都是中文 ID；`translations` 都是相同 `{zh: 中文ID, en: 英文ID, ja: 日文ID}`。lang 分別 zh/en/ja，同 group category/tags/cover_image/status/is_featured/author_username 相同。
 
-正文附「繁體中文」「English」「日本語」互連，使用 `/blog/<zh-id>`、`/en/blog/<en-id>`、`/ja/blog/<ja-id>`。三篇沿用現有 DB，列表暫時混列。
+正文附「繁體中文」「English」「日本語」互連，使用 `/blog/<zh-id>`、`/en/blog/<en-id>`、`/ja/blog/<ja-id>`。三篇沿用現有 DB，各自只出現在對應語系的列表。
 
 ## 跨語檢查
 

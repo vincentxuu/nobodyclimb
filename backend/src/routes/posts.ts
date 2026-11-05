@@ -1,10 +1,11 @@
 import { Hono } from 'hono'
-import { describeRoute } from 'hono-openapi'
+import { describeRoute, validator } from 'hono-openapi'
 import { authMiddleware, optionalAuthMiddleware } from '../middleware/auth'
 import { PostRepository } from '../repositories/post-repository'
 import { PostService } from '../services/post-service'
 import { Env, Post } from '../types'
 import { generateId, parsePagination } from '../utils/id'
+import { postLangQuerySchema, resolvePostLang } from '../utils/post-lang'
 import { createLikeNotificationWithAggregation, createNotification } from './notifications'
 
 export const postsRoutes = new Hono<{ Bindings: Env }>()
@@ -27,17 +28,20 @@ postsRoutes.get(
   describeRoute({
     tags: ['Posts'],
     summary: '取得文章列表',
-    description: '取得所有文章列表，支援分頁、狀態過濾、標籤過濾、分類過濾、精選文章過濾',
+    description:
+      '取得所有文章列表，支援分頁、狀態過濾、標籤過濾、分類過濾、精選文章過濾。lang 可為 zh/en/ja/all，未帶時為 zh；未標語系的文章不分語系都會回傳',
     responses: {
       200: { description: '成功取得文章列表' },
     },
   }),
+  validator('query', postLangQuerySchema),
   async (c) => {
     const { page, limit } = parsePagination(c.req.query('page'), c.req.query('limit'))
     const status = c.req.query('status') || 'published'
     const tag = c.req.query('tag')
     const category = c.req.query('category')
     const featured = c.req.query('featured') === 'true' ? true : undefined
+    const lang = resolvePostLang(c.req.valid('query').lang)
 
     const service = initService(c)
     const result = await service.getList({
@@ -47,6 +51,7 @@ postsRoutes.get(
       tag,
       category,
       featured,
+      lang,
     })
 
     return c.json({
@@ -90,16 +95,17 @@ postsRoutes.get(
   describeRoute({
     tags: ['Posts'],
     summary: '取得精選文章',
-    description: '取得精選文章列表，可指定回傳數量',
+    description: '取得精選文章列表，可指定回傳數量；lang 規則同文章列表',
     responses: {
       200: { description: '成功取得精選文章列表' },
     },
   }),
+  validator('query', postLangQuerySchema),
   async (c) => {
     const limit = parseInt(c.req.query('limit') || '6', 10)
 
     const service = initService(c)
-    const posts = await service.getFeatured(limit)
+    const posts = await service.getFeatured(limit, resolvePostLang(c.req.valid('query').lang))
 
     return c.json({
       success: true,
@@ -114,14 +120,15 @@ postsRoutes.get(
   describeRoute({
     tags: ['Posts'],
     summary: '取得所有標籤',
-    description: '取得文章的所有標籤列表',
+    description: '取得文章的所有標籤列表與文章數；lang 規則同文章列表',
     responses: {
       200: { description: '成功取得標籤列表' },
     },
   }),
+  validator('query', postLangQuerySchema),
   async (c) => {
     const service = initService(c)
-    const tags = await service.getAllTags()
+    const tags = await service.getAllTags(resolvePostLang(c.req.valid('query').lang))
 
     return c.json({
       success: true,
@@ -136,16 +143,17 @@ postsRoutes.get(
   describeRoute({
     tags: ['Posts'],
     summary: '取得熱門文章',
-    description: '取得熱門文章列表，依瀏覽數排序',
+    description: '取得熱門文章列表，依瀏覽數排序；lang 規則同文章列表',
     responses: {
       200: { description: '成功取得熱門文章列表' },
     },
   }),
+  validator('query', postLangQuerySchema),
   async (c) => {
     const limit = parseInt(c.req.query('limit') || '5', 10)
 
     const service = initService(c)
-    const posts = await service.getPopular(limit)
+    const posts = await service.getPopular(limit, resolvePostLang(c.req.valid('query').lang))
 
     return c.json({
       success: true,

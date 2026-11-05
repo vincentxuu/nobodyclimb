@@ -115,42 +115,8 @@ jobs:
           fi
           echo "✅ Required secrets are configured"
 
-      - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: backend
-          wranglerVersion: "4"
-          command: deploy --config wrangler.toml --env ${{ steps.env.outputs.environment }}
-        env:
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-
-      - name: Upload secrets to Cloudflare Workers
-        working-directory: backend
-        run: |
-          echo "$JWT_SECRET" | npx wrangler secret put JWT_SECRET --config wrangler.toml --env ${{ steps.env.outputs.environment }}
-          if [ -n "$CWA_API_KEY" ]; then
-            echo "$CWA_API_KEY" | npx wrangler secret put CWA_API_KEY --config wrangler.toml --env ${{ steps.env.outputs.environment }}
-          fi
-          if [ -n "$GOOGLE_CLIENT_ID" ]; then
-            echo "$GOOGLE_CLIENT_ID" | npx wrangler secret put GOOGLE_CLIENT_ID --config wrangler.toml --env ${{ steps.env.outputs.environment }}
-          fi
-          # Analytics Engine 查詢用（可選）
-          if [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            echo "$CLOUDFLARE_ACCOUNT_ID" | npx wrangler secret put CLOUDFLARE_ACCOUNT_ID --config wrangler.toml --env ${{ steps.env.outputs.environment }}
-          fi
-          ANALYTICS_TOKEN="${CF_ANALYTICS_TOKEN:-$CLOUDFLARE_API_TOKEN}"
-          if [ -n "$ANALYTICS_TOKEN" ]; then
-            echo "$ANALYTICS_TOKEN" | npx wrangler secret put CLOUDFLARE_API_TOKEN --config wrangler.toml --env ${{ steps.env.outputs.environment }}
-          fi
-        env:
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
-
+      # Migration 先於 Worker 部署：新程式可能查詢新欄位，先部署會在 migration 套用前回 500。
+      # 因此 migration 必須與上一版 Worker 相容（只新增、不刪改既有欄位）。
       - name: Apply D1 Migrations (Production)
         if: steps.env.outputs.environment == 'production'
         working-directory: backend
@@ -200,6 +166,42 @@ jobs:
           done
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: backend
+          wranglerVersion: "4"
+          command: deploy --config wrangler.toml --env ${{ steps.env.outputs.environment }}
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
+      - name: Upload secrets to Cloudflare Workers
+        working-directory: backend
+        run: |
+          echo "$JWT_SECRET" | npx wrangler secret put JWT_SECRET --config wrangler.toml --env ${{ steps.env.outputs.environment }}
+          if [ -n "$CWA_API_KEY" ]; then
+            echo "$CWA_API_KEY" | npx wrangler secret put CWA_API_KEY --config wrangler.toml --env ${{ steps.env.outputs.environment }}
+          fi
+          if [ -n "$GOOGLE_CLIENT_ID" ]; then
+            echo "$GOOGLE_CLIENT_ID" | npx wrangler secret put GOOGLE_CLIENT_ID --config wrangler.toml --env ${{ steps.env.outputs.environment }}
+          fi
+          # Analytics Engine 查詢用（可選）
+          if [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "$CLOUDFLARE_ACCOUNT_ID" | npx wrangler secret put CLOUDFLARE_ACCOUNT_ID --config wrangler.toml --env ${{ steps.env.outputs.environment }}
+          fi
+          ANALYTICS_TOKEN="${CF_ANALYTICS_TOKEN:-$CLOUDFLARE_API_TOKEN}"
+          if [ -n "$ANALYTICS_TOKEN" ]; then
+            echo "$ANALYTICS_TOKEN" | npx wrangler secret put CLOUDFLARE_API_TOKEN --config wrangler.toml --env ${{ steps.env.outputs.environment }}
+          fi
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          CWA_API_KEY: ${{ secrets.CWA_API_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
 
       # 文章以 repo 原稿為準：新增缺少的文章、更新內容不同的文章，重跑不會改動資料。
       # 遠端檔案匯入期間 D1 暫時無法服務查詢，所以只在文章或同步腳本有變動時執行；

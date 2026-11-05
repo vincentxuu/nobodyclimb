@@ -193,11 +193,11 @@ export const authService = {
  */
 export const postService = {
   /**
-   * 獲取文章列表
+   * 獲取文章列表；lang 為介面語系，後端只回傳該語系與未標語系的文章
    */
-  getPosts: async (page = 1, limit = 10, tags?: string[]) => {
+  getPosts: async (page = 1, limit = 10, tags?: string[], lang?: string) => {
     const response = await apiClient.get<BackendPostPaginatedResponse>('/posts', {
-      params: { page, limit, tags: tags?.join(',') },
+      params: { page, limit, tags: tags?.join(','), lang },
     })
     return response.data
   },
@@ -234,8 +234,10 @@ export const postService = {
   /**
    * 獲取精選文章
    */
-  getFeaturedPosts: async () => {
-    const response = await apiClient.get<ApiResponse<BackendPost[]>>('/posts/featured')
+  getFeaturedPosts: async (lang?: string) => {
+    const response = await apiClient.get<ApiResponse<BackendPost[]>>('/posts/featured', {
+      params: { lang },
+    })
     return response.data
   },
 
@@ -263,9 +265,9 @@ export const postService = {
   /**
    * 獲取熱門文章
    */
-  getPopularPosts: async (limit = 5) => {
+  getPopularPosts: async (limit = 5, lang?: string) => {
     const response = await apiClient.get<ApiResponse<BackendPost[]>>('/posts/popular', {
-      params: { limit },
+      params: { limit, lang },
     })
     return response.data
   },

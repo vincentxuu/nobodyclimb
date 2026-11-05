@@ -154,58 +154,61 @@ function BlogContent() {
   }, [categoryParam])
 
   // 獲取文章列表
-  const fetchArticles = useCallback(async (pageNum: number, append: boolean = false) => {
-    if (pageNum === 1) {
-      setIsLoading(true)
-    } else {
-      setIsLoadingMore(true)
-    }
-
-    try {
-      const response = await postService.getPosts(pageNum, 9)
-      if (response.success && response.data) {
-        // 後端返回 { success, data: [...], pagination }
-        const { data: postsData, pagination: paginationData } = response
-
-        // 將後端數據轉換為前端格式
-        const fetchedArticles: Article[] = postsData.map((post) => ({
-          id: post.id,
-          title: post.title,
-          category: getCategoryLabel(post.category) || t('uncategorized'),
-          categoryValue: post.category || undefined,
-          date: post.published_at
-            ? new Date(post.published_at).toLocaleDateString(toIntlLocale(locale))
-            : new Date(post.created_at).toLocaleDateString(toIntlLocale(locale)),
-          description: post.excerpt ? normalizeNewlines(post.excerpt) : undefined,
-          imageUrl: post.cover_image || '',
-          isFeature: post.is_featured === 1,
-          content: normalizeNewlines(post.content),
-          author: post.display_name || post.username || undefined,
-        }))
-
-        if (append) {
-          setArticles((prev) => [...prev, ...fetchedArticles])
-        } else {
-          setArticles(fetchedArticles)
-        }
-        setHasMore(pageNum < (paginationData?.total_pages || 1))
+  const fetchArticles = useCallback(
+    async (pageNum: number, append: boolean = false) => {
+      if (pageNum === 1) {
+        setIsLoading(true)
       } else {
+        setIsLoadingMore(true)
+      }
+
+      try {
+        const response = await postService.getPosts(pageNum, 9, undefined, locale)
+        if (response.success && response.data) {
+          // 後端返回 { success, data: [...], pagination }
+          const { data: postsData, pagination: paginationData } = response
+
+          // 將後端數據轉換為前端格式
+          const fetchedArticles: Article[] = postsData.map((post) => ({
+            id: post.id,
+            title: post.title,
+            category: getCategoryLabel(post.category) || t('uncategorized'),
+            categoryValue: post.category || undefined,
+            date: post.published_at
+              ? new Date(post.published_at).toLocaleDateString(toIntlLocale(locale))
+              : new Date(post.created_at).toLocaleDateString(toIntlLocale(locale)),
+            description: post.excerpt ? normalizeNewlines(post.excerpt) : undefined,
+            imageUrl: post.cover_image || '',
+            isFeature: post.is_featured === 1,
+            content: normalizeNewlines(post.content),
+            author: post.display_name || post.username || undefined,
+          }))
+
+          if (append) {
+            setArticles((prev) => [...prev, ...fetchedArticles])
+          } else {
+            setArticles(fetchedArticles)
+          }
+          setHasMore(pageNum < (paginationData?.total_pages || 1))
+        } else {
+          if (!append) {
+            setArticles([])
+          }
+          setHasMore(false)
+        }
+      } catch (err) {
+        console.error('Failed to fetch articles:', err)
         if (!append) {
           setArticles([])
         }
         setHasMore(false)
+      } finally {
+        setIsLoading(false)
+        setIsLoadingMore(false)
       }
-    } catch (err) {
-      console.error('Failed to fetch articles:', err)
-      if (!append) {
-        setArticles([])
-      }
-      setHasMore(false)
-    } finally {
-      setIsLoading(false)
-      setIsLoadingMore(false)
-    }
-  }, [])
+    },
+    [locale]
+  )
 
   // 初始載入
   useEffect(() => {

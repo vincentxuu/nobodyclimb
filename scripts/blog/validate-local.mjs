@@ -123,6 +123,7 @@ try {
       'category',
       'status',
       'is_featured',
+      'lang',
       'view_count',
       'published_at',
       'created_at',
@@ -152,6 +153,7 @@ try {
           'category',
           'status',
           'is_featured',
+          'lang',
         ])
           assert.equal(post[key], meta[key], `${meta.id} ${key}`)
         assert.equal(post.content, html, `${meta.id} content`)
@@ -188,6 +190,14 @@ try {
       assert.notEqual(post.updated_at, '2020-01-01', '內容變更必須刷新 updated_at')
     }
     process.stdout.write('本地 D1 更新並保留日期與瀏覽數：通過\n')
+
+    seed('sync', `UPDATE posts SET lang=NULL, updated_at='2021-01-01';`)
+    run('sync', ['--file', sync, '--json'])
+    const backfilled = snapshot('sync')
+    assertContent(backfilled)
+    for (const post of backfilled.posts)
+      assert.equal(post.updated_at, '2021-01-01', '只補語系不得刷新 updated_at')
+    process.stdout.write('本地 D1 補語系且不刷新更新日期：通過\n')
 
     seed('missing-author', `${schema}\n${author('other-local-author')}`)
     run('missing-author', ['--file', sync, '--json'], false)
