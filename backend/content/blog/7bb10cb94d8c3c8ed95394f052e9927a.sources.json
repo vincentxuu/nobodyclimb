@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "article_id": "7bb10cb94d8c3c8ed95394f052e9927a",
+  "checked_at": "2026-10-12T00:52:59.652278+00:00",
+  "claims": [
+    {
+      "location": "title / excerpt",
+      "claim": "鷹取山攀岩指南：完成登記，再安排公園頂繩日 / 橫須賀鷹取山的攀登須登記並遵守指導與規則。整理公園接近、頂繩取向與部分步道封閉資訊。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
+          "title": "鷹取山公園",
+          "publisher": "横須賀市",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Official Yokosuka park page: former quarry walls; access from Keikyu Oppama by Shonan Takatori estate loop bus to Takatori Shogakko, about 10 minutes on foot. No park parking. Rock climbing normally prohibited with exception when following council instructors and specified rules; council registration required. Partial trail closure from carved Buddha to water distribution reservoir due to rockfall, from 2025-06-08 until further notice; reopening unspecified and Buddha viewable. Year-round park opening does not override climbing conditions.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/115",
+          "title": "鷹取山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Kanagawa Takatoriyama listing says the crag is in Yokosuka park, council registration is required, and routes are principally top-rope. Route database classifies many records as face/lead; that classification is not used as permission to lead.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Title and excerpt reflect source-described venue setting and the concrete preparation questions answered in the body; no visit or opening guarantee is asserted."
+    },
+    {
+      "location": "公園可遊覽，不等於可以自由攀登",
+      "claim": "鷹取山是神奈川縣橫須賀市的公園岩場，適合想在東京旅行中安排有準備的頂繩攀登日的人。它的前提是先完成登記與管理條件；不能看到有人爬，或看到岩壁上的路線，就自行架繩加入。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
+          "title": "鷹取山公園",
+          "publisher": "横須賀市",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Official Yokosuka park page: former quarry walls; access from Keikyu Oppama by Shonan Takatori estate loop bus to Takatori Shogakko, about 10 minutes on foot. No park parking. Rock climbing normally prohibited with exception when following council instructors and specified rules; council registration required. Partial trail closure from carved Buddha to water distribution reservoir due to rockfall, from 2025-06-08 until further notice; reopening unspecified and Buddha viewable. Year-round park opening does not override climbing conditions.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/115",
+          "title": "鷹取山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Kanagawa Takatoriyama listing says the crag is in Yokosuka park, council registration is required, and routes are principally top-rope. Route database classifies many records as face/lead; that classification is not used as permission to lead.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "公園可遊覽，不等於可以自由攀登",
+      "claim": "[橫須賀市官方公園頁](https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html)寫明園內原則禁止岩登，但遵從鷹取山安全登山協議會指導員的指導與既定事項時例外，並要求向協議會登記。這不只是一般推薦。規劃時應先聯絡頁面列出的協議會窗口，確認你的參加方式與指導安排；未完成條件就只安排公園遊覽，不攀登。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
+          "title": "鷹取山公園",
+          "publisher": "横須賀市",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Official Yokosuka park page: former quarry walls; access from Keikyu Oppama by Shonan Takatori estate loop bus to Takatori Shogakko, about 10 minutes on foot. No park parking. Rock climbing normally prohibited with exception when following council instructors and specified rules; council registration required. Partial trail closure from carved Buddha to water distribution reservoir due to rockfall, from 2025-06-08 until further notice; reopening unspecified and Buddha viewable. Year-round park opening does not override climbing conditions.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/115",
+          "title": "鷹取山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Kanagawa Takatoriyama listing says the crag is in Yokosuka park, council registration is required, and routes are principally top-rope. Route database classifies many records as face/lead; that classification is not used as permission to lead.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "先了解頂繩取向",
+      "claim": "[ROCKTOPO 的鷹取山頁](https://www.rocktopo.net/areas/115)同樣提醒登記，並說明此區基本以 top-rope（頂繩）攀登。頂繩是繩索先透過上方支點的方式，但並不意味著任何人都能自己搭建或檢驗上方系統；器材、支點、繩索路徑與確保仍須相應能力。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
+          "title": "鷹取山公園",
+          "publisher": "横須賀市",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Official Yokosuka park page: former quarry walls; access from Keikyu Oppama by Shonan Takatori estate loop bus to Takatori Shogakko, about 10 minutes on foot. No park parking. Rock climbing normally prohibited with exception when following council instructors and specified rules; council registration required. Partial trail closure from carved Buddha to water distribution reservoir due to rockfall, from 2025-06-08 until further notice; reopening unspecified and Buddha viewable. Year-round park opening does not override climbing conditions.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/115",
+          "title": "鷹取山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Kanagawa Takatoriyama listing says the crag is in Yokosuka park, council registration is required, and routes are principally top-rope. Route database classifies many records as face/lead; that classification is not used as permission to lead.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "先了解頂繩取向",
+      "claim": "資料庫雖把許多線歸為 lead/face，場地說明又以頂繩為主，不應僅看分類就自行安排先鋒攀登。先向協議會確認允許的活動與規則，再選目標線；不要以網頁級數或別人的影片代替現場指導。若旅行同伴能力不同，頂繩日也要讓每人瞭解安全檢查與確保分工。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
+          "title": "鷹取山公園",
+          "publisher": "横須賀市",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Official Yokosuka park page: former quarry walls; access from Keikyu Oppama by Shonan Takatori estate loop bus to Takatori Shogakko, about 10 minutes on foot. No park parking. Rock climbing normally prohibited with exception when following council instructors and specified rules; council registration required. Partial trail closure from carved Buddha to water distribution reservoir due to rockfall, from 2025-06-08 until further notice; reopening unspecified and Buddha viewable. Year-round park opening does not override climbing conditions.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/115",
+          "title": "鷹取山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Kanagawa Takatoriyama listing says the crag is in Yokosuka park, council registration is required, and routes are principally top-rope. Route database classifies many records as face/lead; that classification is not used as permission to lead.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "用公園官方交通，而非想像中的停車位",
+      "claim": "市府介紹此處為過去採石形成的垂直岩壁。官方交通是由京急追浜站搭湘南たかとり団地循環巴士，到たかとり小学校下車，再步行約 10 分鐘；頁面同時標示公園沒有停車場。這是公園的到達資訊，不表示每個攀登區都有相同接近時間。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
+          "title": "鷹取山公園",
+          "publisher": "横須賀市",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Official Yokosuka park page: former quarry walls; access from Keikyu Oppama by Shonan Takatori estate loop bus to Takatori Shogakko, about 10 minutes on foot. No park parking. Rock climbing normally prohibited with exception when following council instructors and specified rules; council registration required. Partial trail closure from carved Buddha to water distribution reservoir due to rockfall, from 2025-06-08 until further notice; reopening unspecified and Buddha viewable. Year-round park opening does not override climbing conditions.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/115",
+          "title": "鷹取山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Kanagawa Takatoriyama listing says the crag is in Yokosuka park, council registration is required, and routes are principally top-rope. Route database classifies many records as face/lead; that classification is not used as permission to lead.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "用公園官方交通，而非想像中的停車位",
+      "claim": "公共交通旅人先核對當日巴士和回程，再依允許的接近路進入。若打算開車，不能把資料庫中的停車連結當作公園提供的車位；停車應另行確認合法場所，不能停在住宅道路或妨礙出入口。把裝備收整與公園使用者的通行也納入當天安排。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
+          "title": "鷹取山公園",
+          "publisher": "横須賀市",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Official Yokosuka park page: former quarry walls; access from Keikyu Oppama by Shonan Takatori estate loop bus to Takatori Shogakko, about 10 minutes on foot. No park parking. Rock climbing normally prohibited with exception when following council instructors and specified rules; council registration required. Partial trail closure from carved Buddha to water distribution reservoir due to rockfall, from 2025-06-08 until further notice; reopening unspecified and Buddha viewable. Year-round park opening does not override climbing conditions.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/115",
+          "title": "鷹取山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Kanagawa Takatoriyama listing says the crag is in Yokosuka park, council registration is required, and routes are principally top-rope. Route database classifies many records as face/lead; that classification is not used as permission to lead.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "有步道封閉，就依目前告示改路",
+      "claim": "查閱當日的市府頁仍列出摩崖佛至水道配水池區間因落石封閉，從 2025 年 6 月 8 日起持續，重開時間未定；摩崖佛仍可觀看。這是一段步道的公告，不能推論全公園或全部攀登區閉鎖，也不能繞過封鎖去接近自己的目標。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
+          "title": "鷹取山公園",
+          "publisher": "横須賀市",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Official Yokosuka park page: former quarry walls; access from Keikyu Oppama by Shonan Takatori estate loop bus to Takatori Shogakko, about 10 minutes on foot. No park parking. Rock climbing normally prohibited with exception when following council instructors and specified rules; council registration required. Partial trail closure from carved Buddha to water distribution reservoir due to rockfall, from 2025-06-08 until further notice; reopening unspecified and Buddha viewable. Year-round park opening does not override climbing conditions.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/115",
+          "title": "鷹取山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Kanagawa Takatoriyama listing says the crag is in Yokosuka park, council registration is required, and routes are principally top-rope. Route database classifies many records as face/lead; that classification is not used as permission to lead.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    },
+    {
+      "location": "有步道封閉，就依目前告示改路",
+      "claim": "本指南未核實旅行當日的登記受理、指導安排與步道是否重開，出發前須向協議會並查市府最新告示確認。網站所示公園年中無休，也不等於攀登可以隨時自由進行，兩種資訊需要分開理解。",
+      "verdict": "unverifiable",
+      "disposition": "qualified",
+      "qualification": "本指南未核實旅行當日的登記受理、指導安排與步道是否重開，出發前須向協議會並查市府最新告示確認。",
+      "sources": [
+        {
+          "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
+          "title": "鷹取山公園",
+          "publisher": "横須賀市",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Official Yokosuka park page: former quarry walls; access from Keikyu Oppama by Shonan Takatori estate loop bus to Takatori Shogakko, about 10 minutes on foot. No park parking. Rock climbing normally prohibited with exception when following council instructors and specified rules; council registration required. Partial trail closure from carved Buddha to water distribution reservoir due to rockfall, from 2025-06-08 until further notice; reopening unspecified and Buddha viewable. Year-round park opening does not override climbing conditions.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/115",
+          "title": "鷹取山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Kanagawa Takatoriyama listing says the crag is in Yokosuka park, council registration is required, and routes are principally top-rope. Route database classifies many records as face/lead; that classification is not used as permission to lead.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "The retained paragraph explicitly names the current conditions not established by source retrieval; practical next steps are editorial advice, not confirmation of those conditions."
+    },
+    {
+      "location": "有步道封閉，就依目前告示改路",
+      "claim": "鷹取山最適合以「先聯絡、完成條件、再安排頂繩」的順序準備。水、食物、個人防護與攀登裝備依活動要求攜帶，沒有許可或缺少適當支點能力就不爬。把登記和公共空間規則一起完成，才能安心把這個採石場景觀中的攀登日放進旅程。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
+          "title": "鷹取山公園",
+          "publisher": "横須賀市",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "full",
+          "evidence": "Official Yokosuka park page: former quarry walls; access from Keikyu Oppama by Shonan Takatori estate loop bus to Takatori Shogakko, about 10 minutes on foot. No park parking. Rock climbing normally prohibited with exception when following council instructors and specified rules; council registration required. Partial trail closure from carved Buddha to water distribution reservoir due to rockfall, from 2025-06-08 until further notice; reopening unspecified and Buddha viewable. Year-round park opening does not override climbing conditions.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        },
+        {
+          "url": "https://www.rocktopo.net/areas/115",
+          "title": "鷹取山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:59.652278+00:00",
+          "read_scope": "partial",
+          "evidence": "Kanagawa Takatoriyama listing says the crag is in Yokosuka park, council registration is required, and routes are principally top-rope. Route database classifies many records as face/lead; that classification is not used as permission to lead.",
+          "tool": "Groundlane web_fetch (direct HTTP; retrieved Markdown)"
+        }
+      ],
+      "reason": "Source-described facts are supported by the retrieved paragraphs preserved in evidence; route grades remain database attribution, historical/general descriptions remain attributed, and preparation advice is editorial reasoning rather than a claimed field test."
+    }
+  ],
+  "media": [],
+  "source_sha256": "88268637808ef4692860db5ea6fd22de8d4a1d5a21c03ce6596506a30c3cb495",
+  "links": [
+    {
+      "url": "https://www.city.yokosuka.kanagawa.jp/5560/sisetu/fc00000978.html",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    },
+    {
+      "url": "https://www.rocktopo.net/areas/115",
+      "checked_at": "2026-10-12T00:52:59.652278+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "Retrieved the named venue or management page; checked the final destination and supporting content."
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ]
+}

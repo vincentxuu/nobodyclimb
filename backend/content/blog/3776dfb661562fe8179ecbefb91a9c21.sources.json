@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "article_id": "3776dfb661562fe8179ecbefb91a9c21",
+  "checked_at": "2026-10-12T09:49:42+09:00",
+  "source_sha256": "573e35ba704e6f4451c2b0b4e9445837306274f3a9caa997ab047799ac6a5683",
+  "claims": [
+    {
+      "location": "frontmatter title/excerpt/category/tags",
+      "claim": "広沢寺・弁天岩攀岩指南：厚木斜板練習與場地規則 / 厚木弁天岩斜板的練習用途、巴士與林道接近，並釐清私有地規則與訓練範圍。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/広沢寺/",
+          "title": "山と溪谷社 CLIMBING-net — 広沢寺",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "厚木凝灰岩，弁天岩斜板、對岸及其他岩塊各區；基本腳步練習用途。先鋒與限定頂繩。小田急本厚木／伊勢原轉広沢寺温泉入口，林道車止，指定溫泉停車，禁止林道行車停車、幕營、火與砍樹。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "http://mt-farm.info/koutakujiaizen.html",
+          "title": "MT Farm／広沢寺の岩場を守る会公開資料 — mt-farm.info",
+          "publisher": "MT Farm／広沢寺の岩場を守る会公開資料",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "MT Farm公布守る会2016-03-06私有地使用约定；2019起冰爪與冰工具範圍詳列弁天岩基部告示。本文未將舊線名範圍當成現行許可，指出需看當日告示。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "場地、主題與正文承諾均以已讀來源為背景；分類與標籤是編輯選擇，不宣稱已開放或親身體驗。"
+    },
+    {
+      "location": "## 把腳步練習留給一面斜板 paragraph 1",
+      "claim": "広沢寺一帶位於神奈川縣厚木市，弁天岩是這裡的代表性大岩板。若東京旅行中的戶外日想練習腳點判斷、重心與穩定移動，可以先研究這裡。本文給具備繩索操作能力的搭檔，也協助打算找帶領者的初學者理解場地；「適合練習」不代表能自行架繩或當成無管理的公共教室。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/広沢寺/",
+          "title": "山と溪谷社 CLIMBING-net — 広沢寺",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "厚木凝灰岩，弁天岩斜板、對岸及其他岩塊各區；基本腳步練習用途。先鋒與限定頂繩。小田急本厚木／伊勢原轉広沢寺温泉入口，林道車止，指定溫泉停車，禁止林道行車停車、幕營、火與砍樹。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "http://mt-farm.info/koutakujiaizen.html",
+          "title": "MT Farm／広沢寺の岩場を守る会公開資料 — mt-farm.info",
+          "publisher": "MT Farm／広沢寺の岩場を守る会公開資料",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "MT Farm公布守る会2016-03-06私有地使用约定；2019起冰爪與冰工具範圍詳列弁天岩基部告示。本文未將舊線名範圍當成現行許可，指出需看當日告示。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 把腳步練習留給一面斜板 paragraph 2",
+      "claim": "[CLIMBING-net的介紹](https://www.climbing-net.com/iwaba_detail/広沢寺/)把弁天岩斜板列為核心特色，岩質為凝灰岩，並區分弁天岩、對岸岩區與其他岩塊。本文聚焦弁天岩，不把全區的路線數與難度都算成這一面斜板的選擇。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/広沢寺/",
+          "title": "山と溪谷社 CLIMBING-net — 広沢寺",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "厚木凝灰岩，弁天岩斜板、對岸及其他岩塊各區；基本腳步練習用途。先鋒與限定頂繩。小田急本厚木／伊勢原轉広沢寺温泉入口，林道車止，指定溫泉停車，禁止林道行車停車、幕營、火與砍樹。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 先選練習內容，再安排繩索系統 paragraph 1",
+      "claim": "斜板攀登可把注意力放在腳點、身體平衡與移動節奏，而不只是拉大岩點。若當天目標是技術練習，選能完整處理攀登、確保與下降的路線，再決定如何練習。出版社列有先鋒及有限定的頂繩形式，不能從中推導整面牆都可自由架頂繩。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/広沢寺/",
+          "title": "山と溪谷社 CLIMBING-net — 広沢寺",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "厚木凝灰岩，弁天岩斜板、對岸及其他岩塊各區；基本腳步練習用途。先鋒與限定頂繩。小田急本厚木／伊勢原轉広沢寺温泉入口，林道車止，指定溫泉停車，禁止林道行車停車、幕營、火與砍樹。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "http://mt-farm.info/koutakujiaizen.html",
+          "title": "MT Farm／広沢寺の岩場を守る会公開資料 — mt-farm.info",
+          "publisher": "MT Farm／広沢寺の岩場を守る会公開資料",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "MT Farm公布守る会2016-03-06私有地使用约定；2019起冰爪與冰工具範圍詳列弁天岩基部告示。本文未將舊線名範圍當成現行許可，指出需看當日告示。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 先選練習內容，再安排繩索系統 paragraph 2",
+      "claim": "若請帶領者協助，可在行前說明自己希望練腳步、先鋒或繩索流程，讓目標與對方安排一致。沒有完整路線圖、支點與下降資訊時，不以「新手岩場」三個字補足缺失，也不在本文指定通用繩長或器材數量。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/広沢寺/",
+          "title": "山と溪谷社 CLIMBING-net — 広沢寺",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "厚木凝灰岩，弁天岩斜板、對岸及其他岩塊各區；基本腳步練習用途。先鋒與限定頂繩。小田急本厚木／伊勢原轉広沢寺温泉入口，林道車止，指定溫泉停車，禁止林道行車停車、幕營、火與砍樹。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "http://mt-farm.info/koutakujiaizen.html",
+          "title": "MT Farm／広沢寺の岩場を守る会公開資料 — mt-farm.info",
+          "publisher": "MT Farm／広沢寺の岩場を守る会公開資料",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "MT Farm公布守る会2016-03-06私有地使用约定；2019起冰爪與冰工具範圍詳列弁天岩基部告示。本文未將舊線名範圍當成現行許可，指出需看當日告示。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 本厚木或伊勢原轉巴士，再走溫泉方向 paragraph 1",
+      "claim": "出版社交通骨架是小田急線本厚木或伊勢原站轉巴士，在広沢寺温泉入口下車，步行到溫泉一帶，再走有車止的林道前往岩場。直達温泉的班次較少，安排去回程時要分清站名。不要只看小田急列車時間，而忽略最後一段巴士與步行。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/広沢寺/",
+          "title": "山と溪谷社 CLIMBING-net — 広沢寺",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "厚木凝灰岩，弁天岩斜板、對岸及其他岩塊各區；基本腳步練習用途。先鋒與限定頂繩。小田急本厚木／伊勢原轉広沢寺温泉入口，林道車止，指定溫泉停車，禁止林道行車停車、幕營、火與砍樹。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "http://mt-farm.info/koutakujiaizen.html",
+          "title": "MT Farm／広沢寺の岩場を守る会公開資料 — mt-farm.info",
+          "publisher": "MT Farm／広沢寺の岩場を守る会公開資料",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "MT Farm公布守る会2016-03-06私有地使用约定；2019起冰爪與冰工具範圍詳列弁天岩基部告示。本文未將舊線名範圍當成現行許可，指出需看當日告示。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 本厚木或伊勢原轉巴士，再走溫泉方向 paragraph 2",
+      "claim": "開車者應使用現地指定的広沢寺温泉前停車安排，不開進林道，也不在林道路肩停放。把停車付款或指示、補給及如廁先完成，再帶裝備往牆面走。若設施使用條件改變，依現地要求調整，不把舊攻略寫的免費或方便當成權利。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/広沢寺/",
+          "title": "山と溪谷社 CLIMBING-net — 広沢寺",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "厚木凝灰岩，弁天岩斜板、對岸及其他岩塊各區；基本腳步練習用途。先鋒與限定頂繩。小田急本厚木／伊勢原轉広沢寺温泉入口，林道車止，指定溫泉停車，禁止林道行車停車、幕營、火與砍樹。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "http://mt-farm.info/koutakujiaizen.html",
+          "title": "MT Farm／広沢寺の岩場を守る会公開資料 — mt-farm.info",
+          "publisher": "MT Farm／広沢寺の岩場を守る会公開資料",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "MT Farm公布守る会2016-03-06私有地使用约定；2019起冰爪與冰工具範圍詳列弁天岩基部告示。本文未將舊線名範圍當成現行許可，指出需看當日告示。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 私有地的使用約定，要連同訓練範圍一起讀 paragraph 1",
+      "claim": "[「広沢寺の岩場を守る会」規則的公開資料](http://mt-farm.info/koutakujiaizen.html)說明這裡是私有地，並要求帶走垃圾、不砍樹、不焚火、不在岩場或停車場搭帳。資料記錄2016年的約定，也指出2019年起冰爪、冰工具的禁用範圍詳列於弁天岩基部告示。它不支持把舊線名範圍當成現行完整許可。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "http://mt-farm.info/koutakujiaizen.html",
+          "title": "MT Farm／広沢寺の岩場を守る会公開資料 — mt-farm.info",
+          "publisher": "MT Farm／広沢寺の岩場を守る会公開資料",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "MT Farm公布守る会2016-03-06私有地使用约定；2019起冰爪與冰工具範圍詳列弁天岩基部告示。本文未將舊線名範圍當成現行許可，指出需看當日告示。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 私有地的使用約定，要連同訓練範圍一起讀 paragraph 2",
+      "claim": "目前未確認實際造訪日的利用條件與冰爪、冰工具訓練範圍。",
+      "verdict": "unverifiable",
+      "sources": [],
+      "disposition": "qualified",
+      "qualification": "目前未確認實際造訪日的利用條件與冰爪、冰工具訓練範圍。",
+      "reason": "未取得能確認實際造訪日管理條件的現行來源；正文明示不確定並給出延期或向管理方確認的行動。"
+    },
+    {
+      "location": "## 私有地的使用約定，要連同訓練範圍一起讀 paragraph 2 — remainder",
+      "claim": "一般攀岩旅行不需要把冰爪訓練加進當天；若特別為此而來，務必讀當日基部告示並確認管理要求。把安靜使用、讓出動線與按時收繩列入計畫，才讓斜板上的練習與當地長期維護相容。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/広沢寺/",
+          "title": "山と溪谷社 CLIMBING-net — 広沢寺",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "厚木凝灰岩，弁天岩斜板、對岸及其他岩塊各區；基本腳步練習用途。先鋒與限定頂繩。小田急本厚木／伊勢原轉広沢寺温泉入口，林道車止，指定溫泉停車，禁止林道行車停車、幕營、火與砍樹。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "http://mt-farm.info/koutakujiaizen.html",
+          "title": "MT Farm／広沢寺の岩場を守る会公開資料 — mt-farm.info",
+          "publisher": "MT Farm／広沢寺の岩場を守る会公開資料",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "MT Farm公布守る会2016-03-06私有地使用约定；2019起冰爪與冰工具範圍詳列弁天岩基部告示。本文未將舊線名範圍當成現行許可，指出需看當日告示。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "本段其餘來源背景已核對；查公告、帶補給、保留替代與返程餘裕是品牌編輯的規劃建議，不冒充實測或管理方規定。"
+    }
+  ],
+  "media": [],
+  "links": [
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/広沢寺/",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "http://mt-farm.info/koutakujiaizen.html",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
+  "verification_notes": [
+    "No cover/body images; no media rights assumptions.",
+    "No self-approved reviews; independent factual/translation/editorial review required.",
+    "Future visit permission explicitly qualified.",
+    "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
+  ]
+}

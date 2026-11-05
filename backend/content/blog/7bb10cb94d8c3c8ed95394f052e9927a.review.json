@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "7bb10cb94d8c3c8ed95394f052e9927a",
+  "source_sha256": "88268637808ef4692860db5ea6fd22de8d4a1d5a21c03ce6596506a30c3cb495",
+  "evidence_sha256": "980a43167cc9ece276fb1a3d735300e144e15e275eb9894fb364e0d2f899334d",
+  "reviewed_at": "2026-10-12T00:59:36.685300+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "橫須賀官方頁實讀：原則禁止岩登，遵協議會指導員及規定例外/要登記；追浜巴士たかとり小学校徒歩10分/無停車。2025-06-08起摩崖佛〜水道配水池段落石通行止，重開未定/佛可看；未誤報全園全岩場關閉。ROCKTOPO以頂繩為主亦登記。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語日期8June2025、10分鐘、無park parking、必須符合例外/登記、頂繩非誰都可架與partial trail closure范围一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "公園觀光與攀登资格分清，可對不符合者給不攀登選項；資料庫lead分類不轉成自行先鋒許可。"
+    }
+  },
+  "findings": []
+}

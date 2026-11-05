@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "article_id": "44a849fc8c33070654fbaf80c966bd2d",
+  "checked_at": "2026-10-12T00:52:07.867501+00:00",
+  "claims": [
+    {
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場地、攀登類型和決策用途；分類與標籤依室內抱石/戶外旅行主題。Jogasaki climbing guide: choosing a coastal crack area in Izu / Plan an Izu coastal climbing day around crack skills, the chosen sector and a workable approach and exit.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/9",
+          "title": "城ヶ崎 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城ヶ崎基本情報：静岡県、安山岩、季節12月と1-4月。ルート分布は裂隙・フェイス・マルチ・ボルダーの区別。人気課題パープルシャドウ5.8、ピーターパン5.10b。件数は使用せず、投稿の集合として扱う。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://tommy-climbing.com/rocks/cn8/pg257.html",
+          "title": "JYOGASAKI YAWATANO│TOMMY CLIMBING CLUB",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "八幡野のガイド自身の場地説明、集合・宿泊段落と終了点段落を確認。富戸から赤沢にクラック中心、伊豆高原集合と近隣宿泊、NP/ボルト混合の区別、樹木支点と海沿い残置器材劣化の注意。長い個別ルート一覧のbetaは引用していない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "已對照場地來源及正文承諾；地理標籤東京攀岩指東京旅行延伸目的地，不把外縣岩場寫成位於東京。"
+    },
+    {
+      "location": "正文段落 1",
+      "claim": "Jogasaki is a collection of coastal sectors around Ito in Shizuoka, rather than a single wall with one entrance. [ROCKTOPO's Jogasaki page](https://www.rocktopo.net/areas/9) lists crack leads, face leads, boulders and multipitch routes. [Local guide TOMMY CLIMBING CLUB](https://tommy-climbing.com/rocks/cn8/pg257.html) describes the coast from Futo to Akazawa as predominantly crack climbing. Choose a sector and climbing style before choosing your arrival station.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/9",
+          "title": "城ヶ崎 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城ヶ崎基本情報：静岡県、安山岩、季節12月と1-4月。ルート分布は裂隙・フェイス・マルチ・ボルダーの区別。人気課題パープルシャドウ5.8、ピーターパン5.10b。件数は使用せず、投稿の集合として扱う。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://tommy-climbing.com/rocks/cn8/pg257.html",
+          "title": "JYOGASAKI YAWATANO│TOMMY CLIMBING CLUB",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "八幡野のガイド自身の場地説明、集合・宿泊段落と終了点段落を確認。富戸から赤沢にクラック中心、伊豆高原集合と近隣宿泊、NP/ボルト混合の区別、樹木支点と海沿い残置器材劣化の注意。長い個別ルート一覧のbetaは引用していない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 2",
+      "claim": "If cracks are your aim, assess your ability to place and evaluate natural protection, select the appropriate rack, establish belays and retreat. An indoor lead grade does not answer those questions. If these skills are new, arrange a guide familiar with the selected sector and make the day an introduction to cracks rather than an independent attempt on a seemingly easy route.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/9",
+          "title": "城ヶ崎 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城ヶ崎基本情報：静岡県、安山岩、季節12月と1-4月。ルート分布は裂隙・フェイス・マルチ・ボルダーの区別。人気課題パープルシャドウ5.8、ピーターパン5.10b。件数は使用せず、投稿の集合として扱う。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://tommy-climbing.com/rocks/cn8/pg257.html",
+          "title": "JYOGASAKI YAWATANO│TOMMY CLIMBING CLUB",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "八幡野のガイド自身の場地説明、集合・宿泊段落と終了点段落を確認。富戸から赤沢にクラック中心、伊豆高原集合と近隣宿泊、NP/ボルト混合の区別、樹木支点と海沿い残置器材劣化の注意。長い個別ルート一覧のbetaは引用していない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "ROCKTOPO identifies the rock as andesite and separates crack from face routes; Jogasaki should not be treated as primarily a sport crag. Names such as Purple Shadow, listed at 5.8, and Peter Pan, listed at 5.10b, are useful leads for locating a topo, rather than approved recommendations for your day. TOMMY's Yawatano information distinguishes natural protection from bolted routes, with mixed protection on some lines. Seeing bolts does not establish that quickdraws alone are sufficient.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/9",
+          "title": "城ヶ崎 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城ヶ崎基本情報：静岡県、安山岩、季節12月と1-4月。ルート分布は裂隙・フェイス・マルチ・ボルダーの区別。人気課題パープルシャドウ5.8、ピーターパン5.10b。件数は使用せず、投稿の集合として扱う。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://tommy-climbing.com/rocks/cn8/pg257.html",
+          "title": "JYOGASAKI YAWATANO│TOMMY CLIMBING CLUB",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "八幡野のガイド自身の場地説明、集合・宿泊段落と終了点段落を確認。富戸から赤沢にクラック中心、伊豆高原集合と近隣宿泊、NP/ボルト混合の区別、樹木支点と海沿い残置器材劣化の注意。長い個別ルート一覧のbetaは引用していない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "TOMMY uses Izu-Kogen Station as a meeting point for its Yawatano outings and mentions accommodation around Izu-Kogen, Jogasaki-Kaigan and Futo. That is the guide's arrangement, not a shared entrance for every sector. Before booking, agree on the selected sector's entrance, walking route, any rappel approach and the exit. Exact trains from Tokyo and a complete door-to-door travel time have not been verified here; do not treat a travel note's estimate as a timetable.",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/9",
+          "title": "城ヶ崎 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城ヶ崎基本情報：静岡県、安山岩、季節12月と1-4月。ルート分布は裂隙・フェイス・マルチ・ボルダーの区別。人気課題パープルシャドウ5.8、ピーターパン5.10b。件数は使用せず、投稿の集合として扱う。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://tommy-climbing.com/rocks/cn8/pg257.html",
+          "title": "JYOGASAKI YAWATANO│TOMMY CLIMBING CLUB",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "八幡野のガイド自身の場地説明、集合・宿泊段落と終了点段落を確認。富戸から赤沢にクラック中心、伊豆高原集合と近隣宿泊、NP/ボルト混合の区別、樹木支点と海沿い残置器材劣化の注意。長い個別ルート一覧のbetaは引用していない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "TOMMY uses Izu-Kogen Station as a meeting point for its Yawatano outings and mentions accommodation around Izu-Kogen, Jogasaki-Kaigan and Futo. That is the guide's arrangement, not a shared entrance for every sector. Before booking, agree on the selected sector's entrance, walking route, any rappel approach and the exit. Exact trains from Tokyo and a complete door-to-door travel time have not been verified here; do not treat a travel note's estimate as a timetable."
+    },
+    {
+      "location": "正文段落 5",
+      "claim": "TOMMY warns about deterioration of fixed coastal equipment and the need to inspect tree anchors. Check sea conditions, tides, wind and the actual stance, even if photographs show dry rock. If you cannot assess the coastal setting, do not rappel in before establishing an exit. ROCKTOPO highlights December through April as its season reference, which does not guarantee conditions on a particular day. For an April trip, keep the outdoor day flexible rather than tying your only climbing day to a sea cliff.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/9",
+          "title": "城ヶ崎 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城ヶ崎基本情報：静岡県、安山岩、季節12月と1-4月。ルート分布は裂隙・フェイス・マルチ・ボルダーの区別。人気課題パープルシャドウ5.8、ピーターパン5.10b。件数は使用せず、投稿の集合として扱う。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://tommy-climbing.com/rocks/cn8/pg257.html",
+          "title": "JYOGASAKI YAWATANO│TOMMY CLIMBING CLUB",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "八幡野のガイド自身の場地説明、集合・宿泊段落と終了点段落を確認。富戸から赤沢にクラック中心、伊豆高原集合と近隣宿泊、NP/ボルト混合の区別、樹木支点と海沿い残置器材劣化の注意。長い個別ルート一覧のbetaは引用していない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 6",
+      "claim": "Suggested example: stay in Izu the previous night and visit one confirmed sector in the morning. Make learning the approach, checking protection and trying one or two conservative objectives the core of the day. If conditions are unsuitable, switch to a coastal walk or indoor climbing. This is an editorial planning example, not a verified guiding package or a route-specific gear list.",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/9",
+          "title": "城ヶ崎 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城ヶ崎基本情報：静岡県、安山岩、季節12月と1-4月。ルート分布は裂隙・フェイス・マルチ・ボルダーの区別。人気課題パープルシャドウ5.8、ピーターパン5.10b。件数は使用せず、投稿の集合として扱う。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://tommy-climbing.com/rocks/cn8/pg257.html",
+          "title": "JYOGASAKI YAWATANO│TOMMY CLIMBING CLUB",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "partial",
+          "evidence": "八幡野のガイド自身の場地説明、集合・宿泊段落と終了点段落を確認。富戸から赤沢にクラック中心、伊豆高原集合と近隣宿泊、NP/ボルト混合の区別、樹木支点と海沿い残置器材劣化の注意。長い個別ルート一覧のbetaは引用していない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "本段為編輯的行程安排示例，ROCKTOPO與TOMMY來源只支持岩區分散、海岸條件與季節等背景事實，不支持住宿、單一岩區與替代活動的安排本身；正文已明示為編輯安排示例、非已驗證的嚮導方案。",
+      "disposition": "qualified",
+      "qualification": "This is an editorial planning example, not a verified guiding package"
+    }
+  ],
+  "media": [],
+  "source_sha256": "d2664071209c30ef9a39e25b8feb3b6d85ed7d0bde1dc6a764ab120403a52028",
+  "links": [
+    {
+      "url": "https://www.rocktopo.net/areas/9",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://tommy-climbing.com/rocks/cn8/pg257.html",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_artifacts": [
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/r0.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/r8.json"
+  ],
+  "limitations": ["未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。"]
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "82e5ced58bcad87924ada8646bd4e3b2",
+  "source_sha256": "33477d8a1de269d60c0e24ab7d9ba3e632987cd6049a5ef672bce0a73a59832b",
+  "evidence_sha256": "477f0e235228966ae0c07d8e3c25da205a48f74e6b6b91f71035de8b01e57086",
+  "reviewed_at": "2026-10-12T00:59:34.765995+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "CLIMBING-net全文核對1980年代自由攀登、A峰slab/C峰前傾/A峰roof、chert、30分接近、路邊不可停、長sling及帶水。原raw ROCKTOPO為過窄抽取，reviewer另以Groundlane extract=full讀到フェイスルート的終了點不明、苔/ハーケン/リングボルト使用者記錄，支持正文的個別回報歸屬。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語全文比對1980s、30分、溪谷/稜線與フクロウ岩、脆岩和C峰sling；沒有把使用者回報改為全岩場失效，乾燥/冬暖均非當日保證。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "名詞解释與區域選擇清楚；車站近不等於新式運攀的限制有具体作用。安全建議不提供架站操作教學，讀者能決定是否補topo/尋求有能力夥伴。"
+    }
+  },
+  "findings": []
+}

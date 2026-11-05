@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "af5833584555468d1d9b8279473c03c6",
+  "source_sha256": "9a812907d8e79a26f6d261befcf24f6b5c3d44fb73a6b8ea670c1d7446ab1c00",
+  "evidence_sha256": "c8c45a3daf6cc54ce7f5d6db487dc18ec0a74373cdaf0e71bd65ff7da72eed50",
+  "reviewed_at": "2026-10-12T00:59:36.124233+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "出版者全文支持小型石灰岩、右側數線20m以上、神戸岩別處且禁止攀登、藤倉/小岩巴士神戸岩入口、春日神社/紅橋/民家庭前、路肩和空地不可停、釣場需受付且不能車宿。現行停車/接近未驗明列。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語地名區分、20m以上、居民通行/釣場受付/無車宿限制及現況不確定一致；没有把小型變成短繩足夠。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "以導航誤用與居民空间串場，接近描述是來源線索而非即時turn-by-turn指令；具体行動與撤退資訊需求可理解。zh「隻傳」可選改「只傳」。"
+    }
+  },
+  "findings": []
+}

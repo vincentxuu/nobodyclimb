@@ -1,0 +1,441 @@
+{
+  "schema_version": 1,
+  "article_id": "4c9b21b244fc4b4377bc5a242c083c77",
+  "checked_at": "2026-10-12T09:49:42+09:00",
+  "source_sha256": "46f44c6cff59bc8a31d2d4797a1df5513da190a514625c4ecc67f4c6bfcf7c73",
+  "claims": [
+    {
+      "location": "frontmatter title/excerpt/category/tags",
+      "claim": "河又ガイド：名栗の石灰岩と蛇岩崩落の注意情報 / 河又の石灰岩、飯能からのバス、駐車の約束を、蛇岩崩落情報と合わせて確認します。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/94",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又為埼玉石灰岩、含多個岩區；付費河原停車場是地方約定。所列停車欄位不可充當新費率或許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10282/",
+          "title": "日本フリークライミング協会 JFA — 10282",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-10-01",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-10-01公告、2025-10-06更新：收到蛇岩崩落報告，詳細不明，請暫勿靠近。沒有解除或全河又封閉判定。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.saitamabus.jp/app/routebusstop/busstop/stopid/11-24126",
+          "title": "埼玉県バス協会 — stopid",
+          "publisher": "埼玉県バス協会",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "埼玉巴士協會停留所表：河又名栗湖入口有國際興業飯01、飯02、飯03與飯能站相連，本文不主張固定班次。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/河又/",
+          "title": "山と溪谷社 CLIMBING-net — 河又",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又飯能市下名栗石灰岩90至120度，多5.10、5.11線；飯能／東飯能轉名栗方向河又名栗湖入口，尾須沢鍾乳洞案內板徒步。支點舊化、吊帶及浮石問題、整備不是安全保證、舊停車資料有差異，禁止火、垃圾帶回、如廁安排。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "場地、主題與正文承諾均以已讀來源為背景；分類與標籤是編輯選擇，不宣稱已開放或親身體驗。"
+    },
+    {
+      "location": "## 壁を決める前に崩落情報を読む paragraph 1",
+      "claim": "河又は埼玉県飯能市下名栗にある石灰岩のエリアです。外岩のリード経験があるパートナー同士に向け、交通、選ぶ壁、利用条件を分けて整理します。複数の岩場を含むため、「河又」という名前だけで全区画が同じ状態と考えないでください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/94",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又為埼玉石灰岩、含多個岩區；付費河原停車場是地方約定。所列停車欄位不可充當新費率或許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10282/",
+          "title": "日本フリークライミング協会 JFA — 10282",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-10-01",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-10-01公告、2025-10-06更新：收到蛇岩崩落報告，詳細不明，請暫勿靠近。沒有解除或全河又封閉判定。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.saitamabus.jp/app/routebusstop/busstop/stopid/11-24126",
+          "title": "埼玉県バス協会 — stopid",
+          "publisher": "埼玉県バス協会",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "埼玉巴士協會停留所表：河又名栗湖入口有國際興業飯01、飯02、飯03與飯能站相連，本文不主張固定班次。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/河又/",
+          "title": "山と溪谷社 CLIMBING-net — 河又",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又飯能市下名栗石灰岩90至120度，多5.10、5.11線；飯能／東飯能轉名栗方向河又名栗湖入口，尾須沢鍾乳洞案內板徒步。支點舊化、吊帶及浮石問題、整備不是安全保證、舊停車資料有差異，禁止火、垃圾帶回、如廁安排。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 壁を決める前に崩落情報を読む paragraph 2",
+      "claim": "まず[JFAの2025年10月の蛇岩崩落情報](https://freeclimb.jp/access/10282/)を確認します。崩落の報告を受け、詳細不明として、しばらく近寄らないよう注意しています。日付のあるこの情報から河又全体の閉鎖を推測することはできませんが、データベースにルートが残っていても蛇岩の再開を意味しません。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://freeclimb.jp/access/10282/",
+          "title": "日本フリークライミング協会 JFA — 10282",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-10-01",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-10-01公告、2025-10-06更新：收到蛇岩崩落報告，詳細不明，請暫勿靠近。沒有解除或全河又封閉判定。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 石灰岩の具体的な目標を絞る paragraph 1",
+      "claim": "[CLIMBING-netの紹介](https://www.climbing-net.com/iwaba_detail/河又/)は垂直からかぶった石灰岩と、5.10台・5.11台の多い構成を掲載しています。[ROCKTOPOの索引](https://www.rocktopo.net/areas/94)でも複数の岩場に分かれています。壁と登るラインを決めてトポを入手し、索引全体を自由に移動できる一つの場所として扱わないことが必要です。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/94",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又為埼玉石灰岩、含多個岩區；付費河原停車場是地方約定。所列停車欄位不可充當新費率或許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/河又/",
+          "title": "山と溪谷社 CLIMBING-net — 河又",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又飯能市下名栗石灰岩90至120度，多5.10、5.11線；飯能／東飯能轉名栗方向河又名栗湖入口，尾須沢鍾乳洞案內板徒步。支點舊化、吊帶及浮石問題、整備不是安全保證、舊停車資料有差異，禁止火、垃圾帶回、如廁安排。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 石灰岩の具体的な目標を絞る paragraph 2",
+      "claim": "旅行の一日なら余裕のある最初の一本と、挑戦したい一本を候補にできます。出版社は古い支点、劣化したスリング、浮き石も指摘しています。リボルトは壁全体の安全保証ではないため、装備と下降を実際のラインに合わせて確認しましょう。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/94",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又為埼玉石灰岩、含多個岩區；付費河原停車場是地方約定。所列停車欄位不可充當新費率或許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10282/",
+          "title": "日本フリークライミング協会 JFA — 10282",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-10-01",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-10-01公告、2025-10-06更新：收到蛇岩崩落報告，詳細不明，請暫勿靠近。沒有解除或全河又封閉判定。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.saitamabus.jp/app/routebusstop/busstop/stopid/11-24126",
+          "title": "埼玉県バス協会 — stopid",
+          "publisher": "埼玉県バス協会",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "埼玉巴士協會停留所表：河又名栗湖入口有國際興業飯01、飯02、飯03與飯能站相連，本文不主張固定班次。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/河又/",
+          "title": "山と溪谷社 CLIMBING-net — 河又",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又飯能市下名栗石灰岩90至120度，多5.10、5.11線；飯能／東飯能轉名栗方向河又名栗湖入口，尾須沢鍾乳洞案內板徒步。支點舊化、吊帶及浮石問題、整備不是安全保證、舊停車資料有差異，禁止火、垃圾帶回、如廁安排。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 飯能からバス、帰りの便を先に決める paragraph 1",
+      "claim": "飯能または東飯能から名栗方面のバスで河又名栗湖入口へ向かうのが交通の骨格です。[埼玉県バス協会の停留所情報](https://www.saitamabus.jp/app/routebusstop/busstop/stopid/11-24126)に飯能との系統が掲載されています。旅行当日の運行を調べ、出版社の尾須沢鍾乳洞案内板からのアプローチ記述を最新の現地案内と照合してください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.saitamabus.jp/app/routebusstop/busstop/stopid/11-24126",
+          "title": "埼玉県バス協会 — stopid",
+          "publisher": "埼玉県バス協会",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "埼玉巴士協會停留所表：河又名栗湖入口有國際興業飯01、飯02、飯03與飯能站相連，本文不主張固定班次。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 飯能からバス、帰りの便を先に決める paragraph 2",
+      "claim": "帰りの便と岩場を出る時刻を決めてからトライ数を配分します。重い荷物や不慣れな山道では掲載の徒歩時間をそのまま使わず、余裕を持たせましょう。看板、入口、地形が資料と違えば、進まず確認し直します。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/94",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又為埼玉石灰岩、含多個岩區；付費河原停車場是地方約定。所列停車欄位不可充當新費率或許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10282/",
+          "title": "日本フリークライミング協会 JFA — 10282",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-10-01",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-10-01公告、2025-10-06更新：收到蛇岩崩落報告，詳細不明，請暫勿靠近。沒有解除或全河又封閉判定。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.saitamabus.jp/app/routebusstop/busstop/stopid/11-24126",
+          "title": "埼玉県バス協会 — stopid",
+          "publisher": "埼玉県バス協会",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "埼玉巴士協會停留所表：河又名栗湖入口有國際興業飯01、飯02、飯03與飯能站相連，本文不主張固定班次。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/河又/",
+          "title": "山と溪谷社 CLIMBING-net — 河又",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又飯能市下名栗石灰岩90至120度，多5.10、5.11線；飯能／東飯能轉名栗方向河又名栗湖入口，尾須沢鍾乳洞案內板徒步。支點舊化、吊帶及浮石問題、整備不是安全保證、舊停車資料有差異，禁止火、垃圾帶回、如廁安排。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 地図の空き地より地域の駐車ルールを優先する paragraph 1",
+      "claim": "ROCKTOPOは有料の河原駐車場を利用する地域との取り決めを掲載しています。出版社には古い駐車案内も残っています。指定場所、支払い、時間を現地に確認し、公衆トイレ前の短時間利用の場所を占有したり、無断でゲートを動かしたりしないでください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/94",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又為埼玉石灰岩、含多個岩區；付費河原停車場是地方約定。所列停車欄位不可充當新費率或許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10282/",
+          "title": "日本フリークライミング協会 JFA — 10282",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-10-01",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-10-01公告、2025-10-06更新：收到蛇岩崩落報告，詳細不明，請暫勿靠近。沒有解除或全河又封閉判定。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.saitamabus.jp/app/routebusstop/busstop/stopid/11-24126",
+          "title": "埼玉県バス協会 — stopid",
+          "publisher": "埼玉県バス協会",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "埼玉巴士協會停留所表：河又名栗湖入口有國際興業飯01、飯02、飯03與飯能站相連，本文不主張固定班次。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/河又/",
+          "title": "山と溪谷社 CLIMBING-net — 河又",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又飯能市下名栗石灰岩90至120度，多5.10、5.11線；飯能／東飯能轉名栗方向河又名栗湖入口，尾須沢鍾乳洞案內板徒步。支點舊化、吊帶及浮石問題、整備不是安全保證、舊停車資料有差異，禁止火、垃圾帶回、如廁安排。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 地図の空き地より地域の駐車ルールを優先する paragraph 2",
+      "claim": "蛇岩の再開と、他の岩場の実際の訪問日の利用条件は確認できていません。",
+      "verdict": "unverifiable",
+      "sources": [],
+      "disposition": "qualified",
+      "qualification": "蛇岩の再開と、他の岩場の実際の訪問日の利用条件は確認できていません。",
+      "reason": "未取得能確認實際造訪日管理條件的現行來源；正文明示不確定並給出延期或向管理方確認的行動。"
+    },
+    {
+      "location": "## 地図の空き地より地域の駐車ルールを優先する paragraph 2 — remainder",
+      "claim": "最新の許可や状態が分かるまで、変更できない唯一の外岩予定にはしないでください。食料と水、トイレを先に準備し、ゴミを持ち帰り、火器を使わず、地域の負担を増やさない一日にしましょう。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/94",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又為埼玉石灰岩、含多個岩區；付費河原停車場是地方約定。所列停車欄位不可充當新費率或許可。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10282/",
+          "title": "日本フリークライミング協会 JFA — 10282",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-10-01",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-10-01公告、2025-10-06更新：收到蛇岩崩落報告，詳細不明，請暫勿靠近。沒有解除或全河又封閉判定。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.saitamabus.jp/app/routebusstop/busstop/stopid/11-24126",
+          "title": "埼玉県バス協会 — stopid",
+          "publisher": "埼玉県バス協会",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "埼玉巴士協會停留所表：河又名栗湖入口有國際興業飯01、飯02、飯03與飯能站相連，本文不主張固定班次。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/河又/",
+          "title": "山と溪谷社 CLIMBING-net — 河又",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "河又飯能市下名栗石灰岩90至120度，多5.10、5.11線；飯能／東飯能轉名栗方向河又名栗湖入口，尾須沢鍾乳洞案內板徒步。支點舊化、吊帶及浮石問題、整備不是安全保證、舊停車資料有差異，禁止火、垃圾帶回、如廁安排。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "本段其餘來源背景已核對；查公告、帶補給、保留替代與返程餘裕是品牌編輯的規劃建議，不冒充實測或管理方規定。"
+    },
+    {
+      "location": "現況與利用限制",
+      "claim": "CLIMBING-net頁面並存2010解除歷史與コウモリ岩原則禁止；當期適用範圍不明，不推定進入许可",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/河又/",
+          "title": "山と溪谷社 CLIMBING-net — 河又",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "場地頁開頭有2010禁止解除歷史敘述；その他欄另外寫コウモリ岩は原則禁止。後者無獨立更新日期，不能推定當期開放。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "兩段原文均已核對；正文明示來源矛盾與時效限制，未把頁面記載當成當期進入許可。"
+    }
+  ],
+  "media": [],
+  "links": [
+    {
+      "url": "https://www.rocktopo.net/areas/94",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "https://freeclimb.jp/access/10282/",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "https://www.saitamabus.jp/app/routebusstop/busstop/stopid/11-24126",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/河又/",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
+  "verification_notes": [
+    "No cover/body images; no media rights assumptions.",
+    "No self-approved reviews; independent factual/translation/editorial review required.",
+    "Future visit permission explicitly qualified.",
+    "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
+  ]
+}

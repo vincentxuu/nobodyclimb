@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "55bc53c2ae00be9fa37bf43c61eb3ead",
+  "source_sha256": "c4f5b328b921fead7ded5481958778a81db186e2f5e7147cdb9fa7011b392551",
+  "evidence_sha256": "fa2d4882eb74437deb0f2ac9b75d80af6de565c60d775a8b724d8a4c88c69ccd",
+  "reviewed_at": "2026-10-12T00:53:34.622148+00:00",
+  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "raw fetch-12 官方支持日照冬季、短線與排隊、bus約15分/梅季收費；出版社凝灰岩10–5月、上部危險/テントウムシ以西禁入/2005禁營與不同巴士版本均有保留。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語15分、梅季費用不保證、區界未確認、短不陡不代表安全、非全部自由可用均一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "選區不看总數、公園費用不等於登攀許可、熱門線備案清楚，摘要與正文一致。"
+    }
+  },
+  "findings": []
+}

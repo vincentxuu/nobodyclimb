@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "article_id": "f9c33618b02b1700c394aeb058870e5a",
+  "checked_at": "2026-10-12T00:52:07.867501+00:00",
+  "claims": [
+    {
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場地、攀登類型和決策用途；分類與標籤依室內抱石/戶外旅行主題。Izu Joyama climbing guide: choosing between slabs, sport and multipitch / Match Joyama's varied sectors to your climbing skills, then plan an approach from Ohito and enough time to return.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/10",
+          "title": "城山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山基本情報：静岡県、凝灰岩、季節11-3月、フェイスとマルチ。人気リストはバトルランナー最高5.10a、ストーンフリー5.10c、ミウラー5.11a。件数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/城山/",
+          "title": "城山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山出版社紹介：大仁、凝灰岩、南壁スラブと上部ワイルドボアゴージ、boltとマルチ。季節9月下旬-6月上旬。大仁駅から登山口25分、南壁さらに10分の接近目安。古いキャンプ・トイレ記述は現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://izugeopark.org/geosites/joyama/",
+          "title": "城山 | 南から来た火山の贈りもの | 伊豆半島ジオパーク公式サイト",
+          "publisher": "場地來源出版者",
+          "source_date": "2017-12-19T17:02:15+00:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "伊豆半島ジオパークの地景説明：城山を地表に隆起した火山の根と説明。地質解説に限定し、岩場利用許可や支点安全の根拠にはしない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "已對照場地來源及正文承諾；地理標籤東京攀岩指東京旅行延伸目的地，不把外縣岩場寫成位於東京。"
+    },
+    {
+      "location": "正文段落 1",
+      "claim": "Joyama is near Ohito in Shizuoka's Izu region. [CLIMBING-net's venue guide](https://www.climbing-net.com/iwaba_detail/城山/) describes both the South Face slabs and sectors such as Wild Boar Gorge, listing bolted leads and multipitch climbing. It suits visitors who can manage outdoor belaying with their partners. If your experience is limited to gyms, book outdoor instruction or a guide rather than interpreting the presence of easier routes as independent access.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/10",
+          "title": "城山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山基本情報：静岡県、凝灰岩、季節11-3月、フェイスとマルチ。人気リストはバトルランナー最高5.10a、ストーンフリー5.10c、ミウラー5.11a。件数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/城山/",
+          "title": "城山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山出版社紹介：大仁、凝灰岩、南壁スラブと上部ワイルドボアゴージ、boltとマルチ。季節9月下旬-6月上旬。大仁駅から登山口25分、南壁さらに10分の接近目安。古いキャンプ・トイレ記述は現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://izugeopark.org/geosites/joyama/",
+          "title": "城山 | 南から来た火山の贈りもの | 伊豆半島ジオパーク公式サイト",
+          "publisher": "場地來源出版者",
+          "source_date": "2017-12-19T17:02:15+00:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "伊豆半島ジオパークの地景説明：城山を地表に隆起した火山の根と説明。地質解説に限定し、岩場利用許可や支点安全の根拠にはしない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 2",
+      "claim": "[ROCKTOPO's Joyama page](https://www.rocktopo.net/areas/10) separates face leads from multipitch routes and identifies tuff. The [Izu Peninsula Geopark](https://izugeopark.org/geosites/joyama/) describes the landscape as an exposed volcanic root. That geological explanation does not assess anchors or access status. A South Face single-pitch day, a multipitch objective and a visit to an upper sector require different plans.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/10",
+          "title": "城山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山基本情報：静岡県、凝灰岩、季節11-3月、フェイスとマルチ。人気リストはバトルランナー最高5.10a、ストーンフリー5.10c、ミウラー5.11a。件数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/城山/",
+          "title": "城山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山出版社紹介：大仁、凝灰岩、南壁スラブと上部ワイルドボアゴージ、boltとマルチ。季節9月下旬-6月上旬。大仁駅から登山口25分、南壁さらに10分の接近目安。古いキャンプ・トイレ記述は現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://izugeopark.org/geosites/joyama/",
+          "title": "城山 | 南から来た火山の贈りもの | 伊豆半島ジオパーク公式サイト",
+          "publisher": "場地來源出版者",
+          "source_date": "2017-12-19T17:02:15+00:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "伊豆半島ジオパークの地景説明：城山を地表に隆起した火山の根と説明。地質解説に限定し、岩場利用許可や支点安全の根拠にはしない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "ROCKTOPO lists Battle Runner with a maximum grade of 5.10a, Stone Free at 5.10c and Miura at 5.11a. Use these names to locate detailed topos. A maximum grade says nothing by itself about pitch lengths, protection or descent. This guide supplies no move-by-move beta: confirm the sector, whether the route is single- or multipitch, rope requirements and retreat. With mixed abilities, prioritize single-pitch objectives everyone can take part in.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/10",
+          "title": "城山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山基本情報：静岡県、凝灰岩、季節11-3月、フェイスとマルチ。人気リストはバトルランナー最高5.10a、ストーンフリー5.10c、ミウラー5.11a。件数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/城山/",
+          "title": "城山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山出版社紹介：大仁、凝灰岩、南壁スラブと上部ワイルドボアゴージ、boltとマルチ。季節9月下旬-6月上旬。大仁駅から登山口25分、南壁さらに10分の接近目安。古いキャンプ・トイレ記述は現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://izugeopark.org/geosites/joyama/",
+          "title": "城山 | 南から来た火山の贈りもの | 伊豆半島ジオパーク公式サイト",
+          "publisher": "場地來源出版者",
+          "source_date": "2017-12-19T17:02:15+00:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "伊豆半島ジオパークの地景説明：城山を地表に隆起した火山の根と説明。地質解説に限定し、岩場利用許可や支点安全の根拠にはしない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "CLIMBING-net describes an approach from Ohito Station on the Izu-Hakone Railway: about 25 minutes on foot to the trailhead, then 10 minutes to the South Face. Wild Boar Gorge has a separate approach. These are the publisher's estimates, not a guarantee for your travel day. Look up trains to Ohito and use a current topo for the final section; do not apply South Face times to every sector. Current parking capacity, fees and comprehensive access status have not been verified with a managing body here.",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/10",
+          "title": "城山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山基本情報：静岡県、凝灰岩、季節11-3月、フェイスとマルチ。人気リストはバトルランナー最高5.10a、ストーンフリー5.10c、ミウラー5.11a。件数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/城山/",
+          "title": "城山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山出版社紹介：大仁、凝灰岩、南壁スラブと上部ワイルドボアゴージ、boltとマルチ。季節9月下旬-6月上旬。大仁駅から登山口25分、南壁さらに10分の接近目安。古いキャンプ・トイレ記述は現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://izugeopark.org/geosites/joyama/",
+          "title": "城山 | 南から来た火山の贈りもの | 伊豆半島ジオパーク公式サイト",
+          "publisher": "場地來源出版者",
+          "source_date": "2017-12-19T17:02:15+00:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "伊豆半島ジオパークの地景説明：城山を地表に隆起した火山の根と説明。地質解説に限定し、岩場利用許可や支点安全の根拠にはしない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "CLIMBING-net describes an approach from Ohito Station on the Izu-Hakone Railway: about 25 minutes on foot to the trailhead, then 10 minutes to the South Face. Wild Boar Gorge has a separate approach. These are the publisher's estimates, not a guarantee for your travel day. Look up trains to Ohito and use a current topo for the final section; do not apply South Face times to every sector. Current parking capacity, fees and comprehensive access status have not been verified with a managing body here."
+    },
+    {
+      "location": "正文段落 5",
+      "claim": "Season descriptions use different scopes: CLIMBING-net gives late September through early June, while ROCKTOPO highlights November through March. Treat them as planning references, not a promise of cool, dry conditions on any April date. Check recent rainfall, actual rock conditions and wind before keeping the outdoor plan. Bolts do not imply that every anchor has been inspected; bring route-specific equipment and have someone competent assess conditions.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/10",
+          "title": "城山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山基本情報：静岡県、凝灰岩、季節11-3月、フェイスとマルチ。人気リストはバトルランナー最高5.10a、ストーンフリー5.10c、ミウラー5.11a。件数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/城山/",
+          "title": "城山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山出版社紹介：大仁、凝灰岩、南壁スラブと上部ワイルドボアゴージ、boltとマルチ。季節9月下旬-6月上旬。大仁駅から登山口25分、南壁さらに10分の接近目安。古いキャンプ・トイレ記述は現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://izugeopark.org/geosites/joyama/",
+          "title": "城山 | 南から来た火山の贈りもの | 伊豆半島ジオパーク公式サイト",
+          "publisher": "場地來源出版者",
+          "source_date": "2017-12-19T17:02:15+00:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "伊豆半島ジオパークの地景説明：城山を地表に隆起した火山の根と説明。地質解説に限定し、岩場利用許可や支点安全の根拠にはしない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 6",
+      "claim": "Suggested example: stay in Ohito or nearby the previous night and dedicate the first day to the South Face, without adding upper sectors. Learn the terrain and descent before selecting a small number of objectives, and reserve time for walking and transfers. For multipitch, budget belay transitions, rope management and descent, with an explicit turnaround time. These are editorial suggestions, not NobodyClimb's firsthand ascent report.",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/10",
+          "title": "城山 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山基本情報：静岡県、凝灰岩、季節11-3月、フェイスとマルチ。人気リストはバトルランナー最高5.10a、ストーンフリー5.10c、ミウラー5.11a。件数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/城山/",
+          "title": "城山",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "城山出版社紹介：大仁、凝灰岩、南壁スラブと上部ワイルドボアゴージ、boltとマルチ。季節9月下旬-6月上旬。大仁駅から登山口25分、南壁さらに10分の接近目安。古いキャンプ・トイレ記述は現況根拠にしない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://izugeopark.org/geosites/joyama/",
+          "title": "城山 | 南から来た火山の贈りもの | 伊豆半島ジオパーク公式サイト",
+          "publisher": "場地來源出版者",
+          "source_date": "2017-12-19T17:02:15+00:00",
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "伊豆半島ジオパークの地景説明：城山を地表に隆起した火山の根と説明。地質解説に限定し、岩場利用許可や支点安全の根拠にはしない。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "本段為編輯的行程建議，來源只支持大仁、南壁與上部岩區、多繩距等背景事實，不支持住宿與排程建議本身；正文已明示為編輯規劃建議、非本站親身攀登紀錄。",
+      "disposition": "qualified",
+      "qualification": "These are editorial suggestions, not NobodyClimb's firsthand ascent report"
+    }
+  ],
+  "media": [],
+  "source_sha256": "798da824a9d6f9b48132c9680eb72e6639ccffb21c59660a9b6a0b95f2aaaf2a",
+  "links": [
+    {
+      "url": "https://www.rocktopo.net/areas/10",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/城山/",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://izugeopark.org/geosites/joyama/",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_artifacts": [
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/f2.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/x2.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/y1.json"
+  ],
+  "limitations": ["未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。"]
+}

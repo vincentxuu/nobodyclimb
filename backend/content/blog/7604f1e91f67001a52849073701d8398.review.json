@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "7604f1e91f67001a52849073701d8398",
+  "source_sha256": "3c052e95c903be63ccd4a712932e0fae2ca273f1471f087d53925421f680cc49",
+  "evidence_sha256": "95304a36ce57353a55f4b045f5c2ba29ff0c4bf411b0ebbb135f5c31fb2345c7",
+  "reviewed_at": "2026-10-12T00:59:34.560142+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "管理頁原文核對5.11以上穩定外岩先鋒及確保/見學同條件、全員初次登記、每次入山記錄/下山時間、500円；ROCKTOPO三條5.10c/5.11a/5.12a吻合。2023訪問記録15分未満及販賣機撤除與管理頁差異有日期限定，未把舊支付方式當現價。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語逐段核對5.11、500、2023、15分鐘及三條級數；資格適用全員、不能以容易路線豁免、未檢查支點與當日開放等限定一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "先資格/手續，再路線與裝備順序可执行；適用外岩先鋒者，非首次繩攀自學。歷史步行例與不確定停車分段，摘要未承諾當日通行。"
+    }
+  },
+  "findings": []
+}

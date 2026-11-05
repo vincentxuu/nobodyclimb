@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "article_id": "57c6e2d0d50150551208df0a89af68aa",
+  "source_sha256": "b6178ffba8d5e5d8d5f3eea569fadd27b5ac7038ea8d5ecbb2c8fc3fc509e21f",
+  "evidence_sha256": "83dbcbc162babe48db3da4474a06db51a23577b48dc95e266e98988bd3cb1525",
+  "reviewed_at": "2026-10-12T00:59:37.640481+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "MountainProject全文description/gettingthere支持Dobongsan東北、granite/crack與Line1道峰山站；未沿用Ithink停車/共用60m rack。KNPS window/隊伍/SMS與cmsSeq28GPS16:00開始/下山結束逐項核對；來源未確認指定壁或外籍流程，正文明示。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語道峰山/Dobongsan vs Dobong区別、Line1、3–30/10:00/2–5/16:00、GPS園內/下山結束、無完整接近時間/商業guide資格未驗限定一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "獨立以仙人峰為主，不借仁壽篇完成內容；日期/隊伍/目標向公園詢問是明确下一步。必修申請當日確認、H2與來源清單修後完整重讀。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "初稿H2起始與文末來源已補；KNPS園內GPS+SMS link16:00前開始及下山結束確認已補，三語及cmsSeq28raw重核。"
+    }
+  ]
+}

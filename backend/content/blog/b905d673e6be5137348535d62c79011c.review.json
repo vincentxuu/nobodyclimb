@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "b905d673e6be5137348535d62c79011c",
+  "source_sha256": "39e418d736728da9d5543f96049dac20635a22f7608d4cd5fcff14ad77240ab7",
+  "evidence_sha256": "093b3cdd263e88ed9591ca2e9950ae3edb095347f4918652f75a88a87830a801",
+  "reviewed_at": "2026-10-12T00:53:34.622148+00:00",
+  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "raw fetch-8 支持石灰岩90–110度、5.11為主、TNT5.10b/夏立ちぬ5.11a/ウッシーⅢ5.12b、11–3月、古螺栓、林道與山徑各15分、停車少與無公廁。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語三条grade、11–3月與April外緣、15+15僅參考、神戸觀光點不是同岩場、滿位改地點均一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "讀者範圍、路線/保護、巴士/路徑與停車補給完整且易讀；未指定沒有證據的通用繩長。"
+    }
+  },
+  "findings": []
+}

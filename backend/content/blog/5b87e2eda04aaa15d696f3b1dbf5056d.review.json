@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "article_id": "5b87e2eda04aaa15d696f3b1dbf5056d",
+  "source_sha256": "4192eb480a439f6a09f9f8138fa87c4493b54d01008bdb6d8455db3036b0d4db",
+  "evidence_sha256": "b31b00b0505fdbebdcaec420fa2d12ad8393d5c85ff7abf5ca231b7032dec2ff",
+  "reviewed_at": "2026-10-12T00:57:33.346526+00:00",
+  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "raw fetch-0 支持七條、石灰岩與四條路線grade；kernel-extra BETA的日向和田約5分與青梅定位支持帶歸屬引用。Rose Town停車原文「とのこと」已保留。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語7、5.9/5.10a/5.10c/5.11a及管理公告缺口一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "重讀三語全文與更新台帳：5分鐘明确只歸屬BETA活動說明，獨立旅客當日接近路徑/耗時、停車與營業未確認，不再自相矛盾。7路線與各grade/限制均保留；段落接縫自然。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "三語約5分鐘明確只歸屬BETA活動說明，獨立旅客當日路徑與耗時未確認；對照kernel-extra及ROCKTOPO原文，與其他段落無矛盾。"
+    }
+  ]
+}

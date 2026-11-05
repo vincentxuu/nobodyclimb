@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "article_id": "5ed702d9314fa563edaf66a482188c49",
+  "source_sha256": "7bcc3a04d9525dad56a63ec8a4e5107745fd794dfe0c4c5649e0b0eaf992a982",
+  "evidence_sha256": "8fdf479e326240b52a966d3c18a1c79a206247dc6680b674fdee2f8a40d0f66c",
+  "reviewed_at": "2026-10-12T00:59:37.958956+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "branch Exa取得段支持B弘大2026-05-17閉與延南186三樓LCtower/02-2088-5071；Groundlane英文full核對Yeonnam07–24/08–22、day22000/shoes3000/chalk1000及加總25000/26000。英文頁保留已閉店區塊，金額只datedbudget非保證當日適用。branch後段截斷已改read_scope=partial，支持段落可驗不冒充全文。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語日期/address/floor/phone/hours/22000+3000+1000全部對齐；旧弘大125不當延南地址；外籍登記/課程語言/名額未驗、budget非保證與非親訪限定一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "分店辨認作開頭，當日四問可执行。未把品牌全分店设施/語言混成延南實測；初學者先問預約/說明，不虛构英文教學能力。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "初稿H2起始與文末來源已補；branch Exa後段截斷取得範圍已改partial，仍有closure/address支持段，三語重核。"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "7eef70c42822bcb8025353d418e8f4e0",
+  "source_sha256": "0dec2f295b33da3f8268ce0ca889afd998c612604099cb71b30f8fc664d0355f",
+  "evidence_sha256": "22d842abf96885de7dd4b86c82b0ef5cf93996c9ee856b72f72777a72704533f",
+  "reviewed_at": "2026-10-12T00:59:35.817893+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "共同來源支持瀑布側壁30分鐘、千足/武藏五日市、自由線開拓；相對詞近年無日期不轉成新近整修。沒有以共同ROCKTOPO列表虛造天狗逐線級數與設備。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語30分鐘/つづら1.5小時、天王不同名、逐線級數長度支點下降未核實，以及舊piton警告非每條適用都一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "文章承諾辨認/候選判斷，證據不足範圍明示，沒有用低人氣或缺留言判封閉。zh「不是隻畫」用字可選改「只」，不影響語意。"
+    }
+  },
+  "findings": []
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "article_id": "e581bf0c98b450fee3b3325aa169cdc1",
+  "source_sha256": "d23666d90e6020b96bfd32bf8ff2345495aa69a46b80226b03e361dec009abd5",
+  "evidence_sha256": "b13da77e86f7d02055f2dde65e7d16630252f713effe66191dfed7948c98b130",
+  "reviewed_at": "2026-10-12T00:53:34.622148+00:00",
+  "reviewer": "/root/editorial_best_practices (independent; did not author these drafts)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "raw fetch-0 的チャート90–110度、5.10/5.11、上下區與抱石、曽利郷橋、火葬場舊道禁行、釣場停車與廁所要求均支持正文。購買仍需詢問設施權限保留來源限制。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語5.10/5.11、冬冷與西北向、不得擅用釣場、實際造訪日未確認均一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "從讀者能力、選區、巴士、補給撤退逐步回答一日規劃；不捏造體驗。"
+    }
+  },
+  "findings": []
+}

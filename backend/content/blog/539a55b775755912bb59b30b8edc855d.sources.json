@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "article_id": "539a55b775755912bb59b30b8edc855d",
+  "checked_at": "2026-10-12T09:49:42+09:00",
+  "source_sha256": "107fb90a9e1f14a9d25c332cb439bee3b9bf1c01bcb8122931d6fd6112ea7bd2",
+  "claims": [
+    {
+      "location": "frontmatter title/excerpt/category/tags",
+      "claim": "北川ガイド：西吾野から歩いて大ハングの岩場へ / 北川のハング、下降と回収、西吾野からの徒歩、地域の駐車と静かな利用の要望を確認します。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/95",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川埼玉主區，2026-10-12讀取19條フェイス登錄，5.10、5.11與5.12組別；自治會館旁停車，停車費與效率提醒。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/北川/",
+          "title": "山と溪谷社 CLIMBING-net — 北川",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川飯能市、チャート大ハング、居民信仰與私地主理解；西吾野經全昌寺與自治會館步行，頁內時間30與40分鐘不同。舊支點、下降與回收點不同，繩摩擦、噪音、火氣、器材粉痕與天黑前下山要求；春秋適期。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10214/",
+          "title": "日本フリークライミング協会 JFA — 10214",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-05-04",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-05-04，2025-05-12更新，直接居民資訊：每車约定500円未付款、狹小停車場需有效率停車，支出用於地方清潔維護。引用為有日期要求，不保證未來費率。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "場地、主題與正文承諾均以已讀來源為背景；分類與標籤是編輯選擇，不宣稱已開放或親身體驗。"
+    },
+    {
+      "location": "## ハングを目標にするパートナーへ paragraph 1",
+      "claim": "北川は埼玉県飯能市の自然の岩場で、西吾野から徒歩で近づけます。外岩のリードとビレイを自立して行える二人に向く候補です。易しいルートを多数必要とするグループは、難度の構成を見てから予定に入れてください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/95",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川埼玉主區，2026-10-12讀取19條フェイス登錄，5.10、5.11與5.12組別；自治會館旁停車，停車費與效率提醒。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/北川/",
+          "title": "山と溪谷社 CLIMBING-net — 北川",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川飯能市、チャート大ハング、居民信仰與私地主理解；西吾野經全昌寺與自治會館步行，頁內時間30與40分鐘不同。舊支點、下降與回收點不同，繩摩擦、噪音、火氣、器材粉痕與天黑前下山要求；春秋適期。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10214/",
+          "title": "日本フリークライミング協会 JFA — 10214",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-05-04",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-05-04，2025-05-12更新，直接居民資訊：每車约定500円未付款、狹小停車場需有效率停車，支出用於地方清潔維護。引用為有日期要求，不保證未來費率。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## ハングを目標にするパートナーへ paragraph 2",
+      "claim": "[CLIMBING-net](https://www.climbing-net.com/iwaba_detail/北川/)は大ハングを特徴とし、岩質をチャートとしています。[ROCKTOPO](https://www.rocktopo.net/areas/95)は2026年10月12日の閲覧時にフェイスのリード19ルートを登録し、5.10台・5.11台・5.12台を含んでいます。投稿型資料の記録は利用許可の一覧ではなく、易しいルートが少数あっても初心者グループがいつでも登れるとは限りません。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/95",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川埼玉主區，2026-10-12讀取19條フェイス登錄，5.10、5.11與5.12組別；自治會館旁停車，停車費與效率提醒。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/北川/",
+          "title": "山と溪谷社 CLIMBING-net — 北川",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川飯能市、チャート大ハング、居民信仰與私地主理解；西吾野經全昌寺與自治會館步行，頁內時間30與40分鐘不同。舊支點、下降與回收點不同，繩摩擦、噪音、火氣、器材粉痕與天黑前下山要求；春秋適期。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## グレードの前に下降と回収を読む paragraph 1",
+      "claim": "出版社はハング上の終了点と回収用支点を区別し、ロープドラッグ、古いスリング、支点の老朽化を記述しています。質問すべき点を見つける情報として読み、実際のトポや現場判断の代わりにしないでください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/95",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川埼玉主區，2026-10-12讀取19條フェイス登錄，5.10、5.11與5.12組別；自治會館旁停車，停車費與效率提醒。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/北川/",
+          "title": "山と溪谷社 CLIMBING-net — 北川",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川飯能市、チャート大ハング、居民信仰與私地主理解；西吾野經全昌寺與自治會館步行，頁內時間30與40分鐘不同。舊支點、下降與回收點不同，繩摩擦、噪音、火氣、器材粉痕與天黑前下山要求；春秋適期。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10214/",
+          "title": "日本フリークライミング協会 JFA — 10214",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-05-04",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-05-04，2025-05-12更新，直接居民資訊：每車约定500円未付款、狹小停車場需有效率停車，支出用於地方清潔維護。引用為有日期要求，不保證未來費率。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## グレードの前に下降と回収を読む paragraph 2",
+      "claim": "候補の長さ、終了位置、下降、器材回収を旅行前に確認します。かぶったラインの回収に慣れていなければ、登れるグレードというだけで取り付かず、詳しい同行者を探すか最後まで扱える目標を選びましょう。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/95",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川埼玉主區，2026-10-12讀取19條フェイス登錄，5.10、5.11與5.12組別；自治會館旁停車，停車費與效率提醒。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/北川/",
+          "title": "山と溪谷社 CLIMBING-net — 北川",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川飯能市、チャート大ハング、居民信仰與私地主理解；西吾野經全昌寺與自治會館步行，頁內時間30與40分鐘不同。舊支點、下降與回收點不同，繩摩擦、噪音、火氣、器材粉痕與天黑前下山要求；春秋適期。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10214/",
+          "title": "日本フリークライミング協会 JFA — 10214",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-05-04",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-05-04，2025-05-12更新，直接居民資訊：每車约定500円未付款、狹小停車場需有效率停車，支出用於地方清潔維護。引用為有日期要求，不保證未來費率。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 西吾野から余裕を持って歩く paragraph 1",
+      "claim": "出版社の交通案内は西武線西吾野駅から全昌寺を経て中組自治会館へ向かい、その脇の踏み跡に入るものです。同じページ内で徒歩時間に幅があるため、固定の所要時間を約束せず道筋を参考にします。電車と徒歩なら狭い駐車場の問題も避けられます。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/95",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川埼玉主區，2026-10-12讀取19條フェイス登錄，5.10、5.11與5.12組別；自治會館旁停車，停車費與效率提醒。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/北川/",
+          "title": "山と溪谷社 CLIMBING-net — 北川",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川飯能市、チャート大ハング、居民信仰與私地主理解；西吾野經全昌寺與自治會館步行，頁內時間30與40分鐘不同。舊支點、下降與回收點不同，繩摩擦、噪音、火氣、器材粉痕與天黑前下山要求；春秋適期。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10214/",
+          "title": "日本フリークライミング協会 JFA — 10214",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-05-04",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-05-04，2025-05-12更新，直接居民資訊：每車约定500円未付款、狹小停車場需有效率停車，支出用於地方清潔維護。引用為有日期要求，不保證未來費率。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 西吾野から余裕を持って歩く paragraph 2",
+      "claim": "水と昼食を用意し、帰りの列車と下山する時刻を先に決めます。紹介には暗くなる前の下山を望む住民の要望もあります。片付けと徒歩を明るいうちに終えられるよう、最後のトライを早めに設定しましょう。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/95",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川埼玉主區，2026-10-12讀取19條フェイス登錄，5.10、5.11與5.12組別；自治會館旁停車，停車費與效率提醒。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/北川/",
+          "title": "山と溪谷社 CLIMBING-net — 北川",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川飯能市、チャート大ハング、居民信仰與私地主理解；西吾野經全昌寺與自治會館步行，頁內時間30與40分鐘不同。舊支點、下降與回收點不同，繩摩擦、噪音、火氣、器材粉痕與天黑前下山要求；春秋適期。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10214/",
+          "title": "日本フリークライミング協会 JFA — 10214",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-05-04",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-05-04，2025-05-12更新，直接居民資訊：每車约定500円未付款、狹小停車場需有效率停車，支出用於地方清潔維護。引用為有日期要求，不保證未來費率。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 支払いと静かな利用を守る paragraph 1",
+      "claim": "[JFAの2025年5月の告知](https://freeclimb.jp/access/10214/)は、取り決めの一台500円を払わない人がいることと、狭い駐車場で効率よく停めてほしいことを伝えています。日付のある地域の要望なので、将来の料金保証とせず、現在の金額、支払い、駐車指示を確認します。満車なら路肩を使わず予定を変えてください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://freeclimb.jp/access/10214/",
+          "title": "日本フリークライミング協会 JFA — 10214",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-05-04",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-05-04，2025-05-12更新，直接居民資訊：每車约定500円未付款、狹小停車場需有效率停車，支出用於地方清潔維護。引用為有日期要求，不保證未來費率。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 支払いと静かな利用を守る paragraph 2",
+      "claim": "出版社は岩場が地域の信仰対象であり、地主と住民の理解で利用されていることを説明しています。叫び声、火器、器材の残置、過度のチョーク跡を避け、住民には来意を伝えて挨拶しましょう。駐車代だけで解決する問題ではありません。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/95",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川埼玉主區，2026-10-12讀取19條フェイス登錄，5.10、5.11與5.12組別；自治會館旁停車，停車費與效率提醒。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/北川/",
+          "title": "山と溪谷社 CLIMBING-net — 北川",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川飯能市、チャート大ハング、居民信仰與私地主理解；西吾野經全昌寺與自治會館步行，頁內時間30與40分鐘不同。舊支點、下降與回收點不同，繩摩擦、噪音、火氣、器材粉痕與天黑前下山要求；春秋適期。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10214/",
+          "title": "日本フリークライミング協会 JFA — 10214",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-05-04",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-05-04，2025-05-12更新，直接居民資訊：每車约定500円未付款、狹小停車場需有效率停車，支出用於地方清潔維護。引用為有日期要求，不保證未來費率。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "逐段對照上述實際讀取的來源。外部事實限台帳evidence範圍；目標選擇、難度餘裕、交通倒推等措辭為本文編輯規劃建議，未宣稱效能或安全保證。"
+    },
+    {
+      "location": "## 支払いと静かな利用を守る paragraph 3",
+      "claim": "実際の訪問日の利用条件と駐車条件は確認できていません。",
+      "verdict": "unverifiable",
+      "sources": [],
+      "disposition": "qualified",
+      "qualification": "実際の訪問日の利用条件と駐車条件は確認できていません。",
+      "reason": "未取得能確認實際造訪日管理條件的現行來源；正文明示不確定並給出延期或向管理方確認的行動。"
+    },
+    {
+      "location": "## 支払いと静かな利用を守る paragraph 3 — remainder",
+      "claim": "春秋の適期という紹介を計画の参考にしつつ、最新告知、雨、現地指示を再確認してください。",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/95",
+          "title": "ROCKTOPO — areas",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川埼玉主區，2026-10-12讀取19條フェイス登錄，5.10、5.11與5.12組別；自治會館旁停車，停車費與效率提醒。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/北川/",
+          "title": "山と溪谷社 CLIMBING-net — 北川",
+          "publisher": "山と溪谷社 CLIMBING-net",
+          "source_date": null,
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "北川飯能市、チャート大ハング、居民信仰與私地主理解；西吾野經全昌寺與自治會館步行，頁內時間30與40分鐘不同。舊支點、下降與回收點不同，繩摩擦、噪音、火氣、器材粉痕與天黑前下山要求；春秋適期。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        },
+        {
+          "url": "https://freeclimb.jp/access/10214/",
+          "title": "日本フリークライミング協会 JFA — 10214",
+          "publisher": "日本フリークライミング協会 JFA",
+          "source_date": "2025-05-04",
+          "accessed_at": "2026-10-12T09:49:42+09:00",
+          "read_scope": "full",
+          "evidence": "JFA 2025-05-04，2025-05-12更新，直接居民資訊：每車约定500円未付款、狹小停車場需有效率停車，支出用於地方清潔維護。引用為有日期要求，不保證未來費率。",
+          "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback"
+        }
+      ],
+      "reason": "本段其餘來源背景已核對；查公告、帶補給、保留替代與返程餘裕是品牌編輯的規劃建議，不冒充實測或管理方規定。"
+    }
+  ],
+  "media": [],
+  "links": [
+    {
+      "url": "https://www.rocktopo.net/areas/95",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/北川/",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    },
+    {
+      "url": "https://freeclimb.jp/access/10214/",
+      "checked_at": "2026-10-12T09:49:42+09:00",
+      "tool": "Exa web_fetch_exa; Groundlane absent from this agent callable inventory; public fallback",
+      "status": "reachable",
+      "status_code": null,
+      "reason": "Exa實際fetch回傳與場地主題相符的頁面內容，已核對支持段落；工具未提供HTTP碼，未虛構200。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_path": "Groundlane not present in this agent full callable inventory; Exa public search/fetch used; no authenticated or private web content submitted",
+  "verification_notes": [
+    "No cover/body images; no media rights assumptions.",
+    "No self-approved reviews; independent factual/translation/editorial review required.",
+    "Future visit permission explicitly qualified.",
+    "Read_scope full means returned page text under per-page cap; rendered topo images not independently inspected."
+  ]
+}

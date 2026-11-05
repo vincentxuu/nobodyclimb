@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "article_id": "ac1de57c9cd0be29fe035bde62b098e8",
+  "source_sha256": "197bb3a0247eb9e19a631f8c835a71fe05d35abb886c7885aa0aaebe3ca9f000",
+  "evidence_sha256": "3306776934d62a79d901385bdf397422edcc5a301c664036742b43ef5eaf0126",
+  "reviewed_at": "2026-10-12T00:59:37.422500+00:00",
+  "reviewer": "Codex independent reviewer /root/blog_path (未參與本輪寫稿)",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "MountainProject description及2022交通原段支持granite/multipitch/slab/crack/trad/run-out sport、牛耳/道詵寺及四條線名；旧計程費不當現價。KNPS list.do支持3–30日前/10:00/2–5人/最終SMS；cmsSeq28 reviewer fresh Groundlane full核對園區GPS+SMS link/16:00前開始/下山結束，修後補入。未驗指定岩壁/date/外籍流程保留。"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "三語逐段及新GPS段重讀：申請窗口、隊伍數、10:00、16:00、園區定位/開始結束對齐；60m是被拒绝的通用清單而非裝備保證；社群歷史與非親訪限定一致。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "申請→選線/保護/下降→當日管制的旅行決策合理；必修開始/結束確認、H2、文末來源已修，無未解必修。沒有把入口當指定壁許可。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "blocking",
+      "resolved": true,
+      "notes": "初稿H2起始與文末來源已補；KNPS園內GPS+SMS link16:00前開始及下山結束確認已補，三語及cmsSeq28raw重核。"
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "article_id": "5756dd674ad7adc331afd511c9954f78",
+  "checked_at": "2026-10-12T00:52:07.867501+00:00",
+  "claims": [
+    {
+      "location": "title/excerpt/category/tags",
+      "claim": "標題與摘要說明本文場地、攀登類型和決策用途；分類與標籤依室內抱石/戶外旅行主題。Mitsutoge climbing guide: budgeting the approach, belays and descent / Plan this mountain venue around the walking approach and rope systems, with realistic return transport and route-specific equipment.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/8",
+          "title": "三ツ峠 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠基本情報：山梨、集塊岩、フェイス/裂隙/マルチ、季節4,5,6,7,9,10月。ルート総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/三ツ峠/",
+          "title": "三ツ峠",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠出版社情報：山頂下屏風岩、右・中央・左の内容差、フェイス/裂隙/人工/マルチ。季節4-10月、駅から2.5-3時間歩く目安と裏登山道別接近。浮石とロープによる落石、ヘルメットや各種sling等の注意。古い野外排泄・水・小屋通年情報は採用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.fujikyu-railway.jp/sightseeing/hiking.php",
+          "title": "ウォーキング＆ハイキング | 富士山に一番近い鉄道 富士急行線 富士山麓電気鉄道株式会社",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "鉄道運営者の登山案内：河口湖から天下茶屋方面バス三ツ峠登山口、別途三つ峠駅から登山。特定旅行日の往復時刻は採用せず、入口選択の根拠に限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "已對照場地來源及正文承諾；地理標籤東京攀岩指東京旅行延伸目的地，不把外縣岩場寫成位於東京。"
+    },
+    {
+      "location": "正文段落 1",
+      "claim": "Mitsutoge's climbing is below the mountain summit in Yamanashi, with objectives around Byobu Rock. [CLIMBING-net's venue guide](https://www.climbing-net.com/iwaba_detail/三ツ峠/) divides it into right, central and left faces, describing face, crack, aid and multipitch climbing. It can add a mountain-oriented day to a Tokyo trip, provided the ascent and descent on foot are included in the climbing plan.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/8",
+          "title": "三ツ峠 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠基本情報：山梨、集塊岩、フェイス/裂隙/マルチ、季節4,5,6,7,9,10月。ルート総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/三ツ峠/",
+          "title": "三ツ峠",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠出版社情報：山頂下屏風岩、右・中央・左の内容差、フェイス/裂隙/人工/マルチ。季節4-10月、駅から2.5-3時間歩く目安と裏登山道別接近。浮石とロープによる落石、ヘルメットや各種sling等の注意。古い野外排泄・水・小屋通年情報は採用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.fujikyu-railway.jp/sightseeing/hiking.php",
+          "title": "ウォーキング＆ハイキング | 富士山に一番近い鉄道 富士急行線 富士山麓電気鉄道株式会社",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "鉄道運営者の登山案内：河口湖から天下茶屋方面バス三ツ峠登山口、別途三つ峠駅から登山。特定旅行日の往復時刻は採用せず、入口選択の根拠に限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 2",
+      "claim": "[ROCKTOPO records three rope-climbing categories at Mitsutoge](https://www.rocktopo.net/areas/8) and identifies agglomerate rock. Suitability is not settled by the presence of easier lines: a multipitch team needs route finding, belay transitions, rope management, descent and independent retreat skills. Without those skills, choose supervised instruction with someone familiar with the venue rather than using low grades to justify an independent attempt.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/8",
+          "title": "三ツ峠 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠基本情報：山梨、集塊岩、フェイス/裂隙/マルチ、季節4,5,6,7,9,10月。ルート総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/三ツ峠/",
+          "title": "三ツ峠",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠出版社情報：山頂下屏風岩、右・中央・左の内容差、フェイス/裂隙/人工/マルチ。季節4-10月、駅から2.5-3時間歩く目安と裏登山道別接近。浮石とロープによる落石、ヘルメットや各種sling等の注意。古い野外排泄・水・小屋通年情報は採用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.fujikyu-railway.jp/sightseeing/hiking.php",
+          "title": "ウォーキング＆ハイキング | 富士山に一番近い鉄道 富士急行線 富士山麓電気鉄道株式会社",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "鉄道運営者の登山案内：河口湖から天下茶屋方面バス三ツ峠登山口、別途三つ峠駅から登山。特定旅行日の往復時刻は採用せず、入口選択の根拠に限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 3",
+      "claim": "The publisher describes varied face and crack climbing on the right face, steeper and aid climbing on the central face, and classic free routes on the left. On a first visit, choose a concrete aim such as getting familiar with the rock on single pitches or practising multipitch systems, then select appropriate routes from a current topo. Avoid combining objectives from different faces without accounting for movement and belay time.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/8",
+          "title": "三ツ峠 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠基本情報：山梨、集塊岩、フェイス/裂隙/マルチ、季節4,5,6,7,9,10月。ルート総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/三ツ峠/",
+          "title": "三ツ峠",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠出版社情報：山頂下屏風岩、右・中央・左の内容差、フェイス/裂隙/人工/マルチ。季節4-10月、駅から2.5-3時間歩く目安と裏登山道別接近。浮石とロープによる落石、ヘルメットや各種sling等の注意。古い野外排泄・水・小屋通年情報は採用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.fujikyu-railway.jp/sightseeing/hiking.php",
+          "title": "ウォーキング＆ハイキング | 富士山に一番近い鉄道 富士急行線 富士山麓電気鉄道株式会社",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "鉄道運営者の登山案内：河口湖から天下茶屋方面バス三ツ峠登山口、別途三つ峠駅から登山。特定旅行日の往復時刻は採用せず、入口選択の根拠に限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 4",
+      "claim": "The [Fujisanroku Electric Railway hiking page](https://www.fujikyu-railway.jp/sightseeing/hiking.php) points to a bus from Kawaguchiko toward Tenkachaya, getting off at Mitsutoge Trailhead, and also mentions walking from Mitsutoge Station. These are different entrances. The publisher estimates about 2.5 to 3 hours on foot from the station and describes a separate approach from parking on the rear trail. Those are approach references, not measured door-to-door travel times from Tokyo.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/8",
+          "title": "三ツ峠 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠基本情報：山梨、集塊岩、フェイス/裂隙/マルチ、季節4,5,6,7,9,10月。ルート総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/三ツ峠/",
+          "title": "三ツ峠",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠出版社情報：山頂下屏風岩、右・中央・左の内容差、フェイス/裂隙/人工/マルチ。季節4-10月、駅から2.5-3時間歩く目安と裏登山道別接近。浮石とロープによる落石、ヘルメットや各種sling等の注意。古い野外排泄・水・小屋通年情報は採用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.fujikyu-railway.jp/sightseeing/hiking.php",
+          "title": "ウォーキング＆ハイキング | 富士山に一番近い鉄道 富士急行線 富士山麓電気鉄道株式会社",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "鉄道運営者の登山案内：河口湖から天下茶屋方面バス三ツ峠登山口、別途三つ峠駅から登山。特定旅行日の往復時刻は採用せず、入口選択の根拠に限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 5",
+      "claim": "Return buses for a specific date, hut bookings and road conditions have not been fully verified here. Agree on the entrance with the trip leader, check that day's transport and work backward from the return to set the time to leave the wall. If descent and walking cannot fit, do not schedule multipitch. Staying nearby can reduce travel pressure, but older hut and camping descriptions are not current permission.",
+      "verdict": "unverifiable",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/8",
+          "title": "三ツ峠 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠基本情報：山梨、集塊岩、フェイス/裂隙/マルチ、季節4,5,6,7,9,10月。ルート総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/三ツ峠/",
+          "title": "三ツ峠",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠出版社情報：山頂下屏風岩、右・中央・左の内容差、フェイス/裂隙/人工/マルチ。季節4-10月、駅から2.5-3時間歩く目安と裏登山道別接近。浮石とロープによる落石、ヘルメットや各種sling等の注意。古い野外排泄・水・小屋通年情報は採用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.fujikyu-railway.jp/sightseeing/hiking.php",
+          "title": "ウォーキング＆ハイキング | 富士山に一番近い鉄道 富士急行線 富士山麓電気鉄道株式会社",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "鉄道運営者の登山案内：河口湖から天下茶屋方面バス三ツ峠登山口、別途三つ峠駅から登山。特定旅行日の往復時刻は採用せず、入口選択の根拠に限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "取得的資料支持引用部分；當日狀態/指定交通/完整許可/票價適用/服務名額等未知範圍在此段落明示。不可推論為已確定可用或可入場。",
+      "disposition": "qualified",
+      "qualification": "Return buses for a specific date, hut bookings and road conditions have not been fully verified here. Agree on the entrance with the trip leader, check that day's transport and work backward from the return to set the time to leave the wall. If descent and walking cannot fit, do not schedule multipitch. Staying nearby can reduce travel pressure, but older hut and camping descriptions are not current permission."
+    },
+    {
+      "location": "正文段落 6",
+      "claim": "The publisher gives April to October as a season reference; ROCKTOPO lists April, May, June, July, September and October. April is a planning cue, not proof that cold or remaining snow is absent. Check mountain conditions and weather. CLIMBING-net specifically warns about loose rock on ledges, rockfall triggered by ropes and climbers below, and calls for helmets and route-appropriate slings and other gear. A training venue still requires mountain judgment.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/8",
+          "title": "三ツ峠 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠基本情報：山梨、集塊岩、フェイス/裂隙/マルチ、季節4,5,6,7,9,10月。ルート総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/三ツ峠/",
+          "title": "三ツ峠",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠出版社情報：山頂下屏風岩、右・中央・左の内容差、フェイス/裂隙/人工/マルチ。季節4-10月、駅から2.5-3時間歩く目安と裏登山道別接近。浮石とロープによる落石、ヘルメットや各種sling等の注意。古い野外排泄・水・小屋通年情報は採用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.fujikyu-railway.jp/sightseeing/hiking.php",
+          "title": "ウォーキング＆ハイキング | 富士山に一番近い鉄道 富士急行線 富士山麓電気鉄道株式会社",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "鉄道運営者の登山案内：河口湖から天下茶屋方面バス三ツ峠登山口、別途三つ峠駅から登山。特定旅行日の往復時刻は採用せず、入口選択の根拠に限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    },
+    {
+      "location": "正文段落 7",
+      "claim": "Suggested example: stay nearby the previous night, approach in the morning and attempt one main objective. Finish early enough for descent, rope packing and the hike out. If rock conditions, route identification or belays are uncertain, change to a simpler supervised activity or retreat. This article has no route-specific rope-length or belay table; a complete topo and competent partners are the next steps toward an executable plan.",
+      "verdict": "confirmed",
+      "sources": [
+        {
+          "url": "https://www.rocktopo.net/areas/8",
+          "title": "三ツ峠 | ROCKTOPO 日本のクライミング、ボルダリングの岩場情報・トポ",
+          "publisher": "ROCKTOPO",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠基本情報：山梨、集塊岩、フェイス/裂隙/マルチ、季節4,5,6,7,9,10月。ルート総数は引用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.climbing-net.com/iwaba_detail/三ツ峠/",
+          "title": "三ツ峠",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "三ツ峠出版社情報：山頂下屏風岩、右・中央・左の内容差、フェイス/裂隙/人工/マルチ。季節4-10月、駅から2.5-3時間歩く目安と裏登山道別接近。浮石とロープによる落石、ヘルメットや各種sling等の注意。古い野外排泄・水・小屋通年情報は採用しない。",
+          "tool": "Groundlane web_fetch"
+        },
+        {
+          "url": "https://www.fujikyu-railway.jp/sightseeing/hiking.php",
+          "title": "ウォーキング＆ハイキング | 富士山に一番近い鉄道 富士急行線 富士山麓電気鉄道株式会社",
+          "publisher": "場地來源出版者",
+          "source_date": null,
+          "accessed_at": "2026-10-12T00:52:07.867501+00:00",
+          "read_scope": "full",
+          "evidence": "鉄道運営者の登山案内：河口湖から天下茶屋方面バス三ツ峠登山口、別途三つ峠駅から登山。特定旅行日の往復時刻は採用せず、入口選択の根拠に限定。",
+          "tool": "Groundlane web_fetch"
+        }
+      ],
+      "reason": "段落中來源可讀事實與編輯規劃建議已分開；建議為帶限制的決策建議，非本站實測、保證或第一手紀錄。"
+    }
+  ],
+  "media": [],
+  "source_sha256": "4acd3bf3e7240d000ad77a4487adfc66bbdc8b9c5919fde4dbdde245a9bf1bab",
+  "links": [
+    {
+      "url": "https://www.rocktopo.net/areas/8",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://www.climbing-net.com/iwaba_detail/三ツ峠/",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    },
+    {
+      "url": "https://www.fujikyu-railway.jp/sightseeing/hiking.php",
+      "checked_at": "2026-10-12T00:52:07.867501+00:00",
+      "tool": "Groundlane web_fetch",
+      "status": "reachable",
+      "status_code": 200,
+      "reason": "實際取得HTTP回應，目的頁主題與引用段落已核對；HTTP成功不代表未知範圍已核實。"
+    }
+  ],
+  "editorial_inputs": [
+    {
+      "name": "2027-04-首爾東京攀岩行程.md",
+      "sha256": "4f1098c3919f01751488cd4b74af0eaf6fe7d7cd3cca2dc3240b2aa4585ff02c",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    },
+    {
+      "name": "tokyo-crag-guide-shinjuku-daytrip-v4.md",
+      "sha256": "7b2baea4a200eb721a75bdcc30d7c617699b6ca68ec8e279781d635605b25b38",
+      "role": "選題與研究線索；不作現況、第一手體驗或票價保證"
+    }
+  ],
+  "research_artifacts": [
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/r3.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/x1.json",
+    "/tmp/nobodyclimb-seoul-tokyo-article/C/y2.json"
+  ],
+  "limitations": ["未驗當日岩況/服務或交通；正文明示的未知不作肯定事實。"]
+}

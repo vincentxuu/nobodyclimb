@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "article_id": "a2ec5292794db159908646020424553b",
+  "source_sha256": "8145919f1cc86b3905ae9227f6d91dd6ec40648762e707f5adf22a604f9c6c7a",
+  "evidence_sha256": "bef78ad51ad7d0cb6c23cfc41a9715b42683e2d926c390ecaca4c6cfa36eb149",
+  "reviewed_at": "2026-10-12T06:58:21Z",
+  "reviewer": "Claude 獨立審稿 subagent（Opus 5.5；未參與寫稿，也未參與本次台帳修改）",
+  "decision": "approved",
+  "sections": {
+    "factual": {
+      "passed": true,
+      "notes": "本次重審（台帳修改後）：以 git diff 確認三語台帳只刪除 limitations 的「尚待未參與寫稿者獨立審查。」，claims、sources、links 未變，沒有改標。該句寫於獨立審查完成之前，現已有獨立審稿核准，刪除恰當；保留的「未驗當日岩況/服務或交通」仍成立。另以 curl 重新取得三個來源（均 HTTP 200）抽查：CLIMBING-net 古賀志山頁有チャート、リード（ボルト）／マルチピッチ／トップロープ限定あり、シーズン通年、地主六項約定（雌滝エリアに入らない、樹木は伐らない、神社に私物を置かない、焚き火、ゴミ、ヘルメット）、南登山道駐車場と岩場まで30分、バス便廃止與厚生年金会館舊站名；ROCKTOPO areas/80 有「左奥エリアよりも左は登攀禁止」、シーズン列 1–12 月、競技会ルート（5.9）／ハートブレーカー（5.10c）／羚羊ハング（5.11a）、不動滝正面・左／右／左奥フェイス；JFA 報告為 2022 年古賀志山不動滝，疑似リード與トップロープ支點回收、下降前確保確認不備。均與正文相符。兩筆 unverifiable 的 qualification 逐字存在於原稿（各一次）。台帳 source_sha256 等於原稿實際 SHA-256。未驗現行各區完整界線、接送費與停車費（正文已明示）。（2026-10-12 補記：台帳其後僅經 Biome 重新排版，limitations 陣列由多行併為單行；另一位獨立審稿者以程式比對確認 JSON 內容與原核准版本完全相同後更新 evidence_sha256，未重做內容審查。）"
+    },
+    "translation": {
+      "passed": true,
+      "notes": "本次重新逐段對照 zh/en/ja 全文：5.9／5.10c／5.11a、約 30 分鐘接近、六項地主約定、左奧區以左禁攀、通年參考三語一致；「有容易線不代表可自行攀登」「級數不是器材或安全保證」「兩組名稱不能當同一界線」「未向地主或管理方確認」「不沿用舊班次與車程」「接送費與停車費未核實」等限制與否定三語都保留；模擬先鋒／mock leading／疑似リード對應一致。差異：zh 的「不把舊頁上的金額套用到今天」en/ja 沒有對應句；zh「舊站名及廢線」、en「older place names and a discontinued service」、ja「古い施設名や廃止された便」用詞略有出入（來源為巴士便廢止與厚生年金会館站名）；en 把「自然保護」簡化為 protection。不改變事實與限制，列為 advisory。"
+    },
+    "editorial": {
+      "passed": true,
+      "notes": "本次重讀全文：能力門檻、選線、地主約定、交通與一天安排可獨立閱讀，未虛構現場經驗，標題與摘要未承諾現行開放。zh 全文未見簡體字（「会」僅出現在日文路線名競技会ルート）。node scripts/blog/article.mjs check 退出碼 0。"
+    }
+  },
+  "findings": [
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "前一輪審稿者記錄的三項已解必修（中文模擬先鋒用語、簡體字修正、台帳 claim/qualification 與正文同步）本次重新確認仍成立：現稿三語用語對應，zh 無簡體字，台帳正文 claim 與 qualification 均逐字存在於原稿。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "「正文段落 2」（哪類繩隊適合、室內經驗者宜由嚮導帶領）整段是編輯建議，沒有來源事實，仍標 confirmed，原稿也沒有標明編輯建議的句子；「正文段落 6」的行程示例亦屬建議（zh「建議示例是」、en「A suggested day」、ja「計画例として」已標示）。本輪未改標；與本輪改標原則是否一致請主流程裁決，未判為必修。"
+    },
+    {
+      "severity": "advisory",
+      "resolved": true,
+      "notes": "zh 的「不把舊頁上的金額套用到今天」在 en/ja 無對應句；且抽查的 CLIMBING-net 頁面沒有接送或停車金額（只有露營場免費），這句的「舊頁上的金額」指涉不明。不構成事實錯誤，日後改稿可刪或改寫。"
+    }
+  ]
+}
